@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Does_Trainer_and_TF_Communicate_Well__c</fullName>
+    <description>Do your trainer and team facilitator communicate with each other? How do you all work as a team?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Do your trainer and team facilitator communicate with each other? How do you all work as a team?</inlineHelpText>
+    <label>Does Trainer and TF Communicate Well?</label>
+    <length>10000</length>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>LongTextArea</type>
+    <visibleLines>5</visibleLines>
+</CustomField>

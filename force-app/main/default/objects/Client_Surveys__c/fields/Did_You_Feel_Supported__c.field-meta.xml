@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Did_You_Feel_Supported__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Did you feel supported throughout the application process? (Questions answered, concerns addressed,adequate communication with Atlas staff etc.)</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Did you feel supported throughout the application process? (Questions answered, concerns addressed,adequate communication with Atlas staff etc.)</inlineHelpText>
+    <label>Did You Feel Supported Throughout</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

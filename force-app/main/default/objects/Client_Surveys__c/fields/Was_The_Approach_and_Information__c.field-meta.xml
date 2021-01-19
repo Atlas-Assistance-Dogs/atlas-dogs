@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Was_The_Approach_and_Information__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Was the approach and information provided by your facilitator consistent with Atlas’ client courses, ourprogram description, and our stated ethics and goals?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Was the approach and information provided by your facilitator consistent with Atlas’ client courses, ourprogram description, and our stated ethics and goals?</inlineHelpText>
+    <label>Was The Approach and Information</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

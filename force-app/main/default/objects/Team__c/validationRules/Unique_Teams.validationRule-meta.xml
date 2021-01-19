@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Unique_Teams</fullName>
+    <active>true</active>
+    <errorConditionFormula>and(
+    Name = VLOOKUP
+       ($ObjectType.Team__c.Fields.Name , $ObjectType.Team__c.Fields.Name, Name ),
+
+    not(
+     Id=VLOOKUP
+         ($ObjectType.Team__c.Fields.Id , $ObjectType.Team__c.Fields.Name, Name )))</errorConditionFormula>
+    <errorDisplayField>Name</errorDisplayField>
+    <errorMessage>Please select another team name, this name has already been used in the system</errorMessage>
+</ValidationRule>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Things_needed_for_Dog_Activation</fullName>
+    <active>true</active>
+    <description>List of fields needed for activation</description>
+    <errorConditionFormula>AND(
+OR( 
+TODAY() &lt;  ADDMONTHS( Date_of_Birth__c ,14),
+Health_Care_Records_Status__c  &lt;&gt; &quot;All Good&quot;  
+), 
+ ISCHANGED( Active__c) = TRUE )</errorConditionFormula>
+    <errorMessage>For Activation of the Dog, It need to be atleast 14 months, Vaccinations need to be current,</errorMessage>
+</ValidationRule>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Dog_Status__c</fullName>
+    <externalId>false</externalId>
+    <label>Dog Status</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Onboarding</fullName>
+                <default>false</default>
+                <label>Onboarding</label>
+            </value>
+            <value>
+                <fullName>Waiting for Microchip Number</fullName>
+                <default>false</default>
+                <label>Waiting for Microchip Number</label>
+            </value>
+            <value>
+                <fullName>Waiting to be Spayed-Neutered</fullName>
+                <default>false</default>
+                <label>Waiting to be Spayed-Neutered</label>
+            </value>
+            <value>
+                <fullName>Too Young</fullName>
+                <default>false</default>
+                <label>Too Young</label>
+            </value>
+            <value>
+                <fullName>Active</fullName>
+                <default>false</default>
+                <label>Active</label>
+            </value>
+            <value>
+                <fullName>Certified</fullName>
+                <default>false</default>
+                <label>Certified</label>
+            </value>
+            <value>
+                <fullName>Deceased</fullName>
+                <default>false</default>
+                <label>Deceased</label>
+            </value>
+            <value>
+                <fullName>Reject due to health check failure</fullName>
+                <default>false</default>
+                <label>Rejected due to health check failure</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

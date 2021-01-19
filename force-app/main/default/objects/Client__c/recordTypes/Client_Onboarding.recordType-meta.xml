@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Client_Onboarding</fullName>
+    <active>true</active>
+    <description>The phase between intake and full Atlas client</description>
+    <label>Client - On-boarding</label>
+    <picklistValues>
+        <picklist>Military_Service__c</picklist>
+        <values>
+            <fullName>Active Duty</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Veteran</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Primary_Certification__c</picklist>
+        <values>
+            <fullName>Allergen</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Autism</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Diabetes</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Hearing</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Medical Alert</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Medical Assistance</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mobility</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Psychiatric</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Seizure Response</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Recertification_Type__c</picklist>
+        <values>
+            <fullName>In-Person</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Live Video</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Secondary__c</picklist>
+        <values>
+            <fullName>Allergen</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Autism</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Diabetes</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Hearing</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Medical Alert</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Medical Assistance</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mobility</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Psychiatric</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Seizure Response</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Stage__c</picklist>
+        <values>
+            <fullName>Intake</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>On-boarding</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>On-going</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

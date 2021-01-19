@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Describe_a_Typical_Training_Session__c</fullName>
+    <description>Please describe a typical training session with your Team Facilitator.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Please describe a typical training session with your Team Facilitator.</inlineHelpText>
+    <label>Describe a Typical Training Session</label>
+    <length>10000</length>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>LongTextArea</type>
+    <visibleLines>5</visibleLines>
+</CustomField>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Was_The_Message_Consistent__c</fullName>
+    <description>Was our message consistent?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Was our message consistent?</inlineHelpText>
+    <label>Was The Message Consistent?</label>
+    <length>10000</length>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>LongTextArea</type>
+    <visibleLines>5</visibleLines>
+</CustomField>

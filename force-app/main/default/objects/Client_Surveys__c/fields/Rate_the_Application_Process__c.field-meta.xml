@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Rate_the_Application_Process__c</fullName>
+    <description>How would you rate the application process? 1-10 10 being the best</description>
+    <externalId>false</externalId>
+    <inlineHelpText>How would you rate the application process? 1-10 10 being the best</inlineHelpText>
+    <label>Rate the Application Process</label>
+    <precision>2</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

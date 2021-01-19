@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Were_You_Treated_Fair_and_Ethical__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Do you think you were treated in a fair, ethical, and non-discriminatory fashion throughout the application, training, and PAT?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Do you think you were treated in a fair, ethical, and non-discriminatory fashion throughout the application, training, and PAT?</inlineHelpText>
+    <label>Were You Treated Fair and Ethical</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

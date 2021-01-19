@@ -1,0 +1,29 @@
+<template>
+    <lightning-card >
+        <lightning-file-upload
+            label={lwcname}
+            name="fileUploader"
+            accept={acceptedFormats}
+            record-id={recordId}
+            onuploadfinished={handleUploadFinished}
+            multiple>
+        </lightning-file-upload>
+        </lightning-card>
+            
+        <lightning-card title="Related Files of the record" icon-name="standard:account">
+            <div style="width: auto;">
+                <template if:true={fileUploadList}>
+                        <lightning-datatable
+                                data={fileUploadList}
+                                columns={columns}
+                                key-field="recordId"
+                                onrowaction={getSelectedRecords}>
+                        </lightning-datatable>
+                </template>
+            </div>
+        </lightning-card>
+        <template if:true={isErrorMessage}>
+            <span class="slds-text-color_error">{errorMessage}</span>
+          </template>
+         
+</template>

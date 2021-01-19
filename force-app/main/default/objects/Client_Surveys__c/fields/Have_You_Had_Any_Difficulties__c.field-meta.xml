@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Have_You_Had_Any_Difficulties__c</fullName>
+    <description>Have you had any difficulties as a service dog team in the past year? Explain.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Have you had any difficulties as a service dog team in the past year? Explain.</inlineHelpText>
+    <label>Have You Had Any Difficulties</label>
+    <length>10000</length>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>LongTextArea</type>
+    <visibleLines>5</visibleLines>
+</CustomField>

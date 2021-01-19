@@ -1,0 +1,30 @@
+<template>
+  
+        <lightning-card title="Files" icon-name="action:add_file">
+            <div style="width: auto;">
+              <lightning-file-upload
+                label="Add Files"
+                name="fileUploader"
+                accept={acceptedFormats}
+                record-id={recordId}
+                onuploadfinished={handleUploadFinished}
+                slot="actions"
+                multiple>
+            </lightning-file-upload>
+      
+                <template if:true={fileUploadList}>
+                        <lightning-datatable
+                                data={fileUploadList}
+                                columns={columns}
+                                key-field="recordId"
+                                onrowaction={getSelectedRecords}>
+                        </lightning-datatable>
+                </template>
+            </div>
+        </lightning-card>  
+
+        <template if:true={isErrorMessage}>
+            <span class="slds-text-color_error">{errorMessage}</span>
+          </template>
+    
+</template>

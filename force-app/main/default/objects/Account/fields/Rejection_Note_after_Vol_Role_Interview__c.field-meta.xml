@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Rejection_Note_after_Vol_Role_Interview__c</fullName>
+    <description>Rejection note after interview for the volunteer role</description>
+    <externalId>false</externalId>
+    <label>Rejection Note after Vol Role Interview</label>
+    <length>32768</length>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>LongTextArea</type>
+    <visibleLines>3</visibleLines>
+</CustomField>

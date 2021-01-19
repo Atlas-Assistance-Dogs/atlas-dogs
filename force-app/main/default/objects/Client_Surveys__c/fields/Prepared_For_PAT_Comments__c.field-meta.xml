@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Prepared_For_PAT_Comments__c</fullName>
+    <description>Did you feel prepared for your PAT?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Did you feel prepared for your PAT?</inlineHelpText>
+    <label>Prepared For PAT, Comments</label>
+    <length>10000</length>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>LongTextArea</type>
+    <visibleLines>5</visibleLines>
+</CustomField>

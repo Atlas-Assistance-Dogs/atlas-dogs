@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>How_Well_Did_Trainer_Communicate_w_you__c</fullName>
+    <description>How well did your trainer communicate with you, including listening well, during and outside of sessionstraining sessions?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>How well did your trainer communicate with you, including listening well, during and outside of sessionstraining sessions?</inlineHelpText>
+    <label>How Well Did Trainer Communicate w/you</label>
+    <length>10000</length>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>LongTextArea</type>
+    <visibleLines>5</visibleLines>
+</CustomField>

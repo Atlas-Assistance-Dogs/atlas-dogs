@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>How_Has_Having_A_Service_Dog_Affected__c</fullName>
+    <description>How has having a service dog affected your day-to-day life?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>How has having a service dog affected your day-to-day life?</inlineHelpText>
+    <label>How Has Having A Service Dog Affected</label>
+    <length>10000</length>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>LongTextArea</type>
+    <visibleLines>5</visibleLines>
+</CustomField>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Rate_Overall_Experience_with_TF__c</fullName>
+    <description>How would you rate your overall experience with your team facilitator?</description>
+    <externalId>false</externalId>
+    <inlineHelpText>How would you rate your overall experience with your team facilitator?</inlineHelpText>
+    <label>Rate Overall Experience with TF</label>
+    <precision>2</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>
