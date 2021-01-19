@@ -1,0 +1,26 @@
+minimum_cumulusci_version: '3.26.0'
+project:
+    name: atlas-salesforce
+    package:
+        name: atlas-dogs
+        api_version: '50.0'
+    dependencies:
+        - github: 'https://github.com/SalesforceFoundation/NPSP'
+    git:
+    source_format: sfdx
+
+tasks:
+    robot:
+        options:
+            suites: robot/atlas-salesforce/tests
+            options:
+                outputdir: robot/atlas-salesforce/results
+
+    robot_testdoc:
+        options:
+            path: robot/atlas-salesforce/tests
+            output: robot/atlas-salesforce/doc/atlas-salesforce_tests.html
+
+    run_tests:
+        options:
+            required_org_code_coverage_percent: 75
