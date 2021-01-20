@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Type__c</fullName>
+    <externalId>false</externalId>
+    <label>Type</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Resume</fullName>
+                <default>false</default>
+                <label>Resume</label>
+            </value>
+            <value>
+                <fullName>Reference</fullName>
+                <default>false</default>
+                <label>Reference</label>
+            </value>
+            <value>
+                <fullName>Application</fullName>
+                <default>false</default>
+                <label>Application</label>
+            </value>
+            <value>
+                <fullName>Provisional Agreement</fullName>
+                <default>false</default>
+                <label>Provisional Agreement</label>
+            </value>
+            <value>
+                <fullName>Volunteer Form</fullName>
+                <default>false</default>
+                <label>Volunteer Form</label>
+            </value>
+            <value>
+                <fullName>Agreement</fullName>
+                <default>false</default>
+                <label>Agreement</label>
+            </value>
+            <value>
+                <fullName>Emergency Contact Form</fullName>
+                <default>false</default>
+                <label>Emergency Contact Form</label>
+            </value>
+            <value>
+                <fullName>Media Release</fullName>
+                <default>false</default>
+                <label>Media Release</label>
+            </value>
+            <value>
+                <fullName>Background Check  Report</fullName>
+                <default>false</default>
+                <label>Background Check  Report</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

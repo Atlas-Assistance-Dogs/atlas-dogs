@@ -17,7 +17,7 @@ sfdx force:mdapi:deploy -w 100 -d  ./npsp-dependencies/opportunity_record_types 
 echo "(1/6) NPSP Installing Contacts & Organizations 3.15.0.2"
 echo "y" | sfdx force:package:install -p 04t1E000000cn2oQAA -w 15 -u atlas
 
-echo "(2/6) NPSP Installing Household 3.13.0.2"
+echo "(2/6) NPSP Installing Households 3.13.0.2"
 echo "y" | sfdx force:package:install -p 04t1E000000yAh8QAE -w 15 -u atlas
 
 echo "(3/6) NPSP Installing Affiliations 3.9.0.2"
