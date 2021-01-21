@@ -1,0 +1,26 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickAction,lightning:availableForFlowScreens" access="global">
+    <aura:attribute name="myRecordId" type="String" description="Record to which the files should be attached" />
+    <aura:attribute name="name" type="String" default = "fileUploader"  />
+    <aura:attribute name="multiple" type="boolean" default = "true"  />
+    <aura:attribute name="accept" type="String" default = ".pdf,.png" />
+    <aura:attribute name="label" type="String" default="Upload Trainee Certificate" />
+	<aura:attribute name="isFileUpload" type="Boolean" default="true"/>
+	<aura:attribute name="isbuttondisabled" type="Boolean" default="true"/>     
+    
+    <lightning:fileUpload label="{!v.label}"
+        name="{!v.name}"
+        multiple="{!v.multiple}"
+        accept="{!v.accept}"
+        recordId="{!v.myRecordId}"
+        onuploadfinished="{!c.handleUploadFinished}" />
+
+	<ui:inputCheckbox aura:id="checkbox" label="Trainer Certificated uploaded" change="{!c.onCheck}"/>    
+
+
+        <div class="slds-m-around--xx-small" > 
+        <div class=" slds-p-medium slds-float_right" >
+            <lightning:button class="slds-button slds-button--brand slds-p-left_xxx-medium" variant="brand" title="Brand action" disabled = "{!v.isbuttondisabled}" onclick="{!c.next}">Next</lightning:button>            
+        </div>
+        </div>
+    
+</aura:component>

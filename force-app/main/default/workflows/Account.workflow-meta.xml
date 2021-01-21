@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Account_Provision_Email</fullName>
+        <description>Account Provision Email</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Email__c</field>
+            <type>email</type>
+        </recipients>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Account_Provisioning</template>
+    </alerts>
+    <alerts>
+        <fullName>Assign_Volunteer_Roles</fullName>
+        <description>Assign Volunteer Roles</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>Account_Provision_Director</recipient>
+            <type>role</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Account_Provisioning</template>
+    </alerts>
+    <alerts>
+        <fullName>Background_Check_Request_Email_Alert</fullName>
+        <description>Background Check Request Email Alert</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>Background_Check_Coordinator</recipient>
+            <type>role</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Background_Check_Order</template>
+    </alerts>
+    <alerts>
+        <fullName>Course_Provision_Email</fullName>
+        <description>Course Provision Email</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Email__c</field>
+            <type>email</type>
+        </recipients>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <recipients>
+            <recipient>Course_Assignment_Director</recipient>
+            <type>role</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Course_Provisioning</template>
+    </alerts>
+    <alerts>
+        <fullName>Email_Alert_to_send_out_the_Facilitator_Agreement</fullName>
+        <description>Email Alert to send out the Facilitator Agreement</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Facilitator_Agreement_Notice</template>
+    </alerts>
+    <alerts>
+        <fullName>Facilitator_Provisionally_selected_agreement_email_alert</fullName>
+        <description>Facilitator Provisionally selected agreement email alert</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Facilitator_Provisionally_Accepted_Existing_Volunteer</template>
+    </alerts>
+    <alerts>
+        <fullName>New_Volunteer_Provisionally_selected_email_alert</fullName>
+        <description>New Volunteer Provisionally selected email alert</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Volunteer_Provisionally_Accepted_New_Volunteer</template>
+    </alerts>
+    <alerts>
+        <fullName>Rejection_for_the_Board_Member_application</fullName>
+        <description>Rejection for the Board Member application</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Board_Member_Rejection</template>
+    </alerts>
+    <alerts>
+        <fullName>Volunteer_rejected_due_to_background_check_failure</fullName>
+        <description>Volunteer rejected due to background check failure</description>
+        <protected>false</protected>
+        <recipients>
+            <type>accountOwner</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Background_Check_Failed</template>
+    </alerts>
+</Workflow>

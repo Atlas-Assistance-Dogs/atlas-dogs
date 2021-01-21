@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>Atlas_Letterhead_v2</letterhead>
+    <name>Background Check Failed</name>
+    <style>freeForm</style>
+    <subject>Thank you for applying to volunteer with Atlas Assistance Dogs</subject>
+    <textOnly>Dear {!Account.First_Name__c} {!Account.Last_Name__c},
+
+We want to thank you for your interest in volunteering with Atlas Assistance Dogs.
+
+Unfortunately the results of your background check put us in a position that we cannot have you volunteering with Atlas.
+
+We wish you nothing but the best.
+
+{!User.FirstName} {!User.LastName}</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

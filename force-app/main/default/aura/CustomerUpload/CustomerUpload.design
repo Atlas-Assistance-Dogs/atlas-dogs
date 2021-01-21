@@ -1,0 +1,7 @@
+<design:component>
+<design:attribute name="myRecordId" label="myRecordId" />
+<design:attribute name="name" label="name" />
+<design:attribute name="multiple" label="multiple" />
+<design:attribute name="accept" label="accept" />
+<design:attribute name="label" label="label"/>    
+</design:component>
