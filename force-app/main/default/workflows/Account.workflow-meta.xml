@@ -108,4 +108,52 @@
         <senderType>CurrentUser</senderType>
         <template>unfiled$public/Background_Check_Failed</template>
     </alerts>
+    <alerts>
+        <fullName>Existing_Volunteer_Provisionally_selected_email_alert</fullName>
+        <description>Existing Volunteer Provisionally selected email alert</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Volunteer_Provisionally_Accepted_Existing_Volunteer</template>
+    </alerts>
+    <alerts>
+        <fullName>Facilitator_rejection_at_Provisional_interview_stage_Email_Alert</fullName>
+        <description>Facilitator rejection at Provisional interview stage Email Alert</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Volunteer_Not_Accepted_Post_Interview</template>
+    </alerts>
+    <alerts>
+        <fullName>Facilitator_Provisionally_active_Email_Alert</fullName>
+        <description>Facilitator Provisionally active Email Alert</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Email__c</field>
+            <type>email</type>
+        </recipients>
+        <recipients>
+            <recipient>Program_Director</recipient>
+            <type>role</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Facilitator_Provisionally_Activated</template>
+    </alerts>
+    <alerts>
+        <fullName>Volunteer_rejection_after_initial_interview</fullName>
+        <description>Volunteer rejection after initial interview</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Volunteer_Not_Accepted_Post_Interview</template>
+    </alerts>
 </Workflow>
