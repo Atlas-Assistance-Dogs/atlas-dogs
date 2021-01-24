@@ -48,7 +48,7 @@
             </quickActionLayoutItems>
         </quickActionLayoutColumns>
     </quickActionLayout>
-    <successMessage>Add {!Get_Account_Record.First_Name__c} {!Get_Account_Record.Last_Name__c}  to mail chimp</successMessage>
+    <successMessage>Add {!Get_Account_Record.First_Name__c} {!Get_Account_Record.Last_Name__c} to mail chimp</successMessage>
     <targetObject>Task</targetObject>
     <type>Create</type>
 </QuickAction>

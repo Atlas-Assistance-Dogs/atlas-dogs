@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <QuickAction xmlns="http://soap.sforce.com/2006/04/metadata">
-    <description>order background check</description>
     <label>Background Check request</label>
     <optionsCreateFeedItem>true</optionsCreateFeedItem>
     <quickActionLayout>

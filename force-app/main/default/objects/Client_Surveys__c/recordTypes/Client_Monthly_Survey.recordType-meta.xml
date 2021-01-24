@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Client_Monthly_Survey</fullName>
-    <active>true</active>
-    <description>This is to be completed monthly for the 1st 6 months after initial certification (not the New Client Survey)</description>
-    <label>Client Monthly Survey</label>
-</RecordType>

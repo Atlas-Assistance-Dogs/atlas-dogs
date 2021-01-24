@@ -56,18 +56,14 @@ public with sharing class CourseAssigned {
     public static void updateRecords(Id accId,List<String> sobList) {
         system.debug('sobList'+sobList);
         system.debug('accId'+accId);
-       
         //Set<String> newList = new Set<String>(sobList);
-         Account a = [Select id,assignedCourses__c from Account where id = :accId];
-         Account updateAccount = new Account();
+        
        // system.debug('newList'+newList);
        //String accId;
         List<Courses_Taken__c> createList = new List<Courses_Taken__c>();
-       List<Course_Master__c> cmasterList =[SELECT Id,Expected_Completion__c,Course_SIS_Section_SIS_Course_Name__c FROM Course_Master__c where id in:sobList];
+       List<Course_Master__c> cmasterList =[SELECT Id,Expected_Completion__c FROM Course_Master__c where id in:sobList];
       List<Courses_Taken__c> checkList = new List<Courses_Taken__c>([SELECT Id,Status__c,Course_Name__c from Courses_Taken__c where Account_Name__c =:accId]);
         Map<Id,String> mapCTList = new Map<Id,String>();
-        Map<Id,String> mapAssignedCourses = new Map<Id,String>();
-        String concatAssignedCourses;
       system.debug('checkList'+checkList);
       for(Courses_Taken__c chcourseTaken:checkList){
         mapCTList.put(chcourseTaken.Course_Name__c,chcourseTaken.Status__c);
@@ -85,27 +81,13 @@ public with sharing class CourseAssigned {
                 createCoursesTaken.Expected_Completion_Date__c=todaysDate.adddays(daysCount);
                 createCoursesTaken.Assigned_Date__c=date.today();
                 createList.add(createCoursesTaken);
-                
-                if(mapAssignedCourses.containsKey(accId)){
-                    concatAssignedCourses = concatAssignedCourses + ct.Course_SIS_Section_SIS_Course_Name__c;
-                    mapAssignedCourses.put(accId,concatAssignedCourses);
-                }else{
-                    system.debug(' ct.Course_SIS_Section_SIS_Course_Name__c'+ ct.Course_SIS_Section_SIS_Course_Name__c);
-                    concatAssignedCourses =  ct.Course_SIS_Section_SIS_Course_Name__c;
-                    mapAssignedCourses.put(accId,concatAssignedCourses);
-                }
-                
                 }
             }
         }
-        system.debug('mapAssignedCourses'+mapAssignedCourses);
         system.debug('insert'+createList);
         if(!createList.isEmpty())
         insert createList;
-        system.debug('After Insert');
-        updateAccount.id = accId;
-        updateAccount.assignedCourses__c = mapAssignedCourses.get(accId);
-        update updateAccount;
+        
         //system.debug('updateList'+updateList);
        // update updateList;
     }

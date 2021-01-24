@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <FlexiPage xmlns="http://soap.sforce.com/2006/04/metadata">
     <flexiPageRegions>
-        <mode>Replace</mode>
-        <name>top</name>
-        <type>Region</type>
-    </flexiPageRegions>
-    <flexiPageRegions>
         <itemInstances>
             <componentInstance>
                 <componentName>home:eventContainer</componentName>
@@ -48,18 +43,13 @@
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>reportName</name>
-                    <value>NPSP3_Open_Opportunities_By_Stage</value>
+                    <value>Open_Opportunities</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>showRefreshButton</name>
                     <value>true</value>
                 </componentInstanceProperties>
                 <componentName>flexipage:reportChart</componentName>
-            </componentInstance>
-        </itemInstances>
-        <itemInstances>
-            <componentInstance>
-                <componentName>fileUploadLWC</componentName>
             </componentInstance>
         </itemInstances>
         <itemInstances>
@@ -117,6 +107,11 @@
         </itemInstances>
         <mode>Replace</mode>
         <name>sidebar</name>
+        <type>Region</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <mode>Replace</mode>
+        <name>top</name>
         <type>Region</type>
     </flexiPageRegions>
     <masterLabel>desktopDefault</masterLabel>

@@ -55,8 +55,8 @@
         <description>action to send email to existing volunteer</description>
         <name>Existing_Volunteer_Provisionally_selected</name>
         <label>Existing Volunteer Provisionally selected</label>
-        <locationX>1011</locationX>
-        <locationY>993</locationY>
+        <locationX>1005</locationX>
+        <locationY>991</locationY>
         <actionName>Account.Existing_Volunteer_Provisionally_selected_email_alert</actionName>
         <actionType>emailAlert</actionType>
         <connector>
@@ -125,8 +125,8 @@
     <actionCalls>
         <name>Volunteer_Interview_Needed</name>
         <label>Volunteer Interview Needed</label>
-        <locationX>1318</locationX>
-        <locationY>440</locationY>
+        <locationX>1313</locationX>
+        <locationY>441</locationY>
         <actionName>Volunteer_Interview_setup_remainder</actionName>
         <actionType>quickAction</actionType>
         <connector>
@@ -293,7 +293,7 @@
     </choices>
     <choices>
         <name>choiceConsideredAfterInterview</name>
-        <choiceText>Selected</choiceText>
+        <choiceText>{!Get_Account_Record.First_Name__c} {!Get_Account_Record.Last_Name__c} is conidered</choiceText>
         <dataType>String</dataType>
         <value>
             <stringValue>Yes</stringValue>
@@ -301,7 +301,7 @@
     </choices>
     <choices>
         <name>choiceCoursesCompleted</name>
-        <choiceText>Completed</choiceText>
+        <choiceText>{!Get_Account_Record.First_Name__c}&amp;nbsp;&amp;nbsp;{!Get_Account_Record.Last_Name__c} Completed the training courses.</choiceText>
         <dataType>String</dataType>
         <value>
             <stringValue>Yes</stringValue>
@@ -309,7 +309,7 @@
     </choices>
     <choices>
         <name>choiceCoursesNotCompleted</name>
-        <choiceText>Not completed</choiceText>
+        <choiceText>{!Get_Account_Record.First_Name__c}&amp;nbsp;&amp;nbsp;{!Get_Account_Record.Last_Name__c} not completed the training courses.</choiceText>
         <dataType>String</dataType>
         <value>
             <stringValue>No</stringValue>
@@ -317,7 +317,7 @@
     </choices>
     <choices>
         <name>choiceDecidesNotToConsider</name>
-        <choiceText>Not Interested</choiceText>
+        <choiceText>Decides not to consider</choiceText>
         <dataType>String</dataType>
         <value>
             <stringValue>No</stringValue>
@@ -325,7 +325,7 @@
     </choices>
     <choices>
         <name>choiceDecidesToConsider</name>
-        <choiceText>Interested</choiceText>
+        <choiceText>Decides to consider</choiceText>
         <dataType>String</dataType>
         <value>
             <stringValue>Yes</stringValue>
@@ -341,7 +341,7 @@
     </choices>
     <choices>
         <name>choiceNotConsideredAfterInterview</name>
-        <choiceText>Not Selected</choiceText>
+        <choiceText>{!Get_Account_Record.First_Name__c} {!Get_Account_Record.Last_Name__c} is not considered</choiceText>
         <dataType>String</dataType>
         <value>
             <stringValue>No</stringValue>
@@ -513,8 +513,8 @@
     <decisions>
         <name>Considered_after_interview_for_volunteer_role</name>
         <label>Considered after interview for volunteer role?</label>
-        <locationX>955</locationX>
-        <locationY>617</locationY>
+        <locationX>956</locationX>
+        <locationY>616</locationY>
         <defaultConnector>
             <targetReference>Update_with_interview_result</targetReference>
         </defaultConnector>
@@ -683,28 +683,28 @@
         </rules>
     </decisions>
     <decisions>
-        <name>VolunteerCourseCompleted</name>
-        <label>VolunteerCourseCompleted?</label>
-        <locationX>1397</locationX>
-        <locationY>1371</locationY>
+        <name>VolunteerCoursesCompleted</name>
+        <label>VolunteerCoursesCompleted</label>
+        <locationX>1461</locationX>
+        <locationY>1376</locationY>
         <defaultConnector>
             <targetReference>Course_Complete_Confirmation</targetReference>
         </defaultConnector>
-        <defaultConnectorLabel>Courses not completed</defaultConnectorLabel>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
-            <name>Courses_Completes</name>
+            <name>VolunteerCourseCompleted</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
-                <leftValueReference>Good_Fit</leftValueReference>
+                <leftValueReference>choiceCoursesCompleted</leftValueReference>
                 <operator>EqualTo</operator>
                 <rightValue>
-                    <elementReference>choiceCoursesCompleted</elementReference>
+                    <stringValue>Yes</stringValue>
                 </rightValue>
             </conditions>
             <connector>
                 <targetReference>Update_status_with_Course_completion</targetReference>
             </connector>
-            <label>Courses Completed</label>
+            <label>VolunteerCourseCompleted?</label>
         </rules>
     </decisions>
     <description>Used Background check subflow</description>
@@ -725,16 +725,6 @@
         <picklistField>Volunteer_role_with_no_data_access__c</picklistField>
         <picklistObject>Account</picklistObject>
     </dynamicChoiceSets>
-    <formulas>
-        <name>FormulaInterviewDateFrom</name>
-        <dataType>DateTime</dataType>
-        <expression>{!$Flow.CurrentDateTime}+1440/1440</expression>
-    </formulas>
-    <formulas>
-        <name>FormulaInterviewDateTo</name>
-        <dataType>DateTime</dataType>
-        <expression>{!$Flow.CurrentDateTime}+1470/1440</expression>
-    </formulas>
     <formulas>
         <name>varBackCheckStatus</name>
         <dataType>String</dataType>
@@ -839,6 +829,30 @@
         <object>Account</object>
     </recordUpdates>
     <recordUpdates>
+        <name>Update_Account_provisioning_notes</name>
+        <label>Update Course provisioning notes</label>
+        <locationX>1163</locationX>
+        <locationY>1168</locationY>
+        <connector>
+            <targetReference>Email_Alert_Course_Provisioning</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Volunteer_Status__c</field>
+            <value>
+                <stringValue>Course Provisioning Requested</stringValue>
+            </value>
+        </inputAssignments>
+        <object>Account</object>
+    </recordUpdates>
+    <recordUpdates>
         <name>Update_Acct_with_Not_Ready_Status</name>
         <label>Update Acct with Not Ready Status</label>
         <locationX>471</locationX>
@@ -930,30 +944,6 @@
             <field>Volunteer_Interview_Notes__c</field>
             <value>
                 <elementReference>Preliminary_Interview_Notes</elementReference>
-            </value>
-        </inputAssignments>
-        <object>Account</object>
-    </recordUpdates>
-    <recordUpdates>
-        <name>Update_status_to_course_provisioning</name>
-        <label>Update status to course provisioning</label>
-        <locationX>1163</locationX>
-        <locationY>1168</locationY>
-        <connector>
-            <targetReference>Email_Alert_Course_Provisioning</targetReference>
-        </connector>
-        <filterLogic>and</filterLogic>
-        <filters>
-            <field>Id</field>
-            <operator>EqualTo</operator>
-            <value>
-                <elementReference>recordId</elementReference>
-            </value>
-        </filters>
-        <inputAssignments>
-            <field>Volunteer_Status__c</field>
-            <value>
-                <stringValue>Course Provisioning Requested</stringValue>
             </value>
         </inputAssignments>
         <object>Account</object>
@@ -1133,7 +1123,7 @@
             <choiceReferences>choiceAccessToSensitiveInformationNotNeeded</choiceReferences>
             <dataType>String</dataType>
             <defaultSelectedChoiceReference>choiceAccessToSenstiveDataNeeded</defaultSelectedChoiceReference>
-            <fieldText>Choose any one of the option</fieldText>
+            <fieldText>Sensitive data access needed ?</fieldText>
             <fieldType>RadioButtons</fieldType>
             <isRequired>true</isRequired>
         </fields>
@@ -1144,7 +1134,7 @@
         <name>Assign_Role_with_BC</name>
         <label>Assign Role with BC</label>
         <locationX>961</locationX>
-        <locationY>1615</locationY>
+        <locationY>1616</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -1260,11 +1250,11 @@
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <connector>
-            <targetReference>VolunteerCourseCompleted</targetReference>
+            <targetReference>VolunteerCoursesCompleted</targetReference>
         </connector>
         <fields>
             <name>FOGFNote1</name>
-            <fieldText>&lt;p&gt;&lt;b&gt;{!Get_Account_Record.First_Name__c}&amp;nbsp;&amp;nbsp;{!Get_Account_Record.Last_Name__c} courses completions status&lt;/b&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;b&gt;Once courses are completed by {!Get_Account_Record.First_Name__c}&amp;nbsp;&amp;nbsp;{!Get_Account_Record.Last_Name__c} in canvas, please confirm the completion of the courses below&lt;/b&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
@@ -1272,7 +1262,8 @@
             <choiceReferences>choiceCoursesCompleted</choiceReferences>
             <choiceReferences>choiceCoursesNotCompleted</choiceReferences>
             <dataType>String</dataType>
-            <fieldText>Courses Status</fieldText>
+            <defaultSelectedChoiceReference>choiceCoursesCompleted</defaultSelectedChoiceReference>
+            <fieldText>Good Fit</fieldText>
             <fieldType>RadioButtons</fieldType>
             <isRequired>true</isRequired>
         </fields>
@@ -1282,17 +1273,17 @@
     <screens>
         <name>Course_Provisioning</name>
         <label>Course Provisioning</label>
-        <locationX>1014</locationX>
-        <locationY>1170</locationY>
+        <locationX>1013</locationX>
+        <locationY>1169</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <connector>
-            <targetReference>Update_status_to_course_provisioning</targetReference>
+            <targetReference>Update_Account_provisioning_notes</targetReference>
         </connector>
         <fields>
             <name>FONote71</name>
-            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;Select one or more courses for {!Get_Account_Record.First_Name__c}&amp;nbsp;&amp;nbsp;{!Get_Account_Record.Last_Name__c}.&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;Please select the courses and work shop schedule that need to be assigned {!Get_Account_Record.First_Name__c}&amp;nbsp;&amp;nbsp;{!Get_Account_Record.Last_Name__c} to onboard for Facilitator role. You can select more than 1 course.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
@@ -1312,16 +1303,28 @@
                 </value>
             </inputParameters>
             <isRequired>true</isRequired>
-            <outputParameters>
-                <assignToReference>varCourseCollection</assignToReference>
-                <name>cmasterlst</name>
-            </outputParameters>
-            <outputParameters>
-                <assignToReference>varCourseNameOutput</assignToReference>
-                <name>CourseNameOutput</name>
-            </outputParameters>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
         </fields>
-        <showFooter>false</showFooter>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>Display_Count1</name>
+        <label>Display Count1</label>
+        <locationX>1284</locationX>
+        <locationY>326</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <connector>
+            <targetReference>Volunteer_Interview_Needed</targetReference>
+        </connector>
+        <fields>
+            <name>Display_Count</name>
+            <fieldText>&lt;p&gt;{!varCountOfFiles}&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
         <showHeader>true</showHeader>
     </screens>
     <screens>
@@ -1337,34 +1340,28 @@
         </connector>
         <fields>
             <name>FONote2</name>
-            <fieldText>&lt;p&gt;&lt;b&gt;Schedule the interview date and time for  {!Get_Account_Record.First_Name__c}&amp;nbsp;&amp;nbsp;{!Get_Account_Record.Last_Name__c} &lt;/b&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;b&gt;Enter the scheduled interview date along with start and end time for  {!Get_Account_Record.First_Name__c}&amp;nbsp;&amp;nbsp;{!Get_Account_Record.Last_Name__c} &lt;/b&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
             <name>Interview_Date_and_time_From</name>
             <dataType>DateTime</dataType>
-            <defaultValue>
-                <elementReference>FormulaInterviewDateFrom</elementReference>
-            </defaultValue>
             <fieldText>Interview  Date &amp; time (From)</fieldText>
             <fieldType>InputField</fieldType>
             <isRequired>true</isRequired>
             <validationRule>
-                <errorMessage>&lt;p&gt;The interview date should not be less than today&lt;/p&gt;</errorMessage>
+                <errorMessage>&lt;p&gt;less than today&lt;/p&gt;</errorMessage>
                 <formulaExpression>{!Interview_Date_and_time_From} &gt;= NOW()</formulaExpression>
             </validationRule>
         </fields>
         <fields>
             <name>Interview_Date_Time_To</name>
             <dataType>DateTime</dataType>
-            <defaultValue>
-                <elementReference>FormulaInterviewDateTo</elementReference>
-            </defaultValue>
             <fieldText>Interview Date &amp; Time (To)</fieldText>
             <fieldType>InputField</fieldType>
             <isRequired>true</isRequired>
             <validationRule>
-                <errorMessage>&lt;p&gt;To Date cannot be earlier than From Date&lt;/p&gt;</errorMessage>
+                <errorMessage>&lt;p&gt;To Date cannot be less than From Date &lt;/p&gt;</errorMessage>
                 <formulaExpression>{!Interview_Date_Time_To} &gt;= {!Interview_Date_and_time_From}</formulaExpression>
             </validationRule>
         </fields>
@@ -1379,8 +1376,8 @@
     <screens>
         <name>Interview_Result</name>
         <label>Interview Result</label>
-        <locationX>1344</locationX>
-        <locationY>612</locationY>
+        <locationX>1347</locationX>
+        <locationY>610</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -1389,7 +1386,7 @@
         </connector>
         <fields>
             <name>FONote3</name>
-            <fieldText>&lt;p&gt;&lt;b&gt;Interview Results and Comments for {!Get_Account_Record.First_Name__c}&amp;nbsp;&amp;nbsp;{!Get_Account_Record.Last_Name__c} &lt;/b&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;b&gt;After reviewing the resume and talking to {!Get_Account_Record.First_Name__c}&amp;nbsp;&amp;nbsp;{!Get_Account_Record.Last_Name__c} , Please summarize the interview notes.&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;&lt;span class=&quot;ql-cursor&quot;&gt;﻿&lt;/span&gt;&lt;/b&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
@@ -1481,17 +1478,17 @@
     <screens>
         <name>Upload_Resume</name>
         <label>Upload Resume</label>
-        <locationX>1152</locationX>
-        <locationY>395</locationY>
+        <locationX>1145</locationX>
+        <locationY>439</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <connector>
-            <targetReference>Volunteer_Interview_Needed</targetReference>
+            <targetReference>Display_Count1</targetReference>
         </connector>
         <fields>
             <name>VOBNote2_0</name>
-            <fieldText>&lt;p&gt;Upload the Resume for {!Get_Account_Record.First_Name__c} {!Get_Account_Record.Last_Name__c}&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;Please Upload the resume for {!Get_Account_Record.First_Name__c} {!Get_Account_Record.Last_Name__c}&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
@@ -1501,7 +1498,7 @@
             <inputParameters>
                 <name>countOfFiles</name>
                 <value>
-                    <stringValue>1</stringValue>
+                    <stringValue>0</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
@@ -1529,8 +1526,18 @@
             </outputParameters>
         </fields>
         <fields>
+            <name>FONote2_0</name>
+            <fieldText>&lt;p&gt;&lt;b&gt;Enter the scheduled interview date along with start and end time for  {!Get_Account_Record.First_Name__c}&amp;nbsp;&amp;nbsp;{!Get_Account_Record.Last_Name__c} &lt;/b&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
             <name>FONote22_0</name>
             <fieldText>&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>DisplayCountOfFiles</name>
+            <fieldText>&lt;p&gt;CountOfFiles: {!varCountOfFiles}&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
@@ -1549,7 +1556,7 @@
         </connector>
         <fields>
             <name>FONote1</name>
-            <fieldText>&lt;p&gt;&lt;b&gt;Selection process for {!Get_Account_Record.First_Name__c}   {!Get_Account_Record.Last_Name__c} &lt;/b&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;b&gt;{!Get_Account_Record.First_Name__c}   {!Get_Account_Record.Last_Name__c} is considering to onboard as volunteer?&lt;/b&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
@@ -1558,7 +1565,7 @@
             <choiceReferences>choiceDecidesNotToConsider</choiceReferences>
             <dataType>String</dataType>
             <defaultSelectedChoiceReference>choiceDecidesToConsider</defaultSelectedChoiceReference>
-            <fieldText>Options</fieldText>
+            <fieldText>Considering</fieldText>
             <fieldType>RadioButtons</fieldType>
             <isRequired>true</isRequired>
         </fields>
@@ -1729,13 +1736,6 @@
         <isOutput>true</isOutput>
     </variables>
     <variables>
-        <name>var_assignedCourses</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
         <name>varAccountProvisioningNotes</name>
         <dataType>String</dataType>
         <isCollection>false</isCollection>
@@ -1753,20 +1753,6 @@
         <name>varCountOfFiles</name>
         <dataType>String</dataType>
         <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
-        <name>varCourseCollection</name>
-        <dataType>String</dataType>
-        <isCollection>true</isCollection>
-        <isInput>false</isInput>
-        <isOutput>true</isOutput>
-    </variables>
-    <variables>
-        <name>varCourseNameOutput</name>
-        <dataType>String</dataType>
-        <isCollection>true</isCollection>
         <isInput>false</isInput>
         <isOutput>false</isOutput>
     </variables>

@@ -44,15 +44,14 @@ export default class ADFileUpload extends LightningElement {
     @api countOfFiles;
     
     @api validate() {
-    console.log('In Validate ****')
-    if(this.localCountofFiles  > 0) { 
+    if(countOfFiles  > 0) { 
          return { isValid: true }; 
         } 
     else { 
     //If the component is invalid, return the isValid parameter as false and return an error message. 
          return { 
-            isValid: false, 
-            errorMessage: 'Minimum of ' +this.countOfFiles+ ' file/s is/are required'
+               isValid: false, 
+               errorMessage: 'Atleast one File should be present' 
                 }; 
      } 
 }
@@ -76,7 +75,8 @@ export default class ADFileUpload extends LightningElement {
         console.log('this.fileID'+this.fileID);
         this.updateFiles();
         this.getRelatedFiles();
-      
+        const attributeChangeEvent = new FlowAttributeChangeEvent('outputFlowValue', this.outputFlowValue);
+        this.dispatchEvent(attributeChangeEvent); 
     
 }
 //Update the Files with User Type and Doc Type 
@@ -104,7 +104,6 @@ export default class ADFileUpload extends LightningElement {
             console.log('this.fileUploadList'+JSON.stringify(this.fileUploadList));
             if(this.fileUploadList!=null){
             this.localCountofFiles = this.fileUploadList.length;
-            console.log('this.localCountofFiles'+this.localCountofFiles);
             }
             this.handleErrorOnUpload();
         })
@@ -121,18 +120,11 @@ export default class ADFileUpload extends LightningElement {
     }
     //Show Error if Count of Files are less 
     handleErrorOnUpload(){
-        console.log('Method entered...local count '+ this.localCountofFiles);
         if(this.localCountofFiles < this.countOfFiles){
-           // this.errorMessage = 'Minimum of ' +this.countOfFiles+ ' files are required';
-            //Testing
-            //this.countOfFiles = this.localCountofFiles;
-            console.log('After uploading...'+ this.countOfFiles);
+            this.errorMessage = 'Minimum of ' +this.countOfFiles+ ' files are required'
             this.isErrorMessage = true;
            
         }else{
-            //this.countOfFiles = this.localCountofFiles;
-            console.log('After uploading...in else '+ this.countOfFiles);
-            console.log('After uploading...in else '+ this.localCountofFiles);
             this.isErrorMessage = false;
         }
     }

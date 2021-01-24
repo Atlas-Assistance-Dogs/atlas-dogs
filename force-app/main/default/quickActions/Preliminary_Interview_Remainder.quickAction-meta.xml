@@ -48,7 +48,7 @@
             </quickActionLayoutItems>
         </quickActionLayoutColumns>
     </quickActionLayout>
-    <successMessage>Subject - Check whether {!Get_Account_Record.First_Name__c}   {!Get_Account_Record.Last_Name__c} is still interested in on boarding as volunteer</successMessage>
+    <successMessage>Subject - Check whether {!Get_Account_Record.First_Name__c} {!Get_Account_Record.Last_Name__c} is still interested in on boarding as volunteer</successMessage>
     <targetObject>Task</targetObject>
     <type>Create</type>
 </QuickAction>

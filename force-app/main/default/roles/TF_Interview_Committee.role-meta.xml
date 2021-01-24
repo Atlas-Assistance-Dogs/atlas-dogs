@@ -5,5 +5,4 @@
     <mayForecastManagerShare>false</mayForecastManagerShare>
     <name>TF Interview Committee</name>
     <opportunityAccessLevel>Edit</opportunityAccessLevel>
-    <parentRole>Team_Facilitator_Manager</parentRole>
 </Role>

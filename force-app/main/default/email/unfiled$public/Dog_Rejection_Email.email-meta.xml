@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Dog rejected due to health check failure</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Dog Rejection Email</name>
+    <style>none</style>
+    <subject>Re : Not able to accept the Dog,{!Dog__c.Name} due to health check reasons</subject>
+    <type>text</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

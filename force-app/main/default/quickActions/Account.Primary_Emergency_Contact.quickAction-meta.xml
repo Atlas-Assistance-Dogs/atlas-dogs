@@ -81,5 +81,6 @@
     </quickActionLayout>
     <targetObject>Contact</targetObject>
     <targetParentField>Account</targetParentField>
+    <targetRecordType>Contact.Contacts</targetRecordType>
     <type>Create</type>
 </QuickAction>

@@ -66,49 +66,6 @@
         <template>unfiled$public/Facilitator_Agreement_Notice</template>
     </alerts>
     <alerts>
-        <fullName>Facilitator_Provisionally_selected_agreement_email_alert</fullName>
-        <description>Facilitator Provisionally selected agreement email alert</description>
-        <protected>false</protected>
-        <recipients>
-            <field>Email__c</field>
-            <type>email</type>
-        </recipients>
-        <senderType>CurrentUser</senderType>
-        <template>unfiled$public/Facilitator_Provisionally_Accepted_Existing_Volunteer</template>
-    </alerts>
-    <alerts>
-        <fullName>New_Volunteer_Provisionally_selected_email_alert</fullName>
-        <description>New Volunteer Provisionally selected email alert</description>
-        <protected>false</protected>
-        <recipients>
-            <field>Email__c</field>
-            <type>email</type>
-        </recipients>
-        <senderType>CurrentUser</senderType>
-        <template>unfiled$public/Volunteer_Provisionally_Accepted_New_Volunteer</template>
-    </alerts>
-    <alerts>
-        <fullName>Rejection_for_the_Board_Member_application</fullName>
-        <description>Rejection for the Board Member application</description>
-        <protected>false</protected>
-        <recipients>
-            <field>Email__c</field>
-            <type>email</type>
-        </recipients>
-        <senderType>CurrentUser</senderType>
-        <template>unfiled$public/Board_Member_Rejection</template>
-    </alerts>
-    <alerts>
-        <fullName>Volunteer_rejected_due_to_background_check_failure</fullName>
-        <description>Volunteer rejected due to background check failure</description>
-        <protected>false</protected>
-        <recipients>
-            <type>accountOwner</type>
-        </recipients>
-        <senderType>CurrentUser</senderType>
-        <template>unfiled$public/Background_Check_Failed</template>
-    </alerts>
-    <alerts>
         <fullName>Existing_Volunteer_Provisionally_selected_email_alert</fullName>
         <description>Existing Volunteer Provisionally selected email alert</description>
         <protected>false</protected>
@@ -120,15 +77,26 @@
         <template>unfiled$public/Volunteer_Provisionally_Accepted_Existing_Volunteer</template>
     </alerts>
     <alerts>
-        <fullName>Facilitator_rejection_at_Provisional_interview_stage_Email_Alert</fullName>
-        <description>Facilitator rejection at Provisional interview stage Email Alert</description>
+        <fullName>Facililitator_Workshop_schedule</fullName>
+        <description>Facililitator Workshop schedule</description>
         <protected>false</protected>
         <recipients>
             <field>Email__c</field>
             <type>email</type>
         </recipients>
         <senderType>CurrentUser</senderType>
-        <template>unfiled$public/Volunteer_Not_Accepted_Post_Interview</template>
+        <template>unfiled$public/Facilitator_Workshop_Schedule</template>
+    </alerts>
+    <alerts>
+        <fullName>Facilitator_Interview_Remainder_Email_notification</fullName>
+        <description>Facilitator Interview Remainder Email notification</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Facilitator_Interview_Notifice</template>
     </alerts>
     <alerts>
         <fullName>Facilitator_Provisionally_active_Email_Alert</fullName>
@@ -146,6 +114,103 @@
         <template>unfiled$public/Facilitator_Provisionally_Activated</template>
     </alerts>
     <alerts>
+        <fullName>Facilitator_Provisionally_selected</fullName>
+        <description>Facilitator Provisionally selected</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Facilitator_Provisionally_Selected_Notification</template>
+    </alerts>
+    <alerts>
+        <fullName>Facilitator_Provisionally_selected_agreement_email_alert</fullName>
+        <description>Facilitator Provisionally selected agreement email alert</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Facilitator_Provisionally_Accepted_Existing_Volunteer</template>
+    </alerts>
+    <alerts>
+        <fullName>Facilitator_rejection_at_Provisional_interview_stage_Email_Alert</fullName>
+        <description>Facilitator rejection at Provisional interview stage Email Alert</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Volunteer_Not_Accepted_Post_Interview</template>
+    </alerts>
+    <alerts>
+        <fullName>New_Volunteer_Provisionally_selected_email_alert</fullName>
+        <description>New Volunteer Provisionally selected email alert</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Volunteer_Provisionally_Accepted_New_Volunteer</template>
+    </alerts>
+    <alerts>
+        <fullName>Offering_Background_Check_Failed_Alternate_Role</fullName>
+        <description>Offering Alternate role as Background Check Failed</description>
+        <protected>false</protected>
+        <recipients>
+            <type>accountOwner</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Background_Check_Failed_Alternate_Role</template>
+    </alerts>
+    <alerts>
+        <fullName>Rejection_for_the_Board_Member_application</fullName>
+        <description>Rejection for the Board Member application</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Board_Member_Rejection</template>
+    </alerts>
+    <alerts>
+        <fullName>Volunteer_Form_Link_Email_alert</fullName>
+        <description>Volunteer Form Link Email alert</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Volunteer_Forms_Links</template>
+    </alerts>
+    <alerts>
+        <fullName>Volunteer_Interview_notification_email_alert</fullName>
+        <description>Volunteer Interview notification email alert</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Volunteer_Interview_Notification</template>
+    </alerts>
+    <alerts>
+        <fullName>Volunteer_rejected_due_to_background_check_failure</fullName>
+        <description>Volunteer rejected due to background check failure</description>
+        <protected>false</protected>
+        <recipients>
+            <type>accountOwner</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Background_Check_Failed</template>
+    </alerts>
+    <alerts>
         <fullName>Volunteer_rejection_after_initial_interview</fullName>
         <description>Volunteer rejection after initial interview</description>
         <protected>false</protected>
@@ -156,4 +221,69 @@
         <senderType>CurrentUser</senderType>
         <template>unfiled$public/Volunteer_Not_Accepted_Post_Interview</template>
     </alerts>
+    <rules>
+        <fullName>BckgrdCheckTask</fullName>
+        <active>false</active>
+        <formula>Background_Check_Requested_Date__c &gt; today()</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <tasks>
+        <fullName>Facilitator_is_provisionally_active</fullName>
+        <assignedTo>Team_Facilitator_Manager</assignedTo>
+        <assignedToType>role</assignedToType>
+        <dueDateOffset>30</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Account.Facitator_Agreement_Recieved_Date__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Facilitator is provisionally active, waiting for Practicum assignment</subject>
+    </tasks>
+    <tasks>
+        <fullName>Facilitator_onbaording_remainder</fullName>
+        <assignedTo>Program_Director</assignedTo>
+        <assignedToType>role</assignedToType>
+        <dueDateOffset>170</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Account.Facilitator_Reminder_Date__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Facilitator onbaording remainder</subject>
+    </tasks>
+    <tasks>
+        <fullName>Please_reach_out_to_potential_facilitator</fullName>
+        <assignedTo>Program_Director</assignedTo>
+        <assignedToType>role</assignedToType>
+        <dueDateOffset>-7</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Account.Board_Member_Accepted_Date__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Please reach out to potential facilitator</subject>
+    </tasks>
+    <tasks>
+        <fullName>Preliminary_Interview_for_Board_Member_Application</fullName>
+        <assignedTo>Preliminary_Interview_Committee</assignedTo>
+        <assignedToType>role</assignedToType>
+        <dueDateOffset>-7</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Account.Interview_Date_for_Board__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Preliminary Interview for Board Member Application</subject>
+    </tasks>
+    <tasks>
+        <fullName>Provision_for_Volunteer_role</fullName>
+        <assignedTo>Account_Provision_Director</assignedTo>
+        <assignedToType>role</assignedToType>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Provision for Volunteer role</subject>
+    </tasks>
 </Workflow>

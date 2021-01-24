@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>One_to_Ten_Rule</fullName>
-    <active>true</active>
-    <description>Keeps the 1-10 of the survey question from being above 10</description>
-    <errorConditionFormula>Rate_the_Application_Process__c &gt; 10</errorConditionFormula>
-    <errorDisplayField>Anything_Else__c</errorDisplayField>
-    <errorMessage>You must select a number between 1 and 10</errorMessage>
-</ValidationRule>

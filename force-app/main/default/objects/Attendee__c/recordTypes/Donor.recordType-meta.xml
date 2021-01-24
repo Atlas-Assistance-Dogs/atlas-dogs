@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Donor</fullName>
-    <active>true</active>
-    <description>Attended an event as a donor</description>
-    <label>Donor</label>
-</RecordType>

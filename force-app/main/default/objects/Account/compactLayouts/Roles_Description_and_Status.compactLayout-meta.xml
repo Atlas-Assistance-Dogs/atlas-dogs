@@ -11,5 +11,5 @@
     <fields>Lead_Facilitator_Status__c</fields>
     <fields>Trainer__c</fields>
     <fields>Trainer_Status__c</fields>
-    <label>Roles Description and Status</label>
+    <label>Roles Description and status</label>
 </CompactLayout>

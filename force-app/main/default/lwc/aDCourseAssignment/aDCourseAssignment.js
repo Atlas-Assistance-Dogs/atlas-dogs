@@ -235,16 +235,9 @@ export default class ADCourseAssignment extends LightningElement {
         this.dispatchEvent(nextNavigationEvent);
 
     }
-    handlePause( event ) {
-       
-        const pauseNavigationEvent = new FlowNavigationBackEvent();       
-        this.dispatchEvent(pauseNavigationEvent);
-
-    }
     updateRecordsToAssignedStatus(){
        let updateList = this.retrievedRows;
         console.log('updateList'+updateList);
-        console.log('this.CourseNameOutput'+this.CourseNameOutput);
         if(this.retrievedRows){
          updateRecords({accId:this.recordId, sobList: updateList})
          .then(result => {
