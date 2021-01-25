@@ -240,7 +240,7 @@
         <subject>Facilitator is provisionally active, waiting for Practicum assignment</subject>
     </tasks>
     <tasks>
-        <fullName>Facilitator_onbaording_remainder</fullName>
+        <fullName>Facilitator_Onboarding_remainder</fullName>
         <assignedTo>Program_Director</assignedTo>
         <assignedToType>role</assignedToType>
         <dueDateOffset>170</dueDateOffset>
@@ -249,7 +249,7 @@
         <priority>Normal</priority>
         <protected>false</protected>
         <status>Not Started</status>
-        <subject>Facilitator onbaording remainder</subject>
+        <subject>Facilitator Onboarding remainder</subject>
     </tasks>
     <tasks>
         <fullName>Please_reach_out_to_potential_facilitator</fullName>
