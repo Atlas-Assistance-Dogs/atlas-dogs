@@ -1,5 +1,5 @@
 import { LightningElement, track } from 'lwc';
-import getAcct from '@salesforce/apex/courseAssignmentByAccount.getAcct';
+import getAcct from '@salesforce/apex/CourseAssignmentByAccount.getAcct';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 
 const accountList = [];

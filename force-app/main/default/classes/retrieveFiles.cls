@@ -1,4 +1,4 @@
-public with sharing class retrieveFiles {
+public with sharing class RetrieveFiles {
     public retrieveFiles() {
 
     }

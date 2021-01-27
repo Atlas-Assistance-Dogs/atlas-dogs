@@ -1,10 +1,10 @@
 import { LightningElement,api,track,wire } from 'lwc';
 import {ShowToastEvent} from 'lightning/platformShowToastEvent';
-import {refreshApex} from '@salesforce/apex'
-import { deleteRecord } from 'lightning/uiRecordApi'
-import accountFilesRetrieve from '@salesforce/apex/retrieveFiles.accountFilesRetrieve';
-import deleteRecords from '@salesforce/apex/retrieveFiles.deleteRecords';
-import updateRecords from '@salesforce/apex/retrieveFiles.updateRecords';
+//import {refreshApex} from '@salesforce/apex'
+//import { deleteRecord } from 'lightning/uiRecordApi'
+import accountFilesRetrieve from '@salesforce/apex/RetrieveFiles.accountFilesRetrieve';
+import deleteRecords from '@salesforce/apex/RetrieveFiles.deleteRecords';
+import updateRecords from '@salesforce/apex/RetrieveFiles.updateRecords';
 
 import { FlowAttributeChangeEvent } from 'lightning/flowSupport';
 

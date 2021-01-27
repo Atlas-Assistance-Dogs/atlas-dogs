@@ -1,5 +1,5 @@
 import { LightningElement, api, wire, track } from 'lwc';
-import getAssignedCourse from '@salesforce/apex/courseAssgmntInline.getAssignedCourse';
+import getAssignedCourse from '@salesforce/apex/CourseAssignmentInline.getAssignedCourse';
 import { updateRecord } from 'lightning/uiRecordApi';
 import { refreshApex } from '@salesforce/apex';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
