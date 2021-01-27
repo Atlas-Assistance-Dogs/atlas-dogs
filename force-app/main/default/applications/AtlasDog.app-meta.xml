@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <brand>
+        <headerColor>#ED9110</headerColor>
+        <logo>Screen_Shot_20201216_at_103438_AM</logo>
+        <logoVersion>1</logoVersion>
+        <shouldOverrideOrgTheme>false</shouldOverrideOrgTheme>
+    </brand>
+    <formFactors>Small</formFactors>
+    <formFactors>Large</formFactors>
+    <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
+    <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
+    <label>AtlasDog</label>
+    <navType>Standard</navType>
+    <setupExperience>service</setupExperience>
+    <tabs>standard-Account</tabs>
+    <tabs>standard-Contact</tabs>
+    <tabs>Dog__c</tabs>
+    <tabs>Courses_Taken__c</tabs>
+    <tabs>Course_Master__c</tabs>
+    <tabs>Course_Master2</tabs>
+    <uiType>Lightning</uiType>
+    <utilityBar>AtlasDog_UtilityBar</utilityBar>
+</CustomApplication>
