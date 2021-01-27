@@ -505,7 +505,7 @@
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>Volunteer_Back_ground_check</targetReference>
+                <targetReference>Volunteer_Background_check</targetReference>
             </connector>
             <label>Needed</label>
         </rules>
@@ -1693,14 +1693,14 @@
     </start>
     <status>Active</status>
     <subflows>
-        <name>Volunteer_Back_ground_check</name>
-        <label>Volunteer Back ground check</label>
+        <name>Volunteer_Background_check</name>
+        <label>Volunteer Background check</label>
         <locationX>670</locationX>
         <locationY>1378</locationY>
         <connector>
             <targetReference>D_BkgChk_Pass</targetReference>
         </connector>
-        <flowName>Back_ground_Check</flowName>
+        <flowName>Background_Check</flowName>
         <inputAssignments>
             <name>recordId</name>
             <value>

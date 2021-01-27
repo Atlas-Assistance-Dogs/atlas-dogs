@@ -1,4 +1,4 @@
-public with sharing class courseAssignmentByAccount{
+public with sharing class CourseAssignmentByAccount{
     
         @AuraEnabled(Cacheable=true)
         public static List <Account> getAcct(String strName) {

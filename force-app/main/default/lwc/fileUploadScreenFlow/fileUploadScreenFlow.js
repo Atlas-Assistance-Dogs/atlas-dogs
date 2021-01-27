@@ -1,8 +1,8 @@
 import { LightningElement,track, api } from 'lwc';
 // imported to show toast messages
 import {ShowToastEvent} from 'lightning/platformShowToastEvent';
-import {refreshApex} from '@salesforce/apex'
-import { deleteRecord } from 'lightning/uiRecordApi'
+import { refreshApex } from '@salesforce/apex';
+import { deleteRecord } from 'lightning/uiRecordApi';
 
 const actions = [
     { label: 'Show details', name: 'show_details' },

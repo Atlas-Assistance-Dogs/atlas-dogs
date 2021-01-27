@@ -1,4 +1,4 @@
-public with sharing class getPickListValueInLwcCtrl {
+public with sharing class GetPickListValueInLwcCtrl {
     public getPickListValueInLwcCtrl() {
 
     }

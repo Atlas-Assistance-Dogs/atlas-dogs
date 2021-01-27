@@ -1,4 +1,4 @@
-public with sharing class courseAssgmntInline {
+public with sharing class CourseAssignmentInline {
     @AuraEnabled(cacheable=true)
     public static List<Courses_Taken__c> getAssignedCourse(String accountID) {
                 return [SELECT Id, Name,
