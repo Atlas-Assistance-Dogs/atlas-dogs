@@ -1,7 +1,7 @@
 {
-  "orgName": "deb company",
+  "orgName": "ubuntu company",
   "edition": "Developer",
-  "features": ["ContactsToMultipleAccounts"],
+  "features": [],
   "settings": {
     "lightningExperienceSettings": {
       "enableS1DesktopEnabled": true

@@ -1,11 +1,19 @@
 {
-  "packageDirectories": [
-    {
-      "path": "force-app",
-      "default": true
-    }
-  ],
-  "namespace": "",
-  "sfdcLoginUrl": "https://login.salesforce.com",
-  "sourceApiVersion": "50.0"
+  "packageDirectories" : [ {
+    "path" : "Dashboards",
+    "default" : true,
+    "package" : "Dashboards",
+    "versionName" : "Dashboards",
+    "versionNumber" : "1.0.0.0"
+  }, {
+    "path" : "force-app",
+    "default" : false
+  } ],
+  "namespace" : "",
+  "sfdcLoginUrl" : "https://login.salesforce.com",
+  "sourceApiVersion" : "50.0",
+  "packageAliases" : {
+    "Dashboards" : "0Ho4x000000Kyo1CAC",
+    "Dashboards@1.0.0.0" : "04t4x000000lkeqAAA"
+  }
 }
