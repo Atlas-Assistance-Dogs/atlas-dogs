@@ -22,6 +22,8 @@ Insert Course_Master__c:
   - Expected_Completion__c
   - Facilitator_Course__c
   - Name
+  - Optional__c
+  - Required__c
   - Section_SIS__c
   - Term_SIS__c
   - Trainer_Course__c
