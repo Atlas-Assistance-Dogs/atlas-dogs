@@ -337,7 +337,7 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Account.Volunteer_Role_with_no_Data_Access__c</field>
+        <field>Account.Volunteer_Role_With_No_Data_Access__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

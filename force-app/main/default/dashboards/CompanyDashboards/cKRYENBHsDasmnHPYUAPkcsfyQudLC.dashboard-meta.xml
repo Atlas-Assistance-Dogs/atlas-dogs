@@ -83,7 +83,7 @@
                         <type>detail</type>
                     </flexTableColumn>
                     <flexTableColumn>
-                        <reportColumn>Dog__c.DogOwner__c</reportColumn>
+                        <reportColumn>Dog__c.Dog_Owner__c</reportColumn>
                         <showSubTotal>false</showSubTotal>
                         <showTotal>false</showTotal>
                         <type>detail</type>
