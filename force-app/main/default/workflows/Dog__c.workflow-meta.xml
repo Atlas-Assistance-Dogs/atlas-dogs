@@ -21,7 +21,7 @@
             <type>campaignMemberDerivedOwner</type>
         </recipients>
         <recipients>
-            <recipient>rameshi@atlasdog.org</recipient>
+            <recipient>rameshiad@atlasdog.org</recipient>
             <type>user</type>
         </recipients>
         <senderType>CurrentUser</senderType>
@@ -32,7 +32,7 @@
         <description>Dog is about to be 14 months</description>
         <protected>false</protected>
         <recipients>
-            <recipient>molly@atlasdog.org</recipient>
+            <recipient>mollyad@atlasdog.org</recipient>
             <type>user</type>
         </recipients>
         <senderType>CurrentUser</senderType>
@@ -61,7 +61,7 @@
     </tasks>
     <tasks>
         <fullName>Eligibility_reminder_for_Dog_Name</fullName>
-        <assignedTo>molly@atlasdog.org</assignedTo>
+        <assignedTo>mollyad@atlasdog.org</assignedTo>
         <assignedToType>user</assignedToType>
         <description>{!Dog.Name} is eligible to onboar</description>
         <dueDateOffset>-30</dueDateOffset>
@@ -74,7 +74,7 @@
     </tasks>
     <tasks>
         <fullName>Vaccination_reminder</fullName>
-        <assignedTo>molly@atlasdog.org</assignedTo>
+        <assignedTo>mollyad@atlasdog.org</assignedTo>
         <assignedToType>user</assignedToType>
         <dueDateOffset>-30</dueDateOffset>
         <notifyAssignee>false</notifyAssignee>
