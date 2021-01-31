@@ -722,7 +722,7 @@
         <dataType>Multipicklist</dataType>
         <displayField xsi:nil="true"/>
         <object xsi:nil="true"/>
-        <picklistField>Volunteer_role_with_no_data_access__c</picklistField>
+        <picklistField>Volunteer_Role_With_No_Data_Access__c</picklistField>
         <picklistObject>Account</picklistObject>
     </dynamicChoiceSets>
     <formulas>
