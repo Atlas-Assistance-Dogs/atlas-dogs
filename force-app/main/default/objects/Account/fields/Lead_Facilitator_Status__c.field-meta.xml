@@ -4,7 +4,7 @@
     <externalId>false</externalId>
     <formula>Null</formula>
     <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
-    <label>Lead Facilitator_Status</label>
+    <label>Lead Facilitator Status</label>
     <required>false</required>
     <type>Text</type>
     <unique>false</unique>

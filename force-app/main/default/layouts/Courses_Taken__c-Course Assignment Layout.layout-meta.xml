@@ -8,7 +8,7 @@
         <layoutColumns>
             <layoutItems>
                 <behavior>Required</behavior>
-                <field>Account_Name__c</field>
+                <field>Account__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Required</behavior>
@@ -16,7 +16,7 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Required</behavior>
-                <field>Course_Name__c</field>
+                <field>Course__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Readonly</behavior>
@@ -60,9 +60,9 @@
         <style>CustomLinks</style>
     </layoutSections>
     <miniLayout>
-        <fields>Account_Name__c</fields>
+        <fields>Account__c</fields>
         <fields>Assigned_Date__c</fields>
-        <fields>Course_Name__c</fields>
+        <fields>Course__c</fields>
     </miniLayout>
     <relatedLists>
         <fields>TASK.SUBJECT</fields>

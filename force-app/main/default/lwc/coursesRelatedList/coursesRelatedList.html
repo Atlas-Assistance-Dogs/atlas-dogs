@@ -1,0 +1,29 @@
+<template>
+    <div class ="slds-box slds-var-p-around_medium">
+        <lightning-card>
+            <h3 slot="title">
+                <div style ="display: flex;">
+                    <lightning-icon icon-name="standard:lead_list"></lightning-icon>
+                    <p class="slds-var-p-left_medium"><b>Assigned course(s)</b></p>
+                </div>  
+            </h3>
+            <lightning-button label="New" slot="actions"></lightning-button>
+            <div class="slds-var-p-top_large  slds-var-m-top_large slds-var-p-around_medium slds-border_top">
+                <template if:false = {noRecordsFound}>
+                    <lightning-datatable
+                        key-field="id"
+                        data={courseData}
+                        columns={columns}
+                        hide-checkbox-column
+                        >
+                    </lightning-datatable>
+                </template>
+                <template if:true = {noRecordsFound}>
+                    <div>No Record Found</div>
+                </template>
+            </div>
+            
+        </lightning-card>
+    </div>
+   
+</template>

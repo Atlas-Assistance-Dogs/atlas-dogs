@@ -925,7 +925,7 @@
             <targetReference>Process_Course_Master_IDs_Collected</targetReference>
         </connector>
         <inputAssignments>
-            <field>Account_Name__c</field>
+            <field>Account__c</field>
             <value>
                 <elementReference>recordId</elementReference>
             </value>

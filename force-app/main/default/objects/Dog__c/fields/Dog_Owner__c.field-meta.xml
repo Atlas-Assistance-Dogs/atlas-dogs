@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>DogOwner__c</fullName>
+    <fullName>Dog_Owner__c</fullName>
     <deleteConstraint>SetNull</deleteConstraint>
     <externalId>false</externalId>
-    <label>DogOwner</label>
+    <label>Dog Owner Account</label>
     <lookupFilter>
         <active>true</active>
         <filterItems>

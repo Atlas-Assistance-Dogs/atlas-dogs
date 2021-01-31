@@ -2,7 +2,7 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Client_Status_PKlst__c</fullName>
     <externalId>false</externalId>
-    <label>Trainer Status PKlist</label>
+    <label>Trainer Status</label>
     <required>false</required>
     <trackFeedHistory>false</trackFeedHistory>
     <type>Picklist</type>

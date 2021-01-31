@@ -4,7 +4,7 @@ public with sharing class CourseAssignmentInline {
                 return [SELECT Id, Name,
         Course_Description__c, Assigned_Date__c,
         Expected_Completion_Date__c,
-     Course_Completion_Date__c ,Status__c
+     Course_Completion_Date__c, Status__c
      FROM Courses_Taken__c where Account_Name__c = :accountID];
     }
 
