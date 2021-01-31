@@ -168,7 +168,7 @@
         <template>unfiled$public/Background_Check_Failed_Alternate_Role</template>
     </alerts>
     <alerts>
-        <fullName>Rejection_for_the_Board_Member_application</fullName>
+        <fullName>Rejection_for_the_Board_Member_Application</fullName>
         <description>Rejection for the Board Member application</description>
         <protected>false</protected>
         <recipients>
@@ -227,6 +227,57 @@
         <formula>Background_Check_Requested_Date__c &gt; today()</formula>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>
+    <rules>
+        <fullName>Create New Task Account Followup</fullName>
+        <actions>
+            <name>New_Account_Created</name>
+            <type>Task</type>
+        </actions>
+        <active>true</active>
+        <description>Create Task for Molly for New Account</description>
+        <formula>True</formula>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>Set Status for Roles</fullName>
+        <active>false</active>
+        <booleanFilter>1 OR 2 OR 3 OR 4</booleanFilter>
+        <criteriaItems>
+            <field>Account.Volunteer__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Client__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Facilitator__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Trainer__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <description>if one of the checkboxes (volunteer, client, trainer, facilitator) is checked it automatically sets the associated status to “Initial Inquiry”</description>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <tasks>
+        <fullName>New_Account_Created</fullName>
+        <assignedTo>molly@atlasdog.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>A new Account has been created , please start follow up</description>
+        <dueDateOffset>30</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Account.CreatedDate</offsetFromField>
+        <priority>High</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>New Account Created</subject>
+    </tasks>
     <tasks>
         <fullName>Facilitator_is_provisionally_active</fullName>
         <assignedTo>Team_Facilitator_Manager</assignedTo>

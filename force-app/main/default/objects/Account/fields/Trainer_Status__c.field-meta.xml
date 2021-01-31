@@ -4,7 +4,7 @@
     <externalId>false</externalId>
     <formula>Null</formula>
     <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
-    <label>Trainer_Status</label>
+    <label>Trainer Status</label>
     <required>false</required>
     <type>Text</type>
     <unique>false</unique>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Volunteer_provision_details__c</fullName>
+    <fullName>Volunteer_Provision_Details__c</fullName>
     <externalId>false</externalId>
-    <label>Volunteer provision details</label>
+    <label>Volunteer Provisioning Details</label>
     <length>32768</length>
     <trackFeedHistory>false</trackFeedHistory>
     <type>LongTextArea</type>

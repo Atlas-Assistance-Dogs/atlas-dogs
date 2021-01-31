@@ -8,7 +8,7 @@
         <actionName>Account.Background_Check_Request_Email_Alert</actionName>
         <actionType>emailAlert</actionType>
         <connector>
-            <targetReference>Back_ground_Check_Results_Record</targetReference>
+            <targetReference>Background_Check_Results_Record</targetReference>
         </connector>
         <inputParameters>
             <name>SObjectRowId</name>
@@ -341,8 +341,8 @@ Note - Background check is valid for only 1 year</description>
         <showHeader>true</showHeader>
     </screens>
     <screens>
-        <name>Back_ground_Check_Results_Record</name>
-        <label>Back ground Check Results Record</label>
+        <name>Background_Check_Results_Record</name>
+        <label>Background Check Results Record</label>
         <locationX>767</locationX>
         <locationY>540</locationY>
         <allowBack>true</allowBack>
@@ -357,7 +357,7 @@ Note - Background check is valid for only 1 year</description>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
-            <name>Background_check_results</name>
+            <name>Background_Check_Results</name>
             <choiceReferences>varBkgCkPass</choiceReferences>
             <choiceReferences>varBkgCkFailed</choiceReferences>
             <dataType>String</dataType>

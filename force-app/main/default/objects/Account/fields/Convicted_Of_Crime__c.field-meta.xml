@@ -3,7 +3,7 @@
     <fullName>Convicted_Of_Crime__c</fullName>
     <defaultValue>false</defaultValue>
     <externalId>false</externalId>
-    <label>Convicted Of Crime</label>
+    <label>Criminal Conviction?</label>
     <trackFeedHistory>false</trackFeedHistory>
     <type>Checkbox</type>
 </CustomField>

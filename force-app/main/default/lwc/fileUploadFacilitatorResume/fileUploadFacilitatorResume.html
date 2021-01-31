@@ -9,20 +9,19 @@
             multiple>
         </lightning-file-upload>
         </lightning-card>
-            
-        <lightning-card title="Related Files of the record" icon-name="standard:account">
-            <div style="width: auto;">
-                <template if:true={fileUploadList}>
-                        <lightning-datatable
-                                data={fileUploadList}
-                                columns={columns}
-                                key-field="recordId"
-                                onrowaction={getSelectedRecords}>
-                        </lightning-datatable>
-                </template>
+<template if:true = {filelst}>       
+        <lightning-card title="Files Uploaded" icon-name="custom:custom63">
+            <div class="slds-m-around_medium">
+                    <lightning-datatable
+                        key-field="documentId"
+                        data={filelst}
+                        columns={columns}
+                        hide-checkbox-column=true 
+                        onrowaction={handleRowAction}
+                        >
+                    </lightning-datatable>
             </div>
-        </lightning-card>
-        <template if:true={isErrorMessage}>
-            <span class="slds-text-color_error">{errorMessage}</span>
-          </template>
+    </lightning-card>
+</template>
+
 </template>

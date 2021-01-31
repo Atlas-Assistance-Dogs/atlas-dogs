@@ -12,8 +12,8 @@
     <targetConfigs>
         <targetConfig targets="lightning__FlowScreen">
             <property name="cmasterlst" type="String[]" role="outputOnly"/>
-            <property name="typeOfUser" type="String"/>
             <property name="recordId" type="String" role="inputOnly"/>
+            <property name="typeOfUser" type="String" role="inputOnly" />
         </targetConfig>
     </targetConfigs>
 </LightningComponentBundle>

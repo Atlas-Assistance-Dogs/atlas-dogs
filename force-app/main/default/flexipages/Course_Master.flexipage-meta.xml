@@ -3,7 +3,7 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
-                <componentName>courseAssgmntInlineEdit</componentName>
+                <componentName>courseAssignmentInlineEdit</componentName>
             </componentInstance>
         </itemInstances>
         <name>main</name>
