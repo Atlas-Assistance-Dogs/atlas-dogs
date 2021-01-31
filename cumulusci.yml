@@ -1,6 +1,6 @@
 minimum_cumulusci_version: '3.26.0'
 project:
-    name: atlas-salesforce
+    name: atlas-dog
     package:
         name: atlas-dogs
         api_version: '50.0'
@@ -12,14 +12,14 @@ project:
 tasks:
     robot:
         options:
-            suites: robot/atlas-salesforce/tests
+            suites: robot/atlas-dog/tests
             options:
-                outputdir: robot/atlas-salesforce/results
+                outputdir: robot/atlas-dog/results
 
     robot_testdoc:
         options:
-            path: robot/atlas-salesforce/tests
-            output: robot/atlas-salesforce/doc/atlas-salesforce_tests.html
+            path: robot/atlas-dog/tests
+            output: robot/atlas-dog/doc/atlas-dog_tests.html
 
     run_tests:
         options:
