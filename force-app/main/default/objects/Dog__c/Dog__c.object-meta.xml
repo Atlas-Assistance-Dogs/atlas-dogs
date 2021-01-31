@@ -164,7 +164,22 @@
         <type>Text</type>
     </nameField>
     <pluralLabel>Dogs</pluralLabel>
-    <searchLayouts/>
+    <profileSearchLayouts>
+        <fields>NAME</fields>
+        <profileName>Business User</profileName>
+    </profileSearchLayouts>
+    <searchLayouts>
+        <excludedStandardButtons>New</excludedStandardButtons>
+        <excludedStandardButtons>OpenListInQuip</excludedStandardButtons>
+        <excludedStandardButtons>ChangeOwner</excludedStandardButtons>
+        <excludedStandardButtons>MassChangeOwner</excludedStandardButtons>
+        <listViewButtons>Onboard_New_Dog</listViewButtons>
+        <searchResultsAdditionalFields>Dog_Status__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Expiry_Date_Status__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Active__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Dog_Certified__c</searchResultsAdditionalFields>
+        <searchResultsCustomButtons>Onboard_New_Dog</searchResultsCustomButtons>
+    </searchLayouts>
     <sharingModel>ReadWrite</sharingModel>
     <visibility>Public</visibility>
 </CustomObject>

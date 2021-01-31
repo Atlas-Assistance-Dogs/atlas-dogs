@@ -2,17 +2,31 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Health_Care_Records_Status__c</fullName>
     <externalId>false</externalId>
-    <formula>IF(    
-AND(
-TODAY() &lt; (Most_Recent_Distemper_Vaccine__c ),
-TODAY() &lt; (Most_Recent_Hepatitis_Vaccine__c ),
-TODAY() &lt; (Most_Recent_Parainfluenza_Vaccine__c),
-TODAY() &lt; (Most_Recent_Parvovirus_Vaccine__c  ),
-TODAY() &lt; (Most_Recent_Physical_Exam__c ),
-TODAY() &lt; (Most_Recent_Rabies_Vaccine__c )
-), 
-&quot;All Good&quot;,  
-&quot;Vacination(s) Expired&quot;)</formula>
+    <formula>IF( Expiry_Date_Status__c  = &quot;Good&quot;, &quot; All Good &quot;, NULL) 
+
+&amp;
+
+IF(Most_Recent_Distemper_Vaccine__c &lt; TODAY(),  IMAGE(&quot;/sfc/servlet.shepherd/version/renditionDownload?rendition=ORIGINAL_Png&amp;versionId=068c00000013Ric&amp;operationContext=CHATTER&amp;contentId=05Tc0000006l4b4&quot;,&apos;*&apos;,15,15) &amp; &quot; Distemper Vaccination is expired&quot; &amp;  BR() , IMAGE(&quot;/img/samples/rating2.gif&quot;,&apos;*&apos;) &amp; &quot; Distemper Vaccination is good until &quot; &amp;  TEXT(Most_Recent_Distemper_Vaccine__c) &amp;  BR()) 
+
+&amp; 
+
+IF(Most_Recent_Hepatitis_Vaccine__c &lt; TODAY(),  IMAGE(&quot;/img/samples/rating1.gif&quot;,&apos;*&apos;) &amp; &quot; Hepatitis Vaccination is expired&quot; &amp;  BR() , IMAGE(&quot;/img/samples/rating2.gif&quot;,&apos;*&apos;) &amp; &quot; Hepatitis Vaccination is good until &quot; &amp;  TEXT(Most_Recent_Hepatitis_Vaccine__c) &amp;  BR())
+
+&amp; 
+
+IF(Most_Recent_Parainfluenza_Vaccine__c &lt; TODAY(),  IMAGE(&quot;/img/samples/rating1.gif&quot;,&apos;*&apos;) &amp; &quot; Parainflunenza Vaccination is expired&quot; &amp;  BR() , IMAGE(&quot;/img/samples/rating2.gif&quot;,&apos;*&apos;) &amp; &quot; Parainflunenza Vaccination is good until &quot; &amp;  TEXT(Most_Recent_Parainfluenza_Vaccine__c) &amp;  BR())
+
+&amp; 
+
+IF(Most_Recent_Parvovirus_Vaccine__c  &lt; TODAY(),  IMAGE(&quot;/img/samples/rating1.gif&quot;,&apos;*&apos;) &amp; &quot; Paravovirus Vaccination is expired&quot; &amp;  BR() , IMAGE(&quot;/img/samples/rating2.gif&quot;,&apos;*&apos;) &amp; &quot; Paravovirus Vaccination is good until &quot; &amp;  TEXT(Most_Recent_Parvovirus_Vaccine__c) &amp;  BR())
+
+&amp; 
+
+IF(Most_Recent_Rabies_Vaccine__c &lt; TODAY(),  IMAGE(&quot;/img/samples/rating1.gif&quot;,&apos;*&apos;) &amp; &quot; Rabies Vaccination is expired&quot; &amp;  BR() , IMAGE(&quot;/img/samples/rating2.gif&quot;,&apos;*&apos;) &amp; &quot; Rabies Vaccination is good until &quot; &amp;  TEXT(Most_Recent_Rabies_Vaccine__c) &amp;  BR())
+
+&amp; 
+
+IF(Most_Recent_Physical_Exam__c &lt; TODAY(),  IMAGE(&quot;/img/samples/rating1.gif&quot;,&apos;*&apos;) &amp; &quot; Physical Exam is not up to date&quot; &amp;  BR() , IMAGE(&quot;/img/samples/rating2.gif&quot;,&apos;*&apos;) &amp; &quot; Physical Exam is good until &quot; &amp;  TEXT(Most_Recent_Physical_Exam__c) &amp;  BR())</formula>
     <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
     <label>Health Care Records Status</label>
     <required>false</required>

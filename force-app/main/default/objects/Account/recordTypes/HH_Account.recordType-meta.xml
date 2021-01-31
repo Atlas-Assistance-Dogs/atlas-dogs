@@ -2,7 +2,7 @@
 <RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>HH_Account</fullName>
     <active>true</active>
-    <compactLayoutAssignment>Roles_Description_and_Status</compactLayoutAssignment>
+    <compactLayoutAssignment>New_System_Default</compactLayoutAssignment>
     <description>An Account representing a Household containing one or more individuals</description>
     <label>Household Account</label>
     <picklistValues>
@@ -13,10 +13,6 @@
         </values>
         <values>
             <fullName>Other</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Partner Referral</fullName>
             <default>false</default>
         </values>
         <values>
@@ -40,49 +36,6 @@
         </values>
         <values>
             <fullName>Pass</fullName>
-            <default>false</default>
-        </values>
-    </picklistValues>
-    <picklistValues>
-        <picklist>Board_Member_Status__c</picklist>
-        <values>
-            <fullName>Active</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Awaiting Board Approval</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Background Check In progress</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Board Interview Committee Feedback Pending</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Board Interview Committee interview Setup</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Not a good fit</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Offered other roles</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Onboarding</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Preliminary Interview Setup</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Provisionally on boarded as volunteer until next board meeting</fullName>
             <default>false</default>
         </values>
     </picklistValues>
@@ -130,57 +83,6 @@
         </values>
         <values>
             <fullName>Selected</fullName>
-            <default>false</default>
-        </values>
-    </picklistValues>
-    <picklistValues>
-        <picklist>Facilitator_Status__c</picklist>
-        <values>
-            <fullName>Active</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Background Check In progress</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Inactive</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Not Ready</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Not Selected</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Not considering</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>On boarding</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Provisionally active</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Provisionally selected</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Scheduled Interview</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Training course and workshop pending completion</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Workshop pending completion</fullName>
             <default>false</default>
         </values>
     </picklistValues>
@@ -335,6 +237,25 @@
         </values>
     </picklistValues>
     <picklistValues>
+        <picklist>Preferred_Pronoun__c</picklist>
+        <values>
+            <fullName>He</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>She</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>They</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
         <picklist>Rating</picklist>
         <values>
             <fullName>Cold</fullName>
@@ -350,104 +271,10 @@
         </values>
     </picklistValues>
     <picklistValues>
-        <picklist>Status__c</picklist>
-        <values>
-            <fullName>Interview Pending</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Interview Schedule</fullName>
-            <default>false</default>
-        </values>
-    </picklistValues>
-    <picklistValues>
         <picklist>Type</picklist>
         <values>
             <fullName>Household</fullName>
             <default>true</default>
-        </values>
-    </picklistValues>
-    <picklistValues>
-        <picklist>Volunteer_Role__c</picklist>
-        <values>
-            <fullName>ADI Accreditation</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Academy</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Branding and Marketing</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Client Certification</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Client Operations</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Community Outreach and Education</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Dog Availability</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Financial Operations</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Fund Development</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Governance and Compliance %26 Operations</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Operations Master Docs</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Research and Development</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Scholarships</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>State Registration</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Team Facilitator Certification</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Team Facilitator Operations</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Technology Infrastructure</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Trainer Certification</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Volunteer %26 Staff Operations</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Volunteer Recruitment and Retention</fullName>
-            <default>false</default>
         </values>
     </picklistValues>
     <picklistValues>
@@ -458,14 +285,10 @@
         </values>
         <values>
             <fullName>Active</fullName>
-            <default>false</default>
+            <default>true</default>
         </values>
         <values>
             <fullName>Background Check In progress</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Course Provisioning Requested</fullName>
             <default>false</default>
         </values>
         <values>
@@ -474,6 +297,10 @@
         </values>
         <values>
             <fullName>Inactive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Initial Inquiry</fullName>
             <default>false</default>
         </values>
         <values>
@@ -501,101 +328,11 @@
             <default>false</default>
         </values>
         <values>
-            <fullName>Provisionally selected</fullName>
-            <default>false</default>
-        </values>
-        <values>
             <fullName>Scheduled Interview</fullName>
             <default>false</default>
         </values>
         <values>
             <fullName>Training in progress</fullName>
-            <default>false</default>
-        </values>
-    </picklistValues>
-    <picklistValues>
-        <picklist>Volunteer_role_with_no_data_access__c</picklist>
-        <values>
-            <fullName>ADI Accreditation</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Academy</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Branding and Marketing</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Client Certification</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Community Outreach and Education</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Dog Availability</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Financial Operations</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Fund Development</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Governance and Compliance %26 Operations</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Operations Master Docs</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Research and Development</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Scholarships</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>State Registration</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Team Facilitator Certification</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Technology Infrastructure</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Trainer Certification</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Volunteer Recruitment and Retention</fullName>
-            <default>false</default>
-        </values>
-    </picklistValues>
-    <picklistValues>
-        <picklist>npo02__SYSTEM_CUSTOM_NAMING__c</picklist>
-        <values>
-            <fullName>Formal_Greeting%5F%5Fc</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Informal_Greeting%5F%5Fc</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Name</fullName>
             <default>false</default>
         </values>
     </picklistValues>

@@ -1,0 +1,51 @@
+<template>
+    <lightning-card title="Role(s) with Status" icon-name="standard:user_role">
+        <template if:true={account.data}>
+            <div class="slds-m-around_medium slds-var-p-left_large">
+                <template if:true={account.data.fields.Client__c.value}>
+                    <div style="display:flex">
+                        <lightning-icon icon-name="utility:favorite" title="Volunteer" size="xx-small" class="slds-var-p-right_small"></lightning-icon>
+                        <div>Client - {account.data.fields.Client_Status__c.value}</div>
+                    </div> 
+                </template>
+                <template if:true={account.data.fields.Volunteer__c.value}>
+                    <div style="display:flex">
+                        <lightning-icon icon-name="utility:favorite" title="Volunteer"  size="xx-small" class="slds-var-p-right_small"></lightning-icon>
+                        <div>Voluteer - {account.data.fields.Volunteer_Status__c.value}</div>
+                    </div> 
+                </template>
+                
+                <template if:true={account.data.fields.Facilitator__c.value}>
+                    <div style="display:flex">
+                        <lightning-icon icon-name="utility:favorite" title="Volunteer" size="xx-small" class="slds-var-p-right_small"></lightning-icon>
+                        <div>Facilitator - {account.data.fields.Facilitator_Status__c.value}</div>
+                    </div> 
+                   
+                </template>
+                <template if:true={account.data.fields.Lead_Facilitator__c.value}>
+                    <div style="display:flex">
+                        <lightning-icon icon-name="utility:favorite" title="Volunteer"  size="xx-small" class="slds-var-p-right_small"></lightning-icon>
+                        <div>Lead Facilitator - {account.data.fields.Lead_Facilitator_Status__c.value}</div>
+                    </div> 
+                    <p></p>
+                </template>
+                <template if:true={account.data.fields.Board_Member__c.value}>
+                    <div style="display:flex">
+                        <lightning-icon icon-name="utility:favorite" title="Volunteer" size="xx-small" class="slds-var-p-right_small"></lightning-icon>
+                        <div>Board Member - {account.data.fields.Board_Member_Status__c.value}</div>
+                    </div> 
+                   
+                </template>   
+                <template if:true={account.data.fields.Trainer__c.value}>
+                    <div style="display:flex">
+                        <lightning-icon icon-name="utility:favorite" title="Volunteer" size="xx-small" class="slds-var-p-right_small"></lightning-icon>
+                        <div>Trainer - {account.data.fields.Trainer_Status__c.value}</div>
+                    </div> 
+                  
+                </template>
+                
+                
+            </div>
+        </template>
+    </lightning-card>
+</template>

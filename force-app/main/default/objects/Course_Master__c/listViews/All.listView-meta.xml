@@ -5,6 +5,7 @@
     <columns>Course_Code__c</columns>
     <columns>Course_Name__c</columns>
     <columns>Common_Course__c</columns>
+    <columns>Client_Course__c</columns>
     <columns>Trainer_Course__c</columns>
     <columns>Facilitator_Course__c</columns>
     <columns>Course_SIS__c</columns>
@@ -12,5 +13,10 @@
     <columns>Term_SIS__c</columns>
     <columns>Active__c</columns>
     <filterScope>Everything</filterScope>
+    <filters>
+        <field>Active__c</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
     <label>All</label>
 </ListView>

@@ -4,15 +4,21 @@
         <div class="slds-m-around_medium" style="height: 300px">
             <lightning-datatable
                 key-field="Id"
-                data={courses}
+                data={AssignedCourses.data}
                 columns={columns}
                 onrowselection={getSelectedName}
                 selected-rows={selectRows}
                 sorted-by={sortedBy}
                 sorted-direction={sortedDirection}
-                onsort={updateColumnSorting} >
+                onsort={updateColumnSorting}
+                >
             </lightning-datatable>
          </div>    
 
+         <div class="slds-clearfix">
+            <div class="slds-align_absolute-center">
+                <lightning-button onclick={facclick} value="assignedFacilitator" label="Select Facilitator Courses"></lightning-button>
+            </div>
+         </div>   
 </lightning-card>    
 </template>
