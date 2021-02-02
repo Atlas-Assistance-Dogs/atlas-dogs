@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <DashboardFolder xmlns="http://soap.sforce.com/2006/04/metadata">
-    <folderShares>
+    <!--folderShares>
         <accessLevel>Manage</accessLevel>
-        <sharedTo>davidr@atlasdog.org</sharedTo>
+    <sharedTo>davidrad@atlasdog.org</sharedTo>
         <sharedToType>User</sharedToType>
-    </folderShares>
+    </folderShares-->
     <name>Facilitator Dashboard</name>
 </DashboardFolder>
