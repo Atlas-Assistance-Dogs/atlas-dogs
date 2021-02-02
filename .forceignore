@@ -16,3 +16,8 @@ package.xml
 
 # include Business user profile
 !**/profiles/Business User.profile-meta.xml
+
+# NPSP files
+**/npsp__*
+**/npe01__*
+**/npo02__*
