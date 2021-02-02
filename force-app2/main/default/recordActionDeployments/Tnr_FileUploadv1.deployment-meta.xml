@@ -3,7 +3,7 @@
     <channelConfigurations>
         <channel>Chat</channel>
         <channelItems>
-            <action>Trainee_interview</action>
+            <action>Trainee_Interview</action>
             <isMandatory>false</isMandatory>
             <isUiRemoveHidden>false</isUiRemoveHidden>
             <pinned>Top</pinned>

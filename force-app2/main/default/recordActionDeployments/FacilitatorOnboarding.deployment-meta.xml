@@ -3,7 +3,7 @@
     <channelConfigurations>
         <channel>Chat</channel>
         <channelItems>
-            <action>Faciltator_Onboarding_v4</action>
+            <action>Faciltator_Onboarding</action>
             <isMandatory>false</isMandatory>
             <isUiRemoveHidden>false</isUiRemoveHidden>
             <pinned>Top</pinned>
@@ -64,14 +64,11 @@
     <deploymentContexts>
         <entityName>npo02__Household__c</entityName>
     </deploymentContexts>
-    <deploymentContexts>
-        <entityName>Event__c</entityName>
-    </deploymentContexts>
     <hasGuidedActions>true</hasGuidedActions>
     <hasRecommendations>false</hasRecommendations>
     <masterLabel>Facilitator Onboarding</masterLabel>
     <selectableItems>
-        <action>Faciltator_Onboarding_v4</action>
+        <action>Faciltator_Onboarding</action>
         <type>Flow</type>
     </selectableItems>
 </RecordActionDeployment>
