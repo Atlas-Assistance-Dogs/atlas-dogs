@@ -202,6 +202,15 @@
         <itemInstances>
             <componentInstance>
                 <componentInstanceProperties>
+                    <name>recordActionDeployment</name>
+                    <value>VolunteerOnboarding</value>
+                </componentInstanceProperties>
+                <componentName>lbpm:actionList</componentName>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
                     <name>tabs</name>
                     <value>Facet-dedc837a-d5d7-4b97-a45f-d2a4ccc3d990</value>
                 </componentInstanceProperties>

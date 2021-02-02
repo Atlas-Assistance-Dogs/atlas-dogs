@@ -44,7 +44,7 @@
         <type>Flow</type>
     </selectableItems>
     <selectableItems>
-        <action>Trainee_interview</action>
+        <action>Trainee_Interview</action>
         <type>Flow</type>
     </selectableItems>
     <selectableItems>
@@ -189,14 +189,6 @@
     </selectableItems>
     <selectableItems>
         <action>Account.npsp__Quick_Organization_Update</action>
-        <type>QuickAction</type>
-    </selectableItems>
-    <selectableItems>
-        <action>Account.Trainer_Initial_Interview</action>
-        <type>QuickAction</type>
-    </selectableItems>
-    <selectableItems>
-        <action>Account.Trainer_intitial_Interview_Process</action>
         <type>QuickAction</type>
     </selectableItems>
     <selectableItems>
