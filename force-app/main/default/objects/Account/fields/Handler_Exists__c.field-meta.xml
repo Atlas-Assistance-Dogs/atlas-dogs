@@ -3,7 +3,7 @@
     <fullName>Handler_Exists__c</fullName>
     <defaultValue>false</defaultValue>
     <externalId>false</externalId>
-    <label>Handler Exists</label>
+    <label>Has Handler</label>
     <trackFeedHistory>false</trackFeedHistory>
     <type>Checkbox</type>
 </CustomField>

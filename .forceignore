@@ -12,7 +12,12 @@ package.xml
 **/__tests__/**
 
 # ignore profiles
-**/profiles/**
+#**/profiles/**
 
 # include Business user profile
 !**/profiles/Business User.profile-meta.xml
+
+# NPSP files
+**/npsp__*
+**/npe01__*
+**/npo02__*

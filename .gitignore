@@ -9,7 +9,7 @@
 __pycache__
 
 # Robot Framework results
-robot/atlas-salesforce/results/
+robot/atlas-dog/results/
 
 # Editors
 *.sublime-project
@@ -21,6 +21,3 @@ robot/atlas-salesforce/results/
 
 # Misc
 .DS_Store
-
-# temporary files
-mdapi

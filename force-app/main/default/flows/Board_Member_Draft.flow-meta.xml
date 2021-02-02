@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <actionCalls>
-        <name>Board_Member_application_Rejection</name>
-        <label>Board Member application Rejection</label>
+        <name>Board_Member_Application_Rejection</name>
+        <label>Board Member Application Rejection</label>
         <locationX>206</locationX>
         <locationY>757</locationY>
-        <actionName>Account.Rejection_for_the_Board_Member_application</actionName>
+        <actionName>Account.Rejection_for_the_Board_Member_Application</actionName>
         <actionType>emailAlert</actionType>
         <inputParameters>
             <name>SObjectRowId</name>
@@ -629,7 +629,7 @@
         <label>Onboard Volunteer2</label>
         <locationX>454</locationX>
         <locationY>930</locationY>
-        <flowName>Volunteer_Onboarding_v4</flowName>
+        <flowName>Volunteer_Onboarding</flowName>
         <inputAssignments>
             <name>recordId</name>
             <value>

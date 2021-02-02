@@ -2,7 +2,7 @@
 <RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>HH_Account</fullName>
     <active>true</active>
-    <compactLayoutAssignment>Roles_Description_and_Status</compactLayoutAssignment>
+    <compactLayoutAssignment>New_System_Default</compactLayoutAssignment>
     <description>An Account representing a Household containing one or more individuals</description>
     <label>Household Account</label>
     <picklistValues>
@@ -13,10 +13,6 @@
         </values>
         <values>
             <fullName>Other</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Partner Referral</fullName>
             <default>false</default>
         </values>
         <values>
@@ -335,6 +331,25 @@
         </values>
     </picklistValues>
     <picklistValues>
+        <picklist>Preferred_Pronoun__c</picklist>
+        <values>
+            <fullName>He</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>She</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>They</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
         <picklist>Rating</picklist>
         <values>
             <fullName>Cold</fullName>
@@ -365,6 +380,77 @@
         <values>
             <fullName>Household</fullName>
             <default>true</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Volunteer_Role_With_No_Data_Access__c</picklist>
+        <values>
+            <fullName>ADI Accreditation</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Academy</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Branding and Marketing</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Client Certification</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Community Outreach and Education</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Dog Availability</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Financial Operations</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Fund Development</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Governance and Compliance %26 Operations</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Operations Master Docs</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Research and Development</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Scholarships</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>State Registration</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Team Facilitator Certification</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Technology Infrastructure</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Trainer Certification</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Volunteer Recruitment and Retention</fullName>
+            <default>false</default>
         </values>
     </picklistValues>
     <picklistValues>
@@ -458,14 +544,10 @@
         </values>
         <values>
             <fullName>Active</fullName>
-            <default>false</default>
+            <default>true</default>
         </values>
         <values>
             <fullName>Background Check In progress</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Course Provisioning Requested</fullName>
             <default>false</default>
         </values>
         <values>
@@ -474,6 +556,10 @@
         </values>
         <values>
             <fullName>Inactive</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Initial Inquiry</fullName>
             <default>false</default>
         </values>
         <values>
@@ -501,86 +587,11 @@
             <default>false</default>
         </values>
         <values>
-            <fullName>Provisionally selected</fullName>
-            <default>false</default>
-        </values>
-        <values>
             <fullName>Scheduled Interview</fullName>
             <default>false</default>
         </values>
         <values>
             <fullName>Training in progress</fullName>
-            <default>false</default>
-        </values>
-    </picklistValues>
-    <picklistValues>
-        <picklist>Volunteer_role_with_no_data_access__c</picklist>
-        <values>
-            <fullName>ADI Accreditation</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Academy</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Branding and Marketing</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Client Certification</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Community Outreach and Education</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Dog Availability</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Financial Operations</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Fund Development</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Governance and Compliance %26 Operations</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Operations Master Docs</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Research and Development</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Scholarships</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>State Registration</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Team Facilitator Certification</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Technology Infrastructure</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Trainer Certification</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Volunteer Recruitment and Retention</fullName>
             <default>false</default>
         </values>
     </picklistValues>
@@ -596,6 +607,37 @@
         </values>
         <values>
             <fullName>Name</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>npsp__Funding_Focus__c</picklist>
+        <values>
+            <fullName>Animal Welfare</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Arts and Culture</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Capacity Building</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Education</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Environmental</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Health Services</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Human Services</fullName>
             <default>false</default>
         </values>
     </picklistValues>

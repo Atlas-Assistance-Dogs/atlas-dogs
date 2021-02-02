@@ -1,0 +1,42 @@
+<template>
+   <!-- <lightning-card class="slds-var-m-bottom_medium" variant="Narrow"  title='Vaccination Info' icon-name="standard:timesheet">
+        <div class="slds-var-p-horizontal_small">
+            <lightning-record-edit-form record-id={recordId} object-api-name="Dog__c">
+                <c-vaccination-item vaccination-name = "Distemper Vaccine Expiration Dates" vaccination-date={distemper}></c-vaccination-item>
+                <c-vaccination-item vaccination-name = "Rabies Vaccine Expiration Date" vaccination-date={rabies}></c-vaccination-item>
+            </lightning-record-edit-form>
+        </div>
+    </lightning-card> -->
+     <lightning-card title="Vaccinaion Status">
+         <div class="slds-grid slds-wrap slds-var-p-horizontal_medium">
+             <div class="slds-col slds-size_1-of-2 slds-var-p-around_medium">
+                <c-vaccination-item vaccination-name = "Distemper Vaccine" vaccination-date={distemper}></c-vaccination-item>
+                <c-vaccination-item vaccination-name = "Hepatitis Vaccine" vaccination-date={hepatitis}></c-vaccination-item>
+                <c-vaccination-item vaccination-name = "Parainfluenza Vaccine" vaccination-date={parainfluenza}></c-vaccination-item>
+             </div>
+             <div class="slds-col slds-size_1-of-2 slds-var-p-around_medium">
+                <c-vaccination-item vaccination-name = "Parvovirus Vaccine" vaccination-date={parvovirus}></c-vaccination-item>
+                <c-vaccination-item vaccination-name = "Rabies Vaccine" vaccination-date={rabies}></c-vaccination-item>
+                <c-vaccination-item vaccination-name = "Physical Exam" vaccination-date={physicalExam}></c-vaccination-item>
+             </div>  
+         </div>
+        <!--<lightning-layout multiple-rows>
+            <lightning-layout-item size="12" padding="around-small">
+                <c-vaccination-item vaccination-name = "Distemper Vaccine Expiration Date" vaccination-date={distemper}></c-vaccination-item>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" padding="around-small">
+                <c-vaccination-item vaccination-name = "Hepatitis Vaccine Expiration Date" vaccination-date={hepatitis}></c-vaccination-item>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" padding="around-small">
+                <c-vaccination-item vaccination-name = "Parainfluenza Vaccine Expiration Date" vaccination-date={parainfluenza}></c-vaccination-item>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" padding="around-small">
+                <c-vaccination-item vaccination-name = "Parvovirus Vaccine Expiration Date" vaccination-date={parvovirus}></c-vaccination-item>
+            </lightning-layout-item> 
+            <lightning-layout-item size="12" padding="around-small">
+                <c-vaccination-item vaccination-name = "Rabies Vaccine Expiration Date" vaccination-date={rabies}></c-vaccination-item>
+            </lightning-layout-item>           
+        </lightning-layout>-->
+        
+    </lightning-card>  
+</template>

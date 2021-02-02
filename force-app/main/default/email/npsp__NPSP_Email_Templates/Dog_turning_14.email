@@ -1,0 +1,5 @@
+Hi,
+
+Dog, {!Dog__c.Name}  was not onboarded due to 14 month eligibility rule. {!Dog__c.Name}  will be turning 14 months in next 30 days. Please check for onboarding  with the owner for boarding.
+
+Thanks, Ramesh

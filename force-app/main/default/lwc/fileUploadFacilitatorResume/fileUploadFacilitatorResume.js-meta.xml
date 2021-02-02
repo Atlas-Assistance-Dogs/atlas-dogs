@@ -13,9 +13,6 @@
         <targetConfig targets="lightning__FlowScreen">
             <property name="recordId" type="String" role="inputOnly"/>
             <property name="lwcname" type="String" role="inputOnly"/>
-            <property name="userType" label="userType" type="String"/>
-            <property name="docType" label="docType" type="String"/>
-            <property name="countOfFiles" label="countOfFiles" type="String"/>
         </targetConfig>
     </targetConfigs>
 </LightningComponentBundle>
