@@ -19,6 +19,9 @@
     },
     "languageSettings": {
       "enableTranslationWorkbench": true
+    },
+    "emailAdministrationSettings": {
+      "enableEnhancedEmailEnabled": true
     }
   }
 }

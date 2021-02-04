@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
-    <applicationVisibilities>
-        <application>Atlas_Assistance_Dogs</application>
-        <visible>true</visible>
-    </applicationVisibilities>
     <description>Ability to access all objects, flows, etc.</description>
     <fieldPermissions>
         <editable>true</editable>
@@ -369,16 +365,6 @@
         <editable>true</editable>
         <field>Account.Volunteer__c</field>
         <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Account.Website</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Account.YearStarted</field>
-        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
