@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>aD_I_want_to_know_more_about__c</fullName>
+    <fullName>I_Want_to_Know_More_About__c</fullName>
     <description>Maps to a field in Form assembly</description>
     <externalId>false</externalId>
     <label>I want to know more about</label>

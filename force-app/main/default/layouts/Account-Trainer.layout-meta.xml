@@ -160,7 +160,7 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>aD_Comment_or_Message__c</field>
+                <field>Comment_or_Message__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns/>

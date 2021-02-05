@@ -642,7 +642,7 @@
         </values>
     </picklistValues>
     <picklistValues>
-        <picklist>aD_I_want_to_know_more_about__c</picklist>
+        <picklist>I_Want_to_Know_More_About__c</picklist>
         <values>
             <fullName>Client%2FDog Team Certification</fullName>
             <default>false</default>
@@ -669,7 +669,7 @@
         </values>
     </picklistValues>
     <picklistValues>
-        <picklist>aD_Where_did_you_hear_about_us__c</picklist>
+        <picklist>Where_Did_You_Hear_About_Us__c</picklist>
         <values>
             <fullName>Facebook</fullName>
             <default>false</default>
