@@ -145,6 +145,14 @@
                 <behavior>Edit</behavior>
                 <field>Preferred_Pronoun__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>aD_I_want_to_know_more_about__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>aD_Comment_or_Message__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns/>
         <style>TwoColumnsTopToBottom</style>

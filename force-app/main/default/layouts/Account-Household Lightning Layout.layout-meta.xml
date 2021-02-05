@@ -32,6 +32,18 @@
                 <behavior>Edit</behavior>
                 <field>Preferred_Pronoun__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>aD_I_want_to_know_more_about__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>aD_Where_did_you_hear_about_us__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>aD_Comment_or_Message__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
@@ -277,7 +289,7 @@
         <customLabel>true</customLabel>
         <detailHeading>true</detailHeading>
         <editHeading>true</editHeading>
-        <label>Back ground check &amp; Criminal Conviction</label>
+        <label>Background check &amp; Criminal Conviction</label>
         <layoutColumns>
             <layoutItems>
                 <behavior>Edit</behavior>

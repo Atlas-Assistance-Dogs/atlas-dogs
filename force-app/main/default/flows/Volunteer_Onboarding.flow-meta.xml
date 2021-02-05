@@ -964,7 +964,7 @@
         <inputAssignments>
             <field>Volunteer_Status__c</field>
             <value>
-                <stringValue>On boarding aborted - Back ground Check failed</stringValue>
+                <stringValue>On boarding aborted - Background Check failed</stringValue>
             </value>
         </inputAssignments>
         <object>Account</object>

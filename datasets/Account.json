@@ -35,7 +35,7 @@
             "DOB__c": "1980-05-28",
             "Email__c": "davidw@test.com",
             "Facilitator_application_received__c": false,
-            "Facilitator_Status__c": "On boarding",
+            "Facilitator_Status__c": "Onboarding",
             "Facilitator__c": false,
             "First_Name__c": "David",
             "Handler_Exists__c": false,

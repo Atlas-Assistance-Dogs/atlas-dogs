@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>aD_Comment_or_Message__c</fullName>
+    <description>Maps to a field in Form assembly</description>
+    <externalId>false</externalId>
+    <label>Comment or Message</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>TextArea</type>
+</CustomField>

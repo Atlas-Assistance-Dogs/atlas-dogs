@@ -41,9 +41,9 @@
                 <label>Inactive</label>
             </value>
             <value>
-                <fullName>Delayed on boarding</fullName>
+                <fullName>Delayed onboarding</fullName>
                 <default>false</default>
-                <label>Delayed on boarding</label>
+                <label>Delayed onboarding</label>
             </value>
             <value>
                 <fullName>Not interested</fullName>
@@ -71,9 +71,9 @@
                 <label>Account Provisioning requested</label>
             </value>
             <value>
-                <fullName>On boarding aborted - Back ground Check failed</fullName>
+                <fullName>Onboarding aborted - Background Check failed</fullName>
                 <default>false</default>
-                <label>On boarding aborted - Back ground Check failed</label>
+                <label>Onboarding aborted - Background Check failed</label>
             </value>
             <value>
                 <fullName>Initial Inquiry</fullName>

@@ -89,7 +89,7 @@
             <default>false</default>
         </values>
         <values>
-            <fullName>Back Ground Check in Progress</fullName>
+            <fullName>Background Check in Progress</fullName>
             <default>false</default>
         </values>
         <values>
@@ -156,7 +156,7 @@
             <default>false</default>
         </values>
         <values>
-            <fullName>On boarding</fullName>
+            <fullName>Onboarding</fullName>
             <default>false</default>
         </values>
         <values>
@@ -614,6 +614,68 @@
         </values>
         <values>
             <fullName>Human Services</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>aD_I_want_to_know_more_about__c</picklist>
+        <values>
+            <fullName>Client%2FDog Team Certification</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>General Info%2FOther</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sponsorship%2FDonations</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Team Facilitator Certification</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Trainer Certification</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Volunteering</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>aD_Where_did_you_hear_about_us__c</picklist>
+        <values>
+            <fullName>Facebook</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Friend</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Health Provider</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Instagram</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Search Engine</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Twitter</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Website</fullName>
             <default>false</default>
         </values>
     </picklistValues>
