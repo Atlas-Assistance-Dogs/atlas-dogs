@@ -24,3 +24,26 @@ tasks:
     run_tests:
         options:
             required_org_code_coverage_percent: 75
+flows:
+    config_qa:
+        steps:
+            3:
+                task: dx
+                options:
+                    command: force:data:tree:import
+                    extra: -f datasets/Course_Master__c.json
+            4:
+                task: assign_permission_sets
+                options:
+                    api_names: Atlas_Super_User
+    config_dev:
+        steps:
+            3:
+                task: dx
+                options:
+                    command: force:data:tree:import
+                    extra: -f datasets/Course_Master__c.json
+            4:
+                task: assign_permission_sets
+                options:
+                    api_names: Atlas_Super_User

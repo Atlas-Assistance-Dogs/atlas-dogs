@@ -138,11 +138,14 @@ Insert Account:
   - Crime_Conviction_Notes__c
   - DOB__c
   - Email__c
+  - Facilitator_Application_Receipt_Date__c
+  - Facilitator_Application_Received__c
   - Facilitator_Interview_End_DateTime__c
   - Facilitator_Interview_Notes__c
   - Facilitator_Interview_Start_Date_Time__c
   - Facilitator_Onboarding_Remainder_Date__c
   - Facilitator_Preliminary_Interview_Date__c
+  - Facilitator_Provision_Details__c
   - Facilitator_Provisional_Agreement_Date__c
   - Facilitator_Reminder_Date__c
   - Facilitator_Status__c
@@ -153,9 +156,6 @@ Insert Account:
   - Facilitator_WS_Zip__c
   - Facilitator_Workshop_Schedule__c
   - Facilitator__c
-  - Facilitator_application_receipt_date__c
-  - Facilitator_application_received__c
-  - Facilitator_provision_details__c
   - Facitator_Agreement_Recieved_Date__c
   - First_Name__c
   - Handler_Exists__c
@@ -179,12 +179,12 @@ Insert Account:
   - Volunteer_Interview_Date_End_Time__c
   - Volunteer_Interview_Date_Start_time__c
   - Volunteer_Interview_Notes__c
+  - Volunteer_Provision_Details__c
+  - Volunteer_Remainder_Date__c
+  - Volunteer_Role_With_No_Data_Access__c
   - Volunteer_Role__c
   - Volunteer_Status__c
   - Volunteer__c
-  - Volunteer_provision_details__c
-  - Volunteer_remainder_date__c
-  - Volunteer_role_with_no_data_access__c
   - npe01__SYSTEMIsIndividual__c
   - npe01__SYSTEM_AccountType__c
   - npo02__AverageAmount__c
@@ -240,7 +240,7 @@ Insert Account:
       after: Insert Account
     Level__c:
       table: npsp__Level__c
-    MicrochipNumber__c:
+    Microchip_Number__c:
       table: Dog__c
       after: Insert Dog__c
     ParentId:
@@ -264,9 +264,9 @@ Insert Courses_Taken__c:
   - Expected_Completion_Date__c
   - Status__c
   lookups:
-    Account_Name__c:
+    Account__c:
       table: Account
-    Course_Name__c:
+    Course__c:
       table: Course_Master__c
 Insert Dog__c:
   sf_object: Dog__c
@@ -301,7 +301,7 @@ Insert Dog__c:
   - Vet_State__c
   - Vet_Zip_Code__c
   lookups:
-    DogOwner__c:
+    Dog_Owner__c:
       table: Account
     Replaced_by_dog__c:
       table: Dog__c
