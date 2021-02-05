@@ -26,9 +26,9 @@
                 <label>Initial Interview Setup</label>
             </value>
             <value>
-                <fullName>Back Ground Check in Progress</fullName>
+                <fullName>Background Check in Progress</fullName>
                 <default>false</default>
-                <label>Back Ground Check in Progress</label>
+                <label>Background Check in Progress</label>
             </value>
             <value>
                 <fullName>On Temporary Hold</fullName>

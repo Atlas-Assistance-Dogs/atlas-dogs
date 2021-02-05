@@ -25,7 +25,7 @@
         <actionName>Account.Background_Check_Request_Email_Alert</actionName>
         <actionType>emailAlert</actionType>
         <connector>
-            <targetReference>Update_Back_Ground_Check_Requested_Date</targetReference>
+            <targetReference>Update_Background_Check_Requested_Date</targetReference>
         </connector>
         <inputParameters>
             <name>SObjectRowId</name>
@@ -175,8 +175,8 @@
         </inputParameters>
     </actionCalls>
     <actionCalls>
-        <name>Task_Back_ground_check</name>
-        <label>Task Back ground check</label>
+        <name>Task_Background_check</name>
+        <label>Task Background check</label>
         <locationX>446</locationX>
         <locationY>2273</locationY>
         <actionName>Background_Check_request</actionName>
@@ -718,7 +718,7 @@
         </defaultConnector>
         <defaultConnectorLabel>Do not order background check</defaultConnectorLabel>
         <rules>
-            <name>Record_back_ground_check</name>
+            <name>Record_background_check</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
                 <leftValueReference>Reorder_background_check</leftValueReference>
@@ -730,7 +730,7 @@
             <connector>
                 <targetReference>BkgrndChek_Email_request</targetReference>
             </connector>
-            <label>Record back ground check</label>
+            <label>Record background check</label>
         </rules>
     </decisions>
     <decisions>
@@ -797,7 +797,7 @@
             <name>Bckgrnd_Check_Failed_Offer_other_Role</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
-                <leftValueReference>Task_Back_ground_check</leftValueReference>
+                <leftValueReference>Task_Background_check</leftValueReference>
                 <operator>EqualTo</operator>
                 <rightValue>
                     <elementReference>BkgChk_Passed</elementReference>
@@ -1081,12 +1081,12 @@
         <object>Account</object>
     </recordUpdates>
     <recordUpdates>
-        <name>Update_Back_Ground_Check_Requested_Date</name>
-        <label>Update Back Ground Check Requested Date</label>
+        <name>Update_Background_Check_Requested_Date</name>
+        <label>Update Background Check Requested Date</label>
         <locationX>445</locationX>
         <locationY>2099</locationY>
         <connector>
-            <targetReference>Task_Back_ground_check</targetReference>
+            <targetReference>Task_Background_check</targetReference>
         </connector>
         <filterLogic>and</filterLogic>
         <filters>
@@ -1523,7 +1523,7 @@
         </connector>
         <fields>
             <name>FONote8</name>
-            <fieldText>&lt;p&gt;&lt;b&gt;Ordered the back ground check for {!Get_Account_Record.First_Name__c}&amp;nbsp;&amp;nbsp;{!Get_Account_Record.Last_Name__c}  on  {!Get_Account_Record.Background_Check_Requested_Date__c} &lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;Please record the background check result below:&lt;/b&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;b&gt;Ordered the background check for {!Get_Account_Record.First_Name__c}&amp;nbsp;&amp;nbsp;{!Get_Account_Record.Last_Name__c}  on  {!Get_Account_Record.Background_Check_Requested_Date__c} &lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;Please record the background check result below:&lt;/b&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>

@@ -41,9 +41,9 @@
                 <label>Not Selected</label>
             </value>
             <value>
-                <fullName>On boarding</fullName>
+                <fullName>Onboarding</fullName>
                 <default>false</default>
-                <label>On boarding</label>
+                <label>Onboarding</label>
             </value>
             <value>
                 <fullName>Provisionally active</fullName>

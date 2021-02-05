@@ -221,6 +221,17 @@
         <senderType>CurrentUser</senderType>
         <template>unfiled$public/Volunteer_Not_Accepted_Post_Interview</template>
     </alerts>
+    <fieldUpdates>
+        <fullName>PicklistUpdation</fullName>
+        <description>Whenever the Volunteer and Facilitator checkbox is checked then this action will update the Volunteer Status and Facilitator Status to Initial Enquiry</description>
+        <field>Volunteer_Status__c</field>
+        <literalValue>Initial Inquiry</literalValue>
+        <name>PicklistUpdation</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
     <rules>
         <fullName>BckgrdCheckTask</fullName>
         <active>false</active>
@@ -236,6 +247,26 @@
         <active>true</active>
         <description>Create Task for Molly for New Account</description>
         <formula>True</formula>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>Update the checklist</fullName>
+        <actions>
+            <name>PicklistUpdation</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Account.Volunteer__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Facilitator__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <description>Whenever Volunteer and Facilitator checklist is checked this rule will be evaluated to update the picklist fields of Volunteer Status and Facilitator Status</description>
         <triggerType>onCreateOnly</triggerType>
     </rules>
     <rules>

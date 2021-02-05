@@ -38,7 +38,7 @@
             </value>
         </assignmentItems>
         <connector>
-            <targetReference>Update_Account_with_Back_ground_check</targetReference>
+            <targetReference>Update_Account_with_Background_check</targetReference>
         </connector>
     </assignments>
     <assignments>
@@ -54,7 +54,7 @@
             </value>
         </assignmentItems>
         <connector>
-            <targetReference>Update_Account_with_Back_ground_check</targetReference>
+            <targetReference>Update_Account_with_Background_check</targetReference>
         </connector>
     </assignments>
     <assignments>
@@ -72,7 +72,7 @@
     </assignments>
     <choices>
         <name>varBkgCkFailed</name>
-        <choiceText>{!varFirstName} {!varLastName} back ground check failed</choiceText>
+        <choiceText>{!varFirstName} {!varLastName} background check failed</choiceText>
         <dataType>String</dataType>
         <value>
             <stringValue>Fail</stringValue>
@@ -80,7 +80,7 @@
     </choices>
     <choices>
         <name>varBkgCkPass</name>
-        <choiceText>{!varFirstName} {!varLastName} back ground check passed</choiceText>
+        <choiceText>{!varFirstName} {!varLastName} background check passed</choiceText>
         <dataType>String</dataType>
         <value>
             <stringValue>Pass</stringValue>
@@ -88,7 +88,7 @@
     </choices>
     <choices>
         <name>varDoNotReorderBkgChk</name>
-        <choiceText>No, Do not reorder back ground check</choiceText>
+        <choiceText>No, Do not reorder background check</choiceText>
         <dataType>String</dataType>
         <value>
             <stringValue>No</stringValue>
@@ -96,7 +96,7 @@
     </choices>
     <choices>
         <name>varReorderBkgChk</name>
-        <choiceText>Yes, Reorder the back ground check</choiceText>
+        <choiceText>Yes, Reorder the background check</choiceText>
         <dataType>String</dataType>
         <value>
             <stringValue>Yes</stringValue>
@@ -108,7 +108,7 @@
         <locationX>585</locationX>
         <locationY>284</locationY>
         <defaultConnector>
-            <targetReference>Back_ground_Check_initiated</targetReference>
+            <targetReference>Background_Check_initiated</targetReference>
         </defaultConnector>
         <defaultConnectorLabel>BckgrndChkExpired</defaultConnectorLabel>
         <rules>
@@ -158,7 +158,7 @@
         <locationX>585</locationX>
         <locationY>51</locationY>
         <defaultConnector>
-            <targetReference>Back_ground_Check_initiated</targetReference>
+            <targetReference>Background_Check_initiated</targetReference>
         </defaultConnector>
         <defaultConnectorLabel>Never did</defaultConnectorLabel>
         <rules>
@@ -205,14 +205,14 @@
             <name>Record_BkgChk</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
-                <leftValueReference>Do_you_want_to_reorder_back_ground_check_again</leftValueReference>
+                <leftValueReference>Do_you_want_to_reorder_background_check_again</leftValueReference>
                 <operator>EqualTo</operator>
                 <rightValue>
                     <elementReference>varReorderBkgChk</elementReference>
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>Back_ground_Check_initiated</targetReference>
+                <targetReference>Background_Check_initiated</targetReference>
             </connector>
             <label>Record BkgChk</label>
         </rules>
@@ -230,8 +230,8 @@ Note - Background check is valid for only 1 year</description>
         <dataType>Date</dataType>
         <expression>Today()+7</expression>
     </formulas>
-    <interviewLabel>Back ground Check {!$Flow.CurrentDateTime}</interviewLabel>
-    <label>Back ground Check</label>
+    <interviewLabel>Background Check {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Background Check</label>
     <processMetadataValues>
         <name>BuilderType</name>
         <value>
@@ -289,8 +289,8 @@ Note - Background check is valid for only 1 year</description>
         </outputAssignments>
     </recordLookups>
     <recordUpdates>
-        <name>Update_Account_with_Back_ground_check</name>
-        <label>Update Account with Back ground check</label>
+        <name>Update_Account_with_Background_check</name>
+        <label>Update Account with Background check</label>
         <locationX>771</locationX>
         <locationY>1172</locationY>
         <filterLogic>and</filterLogic>
@@ -322,8 +322,8 @@ Note - Background check is valid for only 1 year</description>
         <object>Account</object>
     </recordUpdates>
     <screens>
-        <name>Back_ground_Check_initiated</name>
-        <label>Back ground Check initiated</label>
+        <name>Background_Check_initiated</name>
+        <label>Background Check initiated</label>
         <locationX>767</locationX>
         <locationY>134</locationY>
         <allowBack>true</allowBack>
@@ -334,7 +334,7 @@ Note - Background check is valid for only 1 year</description>
         </connector>
         <fields>
             <name>BkgChkINotes1</name>
-            <fieldText>&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Back ground check  requested for {!varFirstName} {!varLastName}.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;You can pause the flow now and once you receive the results, continue the on boarding process.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Background check  requested for {!varFirstName} {!varLastName}.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;You can pause the flow now and once you receive the results, continue the on boarding process.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
@@ -353,7 +353,7 @@ Note - Background check is valid for only 1 year</description>
         </connector>
         <fields>
             <name>BkgChkNote2</name>
-            <fieldText>&lt;p&gt;Please record  the back ground check results for {!varFirstName}  {!varLastName} &lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;Please record  the background check results for {!varFirstName}  {!varLastName} &lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
@@ -433,15 +433,15 @@ Note - Background check is valid for only 1 year</description>
         </connector>
         <fields>
             <name>BkgChkNote1</name>
-            <fieldText>&lt;p&gt;{!varFirstName} {!varLastName} failed the back ground check done on {!varPreviousBkgCkDate} with below notes:&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;{!varPreviousBkgCkNotes}&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;{!varFirstName} {!varLastName} failed the background check done on {!varPreviousBkgCkDate} with below notes:&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;{!varPreviousBkgCkNotes}&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
-            <name>Do_you_want_to_reorder_back_ground_check_again</name>
+            <name>Do_you_want_to_reorder_background_check_again</name>
             <choiceReferences>varReorderBkgChk</choiceReferences>
             <choiceReferences>varDoNotReorderBkgChk</choiceReferences>
             <dataType>String</dataType>
-            <fieldText>Do you want to reorder back ground check again ?</fieldText>
+            <fieldText>Do you want to reorder background check again ?</fieldText>
             <fieldType>RadioButtons</fieldType>
             <isRequired>true</isRequired>
         </fields>
