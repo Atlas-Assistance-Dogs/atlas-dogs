@@ -12,10 +12,6 @@
                     <value>false</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
-                    <name>enableActionsInNative</name>
-                    <value>false</value>
-                </componentInstanceProperties>
-                <componentInstanceProperties>
                     <name>hideChatterActions</name>
                     <value>false</value>
                 </componentInstanceProperties>
@@ -36,7 +32,7 @@
             </componentInstance>
         </itemInstances>
         <itemInstances>
-            <componentInstance>
+            <componentInstance>recordActionDeployment
                 <componentName>force:detailPanel</componentName>
             </componentInstance>
         </itemInstances>
@@ -46,7 +42,7 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
-                <componentName>coursesRelatedList</componentName>
+                <componentName>aDFileUploadforRelatedList</componentName>
             </componentInstance>
         </itemInstances>
         <itemInstances>
@@ -67,6 +63,53 @@
             </componentInstance>
         </itemInstances>
         <name>facet-d4b86ab1-47a9-41b2-bba4-2e135720eda4</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>parentFieldApiName</name>
+                    <value>Account.Id</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>relatedListApiName</name>
+                    <value>OpenActivities</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>relatedListComponentOverride</name>
+                    <value>NONE</value>
+                </componentInstanceProperties>
+                <componentName>force:relatedListSingleContainer</componentName>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>parentFieldApiName</name>
+                    <value>Account.Id</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>relatedListApiName</name>
+                    <value>ActivityHistories</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>relatedListComponentOverride</name>
+                    <value>NONE</value>
+                </componentInstanceProperties>
+                <componentName>force:relatedListSingleContainer</componentName>
+            </componentInstance>
+        </itemInstances>
+        <name>facet-ee09b272-a2a9-4b0d-a0d3-93005876e28b</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentName>courseAssignmentInlineEdit</componentName>
+            </componentInstance>
+        </itemInstances>
+        <name>Facet-36052bdb-4b3d-4ce0-8ce8-96e949bfa9b4</name>
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
@@ -100,13 +143,39 @@
                 <componentName>flexipage:tab</componentName>
             </componentInstance>
         </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>body</name>
+                    <value>facet-ee09b272-a2a9-4b0d-a0d3-93005876e28b</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>title</name>
+                    <value>Standard.Tab.activity</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:tab</componentName>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>body</name>
+                    <value>Facet-36052bdb-4b3d-4ce0-8ce8-96e949bfa9b4</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>title</name>
+                    <value>Standard.Tab.detail</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:tab</componentName>
+            </componentInstance>
+        </itemInstances>
         <name>facet-c43171cf-bfb3-433f-81f6-7c425b229a54</name>
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
-                <componentName>accountStatus</componentName>
+                <componentName>accountRolesDisplayLWC</componentName>
             </componentInstance>
         </itemInstances>
         <itemInstances>
@@ -127,7 +196,12 @@
                 <componentName>runtime_sales_activities:activityPanel</componentName>
             </componentInstance>
         </itemInstances>
-        <name>Facet-98e1906a-b999-4f09-8719-a76439c0d021</name>
+        <itemInstances>
+            <componentInstance>
+                <componentName>volunteerInfoLWC</componentName>
+            </componentInstance>
+        </itemInstances>
+        <name>facet-bba4c430-44a0-423e-8e7d-a0a6e28ee13b</name>
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
@@ -136,7 +210,7 @@
                 <componentName>forceChatter:recordFeedContainer</componentName>
             </componentInstance>
         </itemInstances>
-        <name>Facet-7467a6f2-a5a5-4463-a8f5-8d11f391a55a</name>
+        <name>facet-41a167da-609b-479b-9a39-9c6582b430c2</name>
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
@@ -144,11 +218,11 @@
             <componentInstance>
                 <componentInstanceProperties>
                     <name>active</name>
-                    <value>true</value>
+                    <value>false</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>body</name>
-                    <value>Facet-98e1906a-b999-4f09-8719-a76439c0d021</value>
+                    <value>facet-bba4c430-44a0-423e-8e7d-a0a6e28ee13b</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>title</name>
@@ -161,7 +235,7 @@
             <componentInstance>
                 <componentInstanceProperties>
                     <name>body</name>
-                    <value>Facet-7467a6f2-a5a5-4463-a8f5-8d11f391a55a</value>
+                    <value>facet-41a167da-609b-479b-9a39-9c6582b430c2</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>title</name>
@@ -170,10 +244,50 @@
                 <componentName>flexipage:tab</componentName>
             </componentInstance>
         </itemInstances>
-        <name>Facet-dedc837a-d5d7-4b97-a45f-d2a4ccc3d990</name>
+        <name>facet-39d15a52-3328-4242-a7e0-abfea910af40</name>
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>recordActionDeployment</name>
+                    <value>VolunteerOnboarding</value>
+                </componentInstanceProperties>
+                <componentName>lbpm:actionList</componentName>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>flowArguments</name>
+                    <value>[{&quot;label&quot;:&quot;recordId&quot;,&quot;dataType&quot;:&quot;String&quot;,&quot;supportsRecordId&quot;:true,&quot;value&quot;:&quot;{!Record.Id}&quot;}]</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>flowLayout</name>
+                    <value>oneColumn</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>flowName</name>
+                    <value>Volunteer_Onboarding</value>
+                </componentInstanceProperties>
+                <componentName>flowruntime:interview</componentName>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>tabs</name>
+                    <value>facet-39d15a52-3328-4242-a7e0-abfea910af40</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:tabset</componentName>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentName>courseAssignmentInlineEdit</componentName>
+            </componentInstance>
+        </itemInstances>
         <itemInstances>
             <componentInstance>
                 <componentInstanceProperties>
@@ -202,19 +316,26 @@
         <itemInstances>
             <componentInstance>
                 <componentInstanceProperties>
-                    <name>recordActionDeployment</name>
-                    <value>VolunteerOnboarding</value>
+                    <name>parentFieldApiName</name>
+                    <value>Account.Id</value>
                 </componentInstanceProperties>
-                <componentName>lbpm:actionList</componentName>
-            </componentInstance>
-        </itemInstances>
-        <itemInstances>
-            <componentInstance>
                 <componentInstanceProperties>
-                    <name>tabs</name>
-                    <value>Facet-dedc837a-d5d7-4b97-a45f-d2a4ccc3d990</value>
+                    <name>relatedListApiName</name>
+                    <value>Cases__r</value>
                 </componentInstanceProperties>
-                <componentName>flexipage:tabset</componentName>
+                <componentInstanceProperties>
+                    <name>relatedListComponentOverride</name>
+                    <value>NONE</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>rowsToDisplay</name>
+                    <value>10</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>showActionBar</name>
+                    <value>true</value>
+                </componentInstanceProperties>
+                <componentName>force:relatedListSingleContainer</componentName>
             </componentInstance>
         </itemInstances>
         <name>sidebar</name>
