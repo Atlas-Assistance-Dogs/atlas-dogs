@@ -27,23 +27,49 @@ tasks:
 flows:
     config_qa:
         steps:
+            2:
+                task: dx_push
+                when: org_config.scratch
             3:
-                task: dx
-                options:
-                    command: force:data:tree:import
-                    extra: -f datasets/Course_Master__c.json
-            4:
                 task: assign_permission_sets
                 options:
                     api_names: Atlas_Super_User
+            4:
+                task: dx
+                options:
+                    command: force:source:deploy
+                    extra: -p force-app2/main/default
+            5:
+                task: dx
+                options:
+                    command: force:data:tree:import
+                    extra: -p datasets/Account-Contact-plan.json
+            6:
+                task: dx
+                options:
+                    command: force:data:tree:import
+                    extra: -f datasets/Dog__c.json,datasets/Course_Master__c.json
     config_dev:
         steps:
+            2:
+                task: dx_push
+                when: org_config.scratch
             3:
-                task: dx
-                options:
-                    command: force:data:tree:import
-                    extra: -f datasets/Course_Master__c.json
-            4:
                 task: assign_permission_sets
                 options:
                     api_names: Atlas_Super_User
+            4:
+                task: dx
+                options:
+                    command: force:source:deploy
+                    extra: -p force-app2/main/default
+            5:
+                task: dx
+                options:
+                    command: force:data:tree:import
+                    extra: -p datasets/Account-Contact-plan.json
+            6:
+                task: dx
+                options:
+                    command: force:data:tree:import
+                    extra: -f datasets/Dog__c.json,datasets/Course_Master__c.json
