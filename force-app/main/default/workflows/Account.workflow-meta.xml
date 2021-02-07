@@ -298,9 +298,9 @@
     </rules>
     <tasks>
         <fullName>New_Account_Created</fullName>
-        <assignedTo>molly@atlasdog.org</assignedTo>
+        <assignedTo>mollyad@atlasdog.org</assignedTo>
         <assignedToType>user</assignedToType>
-        <description>A new Account has been created , please start follow up</description>
+        <description>A new Account has been created, please start follow up</description>
         <dueDateOffset>30</dueDateOffset>
         <notifyAssignee>false</notifyAssignee>
         <offsetFromField>Account.CreatedDate</offsetFromField>

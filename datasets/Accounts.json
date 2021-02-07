@@ -925,7 +925,7 @@
             "Client__c": false,
             "Convicted_Of_Crime__c": false,
             "DOB__c": "1990-05-01",
-            "Email__c": "molly@atlasdog.org",
+            "Email__c": "mollyad@atlasdog.org",
             "Facilitator_application_receipt_date__c": "2020-05-21",
             "Facilitator_application_received__c": true,
             "Facilitator_Interview_End_DateTime__c": "2020-05-22T23:30:00.000+0000",
