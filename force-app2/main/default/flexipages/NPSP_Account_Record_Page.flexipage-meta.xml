@@ -32,7 +32,7 @@
             </componentInstance>
         </itemInstances>
         <itemInstances>
-            <componentInstance>recordActionDeployment
+            <componentInstance>
                 <componentName>force:detailPanel</componentName>
             </componentInstance>
         </itemInstances>
@@ -40,11 +40,6 @@
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
-        <itemInstances>
-            <componentInstance>
-                <componentName>aDFileUploadforRelatedList</componentName>
-            </componentInstance>
-        </itemInstances>
         <itemInstances>
             <componentInstance>
                 <componentInstanceProperties>
@@ -175,7 +170,7 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
-                <componentName>accountRolesDisplayLWC</componentName>
+                <componentName>accountStatus</componentName>
             </componentInstance>
         </itemInstances>
         <itemInstances>
