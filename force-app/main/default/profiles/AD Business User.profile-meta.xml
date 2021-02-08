@@ -3,7 +3,7 @@
     <custom>true</custom>
     <flowAccesses>
         <enabled>false</enabled>
-        <flow>Schedule_meeting</flow>
+        <flow>Schedule_Meeting</flow>
     </flowAccesses>
     <layoutAssignments>
         <layout>Contact-Contact Lightning Layout</layout>
