@@ -72,10 +72,16 @@
         <recordType>Account.Volunteer</recordType>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>Dog__c-Dog Layout</layout>
+        <layout>Contact-Contact Lightning Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Event__c-Event Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
         <layout>Global-Global Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Dog__c-Dog Layout</layout>
     </layoutAssignments>
     <objectPermissions>
         <allowCreate>true</allowCreate>

@@ -6,6 +6,8 @@ project:
         api_version: '50.0'
     dependencies:
         - github: 'https://github.com/SalesforceFoundation/NPSP'
+        - namespace: 'zoom_app'
+          version: 3.12
     git:
     source_format: sfdx
 

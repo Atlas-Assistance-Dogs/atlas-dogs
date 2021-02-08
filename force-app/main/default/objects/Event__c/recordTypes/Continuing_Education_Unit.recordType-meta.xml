@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Continuing_Education_Unit</fullName>
+    <active>false</active>
+    <description>This type of event is specifically for trainers to earn CEU&apos;s</description>
+    <label>Continuing Education Unit</label>
+</RecordType>
