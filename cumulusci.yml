@@ -35,7 +35,7 @@ flows:
             3:
                 task: assign_permission_sets
                 options:
-                    api_names: Atlas_Super_User
+                    api_names: Atlas_Super_User,Zoom_Admin_Atlas
             4:
                 task: dx
                 options:
