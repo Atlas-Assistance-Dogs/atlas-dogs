@@ -24,7 +24,14 @@ tasks:
     run_tests:
         options:
             required_org_code_coverage_percent: 75
+
 flows:
+    dependencies:
+        steps:
+            1:
+                task: update_dependencies
+                options:
+                    include_beta: False
     config_qa:
         steps:
             2:
