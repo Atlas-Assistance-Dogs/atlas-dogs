@@ -215,7 +215,7 @@
             </value>
         </inputAssignments>
         <inputAssignments>
-            <field>Dog_Status__c</field>
+            <field>Status__c</field>
             <value>
                 <stringValue>Onboarding</stringValue>
             </value>
@@ -257,7 +257,7 @@
             </value>
         </filters>
         <inputAssignments>
-            <field>Dog_Status__c</field>
+            <field>Status__c</field>
             <value>
                 <stringValue>Reject due to health check failure</stringValue>
             </value>
@@ -278,7 +278,7 @@
             </value>
         </filters>
         <inputAssignments>
-            <field>Dog_Status__c</field>
+            <field>Status__c</field>
             <value>
                 <stringValue>Too Young</stringValue>
             </value>
@@ -302,7 +302,7 @@
             </value>
         </filters>
         <inputAssignments>
-            <field>Dog_Status__c</field>
+            <field>Status__c</field>
             <value>
                 <stringValue>Onboarding</stringValue>
             </value>

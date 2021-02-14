@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <Report xmlns="http://soap.sforce.com/2006/04/metadata">
     <chart>
         <backgroundColor1>#FFFFFF</backgroundColor1>
@@ -11,7 +11,7 @@
         <chartType>HorizontalBar</chartType>
         <enableHoverLabels>false</enableHoverLabels>
         <expandOthers>true</expandOthers>
-        <groupingColumn>Dog__c.Dog_Status__c</groupingColumn>
+        <groupingColumn>Dog__c.Status__c</groupingColumn>
         <location>CHART_BOTTOM</location>
         <showAxisLabels>true</showAxisLabels>
         <showPercentage>false</showPercentage>
@@ -49,7 +49,7 @@
     </groupingsDown>
     <groupingsDown>
         <dateGranularity>Day</dateGranularity>
-        <field>Dog__c.Dog_Status__c</field>
+        <field>Dog__c.Status__c</field>
         <sortOrder>Asc</sortOrder>
     </groupingsDown>
     <name>Dog Tracker_12_28_2020_test</name>

@@ -159,7 +159,7 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Dog__c.Dog_Status__c</field>
+        <field>Dog__c.Status__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>

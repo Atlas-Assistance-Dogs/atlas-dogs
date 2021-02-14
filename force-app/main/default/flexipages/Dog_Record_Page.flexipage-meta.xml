@@ -49,7 +49,7 @@
         </itemInstances>
         <itemInstances>
             <fieldInstance>
-                <fieldItem>Record.Dog_Status__c</fieldItem>
+                <fieldItem>Record.Status__c</fieldItem>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
@@ -69,7 +69,7 @@
         </itemInstances>
         <itemInstances>
             <fieldInstance>
-                <fieldItem>Record.Replaced_by_dog__c</fieldItem>
+                <fieldItem>Record.Replaced_by_Dog__c</fieldItem>
             </fieldInstance>
         </itemInstances>
         <name>Facet-6c8a57f2-015e-43d2-b1d4-6cf40811ca1a</name>

@@ -486,7 +486,7 @@ CREATE TABLE "Dog__c" (
 	"Date_of_Birth__c" VARCHAR(255), 
 	"Deceased__c" VARCHAR(255), 
 	"Dog_Certified__c" VARCHAR(255), 
-	"Dog_Status__c" VARCHAR(255), 
+	"Status__c" VARCHAR(255), 
 	"Gender__c" VARCHAR(255), 
 	"Health_Check_Failed_Dog_Accepted__c" VARCHAR(255), 
 	"Health_Check_Note__c" VARCHAR(255), 
