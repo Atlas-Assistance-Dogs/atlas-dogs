@@ -154,7 +154,7 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Volunteer_remainder_date__c</field>
+                <field>Volunteer_Remainder_Date__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -172,7 +172,7 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Volunteer_application_submission_date__c</field>
+                <field>Volunteer_Application_Submission_Date__c</field>
             </layoutItems>
             <layoutItems>
                 <emptySpace>true</emptySpace>
@@ -183,7 +183,7 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Volunteer_provision_details__c</field>
+                <field>Volunteer_Provision_Details__c</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsLeftToRight</style>
@@ -238,7 +238,7 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Facilitator_application_receipt_date__c</field>
+                <field>Facilitator_Application_Receipt_Date__c</field>
             </layoutItems>
             <layoutItems>
                 <emptySpace>true</emptySpace>
@@ -249,7 +249,7 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Facilitator_provision_details__c</field>
+                <field>Facilitator_Provision_Details__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -330,7 +330,7 @@
                 <field>BillingAddress</field>
             </layoutItems>
         </layoutColumns>
-        <layoutColumns />
+        <layoutColumns/>
         <style>TwoColumnsLeftToRight</style>
     </layoutSections>
     <layoutSections>
@@ -501,19 +501,6 @@
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>
-        <fields>npsp__Address_Type__c</fields>
-        <fields>npsp__Formula_MailingAddress__c</fields>
-        <fields>npsp__Default_Address__c</fields>
-        <fields>LAST_UPDATE</fields>
-        <relatedList>npsp__Address__c.npsp__Household_Account__c</relatedList>
-        <sortField>npsp__Default_Address__c</sortField>
-        <sortOrder>Desc</sortOrder>
-    </relatedLists>
-    <relatedLists>
-        <relatedList>RelatedFileList</relatedList>
-    </relatedLists>
-    <relatedLists>
-        <fields>NAME</fields>
         <relatedList>Dog__c.Dog_Owner__c</relatedList>
     </relatedLists>
     <relatedObjects>ParentId</relatedObjects>
@@ -523,7 +510,7 @@
     <showRunAssignmentRulesCheckbox>false</showRunAssignmentRulesCheckbox>
     <showSubmitAndAttachButton>false</showSubmitAndAttachButton>
     <summaryLayout>
-        <masterLabel>00h0b00000LYlKn</masterLabel>
+        <masterLabel>00h550000025wBT</masterLabel>
         <sizeX>1</sizeX>
         <sizeY>2</sizeY>
         <summaryLayoutItems>
