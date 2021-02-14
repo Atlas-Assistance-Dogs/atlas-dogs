@@ -181,6 +181,33 @@
         </values>
     </picklistValues>
     <picklistValues>
+        <picklist>I_Want_to_Know_More_About__c</picklist>
+        <values>
+            <fullName>Client%2FDog Team Certification</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>General Info%2FOther</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Sponsorship%2FDonations</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Team Facilitator Certification</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Trainer Certification</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Volunteering</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
         <picklist>Industry</picklist>
         <values>
             <fullName>Agriculture</fullName>
@@ -575,10 +602,6 @@
             <default>false</default>
         </values>
         <values>
-            <fullName>Onboarding aborted - Background Check failed</fullName>
-            <default>false</default>
-        </values>
-        <values>
             <fullName>Onboarding</fullName>
             <default>false</default>
         </values>
@@ -587,11 +610,50 @@
             <default>false</default>
         </values>
         <values>
+            <fullName>Onboarding aborted - Background Check failed</fullName>
+            <default>false</default>
+        </values>
+        <values>
             <fullName>Scheduled Interview</fullName>
             <default>false</default>
         </values>
         <values>
             <fullName>Training in progress</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Where_Did_You_Hear_About_Us__c</picklist>
+        <values>
+            <fullName>Facebook</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Friend</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Health Provider</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Instagram</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Search Engine</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Twitter</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Website</fullName>
             <default>false</default>
         </values>
     </picklistValues>
@@ -638,68 +700,6 @@
         </values>
         <values>
             <fullName>Human Services</fullName>
-            <default>false</default>
-        </values>
-    </picklistValues>
-    <picklistValues>
-        <picklist>I_Want_to_Know_More_About__c</picklist>
-        <values>
-            <fullName>Client%2FDog Team Certification</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>General Info%2FOther</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Sponsorship%2FDonations</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Team Facilitator Certification</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Trainer Certification</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Volunteering</fullName>
-            <default>false</default>
-        </values>
-    </picklistValues>
-    <picklistValues>
-        <picklist>Where_Did_You_Hear_About_Us__c</picklist>
-        <values>
-            <fullName>Facebook</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Friend</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Health Provider</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Instagram</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Other</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Search Engine</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Twitter</fullName>
-            <default>false</default>
-        </values>
-        <values>
-            <fullName>Website</fullName>
             <default>false</default>
         </values>
     </picklistValues>
