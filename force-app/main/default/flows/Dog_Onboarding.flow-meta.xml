@@ -1,5 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Flow xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<?xml version="1.0" encoding="UTF-8" ?>
+<Flow
+  xmlns="http://soap.sforce.com/2006/04/metadata"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+>
     <apiVersion>49.0</apiVersion>
     <constants>
         <name>consFail</name>
@@ -30,12 +33,14 @@
         <defaultConnector>
             <targetReference>Update_Dog_Status_to_Rejected</targetReference>
         </defaultConnector>
-        <defaultConnectorLabel>Reject Health Check Failed Dog</defaultConnectorLabel>
+        <defaultConnectorLabel
+    >Reject Health Check Failed Dog</defaultConnectorLabel>
         <rules>
             <name>Accept_Health_Check_Failed_Dog</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
-                <leftValueReference>varHealthCheckFailedDogAcceptPklst</leftValueReference>
+                <leftValueReference
+        >varHealthCheckFailedDogAcceptPklst</leftValueReference>
                 <operator>EqualTo</operator>
                 <rightValue>
                     <elementReference>conYes</elementReference>
@@ -53,14 +58,16 @@
         <locationX>564</locationX>
         <locationY>813</locationY>
         <defaultConnector>
-            <targetReference>Accepting_the_Health_Check_Failed_Dog</targetReference>
+            <targetReference
+      >Accepting_the_Health_Check_Failed_Dog</targetReference>
         </defaultConnector>
         <defaultConnectorLabel>Health Check Failed</defaultConnectorLabel>
         <rules>
             <name>Health_Check_Passed</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
-                <leftValueReference>Latest_Health_Check_Status</leftValueReference>
+                <leftValueReference
+        >Latest_Health_Check_Status</leftValueReference>
                 <operator>EqualTo</operator>
                 <rightValue>
                     <elementReference>consPass</elementReference>
@@ -168,7 +175,8 @@
     <formulas>
         <name>varFirstNameLastName</name>
         <dataType>String</dataType>
-        <expression>{!varOwnerFirstName}+ &apos; &apos;+{!varOwnerLastName}</expression>
+        <expression
+    >{!varOwnerFirstName}+ &apos; &apos;+{!varOwnerLastName}</expression>
     </formulas>
     <interviewLabel>Dog Onboarding {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Dog Onboarding</label>
@@ -320,7 +328,8 @@
         <inputAssignments>
             <field>Most_Recent_Parainfluenza_Vaccine__c</field>
             <value>
-                <elementReference>Parainfluenza_Vaccine_Due_on</elementReference>
+                <elementReference
+        >Parainfluenza_Vaccine_Due_on</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -366,55 +375,10 @@
             </value>
         </filters>
         <inputAssignments>
-            <field>Vet_Address1__c</field>
+            <field>Vet_Clinic__c</field>
             <value>
-                <elementReference>Clinic_Address</elementReference>
+                <elementReference>Vet_Clinic</elementReference>
             </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Vet_Address2__c</field>
-            <value>
-                <elementReference>Clinic_Address2</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Vet_City__c</field>
-            <value>
-                <elementReference>Clinic_City</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Vet_Clinic_Name__c</field>
-            <value>
-                <elementReference>Vet_Clinic_Name</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Vet_Email__c</field>
-            <value>
-                <elementReference>varVetEmail</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Vet_Name__c</field>
-            <value>
-                <elementReference>Vet_Name</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Vet_Phone__c</field>
-            <value>
-                <elementReference>varVetPhone</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Vet_State__c</field>
-            <value>
-                <elementReference>Clinic_State</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Vet_Zip_Code__c</field>
         </inputAssignments>
         <object>Dog__c</object>
     </recordUpdates>
@@ -431,12 +395,14 @@
         </connector>
         <fields>
             <name>DANote1</name>
-            <fieldText>&lt;p&gt;&lt;b&gt;Dog failed the health check examp, Do you still want to accept the dog into the program ?&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;</fieldText>
+            <fieldText
+      >&lt;p&gt;&lt;b&gt;Dog failed the health check examp, Do you still want to accept the dog into the program ?&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
             <name>Dog_Accepted</name>
-            <choiceReferences>varHealthCheckFailedDogAcceptPklst</choiceReferences>
+            <choiceReferences
+      >varHealthCheckFailedDogAcceptPklst</choiceReferences>
             <dataType>String</dataType>
             <fieldText>Dog Accepted ?</fieldText>
             <fieldType>DropdownBox</fieldType>
@@ -444,7 +410,8 @@
         </fields>
         <fields>
             <name>DANote2</name>
-            <fieldText>&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;</fieldText>
+            <fieldText
+      >&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
@@ -469,7 +436,8 @@
         </connector>
         <fields>
             <name>DNote1</name>
-            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b&gt;Welcome to the Dog on boarding screen. Please enter below requested formation.&lt;/b&gt;&lt;/p&gt;</fieldText>
+            <fieldText
+      >&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b&gt;Welcome to the Dog on boarding screen. Please enter below requested formation.&lt;/b&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
@@ -503,7 +471,8 @@
         </fields>
         <fields>
             <name>MicrochipNumberWarning</name>
-            <fieldText>&lt;p&gt;     &lt;span style=&quot;color: rgb(205, 32, 32);&quot;&gt;Note- Microchip number is needed for certification of the dog&lt;/span&gt;&lt;/p&gt;</fieldText>
+            <fieldText
+      >&lt;p&gt;     &lt;span style=&quot;color: rgb(205, 32, 32);&quot;&gt;Note- Microchip number is needed for certification of the dog&lt;/span&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
@@ -537,7 +506,8 @@
         </fields>
         <fields>
             <name>FullName</name>
-            <fieldText>&lt;p&gt;Full Name -{!varFirstNameLastName}&lt;/p&gt;</fieldText>
+            <fieldText
+      >&lt;p&gt;Full Name -{!varFirstNameLastName}&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
@@ -594,7 +564,8 @@
         </fields>
         <fields>
             <name>DogSpayedWarning</name>
-            <fieldText>&lt;p&gt;&lt;span style=&quot;color: rgb(211, 19, 19);&quot;&gt;Note - Dog need to be Spayed/Neutered before certification&lt;/span&gt;&lt;/p&gt;</fieldText>
+            <fieldText
+      >&lt;p&gt;&lt;span style=&quot;color: rgb(211, 19, 19);&quot;&gt;Note - Dog need to be Spayed/Neutered before certification&lt;/span&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
             <visibilityRule>
                 <conditionLogic>and</conditionLogic>
@@ -666,7 +637,8 @@
         <allowPause>true</allowPause>
         <fields>
             <name>DogNotAcceptedInfo</name>
-            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b&gt;Dog, {!Dog_Name} is not accepted as Health Check is not passed.&lt;/b&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b&gt;Email will be sent to the owner. &lt;/b&gt;&lt;/p&gt;</fieldText>
+            <fieldText
+      >&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b&gt;Dog, {!Dog_Name} is not accepted as Health Check is not passed.&lt;/b&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b&gt;Email will be sent to the owner. &lt;/b&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
@@ -685,7 +657,8 @@
         </connector>
         <fields>
             <name>DogNotQualifiedTxt</name>
-            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b&gt;Dog need to be atleast 13 months old .&lt;/b&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b&gt;Earliest date {!Dog_Name} is qualified is {!varDoBEffective}&lt;/b&gt;&lt;/p&gt;</fieldText>
+            <fieldText
+      >&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b&gt;Dog need to be atleast 13 months old .&lt;/b&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b&gt;Earliest date {!Dog_Name} is qualified is {!varDoBEffective}&lt;/b&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
@@ -701,7 +674,8 @@
         <allowPause>true</allowPause>
         <fields>
             <name>TQNote1</name>
-            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b&gt;You have completed the on boarding of the dog {!Dog_Name}. You may close the screen.&lt;/b&gt;&lt;/p&gt;</fieldText>
+            <fieldText
+      >&lt;p style=&quot;text-align: center;&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b&gt;You have completed the on boarding of the dog {!Dog_Name}. You may close the screen.&lt;/b&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
@@ -770,7 +744,8 @@
         </fields>
         <fields>
             <name>DONote4</name>
-            <fieldText>&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;Clinic Address:&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;</fieldText>
+            <fieldText
+      >&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;Clinic Address:&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>

@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Dog_Highlight_Panel</fullName>
     <fields>Name</fields>
-    <fields>Dog_Owner__c</fields>
+    <fields>Owner__c</fields>
     <fields>Dog_Status__c</fields>
     <fields>Expiry_Date_Status__c</fields>
     <label>Dog Highlight Panel</label>

@@ -500,16 +500,8 @@ CREATE TABLE "Dog__c" (
 	"Most_Recent_Rabies_Vaccine__c" VARCHAR(255), 
 	"Name" VARCHAR(255), 
 	"Spayed_Neutered__c" VARCHAR(255), 
-	"Vet_Address1__c" VARCHAR(255), 
-	"Vet_Address2__c" VARCHAR(255), 
-	"Vet_City__c" VARCHAR(255), 
-	"Vet_Clinic_Name__c" VARCHAR(255), 
-	"Vet_Email__c" VARCHAR(255), 
-	"Vet_Name__c" VARCHAR(255), 
-	"Vet_Phone__c" VARCHAR(255), 
-	"Vet_State__c" VARCHAR(255), 
-	"Vet_Zip_Code__c" VARCHAR(255), 
-	"Dog_Owner__c" VARCHAR(255), 
+	"Vet_Clinic__c" VARCHAR(255), 
+	"Owner__c" VARCHAR(255), 
 	"Replaced_by_dog__c" VARCHAR(255), 
 	PRIMARY KEY (id)
 );

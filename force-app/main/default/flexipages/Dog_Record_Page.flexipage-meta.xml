@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <FlexiPage xmlns="http://soap.sforce.com/2006/04/metadata">
     <flexiPageRegions>
         <itemInstances>
@@ -93,12 +93,12 @@
         </itemInstances>
         <itemInstances>
             <fieldInstance>
-                <fieldItem>Record.Dog_Owner__c</fieldItem>
+                <fieldItem>Record.Owner__c</fieldItem>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
-                <fieldItem>Record.Dog_Picture__c</fieldItem>
+                <fieldItem>Record.Picture__c</fieldItem>
             </fieldInstance>
         </itemInstances>
         <name>Facet-f6a1e2a7-d4a4-43a1-b90d-cb50a72f9a8d</name>
@@ -162,7 +162,8 @@
         </itemInstances>
         <itemInstances>
             <fieldInstance>
-                <fieldItem>Record.Most_Recent_Parainfluenza_Vaccine__c</fieldItem>
+                <fieldItem
+        >Record.Most_Recent_Parainfluenza_Vaccine__c</fieldItem>
             </fieldInstance>
         </itemInstances>
         <name>Facet-c6f8a4af-14e8-4df8-8185-a5cb099ed7c9</name>
@@ -226,7 +227,8 @@
     <flexiPageRegions>
         <itemInstances>
             <fieldInstance>
-                <fieldItem>Record.Health_Check_Failed_Dog_Accepted__c</fieldItem>
+                <fieldItem
+        >Record.Health_Check_Failed_Dog_Accepted__c</fieldItem>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
@@ -292,51 +294,7 @@
     <flexiPageRegions>
         <itemInstances>
             <fieldInstance>
-                <fieldItem>Record.Vet_Name__c</fieldItem>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldItem>Record.Vet_Email__c</fieldItem>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldItem>Record.Vet_Address1__c</fieldItem>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldItem>Record.Vet_City__c</fieldItem>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldItem>Record.Vet_Zip_Code__c</fieldItem>
-            </fieldInstance>
-        </itemInstances>
-        <name>Facet-d44caacb-44e5-48fd-8030-914faab5b849</name>
-        <type>Facet</type>
-    </flexiPageRegions>
-    <flexiPageRegions>
-        <itemInstances>
-            <fieldInstance>
-                <fieldItem>Record.Vet_Clinic_Name__c</fieldItem>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldItem>Record.Vet_Phone__c</fieldItem>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldItem>Record.Vet_Address2__c</fieldItem>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldItem>Record.Vet_State__c</fieldItem>
+                <fieldItem>Record.Vet_Clinic__c</fieldItem>
             </fieldInstance>
         </itemInstances>
         <name>Facet-db1eeef5-5541-4d8f-8dce-40d1f67c81ac</name>
@@ -486,7 +444,8 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
-                <componentName>runtime_sales_activities:activityPanel</componentName>
+                <componentName
+        >runtime_sales_activities:activityPanel</componentName>
             </componentInstance>
         </itemInstances>
         <mode>Replace</mode>
@@ -524,7 +483,7 @@
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>lookupFieldName</name>
-                    <value>Dog__c.Dog_Owner__c</value>
+                    <value>Dog__c.Owner__c</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>titleFieldName</name>
@@ -537,7 +496,8 @@
                 <componentName>console:relatedRecord</componentName>
                 <visibilityRule>
                     <criteria>
-                        <leftValue>{!Record.Owner_First_Last_Name__c}</leftValue>
+                        <leftValue
+            >{!Record.Owner_First_Last_Name__c}</leftValue>
                         <operator>NE</operator>
                     </criteria>
                 </visibilityRule>

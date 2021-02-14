@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <Dashboard xmlns="http://soap.sforce.com/2006/04/metadata">
     <backgroundEndColor>#FFFFFF</backgroundEndColor>
     <backgroundFadeDirection>Diagonal</backgroundFadeDirection>
@@ -71,19 +71,21 @@
                         <type>detail</type>
                     </flexTableColumn>
                     <flexTableColumn>
-                        <reportColumn>Dog__c.Dog_Eligible_by_DOB__c</reportColumn>
+                        <reportColumn
+            >Dog__c.Dog_Eligible_by_DOB__c</reportColumn>
                         <showSubTotal>false</showSubTotal>
                         <showTotal>false</showTotal>
                         <type>detail</type>
                     </flexTableColumn>
                     <flexTableColumn>
-                        <reportColumn>Dog__c.Health_Care_Records_Status__c</reportColumn>
+                        <reportColumn
+            >Dog__c.Health_Care_Records_Status__c</reportColumn>
                         <showSubTotal>false</showSubTotal>
                         <showTotal>false</showTotal>
                         <type>detail</type>
                     </flexTableColumn>
                     <flexTableColumn>
-                        <reportColumn>Dog__c.Dog_Owner__c</reportColumn>
+                        <reportColumn>Dog__c.Owner__c</reportColumn>
                         <showSubTotal>false</showSubTotal>
                         <showTotal>false</showTotal>
                         <type>detail</type>
@@ -152,7 +154,7 @@
                 <displayUnits>Auto</displayUnits>
                 <gaugeMax>100.0</gaugeMax>
                 <gaugeMin>0.0</gaugeMin>
-                <groupingSortProperties/>
+                <groupingSortProperties />
                 <header>Dog Onboarding Tracker</header>
                 <indicatorBreakpoint1>33.0</indicatorBreakpoint1>
                 <indicatorBreakpoint2>67.0</indicatorBreakpoint2>
@@ -217,7 +219,8 @@
         <rowHeight>36</rowHeight>
     </dashboardGridLayout>
     <dashboardType>SpecifiedUser</dashboardType>
-    <description>Main dashboard for Molly with access to all Use Cases</description>
+    <description
+  >Main dashboard for Molly with access to all Use Cases</description>
     <isGridLayout>true</isGridLayout>
     <runningUser>davidr@atlasdog.org</runningUser>
     <textColor>#000000</textColor>

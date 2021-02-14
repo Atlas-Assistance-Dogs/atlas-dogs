@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Dog_Picture__c</fullName>
+    <fullName>Picture__c</fullName>
     <externalId>false</externalId>
     <label>dog Picture</label>
     <length>32768</length>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <Layout xmlns="http://soap.sforce.com/2006/04/metadata">
     <customButtons>npsp__Manage_Household</customButtons>
     <excludeButtons>DataDotComClean</excludeButtons>
@@ -140,9 +140,9 @@
         <detailHeading>false</detailHeading>
         <editHeading>false</editHeading>
         <label>Custom Links</label>
-        <layoutColumns/>
-        <layoutColumns/>
-        <layoutColumns/>
+        <layoutColumns />
+        <layoutColumns />
+        <layoutColumns />
         <style>CustomLinks</style>
     </layoutSections>
     <miniLayout>
@@ -234,7 +234,8 @@
             <quickActionName>npsp__NewContact</quickActionName>
         </quickActionListItems>
         <quickActionListItems>
-            <quickActionName>Account.npsp__Quick_Household_Update</quickActionName>
+            <quickActionName
+      >Account.npsp__Quick_Household_Update</quickActionName>
         </quickActionListItems>
         <quickActionListItems>
             <quickActionName>Account.npsp__New_Address</quickActionName>
@@ -308,7 +309,7 @@
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>
-        <relatedList>Dog__c.Dog_Owner__c</relatedList>
+        <relatedList>Dog__c.Owner__c</relatedList>
     </relatedLists>
     <relatedLists>
         <fields>ACCOUNT.NAME</fields>
