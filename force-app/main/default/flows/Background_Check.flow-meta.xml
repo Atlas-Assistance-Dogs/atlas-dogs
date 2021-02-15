@@ -1,14 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <actionCalls>
         <name>Bckgd_Check_Alert_Email</name>
         <label>Bckgd Check Alert Email</label>
-        <locationX>774</locationX>
-        <locationY>399</locationY>
+        <locationX>722</locationX>
+        <locationY>155</locationY>
         <actionName>Account.Background_Check_Request_Email_Alert</actionName>
         <actionType>emailAlert</actionType>
         <connector>
-            <targetReference>Background_Check_Results_Record</targetReference>
+            <targetReference>Background_Check_initiated</targetReference>
         </connector>
         <inputParameters>
             <name>SObjectRowId</name>
@@ -38,7 +38,8 @@
             </value>
         </assignmentItems>
         <connector>
-            <targetReference>Update_Account_with_Background_check</targetReference>
+            <targetReference
+      >Update_Account_with_Background_check</targetReference>
         </connector>
     </assignments>
     <assignments>
@@ -54,14 +55,15 @@
             </value>
         </assignmentItems>
         <connector>
-            <targetReference>Update_Account_with_Background_check</targetReference>
+            <targetReference
+      >Update_Account_with_Background_check</targetReference>
         </connector>
     </assignments>
     <assignments>
         <name>Current_BkgChk_var_Pass_assignment</name>
         <label>Current BkgChk var Pass assignment</label>
-        <locationX>593</locationX>
-        <locationY>516</locationY>
+        <locationX>619</locationX>
+        <locationY>531</locationY>
         <assignmentItems>
             <assignToReference>varBackgroundCheckResult</assignToReference>
             <operator>Assign</operator>
@@ -72,7 +74,8 @@
     </assignments>
     <choices>
         <name>varBkgCkFailed</name>
-        <choiceText>{!varFirstName} {!varLastName} background check failed</choiceText>
+        <choiceText
+    >{!varFirstName} {!varLastName} background check failed</choiceText>
         <dataType>String</dataType>
         <value>
             <stringValue>Fail</stringValue>
@@ -80,7 +83,8 @@
     </choices>
     <choices>
         <name>varBkgCkPass</name>
-        <choiceText>{!varFirstName} {!varLastName} background check passed</choiceText>
+        <choiceText
+    >{!varFirstName} {!varLastName} background check passed</choiceText>
         <dataType>String</dataType>
         <value>
             <stringValue>Pass</stringValue>
@@ -105,10 +109,10 @@
     <decisions>
         <name>Check_the_Expiration_date_of_previous_bckgrndchk</name>
         <label>Check the Expiration date of previous bckgrndchk</label>
-        <locationX>585</locationX>
-        <locationY>284</locationY>
+        <locationX>492</locationX>
+        <locationY>369</locationY>
         <defaultConnector>
-            <targetReference>Background_Check_initiated</targetReference>
+            <targetReference>Bckgd_Check_Alert_Email</targetReference>
         </defaultConnector>
         <defaultConnectorLabel>BckgrndChkExpired</defaultConnectorLabel>
         <rules>
@@ -122,7 +126,8 @@
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>Current_BkgChk_var_Pass_assignment</targetReference>
+                <targetReference
+        >Current_BkgChk_var_Pass_assignment</targetReference>
             </connector>
             <label>BckgrdchkValid</label>
         </rules>
@@ -140,7 +145,8 @@
             <name>Passed</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
-                <leftValueReference>Background_check_results</leftValueReference>
+                <leftValueReference
+        >Background_check_results</leftValueReference>
                 <operator>EqualTo</operator>
                 <rightValue>
                     <elementReference>varBkgCkPass</elementReference>
@@ -155,10 +161,10 @@
     <decisions>
         <name>D_Previos_BkgChk_Pass</name>
         <label>D Previos BkgChk Pass?</label>
-        <locationX>585</locationX>
-        <locationY>51</locationY>
+        <locationX>578</locationX>
+        <locationY>56</locationY>
         <defaultConnector>
-            <targetReference>Background_Check_initiated</targetReference>
+            <targetReference>Bckgd_Check_Alert_Email</targetReference>
         </defaultConnector>
         <defaultConnectorLabel>Never did</defaultConnectorLabel>
         <rules>
@@ -172,7 +178,8 @@
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>Check_the_Expiration_date_of_previous_bckgrndchk</targetReference>
+                <targetReference
+        >Check_the_Expiration_date_of_previous_bckgrndchk</targetReference>
             </connector>
             <label>P BkgChk Passed</label>
         </rules>
@@ -187,7 +194,8 @@
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>Background_Check_Order_Request</targetReference>
+                <targetReference
+        >Background_Check_Order_Request</targetReference>
             </connector>
             <label>P BkgCheck Failed</label>
         </rules>
@@ -195,8 +203,8 @@
     <decisions>
         <name>D_Reorder_Bckg_Check</name>
         <label>D Reorder Bckg Check</label>
-        <locationX>942</locationX>
-        <locationY>210</locationY>
+        <locationX>1073</locationX>
+        <locationY>311</locationY>
         <defaultConnector>
             <targetReference>BkgChk_var_Fail_assignment</targetReference>
         </defaultConnector>
@@ -205,14 +213,15 @@
             <name>Record_BkgChk</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
-                <leftValueReference>Do_you_want_to_reorder_background_check_again</leftValueReference>
+                <leftValueReference
+        >Do_you_want_to_reorder_background_check_again</leftValueReference>
                 <operator>EqualTo</operator>
                 <rightValue>
                     <elementReference>varReorderBkgChk</elementReference>
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>Background_Check_initiated</targetReference>
+                <targetReference>Bckgd_Check_Alert_Email</targetReference>
             </connector>
             <label>Record BkgChk</label>
         </rules>
@@ -239,6 +248,12 @@ Note - Background check is valid for only 1 year</description>
         </value>
     </processMetadataValues>
     <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>FREE_FORM_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
         <name>OriginBuilderType</name>
         <value>
             <stringValue>LightningFlowBuilder</stringValue>
@@ -249,8 +264,9 @@ Note - Background check is valid for only 1 year</description>
         <name>Get_Account_Background_Check_related_info</name>
         <label>Get Account Background Check related info</label>
         <locationX>390</locationX>
-        <locationY>50</locationY>
-        <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
+        <locationY>49</locationY>
+        <assignNullValuesIfNoRecordsFound
+    >true</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>D_Previos_BkgChk_Pass</targetReference>
         </connector>
@@ -324,18 +340,49 @@ Note - Background check is valid for only 1 year</description>
     <screens>
         <name>Background_Check_initiated</name>
         <label>Background Check initiated</label>
-        <locationX>767</locationX>
-        <locationY>134</locationY>
+        <locationX>829</locationX>
+        <locationY>374</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <connector>
-            <targetReference>Bckgd_Check_Alert_Email</targetReference>
+            <targetReference>Background_Check_Results_Record</targetReference>
         </connector>
         <fields>
             <name>BkgChkINotes1</name>
-            <fieldText>&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Background check  requested for {!varFirstName} {!varLastName}.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;You can pause the flow now and once you receive the results, continue the on boarding process.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;</fieldText>
+            <fieldText
+      >&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Background check  requested for {!varFirstName} {!varLastName}.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;You can pause the flow now and once you receive the results, continue the on boarding process.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>Background_Check_Order_Request</name>
+        <label>Background Check Order Request</label>
+        <locationX>951</locationX>
+        <locationY>43</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <connector>
+            <targetReference>D_Reorder_Bckg_Check</targetReference>
+        </connector>
+        <fields>
+            <name>BkgChkNote1</name>
+            <fieldText
+      >&lt;p&gt;{!varFirstName} {!varLastName} failed the background check done on {!varPreviousBkgCkDate} with below notes:&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;{!varPreviousBkgCkNotes}&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>Do_you_want_to_reorder_background_check_again</name>
+            <choiceReferences>varReorderBkgChk</choiceReferences>
+            <choiceReferences>varDoNotReorderBkgChk</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText
+      >Do you want to reorder background check again ?</fieldText>
+            <fieldType>RadioButtons</fieldType>
+            <isRequired>true</isRequired>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>
@@ -353,7 +400,8 @@ Note - Background check is valid for only 1 year</description>
         </connector>
         <fields>
             <name>BkgChkNote2</name>
-            <fieldText>&lt;p&gt;Please record  the background check results for {!varFirstName}  {!varLastName} &lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;</fieldText>
+            <fieldText
+      >&lt;p&gt;Please record  the background check results for {!varFirstName}  {!varLastName} &lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
@@ -361,14 +409,16 @@ Note - Background check is valid for only 1 year</description>
             <choiceReferences>varBkgCkPass</choiceReferences>
             <choiceReferences>varBkgCkFailed</choiceReferences>
             <dataType>String</dataType>
-            <defaultSelectedChoiceReference>varBkgCkPass</defaultSelectedChoiceReference>
+            <defaultSelectedChoiceReference
+      >varBkgCkPass</defaultSelectedChoiceReference>
             <fieldText>Background check results</fieldText>
             <fieldType>RadioButtons</fieldType>
             <isRequired>true</isRequired>
         </fields>
         <fields>
             <name>BkgChkNote21</name>
-            <fieldText>&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;</fieldText>
+            <fieldText
+      >&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
@@ -379,7 +429,8 @@ Note - Background check is valid for only 1 year</description>
             <visibilityRule>
                 <conditionLogic>and</conditionLogic>
                 <conditions>
-                    <leftValueReference>Background_check_results</leftValueReference>
+                    <leftValueReference
+          >Background_check_results</leftValueReference>
                     <operator>NotEqualTo</operator>
                     <rightValue>
                         <elementReference>varBkgCkPass</elementReference>
@@ -389,7 +440,8 @@ Note - Background check is valid for only 1 year</description>
         </fields>
         <fields>
             <name>UploadBckgrndCheckReport</name>
-            <fieldText>&lt;p&gt;Please upload the background check report.&lt;/p&gt;</fieldText>
+            <fieldText
+      >&lt;p&gt;Please upload the background check report.&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
@@ -420,39 +472,12 @@ Note - Background check is valid for only 1 year</description>
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>
     </screens>
-    <screens>
-        <name>Background_Check_Order_Request</name>
-        <label>Background Check Order Request</label>
-        <locationX>951</locationX>
-        <locationY>43</locationY>
-        <allowBack>true</allowBack>
-        <allowFinish>true</allowFinish>
-        <allowPause>true</allowPause>
-        <connector>
-            <targetReference>D_Reorder_Bckg_Check</targetReference>
-        </connector>
-        <fields>
-            <name>BkgChkNote1</name>
-            <fieldText>&lt;p&gt;{!varFirstName} {!varLastName} failed the background check done on {!varPreviousBkgCkDate} with below notes:&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;{!varPreviousBkgCkNotes}&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-        </fields>
-        <fields>
-            <name>Do_you_want_to_reorder_background_check_again</name>
-            <choiceReferences>varReorderBkgChk</choiceReferences>
-            <choiceReferences>varDoNotReorderBkgChk</choiceReferences>
-            <dataType>String</dataType>
-            <fieldText>Do you want to reorder background check again ?</fieldText>
-            <fieldType>RadioButtons</fieldType>
-            <isRequired>true</isRequired>
-        </fields>
-        <showFooter>true</showFooter>
-        <showHeader>true</showHeader>
-    </screens>
     <start>
         <locationX>54</locationX>
         <locationY>31</locationY>
         <connector>
-            <targetReference>Get_Account_Background_Check_related_info</targetReference>
+            <targetReference
+      >Get_Account_Background_Check_related_info</targetReference>
         </connector>
     </start>
     <status>Active</status>
