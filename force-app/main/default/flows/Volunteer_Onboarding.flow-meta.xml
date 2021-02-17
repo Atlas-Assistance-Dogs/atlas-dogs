@@ -1771,7 +1771,7 @@
             <targetReference>Get_Account_Record</targetReference>
         </connector>
     </start>
-    <status>Draft</status>
+    <status>Active</status>
     <subflows>
         <name>Volunteer_Background_check</name>
         <label>Volunteer Background check</label>
