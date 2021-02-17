@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Client/Dog Team Certification</fullName>
+        <default>false</default>
+        <label>Client/Dog Team Certification</label>
+    </customValue>
+    <customValue>
+        <fullName>Trainer Certification</fullName>
+        <default>false</default>
+        <label>Trainer Certification</label>
+    </customValue>
+    <customValue>
+        <fullName>Team Facilitator Certification</fullName>
+        <default>false</default>
+        <label>Team Facilitator Certification</label>
+    </customValue>
+    <customValue>
+        <fullName>Volunteer</fullName>
+        <default>false</default>
+        <label>Volunteer</label>
+    </customValue>
+    <customValue>
+        <fullName>Sponsorship/Donations</fullName>
+        <default>false</default>
+        <label>Sponsorship/Donations</label>
+    </customValue>
+    <customValue>
+        <fullName>General info/Other</fullName>
+        <default>false</default>
+        <label>General info/Other</label>
+    </customValue>
+    <description>What a lead is interested in</description>
+    <masterLabel>Lead Interest</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

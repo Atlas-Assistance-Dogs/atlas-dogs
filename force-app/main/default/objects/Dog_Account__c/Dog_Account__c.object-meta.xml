@@ -132,45 +132,35 @@
     </actionOverrides>
     <actionOverrides>
         <actionName>View</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
         <formFactor>Small</formFactor>
         <type>Default</type>
     </actionOverrides>
-    <allowInChatterGroups>true</allowInChatterGroups>
-    <compactLayoutAssignment>Dog_Highlight_Panel</compactLayoutAssignment>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
     <deploymentStatus>Deployed</deploymentStatus>
-    <description
-  >Records detailing information about dogs being utilized by clients and trainers</description>
-    <enableActivities>true</enableActivities>
+    <description>Connection between a dog and an account</description>
+    <enableActivities>false</enableActivities>
     <enableBulkApi>true</enableBulkApi>
     <enableFeeds>false</enableFeeds>
-    <enableHistory>true</enableHistory>
+    <enableHistory>false</enableHistory>
     <enableLicensing>false</enableLicensing>
-    <enableReports>true</enableReports>
-    <enableSearch>true</enableSearch>
+    <enableReports>false</enableReports>
+    <enableSearch>false</enableSearch>
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
     <externalSharingModel>Private</externalSharingModel>
-    <label>Dog</label>
+    <label>Dog Account</label>
     <nameField>
-        <label>Dog Name</label>
-        <trackHistory>false</trackHistory>
+        <label>Dog Account Name</label>
         <type>Text</type>
     </nameField>
-    <pluralLabel>Dogs</pluralLabel>
-    <searchLayouts>
-        <excludedStandardButtons>New</excludedStandardButtons>
-        <excludedStandardButtons>OpenListInQuip</excludedStandardButtons>
-        <excludedStandardButtons>ChangeOwner</excludedStandardButtons>
-        <excludedStandardButtons>MassChangeOwner</excludedStandardButtons>
-        <listViewButtons>Onboard_New_Dog</listViewButtons>
-        <searchResultsAdditionalFields>Status__c</searchResultsAdditionalFields>
-        <searchResultsAdditionalFields
-    >Expiry_Date_Status__c</searchResultsAdditionalFields>
-        <searchResultsAdditionalFields>Active__c</searchResultsAdditionalFields>
-        <searchResultsAdditionalFields
-    >Certified__c</searchResultsAdditionalFields>
-        <searchResultsCustomButtons>Onboard_New_Dog</searchResultsCustomButtons>
-    </searchLayouts>
+    <pluralLabel>Dogs Accounts</pluralLabel>
+    <searchLayouts />
     <sharingModel>ReadWrite</sharingModel>
     <visibility>Public</visibility>
 </CustomObject>

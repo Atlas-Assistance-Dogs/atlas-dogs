@@ -1,5 +1,0 @@
-<aura:component implements="lightning:actionOverride" access="global" >  
-
-    <c:newAccountPage />
-      
-</aura:component>

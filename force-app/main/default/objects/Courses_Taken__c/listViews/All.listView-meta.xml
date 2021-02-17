@@ -1,8 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <ListView xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>All</fullName>
     <columns>NAME</columns>
-    <columns>Account_Name__c</columns>
     <columns>Course_Description__c</columns>
     <columns>Assigned_Date__c</columns>
     <columns>Expected_Completion_Date__c</columns>
