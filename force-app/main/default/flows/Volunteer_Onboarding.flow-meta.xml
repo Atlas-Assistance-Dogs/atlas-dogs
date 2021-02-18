@@ -1,8 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<Flow
-  xmlns="http://soap.sforce.com/2006/04/metadata"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
->
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <actionCalls>
         <description>alert to send email to provision courses</description>
         <name>Email_Alert_Course_Provisioning</name>
@@ -22,20 +19,15 @@
         </inputParameters>
     </actionCalls>
     <actionCalls>
-        <description
-    >alert to send email to volunteer rejecting due to background check</description>
-        <name
-    >email_alert_volunteer_rejected_due_to_background_check_failure</name>
-        <label
-    >email alert- volunteer rejected due to background check failure</label>
+        <description>alert to send email to volunteer rejecting due to background check</description>
+        <name>email_alert_volunteer_rejected_due_to_background_check_failure</name>
+        <label>email alert- volunteer rejected due to background check failure</label>
         <locationX>1111</locationX>
         <locationY>1987</locationY>
-        <actionName
-    >Account.Volunteer_rejected_due_to_background_check_failure</actionName>
+        <actionName>Account.Volunteer_rejected_due_to_background_check_failure</actionName>
         <actionType>emailAlert</actionType>
         <connector>
-            <targetReference
-      >Update_status_with_BkgndChk_Failure</targetReference>
+            <targetReference>Update_status_with_BkgndChk_Failure</targetReference>
         </connector>
         <inputParameters>
             <name>SObjectRowId</name>
@@ -45,8 +37,7 @@
         </inputParameters>
     </actionCalls>
     <actionCalls>
-        <description
-    >task to send email to provision account, assign volunteer roles, and add to mailchimp</description>
+        <description>task to send email to provision account, assign volunteer roles, and add to mailchimp</description>
         <name>Email_Provision_Account_and_Assign_Volunteer_Roles</name>
         <label>Email - Provision Account and Assign Volunteer Roles</label>
         <locationX>1493</locationX>
@@ -66,8 +57,7 @@
         <label>Existing Volunteer Provisionally selected</label>
         <locationX>1005</locationX>
         <locationY>991</locationY>
-        <actionName
-    >Account.Existing_Volunteer_Provisionally_selected_email_alert</actionName>
+        <actionName>Account.Existing_Volunteer_Provisionally_selected_email_alert</actionName>
         <actionType>emailAlert</actionType>
         <connector>
             <targetReference>Course_Provisioning</targetReference>
@@ -80,14 +70,12 @@
         </inputParameters>
     </actionCalls>
     <actionCalls>
-        <description
-    >Alert to send email to a new volunteer that they are provisionally accepted</description>
+        <description>Alert to send email to a new volunteer that they are provisionally accepted</description>
         <name>New_Volunteer_Provisionally_Selected_Email_Notification</name>
         <label>New Volunteer Provisionally Selected Email Notification</label>
         <locationX>553</locationX>
         <locationY>989</locationY>
-        <actionName
-    >Account.New_Volunteer_Provisionally_selected_email_alert</actionName>
+        <actionName>Account.New_Volunteer_Provisionally_selected_email_alert</actionName>
         <actionType>emailAlert</actionType>
         <connector>
             <targetReference>Volunteer_Form_request</targetReference>
@@ -130,8 +118,7 @@
         <inputParameters>
             <name>Subject</name>
             <value>
-                <stringValue
-        >Revisit whether {!Get_Account_Record.First_Name__c} {!Get_Account_Record.Last_Name__c} might now be interested in volunteering</stringValue>
+                <stringValue>Revisit whether {!Get_Account_Record.First_Name__c} {!Get_Account_Record.Last_Name__c} might now be interested in volunteering</stringValue>
             </value>
         </inputParameters>
     </actionCalls>
@@ -166,20 +153,17 @@
         <inputParameters>
             <name>Subject</name>
             <value>
-                <stringValue
-        >Schedule an interview for volunteer: {!Get_Account_Record.First_Name__c} {!Get_Account_Record.Last_Name__c} </stringValue>
+                <stringValue>Schedule an interview for volunteer: {!Get_Account_Record.First_Name__c} {!Get_Account_Record.Last_Name__c} </stringValue>
             </value>
         </inputParameters>
     </actionCalls>
     <actionCalls>
-        <description
-    >action to send email to let volunteer know not accepted</description>
+        <description>action to send email to let volunteer know not accepted</description>
         <name>Volunteer_Reject_Email_Notification</name>
         <label>Volunteer Reject Email Notification</label>
         <locationX>1205</locationX>
         <locationY>825</locationY>
-        <actionName
-    >Account.Volunteer_rejection_after_initial_interview</actionName>
+        <actionName>Account.Volunteer_rejection_after_initial_interview</actionName>
         <actionType>emailAlert</actionType>
         <inputParameters>
             <name>SObjectRowId</name>
@@ -198,8 +182,7 @@
             <assignToReference>VolunteerRoleEmailText</assignToReference>
             <operator>Assign</operator>
             <value>
-                <elementReference
-        >Select_Volunteer_Roles_with_BC_Fail</elementReference>
+                <elementReference>Select_Volunteer_Roles_with_BC_Fail</elementReference>
             </value>
         </assignmentItems>
         <assignmentItems>
@@ -222,8 +205,7 @@
             <assignToReference>VolunteerRoleEmailText</assignToReference>
             <operator>Assign</operator>
             <value>
-                <elementReference
-        >Select_Volunteer_Roles_with_BC</elementReference>
+                <elementReference>Select_Volunteer_Roles_with_BC</elementReference>
             </value>
         </assignmentItems>
         <assignmentItems>
@@ -239,8 +221,7 @@
     </assignments>
     <choices>
         <name>choice</name>
-        <choiceText
-    >{!Get_Account_Record.First_Name__c}&amp;nbsp;&amp;nbsp;{!Get_Account_Record.Last_Name__c} attended the workshop</choiceText>
+        <choiceText>{!Get_Account_Record.First_Name__c}&amp;nbsp;&amp;nbsp;{!Get_Account_Record.Last_Name__c} attended the workshop</choiceText>
         <dataType>String</dataType>
         <value>
             <stringValue>Yes</stringValue>
@@ -264,8 +245,7 @@
     </choices>
     <choices>
         <name>choiceAgreementNotSent</name>
-        <choiceText
-    >&lt;b style=&quot;color: rgb(157, 33, 43);&quot;&gt;Not Yet &lt;/b&gt;</choiceText>
+        <choiceText>&lt;b style=&quot;color: rgb(157, 33, 43);&quot;&gt;Not Yet &lt;/b&gt;</choiceText>
         <dataType>String</dataType>
         <value>
             <stringValue>No</stringValue>
@@ -273,8 +253,7 @@
     </choices>
     <choices>
         <name>choiceAgreementSent</name>
-        <choiceText
-    >&lt;b style=&quot;color: rgb(32, 150, 54);&quot;&gt;Sent Agreement &lt;/b&gt;</choiceText>
+        <choiceText>&lt;b style=&quot;color: rgb(32, 150, 54);&quot;&gt;Sent Agreement &lt;/b&gt;</choiceText>
         <dataType>String</dataType>
         <value>
             <stringValue>Yes</stringValue>
@@ -314,8 +293,7 @@
     </choices>
     <choices>
         <name>choiceConsideredAfterInterview</name>
-        <choiceText
-    >{!Get_Account_Record.First_Name__c} {!Get_Account_Record.Last_Name__c} is conidered</choiceText>
+        <choiceText>{!Get_Account_Record.First_Name__c} {!Get_Account_Record.Last_Name__c} is conidered</choiceText>
         <dataType>String</dataType>
         <value>
             <stringValue>Yes</stringValue>
@@ -323,8 +301,7 @@
     </choices>
     <choices>
         <name>choiceCoursesCompleted</name>
-        <choiceText
-    >{!Get_Account_Record.First_Name__c}&amp;nbsp;&amp;nbsp;{!Get_Account_Record.Last_Name__c} Completed the training courses.</choiceText>
+        <choiceText>{!Get_Account_Record.First_Name__c}&amp;nbsp;&amp;nbsp;{!Get_Account_Record.Last_Name__c} Completed the training courses.</choiceText>
         <dataType>String</dataType>
         <value>
             <stringValue>Yes</stringValue>
@@ -332,8 +309,7 @@
     </choices>
     <choices>
         <name>choiceCoursesNotCompleted</name>
-        <choiceText
-    >{!Get_Account_Record.First_Name__c}&amp;nbsp;&amp;nbsp;{!Get_Account_Record.Last_Name__c} not completed the training courses.</choiceText>
+        <choiceText>{!Get_Account_Record.First_Name__c}&amp;nbsp;&amp;nbsp;{!Get_Account_Record.Last_Name__c} not completed the training courses.</choiceText>
         <dataType>String</dataType>
         <value>
             <stringValue>No</stringValue>
@@ -357,8 +333,7 @@
     </choices>
     <choices>
         <name>choiceGoodFit</name>
-        <choiceText
-    >&lt;span style=&quot;color: rgb(46, 141, 57);&quot;&gt;{!Get_Account_Record.First_Name__c}&amp;nbsp;&amp;nbsp;{!Get_Account_Record.Last_Name__c} is good fit&lt;/span&gt;</choiceText>
+        <choiceText>&lt;span style=&quot;color: rgb(46, 141, 57);&quot;&gt;{!Get_Account_Record.First_Name__c}&amp;nbsp;&amp;nbsp;{!Get_Account_Record.Last_Name__c} is good fit&lt;/span&gt;</choiceText>
         <dataType>String</dataType>
         <value>
             <stringValue>Yes</stringValue>
@@ -366,8 +341,7 @@
     </choices>
     <choices>
         <name>choiceNotConsideredAfterInterview</name>
-        <choiceText
-    >{!Get_Account_Record.First_Name__c} {!Get_Account_Record.Last_Name__c} is not considered</choiceText>
+        <choiceText>{!Get_Account_Record.First_Name__c} {!Get_Account_Record.Last_Name__c} is not considered</choiceText>
         <dataType>String</dataType>
         <value>
             <stringValue>No</stringValue>
@@ -383,8 +357,7 @@
     </choices>
     <choices>
         <name>choiceNotGoofFit</name>
-        <choiceText
-    >&lt;span style=&quot;color: rgb(231, 20, 20);&quot;&gt;{!Get_Account_Record.First_Name__c}&amp;nbsp;&amp;nbsp;{!Get_Account_Record.Last_Name__c} not a good fit&lt;/span&gt;</choiceText>
+        <choiceText>&lt;span style=&quot;color: rgb(231, 20, 20);&quot;&gt;{!Get_Account_Record.First_Name__c}&amp;nbsp;&amp;nbsp;{!Get_Account_Record.Last_Name__c} not a good fit&lt;/span&gt;</choiceText>
         <dataType>String</dataType>
         <value>
             <stringValue>No</stringValue>
@@ -453,8 +426,7 @@
     </choices>
     <choices>
         <name>choiceWorkshipAttended</name>
-        <choiceText
-    >&lt;span style=&quot;color: rgb(67, 144, 73);&quot;&gt;{!Get_Account_Record.First_Name__c}&amp;nbsp;&amp;nbsp;{!Get_Account_Record.Last_Name__c} attended the workshop&lt;/span&gt;</choiceText>
+        <choiceText>&lt;span style=&quot;color: rgb(67, 144, 73);&quot;&gt;{!Get_Account_Record.First_Name__c}&amp;nbsp;&amp;nbsp;{!Get_Account_Record.Last_Name__c} attended the workshop&lt;/span&gt;</choiceText>
         <dataType>String</dataType>
         <value>
             <stringValue>Yes</stringValue>
@@ -462,8 +434,7 @@
     </choices>
     <choices>
         <name>choiceWorkshipNotAttended</name>
-        <choiceText
-    >&lt;span style=&quot;color: rgb(215, 38, 38);&quot;&gt;{!Get_Account_Record.First_Name__c}&amp;nbsp;&amp;nbsp;{!Get_Account_Record.Last_Name__c} did not attend the course&lt;/span&gt;</choiceText>
+        <choiceText>&lt;span style=&quot;color: rgb(215, 38, 38);&quot;&gt;{!Get_Account_Record.First_Name__c}&amp;nbsp;&amp;nbsp;{!Get_Account_Record.Last_Name__c} did not attend the course&lt;/span&gt;</choiceText>
         <dataType>String</dataType>
         <value>
             <stringValue>No</stringValue>
@@ -471,8 +442,7 @@
     </choices>
     <choices>
         <name>varConsiderBckgrngChkFailedMaybe</name>
-        <choiceText
-    >&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(62, 62, 60);&quot;&gt;Considered to offer role not needing access to sensitive data&lt;/span&gt;</choiceText>
+        <choiceText>&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(62, 62, 60);&quot;&gt;Considered to offer role not needing access to sensitive data&lt;/span&gt;</choiceText>
         <dataType>String</dataType>
         <value>
             <stringValue>May Be</stringValue>
@@ -488,8 +458,7 @@
     </choices>
     <choices>
         <name>varConsiderFailedBkgcheck</name>
-        <choiceText
-    >Considered to proceed to offer any role (including which need access to sensitive data)</choiceText>
+        <choiceText>Considered to proceed to offer any role (including which need access to sensitive data)</choiceText>
         <dataType>String</dataType>
         <value>
             <stringValue>Yes</stringValue>
@@ -499,14 +468,14 @@
         <name>collectVarVolunteerRole</name>
         <dataType>String</dataType>
         <value>
-            <stringValue />
+            <stringValue/>
         </value>
     </constants>
     <constants>
         <name>constantVolunteerRoleSelection</name>
         <dataType>String</dataType>
         <value>
-            <stringValue />
+            <stringValue/>
         </value>
     </constants>
     <constants>
@@ -529,12 +498,10 @@
             <name>Needed</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
-                <leftValueReference
-        >Sensitive_data_access_needed</leftValueReference>
+                <leftValueReference>Sensitive_data_access_needed</leftValueReference>
                 <operator>EqualTo</operator>
                 <rightValue>
-                    <elementReference
-          >choiceAccessToSenstiveDataNeeded</elementReference>
+                    <elementReference>choiceAccessToSenstiveDataNeeded</elementReference>
                 </rightValue>
             </conditions>
             <connector>
@@ -551,8 +518,7 @@
         <defaultConnector>
             <targetReference>Update_with_interview_result</targetReference>
         </defaultConnector>
-        <defaultConnectorLabel
-    >Not Considered for Volunteer role</defaultConnectorLabel>
+        <defaultConnectorLabel>Not Considered for Volunteer role</defaultConnectorLabel>
         <rules>
             <name>Considered_for_volunteer</name>
             <conditionLogic>and</conditionLogic>
@@ -560,13 +526,11 @@
                 <leftValueReference>Choose_to_move_forward</leftValueReference>
                 <operator>EqualTo</operator>
                 <rightValue>
-                    <elementReference
-          >choiceConsideredAfterInterview</elementReference>
+                    <elementReference>choiceConsideredAfterInterview</elementReference>
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference
-        >Update_with_provisionally_selected_Status</targetReference>
+                <targetReference>Update_with_provisionally_selected_Status</targetReference>
             </connector>
             <label>Considered for volunteer</label>
         </rules>
@@ -609,8 +573,7 @@
             <name>BkgChk_Passed</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
-                <leftValueReference
-        >varBackgroundCheckResult</leftValueReference>
+                <leftValueReference>varBackgroundCheckResult</leftValueReference>
                 <operator>EqualTo</operator>
                 <rightValue>
                     <stringValue>Pass</stringValue>
@@ -628,8 +591,7 @@
         <locationX>955</locationX>
         <locationY>1870</locationY>
         <defaultConnector>
-            <targetReference
-      >email_alert_volunteer_rejected_due_to_background_check_failure</targetReference>
+            <targetReference>email_alert_volunteer_rejected_due_to_background_check_failure</targetReference>
         </defaultConnector>
         <defaultConnectorLabel>Not considered</defaultConnectorLabel>
         <rules>
@@ -639,8 +601,7 @@
                 <leftValueReference>Do_you_want_to_consider</leftValueReference>
                 <operator>EqualTo</operator>
                 <rightValue>
-                    <elementReference
-          >varConsiderFailedBkgcheck</elementReference>
+                    <elementReference>varConsiderFailedBkgcheck</elementReference>
                 </rightValue>
             </conditions>
             <connector>
@@ -655,8 +616,7 @@
                 <leftValueReference>Do_you_want_to_consider</leftValueReference>
                 <operator>EqualTo</operator>
                 <rightValue>
-                    <elementReference
-          >varConsiderBckgrngChkFailedMaybe</elementReference>
+                    <elementReference>varConsiderBckgrngChkFailedMaybe</elementReference>
                 </rightValue>
             </conditions>
             <connector>
@@ -671,32 +631,28 @@
         <locationX>711</locationX>
         <locationY>988</locationY>
         <defaultConnector>
-            <targetReference
-      >New_Volunteer_Provisionally_Selected_Email_Notification</targetReference>
+            <targetReference>New_Volunteer_Provisionally_Selected_Email_Notification</targetReference>
         </defaultConnector>
         <defaultConnectorLabel>Not Yet</defaultConnectorLabel>
         <rules>
             <name>Submitted_Already</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
-                <leftValueReference
-        >Get_Account_Record.Volunteer_Emergency_Contact_Submitted__c</leftValueReference>
+                <leftValueReference>Get_Account_Record.Volunteer_Emergency_Contact_Submitted__c</leftValueReference>
                 <operator>EqualTo</operator>
                 <rightValue>
                     <booleanValue>true</booleanValue>
                 </rightValue>
             </conditions>
             <conditions>
-                <leftValueReference
-        >Get_Account_Record.Media_Release_Form_Submitted__c</leftValueReference>
+                <leftValueReference>Get_Account_Record.Media_Release_Form_Submitted__c</leftValueReference>
                 <operator>EqualTo</operator>
                 <rightValue>
                     <booleanValue>true</booleanValue>
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference
-        >Existing_Volunteer_Provisionally_selected</targetReference>
+                <targetReference>Existing_Volunteer_Provisionally_selected</targetReference>
             </connector>
             <label>Submitted Already</label>
         </rules>
@@ -721,8 +677,7 @@
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference
-        >Update_Acct_with_Not_Ready_Status</targetReference>
+                <targetReference>Update_Acct_with_Not_Ready_Status</targetReference>
             </connector>
             <label>Will Get back</label>
         </rules>
@@ -744,8 +699,7 @@
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference
-        >Update_status_with_Course_completion</targetReference>
+                <targetReference>Update_status_with_Course_completion</targetReference>
             </connector>
             <label>VolunteerCourseCompleted?</label>
         </rules>
@@ -753,8 +707,7 @@
             <name>VolunteerCourseNotCompleted</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
-                <leftValueReference
-        >choiceCoursesNotCompleted</leftValueReference>
+                <leftValueReference>choiceCoursesNotCompleted</leftValueReference>
                 <operator>WasSelected</operator>
                 <rightValue>
                     <booleanValue>true</booleanValue>
@@ -770,8 +723,8 @@
     <dynamicChoiceSets>
         <name>choiceVolunteerRole</name>
         <dataType>Multipicklist</dataType>
-        <displayField xsi:nil="true" />
-        <object xsi:nil="true" />
+        <displayField xsi:nil="true"/>
+        <object xsi:nil="true"/>
         <picklistField>Volunteer_Role__c</picklistField>
         <picklistObject>Account</picklistObject>
         <sortOrder>Asc</sortOrder>
@@ -779,8 +732,8 @@
     <dynamicChoiceSets>
         <name>choiceVolunteerRoleWithBCFail</name>
         <dataType>Multipicklist</dataType>
-        <displayField xsi:nil="true" />
-        <object xsi:nil="true" />
+        <displayField xsi:nil="true"/>
+        <object xsi:nil="true"/>
         <picklistField>Volunteer_Role_With_No_Data_Access__c</picklistField>
         <picklistObject>Account</picklistObject>
     </dynamicChoiceSets>
@@ -792,8 +745,7 @@
     <formulas>
         <name>varBkgndChkDone</name>
         <dataType>Boolean</dataType>
-        <expression
-    >IF( ISBLANK({!Get_Account_Record.Background_Check_Latest_Date__c}), FALSE,TRUE)</expression>
+        <expression>IF( ISBLANK({!Get_Account_Record.Background_Check_Latest_Date__c}), FALSE,TRUE)</expression>
     </formulas>
     <formulas>
         <name>varRemainderDate</name>
@@ -810,8 +762,7 @@
         <dataType>Date</dataType>
         <expression>today()</expression>
     </formulas>
-    <interviewLabel
-  >Volunteer Onboarding v4 {!$Flow.CurrentDateTime}</interviewLabel>
+    <interviewLabel>Volunteer Onboarding v4 {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Volunteer Onboarding v5</label>
     <processMetadataValues>
         <name>BuilderType</name>
@@ -837,8 +788,7 @@
         <label>Get Account Record</label>
         <locationX>777</locationX>
         <locationY>159</locationY>
-        <assignNullValuesIfNoRecordsFound
-    >false</assignNullValuesIfNoRecordsFound>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Volunteer_Considering_or_Not</targetReference>
         </connector>
@@ -860,8 +810,7 @@
         <locationX>1494</locationX>
         <locationY>1686</locationY>
         <connector>
-            <targetReference
-      >Email_Provision_Account_and_Assign_Volunteer_Roles</targetReference>
+            <targetReference>Email_Provision_Account_and_Assign_Volunteer_Roles</targetReference>
         </connector>
         <filterLogic>and</filterLogic>
         <filters>
@@ -964,8 +913,7 @@
         <inputAssignments>
             <field>Volunteer_Interview_Date_End_Time__c</field>
             <value>
-                <elementReference
-        >Interview_Date_and_time_From</elementReference>
+                <elementReference>Interview_Date_and_time_From</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -988,8 +936,7 @@
         <locationX>1159</locationX>
         <locationY>613</locationY>
         <connector>
-            <targetReference
-      >Considered_after_interview_for_volunteer_role</targetReference>
+            <targetReference>Considered_after_interview_for_volunteer_role</targetReference>
         </connector>
         <filterLogic>and</filterLogic>
         <filters>
@@ -1029,8 +976,7 @@
         <inputAssignments>
             <field>Volunteer_Status__c</field>
             <value>
-                <stringValue
-        >On boarding aborted - Background Check failed</stringValue>
+                <stringValue>On boarding aborted - Background Check failed</stringValue>
             </value>
         </inputAssignments>
         <object>Account</object>
@@ -1101,8 +1047,7 @@
         <locationX>967</locationX>
         <locationY>826</locationY>
         <connector>
-            <targetReference
-      >Volunteer_Reject_Email_Notification</targetReference>
+            <targetReference>Volunteer_Reject_Email_Notification</targetReference>
         </connector>
         <filterLogic>and</filterLogic>
         <filters>
@@ -1150,8 +1095,7 @@
         <locationX>721</locationX>
         <locationY>618</locationY>
         <connector>
-            <targetReference
-      >D_Volunteer_form_already_submitted</targetReference>
+            <targetReference>D_Volunteer_form_already_submitted</targetReference>
         </connector>
         <filterLogic>and</filterLogic>
         <filters>
@@ -1182,19 +1126,15 @@
         </connector>
         <fields>
             <name>AcccessToSensitiveDataNote</name>
-            <fieldText
-      >&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;Does {!Get_Account_Record.First_Name__c}&amp;nbsp;&amp;nbsp;{!Get_Account_Record.Last_Name__c} need access to sensitive data ?&lt;/b&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;Does {!Get_Account_Record.First_Name__c}&amp;nbsp;&amp;nbsp;{!Get_Account_Record.Last_Name__c} need access to sensitive data ?&lt;/b&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
             <name>Sensitive_data_access_needed</name>
-            <choiceReferences
-      >choiceAccessToSenstiveDataNeeded</choiceReferences>
-            <choiceReferences
-      >choiceAccessToSensitiveInformationNotNeeded</choiceReferences>
+            <choiceReferences>choiceAccessToSenstiveDataNeeded</choiceReferences>
+            <choiceReferences>choiceAccessToSensitiveInformationNotNeeded</choiceReferences>
             <dataType>String</dataType>
-            <defaultSelectedChoiceReference
-      >choiceAccessToSenstiveDataNeeded</defaultSelectedChoiceReference>
+            <defaultSelectedChoiceReference>choiceAccessToSenstiveDataNeeded</defaultSelectedChoiceReference>
             <fieldText>Sensitive data access needed ?</fieldText>
             <fieldType>RadioButtons</fieldType>
             <isRequired>true</isRequired>
@@ -1223,8 +1163,7 @@
         </fields>
         <fields>
             <name>ProvisionNoteHdr</name>
-            <fieldText
-      >&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(62, 62, 60);&quot;&gt;Please add additional notes that should be considered while provisioning the account&lt;/span&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(62, 62, 60);&quot;&gt;Please add additional notes that should be considered while provisioning the account&lt;/span&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
@@ -1245,8 +1184,7 @@
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <connector>
-            <targetReference
-      >AssignPicklistValuesBCFailToEmailText</targetReference>
+            <targetReference>AssignPicklistValuesBCFailToEmailText</targetReference>
         </connector>
         <fields>
             <name>Select_Volunteer_Roles_with_BC_Fail</name>
@@ -1258,8 +1196,7 @@
         </fields>
         <fields>
             <name>ProvisionNoteHdr2</name>
-            <fieldText
-      >&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(62, 62, 60);&quot;&gt;Please add additional notes that should be considered while provisioning the account&lt;/span&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(62, 62, 60);&quot;&gt;Please add additional notes that should be considered while provisioning the account&lt;/span&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
@@ -1284,17 +1221,14 @@
         </connector>
         <fields>
             <name>FONote8_0</name>
-            <fieldText
-      >&lt;p&gt;&lt;b&gt;{!Get_Account_Record.First_Name__c}&amp;nbsp;&amp;nbsp;{!Get_Account_Record.Last_Name__c} failed background check. Do you want to still consider for Volunteer role ? &lt;/b&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;b&gt;{!Get_Account_Record.First_Name__c}&amp;nbsp;&amp;nbsp;{!Get_Account_Record.Last_Name__c} failed background check. Do you want to still consider for Volunteer role ? &lt;/b&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
             <name>Do_you_want_to_consider</name>
             <choiceReferences>varConsiderFailedBkgcheck</choiceReferences>
-            <choiceReferences
-      >varConsideredNotToProceedBkgChkFailed</choiceReferences>
-            <choiceReferences
-      >varConsiderBckgrngChkFailedMaybe</choiceReferences>
+            <choiceReferences>varConsideredNotToProceedBkgChkFailed</choiceReferences>
+            <choiceReferences>varConsiderBckgrngChkFailedMaybe</choiceReferences>
             <dataType>String</dataType>
             <fieldText>Do you want to consider ?</fieldText>
             <fieldType>RadioButtons</fieldType>
@@ -1308,12 +1242,10 @@
             <visibilityRule>
                 <conditionLogic>and</conditionLogic>
                 <conditions>
-                    <leftValueReference
-          >Do_you_want_to_consider</leftValueReference>
+                    <leftValueReference>Do_you_want_to_consider</leftValueReference>
                     <operator>EqualTo</operator>
                     <rightValue>
-                        <elementReference
-            >varConsiderFailedBkgcheck</elementReference>
+                        <elementReference>varConsiderFailedBkgcheck</elementReference>
                     </rightValue>
                 </conditions>
             </visibilityRule>
@@ -1334,8 +1266,7 @@
         </connector>
         <fields>
             <name>FOGFNote1</name>
-            <fieldText
-      >&lt;p&gt;&lt;b&gt;Once courses are completed by {!Get_Account_Record.First_Name__c}&amp;nbsp;&amp;nbsp;{!Get_Account_Record.Last_Name__c} in canvas, please confirm the completion of the courses below&lt;/b&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;b&gt;Once courses are completed by {!Get_Account_Record.First_Name__c}&amp;nbsp;&amp;nbsp;{!Get_Account_Record.Last_Name__c} in canvas, please confirm the completion of the courses below&lt;/b&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
@@ -1343,8 +1274,7 @@
             <choiceReferences>choiceCoursesCompleted</choiceReferences>
             <choiceReferences>choiceCoursesNotCompleted</choiceReferences>
             <dataType>String</dataType>
-            <defaultSelectedChoiceReference
-      >choiceCoursesCompleted</defaultSelectedChoiceReference>
+            <defaultSelectedChoiceReference>choiceCoursesCompleted</defaultSelectedChoiceReference>
             <fieldText>Good Fit</fieldText>
             <fieldType>RadioButtons</fieldType>
             <isRequired>true</isRequired>
@@ -1365,8 +1295,7 @@
         </connector>
         <fields>
             <name>FONote71</name>
-            <fieldText
-      >&lt;p style=&quot;text-align: center;&quot;&gt;Please select the courses and work shop schedule that need to be assigned {!Get_Account_Record.First_Name__c}&amp;nbsp;&amp;nbsp;{!Get_Account_Record.Last_Name__c} to onboard for Facilitator role. You can select more than 1 course.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;Please select the courses that need to be assigned {!Get_Account_Record.First_Name__c}&amp;nbsp;&amp;nbsp;{!Get_Account_Record.Last_Name__c} to onboard for Volunteer role. You can select more than 1 course.&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
@@ -1382,7 +1311,7 @@
             <inputParameters>
                 <name>typeOfUser</name>
                 <value>
-                    <stringValue>Facilitator</stringValue>
+                    <stringValue>Volunteer</stringValue>
                 </value>
             </inputParameters>
             <isRequired>true</isRequired>
@@ -1404,8 +1333,7 @@
         </connector>
         <fields>
             <name>FONote2</name>
-            <fieldText
-      >&lt;p&gt;&lt;b&gt;Enter the scheduled interview date along with start and end time for  {!Get_Account_Record.First_Name__c}&amp;nbsp;&amp;nbsp;{!Get_Account_Record.Last_Name__c} &lt;/b&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;b&gt;Enter the scheduled interview date along with start and end time for  {!Get_Account_Record.First_Name__c}&amp;nbsp;&amp;nbsp;{!Get_Account_Record.Last_Name__c} &lt;/b&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
@@ -1416,8 +1344,7 @@
             <isRequired>true</isRequired>
             <validationRule>
                 <errorMessage>&lt;p&gt;less than today&lt;/p&gt;</errorMessage>
-                <formulaExpression
-        >{!Interview_Date_and_time_From} &gt;= NOW()</formulaExpression>
+                <formulaExpression>{!Interview_Date_and_time_From} &gt;= NOW()</formulaExpression>
             </validationRule>
         </fields>
         <fields>
@@ -1427,16 +1354,13 @@
             <fieldType>InputField</fieldType>
             <isRequired>true</isRequired>
             <validationRule>
-                <errorMessage
-        >&lt;p&gt;To Date cannot be less than From Date &lt;/p&gt;</errorMessage>
-                <formulaExpression
-        >{!Interview_Date_Time_To} &gt;= {!Interview_Date_and_time_From}</formulaExpression>
+                <errorMessage>&lt;p&gt;To Date cannot be less than From Date &lt;/p&gt;</errorMessage>
+                <formulaExpression>{!Interview_Date_Time_To} &gt;= {!Interview_Date_and_time_From}</formulaExpression>
             </validationRule>
         </fields>
         <fields>
             <name>FONote22</name>
-            <fieldText
-      >&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
@@ -1455,8 +1379,7 @@
         </connector>
         <fields>
             <name>FONote3</name>
-            <fieldText
-      >&lt;p&gt;&lt;b&gt;After reviewing the resume and talking to {!Get_Account_Record.First_Name__c}&amp;nbsp;&amp;nbsp;{!Get_Account_Record.Last_Name__c} , Please summarize the interview notes.&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;&lt;span class=&quot;ql-cursor&quot;&gt;﻿&lt;/span&gt;&lt;/b&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;b&gt;After reviewing the resume and talking to {!Get_Account_Record.First_Name__c}&amp;nbsp;&amp;nbsp;{!Get_Account_Record.Last_Name__c} , Please summarize the interview notes.&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;&lt;span class=&quot;ql-cursor&quot;&gt;﻿&lt;/span&gt;&lt;/b&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
@@ -1467,15 +1390,13 @@
         </fields>
         <fields>
             <name>FONote32</name>
-            <fieldText
-      >&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
             <name>Choose_to_move_forward</name>
             <choiceReferences>choiceConsideredAfterInterview</choiceReferences>
-            <choiceReferences
-      >choiceNotConsideredAfterInterview</choiceReferences>
+            <choiceReferences>choiceNotConsideredAfterInterview</choiceReferences>
             <dataType>String</dataType>
             <fieldText>Choose to move forward ?</fieldText>
             <fieldType>RadioButtons</fieldType>
@@ -1483,18 +1404,15 @@
         </fields>
         <fields>
             <name>optional_message_header</name>
-            <fieldText
-      >&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Insert an optional message to go to the applicant.&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Insert an optional message to go to the applicant.&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
             <visibilityRule>
                 <conditionLogic>and</conditionLogic>
                 <conditions>
-                    <leftValueReference
-          >Choose_to_move_forward</leftValueReference>
+                    <leftValueReference>Choose_to_move_forward</leftValueReference>
                     <operator>EqualTo</operator>
                     <rightValue>
-                        <elementReference
-            >choiceNotConsideredAfterInterview</elementReference>
+                        <elementReference>choiceNotConsideredAfterInterview</elementReference>
                     </rightValue>
                 </conditions>
             </visibilityRule>
@@ -1507,12 +1425,10 @@
             <visibilityRule>
                 <conditionLogic>and</conditionLogic>
                 <conditions>
-                    <leftValueReference
-          >Choose_to_move_forward</leftValueReference>
+                    <leftValueReference>Choose_to_move_forward</leftValueReference>
                     <operator>EqualTo</operator>
                     <rightValue>
-                        <elementReference
-            >choiceNotConsideredAfterInterview</elementReference>
+                        <elementReference>choiceNotConsideredAfterInterview</elementReference>
                     </rightValue>
                 </conditions>
             </visibilityRule>
@@ -1530,8 +1446,7 @@
         <allowPause>true</allowPause>
         <fields>
             <name>FONotInterestedNote</name>
-            <fieldText
-      >&lt;p&gt; {!Get_Account_Record.First_Name__c}   {!Get_Account_Record.Last_Name__c}   is no more interested in the volunteer role.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Volunteer Status will be updated as &apos;Not Interested&apos; on account record.&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt; {!Get_Account_Record.First_Name__c}   {!Get_Account_Record.Last_Name__c}   is no more interested in the volunteer role.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Volunteer Status will be updated as &apos;Not Interested&apos; on account record.&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
@@ -1547,8 +1462,7 @@
         <allowPause>true</allowPause>
         <fields>
             <name>FOSixMonthsRemainder</name>
-            <fieldText
-      >&lt;p&gt;Please reach out to {!Get_Account_Record.First_Name__c}   {!Get_Account_Record.Last_Name__c}   around {!varRemainderDate} to check whether he/she still interested.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Task is being assigned to you to remind you to reach out &lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(62, 62, 60);&quot;&gt;{!Get_Account_Record.First_Name__c}   {!Get_Account_Record.Last_Name__c}    around {!varRemainderDate}&lt;/span&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;Please reach out to {!Get_Account_Record.First_Name__c}   {!Get_Account_Record.Last_Name__c}   around {!varRemainderDate} to check whether he/she still interested.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Task is being assigned to you to remind you to reach out &lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(62, 62, 60);&quot;&gt;{!Get_Account_Record.First_Name__c}   {!Get_Account_Record.Last_Name__c}    around {!varRemainderDate}&lt;/span&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
@@ -1567,8 +1481,7 @@
         </connector>
         <fields>
             <name>VOBNote2_0</name>
-            <fieldText
-      >&lt;p&gt;Please Upload the resume for {!Get_Account_Record.First_Name__c} {!Get_Account_Record.Last_Name__c}&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;Please Upload the resume for {!Get_Account_Record.First_Name__c} {!Get_Account_Record.Last_Name__c}&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
@@ -1607,8 +1520,7 @@
         </fields>
         <fields>
             <name>FONote22_0</name>
-            <fieldText
-      >&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
@@ -1623,13 +1535,11 @@
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
         <connector>
-            <targetReference
-      >Considering_to_onboard_as_volunteer</targetReference>
+            <targetReference>Considering_to_onboard_as_volunteer</targetReference>
         </connector>
         <fields>
             <name>FONote1</name>
-            <fieldText
-      >&lt;p&gt;&lt;b&gt;{!Get_Account_Record.First_Name__c}   {!Get_Account_Record.Last_Name__c} is considering to onboard as volunteer?&lt;/b&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;b&gt;{!Get_Account_Record.First_Name__c}   {!Get_Account_Record.Last_Name__c} is considering to onboard as volunteer?&lt;/b&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
@@ -1637,16 +1547,14 @@
             <choiceReferences>choiceDecidesToConsider</choiceReferences>
             <choiceReferences>choiceDecidesNotToConsider</choiceReferences>
             <dataType>String</dataType>
-            <defaultSelectedChoiceReference
-      >choiceDecidesToConsider</defaultSelectedChoiceReference>
+            <defaultSelectedChoiceReference>choiceDecidesToConsider</defaultSelectedChoiceReference>
             <fieldText>Considering</fieldText>
             <fieldType>RadioButtons</fieldType>
             <isRequired>true</isRequired>
         </fields>
         <fields>
             <name>FONote24</name>
-            <fieldText
-      >&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
@@ -1654,12 +1562,10 @@
             <choiceReferences>choiceWillGetBack</choiceReferences>
             <choiceReferences>choiceNotInterested</choiceReferences>
             <dataType>String</dataType>
-            <defaultSelectedChoiceReference
-      >choiceWillGetBack</defaultSelectedChoiceReference>
+            <defaultSelectedChoiceReference>choiceWillGetBack</defaultSelectedChoiceReference>
             <fieldText>Check back in 3 months</fieldText>
             <fieldType>RadioButtons</fieldType>
-            <helpText
-      >&lt;p&gt;&lt;b&gt;{!Get_Account_Record.First_Name__c} {!Get_Account_Record.Last_Name__c} will get the remainder in 3 months if - &apos;Will get back&apos; is selected.&lt;/b&gt;&lt;/p&gt;</helpText>
+            <helpText>&lt;p&gt;&lt;b&gt;{!Get_Account_Record.First_Name__c} {!Get_Account_Record.Last_Name__c} will get the remainder in 3 months if - &apos;Will get back&apos; is selected.&lt;/b&gt;&lt;/p&gt;</helpText>
             <isRequired>true</isRequired>
             <visibilityRule>
                 <conditionLogic>and</conditionLogic>
@@ -1667,8 +1573,7 @@
                     <leftValueReference>Considering</leftValueReference>
                     <operator>NotEqualTo</operator>
                     <rightValue>
-                        <elementReference
-            >choiceDecidesToConsider</elementReference>
+                        <elementReference>choiceDecidesToConsider</elementReference>
                     </rightValue>
                 </conditions>
             </visibilityRule>
@@ -1689,8 +1594,7 @@
         </connector>
         <fields>
             <name>FONote5</name>
-            <fieldText
-      >&lt;p&gt;Please upload the volunteer Emergency Contact Form received from {!Get_Account_Record.First_Name__c}&amp;nbsp;&amp;nbsp;{!Get_Account_Record.Last_Name__c}&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Email is sent with form links on {!varVolunteerFormSentOn}&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;Please upload the volunteer Emergency Contact Form received from {!Get_Account_Record.First_Name__c}&amp;nbsp;&amp;nbsp;{!Get_Account_Record.Last_Name__c}&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Email is sent with form links on {!varVolunteerFormSentOn}&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
@@ -1726,8 +1630,7 @@
         </fields>
         <fields>
             <name>MeidaReleaseNote</name>
-            <fieldText
-      >&lt;p&gt;Please upload the  Media Release form  received from {!Get_Account_Record.First_Name__c}&amp;nbsp;&amp;nbsp;{!Get_Account_Record.Last_Name__c}&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;Please upload the  Media Release form  received from {!Get_Account_Record.First_Name__c}&amp;nbsp;&amp;nbsp;{!Get_Account_Record.Last_Name__c}&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>

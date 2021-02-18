@@ -80,6 +80,11 @@
                 <default>false</default>
                 <label>Initial Inquiry</label>
             </value>
+            <value>
+                <fullName>Provisionally selected</fullName>
+                <default>false</default>
+                <label>Provisionally selected</label>
+            </value>
         </valueSetDefinition>
     </valueSet>
 </CustomField>
