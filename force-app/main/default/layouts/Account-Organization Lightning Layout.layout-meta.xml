@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <Layout xmlns="http://soap.sforce.com/2006/04/metadata">
     <customButtons>npsp__Recalculate_Rollups</customButtons>
     <excludeButtons>DataDotComCompanyHierarchy</excludeButtons>
@@ -220,6 +220,10 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>I_Want_to_Know_More_About__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Assigned_Courses__c</field>
             </layoutItems>
         </layoutColumns>
         <style>OneColumn</style>
@@ -467,9 +471,9 @@
         <detailHeading>true</detailHeading>
         <editHeading>false</editHeading>
         <label>Custom Links</label>
-        <layoutColumns/>
-        <layoutColumns/>
-        <layoutColumns/>
+        <layoutColumns />
+        <layoutColumns />
+        <layoutColumns />
         <style>CustomLinks</style>
     </layoutSections>
     <miniLayout>
@@ -480,6 +484,21 @@
     </miniLayout>
     <platformActionList>
         <actionListContext>Record</actionListContext>
+        <platformActionListItems>
+            <actionName>SmsHighlightAction</actionName>
+            <actionType>ProductivityAction</actionType>
+            <sortOrder>17</sortOrder>
+        </platformActionListItems>
+        <platformActionListItems>
+            <actionName>EmailHighlightAction</actionName>
+            <actionType>ProductivityAction</actionType>
+            <sortOrder>18</sortOrder>
+        </platformActionListItems>
+        <platformActionListItems>
+            <actionName>WebsiteHighlightAction</actionName>
+            <actionType>ProductivityAction</actionType>
+            <sortOrder>19</sortOrder>
+        </platformActionListItems>
         <platformActionListItems>
             <actionName>FeedItem.TextPost</actionName>
             <actionType>QuickAction</actionType>
@@ -565,21 +584,6 @@
             <actionType>ProductivityAction</actionType>
             <sortOrder>16</sortOrder>
         </platformActionListItems>
-        <platformActionListItems>
-            <actionName>SmsHighlightAction</actionName>
-            <actionType>ProductivityAction</actionType>
-            <sortOrder>17</sortOrder>
-        </platformActionListItems>
-        <platformActionListItems>
-            <actionName>EmailHighlightAction</actionName>
-            <actionType>ProductivityAction</actionType>
-            <sortOrder>18</sortOrder>
-        </platformActionListItems>
-        <platformActionListItems>
-            <actionName>WebsiteHighlightAction</actionName>
-            <actionType>ProductivityAction</actionType>
-            <sortOrder>19</sortOrder>
-        </platformActionListItems>
     </platformActionList>
     <quickActionList>
         <quickActionListItems>
@@ -589,7 +593,8 @@
             <quickActionName>npsp__NewContact</quickActionName>
         </quickActionListItems>
         <quickActionListItems>
-            <quickActionName>Account.npsp__Quick_Organization_Update</quickActionName>
+            <quickActionName
+      >Account.npsp__Quick_Organization_Update</quickActionName>
         </quickActionListItems>
         <quickActionListItems>
             <quickActionName>Account.npsp__New_Affiliation</quickActionName>
@@ -639,7 +644,8 @@
         <fields>npe03__Installment_Amount__c</fields>
         <fields>npe03__Total__c</fields>
         <fields>npe03__Total_Paid_Installments__c</fields>
-        <relatedList>npe03__Recurring_Donation__c.npe03__Organization__c</relatedList>
+        <relatedList
+    >npe03__Recurring_Donation__c.npe03__Organization__c</relatedList>
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>
