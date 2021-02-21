@@ -16,5 +16,11 @@
       "sessionSettings": {
         "forceRelogin": false
       }
-    }  }
+    },
+    "flowSettings": {
+      "enableFlowInterviewSharingEnabled": true,
+      "enableFlowPauseEnabled": true
+    }
+  },
+  "features": ["DefaultWorkflowUser"]
 }

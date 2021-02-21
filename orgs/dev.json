@@ -2,6 +2,9 @@
   "orgName": "atlas-dog - Dev Org",
   "edition": "Developer",
   "settings": {
+    "accountSettings": {
+      "enableRelateContactToMultipleAccounts": true
+    },
     "lightningExperienceSettings": {
       "enableS1DesktopEnabled": true
     },
@@ -22,6 +25,11 @@
     },
     "emailAdministrationSettings": {
       "enableEnhancedEmailEnabled": true
+    },
+    "flowSettings": {
+      "enableFlowInterviewSharingEnabled": true,
+      "enableFlowPauseEnabled": true
     }
-  }
+  },
+  "features": ["DefaultWorkflowUser"]
 }
