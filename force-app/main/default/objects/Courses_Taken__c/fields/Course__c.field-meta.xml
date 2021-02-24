@@ -4,7 +4,7 @@
     <deleteConstraint>Restrict</deleteConstraint>
     <externalId>false</externalId>
     <label>Course</label>
-    <referenceTo>Course_Master__c</referenceTo>
+    <referenceTo>Course__c</referenceTo>
     <relationshipLabel>Course Taken</relationshipLabel>
     <relationshipName>Course_Taken</relationshipName>
     <required>true</required>

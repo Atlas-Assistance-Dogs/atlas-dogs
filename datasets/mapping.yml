@@ -10,8 +10,8 @@ Insert ContentVersion:
     - Title
     - Type__c
     - UserType__c
-Insert Course_Master__c:
-  sf_object: Course_Master__c
+Insert Course__c:
+  sf_object: Course__c
   fields:
     - Active__c
     - Client_Course__c
@@ -267,7 +267,7 @@ Insert Courses_Taken__c:
     Account__c:
       table: Account
     Course__c:
-      table: Course_Master__c
+      table: Course__c
 Insert Dog__c:
   sf_object: Dog__c
   fields:

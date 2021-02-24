@@ -140,29 +140,35 @@
         <formFactor>Small</formFactor>
         <type>Default</type>
     </actionOverrides>
-    <allowInChatterGroups>true</allowInChatterGroups>
-    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>Course_Master_Layout</compactLayoutAssignment>
     <deploymentStatus>Deployed</deploymentStatus>
-    <description>This object contains course records relating to various record types within the contact object</description>
-    <enableActivities>true</enableActivities>
+    <enableActivities>false</enableActivities>
     <enableBulkApi>true</enableBulkApi>
     <enableFeeds>false</enableFeeds>
-    <enableHistory>true</enableHistory>
+    <enableHistory>false</enableHistory>
     <enableLicensing>false</enableLicensing>
-    <enableReports>true</enableReports>
+    <enableReports>false</enableReports>
     <enableSearch>true</enableSearch>
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
     <externalSharingModel>Private</externalSharingModel>
     <label>Course</label>
     <nameField>
-        <displayFormat>C-{0000}</displayFormat>
-        <label>Course Record</label>
-        <trackHistory>false</trackHistory>
-        <type>AutoNumber</type>
+        <label>Course Name</label>
+        <type>Text</type>
     </nameField>
-    <pluralLabel>Courses</pluralLabel>
-    <searchLayouts/>
+    <pluralLabel>Course</pluralLabel>
+    <searchLayouts>
+        <lookupDialogsAdditionalFields>Course_SIS_Section_SIS_Course_Name__c</lookupDialogsAdditionalFields>
+        <searchResultsAdditionalFields>Course_SIS_Section_SIS_Course_Name__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Course_Code__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Course_Name__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Course_SIS__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Section_SIS__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Term_SIS__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Active__c</searchResultsAdditionalFields>
+    </searchLayouts>
     <sharingModel>ReadWrite</sharingModel>
     <visibility>Public</visibility>
 </CustomObject>

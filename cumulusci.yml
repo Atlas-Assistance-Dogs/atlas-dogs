@@ -55,7 +55,7 @@ flows:
                 task: dx
                 options:
                     command: force:data:tree:import
-                    extra: -f datasets/Dog__c.json,datasets/Course_Master__c.json
+                    extra: -f datasets/Dog__c.json,datasets/Course__c.json
     config_dev:
         steps:
             2:
@@ -79,4 +79,4 @@ flows:
                 task: dx
                 options:
                     command: force:data:tree:import
-                    extra: -f datasets/Dog__c.json,datasets/Course_Master__c.json
+                    extra: -f datasets/Dog__c.json,datasets/Course__c.json

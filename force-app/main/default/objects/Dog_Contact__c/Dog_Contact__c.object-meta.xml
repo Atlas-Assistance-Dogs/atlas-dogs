@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
     <actionOverrides>
         <actionName>Accept</actionName>
@@ -154,12 +154,12 @@
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
     <externalSharingModel>Private</externalSharingModel>
-    <label>Dog Account</label>
+    <label>Dog Contact</label>
     <nameField>
-        <label>Dog Account Name</label>
+        <label>Dog Contact Name</label>
         <type>Text</type>
     </nameField>
-    <pluralLabel>Dogs Accounts</pluralLabel>
+    <pluralLabel>Dogs Contacts</pluralLabel>
     <searchLayouts />
     <sharingModel>ReadWrite</sharingModel>
     <visibility>Public</visibility>

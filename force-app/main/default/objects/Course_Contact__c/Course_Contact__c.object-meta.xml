@@ -140,35 +140,29 @@
         <formFactor>Small</formFactor>
         <type>Default</type>
     </actionOverrides>
-    <allowInChatterGroups>false</allowInChatterGroups>
-    <compactLayoutAssignment>Course_Master_Layout</compactLayoutAssignment>
+    <allowInChatterGroups>true</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
     <deploymentStatus>Deployed</deploymentStatus>
-    <enableActivities>false</enableActivities>
+    <description>This object contains course records relating to various record types within the contact object</description>
+    <enableActivities>true</enableActivities>
     <enableBulkApi>true</enableBulkApi>
     <enableFeeds>false</enableFeeds>
-    <enableHistory>false</enableHistory>
+    <enableHistory>true</enableHistory>
     <enableLicensing>false</enableLicensing>
-    <enableReports>false</enableReports>
+    <enableReports>true</enableReports>
     <enableSearch>true</enableSearch>
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
     <externalSharingModel>Private</externalSharingModel>
-    <label>Course Master</label>
+    <label>Course Contact</label>
     <nameField>
-        <label>Course Master Name</label>
-        <type>Text</type>
+        <displayFormat>C-{0000}</displayFormat>
+        <label>Course Record</label>
+        <trackHistory>false</trackHistory>
+        <type>AutoNumber</type>
     </nameField>
-    <pluralLabel>Course Master</pluralLabel>
-    <searchLayouts>
-        <lookupDialogsAdditionalFields>Course_SIS_Section_SIS_Course_Name__c</lookupDialogsAdditionalFields>
-        <searchResultsAdditionalFields>Course_SIS_Section_SIS_Course_Name__c</searchResultsAdditionalFields>
-        <searchResultsAdditionalFields>Course_Code__c</searchResultsAdditionalFields>
-        <searchResultsAdditionalFields>Course_Name__c</searchResultsAdditionalFields>
-        <searchResultsAdditionalFields>Course_SIS__c</searchResultsAdditionalFields>
-        <searchResultsAdditionalFields>Section_SIS__c</searchResultsAdditionalFields>
-        <searchResultsAdditionalFields>Term_SIS__c</searchResultsAdditionalFields>
-        <searchResultsAdditionalFields>Active__c</searchResultsAdditionalFields>
-    </searchLayouts>
+    <pluralLabel>Course Contacts</pluralLabel>
+    <searchLayouts />
     <sharingModel>ReadWrite</sharingModel>
     <visibility>Public</visibility>
 </CustomObject>

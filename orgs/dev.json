@@ -17,6 +17,9 @@
         "forceRelogin": false
       }
     },
+    "enhancedNotesSettings": {
+      "enableEnhancedNotes": true
+    },
     "languageSettings": {
       "enableTranslationWorkbench": true
     },

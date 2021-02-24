@@ -5,7 +5,6 @@
     <label>Notes</label>
     <length>50000</length>
     <trackFeedHistory>false</trackFeedHistory>
-    <trackHistory>false</trackHistory>
     <type>Html</type>
     <visibleLines>10</visibleLines>
 </CustomField>
