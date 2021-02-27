@@ -1,0 +1,10 @@
+name: 'Install Cumulus'
+description: 'Install cumulus ci, requires python and sfdx'
+runs:
+  using: "composite"
+  steps:
+    - name: Install CumulusCI
+      shell: bash
+      run: |
+        python -m pip install -U pip
+        pip install cumulusci
