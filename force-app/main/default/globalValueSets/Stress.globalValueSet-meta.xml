@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Not at all</fullName>
+        <default>true</default>
+        <label>Not at all</label>
+    </customValue>
+    <customValue>
+        <fullName>Only a little</fullName>
+        <default>false</default>
+        <label>Only a little</label>
+    </customValue>
+    <customValue>
+        <fullName>To some extent</fullName>
+        <default>false</default>
+        <label>To some extent</label>
+    </customValue>
+    <customValue>
+        <fullName>Rather much</fullName>
+        <default>false</default>
+        <label>Rather much</label>
+    </customValue>
+    <customValue>
+        <fullName>Very much</fullName>
+        <default>false</default>
+        <label>Very much</label>
+    </customValue>
+    <description>Stress Levels</description>
+    <masterLabel>Stress</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

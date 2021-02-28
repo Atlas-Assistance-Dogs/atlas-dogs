@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
     <customValue>
-        <fullName>Client/Dog Team Certification</fullName>
+        <fullName>Volunteering</fullName>
         <default>false</default>
-        <label>Client/Dog Team Certification</label>
-    </customValue>
-    <customValue>
-        <fullName>Trainer Certification</fullName>
-        <default>false</default>
-        <label>Trainer Certification</label>
+        <label>Volunteering</label>
     </customValue>
     <customValue>
         <fullName>Team Facilitator Certification</fullName>
@@ -16,9 +11,24 @@
         <label>Team Facilitator Certification</label>
     </customValue>
     <customValue>
-        <fullName>Volunteer</fullName>
+        <fullName>Team Facilitator Lead</fullName>
         <default>false</default>
-        <label>Volunteer</label>
+        <label>Team Facilitator Lead</label>
+    </customValue>
+    <customValue>
+        <fullName>Client Certification</fullName>
+        <default>false</default>
+        <label>Client Certification</label>
+    </customValue>
+    <customValue>
+        <fullName>Owner Trainer Program</fullName>
+        <default>false</default>
+        <label>Owner Trainer Program</label>
+    </customValue>
+    <customValue>
+        <fullName>Sweet Snoopers Training Program</fullName>
+        <default>false</default>
+        <label>Sweet Snoopers Training Program</label>
     </customValue>
     <customValue>
         <fullName>Sponsorship/Donations</fullName>
@@ -31,6 +41,6 @@
         <label>General info/Other</label>
     </customValue>
     <description>What a lead is interested in</description>
-    <masterLabel>Lead Interest</masterLabel>
+    <masterLabel>I want to know more about</masterLabel>
     <sorted>false</sorted>
 </GlobalValueSet>

@@ -1,10 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>npe4__Type__c</fullName>
     <deprecated>false</deprecated>
-    <description>Field that describes how the Related Contact is connected to the Contact.</description>
+    <description
+  >Field that describes how the Related Contact is connected to the Contact.</description>
     <externalId>false</externalId>
-    <inlineHelpText>Field that describes how the Related Contact is connected to the Contact.</inlineHelpText>
+    <inlineHelpText
+  >Field that describes how the Related Contact is connected to the Contact.</inlineHelpText>
     <label>Type</label>
     <required>false</required>
     <trackHistory>false</trackHistory>
@@ -142,6 +144,41 @@
                 <fullName>Facilitator</fullName>
                 <default>false</default>
                 <label>Facilitator</label>
+            </value>
+            <value>
+                <fullName>Volunteer</fullName>
+                <default>false</default>
+                <label>Volunteer</label>
+            </value>
+            <value>
+                <fullName>Team Faciliator</fullName>
+                <default>false</default>
+                <label>Team Faciliator</label>
+            </value>
+            <value>
+                <fullName>Team Facilitator Lead</fullName>
+                <default>false</default>
+                <label>Team Facilitator Lead</label>
+            </value>
+            <value>
+                <fullName>Volunteer Lead</fullName>
+                <default>false</default>
+                <label>Volunteer Lead</label>
+            </value>
+            <value>
+                <fullName>Handler</fullName>
+                <default>false</default>
+                <label>Handler</label>
+            </value>
+            <value>
+                <fullName>Primary Emergency Contact</fullName>
+                <default>false</default>
+                <label>Primary Emergency Contact</label>
+            </value>
+            <value>
+                <fullName>Secondary Emergency Contact</fullName>
+                <default>false</default>
+                <label>Secondary Emergency Contact</label>
             </value>
         </valueSetDefinition>
     </valueSet>

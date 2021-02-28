@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Satisfaction__c</fullName>
+    <externalId>false</externalId>
+    <label>Life Satisfaction</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>No enjoyment</fullName>
+                <default>false</default>
+                <label>No enjoyment</label>
+            </value>
+            <value>
+                <fullName>A little enjoyment</fullName>
+                <default>false</default>
+                <label>A little enjoyment</label>
+            </value>
+            <value>
+                <fullName>Some enjoyment</fullName>
+                <default>false</default>
+                <label>Some enjoyment</label>
+            </value>
+            <value>
+                <fullName>Rather much enjoyment</fullName>
+                <default>false</default>
+                <label>Rather much enjoyment</label>
+            </value>
+            <value>
+                <fullName>Extreme amount of enjoyment</fullName>
+                <default>false</default>
+                <label>Extreme amount of enjoyment</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

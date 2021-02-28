@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Atlas</fullName>
+        <default>true</default>
+        <label>Atlas</label>
+    </customValue>
+    <customValue>
+        <fullName>KPA</fullName>
+        <default>false</default>
+        <label>KPA</label>
+    </customValue>
+    <customValue>
+        <fullName>CCPDT</fullName>
+        <default>false</default>
+        <label>CCPDT</label>
+    </customValue>
+    <customValue>
+        <fullName>IAABC</fullName>
+        <default>false</default>
+        <label>IAABC</label>
+    </customValue>
+    <customValue>
+        <fullName>CBCC</fullName>
+        <default>false</default>
+        <label>CBCC</label>
+    </customValue>
+    <customValue>
+        <fullName>None</fullName>
+        <default>false</default>
+        <label>None</label>
+    </customValue>
+    <description>Client Dog Team Certifications</description>
+    <masterLabel>Certifications</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

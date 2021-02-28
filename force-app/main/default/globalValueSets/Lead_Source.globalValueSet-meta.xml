@@ -26,21 +26,16 @@
         <label>Twitter</label>
     </customValue>
     <customValue>
-        <fullName>Healthcare Referral</fullName>
+        <fullName>Health Provider</fullName>
         <default>false</default>
-        <label>Healthcare Referral</label>
-    </customValue>
-    <customValue>
-        <fullName>Friend Referral</fullName>
-        <default>false</default>
-        <label>Friend Referral</label>
+        <label>Health Provider</label>
     </customValue>
     <customValue>
         <fullName>Other</fullName>
         <default>false</default>
         <label>Other</label>
     </customValue>
-    <description>Where did you hear about us</description>
-    <masterLabel>Lead Source</masterLabel>
+    <description>Where did you hear about us?</description>
+    <masterLabel>Where did you hear about us?</masterLabel>
     <sorted>false</sorted>
 </GlobalValueSet>

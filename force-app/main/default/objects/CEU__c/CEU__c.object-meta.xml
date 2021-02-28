@@ -143,7 +143,7 @@
     <allowInChatterGroups>false</allowInChatterGroups>
     <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
     <deploymentStatus>Deployed</deploymentStatus>
-    <description>Connection between a dog and a contact</description>
+    <description>Continuing Education Units</description>
     <enableActivities>false</enableActivities>
     <enableBulkApi>true</enableBulkApi>
     <enableFeeds>false</enableFeeds>
@@ -154,12 +154,12 @@
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
     <externalSharingModel>Private</externalSharingModel>
-    <label>Dog Contact</label>
+    <label>CEU</label>
     <nameField>
-        <label>Dog Contact Name</label>
+        <label>CEU Name</label>
         <type>Text</type>
     </nameField>
-    <pluralLabel>Dogs Contacts</pluralLabel>
+    <pluralLabel>CEUs</pluralLabel>
     <searchLayouts />
     <sharingModel>ReadWrite</sharingModel>
     <visibility>Public</visibility>
