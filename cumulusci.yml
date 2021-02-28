@@ -1,82 +1,86 @@
-minimum_cumulusci_version: '3.26.0'
+minimum_cumulusci_version: "3.26.0"
 project:
-    name: atlas-dog
-    package:
-        name: atlas-dogs
-        api_version: '50.0'
-    dependencies:
-        - github: 'https://github.com/SalesforceFoundation/NPSP'
-    git:
-    source_format: sfdx
+  name: atlas-dog
+  package:
+    name: atlas-dogs
+    api_version: "50.0"
+  dependencies:
+    - github: "https://github.com/SalesforceFoundation/NPSP"
+  git:
+  source_format: sfdx
 
 tasks:
-    robot:
-        options:
-            suites: robot/atlas-dog/tests
-            options:
-                outputdir: robot/atlas-dog/results
+  robot:
+    options:
+      suites: robot/atlas-dog/tests
+      options:
+        outputdir: robot/atlas-dog/results
 
-    robot_testdoc:
-        options:
-            path: robot/atlas-dog/tests
-            output: robot/atlas-dog/doc/atlas-dog_tests.html
+  robot_testdoc:
+    options:
+      path: robot/atlas-dog/tests
+      output: robot/atlas-dog/doc/atlas-dog_tests.html
 
-    run_tests:
-        options:
-            required_org_code_coverage_percent: 75
+  run_tests:
+    options:
+      required_org_code_coverage_percent: 75
 
 flows:
-    dependencies:
-        steps:
-            1:
-                task: update_dependencies
-                options:
-                    include_beta: False
-    config_qa:
-        steps:
-            2:
-                task: dx_push
-                when: org_config.scratch
-            3:
-                task: assign_permission_sets
-                options:
-                    api_names: Atlas_Super_User
-            4:
-                task: dx
-                options:
-                    command: force:source:deploy
-                    extra: -p force-app2/main/default
-            5:
-                task: dx
-                options:
-                    command: force:data:tree:import
-                    extra: -p datasets/Account-Contact-plan.json
-            6:
-                task: dx
-                options:
-                    command: force:data:tree:import
-                    extra: -f datasets/Dog__c.json,datasets/Course__c.json
-    config_dev:
-        steps:
-            2:
-                task: dx_push
-                when: org_config.scratch
-            3:
-                task: assign_permission_sets
-                options:
-                    api_names: Atlas_Super_User
-            4:
-                task: dx
-                options:
-                    command: force:source:deploy
-                    extra: -p force-app2/main/default
-            5:
-                task: dx
-                options:
-                    command: force:data:tree:import
-                    extra: -p datasets/Account-Contact-plan.json
-            6:
-                task: dx
-                options:
-                    command: force:data:tree:import
-                    extra: -f datasets/Dog__c.json,datasets/Course__c.json
+  dependencies:
+    steps:
+      1:
+        task: update_dependencies
+        options:
+          include_beta: False
+  config_qa:
+    steps:
+      2:
+        task: dx_push
+        when: org_config.scratch
+      3:
+        task: assign_permission_sets
+        options:
+          api_names: Atlas_Super_User
+      4:
+        task: dx
+        options:
+          command: force:source:deploy
+          extra: -p force-app2/main/default
+      5:
+        task: dx
+        options:
+          command: force:data:tree:import
+          extra: -p datasets/Account-Contact-plan.json
+      6:
+        task: dx
+        options:
+          command: force:data:tree:import
+          extra: -f datasets/Dog__c.json,datasets/Course__c.json
+  config_dev:
+    steps:
+      2:
+        task: dx_push
+        when: org_config.scratch
+      3:
+        task: assign_permission_sets
+        options:
+          api_names: Atlas_Super_User
+      4:
+        task: dx
+        options:
+          command: force:source:deploy
+          extra: -p force-app2/main/default
+      5:
+        task: dx
+        options:
+          command: force:data:tree:import
+          extra: -p datasets/Account-Contact-plan.json
+      6:
+        task: dx
+        options:
+          command: force:data:tree:import
+          extra: -f datasets/Dog__c.json,datasets/Course__c.json
+
+  deploy_unmanaged:
+    steps:
+      3.1: None
