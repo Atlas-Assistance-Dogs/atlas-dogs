@@ -80,7 +80,3 @@ flows:
         options:
           command: force:data:tree:import
           extra: -f datasets/Dog__c.json,datasets/Course__c.json
-
-  deploy_unmanaged:
-    steps:
-      3.1: None

@@ -140,7 +140,7 @@
         <fields>Term_SIS__c</fields>
         <fields>Course__c</fields>
         <fields>Section_SIS__c</fields>
-        <relatedList>Courses_Taken__c.Contact__c</relatedList>
+        <relatedList>Course_Assignment__c.Contact__c</relatedList>
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>

@@ -129,7 +129,7 @@
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>
-        <relatedList>Courses_Taken__c.Contact__c</relatedList>
+        <relatedList>Course_Assignment__c.Contact__c</relatedList>
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>
