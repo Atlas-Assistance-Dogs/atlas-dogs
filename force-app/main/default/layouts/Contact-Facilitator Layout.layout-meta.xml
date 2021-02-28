@@ -84,6 +84,10 @@
                 <behavior>Edit</behavior>
                 <field>Pronoun__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Volunteer_Access__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns />
         <style>TwoColumnsLeftToRight</style>
@@ -137,6 +141,10 @@
         <fields>Course__c</fields>
         <fields>Section_SIS__c</fields>
         <relatedList>Courses_Taken__c.Contact__c</relatedList>
+    </relatedLists>
+    <relatedLists>
+        <fields>NAME</fields>
+        <relatedList>Dog_Contact__c.Contact__c</relatedList>
     </relatedLists>
     <relatedObjects>AccountId</relatedObjects>
     <showEmailCheckbox>false</showEmailCheckbox>

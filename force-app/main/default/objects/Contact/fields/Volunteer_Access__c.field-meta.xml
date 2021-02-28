@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Volunteer_Access__c</fullName>
+    <externalId>false</externalId>
+    <label>Volunteer Access</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Operations- Master Docs - READ ONLY</fullName>
+                <default>false</default>
+                <label>Operations- Master Docs - READ ONLY</label>
+            </value>
+            <value>
+                <fullName>Operations- Financial</fullName>
+                <default>false</default>
+                <label>Operations- Financial</label>
+            </value>
+            <value>
+                <fullName>Operations- Client</fullName>
+                <default>false</default>
+                <label>Operations- Client</label>
+            </value>
+            <value>
+                <fullName>Operations- Volunteer and Staff</fullName>
+                <default>false</default>
+                <label>Operations- Volunteer and Staff</label>
+            </value>
+            <value>
+                <fullName>Operations- Trainer</fullName>
+                <default>false</default>
+                <label>Operations- Trainer</label>
+            </value>
+            <value>
+                <fullName>Board - READ ONLY</fullName>
+                <default>false</default>
+                <label>Board - READ ONLY</label>
+            </value>
+            <value>
+                <fullName>Board</fullName>
+                <default>false</default>
+                <label>Board</label>
+            </value>
+            <value>
+                <fullName>Sensitive Info- Volunteer and Staff</fullName>
+                <default>false</default>
+                <label>Sensitive Info- Volunteer and Staff</label>
+            </value>
+            <value>
+                <fullName>Sensitive Info- Trainer</fullName>
+                <default>false</default>
+                <label>Sensitive Info- Trainer</label>
+            </value>
+            <value>
+                <fullName>Sensitive Info- Board</fullName>
+                <default>false</default>
+                <label>Sensitive Info- Board</label>
+            </value>
+            <value>
+                <fullName>Active Projects- Academy</fullName>
+                <default>false</default>
+                <label>Active Projects- Academy</label>
+            </value>
+            <value>
+                <fullName>Active Projects- ADI</fullName>
+                <default>false</default>
+                <label>Active Projects- ADI</label>
+            </value>
+            <value>
+                <fullName>Active Projects- Branding and Marketing</fullName>
+                <default>false</default>
+                <label>Active Projects- Branding and Marketing</label>
+            </value>
+            <value>
+                <fullName>Active Projects- Client Certification</fullName>
+                <default>false</default>
+                <label>Active Projects- Client Certification</label>
+            </value>
+            <value>
+                <fullName
+        >Active Projects- Community Outreach and Education</fullName>
+                <default>false</default>
+                <label>Active Projects- Community Outreach and Education</label>
+            </value>
+            <value>
+                <fullName>Active Projects- Dog Availability</fullName>
+                <default>false</default>
+                <label>Active Projects- Dog Availability</label>
+            </value>
+            <value>
+                <fullName>Active Projects- Fund Development</fullName>
+                <default>false</default>
+                <label>Active Projects- Fund Development</label>
+            </value>
+            <value>
+                <fullName
+        >Active Projects- Governance, Compliance and Operations</fullName>
+                <default>false</default>
+                <label
+        >Active Projects- Governance, Compliance and Operations</label>
+            </value>
+            <value>
+                <fullName>Active Projects- Research and Development</fullName>
+                <default>false</default>
+                <label>Active Projects- Research and Development</label>
+            </value>
+            <value>
+                <fullName>Active Projects- Scholarships</fullName>
+                <default>false</default>
+                <label>Active Projects- Scholarships</label>
+            </value>
+            <value>
+                <fullName>Active Projects- State Registration</fullName>
+                <default>false</default>
+                <label>Active Projects- State Registration</label>
+            </value>
+            <value>
+                <fullName
+        >Active Projects- Team Facilitator Certification</fullName>
+                <default>false</default>
+                <label>Active Projects- Team Facilitator Certification</label>
+            </value>
+            <value>
+                <fullName>Active Projects- Technology Infrastructure</fullName>
+                <default>false</default>
+                <label>Active Projects- Technology Infrastructure</label>
+            </value>
+            <value>
+                <fullName>Active Projects- Trainer Certification</fullName>
+                <default>false</default>
+                <label>Active Projects- Trainer Certification</label>
+            </value>
+            <value>
+                <fullName
+        >Active Projects- Volunteer Recruitment and Retention</fullName>
+                <default>false</default>
+                <label
+        >Active Projects- Volunteer Recruitment and Retention</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>6</visibleLines>
+</CustomField>
