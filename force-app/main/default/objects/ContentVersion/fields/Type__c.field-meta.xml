@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Type__c</fullName>
     <externalId>false</externalId>
@@ -51,9 +51,9 @@
                 <label>Media Release</label>
             </value>
             <value>
-                <fullName>Background Check  Report</fullName>
+                <fullName>Background Check Report</fullName>
                 <default>false</default>
-                <label>Background Check  Report</label>
+                <label>Background Check Report</label>
             </value>
         </valueSetDefinition>
     </valueSet>
