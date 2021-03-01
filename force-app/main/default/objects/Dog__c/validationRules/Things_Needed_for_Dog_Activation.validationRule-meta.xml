@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Things_needed_for_Dog_Activation</fullName>
+    <fullName>Things_Needed_for_Dog_Activation</fullName>
     <active>true</active>
     <description>List of fields needed for activation</description>
     <errorConditionFormula>AND(
