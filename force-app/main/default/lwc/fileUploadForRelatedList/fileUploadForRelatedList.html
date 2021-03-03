@@ -1,0 +1,145 @@
+<template>
+    <div class="slds-box slds-var-p-around_medium">
+        <lightning-card>
+            <!-- lightning button for open modal window -->
+            <h3 slot="title">
+                <div style="display: flex">
+                    <lightning-icon
+                        icon-name="standard:folder"
+                    ></lightning-icon>
+                    <p class="slds-var-p-left_medium"><b>Files</b></p>
+                </div>
+            </h3>
+            <lightning-button
+                variant="brand"
+                label="Upload Files"
+                title="Upload Files"
+                onclick={openModal}
+                slot="actions"
+            >
+            </lightning-button>
+            <!--Use template if:true to display/hide popup based on isModalOpen value-->
+            <template if:true={isModalOpen}>
+                <!-- Modal/Popup Box LWC starts here -->
+                <section
+                    role="dialog"
+                    tabindex="-1"
+                    aria-labelledby="modal-heading-01"
+                    aria-modal="true"
+                    aria-describedby="modal-content-id-1"
+                    class="slds-modal slds-fade-in-open"
+                >
+                    <div class="slds-modal__container">
+                        <!-- Modal/Popup Box LWC header here -->
+                        <header class="slds-modal__header">
+                            <button
+                                class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                                title="Close"
+                                onclick={closeModal}
+                            >
+                                <lightning-icon
+                                    icon-name="utility:close"
+                                    alternative-text="close"
+                                    variant="inverse"
+                                    size="small"
+                                ></lightning-icon>
+                                <span class="slds-assistive-text">Close</span>
+                            </button>
+                            <h2
+                                id="modal-heading-01"
+                                class="slds-text-heading_medium slds-hyphenate"
+                            >
+                                Upload File
+                            </h2>
+                        </header>
+                        <!-- Modal/Popup Box LWC body starts here -->
+                        <div
+                            class="slds-modal__content slds-p-around_medium"
+                            id="modal-content-id-1"
+                        >
+                            <div class="slds-scrollable" style="height: 15rem">
+                                <div class="user" style="overflow: visible">
+                                    <lightning-combobox
+                                        name="UserType"
+                                        label="User Type"
+                                        value={userValue}
+                                        placeholder="Select UserType"
+                                        options={userPicklistValues}
+                                        onchange={handleChangeUser}
+                                    ></lightning-combobox>
+                                </div>
+
+                                <div class="doc" style="overflow: visible">
+                                    <lightning-combobox
+                                        name="DocType"
+                                        label="Document Type"
+                                        value={docValue}
+                                        placeholder="Select DocType"
+                                        options={docPicklistValues}
+                                        onchange={handleChangeDoc}
+                                    ></lightning-combobox>
+                                </div>
+
+                                <div style="width: auto">
+                                    <div class="fileUpload">
+                                        <lightning-file-upload
+                                            label="Add Files"
+                                            name="fileUploader"
+                                            accept={acceptedFormats}
+                                            record-id={recordId}
+                                            onuploadfinished={handleUploadFinished}
+                                            slot="actions"
+                                            multiple
+                                        >
+                                        </lightning-file-upload>
+                                    </div>
+                                </div>
+                                <template if:true={isErrorMessage}>
+                                    <span class="slds-text-color_error"
+                                        >{errorMessage}</span
+                                    >
+                                </template>
+                                <template if:false={isErrorMessage}>
+                                    <span class="slds-text-color_success"
+                                        >{errorMessage}</span
+                                    >
+                                </template>
+                            </div>
+                        </div>
+                        <!-- Modal/Popup Box LWC footer starts here -->
+                        <footer class="slds-modal__footer">
+                            <button
+                                class="slds-button slds-button_neutral"
+                                onclick={closeModal}
+                                title="Cancel"
+                            >
+                                Cancel
+                            </button>
+                            <button
+                                class="slds-button slds-button_brand"
+                                onclick={submitDetails}
+                                title="OK"
+                            >
+                                OK
+                            </button>
+                        </footer>
+                    </div>
+                </section>
+                <div class="slds-backdrop slds-backdrop_open"></div>
+            </template>
+            <div>
+                <div class="fileUpload">
+                    <template if:true={fileUploadList}>
+                        <lightning-datatable
+                            data={fileUploadList}
+                            columns={columns}
+                            key-field="recordId"
+                            onrowaction={getSelectedRecords}
+                        >
+                        </lightning-datatable>
+                    </template>
+                </div>
+            </div>
+        </lightning-card>
+    </div>
+</template>
