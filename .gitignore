@@ -20,6 +20,5 @@ robot/atlas-dog/results/
 .settings
 
 # Misc
-.DS_Store
-
 node_modules/
+

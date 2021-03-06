@@ -685,26 +685,38 @@
     <decisions>
         <name>VolunteerCoursesCompleted</name>
         <label>VolunteerCoursesCompleted</label>
-        <locationX>1461</locationX>
-        <locationY>1376</locationY>
-        <defaultConnector>
-            <targetReference>Course_Complete_Confirmation</targetReference>
-        </defaultConnector>
+        <locationX>1464</locationX>
+        <locationY>1368</locationY>
         <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
         <rules>
             <name>VolunteerCourseCompleted</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
                 <leftValueReference>choiceCoursesCompleted</leftValueReference>
-                <operator>EqualTo</operator>
+                <operator>WasSelected</operator>
                 <rightValue>
-                    <stringValue>Yes</stringValue>
+                    <booleanValue>true</booleanValue>
                 </rightValue>
             </conditions>
             <connector>
                 <targetReference>Update_status_with_Course_completion</targetReference>
             </connector>
             <label>VolunteerCourseCompleted?</label>
+        </rules>
+        <rules>
+            <name>VolunteerCourseNotCompleted</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>choiceCoursesNotCompleted</leftValueReference>
+                <operator>WasSelected</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Course_Complete_Confirmation</targetReference>
+            </connector>
+            <label>VolunteerCourseNotCompleted?</label>
         </rules>
     </decisions>
     <description>Used Background check subflow</description>
@@ -815,15 +827,15 @@
             </value>
         </inputAssignments>
         <inputAssignments>
-            <field>Volunteer_Status__c</field>
+            <field>Volunteer_Provision_Details__c</field>
             <value>
-                <stringValue>Active</stringValue>
+                <elementReference>varAccountProvisioningNotes</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
-            <field>Volunteer_provision_details__c</field>
+            <field>Volunteer_Status__c</field>
             <value>
-                <elementReference>varAccountProvisioningNotes</elementReference>
+                <stringValue>Active</stringValue>
             </value>
         </inputAssignments>
         <object>Account</object>
@@ -847,7 +859,7 @@
         <inputAssignments>
             <field>Volunteer_Status__c</field>
             <value>
-                <stringValue>Course Provisioning Requested</stringValue>
+                <stringValue>Training in progress</stringValue>
             </value>
         </inputAssignments>
         <object>Account</object>
@@ -869,15 +881,15 @@
             </value>
         </filters>
         <inputAssignments>
-            <field>Volunteer_Status__c</field>
+            <field>Volunteer_Remainder_Date__c</field>
             <value>
-                <stringValue>Not ready</stringValue>
+                <elementReference>varRemainderDate</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
-            <field>Volunteer_remainder_date__c</field>
+            <field>Volunteer_Status__c</field>
             <value>
-                <elementReference>varRemainderDate</elementReference>
+                <stringValue>Not ready</stringValue>
             </value>
         </inputAssignments>
         <object>Account</object>
@@ -1283,7 +1295,7 @@
         </connector>
         <fields>
             <name>FONote71</name>
-            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;Please select the courses and work shop schedule that need to be assigned {!Get_Account_Record.First_Name__c}&amp;nbsp;&amp;nbsp;{!Get_Account_Record.Last_Name__c} to onboard for Facilitator role. You can select more than 1 course.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;Please select the courses that need to be assigned {!Get_Account_Record.First_Name__c}&amp;nbsp;&amp;nbsp;{!Get_Account_Record.Last_Name__c} to onboard for Volunteer role. You can select more than 1 course.&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
@@ -1299,32 +1311,13 @@
             <inputParameters>
                 <name>typeOfUser</name>
                 <value>
-                    <stringValue>Facilitator</stringValue>
+                    <stringValue>Volunteer</stringValue>
                 </value>
             </inputParameters>
             <isRequired>true</isRequired>
             <storeOutputAutomatically>true</storeOutputAutomatically>
         </fields>
-        <showFooter>true</showFooter>
-        <showHeader>true</showHeader>
-    </screens>
-    <screens>
-        <name>Display_Count1</name>
-        <label>Display Count1</label>
-        <locationX>1284</locationX>
-        <locationY>326</locationY>
-        <allowBack>true</allowBack>
-        <allowFinish>true</allowFinish>
-        <allowPause>true</allowPause>
-        <connector>
-            <targetReference>Volunteer_Interview_Needed</targetReference>
-        </connector>
-        <fields>
-            <name>Display_Count</name>
-            <fieldText>&lt;p&gt;{!varCountOfFiles}&lt;/p&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-        </fields>
-        <showFooter>true</showFooter>
+        <showFooter>false</showFooter>
         <showHeader>true</showHeader>
     </screens>
     <screens>
@@ -1484,7 +1477,7 @@
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <connector>
-            <targetReference>Display_Count1</targetReference>
+            <targetReference>Volunteer_Interview_Needed</targetReference>
         </connector>
         <fields>
             <name>VOBNote2_0</name>
@@ -1526,18 +1519,8 @@
             </outputParameters>
         </fields>
         <fields>
-            <name>FONote2_0</name>
-            <fieldText>&lt;p&gt;&lt;b&gt;Enter the scheduled interview date along with start and end time for  {!Get_Account_Record.First_Name__c}&amp;nbsp;&amp;nbsp;{!Get_Account_Record.Last_Name__c} &lt;/b&gt;&lt;/p&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-        </fields>
-        <fields>
             <name>FONote22_0</name>
             <fieldText>&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-        </fields>
-        <fields>
-            <name>DisplayCountOfFiles</name>
-            <fieldText>&lt;p&gt;CountOfFiles: {!varCountOfFiles}&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
