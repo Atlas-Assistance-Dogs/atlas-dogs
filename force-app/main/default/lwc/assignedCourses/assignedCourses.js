@@ -22,7 +22,7 @@ const columns = [
     },
     {
         label: "Actual Completion Date",
-        fieldName: "Course_Completion_Date__c",
+        fieldName: "Completion_Date__c",
         type: "date-local",
         editable: true
     },

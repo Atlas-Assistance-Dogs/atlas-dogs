@@ -16,7 +16,7 @@ const columns = [
     },
     {
         label: "Actual Completion Date",
-        fieldName: "Course_Completion_Date__c",
+        fieldName: "Completion_Date__c",
         type: "date-local",
         editable: true
     }
@@ -93,21 +93,3 @@ export default class CourseRelatedDetails extends LightningElement {
         this.dispatchEvent(new CustomEvent("edit"));
     }
 }
-
-/*
-            let currentData = [];
-            data.forEach((row) => {
-                let rowData = {};
-                rowData.AccountName__c = row.AccountName__c;
-                rowData.Assigned_Date__c = row.Assigned_Date__c;
-                rowData.Expected_Completion_Date__c = row.Expected_Completion_Date__c;
-                rowData.Course_Completion_Date__c = row.Course_Completion_Date__c;
-
-                if (row.Course_Name__c) {
-                    rowData.Role = row.Course_Name__r.Facilitator_Course__c;
-                   
-                }
-                currentData.push(rowData);
-            });
-            this.data = currentData;
-*/

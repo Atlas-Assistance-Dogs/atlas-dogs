@@ -59,7 +59,7 @@ public inherited sharing class CourseController {
                 Term_SIS__c,
                 Assigned_Date__c,
                 Expected_Completion_Date__c,
-                Course_Completion_Date__c,
+                Completion_Date__c,
                 Status__c
             FROM Course_Assignment__c
             WHERE Contact__c = :contact

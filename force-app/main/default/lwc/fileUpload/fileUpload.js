@@ -1,8 +1,8 @@
 import { LightningElement, api, track } from "lwc";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
-import accountFilesRetrieve from "@salesforce/apex/RetrieveFiles.accountFilesRetrieve";
-import deleteRecords from "@salesforce/apex/RetrieveFiles.deleteRecords";
-import updateRecords from "@salesforce/apex/RetrieveFiles.updateRecords";
+import accountFilesRetrieve from "@salesforce/apex/FileController.accountFilesRetrieve";
+import deleteRecords from "@salesforce/apex/FileController.deleteRecords";
+import updateRecords from "@salesforce/apex/FileController.updateRecords";
 import { FlowAttributeChangeEvent } from "lightning/flowSupport";
 
 const actions = [{ label: "Delete", name: "delete" }];

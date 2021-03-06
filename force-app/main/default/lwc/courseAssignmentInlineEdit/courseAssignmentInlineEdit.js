@@ -24,7 +24,7 @@ const COLS = [
     },
     {
         label: "Actual Completion Date",
-        fieldName: "Course_Completion_Date__c",
+        fieldName: "Completion_Date__c",
         editable: true,
         initialWidth: 100
     }

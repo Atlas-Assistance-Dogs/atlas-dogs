@@ -1,9 +1,9 @@
 import { LightningElement, track, api, wire } from "lwc";
 
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
-import retrieveAllData from "@salesforce/apex/retrieveFiles.retrieveAllData";
-import deleteRecords from "@salesforce/apex/retrieveFiles.deleteRecords";
-import updateRecords from "@salesforce/apex/retrieveFiles.updateRecords";
+import retrieveAllData from "@salesforce/apex/FileController.retrieveAllData";
+import deleteRecords from "@salesforce/apex/FileController.deleteRecords";
+import updateRecords from "@salesforce/apex/FileController.updateRecords";
 import TYPE__C_FIELD from "@salesforce/schema/ContentVersion.Type__c";
 import POSITIONS__C_FIELD from "@salesforce/schema/ContentVersion.Positions__c";
 import { getPicklistValues } from "lightning/uiObjectInfoApi";

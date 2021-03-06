@@ -61,3 +61,7 @@ flows:
             2:
                 task: dx_push
                 when: org_config.scratch
+            3:
+                task: assign_permission_sets
+                options:
+                    api_names: Atlas_Super_User

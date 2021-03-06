@@ -134,7 +134,7 @@
     <relatedLists>
         <fields>NAME</fields>
         <fields>Assigned_Date__c</fields>
-        <fields>Course_Completion_Date__c</fields>
+        <fields>Completion_Date__c</fields>
         <fields>Expected_Completion_Date__c</fields>
         <fields>Course_SIS__c</fields>
         <fields>Term_SIS__c</fields>

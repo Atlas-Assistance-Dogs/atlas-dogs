@@ -5,7 +5,7 @@
     <columns>Course_Description__c</columns>
     <columns>Assigned_Date__c</columns>
     <columns>Expected_Completion_Date__c</columns>
-    <columns>Course_Completion_Date__c</columns>
+    <columns>Completion_Date__c</columns>
     <columns>Status__c</columns>
     <filterScope>Everything</filterScope>
     <label>All</label>
