@@ -1,0 +1,172 @@
+<template>
+    <section
+        id="modal"
+        role="dialog"
+        tabindex="-1"
+        aria-labelledby="modal-heading-01"
+        aria-modal="true"
+        aria-describedby="modal-content-id-1"
+        class="slds-modal slds-fade-in-open slds-hide"
+    >
+        <div class="slds-modal__container">
+            <header class="slds-modal__header">
+                <button
+                    class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                    title="Close"
+                    onclick={handleCancel}
+                >
+                    <svg
+                        class="slds-button__icon slds-button__icon_large"
+                        aria-hidden="true"
+                    >
+                        <use
+                            xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#close"
+                        ></use>
+                    </svg>
+                    <span class="slds-assistive-text">Close</span>
+                </button>
+                <h2
+                    id="modal-heading-01"
+                    class="slds-modal__title slds-hyphenate"
+                >
+                    Select Course
+                </h2>
+            </header>
+            <div
+                class="slds-modal__content slds-var-p-around_medium"
+                id="modal-content-id-1"
+            >
+                <div
+                    class="slds-var-p-bottom_large slds-var-p-left_large"
+                    style="width: 500px"
+                >
+                    <lightning-dual-listbox
+                        name="courses"
+                        label="Select Course"
+                        source-label="Available"
+                        selected-label="Selected"
+                        field-level-help="Select Course"
+                        options={courses}
+                        onchange={handleCourseSelecion}
+                    >
+                    </lightning-dual-listbox>
+
+                    <!--<h2 class="slds-var-p-bottom_medium slds-text-title_bold">Select Role:</h2>-->
+                    <!--<div style="display:flex">
+                        <lightning-input type="checkbox" label="All" value = 'All' onchange = {handleRoleChange}></lightning-input>
+                        <lightning-input type="checkbox" label="Facilitator" value="Facilitator" onchange = {handleRoleChange}></lightning-input>
+                        <lightning-input type="checkbox" label="Client" value="Facilitator" onchange = {handleRoleChange}></lightning-input>
+                        <lightning-input type="checkbox" label="Trainer" value="Facilitator" onchange = {handleRoleChange}></lightning-input>
+                        <lightning-input type="checkbox" label="Volunteer" value="Facilitator" onchange = {handleRoleChange}></lightning-input>
+                    </div> -->
+                    <lightning-checkbox-group
+                        name="Checkbox Group"
+                        label="Select Role"
+                        options={roleOptions}
+                        value={value}
+                        class="slds-var-p-around_medium"
+                        onchange={handleRoleChange}
+                    >
+                    </lightning-checkbox-group>
+                    <p class="slds-hide">Selected Roles are: {selectedRoles}</p>
+                </div>
+            </div>
+            <footer class="slds-modal__footer">
+                <button
+                    class="slds-button slds-button_neutral"
+                    onclick={handleCancel}
+                >
+                    Cancel
+                </button>
+                <button
+                    class="slds-button slds-button_brand"
+                    onclick={AddSelectedCourseToRole}
+                >
+                    Add
+                </button>
+            </footer>
+        </div>
+    </section>
+    <div
+        id="modalBackdrops"
+        class="slds-backdrop slds-backdrop_open slds-hide modalBackdrops"
+    ></div>
+
+    <lightning-card icon-name="standard:account">
+        <lightning-radio-group
+            slot="title"
+            name="radioGroup"
+            options={viewOptions}
+            value={viewValue}
+            type="Button"
+            onchange={viewChange}
+        >
+        </lightning-radio-group>
+        <div class="slds-grid" slot="actions">
+            <template if:true={btnVisible}>
+                <lightning-input
+                    type="search"
+                    label="Search Account"
+                    placeholder="Search Account"
+                    variant="label-hidden"
+                    class="slds-col slds-var-m-around_small slds-size_small"
+                    onchange={handleSearchKey}
+                    value={searchKey}
+                >
+                </lightning-input>
+            </template>
+            <!--<lightning-button-group class="slds-col">-->
+            <div class="slds-var-m-around_small">
+                <lightning-button
+                    label="Assign New Course(s)"
+                    onclick={AddNewCourse}
+                ></lightning-button>
+            </div>
+            <!--<lightning-button label="Replace Existing Course(s)" class='slds-var-m-around_small'></lightning-button>
+            </lightning-button-group> -->
+        </div>
+
+        <template if:false={noRecordsFound}>
+            <template if:false={accountView}>
+                <!--<p class='slds-align_absolute-center'>Course Datatable as per diferent Role Sectios....</p>-->
+                <c-filter-by-role></c-filter-by-role>
+            </template>
+            <template if:true={accountView}>
+                <lightning-accordion
+                    allow-multiple-sections-open
+                    onsectiontoggle={handleSectionToggle}
+                    active-section-name={activeSections}
+                >
+                    <template for:each={accounts} for:item="acc">
+                        <lightning-accordion-section
+                            key={acc.Id}
+                            name={acc.Name}
+                            label={acc.Name}
+                        >
+                            <c-assigned-courses
+                                account={acc.Id}
+                                onedit={handleDateEdit}
+                            >
+                            </c-assigned-courses>
+                        </lightning-accordion-section>
+                    </template>
+                </lightning-accordion>
+            </template>
+            <template if:true={accountView}>
+                <template if:true={accounts}>
+                    <c-course-pagination
+                        page-number={pageNumber}
+                        page-size={pageSize}
+                        total-count={totalCount}
+                        onprevious={handlePreviousPage}
+                        onnext={handleNextPage}
+                        class="slds-show"
+                    ></c-course-pagination>
+                </template>
+            </template>
+        </template>
+        <template if:true={noRecordsFound}>
+            --No Account Records Found--
+        </template>
+    </lightning-card>
+</template>

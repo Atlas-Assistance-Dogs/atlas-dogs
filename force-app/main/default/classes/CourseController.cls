@@ -116,6 +116,23 @@ public inherited sharing class CourseController {
         ];
     }
 
+    // Get the active courses
+    @AuraEnabled(cacheable=true)
+    public static List<Course__c> getCoursesForPositions(
+        List<String> positions
+    ) {
+        String positionString = String.join(positions, ';');
+        return [
+            SELECT
+                Id,
+                Course_Code__c,
+                Course_Name__c,
+                Course_SIS_Section_SIS_Course_Name__c
+            FROM Course__c
+            WHERE Active__c = TRUE AND Positions__c INCLUDES (:positionString)
+        ];
+    }
+
     // Asssign new courses to the contact if needed
     @AuraEnabled
     public static void updateRecords(Id contactId, List<String> sobList) {

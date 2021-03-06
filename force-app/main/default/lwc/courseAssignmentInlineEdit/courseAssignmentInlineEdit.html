@@ -1,0 +1,21 @@
+<template>
+    <template if:true={AssignedCourses}>
+        <lightning-card
+            title="Courses Assigned with inline edits"
+            icon-name="custom:custom63"
+        >
+            <div class="slds-m-around_medium">
+                <lightning-datatable
+                    key-field="Id"
+                    data={AssignedCourses.data}
+                    columns={columns}
+                    onsave={handleSave}
+                    draft-values={draftValues}
+                    hide-checkbox-column="false"
+                    wraptext="true"
+                >
+                </lightning-datatable>
+            </div>
+        </lightning-card>
+    </template>
+</template>

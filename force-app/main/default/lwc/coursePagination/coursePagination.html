@@ -1,0 +1,27 @@
+<template>
+    <div
+        class="slds-grid slds-box slds-grid_align-space slds-var-p-horizontal_large slds-var-m-horizontal_large"
+    >
+        <div class="slds-col">
+            <template if:false={isFirstPage}>
+                <lightning-button-icon
+                    icon-name="utility:chevronleft"
+                    variant="brand"
+                    onclick={handlePrevious}
+                ></lightning-button-icon>
+            </template>
+        </div>
+        <div class="slds-col slds-align_absolute-center">
+            Total {totalCount} items • page {currentPageNumber} of {totalPages}
+        </div>
+        <div class="slds-col">
+            <template if:false={isLastPage}>
+                <lightning-button-icon
+                    icon-name="utility:chevronright"
+                    variant="brand"
+                    onclick={handleNext}
+                ></lightning-button-icon>
+            </template>
+        </div>
+    </div>
+</template>
