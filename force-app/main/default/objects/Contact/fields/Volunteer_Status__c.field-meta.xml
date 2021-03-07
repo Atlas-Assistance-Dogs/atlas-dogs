@@ -11,6 +11,11 @@
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
+                <fullName>Account Provisioning Requested</fullName>
+                <default>false</default>
+                <label>Account Provisioning Requested</label>
+            </value>
+            <value>
                 <fullName>Onboarding</fullName>
                 <default>false</default>
                 <label>Onboarding</label>
@@ -66,15 +71,20 @@
                 <label>Not selected</label>
             </value>
             <value>
-                <fullName>Account Provisioning requested</fullName>
+                <fullName>Training Completed</fullName>
                 <default>false</default>
-                <label>Account Provisioning requested</label>
+                <label>Training Completed</label>
             </value>
             <value>
                 <fullName
                 >Onboarding aborted - Background Check failed</fullName>
                 <default>false</default>
                 <label>Onboarding aborted - Background Check failed</label>
+            </value>
+            <value>
+                <fullName>Provisionally Selected</fullName>
+                <default>false</default>
+                <label>Provisionally Selected</label>
             </value>
             <value>
                 <fullName>Initial Inquiry</fullName>

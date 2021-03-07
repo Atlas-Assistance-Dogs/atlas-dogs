@@ -2,7 +2,6 @@
   fields:
       Positions__c:
           random_choice:
-              - None
               - Volunteer
               - Team Facilitator
               - Team Facilitator Lead
@@ -16,7 +15,6 @@
   fields:
       Position__c:
           random_choice:
-              - None
               - Volunteer
               - Team Facilitator
               - Team Facilitator Lead

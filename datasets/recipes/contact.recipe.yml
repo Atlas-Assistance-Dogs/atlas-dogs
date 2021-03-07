@@ -392,8 +392,12 @@
               - Up to Date
               - Need Renewal
       Trainer_Specialties__c:
-          fake.text:
-              max_nb_chars: 80
+          random_choice:
+              - Basic Training
+              - Eye Dog
+              - Hearing Dog
+              - Emotional Trauma
+              - Epilepsy
       Trainer_Status__c:
           random_choice:
               - Active
@@ -476,11 +480,11 @@
               - Active
               - Inactive
               - Delayed Onboarding
-              - Not interested
-              - Not ready
+              - Not Interested
+              - Not Ready
               - Scheduled Interview
-              - Not selected
-              - Account Provisioning Request
+              - Not Selected
+              - Account Provisioning Requested
               - Onboarding aborted - Background check failed
-              - Provisionally selected
-              - Training completed
+              - Provisionally Selected
+              - Training Completed

@@ -30,6 +30,11 @@
                 <default>false</default>
                 <label>Emotional Trauma</label>
             </value>
+            <value>
+                <fullName>Epilepsy</fullName>
+                <default>false</default>
+                <label>Epilepsy</label>
+            </value>
         </valueSetDefinition>
     </valueSet>
     <visibleLines>4</visibleLines>

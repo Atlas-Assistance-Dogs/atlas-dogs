@@ -6,12 +6,13 @@
       Name:
           fake: catch_phrase
       Authority__c:
-          random_choice: KPA
-              CCPDT
-              IAABC
-              CBCC
-              Atlas
-              None
+          random_choice:
+              - KPA
+              - CCPDT
+              - IAABC
+              - CBCC
+              - Atlas
+              - None
       Comments__c:
           fake: sentence
       Program_Date__c:

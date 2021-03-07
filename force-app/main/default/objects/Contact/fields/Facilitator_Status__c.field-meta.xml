@@ -16,9 +16,9 @@
                 <label>Active</label>
             </value>
             <value>
-                <fullName>Background Check In Progress</fullName>
+                <fullName>Background Check In progress</fullName>
                 <default>false</default>
-                <label>Background Check In Progress</label>
+                <label>Background Check In progress</label>
             </value>
             <value>
                 <fullName>Inactive</fullName>
@@ -64,7 +64,7 @@
                 <fullName
                 >Training Course and Workshop Pending Completion</fullName>
                 <default>false</default>
-                <label>Training Course &amp; Workshop Pending Completion</label>
+                <label>Training Course and Workshop Pending Completion</label>
             </value>
             <value>
                 <fullName>Workshop Pending Completion</fullName>

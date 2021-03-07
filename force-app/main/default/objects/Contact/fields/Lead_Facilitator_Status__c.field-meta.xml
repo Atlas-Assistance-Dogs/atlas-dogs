@@ -10,14 +10,9 @@
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
-                <fullName>Onboarding</fullName>
+                <fullName>Active</fullName>
                 <default>false</default>
-                <label>Onboarding</label>
-            </value>
-            <value>
-                <fullName>Onboarding Failed</fullName>
-                <default>false</default>
-                <label>Onboarding Failed</label>
+                <label>Active</label>
             </value>
             <value>
                 <fullName>Background Check In progress</fullName>
@@ -25,34 +20,39 @@
                 <label>Background Check In progress</label>
             </value>
             <value>
-                <fullName>Training in progress</fullName>
-                <default>false</default>
-                <label>Training in progress</label>
-            </value>
-            <value>
-                <fullName>Active</fullName>
-                <default>false</default>
-                <label>Active</label>
-            </value>
-            <value>
                 <fullName>Inactive</fullName>
                 <default>false</default>
                 <label>Inactive</label>
             </value>
             <value>
-                <fullName>Delayed onboarding</fullName>
+                <fullName>Not Considering</fullName>
                 <default>false</default>
-                <label>Delayed onboarding</label>
+                <label>Not Considering</label>
             </value>
             <value>
-                <fullName>Not interested</fullName>
+                <fullName>Not Ready</fullName>
                 <default>false</default>
-                <label>Not interested</label>
+                <label>Not Ready</label>
             </value>
             <value>
-                <fullName>Not ready</fullName>
+                <fullName>Not Selected</fullName>
                 <default>false</default>
-                <label>Not ready</label>
+                <label>Not Selected</label>
+            </value>
+            <value>
+                <fullName>Onboarding</fullName>
+                <default>false</default>
+                <label>Onboarding</label>
+            </value>
+            <value>
+                <fullName>Provisionally Active</fullName>
+                <default>false</default>
+                <label>Provisionally Active</label>
+            </value>
+            <value>
+                <fullName>Provisionally Selected</fullName>
+                <default>false</default>
+                <label>Provisionally Selected</label>
             </value>
             <value>
                 <fullName>Scheduled Interview</fullName>
@@ -60,25 +60,15 @@
                 <label>Scheduled Interview</label>
             </value>
             <value>
-                <fullName>Not selected</fullName>
-                <default>false</default>
-                <label>Not selected</label>
-            </value>
-            <value>
-                <fullName>Account Provisioning requested</fullName>
-                <default>false</default>
-                <label>Account Provisioning requested</label>
-            </value>
-            <value>
                 <fullName
-                >Onboarding aborted - Background Check failed</fullName>
+                >Training Course and Workshop Pending Completion</fullName>
                 <default>false</default>
-                <label>Onboarding aborted - Background Check failed</label>
+                <label>Training Course and Workshop Pending Completion</label>
             </value>
             <value>
-                <fullName>Initial Inquiry</fullName>
+                <fullName>Workshop Pending Completion</fullName>
                 <default>false</default>
-                <label>Initial Inquiry</label>
+                <label>Workshop Pending Completion</label>
             </value>
         </valueSetDefinition>
     </valueSet>

@@ -4,7 +4,13 @@
   count: 5
   include: positions
   fields:
-      ContentLocation: /salesforce/public/storage/${{fake.text(max_nb_chars=12)}}pdf
+      ContentLocation: S
+      PathOnClient:
+          fake.file_path:
+              extension: pdf
+      VersionData:
+          fake.text:
+              max_nb_chars: 10000
       IsAssetEnabled:
           fake: boolean
       IsMajorVersion:

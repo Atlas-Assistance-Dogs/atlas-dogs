@@ -284,6 +284,7 @@
       Vet_Clinic__c:
           - object: Account
             fields:
+                RecordType: Organization
                 name:
                     fake: company
                 Description:
