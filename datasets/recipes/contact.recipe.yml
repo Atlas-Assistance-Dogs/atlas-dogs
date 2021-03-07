@@ -1,0 +1,486 @@
+## NPSP Contacts Example
+
+# To run this code against a fresh scratch org called ("qa"):
+#
+# cci flow run npsp:install_prod --org qa
+# cci task run generate_and_load_from_yaml -o generator_yaml datasets/recipes/Contact.recipe.yml -o num_records 300 -o num_records_tablename Contact --org qa
+
+# Look at examples/salesforce/Contact.recipe.yml for more examples.
+- include_file: standard_objs.recipe.yml
+- include_file: standard_npsp_objs_recipe.yml
+- include_file: common.recipe.yml
+
+- object: Contact
+  count: 10
+  fields:
+      AccountId:
+          reference: Household
+      FirstName:
+          fake: last_name
+      LastName:
+          fake: first_name
+      npe01__AlternateEmail__c:
+          fake: email
+      npe01__HomeEmail__c:
+          fake: email
+      npe01__Primary_Address_Type__c:
+          random_choice:
+              - Home
+              - Work
+              - Other
+      npe01__Secondary_Address_Type__c:
+          random_choice:
+              - Home
+              - Work
+              - Other
+      npe01__WorkEmail__c:
+          fake: email
+      npe01__WorkPhone__c:
+          fake: phone_number
+      npo02__Best_Gift_Year_Total__c:
+          random_number:
+              min: 1
+              max: 100000
+      npo02__Best_Gift_Year__c:
+          fake: year
+      npo02__FirstCloseDate__c:
+          date_between:
+              start_date: -1y
+              end_date: today
+      npo02__Household_Naming_Order__c:
+          random_number:
+              min: 1
+              max: 100000
+      npo02__LastCloseDate__c:
+          date_between:
+              start_date: -1y
+              end_date: today
+      npo02__LastMembershipDate__c:
+          date_between:
+              start_date: -1y
+              end_date: today
+      npo02__LastMembershipLevel__c:
+          fake.text:
+              max_nb_chars: 100
+      npo02__LastMembershipOrigin__c:
+          fake.text:
+              max_nb_chars: 100
+      npo02__MembershipEndDate__c:
+          date_between:
+              start_date: -1y
+              end_date: today
+      npo02__MembershipJoinDate__c:
+          date_between:
+              start_date: -1y
+              end_date: today
+      npo02__Naming_Exclusions__c:
+          random_choice:
+              - Household__c.Name
+              - Household__c.Formal_Greeting__c
+              - Household__c.Informal_Greeting__c
+      npo02__Soft_Credit_Last_Year__c:
+          random_number:
+              min: 1
+              max: 100000
+      npo02__Soft_Credit_This_Year__c:
+          random_number:
+              min: 1
+              max: 100000
+      npo02__Soft_Credit_Total__c:
+          random_number:
+              min: 1
+              max: 100000
+      npo02__Soft_Credit_Two_Years_Ago__c:
+          random_number:
+              min: 1
+              max: 100000
+      npo02__SystemHouseholdProcessor__c:
+          random_choice:
+              - All Individual Contacts
+              - All New or Edited Contacts
+              - No Contacts
+      npsp__Current_Address__c:
+          reference: npsp__Address__c
+      npsp__First_Soft_Credit_Amount__c:
+          random_number:
+              min: 1
+              max: 100000
+      npsp__First_Soft_Credit_Date__c:
+          date_between:
+              start_date: -1y
+              end_date: today
+      npsp__Largest_Soft_Credit_Amount__c:
+          random_number:
+              min: 1
+              max: 100000
+      npsp__Largest_Soft_Credit_Date__c:
+          date_between:
+              start_date: -1y
+              end_date: today
+      npsp__Last_Soft_Credit_Amount__c:
+          random_number:
+              min: 1
+              max: 100000
+      npsp__Number_of_Soft_Credits_Last_N_Days__c:
+          random_number:
+              min: 1
+              max: 100000
+      npsp__Number_of_Soft_Credits_Last_Year__c:
+          random_number:
+              min: 1
+              max: 100000
+      npsp__Number_of_Soft_Credits_This_Year__c:
+          random_number:
+              min: 1
+              max: 100000
+      npsp__Number_of_Soft_Credits_Two_Years_Ago__c:
+          random_number:
+              min: 1
+              max: 100000
+      npsp__Number_of_Soft_Credits__c:
+          random_number:
+              min: 1
+              max: 100000
+      # npsp__Primary_Affiliation__c:
+      #   reference: Organization # you need to have defined an Account with the nickname Organization
+      Salutation:
+          random_choice:
+              - Mr.
+              - Ms.
+              - Mrs.
+              - Dr.
+              - Prof.
+      OtherStreet:
+          fake.text:
+              max_nb_chars: 100
+      OtherCity:
+          fake: city
+      OtherState:
+          fake: state
+      OtherPostalCode:
+          fake: postalcode
+      OtherCountry:
+          fake: country
+      OtherLatitude:
+          fake: latitude
+      OtherLongitude:
+          fake: longitude
+      OtherGeocodeAccuracy:
+          random_choice:
+              - Address
+              - NearAddress
+              - Block
+              - Street
+              - ExtendedZip
+              - Zip
+              - Neighborhood
+              - City
+              - County
+              - State
+              - Unknown
+      MailingStreet:
+          fake.text:
+              max_nb_chars: 100
+      MailingCity:
+          fake: city
+      MailingState:
+          fake: state
+      MailingPostalCode:
+          fake: postalcode
+      MailingCountry:
+          fake: country
+      MailingLatitude:
+          fake: latitude
+      MailingLongitude:
+          fake: longitude
+      MailingGeocodeAccuracy:
+          random_choice:
+              - Address
+              - NearAddress
+              - Block
+              - Street
+              - ExtendedZip
+              - Zip
+              - Neighborhood
+              - City
+              - County
+              - State
+              - Unknown
+      Phone:
+          fake: phone_number
+      Fax:
+          fake: phone_number
+      MobilePhone:
+          fake: phone_number
+      HomePhone:
+          fake: phone_number
+      OtherPhone:
+          fake: phone_number
+      AssistantPhone:
+          fake: phone_number
+      # ReportsToId:
+      #   reference: BossContact # you need to have defined this Contact elsewhere
+      Email:
+          fake: email
+      Title:
+          fake.text:
+              max_nb_chars: 100
+      Department:
+          fake.text:
+              max_nb_chars: 80
+      AssistantName:
+          fake: name
+      LeadSource:
+          random_choice:
+              - Web
+              - Phone Inquiry
+              - Partner Referral
+              - Purchased List
+              - Other
+      Birthdate:
+          date_between:
+              start_date: -1y
+              end_date: today
+      Description:
+          fake.text:
+              max_nb_chars: 100
+      EmailBouncedReason:
+          fake.text:
+              max_nb_chars: 100
+      EmailBouncedDate: ${{fake.date}}T${{fake.time}}Z
+      CleanStatus:
+          random_choice:
+              - Matched
+              - Different
+              - Acknowledged
+              - NotFound
+              - Inactive
+              - Pending
+              # - SelectMatch  # causes problems
+              - Skipped
+      Board_Member_Status__c:
+          random_choice:
+              - Onboarding
+              - Preliminary Interview Setup
+              - Board Interview Committee Feedback Pending
+              - Not a good fit
+              - Board Interview Committee interview Setup
+              - Awaiting Board Approval
+              - Active
+              - Offered other roles
+              - Provisionally on boarded as volunteer until next board meeting
+              - Background Check In progress
+      Client_Medical_Devices__c:
+          fake: sentence
+      Client_Status__c:
+          random_choice:
+              - Initial Screening
+              - Not Fit
+              - Initial Interview Setup
+              - Background Check in Progress
+              - On Temporary Hold
+              - Selected
+              - Course Work - In Progress
+              - Course Work - Completed
+              - Onboarding - Training agreement and Site update
+              - Acttive
+              - No More Active
+      Client_Team_Primary_Certification__c:
+          random_choice:
+              - Atlas
+              - KPA
+              - CCPDT
+              - IAABC
+              - CBCC
+              - None
+      Client_Team_Secondary_Certification__c:
+          random_choice:
+              - Atlas
+              - KPA
+              - CCPDT
+              - IAABC
+              - CBCC
+              - None
+      Criminal_Conviction__c:
+          fake: boolean
+      Criminal_Conviction_Notes__c:
+          fake: paragraph
+      Date_Started__c:
+          date_between:
+              start_date: 2000-01-01
+              end_date: today
+      Facilitator_Interview_Notes__c:
+          if:
+              - choice:
+                    when: ${{Positions__c == 'Team Facilitator'}}
+                    pick:
+                        fake: paragraph
+      Facilitator_Status__c:
+          if:
+              - choice:
+                    when: ${{Positions__c == 'Team Facilitator'}}
+                    pick:
+                        random_choice:
+                            - Active
+                            - Background Check In Progress
+                            - Inactive
+                            - Not Considering
+                            - Not Ready
+                            - Not Selected
+                            - Onboarding
+                            - Provisionally Active
+                            - Provisionally Selected
+                            - Scheduled Interview
+                            - Training Course and Workshop Pending Completion
+                            - Workshop Pending Completion
+      Lead_Comments__c:
+          fake: paragraph
+      Lead_Facilitator_Status__c:
+          if:
+              - choice:
+                    when: ${{Positions__c == 'Team Facilitator Lead'}}
+                    pick:
+                        random_choice:
+                            - Active
+                            - Background Check In Progress
+                            - Inactive
+                            - Not Considering
+                            - Not Ready
+                            - Not Selected
+                            - Onboarding
+                            - Provisionally Active
+                            - Provisionally Selected
+                            - Scheduled Interview
+                            - Training Course and Workshop Pending Completion
+                            - Workshop Pending Completion
+      Lead_Interest__c:
+          random_choice:
+              - Volunteering
+              - Team Facilitator Certification
+              - Team Facilitator Lead
+              - Client Certification
+              - Owner Trainer Program
+              - Sweet Snoopers Training Program
+              - Sponsorship/Donations
+              - General info/Other
+      Lead_Source__c:
+          random_choice:
+              - Website
+              - Search Engine
+              - Facebook
+              - Instagram
+              - Twitter
+              - Health Provider
+              - Other
+      Pronoun_Other__c:
+          fake.text:
+              max_nb_chars: 10
+      Pronoun__c:
+          random_choice:
+              - he
+              - she
+              - they
+              - other
+      Trainer_Board_Train__c:
+          random_choice:
+              - true
+              - false
+      Trainer_CEU_Status__c:
+          random_choice:
+              - None
+              - In Progress
+              - Up to Date
+              - Need Renewal
+      Trainer_Specialties__c:
+          fake.text:
+              max_nb_chars: 80
+      Trainer_Status__c:
+          random_choice:
+              - Active
+              - Background Check In Progress
+              - Inactive
+              - Not Considering
+              - Not Ready
+              - Not Selected
+              - Onboarding
+              - Provisionally Active
+              - Provisionally Selected
+              - Scheduled Interview
+              - Training Course and Workshop Pending Completion
+              - Workshop Pending Completion
+      Volunteer_Access__c:
+          random_choice:
+              - Operations- Master Docs - READ ONLY
+              - Operations- Financial
+              - Operations- Client
+              - Operations- Volunteer and Staff
+              - Operations- Trainer
+              - Board - READ ONLY
+              - Board
+              - Sensitive Info- Volunteer and Staff
+              - Sensitive Info- Trainer
+              - Sensitive Info- Board
+              - Active Projects- Academy
+              - Active Projects- ADI
+              - Active Projects- Academy
+              - Active Projects- Branding and Marketing
+              - Active Projects- Client Certification
+              - Active Projects- Community Outreach and Education
+              - Active Projects- Dog Availability
+              - Active Projects- Fund Development
+              - Active Projects- Governance, Compliance and Operations
+              - Active Projects- Research and Development
+              - Active Projects- Scholarships
+              - Active Projects- State Registration
+              - Active Projects- Team Facilitator Certification
+              - Active Projects- Technology Infrastructure
+              - Active Projects- Trainer Certification
+              - Active Projects- Volunteer Recruitment and Retention
+      Volunteer_Background__c:
+          fake.text:
+              max_nb_chars: 100
+      Volunteer_Focus__c:
+          random_choice:
+              - Academy-Content Creator
+              - Academy-Content Editor
+              - Marketing- Graphic Design
+              - Marketing- Video
+              - Marketing- Photo
+              - Marketing- Writing
+              - Marketing- Leadership
+              - Marketing- SEO
+              - Marketing- Website
+              - Marketing- Sales
+              - Marketing- Advertising
+              - Marketing- Events
+              - Administrative- Client
+              - Administrative- Volunteer
+              - Administrative- Trainer
+              - Administrative- General
+              - Administrative- Technology
+              - Outreach- Clients
+              - Outreach- Disability Orgs
+              - Outreach- Dogs
+              - Outreach- Veterinarians
+              - Outreach- Medical Providers
+              - Outreach- Diversity
+      Volunteer_Interview_Notes__c:
+          fake: paragraph
+      Volunteer_Status__c:
+          random_choice:
+              - Initial Inquiry
+              - Onboarding
+              - Onboarding Failed
+              - Background Check in Progress
+              - Training in Progress
+              - Active
+              - Inactive
+              - Delayed Onboarding
+              - Not interested
+              - Not ready
+              - Scheduled Interview
+              - Not selected
+              - Account Provisioning Request
+              - Onboarding aborted - Background check failed
+              - Provisionally selected
+              - Training completed

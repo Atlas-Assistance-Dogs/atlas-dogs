@@ -1,0 +1,317 @@
+- include_file: common.recipe.yml
+- include_file: standard_npsp_objs_recipe.yml
+- include_file: contact.recipe.yml
+
+- object: Dog__c
+  count: 5
+  fields:
+      Activation_Date__c:
+          date_between:
+              start_date: 2000-01-01
+              end_date: today
+      Active__c:
+          fake: boolean
+      Birthdate__c:
+          date_between:
+              start_date: 2000-01-01
+              end_date: today
+      Breed__c:
+          random_choice:
+              - Labrador
+      Certified__c:
+          fake: boolean
+      Deceased__c:
+          fake: boolean
+      Gender__c:
+          random_choice:
+              - Male
+              - Female
+      Health_Check_Failed_Dog_Accepted__c:
+          random_choice:
+              - Yes
+              - No
+      Health_Check_Note__c:
+          fake: paragraph
+      Latest_Physical_Exam_Outcome__c:
+          random_choice:
+              - Pass
+              - Fail
+      Microchip_Number__c:
+          fake: isbn10
+      Most_Recent_Distemper_Vaccine__c:
+          date_between:
+              start_date: 2020-01-01
+              end_date: today
+      Most_Recent_Hepatitis_Vaccine__c:
+          date_between:
+              start_date: 2020-01-01
+              end_date: today
+      Most_Recent_Parainfluenza_Vaccine__c:
+          date_between:
+              start_date: 2020-01-01
+              end_date: today
+      Most_Recent_Parvovirus_Vaccine__c:
+          date_between:
+              start_date: 2020-01-01
+              end_date: today
+      Most_Recent_Physical_Exam__c:
+          date_between:
+              start_date: 2020-01-01
+              end_date: today
+      Most_Recent_Rabies_Vaccine__c:
+          date_between:
+              start_date: 2020-01-01
+              end_date: today
+      Name:
+          if:
+              - choice:
+                    when: ${{Gender__c=='Male'}}
+                    pick:
+                        random_choice:
+                            - Max
+                            - Buddy
+                            - Charlie
+                            - Jack
+                            - Cooper
+                            - Rocky
+                            - Toby
+                            - Tucker
+                            - Jake
+                            - Bear
+                            - Duke
+                            - Teddy
+                            - Oliver
+                            - Riley
+                            - Bailey
+                            - Bentley
+                            - Milo
+                            - Buster
+                            - Cody
+                            - Dexter
+                            - Winston
+                            - Murphy
+                            - Leo
+                            - Lucky
+                            - Oscar
+                            - Louie
+                            - Zeus
+                            - Henry
+                            - Sam
+                            - Harley
+                            - Baxter
+                            - Gus
+                            - Sammy
+                            - Jackson
+                            - Bruno
+                            - Diesel
+                            - Jax
+                            - Gizmo
+                            - Bandit
+                            - Rusty
+                            - Marley
+                            - Jasper
+                            - Brody
+                            - Roscoe
+                            - Hank
+                            - Otis
+                            - Bo
+                            - Joey
+                            - Beau
+                            - Ollie
+                            - Tank
+                            - Shadow
+                            - Peanut
+                            - Hunter
+                            - Scout
+                            - Blue
+                            - Rocco
+                            - Simba
+                            - Tyson
+                            - Ziggy
+                            - Boomer
+                            - Romeo
+                            - Apollo
+                            - Ace
+                            - Luke
+                            - Rex
+                            - Finn
+                            - Chance
+                            - Rudy
+                            - Loki
+                            - Moose
+                            - George
+                            - Samson
+                            - Coco
+                            - Benny
+                            - Thor
+                            - Rufus
+                            - Prince
+                            - Chester
+                            - Brutus
+                            - Scooter
+                            - Chico
+                            - Spike
+                            - Gunner
+                            - Sparky
+                            - Mickey
+                            - Kobe
+                            - Chase
+                            - Oreo
+                            - Frankie
+                            - Mac
+                            - Benji
+                            - Bubba
+                            - Champ
+                            - Brady
+                            - Elvis
+                            - Copper
+                            - Cash
+                            - Archie
+                            - Walter
+                            - Skipper
+              - choice:
+                    when: ${{Gender__c=='Female'}}
+                    pick:
+                        random_choice:
+                            - Bella
+                            - Lucy
+                            - Daisy
+                            - Molly
+                            - Lola
+                            - Sophie
+                            - Sadie
+                            - Maggie
+                            - Chloe
+                            - Bailey
+                            - Roxy
+                            - Zoey
+                            - Lily
+                            - Luna
+                            - Coco
+                            - Stella
+                            - Gracie
+                            - Abby
+                            - Penny
+                            - Zoe
+                            - Ginger
+                            - Ruby
+                            - Rosie
+                            - Lilly
+                            - Ellie
+                            - Mia
+                            - Sasha
+                            - Lulu
+                            - Pepper
+                            - Nala
+                            - Lexi
+                            - Lady
+                            - Emma
+                            - Riley
+                            - Dixie
+                            - Annie
+                            - Maddie
+                            - Piper
+                            - Princess
+                            - Izzy
+                            - Maya
+                            - Olive
+                            - Cookie
+                            - Roxie
+                            - Angel
+                            - Belle
+                            - Layla
+                            - Missy
+                            - Cali
+                            - Honey
+                            - Millie
+                            - Harley
+                            - Marley
+                            - Holly
+                            - Kona
+                            - Shelby
+                            - Jasmine
+                            - Ella
+                            - Charlie
+                            - Minnie
+                            - Willow
+                            - Phoebe
+                            - Callie
+                            - Scout
+                            - Katie
+                            - Dakota
+                            - Sugar
+                            - Sandy
+                            - Josie
+                            - Macy
+                            - Trixie
+                            - Winnie
+                            - Peanut
+                            - Mimi
+                            - Hazel
+                            - Mocha
+                            - Cleo
+                            - Hannah
+                            - Athena
+                            - Lacey
+                            - Sassy
+                            - Lucky
+                            - Bonnie
+                            - Allie
+                            - Brandy
+                            - Sydney
+                            - Casey
+                            - Gigi
+                            - Baby
+                            - Madison
+                            - Heidi
+                            - Sally
+                            - Shadow
+                            - Cocoa
+                            - Pebbles
+                            - Misty
+                            - Nikki
+                            - Lexie
+                            - Grace
+                            - Sierra
+      Picture__c:
+          fake.image_url:
+              width: 60
+              height: 60
+      Spayed_Neutered__c:
+          fake: boolean
+      Replaced_by_Dog__c:
+          random_reference: Dog__c
+      Vet_Clinic__c:
+          - object: Account
+            fields:
+                name:
+                    fake: company
+                Description:
+                    fake: catch_phrase
+                Industry: Healthcare
+                ShippingStreet:
+                    fake.text:
+                        max_nb_chars: 100
+                ShippingCity:
+                    fake: city
+                ShippingState:
+                    fake: state
+                ShippingPostalCode:
+                    fake: postalcode
+                ShippingCountry:
+                    fake: country
+                ShippingLatitude:
+                    fake: latitude
+                ShippingLongitude:
+                    fake: longitude
+                Phone:
+                    fake: phone_number
+                Fax:
+                    fake: phone_number
+
+- object: Dog_Contact__c
+  fields:
+      Contact__c:
+          random_reference: Contact
+      Dog__c:
+          random_reference: Dog__c

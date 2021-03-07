@@ -1,0 +1,62 @@
+- include_file: common.recipe.yml
+- include_file: contact.recipe.yml
+
+- object: Log__c
+  count: 20
+  fields:
+      Client_Stress__c:
+          random_choice:
+              - Not at all
+              - Only a little
+              - To some extent
+              - Rather much
+              - Very much
+      Date__c:
+          date_between:
+              start_date: 2000-01-01
+              end_date: today
+      Details__c:
+          fake.text:
+              max_nb_chars: 10000
+      Other_Hours__c:
+          random_number:
+              min: 0
+              max: 100
+      Public_Access_Hours__c:
+          random_number:
+              min: 0
+              max: 100
+      Request_Support_From_Atlas__c:
+          fake: boolean
+      Request_Support_From_Team__c:
+          fake: boolean
+      Satisfaction:
+          random_choice:
+              - No enjoyment
+              - A little enjoyment
+              - Some enjoyment
+              - Rather much enjoyment
+              - Extreme amount of enjoyment
+      Session_Type__c:
+          random_choice:
+              - In Person
+              - Virtual
+      Stress__c:
+          random_choice:
+              - Not at all
+              - Only a little
+              - To some extent
+              - Rather much
+              - Very much
+      Submitter__c:
+          random_reference: Contact
+
+- object: Contact_Log__c
+  count: 100
+  include: position
+  fields:
+      Name:
+      Contact__c:
+          random_reference: Contact
+      Log__c:
+          random_reference: Log__c

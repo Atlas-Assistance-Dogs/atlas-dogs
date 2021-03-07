@@ -1,0 +1,56 @@
+- include_file: common.recipe.yml
+
+- object: Lead
+  fields:
+      Company: "fake company"
+      FirstName:
+          fake: first_name
+      IsConverted:
+          fake: boolean
+      LastName:
+          fake: last_name
+      Lead_Interest__c:
+          random_choice:
+              - Volunteering
+              - Team Facilitator Certification
+              - Team Facilitator Lead
+              - Client Certification
+              - Owner Trainer Program
+              - Sweet Snoopers Training Program
+              - Sponsorship/Donations
+              - General info/Other
+      Lead_Source__c:
+          random_choice:
+              - Website
+              - Search Engine
+              - Facebook
+              - Instagram
+              - Twitter
+              - Health Provider
+              - Other
+      Pronoun_Other__c:
+          fake.text:
+              max_nb_chars: 10
+      Pronoun__c:
+          random_choice:
+              - he
+              - she
+              - they
+              - other
+      Status:
+          random_choice:
+              - Open - Not Contacted
+              - Working - Contacted
+              - Closed - Converted
+              - Closed - Not Converted
+      npe01__Preferred_Email__c:
+          random_choice:
+              - Personal
+              - Work
+              - Alternate
+      npe01__Preferred_Phone__c:
+          random_choice:
+              - Home
+              - Mobile
+              - Work
+              - Other

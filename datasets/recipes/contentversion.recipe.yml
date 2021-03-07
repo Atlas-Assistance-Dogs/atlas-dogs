@@ -1,0 +1,25 @@
+- include_file: common.recipe.yml
+
+- object: ContentVersion
+  count: 5
+  include: positions
+  fields:
+      ContentLocation: /salesforce/public/storage/${{fake.text(max_nb_chars=12)}}pdf
+      IsAssetEnabled:
+          fake: boolean
+      IsMajorVersion:
+          fake: boolean
+      Title:
+          fake.text:
+              max_nb_chars: 60
+      Type__c:
+          random_choice:
+              - Resume
+              - Reference
+              - Application
+              - Provisional Agreement
+              - Volunteer Form
+              - Agreement
+              - Emergency Contact Form
+              - Media Release
+              - Background Check Report

@@ -1,0 +1,55 @@
+- include_file: common.recipe.yml
+- include_file: contact.recipe.yml
+
+- object: CEU__c
+  fields:
+      Name:
+          fake: catch_phrase
+      Authority__c:
+          random_choice: KPA
+              CCPDT
+              IAABC
+              CBCC
+              Atlas
+              None
+      Comments__c:
+          fake: sentence
+      Program_Date__c:
+          date_between:
+              start_date: 2000-01-01
+              end_date: today
+      Program_Hours__c:
+          random_number:
+              min: 8
+              max: 2000
+      Program_Title__c:
+          fake: catch_phrase
+      Quantity__c:
+          random_number:
+              min: 1
+              max: 20
+
+- object: CEU_Participant__c
+  count: ${{random_number(0, 10)}}
+  fields:
+      CEU__c:
+          reference: CEU__c
+      Date_Completed__c:
+          date_between:
+              start_date: 2000-01-01
+              end_date: today
+      Date_Submitted__c:
+          date_between:
+              start_date: 2000-01-01
+              end_date: today
+      Role__c:
+          random_choice:
+              Attendee: 80%
+              Presenter: 20%
+      Trainer__c:
+          reference: Contact
+      Status__c:
+          random_choice:
+              Approved: 50%
+              Pending: 40%
+              Denied: 10%

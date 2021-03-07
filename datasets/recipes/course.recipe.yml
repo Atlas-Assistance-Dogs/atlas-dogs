@@ -1,0 +1,52 @@
+- include_file: common.recipe.yml
+- include_file: contact.recipe.yml
+
+- object: Course__c
+  include: positions
+  fields:
+      Active__c:
+          fake: boolean
+      Course_Code__c:
+          fake.text:
+              max_nb_chars: 10
+      Course_Name__c:
+          fake.text:
+              max_nb_chars: 10
+      Course_SIS__c:
+          fake.text:
+              max_nb_chars: 10
+      Expected_Completion__c:
+          random_number:
+              min: 1
+              max: 52
+      Section_SIS__c:
+          fake.text:
+              max_nb_chars: 10
+      Term_SIS__c:
+          fake.text:
+              max_nb_chars: 10
+
+- object: Course_Assignment__c
+  fields:
+      Assigned_Date__c:
+          date_between:
+              start_date: 2000-01-01
+              end_date: today
+      Completion_Date__c:
+          date_between:
+              start_date: 2000-01-01
+              end_date: today
+      Expected_Completion_Date__c:
+          date_between:
+              start_date: 2000-01-01
+              end_date: today
+      Status__c:
+          random_choice:
+              - Completed
+              - Assigned
+              - Discontinued
+              - Replaced
+      Contact__c:
+          random_reference: Contact
+      Course__c:
+          random_reference: Course__c

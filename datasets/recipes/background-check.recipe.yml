@@ -1,0 +1,18 @@
+- include_file: common.recipe.yml
+- include_file: contact.recipe.yml
+
+- object: Background_Check__c
+  fields:
+      Contact__c:
+          random_reference: Contact
+      Date__c:
+          date_between:
+              start_date: 2000-01-01
+              end_date: today
+      Notes__c:
+          fake: paragraph
+      Result__c:
+          random_choice:
+              - None
+              - Pass
+              - Fail

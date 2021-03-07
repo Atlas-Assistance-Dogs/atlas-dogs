@@ -16,9 +16,9 @@
                 <label>Active</label>
             </value>
             <value>
-                <fullName>Background Check In progress</fullName>
+                <fullName>Background Check In Progress</fullName>
                 <default>false</default>
-                <label>Background Check In progress</label>
+                <label>Background Check In Progress</label>
             </value>
             <value>
                 <fullName>Inactive</fullName>
@@ -26,9 +26,9 @@
                 <label>Inactive</label>
             </value>
             <value>
-                <fullName>Not considering</fullName>
+                <fullName>Not Considering</fullName>
                 <default>false</default>
-                <label>Not considering</label>
+                <label>Not Considering</label>
             </value>
             <value>
                 <fullName>Not Ready</fullName>
@@ -46,14 +46,14 @@
                 <label>Onboarding</label>
             </value>
             <value>
-                <fullName>Provisionally active</fullName>
+                <fullName>Provisionally Active</fullName>
                 <default>false</default>
-                <label>Provisionally active</label>
+                <label>Provisionally Active</label>
             </value>
             <value>
-                <fullName>Provisionally selected</fullName>
+                <fullName>Provisionally Selected</fullName>
                 <default>false</default>
-                <label>Provisionally selected</label>
+                <label>Provisionally Selected</label>
             </value>
             <value>
                 <fullName>Scheduled Interview</fullName>
@@ -62,14 +62,14 @@
             </value>
             <value>
                 <fullName
-        >Training course and workshop pending completion</fullName>
+                >Training Course and Workshop Pending Completion</fullName>
                 <default>false</default>
-                <label>Training course &amp; Workshop pending completion</label>
+                <label>Training Course &amp; Workshop Pending Completion</label>
             </value>
             <value>
-                <fullName>Workshop pending completion</fullName>
+                <fullName>Workshop Pending Completion</fullName>
                 <default>false</default>
-                <label>Workshop pending completion</label>
+                <label>Workshop Pending Completion</label>
             </value>
         </valueSetDefinition>
     </valueSet>

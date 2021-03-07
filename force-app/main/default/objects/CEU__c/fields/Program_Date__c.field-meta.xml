@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Request_Support_From_Atlas__c</fullName>
-    <defaultValue>false</defaultValue>
+    <fullName>Program_Date__c</fullName>
     <externalId>false</externalId>
-    <label>Request support from Atlas?</label>
+    <label>Program Date</label>
+    <required>false</required>
     <trackTrending>false</trackTrending>
-    <type>Checkbox</type>
+    <type>Date</type>
 </CustomField>
