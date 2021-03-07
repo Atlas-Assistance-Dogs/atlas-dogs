@@ -72,7 +72,7 @@
             </value>
             <value>
                 <fullName
-        >Onboarding aborted - Background Check failed</fullName>
+                >Onboarding aborted - Background Check failed</fullName>
                 <default>false</default>
                 <label>Onboarding aborted - Background Check failed</label>
             </value>

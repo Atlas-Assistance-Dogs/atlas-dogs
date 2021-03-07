@@ -315,3 +315,9 @@
           random_reference: Contact
       Dog__c:
           random_reference: Dog__c
+      Type__c:
+          random_choice:
+              - Veterinarian
+              - Owner
+              - Trainer
+              - Client

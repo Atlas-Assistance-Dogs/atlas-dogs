@@ -19,7 +19,7 @@
               - Sweet Snoopers Training Program
               - Sponsorship/Donations
               - General info/Other
-      Lead_Source__c:
+      LeadSource:
           random_choice:
               - Website
               - Search Engine

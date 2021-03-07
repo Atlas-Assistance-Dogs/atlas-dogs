@@ -30,7 +30,7 @@
           fake: boolean
       Request_Support_From_Team__c:
           fake: boolean
-      Satisfaction:
+      Satisfaction__c:
           random_choice:
               - No enjoyment
               - A little enjoyment

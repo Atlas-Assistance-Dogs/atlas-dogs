@@ -117,10 +117,6 @@
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>
-        <relatedList>CEU__c.Trainer__c</relatedList>
-    </relatedLists>
-    <relatedLists>
-        <fields>NAME</fields>
         <relatedList>Log__c.Submitter__c</relatedList>
     </relatedLists>
     <relatedLists>
