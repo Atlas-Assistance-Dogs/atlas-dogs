@@ -4,6 +4,7 @@
     <externalId>false</externalId>
     <label>Lead Facilitator Status</label>
     <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
     <type>Picklist</type>
     <valueSet>
         <restricted>true</restricted>
@@ -69,6 +70,49 @@
                 <fullName>Workshop Pending Completion</fullName>
                 <default>false</default>
                 <label>Workshop Pending Completion</label>
+            </value>
+            <value>
+                <fullName>Account Provisioning requested</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Account Provisioning requested</label>
+            </value>
+            <value>
+                <fullName>Delayed onboarding</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Delayed onboarding</label>
+            </value>
+            <value>
+                <fullName>Initial Inquiry</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Initial Inquiry</label>
+            </value>
+            <value>
+                <fullName>Not interested</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Not interested</label>
+            </value>
+            <value>
+                <fullName>Onboarding Failed</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Onboarding Failed</label>
+            </value>
+            <value>
+                <fullName
+                >Onboarding aborted - Background Check failed</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Onboarding aborted - Background Check failed</label>
+            </value>
+            <value>
+                <fullName>Training in progress</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Training in progress</label>
             </value>
         </valueSetDefinition>
     </valueSet>

@@ -11,7 +11,7 @@
 - include_file: common.recipe.yml
 
 - object: Contact
-  count: 10
+  count: ${{random_number(1,3)}}
   fields:
       AccountId:
           reference: Household
@@ -232,10 +232,12 @@
           fake: name
       LeadSource:
           random_choice:
-              - Web
-              - Phone Inquiry
-              - Partner Referral
-              - Purchased List
+              - Website
+              - Search Engine
+              - Facebook
+              - Instagram
+              - Twitter
+              - Health Provider
               - Other
       Birthdate:
           date_between:
@@ -259,32 +261,40 @@
               # - SelectMatch  # causes problems
               - Skipped
       Board_Member_Status__c:
-          random_choice:
-              - Onboarding
-              - Preliminary Interview Setup
-              - Board Interview Committee Feedback Pending
-              - Not a good fit
-              - Board Interview Committee interview Setup
-              - Awaiting Board Approval
-              - Active
-              - Offered other roles
-              - Provisionally on boarded as volunteer until next board meeting
-              - Background Check In progress
+          if:
+              - choice:
+                    when: ${{Positions__c == 'Board Member'}}
+                    pick:
+                        random_choice:
+                            - Onboarding
+                            - Preliminary Interview Setup
+                            - Board Interview Committee Feedback Pending
+                            - Not a good fit
+                            - Board Interview Committee interview Setup
+                            - Awaiting Board Approval
+                            - Active
+                            - Offered other roles
+                            - Provisionally on boarded as volunteer until next board meeting
+                            - Background Check In progress
       Client_Medical_Devices__c:
           fake: sentence
       Client_Status__c:
-          random_choice:
-              - Initial Screening
-              - Not Fit
-              - Initial Interview Setup
-              - Background Check in Progress
-              - On Temporary Hold
-              - Selected
-              - Course Work - In Progress
-              - Course Work - Completed
-              - Onboarding - Training agreement and Site update
-              - Acttive
-              - No More Active
+          if:
+              - choice:
+                    when: ${{Positions__c == 'Client'}}
+                    pick:
+                        random_choice:
+                            - Initial Screening
+                            - Not Fit
+                            - Initial Interview Setup
+                            - Background Check in Progress
+                            - On Temporary Hold
+                            - Selected
+                            - Course Work - In Progress
+                            - Course Work - Completed
+                            - Onboarding - Training agreement and Site update
+                            - Active
+                            - No More Active
       Client_Team_Primary_Certification__c:
           random_choice:
               - Atlas
@@ -363,18 +373,13 @@
               - Sweet Snoopers Training Program
               - Sponsorship/Donations
               - General info/Other
-      Lead_Source__c:
-          random_choice:
-              - Website
-              - Search Engine
-              - Facebook
-              - Instagram
-              - Twitter
-              - Health Provider
-              - Other
       Pronoun_Other__c:
-          fake.text:
-              max_nb_chars: 10
+          if:
+              - choice:
+                    when: ${{Pronoun__c == 'Other'}}
+                    pick:
+                        fake.text:
+                            max_nb_chars: 10
       Pronoun__c:
           random_choice:
               - he
@@ -382,36 +387,52 @@
               - they
               - other
       Trainer_Board_Train__c:
-          random_choice:
-              - true
-              - false
+          if:
+              - choice:
+                    when: ${{Positions__c == 'Trainer'}}
+                    pick:
+                        random_choice:
+                            - true
+                            - false
       Trainer_CEU_Status__c:
-          random_choice:
-              - None
-              - In Progress
-              - Up to Date
-              - Need Renewal
+          if:
+              - choice:
+                    when: ${{Positions__c == 'Trainer'}}
+                    pick:
+                        random_choice:
+                            - None
+                            - In Progress
+                            - Up to Date
+                            - Need Renewal
       Trainer_Specialties__c:
-          random_choice:
-              - Basic Training
-              - Eye Dog
-              - Hearing Dog
-              - Emotional Trauma
-              - Epilepsy
+          if:
+              - choice:
+                    when: ${{Positions__c == 'Trainer'}}
+                    pick:
+                        random_choice:
+                            - Basic Training
+                            - Eye Dog
+                            - Hearing Dog
+                            - Emotional Trauma
+                            - Epilepsy
       Trainer_Status__c:
-          random_choice:
-              - Active
-              - Background Check In Progress
-              - Inactive
-              - Not Considering
-              - Not Ready
-              - Not Selected
-              - Onboarding
-              - Provisionally Active
-              - Provisionally Selected
-              - Scheduled Interview
-              - Training Course and Workshop Pending Completion
-              - Workshop Pending Completion
+          if:
+              - choice:
+                    when: ${{Positions__c == 'Trainer'}}
+                    pick:
+                        random_choice:
+                            - Active
+                            - Background Check In Progress
+                            - Inactive
+                            - Not Considering
+                            - Not Ready
+                            - Not Selected
+                            - Onboarding
+                            - Provisionally Active
+                            - Provisionally Selected
+                            - Scheduled Interview
+                            - Training Course and Workshop Pending Completion
+                            - Workshop Pending Completion
       Volunteer_Access__c:
           random_choice:
               - Operations- Master Docs - READ ONLY
@@ -488,3 +509,100 @@
               - Onboarding aborted - Background check failed
               - Provisionally Selected
               - Training Completed
+
+# Create Primary and secondary emergency contacts for Contact
+- object: npe4__Relationship__c
+  just_once: True
+  fields:
+      npe4__Contact__c:
+          random_reference: Contact
+      npe4__RelatedContact__c:
+          - object: Contact
+            fields:
+                AccountId:
+                    reference: Household
+                FirstName:
+                    fake: last_name
+                LastName:
+                    fake: first_name
+                npe01__AlternateEmail__c:
+                    fake: email
+                npe01__HomeEmail__c:
+                    fake: email
+                npe01__Primary_Address_Type__c:
+                    random_choice:
+                        - Home
+                        - Work
+                        - Other
+                npe01__Secondary_Address_Type__c:
+                    random_choice:
+                        - Home
+                        - Work
+                        - Other
+                npe01__WorkEmail__c:
+                    fake: email
+                npe01__WorkPhone__c:
+                    fake: phone_number
+                Phone:
+                    fake: phone_number
+                Fax:
+                    fake: phone_number
+                MobilePhone:
+                    fake: phone_number
+                HomePhone:
+                    fake: phone_number
+                OtherPhone:
+                    fake: phone_number
+                AssistantPhone:
+                    fake: phone_number
+                Email:
+                    fake: email
+                npe4__Type__c: Primary Emergency Contact
+
+- object: npe4__Relationship__c
+  just_once: True
+  fields:
+      npe4__Contact__c:
+          random_reference: Contact
+      npe4__RelatedContact__c:
+          - object: Contact
+            fields:
+                AccountId:
+                    reference: Household
+                FirstName:
+                    fake: last_name
+                LastName:
+                    fake: first_name
+                npe01__AlternateEmail__c:
+                    fake: email
+                npe01__HomeEmail__c:
+                    fake: email
+                npe01__Primary_Address_Type__c:
+                    random_choice:
+                        - Home
+                        - Work
+                        - Other
+                npe01__Secondary_Address_Type__c:
+                    random_choice:
+                        - Home
+                        - Work
+                        - Other
+                npe01__WorkEmail__c:
+                    fake: email
+                npe01__WorkPhone__c:
+                    fake: phone_number
+                Phone:
+                    fake: phone_number
+                Fax:
+                    fake: phone_number
+                MobilePhone:
+                    fake: phone_number
+                HomePhone:
+                    fake: phone_number
+                OtherPhone:
+                    fake: phone_number
+                AssistantPhone:
+                    fake: phone_number
+                Email:
+                    fake: email
+                npe4__Type__c: Secondary Emergency Contact

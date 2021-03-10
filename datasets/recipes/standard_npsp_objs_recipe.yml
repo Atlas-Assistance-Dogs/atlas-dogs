@@ -30,16 +30,21 @@
   just_once: True
   nickname: Organization
   fields:
-      name: The Organization
+      name:
+          fake: company
       RecordType: Organization
 
 - object: npsp__Address__c
   just_once: True
   fields:
-      npsp__MailingStreet__c: 36624 Jefferson Way Way
-      npsp__MailingCity__c: Greenville
-      npsp__MailingPostalCode__c: 63102
-      npsp__MailingState__c: OR
+      npsp__MailingStreet__c:
+          fake: street_address
+      npsp__MailingCity__c:
+          fake: city
+      npsp__MailingPostalCode__c:
+          fake: postcode
+      npsp__MailingState__c:
+          fake: state
       npsp__Address_Type__c: Home
       npsp__Household_Account__c:
           reference: Household

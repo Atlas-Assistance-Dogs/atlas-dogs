@@ -52,10 +52,10 @@
             </value>
             <value>
                 <fullName
-        >Provisionally on boarded as volunteer until next board meeting</fullName>
+                >Provisionally on boarded as volunteer until next board meeting</fullName>
                 <default>false</default>
                 <label
-        >Provisionally on boarded as volunteer until next board meeting</label>
+                >Provisionally on boarded as volunteer until next board meeting</label>
             </value>
             <value>
                 <fullName>Background Check In progress</fullName>

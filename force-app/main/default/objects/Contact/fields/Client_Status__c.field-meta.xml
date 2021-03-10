@@ -52,14 +52,14 @@
             </value>
             <value>
                 <fullName
-        >Onboarding - Training agreement and Site update</fullName>
+                >Onboarding - Training agreement and Site update</fullName>
                 <default>false</default>
                 <label>Onboarding - Training agreement and Site update</label>
             </value>
             <value>
-                <fullName>Acttive</fullName>
+                <fullName>Active</fullName>
                 <default>false</default>
-                <label>Acttive</label>
+                <label>Active</label>
             </value>
             <value>
                 <fullName>No More Active</fullName>

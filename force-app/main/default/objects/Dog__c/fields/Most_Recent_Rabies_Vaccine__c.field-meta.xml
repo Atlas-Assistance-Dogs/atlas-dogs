@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Most_Recent_Rabies_Vaccine__c</fullName>
-    <description>Rabies Vaccination Expiration Date</description>
+    <description>Most Recent Rabies Vaccination Date</description>
     <externalId>false</externalId>
-    <inlineHelpText>Rabies Vaccination Expiration Date</inlineHelpText>
-    <label>Rabies Vaccine Expiration Date</label>
+    <inlineHelpText>Most recent Rabies Vaccination date</inlineHelpText>
+    <label>Most Recent Rabies Vaccine</label>
     <required>false</required>
     <trackHistory>true</trackHistory>
     <trackTrending>false</trackTrending>

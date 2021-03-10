@@ -58,10 +58,10 @@ flows:
                     extra: -f datasets/Dog__c.json,datasets/Course__c.json
     config_dev:
         steps:
-            2:
+            1:
                 task: dx_push
                 when: org_config.scratch
-            3:
+            2:
                 task: assign_permission_sets
                 options:
                     api_names: Atlas_Super_User

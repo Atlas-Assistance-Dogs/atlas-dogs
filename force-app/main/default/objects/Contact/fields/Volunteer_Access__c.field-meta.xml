@@ -82,7 +82,7 @@
             </value>
             <value>
                 <fullName
-        >Active Projects- Community Outreach and Education</fullName>
+                >Active Projects- Community Outreach and Education</fullName>
                 <default>false</default>
                 <label>Active Projects- Community Outreach and Education</label>
             </value>
@@ -98,10 +98,10 @@
             </value>
             <value>
                 <fullName
-        >Active Projects- Governance, Compliance and Operations</fullName>
+                >Active Projects- Governance, Compliance and Operations</fullName>
                 <default>false</default>
                 <label
-        >Active Projects- Governance, Compliance and Operations</label>
+                >Active Projects- Governance, Compliance and Operations</label>
             </value>
             <value>
                 <fullName>Active Projects- Research and Development</fullName>
@@ -120,7 +120,7 @@
             </value>
             <value>
                 <fullName
-        >Active Projects- Team Facilitator Certification</fullName>
+                >Active Projects- Team Facilitator Certification</fullName>
                 <default>false</default>
                 <label>Active Projects- Team Facilitator Certification</label>
             </value>
@@ -136,10 +136,10 @@
             </value>
             <value>
                 <fullName
-        >Active Projects- Volunteer Recruitment and Retention</fullName>
+                >Active Projects- Volunteer Recruitment and Retention</fullName>
                 <default>false</default>
                 <label
-        >Active Projects- Volunteer Recruitment and Retention</label>
+                >Active Projects- Volunteer Recruitment and Retention</label>
             </value>
         </valueSetDefinition>
     </valueSet>

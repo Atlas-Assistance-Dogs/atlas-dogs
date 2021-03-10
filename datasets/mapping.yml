@@ -265,7 +265,7 @@ Insert Contact:
         - LastName
         - Lead_Comments__c
         - Lead_Interest__c
-        - Lead_Source__c
+        - LeadSource
         - Positions__c
         - Pronoun_Other__c
         - Pronoun__c
@@ -371,8 +371,8 @@ Insert Course_Assignment__c:
             table: Contact
         Course__c:
             table: Course__c
-Insert Dog_Contact__c:
-    sf_object: Dog_Contact__c
+Insert Dog_Relationship__c:
+    sf_object: Dog_Relationship__c
     fields:
         - Name
     lookups:

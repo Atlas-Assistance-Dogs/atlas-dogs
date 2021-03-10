@@ -1,4 +1,6 @@
 - include_file: common.recipe.yml
+- include_file: standard_objs.recipe.yml
+- include_file: standard_npsp_objs_recipe.yml
 
 - object: Lead
   fields:
@@ -41,8 +43,6 @@
           random_choice:
               - Open - Not Contacted
               - Working - Contacted
-              - Closed - Converted
-              - Closed - Not Converted
       npe01__Preferred_Email__c:
           random_choice:
               - Personal

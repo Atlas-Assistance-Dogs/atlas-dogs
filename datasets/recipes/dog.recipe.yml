@@ -3,7 +3,6 @@
 - include_file: contact.recipe.yml
 
 - object: Dog__c
-  count: 5
   fields:
       Activation_Date__c:
           date_between:
@@ -28,8 +27,8 @@
               - Female
       Health_Check_Failed_Dog_Accepted__c:
           random_choice:
-              - Yes
-              - No
+              - "Yes"
+              - "No"
       Health_Check_Note__c:
           fake: paragraph
       Latest_Physical_Exam_Outcome__c:
@@ -40,27 +39,27 @@
           fake: isbn10
       Most_Recent_Distemper_Vaccine__c:
           date_between:
-              start_date: 2020-01-01
+              start_date: -2y
               end_date: today
       Most_Recent_Hepatitis_Vaccine__c:
           date_between:
-              start_date: 2020-01-01
+              start_date: -2y
               end_date: today
       Most_Recent_Parainfluenza_Vaccine__c:
           date_between:
-              start_date: 2020-01-01
+              start_date: -2y
               end_date: today
       Most_Recent_Parvovirus_Vaccine__c:
           date_between:
-              start_date: 2020-01-01
+              start_date: -2y
               end_date: today
       Most_Recent_Physical_Exam__c:
           date_between:
-              start_date: 2020-01-01
+              start_date: -2y
               end_date: today
       Most_Recent_Rabies_Vaccine__c:
           date_between:
-              start_date: 2020-01-01
+              start_date: -2y
               end_date: today
       Name:
           if:
@@ -279,10 +278,11 @@
               height: 60
       Spayed_Neutered__c:
           fake: boolean
-      Replaced_by_Dog__c:
-          random_reference: Dog__c
+      # Replaced_by_Dog__c:
+      #     random_reference: Dog__c
       Vet_Clinic__c:
           - object: Account
+            nickname: vet_clinic
             fields:
                 RecordType: Organization
                 name:
@@ -310,7 +310,46 @@
                 Fax:
                     fake: phone_number
 
-- object: Dog_Contact__c
+# Veterinarian
+- object: Contact
+  nickname: vet
+  fields:
+      AccountId:
+          reference: vet_clinic
+      FirstName:
+          fake: last_name
+      LastName:
+          fake: first_name
+      npe01__AlternateEmail__c:
+          fake: email
+      npe01__HomeEmail__c:
+          fake: email
+      npe01__Primary_Address_Type__c: Work
+      npe01__Secondary_Address_Type__c:
+          random_choice:
+              - Home
+              - Work
+              - Other
+      npe01__WorkEmail__c:
+          fake: email
+      npe01__WorkPhone__c:
+          fake: phone_number
+      Phone:
+          fake: phone_number
+      Fax:
+          fake: phone_number
+      MobilePhone:
+          fake: phone_number
+      HomePhone:
+          fake: phone_number
+      OtherPhone:
+          fake: phone_number
+      AssistantPhone:
+          fake: phone_number
+      Email:
+          fake: email
+
+- object: Dog_Relationship__c
   fields:
       Contact__c:
           random_reference: Contact
@@ -318,7 +357,12 @@
           random_reference: Dog__c
       Type__c:
           random_choice:
-              - Veterinarian
               - Owner
               - Trainer
               - Client
+
+- object: Dog_Relationship__c
+  fields:
+      Contact__c: vet
+      Dog__c: dog
+      Type__c: Veterinarian
