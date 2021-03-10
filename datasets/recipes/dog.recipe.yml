@@ -16,7 +16,38 @@
               end_date: today
       Breed__c:
           random_choice:
-              - Labrador
+              - Labrador Retriever
+              - Golden Retriever
+              - German Shepherd
+              - Poodle
+              - Boxer
+              - Great Dane
+              - Border Collie
+              - Pomeranian
+              - Bernese Mountain Dogs
+              - Pit Bulls
+              - Husky
+              - Cavalier King Charles Spaniel
+              - Samoyed
+              - Belgian Malinois
+              - Bloodhound
+              - American Staffordshire Terrier
+              - Saint Bernard
+              - Yorkshire Terrier
+              - Newfoundland
+              - Collie
+              - Great Pyrenees
+              - Beagle
+              - Miniature Schnauzer
+              - Havanese
+              - Doberman Pinscher
+              - Lhasa Apso
+              - Border Collie
+              - Vizsla
+              - Corgi
+              - Chihuahua
+              - French Bulldog
+              - Pug
       Certified__c:
           fake: boolean
       Deceased__c:

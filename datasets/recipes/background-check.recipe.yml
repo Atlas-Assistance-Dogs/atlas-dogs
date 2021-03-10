@@ -1,5 +1,5 @@
 #- include_file: common.recipe.yml
-#- include_file: contact.recipe.yml
+- include_file: contact.recipe.yml
 
 - object: Background_Check__c
   fields:

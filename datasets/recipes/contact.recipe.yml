@@ -11,7 +11,8 @@
 - include_file: common.recipe.yml
 
 - object: Contact
-  count: ${{random_number(1,3)}}
+  #count: 2
+  nickname: Person
   fields:
       AccountId:
           reference: Household
@@ -515,7 +516,7 @@
   just_once: True
   fields:
       npe4__Contact__c:
-          random_reference: Contact
+          reference: Person
       npe4__RelatedContact__c:
           - object: Contact
             fields:
@@ -563,7 +564,7 @@
   just_once: True
   fields:
       npe4__Contact__c:
-          random_reference: Contact
+          reference: Person
       npe4__RelatedContact__c:
           - object: Contact
             fields:

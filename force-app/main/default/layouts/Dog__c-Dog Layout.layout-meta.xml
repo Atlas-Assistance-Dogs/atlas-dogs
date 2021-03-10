@@ -103,6 +103,10 @@
                 <field>Health_Check_Note__c</field>
             </layoutItems>
             <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>Health_Care_Records_Status__c</field>
+            </layoutItems>
+            <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Vet_Clinic__c</field>
             </layoutItems>
@@ -226,12 +230,6 @@
         <relatedList>RelatedNoteList</relatedList>
     </relatedLists>
     <relatedLists>
-        <fields>NAME</fields>
-        <fields>Contact__c</fields>
-        <fields>Type__c</fields>
-        <relatedList>Dog_Relationship__c.Dog__c</relatedList>
-    </relatedLists>
-    <relatedLists>
         <fields>TASK.SUBJECT</fields>
         <fields>TASK.WHO_NAME</fields>
         <fields>ACTIVITY.TASK</fields>
@@ -240,6 +238,18 @@
         <fields>TASK.PRIORITY</fields>
         <fields>CORE.USERS.FULL_NAME</fields>
         <relatedList>RelatedActivityList</relatedList>
+    </relatedLists>
+    <relatedLists>
+        <fields>VERSION.TITLE</fields>
+        <fields>VERSION.CREATED_DATE</fields>
+        <fields>VERSION.LAST_UPDATE</fields>
+        <relatedList>ContentDocumentRelatedList</relatedList>
+    </relatedLists>
+    <relatedLists>
+        <fields>NAME</fields>
+        <fields>Contact__c</fields>
+        <fields>Type__c</fields>
+        <relatedList>Dog_Relationship__c.Dog__c</relatedList>
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>
@@ -263,7 +273,7 @@
     <showRunAssignmentRulesCheckbox>false</showRunAssignmentRulesCheckbox>
     <showSubmitAndAttachButton>false</showSubmitAndAttachButton>
     <summaryLayout>
-        <masterLabel>00hS0000003aMSS</masterLabel>
+        <masterLabel>00h0U000002EK9y</masterLabel>
         <sizeX>2</sizeX>
         <sizeY>2</sizeY>
         <summaryLayoutItems>

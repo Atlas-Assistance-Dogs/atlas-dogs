@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <ListView xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Facilitators</fullName>
+    <fullName>Doners</fullName>
     <columns>FULL_NAME</columns>
     <columns>ACCOUNT.NAME</columns>
     <columns>CONTACT.PHONE1</columns>
@@ -11,7 +11,7 @@
     <filters>
         <field>Positions__c</field>
         <operation>includes</operation>
-        <value>Team Facilitator</value>
+        <value>Donor</value>
     </filters>
-    <label>Facilitators</label>
+    <label>Doners</label>
 </ListView>
