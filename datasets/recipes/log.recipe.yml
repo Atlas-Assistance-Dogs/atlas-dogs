@@ -18,6 +18,7 @@
       Details__c:
           fake.text:
               max_nb_chars: 10000
+      Name: ${{Type__c}} Log ${{Date__c}}
       Other_Hours__c:
           random_number:
               min: 0
@@ -50,12 +51,16 @@
               - Very much
       Submitter__c:
           random_reference: Contact
+      Type__c:
+          random_choice:
+              - Client
+              - Facilitator
 
 - object: Contact_Log__c
   count: 100
   include: position
   fields:
-      Name:
+      Name: ${{Log__c.Name}}
       Contact__c:
           random_reference: Contact
       Log__c:

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>Atlas_Letterhead_v2</letterhead>
+    <name>Volunteer Provisionally Accepted- Existing Volunteer</name>
+    <style>freeForm</style>
+    <subject
+    >You have been selected to volunteer in additional areas with Atlas</subject>
+    <textOnly>Dear {!Account.First_Name__c} {!Account.Last_Name__c},
+
+We are excited to let you know we would love to have you volunteer in additional roles with us.
+
+If you haven&apos;t completed our most recent volunteer classes, you will receive an email inviting you to complete them. These are quick and help you get familiar with Atlas and the world of service dogs and positive training.
+
+If the role you are doing requires access to sensitive information, once you complete your classes we will send you a background check request. Your ability to volunteer in those roles are contingent on the background check results.
+
+If no background check is required or once your background check is completed, we will contact you with any updated account information and connect you with the team(s) you will be working with.
+
+As always, let us know any questions.
+Thank you for being part of Atlas!
+
+Best,
+Molly and Atlas Assistance Dogs</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

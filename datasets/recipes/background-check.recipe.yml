@@ -9,6 +9,7 @@
           date_between:
               start_date: 2000-01-01
               end_date: today
+      Name: ${{Contact__c.Name}} ${{Date__c}}
       Notes__c:
           fake: paragraph
       Result__c:

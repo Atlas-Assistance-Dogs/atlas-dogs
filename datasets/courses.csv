@@ -1,0 +1,62 @@
+Active,Positions,Course Code,Course Name,Course SIS,Section SIS,Term SIS,Expected Completion
+True,Trainer,D1,D1 - Animal Learning Theory,D1,D1-1,,12
+True,Team Facilitator;Team Facilitator Lead,D1,D1 - Animal Learning Theory,D1,D1-2,,12
+True,Trainer,TO-D1,TO - D1 - Animal Learning Theory Testout,D1testout,D1testout-1,,4
+True,Trainer,D2,D2 - Dog Development and Physiology,D2,D2-1,,12
+True,Trainer,TO-D2,TO - D2 - Dog Development and Physiology,D2testout,D2testout-1,,4
+True,Trainer,D3,D3 - Puppy Socialization and Rearing,D3,D3-1,,12
+True,Trainer,TO-D3,TO - D3 - Puppy Socialization and Rearing,D3testout,D3testout-1,,4
+True,Trainer,D4,D4 - Dog Body Language and Communication,D4,D4-1,,12
+True,Client,D4,D4 - Dog Body Language and Communication,D4,D4-2,,12
+True,Trainer,TO-D4,TO - D4 - Dog Body Language and Communication,D4testout,D4testout-1,,4
+True,Trainer,D5,D5 - Problem Solving of Common Behavioral Issues,D5,D5-1,,12
+True,Trainer,TO-D5,TO - D5 - Problem Solving of Common Behavioral Issues,D5testout,D5testout-1,,4
+True,Trainer,D6,"D6 - Dog Health, Maintenance, and Basic Preventative Care",D6,D6-1,,12
+True,Team Facilitator;Team Facilitator Lead;Client,D6,"D6 - Dog Health, Maintenance, and Basic Preventative Care",D6,D6-2,,12
+True,Trainer,TO-D6,"TO - D6 - Dog Health, Maintenance, and Basic Preventative Care",D6testout,D6testout-1,,4
+True,Trainer,D7,D7 - Use of Training Equipment,D7,D7-1,,12
+True,Trainer,TO-D7,TO - D7 - Methods and Use of Training Equipment,D7testout,D7testout-1,,4
+False,Trainer,D8,D8 - Dog Training Approaches Including Planning and Carrying Out Training Sessions,D8,D8-1,,0
+False,Team Facilitator;Team Facilitator Lead,D8,D8 - Dog Training Approaches Including Planning and Carrying Out Training Sessions,D8,D8-2,,0
+True,Trainer,D8-2,D8 - Training Methods: Creating & Implementing a Training Plan,D8-2,D8-2-T,,12
+True,Team Facilitator;Team Facilitator Lead,D8-2,D8 - Training Methods: Creating & Implementing a Training Plan,D8-2,D8-2-TF,,16
+False,Trainer,TO-D8,TO - D8 - Dog Training Approaches Including Planning and Carrying Out Training Sessions,D8testout,D8testout-1,,0
+False,Team Facilitator;Team Facilitator Lead,F1-1,F1 - Team Facilitator Program,F1-1,F1-1,,0
+False,Team Facilitator;Team Facilitator Lead,F2-1,F2 - Team Facilitator Workshop,F2-1,F2-1,,0
+True,Volunteer;Team Facilitator;Team Facilitator Lead;Trainer;Client;Owner Trainer,I1,I1 - Introduction to Atlas Assistance Dogs,I1,I1-1,,2
+False,Volunteer;Team Facilitator;Team Facilitator Lead;Trainer;Client,I2,I2 - History and Types of Service Dogs,I2,I2-1,,0
+True,Volunteer;Team Facilitator;Team Facilitator Lead;Trainer;Client;Owner Trainer,I2-2,I2 - History and Types of Service Dogs,I2-2,I2-2-G,,2
+True,Volunteer;Team Facilitator;Team Facilitator Lead;Trainer;Client;Owner Trainer,I3-1,I3- Why Positive Methods,I3-1,I3-1-G,,2
+True,Owner Trainer,OT1-1,OT1 Owner-Trainer Foundation Course,OT1-1,OT1-1-OT,,24
+True,Trainer,P1,P1 - Common Learning Styles and Teaching Skills,P1,P1-1,,12
+True,Team Facilitator;Team Facilitator Lead,P1,P1 - Common Learning Styles and Teaching Skills,P1,P1-2,,12
+True,Trainer,TO-P1,TO - P1 - Common Learning Styles and Teaching Skills,P1testout,P1testout-1,,4
+True,Trainer,P2,P2 - Ethical Principles and Behaviors When Training,P2,P2-1,,12
+True,Team Facilitator;Team Facilitator Lead,P2,P2 - Ethical Principles and Behaviors When Training,P2,P2-2,,12
+True,Trainer,P3,"P3 - Communication, Listening, Interpersonal Skills",P3,P3-1,,12
+True,Team Facilitator;Team Facilitator Lead,P3,"P3 - Communication, Listening, Interpersonal Skills",P3,P3-2,,12
+True,Trainer,TO-P3,"TO - P3 - Communication, Listening, Interpersonal Skills",P3testout,P3testout-1,,4
+True,Trainer,P4,P4 - Planning and Setting Up Training Sessions,P4,P4-1,,12
+True,Team Facilitator;Team Facilitator Lead,P4,P4 - Planning and Setting Up Training Sessions,P4,P4-2,,12
+True,Trainer,P5,P5 - Confidentiality and Professionalism,P5,P5-1,,12
+True,Team Facilitator;Team Facilitator Lead,P5,P5 - Confidentiality and Professionalism,P5,P5-2,,12
+True,Trainer,TO-P5,TO - P5 - Confidentiality and Professionalism Testout,P5testout,P5testout-1,,4
+True,Trainer,S1,S1 - Selecting an Appropriate Dog for Service Work,S1,S1-1-1,,24
+False,Trainer,S2-1,S2 - The Americans with Disabilities Act and Relevant Laws,S2-1,S2-1,,0
+False,Team Facilitator;Team Facilitator Lead,S2-1,S2 - The Americans with Disabilities Act and Relevant Laws,S2-1,S2-2,,0
+False,Client,S2-1,S2 - The Americans with Disabilities Act and Relevant Laws,S2-1,S2-2,,0
+True,Client,S2-2,S2- Americans With Disabilities Act and Relevant Laws,S2-2,S2-2-C,,16
+True,Trainer,S2-2,S2- Americans With Disabilities Act and Relevant Laws,S2-2,S2-2-T,,16
+True,Team Facilitator;Team Facilitator Lead,S2-2,S2- Americans With Disabilities Act and Relevant Laws,S2-2,S2-2-TF,,12
+True,Trainer,S3A,S3A - Understanding Disabilities,S3A,S3A-1,,16
+True,Team Facilitator;Team Facilitator Lead,S3A,S3A - Understanding Disabilities,S3A,S3A-2,,12
+True,Trainer,S3B,S3B - How to Be a Successful Trainer When Working with Clients with Disabilities,S3B,S3B-1,,16
+True,Team Facilitator;Team Facilitator Lead,S3B,S3B - How to Be a Successful Trainer When Working with Clients with Disabilities,S3B,S3B-2,,12
+True,Trainer,S4A,S4A - Disability Skills Training (Part 1) - Introduction and Foundational Skills,S4A,S4A-1,,24
+True,Team Facilitator;Team Facilitator Lead,S4A,S4A - Disability Skills Training (Part 1) - Introduction and Foundational Skills,S4A,S4A-2,,16
+True,Trainer,S4B,S4B - Disability Skills Training (Part 2) - Balance and Mobility Tasks,S4B,S4B-1,,32
+True,Trainer,S4C,S4C - Disability Skills Training (Part 3) - Medical Tasks,S4C,S4C-1,,32
+True,Trainer,S6,S6 - Sweet Snoopers Scent Detection for Diabetes and Medical Alert Dogs,S6,S6-1,,32
+True,Trainer,S7,S7 - Developing Your Service Dog Program,S7,S7-1,,32
+True,Trainer,S8,S8 - Atlas' Public Access Test,S8,S8-1,,32
+True,Team Facilitator;Team Facilitator Lead;Client,S8,S8 - Atlas' Public Access Test,S8,S8-2,,16

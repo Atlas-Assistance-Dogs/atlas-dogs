@@ -1,0 +1,12 @@
+Dear {!Account.First_Name__c} {!Account.Last_Name__c},
+
+As part of the Facilitator onboarding process you are schedule to attend the mandatory work school scheduled on {!Account.Facilitator_Workshop_Schedule__c} at below location:
+
+{!Account.Facilitator_WS_Location_Address1__c}
+{!Account.Facilitator_WS_Location_City__c}, {!Account.Facilitator_WS_State__c}, {!Account.Facilitator_WS_Country__c} {!Account.Facilitator_WS_Zip__c}
+
+We will be collecting the feedback on your workshop  participation which will be used in the decision making process on Facilitator Role.
+
+Please let us know if you have any questions.
+
+Thanks, Ramesh

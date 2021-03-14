@@ -156,7 +156,7 @@
     <externalSharingModel>Private</externalSharingModel>
     <label>Dog Relationship</label>
     <nameField>
-        <label>Dog Contact Name</label>
+        <label>Dog Relationship Name</label>
         <type>Text</type>
     </nameField>
     <pluralLabel>Dogs Relationships</pluralLabel>

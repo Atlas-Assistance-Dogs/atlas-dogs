@@ -1,0 +1,6 @@
+Dear {!Dog__c.OwnerFirstLastName__c},
+
+Your dog vaccination is due now and appreciate if you can get  {!Dog__c.Name}  vaccinated at the earliest and  send us the proof for our records.
+
+Thank you,
+Atlas Dog Staff

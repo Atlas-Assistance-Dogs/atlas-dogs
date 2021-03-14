@@ -322,8 +322,7 @@
                     fake: catch_phrase
                 Industry: Healthcare
                 ShippingStreet:
-                    fake.text:
-                        max_nb_chars: 100
+                    fake: street_address
                 ShippingCity:
                     fake: city
                 ShippingState:
@@ -386,6 +385,7 @@
           random_reference: Contact
       Dog__c:
           random_reference: Dog__c
+      Name: ${{Contact__c.FirstName}} ${{Dog__c.Name}} ${{Type__c}}
       Type__c:
           random_choice:
               - Owner
@@ -396,4 +396,5 @@
   fields:
       Contact__c: vet
       Dog__c: dog
+      Name: ${{vet.Name}}-${{dog.Name}}
       Type__c: Veterinarian

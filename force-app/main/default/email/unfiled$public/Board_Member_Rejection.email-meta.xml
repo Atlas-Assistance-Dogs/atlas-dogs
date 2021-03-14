@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description
+    >Rejection email to application for Board Membership</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Board Member Rejection</name>
+    <style>none</style>
+    <subject>Thanks for applying for the Board position at Atlas Dog</subject>
+    <type>text</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

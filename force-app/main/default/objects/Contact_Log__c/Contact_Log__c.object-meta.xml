@@ -155,7 +155,7 @@
     <externalSharingModel>Private</externalSharingModel>
     <label>Contact Log</label>
     <nameField>
-        <label>Contact Log Name</label>
+        <label>Related Log Name</label>
         <type>Text</type>
     </nameField>
     <pluralLabel>Contact Logs</pluralLabel>

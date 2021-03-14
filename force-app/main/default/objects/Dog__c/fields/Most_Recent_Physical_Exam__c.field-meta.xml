@@ -3,8 +3,8 @@
     <fullName>Most_Recent_Physical_Exam__c</fullName>
     <description>Most recent Physical exam</description>
     <externalId>false</externalId>
-    <inlineHelpText>Most recend Physical exam</inlineHelpText>
-    <label>Most Recend Physical Exam</label>
+    <inlineHelpText>Most recent Physical exam</inlineHelpText>
+    <label>Most Recent Physical Exam</label>
     <required>false</required>
     <trackHistory>true</trackHistory>
     <trackTrending>false</trackTrending>

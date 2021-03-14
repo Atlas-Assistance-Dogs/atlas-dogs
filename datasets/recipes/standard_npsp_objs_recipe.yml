@@ -20,14 +20,12 @@
           reference: Campaign
 
 - object: Account
-  just_once: True
   nickname: Household
   fields:
       name: The Household
       RecordType: HH_Account
 
 - object: Account
-  just_once: True
   nickname: Organization
   fields:
       name:
@@ -35,7 +33,6 @@
       RecordType: Organization
 
 - object: npsp__Address__c
-  just_once: True
   fields:
       npsp__MailingStreet__c:
           fake: street_address

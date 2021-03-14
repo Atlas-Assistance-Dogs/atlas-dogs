@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>Atlas_Letterhead_v2</letterhead>
+    <name>Facilitator Provisionally Activated</name>
+    <style>freeForm</style>
+    <subject
+    >Congratulations! You are ready to start working on your Team Facilitator Practicum</subject>
+    <textOnly>Dear {!Account.First_Name__c} {!Account.Last_Name__c},
+
+Congratulations !!!! You now considered provisionally active as an Atlas Team Facilitator. The next steps will be for us to partner you with another experienced Facilitator or Facilitator Lead to complete your practicum. Upon completion of the practicum, you will be fully active as an Atlas Team Facilitator and are eligible to be the primary team facilitator assigned to a client.
+
+We may not have a client in your location that we are ready to have you work with immediately, however, we will pair you with someone so you can make progress on your practicum and will look for opportunities for you to engage with our clients remotely until a local client is available. If you know of people in your area who would be a great for our client certification program, or others who might be interested in becoming a team facilitator, please send them our way.
+
+If you are interested in volunteering in any other aspects of Atlas, or are interested in moving on to take our full Trainer program, please let us know as well.
+
+Thank you for being part of Atlas. Please give us up to 1 week to put you in touch with your mentor. Let us know any questions at all. Thank you for the effort you have put in to getting to this point. I hope you feel proud of what you have accomplished and are excited to work hands on to help someone with disabilities find independent with their service dog.
+
+Best,
+Molly and Atlas Assistance Dogs</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>
