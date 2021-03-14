@@ -1,12 +1,17 @@
 - include_file: common.recipe.yml
 - include_file: standard_objs.recipe.yml
-- include_file: standard_npsp_objs_recipe.yml
 
 - object: Lead
   fields:
-      Company: "fake company"
+      Company: N/A
       FirstName:
           fake: first_name
+      Email:
+          fake: email
+      Phone:
+          fake: phone_number
+      MobilePhone:
+          fake: phone_number
       IsConverted:
           fake: boolean
       LastName:
