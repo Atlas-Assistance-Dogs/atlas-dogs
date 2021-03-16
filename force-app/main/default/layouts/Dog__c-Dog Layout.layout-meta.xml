@@ -31,10 +31,6 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Replaced_by_Dog__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
                 <field>Owner__c</field>
             </layoutItems>
             <layoutItems>
@@ -250,10 +246,6 @@
         <fields>Contact__c</fields>
         <fields>Type__c</fields>
         <relatedList>Dog_Relationship__c.Dog__c</relatedList>
-    </relatedLists>
-    <relatedLists>
-        <fields>NAME</fields>
-        <relatedList>Dog__c.Replaced_by_Dog__c</relatedList>
     </relatedLists>
     <relatedLists>
         <fields>TASK.SUBJECT</fields>

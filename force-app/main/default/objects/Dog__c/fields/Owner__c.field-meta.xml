@@ -3,7 +3,7 @@
     <fullName>Owner__c</fullName>
     <deleteConstraint>SetNull</deleteConstraint>
     <externalId>false</externalId>
-    <label>Dog Owner</label>
+    <label>Owner</label>
     <referenceTo>Contact</referenceTo>
     <relationshipLabel>Dog_Owner</relationshipLabel>
     <relationshipName>Dog_Owner</relationshipName>

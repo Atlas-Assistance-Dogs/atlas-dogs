@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
     <actionOverrides>
         <actionName>Accept</actionName>
@@ -143,7 +143,8 @@
     <allowInChatterGroups>true</allowInChatterGroups>
     <compactLayoutAssignment>Dog_Highlight_Panel</compactLayoutAssignment>
     <deploymentStatus>Deployed</deploymentStatus>
-    <description>Records detailing information about dogs being utilized by clients and trainers</description>
+    <description
+    >Records detailing information about dogs being utilized by clients and trainers</description>
     <enableActivities>true</enableActivities>
     <enableBulkApi>true</enableBulkApi>
     <enableFeeds>false</enableFeeds>
@@ -156,7 +157,7 @@
     <externalSharingModel>Private</externalSharingModel>
     <label>Dog</label>
     <nameField>
-        <label>Dog Name</label>
+        <label>Name</label>
         <trackHistory>false</trackHistory>
         <type>Text</type>
     </nameField>
@@ -168,9 +169,11 @@
         <excludedStandardButtons>MassChangeOwner</excludedStandardButtons>
         <listViewButtons>Onboard_New_Dog</listViewButtons>
         <searchResultsAdditionalFields>Status__c</searchResultsAdditionalFields>
-        <searchResultsAdditionalFields>Expiry_Date_Status__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields
+        >Expiry_Date_Status__c</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>Active__c</searchResultsAdditionalFields>
-        <searchResultsAdditionalFields>Certified__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields
+        >Certified__c</searchResultsAdditionalFields>
         <searchResultsCustomButtons>Onboard_New_Dog</searchResultsCustomButtons>
     </searchLayouts>
     <sharingModel>ReadWrite</sharingModel>

@@ -17,14 +17,14 @@
                 <label>Veterinarian</label>
             </value>
             <value>
-                <fullName>Owner</fullName>
+                <fullName>Handler</fullName>
                 <default>false</default>
-                <label>Owner</label>
+                <label>Handler</label>
             </value>
             <value>
-                <fullName>Trainer</fullName>
+                <fullName>Facilitator</fullName>
                 <default>false</default>
-                <label>Trainer</label>
+                <label>Facilitator</label>
             </value>
             <value>
                 <fullName>Client</fullName>

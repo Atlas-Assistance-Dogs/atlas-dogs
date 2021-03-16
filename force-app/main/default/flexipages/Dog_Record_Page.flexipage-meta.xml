@@ -67,11 +67,6 @@
                 <fieldItem>Record.Deceased__c</fieldItem>
             </fieldInstance>
         </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldItem>Record.Replaced_by_Dog__c</fieldItem>
-            </fieldInstance>
-        </itemInstances>
         <name>Facet-6c8a57f2-015e-43d2-b1d4-6cf40811ca1a</name>
         <type>Facet</type>
     </flexiPageRegions>
@@ -163,7 +158,7 @@
         <itemInstances>
             <fieldInstance>
                 <fieldItem
-        >Record.Most_Recent_Parainfluenza_Vaccine__c</fieldItem>
+                >Record.Most_Recent_Parainfluenza_Vaccine__c</fieldItem>
             </fieldInstance>
         </itemInstances>
         <name>Facet-c6f8a4af-14e8-4df8-8185-a5cb099ed7c9</name>
@@ -228,7 +223,7 @@
         <itemInstances>
             <fieldInstance>
                 <fieldItem
-        >Record.Health_Check_Failed_Dog_Accepted__c</fieldItem>
+                >Record.Health_Check_Failed_Dog_Accepted__c</fieldItem>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
@@ -384,7 +379,7 @@
         <itemInstances>
             <componentInstance>
                 <componentName
-        >runtime_sales_activities:activityPanel</componentName>
+                >runtime_sales_activities:activityPanel</componentName>
             </componentInstance>
         </itemInstances>
         <mode>Replace</mode>
