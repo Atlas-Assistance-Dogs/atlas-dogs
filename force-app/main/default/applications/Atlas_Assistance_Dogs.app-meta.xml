@@ -17,8 +17,10 @@
     <tabs>standard-Contact</tabs>
     <tabs>Course_Actions</tabs>
     <tabs>Dog__c</tabs>
-    <tabs>Courses</tabs>
+    <tabs>Course__c</tabs>
     <tabs>standard-Lead</tabs>
+    <tabs>Background_Check__c</tabs>
+    <tabs>Course_Assignment__c</tabs>
     <uiType>Lightning</uiType>
     <utilityBar>Atlas_Dog_UtilityBar</utilityBar>
 </CustomApplication>

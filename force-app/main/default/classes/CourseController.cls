@@ -92,7 +92,6 @@ public inherited sharing class CourseController {
         return [
             SELECT
                 Id,
-                Course_Code__c,
                 Course_Name__c,
                 Course_SIS_Section_SIS_Course_Name__c,
                 Section_SIS__c,
@@ -107,11 +106,7 @@ public inherited sharing class CourseController {
     @AuraEnabled(cacheable=true)
     public static List<Course__c> getCourses() {
         return [
-            SELECT
-                Id,
-                Course_Code__c,
-                Course_Name__c,
-                Course_SIS_Section_SIS_Course_Name__c
+            SELECT Id, Course_Name__c, Course_SIS_Section_SIS_Course_Name__c
             FROM Course__c
         ];
     }
@@ -123,11 +118,7 @@ public inherited sharing class CourseController {
     ) {
         String positionString = String.join(positions, ';');
         return [
-            SELECT
-                Id,
-                Course_Code__c,
-                Course_Name__c,
-                Course_SIS_Section_SIS_Course_Name__c
+            SELECT Id, Course_Name__c, Course_SIS_Section_SIS_Course_Name__c
             FROM Course__c
             WHERE Active__c = TRUE AND Positions__c INCLUDES (:positionString)
         ];

@@ -606,6 +606,10 @@
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>
+        <fields>Expected_Completion_Date__c</fields>
+        <fields>Completion_Date__c</fields>
+        <fields>Course_Name__c</fields>
+        <fields>Status__c</fields>
         <relatedList>Course_Assignment__c.Contact__c</relatedList>
     </relatedLists>
     <relatedLists>
@@ -624,16 +628,17 @@
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>
+        <fields>Date__c</fields>
         <fields>Result__c</fields>
         <relatedList>Background_Check__c.Contact__c</relatedList>
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>
+        <fields>Date_Submitted__c</fields>
+        <fields>Date_Completed__c</fields>
+        <fields>Role__c</fields>
+        <fields>Status__c</fields>
         <relatedList>CEU_Participant__c.Trainer__c</relatedList>
-    </relatedLists>
-    <relatedLists>
-        <fields>NAME</fields>
-        <relatedList>Dog__c.Owner__c</relatedList>
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>
@@ -648,7 +653,7 @@
     <showRunAssignmentRulesCheckbox>false</showRunAssignmentRulesCheckbox>
     <showSubmitAndAttachButton>false</showSubmitAndAttachButton>
     <summaryLayout>
-        <masterLabel>00hS0000003aMQa</masterLabel>
+        <masterLabel>00h0R000003ac59</masterLabel>
         <sizeX>4</sizeX>
         <sizeY>0</sizeY>
         <summaryLayoutStyle>Default</summaryLayoutStyle>

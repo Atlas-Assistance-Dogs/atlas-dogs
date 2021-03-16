@@ -1,0 +1,758 @@
+{
+    "records": [
+        {
+            "attributes": {
+                "type": "Course__c",
+                "referenceId": "Course__cRef1"
+            },
+            "Name": "I2 - History and Types of Service Dogs",
+            "Active__c": false,
+            "Course_Name__c": "I2 - History and Types of Service Dogs",
+            "Course_SIS__c": "I2",
+            "Expected_Completion__c": 0,
+            "Positions__c": "Volunteer;Team Facilitator;Team Facilitator Lead;Trainer;Client",
+            "Section_SIS__c": "I2-1"
+        },
+        {
+            "attributes": {
+                "type": "Course__c",
+                "referenceId": "Course__cRef2"
+            },
+            "Name": "I2 - History and Types of Service Dogs",
+            "Active__c": true,
+            "Course_Name__c": "I2 - History and Types of Service Dogs",
+            "Course_SIS__c": "I2-2",
+            "Expected_Completion__c": 2,
+            "Positions__c": "Volunteer;Team Facilitator;Team Facilitator Lead;Trainer;Client;Owner Trainer",
+            "Section_SIS__c": "I2-2-G"
+        },
+        {
+            "attributes": {
+                "type": "Course__c",
+                "referenceId": "Course__cRef3"
+            },
+            "Name": "I3- Why Positive Methods",
+            "Active__c": true,
+            "Course_Name__c": "I3- Why Positive Methods",
+            "Course_SIS__c": "I3-1",
+            "Expected_Completion__c": 2,
+            "Positions__c": "Volunteer;Team Facilitator;Team Facilitator Lead;Trainer;Client;Owner Trainer",
+            "Section_SIS__c": "I3-1-G"
+        },
+        {
+            "attributes": {
+                "type": "Course__c",
+                "referenceId": "Course__cRef4"
+            },
+            "Name": "OT1 Owner-Trainer Foundation Course",
+            "Active__c": true,
+            "Course_Name__c": "OT1 Owner-Trainer Foundation Course",
+            "Course_SIS__c": "OT1-1",
+            "Expected_Completion__c": 24,
+            "Positions__c": "Owner Trainer",
+            "Section_SIS__c": "OT1-1-OT"
+        },
+        {
+            "attributes": {
+                "type": "Course__c",
+                "referenceId": "Course__cRef5"
+            },
+            "Name": "P1 - Common Learning Styles and Teaching Skills",
+            "Active__c": true,
+            "Course_Name__c": "P1 - Common Learning Styles and Teaching Skills",
+            "Course_SIS__c": "P1",
+            "Expected_Completion__c": 12,
+            "Positions__c": "Trainer",
+            "Section_SIS__c": "P1-1"
+        },
+        {
+            "attributes": {
+                "type": "Course__c",
+                "referenceId": "Course__cRef6"
+            },
+            "Name": "P1 - Common Learning Styles and Teaching Skills",
+            "Active__c": true,
+            "Course_Name__c": "P1 - Common Learning Styles and Teaching Skills",
+            "Course_SIS__c": "P1",
+            "Expected_Completion__c": 12,
+            "Positions__c": "Team Facilitator;Team Facilitator Lead",
+            "Section_SIS__c": "P1-2"
+        },
+        {
+            "attributes": {
+                "type": "Course__c",
+                "referenceId": "Course__cRef7"
+            },
+            "Name": "TO - P1 - Common Learning Styles and Teaching Skills",
+            "Active__c": true,
+            "Course_Name__c": "TO - P1 - Common Learning Styles and Teaching Skills",
+            "Course_SIS__c": "P1testout",
+            "Expected_Completion__c": 4,
+            "Positions__c": "Trainer",
+            "Section_SIS__c": "P1testout-1"
+        },
+        {
+            "attributes": {
+                "type": "Course__c",
+                "referenceId": "Course__cRef8"
+            },
+            "Name": "P2 - Ethical Principles and Behaviors When Training",
+            "Active__c": true,
+            "Course_Name__c": "P2 - Ethical Principles and Behaviors When Training",
+            "Course_SIS__c": "P2",
+            "Expected_Completion__c": 12,
+            "Positions__c": "Trainer",
+            "Section_SIS__c": "P2-1"
+        },
+        {
+            "attributes": {
+                "type": "Course__c",
+                "referenceId": "Course__cRef9"
+            },
+            "Name": "P2 - Ethical Principles and Behaviors When Training",
+            "Active__c": true,
+            "Course_Name__c": "P2 - Ethical Principles and Behaviors When Training",
+            "Course_SIS__c": "P2",
+            "Expected_Completion__c": 12,
+            "Positions__c": "Team Facilitator;Team Facilitator Lead",
+            "Section_SIS__c": "P2-2"
+        },
+        {
+            "attributes": {
+                "type": "Course__c",
+                "referenceId": "Course__cRef10"
+            },
+            "Name": "P3 - Communication, Listening, Interpersonal Skills",
+            "Active__c": true,
+            "Course_Name__c": "P3 - Communication, Listening, Interpersonal Skills",
+            "Course_SIS__c": "P3",
+            "Expected_Completion__c": 12,
+            "Positions__c": "Trainer",
+            "Section_SIS__c": "P3-1"
+        },
+        {
+            "attributes": {
+                "type": "Course__c",
+                "referenceId": "Course__cRef11"
+            },
+            "Name": "P3 - Communication, Listening, Interpersonal Skills",
+            "Active__c": true,
+            "Course_Name__c": "P3 - Communication, Listening, Interpersonal Skills",
+            "Course_SIS__c": "P3",
+            "Expected_Completion__c": 12,
+            "Positions__c": "Team Facilitator;Team Facilitator Lead",
+            "Section_SIS__c": "P3-2"
+        },
+        {
+            "attributes": {
+                "type": "Course__c",
+                "referenceId": "Course__cRef12"
+            },
+            "Name": "TO - P3 - Communication, Listening, Interpersonal Skills",
+            "Active__c": true,
+            "Course_Name__c": "TO - P3 - Communication, Listening, Interpersonal Skills",
+            "Course_SIS__c": "P3testout",
+            "Expected_Completion__c": 4,
+            "Positions__c": "Trainer",
+            "Section_SIS__c": "P3testout-1"
+        },
+        {
+            "attributes": {
+                "type": "Course__c",
+                "referenceId": "Course__cRef13"
+            },
+            "Name": "P4 - Planning and Setting Up Training Sessions",
+            "Active__c": true,
+            "Course_Name__c": "P4 - Planning and Setting Up Training Sessions",
+            "Course_SIS__c": "P4",
+            "Expected_Completion__c": 12,
+            "Positions__c": "Trainer",
+            "Section_SIS__c": "P4-1"
+        },
+        {
+            "attributes": {
+                "type": "Course__c",
+                "referenceId": "Course__cRef14"
+            },
+            "Name": "P4 - Planning and Setting Up Training Sessions",
+            "Active__c": true,
+            "Course_Name__c": "P4 - Planning and Setting Up Training Sessions",
+            "Course_SIS__c": "P4",
+            "Expected_Completion__c": 12,
+            "Positions__c": "Team Facilitator;Team Facilitator Lead",
+            "Section_SIS__c": "P4-2"
+        },
+        {
+            "attributes": {
+                "type": "Course__c",
+                "referenceId": "Course__cRef15"
+            },
+            "Name": "P5 - Confidentiality and Professionalism",
+            "Active__c": true,
+            "Course_Name__c": "P5 - Confidentiality and Professionalism",
+            "Course_SIS__c": "P5",
+            "Expected_Completion__c": 12,
+            "Positions__c": "Trainer",
+            "Section_SIS__c": "P5-1"
+        },
+        {
+            "attributes": {
+                "type": "Course__c",
+                "referenceId": "Course__cRef16"
+            },
+            "Name": "P5 - Confidentiality and Professionalism",
+            "Active__c": true,
+            "Course_Name__c": "P5 - Confidentiality and Professionalism",
+            "Course_SIS__c": "P5",
+            "Expected_Completion__c": 12,
+            "Positions__c": "Team Facilitator;Team Facilitator Lead",
+            "Section_SIS__c": "P5-2"
+        },
+        {
+            "attributes": {
+                "type": "Course__c",
+                "referenceId": "Course__cRef17"
+            },
+            "Name": "TO - P5 - Confidentiality and Professionalism Testout",
+            "Active__c": true,
+            "Course_Name__c": "TO - P5 - Confidentiality and Professionalism Testout",
+            "Course_SIS__c": "P5testout",
+            "Expected_Completion__c": 4,
+            "Positions__c": "Trainer",
+            "Section_SIS__c": "P5testout-1"
+        },
+        {
+            "attributes": {
+                "type": "Course__c",
+                "referenceId": "Course__cRef18"
+            },
+            "Name": "S1 - Selecting an Appropriate Dog for Service Work",
+            "Active__c": true,
+            "Course_Name__c": "S1 - Selecting an Appropriate Dog for Service Work",
+            "Course_SIS__c": "S1",
+            "Expected_Completion__c": 24,
+            "Positions__c": "Trainer",
+            "Section_SIS__c": "S1-1-1"
+        },
+        {
+            "attributes": {
+                "type": "Course__c",
+                "referenceId": "Course__cRef19"
+            },
+            "Name": "S2 - The Americans with Disabilities Act and Relevant Laws",
+            "Active__c": false,
+            "Course_Name__c": "S2 - The Americans with Disabilities Act and Relevant Laws",
+            "Course_SIS__c": "S2-1",
+            "Expected_Completion__c": 0,
+            "Positions__c": "Trainer",
+            "Section_SIS__c": "S2-1"
+        },
+        {
+            "attributes": {
+                "type": "Course__c",
+                "referenceId": "Course__cRef20"
+            },
+            "Name": "S2 - The Americans with Disabilities Act and Relevant Laws",
+            "Active__c": false,
+            "Course_Name__c": "S2 - The Americans with Disabilities Act and Relevant Laws",
+            "Course_SIS__c": "S2-1",
+            "Expected_Completion__c": 0,
+            "Positions__c": "Team Facilitator;Team Facilitator Lead",
+            "Section_SIS__c": "S2-2"
+        },
+        {
+            "attributes": {
+                "type": "Course__c",
+                "referenceId": "Course__cRef21"
+            },
+            "Name": "S2 - The Americans with Disabilities Act and Relevant Laws",
+            "Active__c": false,
+            "Course_Name__c": "S2 - The Americans with Disabilities Act and Relevant Laws",
+            "Course_SIS__c": "S2-1",
+            "Expected_Completion__c": 0,
+            "Positions__c": "Client",
+            "Section_SIS__c": "S2-2"
+        },
+        {
+            "attributes": {
+                "type": "Course__c",
+                "referenceId": "Course__cRef22"
+            },
+            "Name": "S2- Americans With Disabilities Act and Relevant Laws",
+            "Active__c": true,
+            "Course_Name__c": "S2- Americans With Disabilities Act and Relevant Laws",
+            "Course_SIS__c": "S2-2",
+            "Expected_Completion__c": 16,
+            "Positions__c": "Client",
+            "Section_SIS__c": "S2-2-C"
+        },
+        {
+            "attributes": {
+                "type": "Course__c",
+                "referenceId": "Course__cRef23"
+            },
+            "Name": "S2- Americans With Disabilities Act and Relevant Laws",
+            "Active__c": true,
+            "Course_Name__c": "S2- Americans With Disabilities Act and Relevant Laws",
+            "Course_SIS__c": "S2-2",
+            "Expected_Completion__c": 16,
+            "Positions__c": "Trainer",
+            "Section_SIS__c": "S2-2-T"
+        },
+        {
+            "attributes": {
+                "type": "Course__c",
+                "referenceId": "Course__cRef24"
+            },
+            "Name": "S2- Americans With Disabilities Act and Relevant Laws",
+            "Active__c": true,
+            "Course_Name__c": "S2- Americans With Disabilities Act and Relevant Laws",
+            "Course_SIS__c": "S2-2",
+            "Expected_Completion__c": 12,
+            "Positions__c": "Team Facilitator;Team Facilitator Lead",
+            "Section_SIS__c": "S2-2-TF"
+        },
+        {
+            "attributes": {
+                "type": "Course__c",
+                "referenceId": "Course__cRef25"
+            },
+            "Name": "S3A - Understanding Disabilities",
+            "Active__c": true,
+            "Course_Name__c": "S3A - Understanding Disabilities",
+            "Course_SIS__c": "S3A",
+            "Expected_Completion__c": 16,
+            "Positions__c": "Trainer",
+            "Section_SIS__c": "S3A-1"
+        },
+        {
+            "attributes": {
+                "type": "Course__c",
+                "referenceId": "Course__cRef26"
+            },
+            "Name": "S3A - Understanding Disabilities",
+            "Active__c": true,
+            "Course_Name__c": "S3A - Understanding Disabilities",
+            "Course_SIS__c": "S3A",
+            "Expected_Completion__c": 12,
+            "Positions__c": "Team Facilitator;Team Facilitator Lead",
+            "Section_SIS__c": "S3A-2"
+        },
+        {
+            "attributes": {
+                "type": "Course__c",
+                "referenceId": "Course__cRef27"
+            },
+            "Name": "S3B - How to Be a Successful Trainer When Working with Clients with Disabilities",
+            "Active__c": true,
+            "Course_Name__c": "S3B - How to Be a Successful Trainer When Working with Clients with Disabilities",
+            "Course_SIS__c": "S3B",
+            "Expected_Completion__c": 16,
+            "Positions__c": "Trainer",
+            "Section_SIS__c": "S3B-1"
+        },
+        {
+            "attributes": {
+                "type": "Course__c",
+                "referenceId": "Course__cRef28"
+            },
+            "Name": "D1 - Animal Learning Theory",
+            "Active__c": true,
+            "Course_Name__c": "D1 - Animal Learning Theory",
+            "Course_SIS__c": "D1",
+            "Expected_Completion__c": 12,
+            "Positions__c": "Trainer",
+            "Section_SIS__c": "D1-1"
+        },
+        {
+            "attributes": {
+                "type": "Course__c",
+                "referenceId": "Course__cRef29"
+            },
+            "Name": "D1 - Animal Learning Theory",
+            "Active__c": true,
+            "Course_Name__c": "D1 - Animal Learning Theory",
+            "Course_SIS__c": "D1",
+            "Expected_Completion__c": 12,
+            "Positions__c": "Team Facilitator;Team Facilitator Lead",
+            "Section_SIS__c": "D1-2"
+        },
+        {
+            "attributes": {
+                "type": "Course__c",
+                "referenceId": "Course__cRef30"
+            },
+            "Name": "TO - D1 - Animal Learning Theory Testout",
+            "Active__c": true,
+            "Course_Name__c": "TO - D1 - Animal Learning Theory Testout",
+            "Course_SIS__c": "D1testout",
+            "Expected_Completion__c": 4,
+            "Positions__c": "Trainer",
+            "Section_SIS__c": "D1testout-1"
+        },
+        {
+            "attributes": {
+                "type": "Course__c",
+                "referenceId": "Course__cRef31"
+            },
+            "Name": "D2 - Dog Development and Physiology",
+            "Active__c": true,
+            "Course_Name__c": "D2 - Dog Development and Physiology",
+            "Course_SIS__c": "D2",
+            "Expected_Completion__c": 12,
+            "Positions__c": "Trainer",
+            "Section_SIS__c": "D2-1"
+        },
+        {
+            "attributes": {
+                "type": "Course__c",
+                "referenceId": "Course__cRef32"
+            },
+            "Name": "TO - D2 - Dog Development and Physiology",
+            "Active__c": true,
+            "Course_Name__c": "TO - D2 - Dog Development and Physiology",
+            "Course_SIS__c": "D2testout",
+            "Expected_Completion__c": 4,
+            "Positions__c": "Trainer",
+            "Section_SIS__c": "D2testout-1"
+        },
+        {
+            "attributes": {
+                "type": "Course__c",
+                "referenceId": "Course__cRef33"
+            },
+            "Name": "D3 - Puppy Socialization and Rearing",
+            "Active__c": true,
+            "Course_Name__c": "D3 - Puppy Socialization and Rearing",
+            "Course_SIS__c": "D3",
+            "Expected_Completion__c": 12,
+            "Positions__c": "Trainer",
+            "Section_SIS__c": "D3-1"
+        },
+        {
+            "attributes": {
+                "type": "Course__c",
+                "referenceId": "Course__cRef34"
+            },
+            "Name": "TO - D3 - Puppy Socialization and Rearing",
+            "Active__c": true,
+            "Course_Name__c": "TO - D3 - Puppy Socialization and Rearing",
+            "Course_SIS__c": "D3testout",
+            "Expected_Completion__c": 4,
+            "Positions__c": "Trainer",
+            "Section_SIS__c": "D3testout-1"
+        },
+        {
+            "attributes": {
+                "type": "Course__c",
+                "referenceId": "Course__cRef35"
+            },
+            "Name": "D4 - Dog Body Language and Communication",
+            "Active__c": true,
+            "Course_Name__c": "D4 - Dog Body Language and Communication",
+            "Course_SIS__c": "D4",
+            "Expected_Completion__c": 12,
+            "Positions__c": "Trainer",
+            "Section_SIS__c": "D4-1"
+        },
+        {
+            "attributes": {
+                "type": "Course__c",
+                "referenceId": "Course__cRef36"
+            },
+            "Name": "S3B - How to Be a Successful Trainer When Working with Clients with Disabilities",
+            "Active__c": true,
+            "Course_Name__c": "S3B - How to Be a Successful Trainer When Working with Clients with Disabilities",
+            "Course_SIS__c": "S3B",
+            "Expected_Completion__c": 12,
+            "Positions__c": "Team Facilitator;Team Facilitator Lead",
+            "Section_SIS__c": "S3B-2"
+        },
+        {
+            "attributes": {
+                "type": "Course__c",
+                "referenceId": "Course__cRef37"
+            },
+            "Name": "S4A - Disability Skills Training (Part 1) - Introduction and Foundational Skills",
+            "Active__c": true,
+            "Course_Name__c": "S4A - Disability Skills Training (Part 1) - Introduction and Foundational Skills",
+            "Course_SIS__c": "S4A",
+            "Expected_Completion__c": 24,
+            "Positions__c": "Trainer",
+            "Section_SIS__c": "S4A-1"
+        },
+        {
+            "attributes": {
+                "type": "Course__c",
+                "referenceId": "Course__cRef38"
+            },
+            "Name": "S4A - Disability Skills Training (Part 1) - Introduction and Foundational Skills",
+            "Active__c": true,
+            "Course_Name__c": "S4A - Disability Skills Training (Part 1) - Introduction and Foundational Skills",
+            "Course_SIS__c": "S4A",
+            "Expected_Completion__c": 16,
+            "Positions__c": "Team Facilitator;Team Facilitator Lead",
+            "Section_SIS__c": "S4A-2"
+        },
+        {
+            "attributes": {
+                "type": "Course__c",
+                "referenceId": "Course__cRef39"
+            },
+            "Name": "S4B - Disability Skills Training (Part 2) - Balance and Mobility Tasks",
+            "Active__c": true,
+            "Course_Name__c": "S4B - Disability Skills Training (Part 2) - Balance and Mobility Tasks",
+            "Course_SIS__c": "S4B",
+            "Expected_Completion__c": 32,
+            "Positions__c": "Trainer",
+            "Section_SIS__c": "S4B-1"
+        },
+        {
+            "attributes": {
+                "type": "Course__c",
+                "referenceId": "Course__cRef40"
+            },
+            "Name": "S4C - Disability Skills Training (Part 3) - Medical Tasks",
+            "Active__c": true,
+            "Course_Name__c": "S4C - Disability Skills Training (Part 3) - Medical Tasks",
+            "Course_SIS__c": "S4C",
+            "Expected_Completion__c": 32,
+            "Positions__c": "Trainer",
+            "Section_SIS__c": "S4C-1"
+        },
+        {
+            "attributes": {
+                "type": "Course__c",
+                "referenceId": "Course__cRef41"
+            },
+            "Name": "S6 - Sweet Snoopers Scent Detection for Diabetes and Medical Alert Dogs",
+            "Active__c": true,
+            "Course_Name__c": "S6 - Sweet Snoopers Scent Detection for Diabetes and Medical Alert Dogs",
+            "Course_SIS__c": "S6",
+            "Expected_Completion__c": 32,
+            "Positions__c": "Trainer",
+            "Section_SIS__c": "S6-1"
+        },
+        {
+            "attributes": {
+                "type": "Course__c",
+                "referenceId": "Course__cRef42"
+            },
+            "Name": "S7 - Developing Your Service Dog Program",
+            "Active__c": true,
+            "Course_Name__c": "S7 - Developing Your Service Dog Program",
+            "Course_SIS__c": "S7",
+            "Expected_Completion__c": 32,
+            "Positions__c": "Trainer",
+            "Section_SIS__c": "S7-1"
+        },
+        {
+            "attributes": {
+                "type": "Course__c",
+                "referenceId": "Course__cRef43"
+            },
+            "Name": "S8 - Atlas' Public Access Test",
+            "Active__c": true,
+            "Course_Name__c": "S8 - Atlas' Public Access Test",
+            "Course_SIS__c": "S8",
+            "Expected_Completion__c": 32,
+            "Positions__c": "Trainer",
+            "Section_SIS__c": "S8-1"
+        },
+        {
+            "attributes": {
+                "type": "Course__c",
+                "referenceId": "Course__cRef44"
+            },
+            "Name": "S8 - Atlas' Public Access Test",
+            "Active__c": true,
+            "Course_Name__c": "S8 - Atlas' Public Access Test",
+            "Course_SIS__c": "S8",
+            "Expected_Completion__c": 16,
+            "Positions__c": "Team Facilitator;Team Facilitator Lead;Client",
+            "Section_SIS__c": "S8-2"
+        },
+        {
+            "attributes": {
+                "type": "Course__c",
+                "referenceId": "Course__cRef45"
+            },
+            "Name": "D4 - Dog Body Language and Communication",
+            "Active__c": true,
+            "Course_Name__c": "D4 - Dog Body Language and Communication",
+            "Course_SIS__c": "D4",
+            "Expected_Completion__c": 12,
+            "Positions__c": "Client",
+            "Section_SIS__c": "D4-2"
+        },
+        {
+            "attributes": {
+                "type": "Course__c",
+                "referenceId": "Course__cRef46"
+            },
+            "Name": "TO - D4 - Dog Body Language and Communication",
+            "Active__c": true,
+            "Course_Name__c": "TO - D4 - Dog Body Language and Communication",
+            "Course_SIS__c": "D4testout",
+            "Expected_Completion__c": 4,
+            "Positions__c": "Trainer",
+            "Section_SIS__c": "D4testout-1"
+        },
+        {
+            "attributes": {
+                "type": "Course__c",
+                "referenceId": "Course__cRef47"
+            },
+            "Name": "D5 - Problem Solving of Common Behavioral Issues",
+            "Active__c": true,
+            "Course_Name__c": "D5 - Problem Solving of Common Behavioral Issues",
+            "Course_SIS__c": "D5",
+            "Expected_Completion__c": 12,
+            "Positions__c": "Trainer",
+            "Section_SIS__c": "D5-1"
+        },
+        {
+            "attributes": {
+                "type": "Course__c",
+                "referenceId": "Course__cRef48"
+            },
+            "Name": "TO - D5 - Problem Solving of Common Behavioral Issues",
+            "Active__c": true,
+            "Course_Name__c": "TO - D5 - Problem Solving of Common Behavioral Issues",
+            "Course_SIS__c": "D5testout",
+            "Expected_Completion__c": 4,
+            "Positions__c": "Trainer",
+            "Section_SIS__c": "D5testout-1"
+        },
+        {
+            "attributes": {
+                "type": "Course__c",
+                "referenceId": "Course__cRef49"
+            },
+            "Name": "D6 - Dog Health, Maintenance, and Basic Preventative Care",
+            "Active__c": true,
+            "Course_Name__c": "D6 - Dog Health, Maintenance, and Basic Preventative Care",
+            "Course_SIS__c": "D6",
+            "Expected_Completion__c": 12,
+            "Positions__c": "Trainer",
+            "Section_SIS__c": "D6-1"
+        },
+        {
+            "attributes": {
+                "type": "Course__c",
+                "referenceId": "Course__cRef50"
+            },
+            "Name": "D6 - Dog Health, Maintenance, and Basic Preventative Care",
+            "Active__c": true,
+            "Course_Name__c": "D6 - Dog Health, Maintenance, and Basic Preventative Care",
+            "Course_SIS__c": "D6",
+            "Expected_Completion__c": 12,
+            "Positions__c": "Team Facilitator;Team Facilitator Lead;Client",
+            "Section_SIS__c": "D6-2"
+        },
+        {
+            "attributes": {
+                "type": "Course__c",
+                "referenceId": "Course__cRef51"
+            },
+            "Name": "TO - D6 - Dog Health, Maintenance, and Basic Preventative Care",
+            "Active__c": true,
+            "Course_Name__c": "TO - D6 - Dog Health, Maintenance, and Basic Preventative Care",
+            "Course_SIS__c": "D6testout",
+            "Expected_Completion__c": 4,
+            "Positions__c": "Trainer",
+            "Section_SIS__c": "D6testout-1"
+        },
+        {
+            "attributes": {
+                "type": "Course__c",
+                "referenceId": "Course__cRef52"
+            },
+            "Name": "D7 - Use of Training Equipment",
+            "Active__c": true,
+            "Course_Name__c": "D7 - Use of Training Equipment",
+            "Course_SIS__c": "D7",
+            "Expected_Completion__c": 12,
+            "Positions__c": "Trainer",
+            "Section_SIS__c": "D7-1"
+        },
+        {
+            "attributes": {
+                "type": "Course__c",
+                "referenceId": "Course__cRef53"
+            },
+            "Name": "TO - D7 - Methods and Use of Training Equipment",
+            "Active__c": true,
+            "Course_Name__c": "TO - D7 - Methods and Use of Training Equipment",
+            "Course_SIS__c": "D7testout",
+            "Expected_Completion__c": 4,
+            "Positions__c": "Trainer",
+            "Section_SIS__c": "D7testout-1"
+        },
+        {
+            "attributes": {
+                "type": "Course__c",
+                "referenceId": "Course__cRef54"
+            },
+            "Name": "D8 - Training Methods: Creating & Implementing a Training Plan",
+            "Active__c": true,
+            "Course_Name__c": "D8 - Training Methods: Creating & Implementing a Training Plan",
+            "Course_SIS__c": "D8-2",
+            "Expected_Completion__c": 12,
+            "Positions__c": "Trainer",
+            "Section_SIS__c": "D8-2-T"
+        },
+        {
+            "attributes": {
+                "type": "Course__c",
+                "referenceId": "Course__cRef55"
+            },
+            "Name": "D8 - Training Methods: Creating & Implementing a Training Plan",
+            "Active__c": true,
+            "Course_Name__c": "D8 - Training Methods: Creating & Implementing a Training Plan",
+            "Course_SIS__c": "D8-2",
+            "Expected_Completion__c": 16,
+            "Positions__c": "Team Facilitator;Team Facilitator Lead",
+            "Section_SIS__c": "D8-2-TF"
+        },
+        {
+            "attributes": {
+                "type": "Course__c",
+                "referenceId": "Course__cRef56"
+            },
+            "Name": "F1 - Team Facilitator Program",
+            "Active__c": false,
+            "Course_Name__c": "F1 - Team Facilitator Program",
+            "Course_SIS__c": "F1-1",
+            "Expected_Completion__c": 0,
+            "Positions__c": "Team Facilitator;Team Facilitator Lead",
+            "Section_SIS__c": "F1-1"
+        },
+        {
+            "attributes": {
+                "type": "Course__c",
+                "referenceId": "Course__cRef57"
+            },
+            "Name": "F2 - Team Facilitator Workshop",
+            "Active__c": false,
+            "Course_Name__c": "F2 - Team Facilitator Workshop",
+            "Course_SIS__c": "F2-1",
+            "Expected_Completion__c": 0,
+            "Positions__c": "Team Facilitator;Team Facilitator Lead",
+            "Section_SIS__c": "F2-1"
+        },
+        {
+            "attributes": {
+                "type": "Course__c",
+                "referenceId": "Course__cRef58"
+            },
+            "Name": "I1 - Introduction to Atlas Assistance Dogs",
+            "Active__c": true,
+            "Course_Name__c": "I1 - Introduction to Atlas Assistance Dogs",
+            "Course_SIS__c": "I1",
+            "Expected_Completion__c": 2,
+            "Positions__c": "Volunteer;Team Facilitator;Team Facilitator Lead;Trainer;Client;Owner Trainer",
+            "Section_SIS__c": "I1-1"
+        }
+    ]
+}

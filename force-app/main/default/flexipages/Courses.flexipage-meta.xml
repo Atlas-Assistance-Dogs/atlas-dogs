@@ -1,17 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <FlexiPage xmlns="http://soap.sforce.com/2006/04/metadata">
     <flexiPageRegions>
+        <name>header</name>
+        <type>Region</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
         <itemInstances>
             <componentInstance>
-                <componentName>courseAssignmentInlineEdit</componentName>
+                <componentName>force:detailPanel</componentName>
             </componentInstance>
         </itemInstances>
         <name>main</name>
         <type>Region</type>
     </flexiPageRegions>
     <masterLabel>Courses</masterLabel>
+    <sobjectType>Course__c</sobjectType>
     <template>
-        <name>flexipage:defaultAppHomeTemplate</name>
+        <name>flexipage:recordHomeSimpleViewTemplate</name>
+        <properties>
+            <name>enablePageActionConfig</name>
+            <value>false</value>
+        </properties>
     </template>
-    <type>AppPage</type>
+    <type>RecordPage</type>
 </FlexiPage>

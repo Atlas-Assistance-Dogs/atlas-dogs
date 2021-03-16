@@ -3,6 +3,7 @@
 - include_file: contact.recipe.yml
 
 - object: Dog__c
+  nickname: dog
   fields:
       Activation_Date__c:
           date_between:

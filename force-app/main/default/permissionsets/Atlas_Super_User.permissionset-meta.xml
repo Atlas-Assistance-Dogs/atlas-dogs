@@ -635,7 +635,7 @@
         <visibility>Visible</visibility>
     </tabSettings>
     <tabSettings>
-        <tab>Courses</tab>
+        <tab>Course__c</tab>
         <visibility>Visible</visibility>
     </tabSettings>
     <tabSettings>

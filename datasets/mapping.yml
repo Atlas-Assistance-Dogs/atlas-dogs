@@ -1,26 +1,13 @@
 Insert CEU__c:
     sf_object: CEU__c
     fields:
-        - Name
         - Authority__c
         - Comments__c
-        - Date_Completed__c
-        - Date_Submitted__c
+        - Name
+        - Program_Date__c
         - Program_Hours__c
         - Program_Title__c
         - Quantity__c
-        - Role__c
-        - Status__c
-    lookups:
-        Trainer__c:
-            table: Contact
-Insert Contact_Log__c:
-    sf_object: Contact_Log__c
-    fields:
-        - Name
-        - Contact__c
-        - Log__c
-        - Position__c
 Insert ContentVersion:
     sf_object: ContentVersion
     fields:
@@ -37,7 +24,6 @@ Insert Course__c:
     sf_object: Course__c
     fields:
         - Active__c
-        - Course_Code__c
         - Course_Name__c
         - Course_SIS__c
         - Expected_Completion__c
@@ -45,11 +31,6 @@ Insert Course__c:
         - Positions__c
         - Section_SIS__c
         - Term_SIS__c
-Insert Log__c:
-    sf_object: Log__c
-    fields:
-        - Date__c
-        - Name
 Insert npo02__Household__c:
     sf_object: npo02__Household__c
     fields:
@@ -111,6 +92,7 @@ Insert Lead:
         - IsUnreadByOwner
         - LastName
         - Lead_Interest__c
+        - LeadSource
         - Lead_Source_Other__c
         - Pronoun_Other__c
         - Pronoun__c
@@ -208,6 +190,7 @@ Insert Dog__c:
         - Name
         - Picture__c
         - Spayed_Neutered__c
+        - Status__c
     lookups:
         Replaced_by_Dog__c:
             table: Dog__c
@@ -251,6 +234,7 @@ Insert npsp__Address__c:
 Insert Contact:
     sf_object: Contact
     fields:
+        - Board_Member_Accepted_Date__c
         - Board_Member_Status__c
         - Client_Medical_Devices__c
         - Client_Status__c
@@ -264,6 +248,7 @@ Insert Contact:
         - FirstName
         - LastName
         - Lead_Comments__c
+        - Lead_Facilitator_Status__c
         - Lead_Interest__c
         - LeadSource
         - Positions__c
@@ -272,6 +257,7 @@ Insert Contact:
         - Trainer_Board_Train__c
         - Trainer_CEU_Status__c
         - Trainer_Specialties__c
+        - Trainer_Status__c
         - Volunteer_Access__c
         - Volunteer_Background__c
         - Volunteer_Focus__c
@@ -355,9 +341,25 @@ Insert Contact:
 Insert Background_Check__c:
     sf_object: Background_Check__c
     fields:
+        - Date__c
         - Name
+        - Notes__c
+        - Result__c
     lookups:
         Contact__c:
+            table: Contact
+Insert CEU_Participant__c:
+    sf_object: CEU_Participant__c
+    fields:
+        - Date_Completed__c
+        - Date_Submitted__c
+        - Name
+        - Role__c
+        - Status__c
+    lookups:
+        CEU__c:
+            table: CEU__c
+        Trainer__c:
             table: Contact
 Insert Course_Assignment__c:
     sf_object: Course_Assignment__c
@@ -375,8 +377,37 @@ Insert Dog_Relationship__c:
     sf_object: Dog_Relationship__c
     fields:
         - Name
+        - Type__c
     lookups:
         Contact__c:
             table: Contact
         Dog__c:
             table: Dog__c
+Insert Log__c:
+    sf_object: Log__c
+    fields:
+        - Client_Stress__c
+        - Date__c
+        - Details__c
+        - Name
+        - Other_Hours__c
+        - Public_Access_Hours__c
+        - Request_Support_From_Atlas__c
+        - Request_Support_From_Team__c
+        - Satisfaction__c
+        - Session_Type__c
+        - Stress__c
+        - Type__c
+    lookups:
+        Submitter__c:
+            table: Contact
+Insert Contact_Log__c:
+    sf_object: Contact_Log__c
+    fields:
+        - Name
+        - Position__c
+    lookups:
+        Contact__c:
+            table: Contact
+        Log__c:
+            table: Log__c

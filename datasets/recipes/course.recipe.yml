@@ -6,9 +6,6 @@
   fields:
       Active__c:
           fake: boolean
-      Course_Code__c:
-          fake.text:
-              max_nb_chars: 10
       Course_Name__c:
           fake.text:
               max_nb_chars: 10

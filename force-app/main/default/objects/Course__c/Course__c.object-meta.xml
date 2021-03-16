@@ -1,5 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+<?xml version="1.0" encoding="UTF-8" ?>
+<CustomObject
+    xmlns="http://soap.sforce.com/2006/04/metadata"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+>
     <actionOverrides>
         <actionName>Accept</actionName>
         <type>Default</type>
@@ -128,20 +131,10 @@
     </actionOverrides>
     <actionOverrides>
         <actionName>View</actionName>
-        <type>Default</type>
-    </actionOverrides>
-    <actionOverrides>
-        <actionName>View</actionName>
-        <formFactor>Large</formFactor>
-        <type>Default</type>
-    </actionOverrides>
-    <actionOverrides>
-        <actionName>View</actionName>
-        <formFactor>Small</formFactor>
         <type>Default</type>
     </actionOverrides>
     <allowInChatterGroups>false</allowInChatterGroups>
-    <compactLayoutAssignment>Course_Master_Layout</compactLayoutAssignment>
+    <compactLayoutAssignment>Course_Layout</compactLayoutAssignment>
     <deploymentStatus>Deployed</deploymentStatus>
     <enableActivities>false</enableActivities>
     <enableBulkApi>true</enableBulkApi>
@@ -158,15 +151,21 @@
         <label>Course Name</label>
         <type>Text</type>
     </nameField>
-    <pluralLabel>Course</pluralLabel>
+    <pluralLabel>Courses</pluralLabel>
     <searchLayouts>
-        <lookupDialogsAdditionalFields>Course_SIS_Section_SIS_Course_Name__c</lookupDialogsAdditionalFields>
-        <searchResultsAdditionalFields>Course_SIS_Section_SIS_Course_Name__c</searchResultsAdditionalFields>
-        <searchResultsAdditionalFields>Course_Code__c</searchResultsAdditionalFields>
-        <searchResultsAdditionalFields>Course_Name__c</searchResultsAdditionalFields>
-        <searchResultsAdditionalFields>Course_SIS__c</searchResultsAdditionalFields>
-        <searchResultsAdditionalFields>Section_SIS__c</searchResultsAdditionalFields>
-        <searchResultsAdditionalFields>Term_SIS__c</searchResultsAdditionalFields>
+        <lookupDialogsAdditionalFields
+        >Course_SIS_Section_SIS_Course_Name__c</lookupDialogsAdditionalFields>
+        <searchResultsAdditionalFields
+        >Course_SIS_Section_SIS_Course_Name__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields xsi:nil="true" />
+        <searchResultsAdditionalFields
+        >Course_Name__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields
+        >Course_SIS__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields
+        >Section_SIS__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields
+        >Term_SIS__c</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>Active__c</searchResultsAdditionalFields>
     </searchLayouts>
     <sharingModel>ReadWrite</sharingModel>
