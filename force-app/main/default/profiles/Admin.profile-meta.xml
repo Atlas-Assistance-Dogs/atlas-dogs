@@ -452,11 +452,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Dog__c.Replaced_by_Dog__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
         <field>Dog__c.Spayed_Neutered__c</field>
         <readable>false</readable>
     </fieldPermissions>

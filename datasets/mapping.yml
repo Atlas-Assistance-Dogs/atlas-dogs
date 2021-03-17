@@ -8,18 +8,6 @@ Insert CEU__c:
         - Program_Hours__c
         - Program_Title__c
         - Quantity__c
-Insert ContentVersion:
-    sf_object: ContentVersion
-    fields:
-        - ContentLocation
-        - IsAssetEnabled
-        - IsMajorVersion
-        - Origin
-        - Positions__c
-        - SharingOption
-        - SharingPrivacy
-        - Title
-        - Type__c
 Insert Course__c:
     sf_object: Course__c
     fields:
@@ -92,7 +80,6 @@ Insert Lead:
         - IsUnreadByOwner
         - LastName
         - Lead_Interest__c
-        - LeadSource
         - Lead_Source_Other__c
         - Pronoun_Other__c
         - Pronoun__c
@@ -192,9 +179,6 @@ Insert Dog__c:
         - Spayed_Neutered__c
         - Status__c
     lookups:
-        Replaced_by_Dog__c:
-            table: Dog__c
-            after: Insert Dog__c
         Vet_Clinic__c:
             table: Account
 Insert npsp__Address__c:
@@ -250,7 +234,6 @@ Insert Contact:
         - Lead_Comments__c
         - Lead_Facilitator_Status__c
         - Lead_Interest__c
-        - LeadSource
         - Positions__c
         - Pronoun_Other__c
         - Pronoun__c

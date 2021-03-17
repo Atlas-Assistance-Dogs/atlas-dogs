@@ -66,10 +66,7 @@ flows:
                 options:
                     api_names: Atlas_Super_User
             3:
-                task: dx
-                options:
-                    command: force:data:tree:import
-                    extra: -f datasets/Course__c.json
+                task: load_dataset
 
     dev_org:
         steps:
