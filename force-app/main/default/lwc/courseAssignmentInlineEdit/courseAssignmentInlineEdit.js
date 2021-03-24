@@ -38,8 +38,8 @@ export default class CourseAssignmentInlineEdit extends LightningElement {
 
     @api recordId;
 
-    @wire(getAssignedCourses, { accountID: "$recordId" })
-    AssignedCourses;
+    @wire(getAssignedCourses, { contact: "$recordId" })
+    assignedCourses;
 
     handleSave(event) {
         const recordInputs = event.detail.draftValues.slice().map((draft) => {

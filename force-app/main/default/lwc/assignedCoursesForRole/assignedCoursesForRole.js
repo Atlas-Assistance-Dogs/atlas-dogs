@@ -2,7 +2,7 @@ import { LightningElement, track, wire, api } from "lwc";
 import assignedCoursesForPosition from "@salesforce/apex/CourseController.assignedCoursesForPosition";
 
 const columns = [
-    { label: "Account Name", fieldName: "AccountName__c" },
+    { label: "Contact Name", fieldName: "ContactName__c" },
     { label: "Course Name", fieldName: "CourseName__c" },
     { label: "Section SIS", fieldName: "SectionSIS__c" },
     { label: "Term SIS", fieldName: "TermSIS__c" },
