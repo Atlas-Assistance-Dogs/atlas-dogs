@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Most_Recent_Distemper_Vaccine__c</fullName>
-    <description>Vaccination expiration date</description>
+    <fullName>Vaccine_Latest_Parvovirus__c</fullName>
+    <description>Most recent Parvovirus vaccine date</description>
     <externalId>false</externalId>
-    <inlineHelpText>Most Recent Distemper Vaccine</inlineHelpText>
-    <label>Most Recent Distemper Vaccine</label>
+    <inlineHelpText>Most recent Parvovirus Vaccine date</inlineHelpText>
+    <label>Most Recent Parvovirus Vaccine</label>
     <required>false</required>
     <trackHistory>true</trackHistory>
     <trackTrending>false</trackTrending>

@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Most_Recent_Parvovirus_Vaccine__c</fullName>
-    <description>Most recent Parvovirus vaccine date</description>
+    <fullName>Vaccine_Latest_Hepatitis__c</fullName>
+    <description>Most recent Hepatitis/Adenovirus vaccination date</description>
     <externalId>false</externalId>
-    <inlineHelpText>Most recent Parvovirus Vaccine date</inlineHelpText>
-    <label>Most Recent Parvovirus Vaccine</label>
+    <inlineHelpText
+    >Latest  Hepatitis/Adenovirus vaccination date</inlineHelpText>
+    <label>Most Recent Hepatitis Vaccine</label>
     <required>false</required>
     <trackHistory>true</trackHistory>
     <trackTrending>false</trackTrending>

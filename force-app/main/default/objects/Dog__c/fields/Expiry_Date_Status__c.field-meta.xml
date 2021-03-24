@@ -1,15 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Expiry_Date_Status__c</fullName>
     <externalId>false</externalId>
     <formula>IF(
 AND(
-TODAY() &lt; (Most_Recent_Distemper_Vaccine__c ),
-TODAY() &lt; (Most_Recent_Hepatitis_Vaccine__c ),
-TODAY() &lt; (Most_Recent_Parainfluenza_Vaccine__c),
-TODAY() &lt; (Most_Recent_Parvovirus_Vaccine__c ),
-TODAY() &lt; (Most_Recent_Physical_Exam__c ),
-TODAY() &lt; (Most_Recent_Rabies_Vaccine__c )
+TODAY() &lt; (Vaccine_Due_Distemper__c ),
+TODAY() &lt; (Vaccine_Due_Hepatitis__c ),
+TODAY() &lt; (Vaccine_Due_Parainfluenza__c),
+TODAY() &lt; (Vaccine_Due_Parvovirus__c ),
+TODAY() &lt; (Physical_Exam_Latest__c ),
+TODAY() &lt; (Vaccine_Due_Rabies__c )
 ),
 &apos;Good&apos;,
 &apos;Expired&apos; &amp;  IMAGE(&quot;/img/samples/rating1.gif&quot;, &apos;*&apos;) )</formula>
