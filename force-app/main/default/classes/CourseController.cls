@@ -56,6 +56,7 @@ public inherited sharing class CourseController {
                 Course_SIS__c,
                 Section_SIS__c,
                 Course_Description__c,
+                Course__r.Course_SIS_Section_SIS_Course_Name__c,
                 Term_SIS__c,
                 Assigned_Date__c,
                 Expected_Completion_Date__c,
