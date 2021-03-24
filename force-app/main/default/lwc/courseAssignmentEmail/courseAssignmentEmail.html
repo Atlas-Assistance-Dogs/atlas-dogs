@@ -1,0 +1,33 @@
+<template>
+    <lightning-card title="Hello!" class="slds-m-around_small">
+        <div class="slds-p-around_small">
+            <p>We need to assign courses for the following individual:</p>
+            <dl class="slds-dl_horizontal slds-p-around_small">
+                <dt class="slds-dl_horizontal__label">
+                    <p class="slds-truncate" title="Company">Name:</p>
+                </dt>
+                <dd class="slds-dl_horizontal__detail slds-tile__meta">
+                    <p class="slds-truncate" title={contact.Name}>
+                        {contact.Name}
+                    </p>
+                </dd>
+                <dt class="slds-dl_horizontal__label">
+                    <p class="slds-truncate" title="Email">Email:</p>
+                </dt>
+                <dd class="slds-dl_horizontal__detail slds-tile__meta">
+                    <p class="slds-truncate" title={contact.Email}>
+                        {contact.Email}
+                    </p>
+                </dd>
+            </dl>
+            <p>The following courses should be assigned:</p>
+            <ul class="slds-m-around_medium slds-list_dotted">
+                <template for:each={courses} for:item="course">
+                    <li key={course.Id}>
+                        {course.Course__r.Course_SIS_Section_SIS_Course_Name__c}
+                    </li>
+                </template>
+            </ul>
+        </div>
+    </lightning-card>
+</template>
