@@ -4,11 +4,11 @@
     <externalId>false</externalId>
     <formula>IF(
 AND(
+TODAY() &lt; (Physical_Exam_Due__c ),
 TODAY() &lt; (Vaccine_Due_Distemper__c ),
 TODAY() &lt; (Vaccine_Due_Hepatitis__c ),
 TODAY() &lt; (Vaccine_Due_Parainfluenza__c),
 TODAY() &lt; (Vaccine_Due_Parvovirus__c ),
-TODAY() &lt; (Physical_Exam_Latest__c ),
 TODAY() &lt; (Vaccine_Due_Rabies__c )
 ),
 &apos;Good&apos;,

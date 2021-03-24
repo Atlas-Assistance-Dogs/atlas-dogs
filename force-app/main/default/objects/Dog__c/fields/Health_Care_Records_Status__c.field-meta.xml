@@ -27,7 +27,7 @@ IF(Vaccine_Due_Rabies__c &lt; TODAY(),  IMAGE(&quot;/img/samples/rating1.gif&quo
 
 &amp; 
 
-IF(Physical_Exam_Latest__c &lt; TODAY(),  IMAGE(&quot;/img/samples/rating1.gif&quot;,&apos;*&apos;) &amp; &quot; Physical Exam is not up to date&quot; &amp;  BR() , IMAGE(&quot;/img/samples/rating2.gif&quot;,&apos;*&apos;) &amp; &quot; Physical Exam is good until &quot; &amp;  TEXT(Physical_Exam_Latest__c) &amp;  BR())</formula>
+IF(Physical_Exam_Due__c &lt; TODAY(),  IMAGE(&quot;/img/samples/rating1.gif&quot;,&apos;*&apos;) &amp; &quot; Physical Exam is not up to date&quot; &amp;  BR() , IMAGE(&quot;/img/samples/rating2.gif&quot;,&apos;*&apos;) &amp; &quot; Physical Exam is good until &quot; &amp;  TEXT(Physical_Exam_Latest__c) &amp;  BR())</formula>
     <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
     <label>Health Care Records Status</label>
     <required>false</required>
