@@ -93,6 +93,12 @@
           date_between:
               start_date: -2y
               end_date: today
+      Vaccine_Due_Distemper__c: ${{date(Vaccine_Latest_Distemper__c) + relativedelta(years=1)}}
+      Vaccine_Due_Hepatitis__c: ${{date(Vaccine_Latest_Hepatitis__c) + relativedelta(years=1)}}
+      Vaccine_Due_Parainfluenza__c: ${{date(Vaccine_Latest_Parainfluenza__c) + relativedelta(years=1)}}
+      Vaccine_Due_Parvovirus__c: ${{date(Vaccine_Latest_Parvovirus__c) + relativedelta(years=1)}}
+      Vaccine_Due_Rabies__c: ${{date(Vaccine_Latest_Rabies__c) + relativedelta(years=3)}}
+      Physical_Exam_Due__c: ${{date(Physical_Exam_Latest__c) + relativedelta(years=1)}}
       Name:
           if:
               - choice:
