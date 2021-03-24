@@ -147,18 +147,17 @@
     <flexiPageRegions>
         <itemInstances>
             <fieldInstance>
-                <fieldItem>Record.Most_Recent_Distemper_Vaccine__c</fieldItem>
+                <fieldItem>Record.Vaccine_Latest_Distemper__c</fieldItem>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
-                <fieldItem>Record.Most_Recent_Hepatitis_Vaccine__c</fieldItem>
+                <fieldItem>Record.Vaccine_Latest_Hepatitis__c</fieldItem>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
-                <fieldItem
-                >Record.Most_Recent_Parainfluenza_Vaccine__c</fieldItem>
+                <fieldItem>Record.Vaccine_Latest_Parainfluenza__c</fieldItem>
             </fieldInstance>
         </itemInstances>
         <name>Facet-c6f8a4af-14e8-4df8-8185-a5cb099ed7c9</name>
@@ -167,17 +166,17 @@
     <flexiPageRegions>
         <itemInstances>
             <fieldInstance>
-                <fieldItem>Record.Most_Recent_Parvovirus_Vaccine__c</fieldItem>
+                <fieldItem>Record.Vaccine_Latest_Parvovirus__c</fieldItem>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
-                <fieldItem>Record.Most_Recent_Rabies_Vaccine__c</fieldItem>
+                <fieldItem>Record.Vaccine_Latest_Rabies__c</fieldItem>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
-                <fieldItem>Record.Most_Recent_Physical_Exam__c</fieldItem>
+                <fieldItem>Record.Physical_Exam_Latest__c</fieldItem>
             </fieldInstance>
         </itemInstances>
         <name>Facet-e08de4d3-4d5b-475f-be48-e5f1a879d0d8</name>

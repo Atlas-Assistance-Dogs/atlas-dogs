@@ -2,12 +2,12 @@ import { LightningElement, wire, track, api } from "lwc";
 import { getRecord, getFieldValue } from "lightning/uiRecordApi";
 
 const vaccinationFields = [
-    "Dog__c.Most_Recent_Distemper_Vaccine__c",
-    "Dog__c.Most_Recent_Hepatitis_Vaccine__c",
-    "Dog__c.Most_Recent_Parainfluenza_Vaccine__c",
-    "Dog__c.Most_Recent_Parvovirus_Vaccine__c",
-    "Dog__c.Most_Recent_Physical_Exam__c",
-    "Dog__c.Most_Recent_Rabies_Vaccine__c"
+    "Dog__c.Vaccine_Latest_Distemper__c",
+    "Dog__c.Vaccine_Latest_Hepatitis__c",
+    "Dog__c.Vaccine_Latest_Parainfluenza__c",
+    "Dog__c.Vaccine_Latest_Parvovirus__c",
+    "Dog__c.Physical_Exam_Latest__c",
+    "Dog__c.Vaccine_Latest_Rabies__c"
 ];
 
 export default class Vaccination extends LightningElement {
@@ -16,9 +16,9 @@ export default class Vaccination extends LightningElement {
     @api objectApi;
 
     fieldsArray = [
-        "Most_Recent_Distemper_Vaccine__c",
-        "Most_Recent_Hepatitis_Vaccine__c",
-        "Most_Recent_Rabies_Vaccine__c"
+        "Vaccine_Latest_Distemper__c",
+        "Vaccine_Latest_Hepatitis__c",
+        "Vaccine_Latest_Rabies__c"
     ];
 
     @wire(getRecord, { recordId: "$recordId", fields: vaccinationFields })
@@ -34,7 +34,7 @@ export default class Vaccination extends LightningElement {
     get isExpired() {
         if (this.dogRecord.data) {
             const mydate = new Date(
-                this.dogRecord.data.fields.Most_Recent_Distemper_Vaccine__c.value
+                this.dogRecord.data.fields.Vaccine_Latest_Distemper__c.value
             );
             return mydate < this.today;
         }
@@ -42,40 +42,36 @@ export default class Vaccination extends LightningElement {
 
     get distemper() {
         if (this.dogRecord.data) {
-            return this.dogRecord.data.fields.Most_Recent_Distemper_Vaccine__c
-                .value;
+            return this.dogRecord.data.fields.Vaccine_Latest_Distemper__c.value;
         }
     }
 
     get hepatitis() {
         if (this.dogRecord.data) {
-            return this.dogRecord.data.fields.Most_Recent_Hepatitis_Vaccine__c
-                .value;
+            return this.dogRecord.data.fields.Vaccine_Latest_Hepatitis__c.value;
         }
     }
 
     get parainfluenza() {
         if (this.dogRecord.data) {
-            return this.dogRecord.data.fields
-                .Most_Recent_Parainfluenza_Vaccine__c.value;
+            return this.dogRecord.data.fields.Vaccine_Latest_Parainfluenza__c
+                .value;
         }
     }
     get parvovirus() {
         if (this.dogRecord.data) {
-            return this.dogRecord.data.fields.Most_Recent_Parvovirus_Vaccine__c
+            return this.dogRecord.data.fields.Vaccine_Latest_Parvovirus__c
                 .value;
         }
     }
     get physicalExam() {
         if (this.dogRecord.data) {
-            return this.dogRecord.data.fields.Most_Recent_Physical_Exam__c
-                .value;
+            return this.dogRecord.data.fields.Physical_Exam_Latest__c.value;
         }
     }
     get rabies() {
         if (this.dogRecord.data) {
-            return this.dogRecord.data.fields.Most_Recent_Rabies_Vaccine__c
-                .value;
+            return this.dogRecord.data.fields.Vaccine_Latest_Rabies__c.value;
         }
     }
 }

@@ -69,27 +69,27 @@
               - Fail
       Microchip_Number__c:
           fake: isbn10
-      Most_Recent_Distemper_Vaccine__c:
+      Vaccine_Latest_Distemper__c:
           date_between:
               start_date: -2y
               end_date: today
-      Most_Recent_Hepatitis_Vaccine__c:
+      Vaccine_Latest_Hepatitis__c:
           date_between:
               start_date: -2y
               end_date: today
-      Most_Recent_Parainfluenza_Vaccine__c:
+      Vaccine_Latest_Parainfluenza__c:
           date_between:
               start_date: -2y
               end_date: today
-      Most_Recent_Parvovirus_Vaccine__c:
+      Vaccine_Latest_Parvovirus__c:
           date_between:
               start_date: -2y
               end_date: today
-      Most_Recent_Physical_Exam__c:
+      Vaccine_Latest_Rabies__c:
           date_between:
               start_date: -2y
               end_date: today
-      Most_Recent_Rabies_Vaccine__c:
+      Physical_Exam_Latest__c:
           date_between:
               start_date: -2y
               end_date: today

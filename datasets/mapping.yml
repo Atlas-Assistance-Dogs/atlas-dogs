@@ -168,12 +168,12 @@ Insert Dog__c:
         - Health_Check_Note__c
         - Latest_Physical_Exam_Outcome__c
         - Microchip_Number__c
-        - Most_Recent_Distemper_Vaccine__c
-        - Most_Recent_Hepatitis_Vaccine__c
-        - Most_Recent_Parainfluenza_Vaccine__c
-        - Most_Recent_Parvovirus_Vaccine__c
-        - Most_Recent_Physical_Exam__c
-        - Most_Recent_Rabies_Vaccine__c
+        - Vaccine_Due_Distemper__c
+        - Vaccine_Due_Hepatitis__c
+        - Vaccine_Due_Parainfluenza__c
+        - Vaccine_Due_Parvovirus__c
+        - Physical_Exam_Latest__c
+        - Vaccine_Due_Rabies__c
         - Name
         - Picture__c
         - Spayed_Neutered__c

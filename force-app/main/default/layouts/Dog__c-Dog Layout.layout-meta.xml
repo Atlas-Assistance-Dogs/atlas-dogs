@@ -37,6 +37,30 @@
                 <behavior>Edit</behavior>
                 <field>Picture__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Vaccine_Due_Distemper__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Vaccine_Due_Hepatitis__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Vaccine_Due_Parainfluenza__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Vaccine_Due_Parvovirus__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Vaccine_Due_Rabies__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Physical_Exam_Due__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
@@ -86,7 +110,7 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Most_Recent_Physical_Exam__c</field>
+                <field>Physical_Exam_Latest__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
@@ -120,25 +144,25 @@
         <layoutColumns>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Most_Recent_Distemper_Vaccine__c</field>
+                <field>Vaccine_Latest_Distemper__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Most_Recent_Hepatitis_Vaccine__c</field>
+                <field>Vaccine_Latest_Hepatitis__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Most_Recent_Rabies_Vaccine__c</field>
+                <field>Vaccine_Latest_Rabies__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Most_Recent_Parainfluenza_Vaccine__c</field>
+                <field>Vaccine_Latest_Parainfluenza__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Most_Recent_Parvovirus_Vaccine__c</field>
+                <field>Vaccine_Latest_Parvovirus__c</field>
             </layoutItems>
             <layoutItems>
                 <emptySpace>true</emptySpace>
