@@ -1,7 +1,7 @@
-- object: Account
-  just_once: True
-  fields:
-      name: The Account
+# - object: Account
+#   just_once: True
+#   fields:
+#       name: The Account
 
 - object: Campaign
   just_once: True

@@ -1,5 +1,10 @@
+# Lead recipe
+# To run this code against a fresh scratch org called ("qa"):
+#
+# cci task run generate_and_load_from_yaml -o generator_yaml datasets/recipes/lead.recipe.yml -o num_records 100 -o num_records_tablename Lead --org qa
+
 - include_file: common.recipe.yml
-- include_file: standard_objs.recipe.yml
+#- include_file: standard_objs.recipe.yml
 
 - object: Lead
   fields:

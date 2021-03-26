@@ -25,6 +25,7 @@
   fields:
       name:
           fake: company
+      RecordType: Organization
       Description:
           fake: catch_phrase
       NumberOfEmployees:
