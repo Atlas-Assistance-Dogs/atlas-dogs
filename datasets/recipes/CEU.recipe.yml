@@ -29,19 +29,13 @@
           random_number:
               min: 1
               max: 20
-
-- object: CEU_Participant__c
-  count: ${{random_number(0, 10)}}
-  fields:
-      CEU__c:
-          reference: CEU__c
-      Date_Completed__c:
-          date_between:
-              start_date: 2000-01-01
-              end_date: today
       Date_Submitted__c:
           date_between:
               start_date: 2000-01-01
+              end_date: today
+      Date_Completed__c:
+          date_between:
+              start_date: ${{date(Date_Submitted__c)}}
               end_date: today
       Role__c:
           random_choice:

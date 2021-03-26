@@ -6,7 +6,7 @@
 # cci task run generate_and_load_from_yaml -o generator_yaml datasets/recipes/Contact.recipe.yml -o num_records 300 -o num_records_tablename Contact --org qa
 
 # Look at examples/salesforce/Contact.recipe.yml for more examples.
-- include_file: standard_objs.recipe.yml
+#- include_file: standard_objs.recipe.yml
 - include_file: standard_npsp_objs_recipe.yml
 - include_file: common.recipe.yml
 

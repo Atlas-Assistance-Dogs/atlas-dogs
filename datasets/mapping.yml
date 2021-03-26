@@ -1,13 +1,15 @@
-Insert CEU__c:
-    sf_object: CEU__c
+Insert ContentVersion:
+    sf_object: ContentVersion
     fields:
-        - Authority__c
-        - Comments__c
-        - Name
-        - Program_Date__c
-        - Program_Hours__c
-        - Program_Title__c
-        - Quantity__c
+        - ContentLocation
+        - IsAssetEnabled
+        - IsMajorVersion
+        - Origin
+        - Positions__c
+        - SharingOption
+        - SharingPrivacy
+        - Title
+        - Type__c
 Insert Course__c:
     sf_object: Course__c
     fields:
@@ -168,16 +170,22 @@ Insert Dog__c:
         - Health_Check_Note__c
         - Latest_Physical_Exam_Outcome__c
         - Microchip_Number__c
+        - Name
+        - Physical_Exam_Due__c
+        - Physical_Exam_Latest__c
+        - Picture__c
+        - Spayed_Neutered__c
+        - Status__c
         - Vaccine_Due_Distemper__c
         - Vaccine_Due_Hepatitis__c
         - Vaccine_Due_Parainfluenza__c
         - Vaccine_Due_Parvovirus__c
-        - Physical_Exam_Latest__c
         - Vaccine_Due_Rabies__c
-        - Name
-        - Picture__c
-        - Spayed_Neutered__c
-        - Status__c
+        - Vaccine_Latest_Distemper__c
+        - Vaccine_Latest_Hepatitis__c
+        - Vaccine_Latest_Parainfluenza__c
+        - Vaccine_Latest_Parvovirus__c
+        - Vaccine_Latest_Rabies__c
     lookups:
         Vet_Clinic__c:
             table: Account
@@ -331,17 +339,21 @@ Insert Background_Check__c:
     lookups:
         Contact__c:
             table: Contact
-Insert CEU_Participant__c:
-    sf_object: CEU_Participant__c
+Insert CEU__c:
+    sf_object: CEU__c
     fields:
+        - Authority__c
+        - Comments__c
         - Date_Completed__c
         - Date_Submitted__c
         - Name
+        - Program_Date__c
+        - Program_Hours__c
+        - Program_Title__c
+        - Quantity__c
         - Role__c
         - Status__c
     lookups:
-        CEU__c:
-            table: CEU__c
         Trainer__c:
             table: Contact
 Insert Course_Assignment__c:

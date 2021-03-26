@@ -395,8 +395,8 @@
       Name: ${{Contact__c.FirstName}} ${{Dog__c.Name}} ${{Type__c}}
       Type__c:
           random_choice:
-              - Owner
-              - Trainer
+              - Handler
+              - Facilitator
               - Client
 
 - object: Dog_Relationship__c
