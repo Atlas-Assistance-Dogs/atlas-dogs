@@ -37,3 +37,5 @@ jobs:
                   SSH_KEY: ${{secrets.SSH_KEY}}
                   CONSUMER_KEY: ${{secrets.SANDBOX_CLIENT_ID}}
                   HUB_USERNAME: ${{secrets.DEVUSER}}
+            - run: |
+                  cci flow run sandbox --org sandbox

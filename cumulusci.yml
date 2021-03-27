@@ -59,3 +59,12 @@ flows:
         steps:
             2:
                 flow: None
+
+    # Flow to deploy current source to a sandbox for dev or verification
+    sandbox:
+        steps:
+            1:
+                task: dx
+                options:
+                    command: force:source:deploy
+                    extra: -p force-app/main/default
