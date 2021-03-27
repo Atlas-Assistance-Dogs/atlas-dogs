@@ -9,7 +9,10 @@ on:
 env:
     CUMULUSCI_KEYCHAIN_CLASS: cumulusci.core.keychain.EnvironmentProjectKeychain
     CUMULUSCI_SERVICE_github: ${{ secrets.CUMULUSCI_SERVICE_github }}
-    CUMULUSCI_ORG_SANDBOX: ${{ secrets.CUMULUSCI_ORG_SANDBOX }}
+    CUMULUSCI_ORG_sandbox: ${{ secrets.CUMULUSCI_ORG_SANDBOX }}
+    SFDX_CLIENT_ID: ${{ secrets.SANDBOX_CLIENT_ID }}
+    SFDX_HUB_KEY: ${{ secrets.SSH_KEY }}
+    SFDX_AUDIENCE_URL: "https://test.salesforce.com"
 
 jobs:
     deploy_to_sandbox:
