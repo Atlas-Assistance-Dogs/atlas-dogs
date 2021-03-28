@@ -11,11 +11,6 @@
         <label>Team Facilitator Certification</label>
     </customValue>
     <customValue>
-        <fullName>Team Facilitator Lead</fullName>
-        <default>false</default>
-        <label>Team Facilitator Lead</label>
-    </customValue>
-    <customValue>
         <fullName>Client Certification</fullName>
         <default>false</default>
         <label>Client Certification</label>
@@ -39,6 +34,11 @@
         <fullName>General info/Other</fullName>
         <default>false</default>
         <label>General info/Other</label>
+    </customValue>
+    <customValue>
+        <fullName>Trainer Certification</fullName>
+        <default>false</default>
+        <label>Trainer Certification</label>
     </customValue>
     <description>What a lead is interested in</description>
     <masterLabel>I want to know more about</masterLabel>
