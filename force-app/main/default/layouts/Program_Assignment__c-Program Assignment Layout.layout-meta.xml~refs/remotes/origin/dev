@@ -29,7 +29,7 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>ExpectedCompletion__c</field>
+                <field>Expected_Completion__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
@@ -39,7 +39,7 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>CompletionDate__c</field>
+                <field>Completion_Date__c</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsTopToBottom</style>
