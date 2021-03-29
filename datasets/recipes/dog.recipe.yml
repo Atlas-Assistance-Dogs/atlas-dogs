@@ -391,17 +391,19 @@
       Contact__c:
           random_reference: Contact
       Dog__c:
-          random_reference: Dog__c
-      Name: ${{Contact__c.FirstName}} ${{Dog__c.Name}} ${{Type__c}}
+          reference: dog
       Type__c:
           random_choice:
               - Handler
               - Facilitator
               - Client
+      Name: ${{Contact__c.FirstName}} ${{Dog__c.Name}} ${{Type__c}}
 
 - object: Dog_Relationship__c
   fields:
-      Contact__c: vet
-      Dog__c: dog
-      Name: ${{vet.Name}}-${{dog.Name}}
+      Contact__c:
+          reference: vet
+      Dog__c:
+          reference: dog
+      Name: ${{Contact__c.Name}}-${{Dog__c.Name}}-Vet
       Type__c: Veterinarian

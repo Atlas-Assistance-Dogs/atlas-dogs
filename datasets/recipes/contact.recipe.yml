@@ -237,6 +237,12 @@
               - Twitter
               - Health Provider
               - Other
+      Lead_Source_Other__c:
+          if:
+              - choice:
+                    when: ${{LeadSource == 'Other'}}
+                    pick:
+                        fake: company
       Birthdate:
           date_between:
               start_date: -1y
@@ -365,7 +371,7 @@
           random_choice:
               - Volunteering
               - Team Facilitator Certification
-              - Team Facilitator Lead
+              - Trainer Certification
               - Client Certification
               - Owner Trainer Program
               - Sweet Snoopers Training Program

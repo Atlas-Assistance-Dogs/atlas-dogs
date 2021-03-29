@@ -128,24 +128,6 @@
     </actionOverrides>
     <actionOverrides>
         <actionName>View</actionName>
-        <comment
-        >Action override created by Lightning App Builder during activation.</comment>
-        <content>Assigned_Courses</content>
-        <formFactor>Large</formFactor>
-        <skipRecordTypeSelect>false</skipRecordTypeSelect>
-        <type>Flexipage</type>
-    </actionOverrides>
-    <actionOverrides>
-        <actionName>View</actionName>
-        <comment
-        >Action override created by Lightning App Builder during activation.</comment>
-        <content>Assigned_Courses</content>
-        <formFactor>Small</formFactor>
-        <skipRecordTypeSelect>false</skipRecordTypeSelect>
-        <type>Flexipage</type>
-    </actionOverrides>
-    <actionOverrides>
-        <actionName>View</actionName>
         <type>Default</type>
     </actionOverrides>
     <allowInChatterGroups>true</allowInChatterGroups>
@@ -161,14 +143,14 @@
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
     <externalSharingModel>Private</externalSharingModel>
-    <label>Course Assignment</label>
+    <label>Program Assignment</label>
     <nameField>
-        <displayFormat>CT-{000000}</displayFormat>
-        <label>Course Assignment Name</label>
+        <displayFormat>PA-{000000}</displayFormat>
+        <label>Program Assignment Name</label>
         <trackHistory>false</trackHistory>
         <type>AutoNumber</type>
     </nameField>
-    <pluralLabel>Course Assignments</pluralLabel>
+    <pluralLabel>Program Assignments</pluralLabel>
     <searchLayouts />
     <sharingModel>ReadWrite</sharingModel>
     <visibility>Public</visibility>
