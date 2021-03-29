@@ -34,28 +34,15 @@ flows:
                     include_beta: False
     config_qa:
         steps:
-            2:
+            1:
                 task: dx_push
                 when: org_config.scratch
-            3:
+            2:
                 task: assign_permission_sets
                 options:
                     api_names: Atlas_Super_User
-            4:
-                task: dx
-                options:
-                    command: force:source:deploy
-                    extra: -p force-app2/main/default
-            5:
-                task: dx
-                options:
-                    command: force:data:tree:import
-                    extra: -p datasets/Account-Contact-plan.json
-            6:
-                task: dx
-                options:
-                    command: force:data:tree:import
-                    extra: -f datasets/Dog__c.json,datasets/Course__c.json
+            3:
+                task: load_dataset
     config_dev:
         steps:
             1:

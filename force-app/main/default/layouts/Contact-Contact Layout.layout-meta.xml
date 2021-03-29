@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Layout xmlns="http://soap.sforce.com/2006/04/metadata">
-    <excludeButtons>RequestUseSfdc</excludeButtons>
     <layoutSections>
         <customLabel>false</customLabel>
         <detailHeading>false</detailHeading>
@@ -46,6 +45,10 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Client_Team_Primary_Certification__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Lead_Source_Other__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
@@ -282,11 +285,10 @@
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>
-        <fields>Course_Name__c</fields>
-        <fields>Expected_Completion_Date__c</fields>
-        <fields>Status__c</fields>
+        <fields>Program__c</fields>
+        <fields>Assigned_Date__c</fields>
         <fields>Completion_Date__c</fields>
-        <relatedList>Course_Assignment__c.Contact__c</relatedList>
+        <relatedList>Program_Assignment__c.Contact__c</relatedList>
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>
@@ -320,7 +322,7 @@
     <showRunAssignmentRulesCheckbox>false</showRunAssignmentRulesCheckbox>
     <showSubmitAndAttachButton>false</showSubmitAndAttachButton>
     <summaryLayout>
-        <masterLabel>00h1F000003waZh</masterLabel>
+        <masterLabel>00hS0000003hZBv</masterLabel>
         <sizeX>4</sizeX>
         <sizeY>0</sizeY>
         <summaryLayoutStyle>Default</summaryLayoutStyle>

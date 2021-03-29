@@ -83,6 +83,10 @@
                 <behavior>Edit</behavior>
                 <field>Volunteer_Access__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Lead_Source_Other__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns />
         <style>TwoColumnsLeftToRight</style>
@@ -124,7 +128,7 @@
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>
-        <relatedList>Course_Assignment__c.Contact__c</relatedList>
+        <relatedList>Program_Assignment__c.Contact__c</relatedList>
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>

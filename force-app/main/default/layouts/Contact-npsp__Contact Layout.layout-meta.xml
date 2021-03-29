@@ -49,6 +49,10 @@
                 <behavior>Edit</behavior>
                 <field>Client_Team_Primary_Certification__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Lead_Source_Other__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
@@ -606,11 +610,9 @@
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>
-        <fields>Expected_Completion_Date__c</fields>
+        <fields>Assigned_Date__c</fields>
         <fields>Completion_Date__c</fields>
-        <fields>Course_Name__c</fields>
-        <fields>Status__c</fields>
-        <relatedList>Course_Assignment__c.Contact__c</relatedList>
+        <relatedList>Program_Assignment__c.Contact__c</relatedList>
     </relatedLists>
     <relatedLists>
         <relatedList>RelatedFileList</relatedList>

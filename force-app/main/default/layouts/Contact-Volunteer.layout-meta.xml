@@ -83,6 +83,10 @@
                 <behavior>Edit</behavior>
                 <field>Volunteer_Access__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Lead_Source_Other__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns />
         <style>TwoColumnsTopToBottom</style>
@@ -138,7 +142,9 @@
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>
-        <relatedList>Course_Assignment__c.Contact__c</relatedList>
+        <fields>Assigned_Date__c</fields>
+        <fields>Completion_Date__c</fields>
+        <relatedList>Program_Assignment__c.Contact__c</relatedList>
     </relatedLists>
     <relatedObjects>AccountId</relatedObjects>
     <showEmailCheckbox>false</showEmailCheckbox>

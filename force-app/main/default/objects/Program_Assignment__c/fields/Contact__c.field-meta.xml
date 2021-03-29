@@ -5,8 +5,8 @@
     <externalId>false</externalId>
     <label>Contact</label>
     <referenceTo>Contact</referenceTo>
-    <relationshipLabel>Course Assigned</relationshipLabel>
-    <relationshipName>Course_Assigned</relationshipName>
+    <relationshipLabel>Assigned Program</relationshipLabel>
+    <relationshipName>Assigned_Program</relationshipName>
     <required>true</required>
     <trackHistory>false</trackHistory>
     <trackTrending>false</trackTrending>

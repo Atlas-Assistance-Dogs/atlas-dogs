@@ -88,6 +88,10 @@
                 <behavior>Edit</behavior>
                 <field>Volunteer_Access__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Lead_Source_Other__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns />
         <style>TwoColumnsLeftToRight</style>
@@ -131,12 +135,7 @@
         <fields>NAME</fields>
         <fields>Assigned_Date__c</fields>
         <fields>Completion_Date__c</fields>
-        <fields>Expected_Completion_Date__c</fields>
-        <fields>Course_SIS__c</fields>
-        <fields>Term_SIS__c</fields>
-        <fields>Course__c</fields>
-        <fields>Section_SIS__c</fields>
-        <relatedList>Course_Assignment__c.Contact__c</relatedList>
+        <relatedList>Program_Assignment__c.Contact__c</relatedList>
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>
