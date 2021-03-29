@@ -64,7 +64,7 @@ flows:
     sandbox:
         steps:
             1:
-                task: update_dependencies
+                flow: dependencies
             2:
                 task: dx
                 options:
