@@ -64,6 +64,8 @@ flows:
     sandbox:
         steps:
             1:
+                flow: update_dependencies
+            2:
                 task: dx
                 options:
                     command: force:source:deploy
