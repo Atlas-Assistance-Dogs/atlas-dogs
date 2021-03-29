@@ -10,17 +10,6 @@ Insert ContentVersion:
         - SharingPrivacy
         - Title
         - Type__c
-Insert Course__c:
-    sf_object: Course__c
-    fields:
-        - Active__c
-        - Course_Name__c
-        - Course_SIS__c
-        - Expected_Completion__c
-        - Name
-        - Positions__c
-        - Section_SIS__c
-        - Term_SIS__c
 Insert npo02__Household__c:
     sf_object: npo02__Household__c
     fields:
@@ -242,6 +231,7 @@ Insert Contact:
         - Lead_Comments__c
         - Lead_Facilitator_Status__c
         - Lead_Interest__c
+        - Lead_Source_Other__c
         - Positions__c
         - Pronoun_Other__c
         - Pronoun__c
@@ -356,18 +346,6 @@ Insert CEU__c:
     lookups:
         Trainer__c:
             table: Contact
-Insert Course_Assignment__c:
-    sf_object: Course_Assignment__c
-    fields:
-        - Assigned_Date__c
-        - Completion_Date__c
-        - Expected_Completion_Date__c
-        - Status__c
-    lookups:
-        Contact__c:
-            table: Contact
-        Course__c:
-            table: Course__c
 Insert Dog_Relationship__c:
     sf_object: Dog_Relationship__c
     fields:
@@ -395,6 +373,15 @@ Insert Log__c:
         - Type__c
     lookups:
         Submitter__c:
+            table: Contact
+Insert Program_Assignment__c:
+    sf_object: Program_Assignment__c
+    fields:
+        - Assigned_Date__c
+        - Completion_Date__c
+        - Program__c
+    lookups:
+        Contact__c:
             table: Contact
 Insert Contact_Log__c:
     sf_object: Contact_Log__c
