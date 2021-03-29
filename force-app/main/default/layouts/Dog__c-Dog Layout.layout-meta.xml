@@ -246,12 +246,11 @@
         <fields>CORE.USERS.FULL_NAME</fields>
         <relatedList>RelatedActivityList</relatedList>
     </relatedLists>
-    <relatedLists>
-        <fields>VERSION.TITLE</fields>
+    <!--relatedLists>
         <fields>VERSION.CREATED_DATE</fields>
         <fields>VERSION.LAST_UPDATE</fields>
         <relatedList>ContentDocumentRelatedList</relatedList>
-    </relatedLists>
+    </relatedLists-->
     <relatedLists>
         <fields>NAME</fields>
         <fields>Contact__c</fields>
