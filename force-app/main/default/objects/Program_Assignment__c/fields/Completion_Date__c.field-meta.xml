@@ -2,7 +2,7 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Completion_Date__c</fullName>
     <externalId>false</externalId>
-    <label>Course Completion Date</label>
+    <label>Completion Date</label>
     <required>false</required>
     <trackHistory>false</trackHistory>
     <trackTrending>false</trackTrending>
