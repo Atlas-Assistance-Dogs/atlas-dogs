@@ -14,3 +14,9 @@
       Contact__c:
           reference: Person
       Program__c: ${{Contact__c.Position__c}}
+      Status__c:
+          random_choice:
+              - In progress
+              - Completed
+              - Discontinued
+              - Removed

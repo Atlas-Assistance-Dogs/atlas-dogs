@@ -5,9 +5,10 @@
     <label>Pronoun</label>
     <required>false</required>
     <trackFeedHistory>false</trackFeedHistory>
-    <type>Picklist</type>
+    <type>MultiselectPicklist</type>
     <valueSet>
         <restricted>true</restricted>
         <valueSetName>Pronouns</valueSetName>
     </valueSet>
+    <visibleLines>4</visibleLines>
 </CustomField>
