@@ -1496,6 +1496,7 @@ INSERT INTO "ContactLog__c" VALUES(797,'Log 2006-11-10','Team Facilitator Lead',
 INSERT INTO "ContactLog__c" VALUES(798,'Log 2006-11-10','Volunteer','159','69');
 INSERT INTO "ContactLog__c" VALUES(799,'Log 2006-11-10','Team Facilitator Lead','159','139');
 INSERT INTO "ContactLog__c" VALUES(800,'Log 2006-11-10','Owner Trainer','159','72');
+<<<<<<< refs/remotes/origin/dev
 CREATE TABLE "ContentVersion" (
 	id INTEGER NOT NULL, 
 	"ContentLocation" VARCHAR(255), 
@@ -1520,6 +1521,8 @@ INSERT INTO "ContentVersion" VALUES(1,'S','True','True','H','Volunteer','A','N',
 CREATE TABLE "Dog_Relationship__c" (
 =======
 INSERT INTO "ContentVersion" VALUES(1,'S','True','True','H','Volunteer','A','N','Atlas-Assitance-Dogs-Logo','');
+=======
+>>>>>>> Small corrections to mapping and cci flow
 CREATE TABLE "ContinuingEducationUnit__c" (
 	id INTEGER NOT NULL, 
 	"Authority__c" VARCHAR(255), 
