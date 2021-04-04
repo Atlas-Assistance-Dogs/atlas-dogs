@@ -2,18 +2,18 @@
 <EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
     <available>true</available>
     <encodingKey>ISO-8859-1</encodingKey>
-    <letterhead>Atlas_Letterhead_v2</letterhead>
+    <letterhead>AtlasLetterhead_v2</letterhead>
     <name>Volunteer Not Accepted Post Interview</name>
     <style>freeForm</style>
     <subject
     >Thank you for applying to volunteer with Atlas Assistance Dogs</subject>
-    <textOnly>Dear {!Account.First_Name__c} {!Account.Last_Name__c},
+    <textOnly>Dear {!Account.FirstName__c} {!Account.LastName__c},
 
 We want to thank you for your interest in volunteering with Atlas Assistance Dogs.
 
 After completing the interview, our organization and this role don&apos;t seem like the right fit for you right now.
 
-{!Rejection_Note_after_Vol_Role_Interview__c}
+{!RejectionNote_afterVolRoleInterview__c}
 
 We wish you nothing but the best.
 

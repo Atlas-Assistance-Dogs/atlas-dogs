@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Profile xmlns="http://soap.sforce.com/2006/04/metadata">
     <applicationVisibilities>
-        <application>Atlas_Assistance_Dogs</application>
+        <application>AtlasAssistanceDogs</application>
         <default>false</default>
         <visible>true</visible>
     </applicationVisibilities>
@@ -28,147 +28,147 @@
     <custom>false</custom>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Background_Check__c.Date__c</field>
+        <field>BackgroundCheck__c.Date__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Background_Check__c.Notes__c</field>
+        <field>BackgroundCheck__c.Notes__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Background_Check__c.Result__c</field>
+        <field>BackgroundCheck__c.Result__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>CEU__c.Authority__c</field>
+        <field>ContinuingEducationUnit__c.Authority__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>CEU__c.Comments__c</field>
+        <field>ContinuingEducationUnit__c.Comments__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>CEU__c.Date_Completed__c</field>
+        <field>ContinuingEducationUnit__c.DateCompleted__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>CEU__c.Date_Submitted__c</field>
+        <field>ContinuingEducationUnit__c.DateSubmitted__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>CEU__c.Program_Date__c</field>
+        <field>ContinuingEducationUnit__c.ProgramDate__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>CEU__c.Program_Hours__c</field>
+        <field>ContinuingEducationUnit__c.ProgramHours__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>CEU__c.Program_Title__c</field>
+        <field>ContinuingEducationUnit__c.ProgramTitle__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>CEU__c.Quantity__c</field>
+        <field>ContinuingEducationUnit__c.Quantity__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>CEU__c.Role__c</field>
+        <field>ContinuingEducationUnit__c.Role__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>CEU__c.Status__c</field>
+        <field>ContinuingEducationUnit__c.Status__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>CEU__c.Trainer__c</field>
+        <field>ContinuingEducationUnit__c.Trainer__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Contact.Board_Member_Accepted_Date__c</field>
+        <field>Contact.BoardMemberAcceptedDate__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Contact.Board_Member_Status__c</field>
+        <field>Contact.BoardMemberStatus__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Contact.Client_Medical_Devices__c</field>
+        <field>Contact.ClientMedicalDevices__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Contact.Client_Status__c</field>
+        <field>Contact.ClientStatus__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Contact.Client_Team_Primary_Certification__c</field>
+        <field>Contact.ClientTeamPrimaryCertification__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Contact.Client_Team_Secondary_Certification__c</field>
+        <field>Contact.ClientTeamSecondaryCertification__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Contact.Criminal_Conviction_Notes__c</field>
+        <field>Contact.CriminalConvictionNotes__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Contact.Criminal_Conviction__c</field>
+        <field>Contact.CriminalConviction__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Contact.Date_Started__c</field>
+        <field>Contact.DateStarted__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Contact.Facilitator_Interview_Notes__c</field>
+        <field>Contact.FacilitatorInterviewNotes__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Contact.Facilitator_Status__c</field>
+        <field>Contact.FacilitatorStatus__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Contact.Lead_Comments__c</field>
+        <field>Contact.LeadComments__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Contact.Lead_Facilitator_Status__c</field>
+        <field>Contact.LeadFacilitatorStatus__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Contact.Lead_Interest__c</field>
+        <field>Contact.LeadInterest__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Contact.Lead_Source_Other__c</field>
+        <field>Contact.LeadSourceOther__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -178,7 +178,7 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Contact.Pronoun_Other__c</field>
+        <field>Contact.PronounOther__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -188,57 +188,57 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Contact.Trainer_Board_Train__c</field>
+        <field>Contact.TrainerBoardTrain__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Contact.Trainer_CEU_Status__c</field>
+        <field>Contact.TrainerCEUStatus__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Contact.Trainer_Specialties__c</field>
+        <field>Contact.TrainerSpecialties__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Contact.Trainer_Status__c</field>
+        <field>Contact.TrainerStatus__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Contact.Volunteer_Access__c</field>
+        <field>Contact.VolunteerAccess__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Contact.Volunteer_Background__c</field>
+        <field>Contact.VolunteerBackground__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Contact.Volunteer_Focus__c</field>
+        <field>Contact.VolunteerFocus__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Contact.Volunteer_Interview_Notes__c</field>
+        <field>Contact.VolunteerInterviewNotes__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Contact.Volunteer_Status__c</field>
+        <field>Contact.VolunteerStatus__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Contact_Log__c.Contact__c</field>
+        <field>ContactLog__c.Contact__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Contact_Log__c.Log__c</field>
+        <field>ContactLog__c.Log__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -253,22 +253,22 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Dog_Relationship__c.Contact__c</field>
+        <field>DogRelationship__c.Contact__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Dog_Relationship__c.Dog__c</field>
+        <field>DogRelationship__c.Dog__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Dog_Relationship__c.Type__c</field>
+        <field>DogRelationship__c.Type__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Dog__c.Activation_Date__c</field>
+        <field>Dog__c.ActivationDate__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -303,7 +303,7 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Dog__c.Eligible_by_DOB__c</field>
+        <field>Dog__c.Eligible_byDOB__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -313,7 +313,7 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Dog__c.Expiry_Date_Status__c</field>
+        <field>Dog__c.ExpiryDateStatus__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -323,27 +323,27 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Dog__c.Health_Care_Records_Status__c</field>
+        <field>Dog__c.HealthCareRecordsStatus__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Dog__c.Health_Check_Failed_Dog_Accepted__c</field>
+        <field>Dog__c.HealthCheckFailedDogAccepted__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Dog__c.Health_Check_Note__c</field>
+        <field>Dog__c.HealthCheckNote__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Dog__c.Latest_Physical_Exam_Outcome__c</field>
+        <field>Dog__c.LatestPhysicalExamOutcome__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Dog__c.Microchip_Number__c</field>
+        <field>Dog__c.MicrochipNumber__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -353,12 +353,12 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Dog__c.Physical_Exam_Due__c</field>
+        <field>Dog__c.PhysicalExamDue__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Dog__c.Physical_Exam_Latest__c</field>
+        <field>Dog__c.PhysicalExamLatest__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -368,7 +368,7 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Dog__c.Spayed_Neutered__c</field>
+        <field>Dog__c.SpayedNeutered__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -378,72 +378,72 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Dog__c.Vaccine_Due_Distemper__c</field>
+        <field>Dog__c.VaccineDueDistemper__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Dog__c.Vaccine_Due_Hepatitis__c</field>
+        <field>Dog__c.VaccineDueHepatitis__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Dog__c.Vaccine_Due_Parainfluenza__c</field>
+        <field>Dog__c.VaccineDueParainfluenza__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Dog__c.Vaccine_Due_Parvovirus__c</field>
+        <field>Dog__c.VaccineDueParvovirus__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Dog__c.Vaccine_Due_Rabies__c</field>
+        <field>Dog__c.VaccineDueRabies__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Dog__c.Vaccine_Latest_Distemper__c</field>
+        <field>Dog__c.VaccineLatestDistemper__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Dog__c.Vaccine_Latest_Hepatitis__c</field>
+        <field>Dog__c.VaccineLatestHepatitis__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Dog__c.Vaccine_Latest_Parainfluenza__c</field>
+        <field>Dog__c.VaccineLatestParainfluenza__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Dog__c.Vaccine_Latest_Parvovirus__c</field>
+        <field>Dog__c.VaccineLatestParvovirus__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Dog__c.Vaccine_Latest_Rabies__c</field>
+        <field>Dog__c.VaccineLatestRabies__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Dog__c.Vet_Clinic__c</field>
+        <field>Dog__c.VetClinic__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Lead.Lead_Interest__c</field>
+        <field>Lead.LeadInterest__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Lead.Lead_Source_Other__c</field>
+        <field>Lead.LeadSourceOther__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Lead.Pronoun_Other__c</field>
+        <field>Lead.PronounOther__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -453,7 +453,7 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Log__c.Client_Stress__c</field>
+        <field>Log__c.ClientStress__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -463,22 +463,22 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Log__c.Other_Hours__c</field>
+        <field>Log__c.OtherHours__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Log__c.Public_Access_Hours__c</field>
+        <field>Log__c.PublicAccessHours__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Log__c.Request_Support_From_Atlas__c</field>
+        <field>Log__c.RequestSupportFromAtlas__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Log__c.Request_Support_From_Team__c</field>
+        <field>Log__c.RequestSupportFromTeam__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -488,7 +488,7 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Log__c.Session_Type__c</field>
+        <field>Log__c.SessionType__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -508,17 +508,17 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Program_Assignment__c.Completion_Date__c</field>
+        <field>ProgramAssignment__c.CompletionDate__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Program_Assignment__c.Expected_Completion__c</field>
+        <field>ProgramAssignment__c.ExpectedCompletion__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Program_Assignment__c.Status__c</field>
+        <field>ProgramAssignment__c.Status__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -527,10 +527,10 @@
         <readable>true</readable>
     </fieldPermissions>
     <layoutAssignments>
-        <layout>Background_Check__c-Background Check Layout</layout>
+        <layout>BackgroundCheck__c-Background Check Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>CEU__c-CEU Layout</layout>
+        <layout>ContinuingEducationUnit__c-CEU Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
         <layout>CommunityMemberLayout-Community Member Layout</layout>
@@ -539,10 +539,10 @@
         <layout>Contact-Contact Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>Contact_Log__c-Contact Log Layout</layout>
+        <layout>ContactLog__c-Contact Log Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>Dog_Relationship__c-Dog Relationship Layout</layout>
+        <layout>DogRelationship__c-Dog Relationship Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
         <layout>Dog__c-Dog Layout</layout>
@@ -551,7 +551,7 @@
         <layout>Log__c-Log Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>Program_Assignment__c-Program Assignment Layout</layout>
+        <layout>ProgramAssignment__c-Program Assignment Layout</layout>
     </layoutAssignments>
     <objectPermissions>
         <allowCreate>true</allowCreate>
@@ -559,7 +559,7 @@
         <allowEdit>true</allowEdit>
         <allowRead>true</allowRead>
         <modifyAllRecords>true</modifyAllRecords>
-        <object>Background_Check__c</object>
+        <object>BackgroundCheck__c</object>
         <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
     <objectPermissions>
@@ -568,7 +568,7 @@
         <allowEdit>true</allowEdit>
         <allowRead>true</allowRead>
         <modifyAllRecords>true</modifyAllRecords>
-        <object>CEU__c</object>
+        <object>ContinuingEducationUnit__c</object>
         <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
     <objectPermissions>
@@ -577,7 +577,7 @@
         <allowEdit>true</allowEdit>
         <allowRead>true</allowRead>
         <modifyAllRecords>true</modifyAllRecords>
-        <object>Contact_Log__c</object>
+        <object>ContactLog__c</object>
         <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
     <objectPermissions>
@@ -586,7 +586,7 @@
         <allowEdit>true</allowEdit>
         <allowRead>true</allowRead>
         <modifyAllRecords>true</modifyAllRecords>
-        <object>Dog_Relationship__c</object>
+        <object>DogRelationship__c</object>
         <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
     <objectPermissions>
@@ -613,7 +613,7 @@
         <allowEdit>true</allowEdit>
         <allowRead>true</allowRead>
         <modifyAllRecords>true</modifyAllRecords>
-        <object>Program_Assignment__c</object>
+        <object>ProgramAssignment__c</object>
         <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
     <recordTypeVisibilities>
@@ -632,11 +632,11 @@
         <visible>false</visible>
     </recordTypeVisibilities>
     <tabVisibilities>
-        <tab>Background_Check__c</tab>
+        <tab>BackgroundCheck__c</tab>
         <visibility>DefaultOn</visibility>
     </tabVisibilities>
     <tabVisibilities>
-        <tab>CEU__c</tab>
+        <tab>ContinuingEducationUnit__c</tab>
         <visibility>DefaultOn</visibility>
     </tabVisibilities>
     <tabVisibilities>
@@ -644,7 +644,7 @@
         <visibility>Hidden</visibility>
     </tabVisibilities>
     <tabVisibilities>
-        <tab>Program_Assignment__c</tab>
+        <tab>ProgramAssignment__c</tab>
         <visibility>DefaultOn</visibility>
     </tabVisibilities>
     <userLicense>Salesforce</userLicense>

@@ -130,7 +130,7 @@
         <actionName>View</actionName>
         <comment
         >Action override created by Lightning App Builder during activation.</comment>
-        <content>Background_Checks</content>
+        <content>BackgroundChecks</content>
         <formFactor>Large</formFactor>
         <skipRecordTypeSelect>false</skipRecordTypeSelect>
         <type>Flexipage</type>
@@ -139,7 +139,7 @@
         <actionName>View</actionName>
         <comment
         >Action override created by Lightning App Builder during activation.</comment>
-        <content>Background_Checks</content>
+        <content>BackgroundChecks</content>
         <formFactor>Small</formFactor>
         <skipRecordTypeSelect>false</skipRecordTypeSelect>
         <type>Flexipage</type>

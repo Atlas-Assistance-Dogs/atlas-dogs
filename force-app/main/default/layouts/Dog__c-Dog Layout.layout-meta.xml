@@ -39,33 +39,33 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Vaccine_Due_Distemper__c</field>
+                <field>VaccineDueDistemper__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Vaccine_Due_Hepatitis__c</field>
+                <field>VaccineDueHepatitis__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Vaccine_Due_Parainfluenza__c</field>
+                <field>VaccineDueParainfluenza__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Vaccine_Due_Parvovirus__c</field>
+                <field>VaccineDueParvovirus__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Vaccine_Due_Rabies__c</field>
+                <field>VaccineDueRabies__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Physical_Exam_Due__c</field>
+                <field>PhysicalExamDue__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Microchip_Number__c</field>
+                <field>MicrochipNumber__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -73,7 +73,7 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Activation_Date__c</field>
+                <field>ActivationDate__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -81,7 +81,7 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Readonly</behavior>
-                <field>Eligible_by_DOB__c</field>
+                <field>Eligible_byDOB__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -102,33 +102,33 @@
         <layoutColumns>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Latest_Physical_Exam_Outcome__c</field>
+                <field>LatestPhysicalExamOutcome__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Spayed_Neutered__c</field>
+                <field>SpayedNeutered__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Physical_Exam_Latest__c</field>
+                <field>PhysicalExamLatest__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Health_Check_Failed_Dog_Accepted__c</field>
+                <field>HealthCheckFailedDogAccepted__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Health_Check_Note__c</field>
+                <field>HealthCheckNote__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Readonly</behavior>
-                <field>Health_Care_Records_Status__c</field>
+                <field>HealthCareRecordsStatus__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Vet_Clinic__c</field>
+                <field>VetClinic__c</field>
             </layoutItems>
             <layoutItems>
                 <emptySpace>true</emptySpace>
@@ -144,25 +144,25 @@
         <layoutColumns>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Vaccine_Latest_Distemper__c</field>
+                <field>VaccineLatestDistemper__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Vaccine_Latest_Hepatitis__c</field>
+                <field>VaccineLatestHepatitis__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Vaccine_Latest_Rabies__c</field>
+                <field>VaccineLatestRabies__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Vaccine_Latest_Parainfluenza__c</field>
+                <field>VaccineLatestParainfluenza__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Vaccine_Latest_Parvovirus__c</field>
+                <field>VaccineLatestParvovirus__c</field>
             </layoutItems>
             <layoutItems>
                 <emptySpace>true</emptySpace>
@@ -201,7 +201,7 @@
     </layoutSections>
     <miniLayout>
         <fields>Name</fields>
-        <fields>Microchip_Number__c</fields>
+        <fields>MicrochipNumber__c</fields>
         <fields>Active__c</fields>
     </miniLayout>
     <platformActionList>
@@ -269,7 +269,7 @@
         <fields>NAME</fields>
         <fields>Contact__c</fields>
         <fields>Type__c</fields>
-        <relatedList>Dog_Relationship__c.Dog__c</relatedList>
+        <relatedList>DogRelationship__c.Dog__c</relatedList>
     </relatedLists>
     <relatedLists>
         <fields>TASK.SUBJECT</fields>
@@ -298,7 +298,7 @@
             <posY>0</posY>
         </summaryLayoutItems>
         <summaryLayoutItems>
-            <field>Microchip_Number__c</field>
+            <field>MicrochipNumber__c</field>
             <posX>0</posX>
             <posY>1</posY>
         </summaryLayoutItems>

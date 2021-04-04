@@ -12,15 +12,15 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Program_Date__c</field>
+                <field>ProgramDate__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Program_Title__c</field>
+                <field>ProgramTitle__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Program_Hours__c</field>
+                <field>ProgramHours__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -42,11 +42,11 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Date_Submitted__c</field>
+                <field>DateSubmitted__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Date_Completed__c</field>
+                <field>DateCompleted__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>

@@ -24,15 +24,15 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Session_Type__c</field>
+                <field>SessionType__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Public_Access_Hours__c</field>
+                <field>PublicAccessHours__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Other_Hours__c</field>
+                <field>OtherHours__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -40,11 +40,11 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Request_Support_From_Team__c</field>
+                <field>RequestSupportFromTeam__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Request_support_from_Atlas__c</field>
+                <field>RequestSupportFromAtlas__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -56,7 +56,7 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Client_Stress__c</field>
+                <field>ClientStress__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
@@ -97,7 +97,7 @@
     </layoutSections>
     <relatedLists>
         <fields>NAME</fields>
-        <relatedList>Contact_Log__c.Log__c</relatedList>
+        <relatedList>ContactLog__c.Log__c</relatedList>
     </relatedLists>
     <showEmailCheckbox>false</showEmailCheckbox>
     <showHighlightsPanel>false</showHighlightsPanel>

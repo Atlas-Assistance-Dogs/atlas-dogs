@@ -2,12 +2,12 @@
 <EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
     <available>true</available>
     <encodingKey>ISO-8859-1</encodingKey>
-    <letterhead>Atlas_Letterhead_v2</letterhead>
+    <letterhead>AtlasLetterhead_v2</letterhead>
     <name>Facilitator Provisionally Activated</name>
     <style>freeForm</style>
     <subject
     >Congratulations! You are ready to start working on your Team Facilitator Practicum</subject>
-    <textOnly>Dear {!Account.First_Name__c} {!Account.Last_Name__c},
+    <textOnly>Dear {!Account.FirstName__c} {!Account.LastName__c},
 
 Congratulations !!!! You now considered provisionally active as an Atlas Team Facilitator. The next steps will be for us to partner you with another experienced Facilitator or Facilitator Lead to complete your practicum. Upon completion of the practicum, you will be fully active as an Atlas Team Facilitator and are eligible to be the primary team facilitator assigned to a client.
 

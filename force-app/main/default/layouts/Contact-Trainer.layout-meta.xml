@@ -45,11 +45,11 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Criminal_Conviction__c</field>
+                <field>CriminalConviction__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Criminal_Conviction_Notes__c</field>
+                <field>CriminalConvictionNotes__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -57,23 +57,23 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Readonly</behavior>
-                <field>Trainer_Status__c</field>
+                <field>TrainerStatus__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Readonly</behavior>
-                <field>Lead_Facilitator_Status__c</field>
+                <field>LeadFacilitatorStatus__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Readonly</behavior>
-                <field>Client_Status__c</field>
+                <field>ClientStatus__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Board_Member_Status__c</field>
+                <field>BoardMemberStatus__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Board_Member_Accepted_Date__c</field>
+                <field>BoardMemberAcceptedDate__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -81,11 +81,11 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Volunteer_Access__c</field>
+                <field>VolunteerAccess__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Lead_Source_Other__c</field>
+                <field>LeadSourceOther__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns />
@@ -116,7 +116,7 @@
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>
-        <relatedList>CEU__c.Trainer__c</relatedList>
+        <relatedList>ContinuingEducationUnit__c.Trainer__c</relatedList>
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>
@@ -124,15 +124,15 @@
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>
-        <relatedList>Background_Check__c.Contact__c</relatedList>
+        <relatedList>BackgroundCheck__c.Contact__c</relatedList>
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>
-        <relatedList>Program_Assignment__c.Contact__c</relatedList>
+        <relatedList>ProgramAssignment__c.Contact__c</relatedList>
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>
-        <relatedList>Dog_Relationship__c.Contact__c</relatedList>
+        <relatedList>DogRelationship__c.Contact__c</relatedList>
     </relatedLists>
     <relatedObjects>AccountId</relatedObjects>
     <showEmailCheckbox>false</showEmailCheckbox>

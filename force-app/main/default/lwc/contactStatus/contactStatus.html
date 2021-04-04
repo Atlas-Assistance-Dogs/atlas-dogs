@@ -14,8 +14,7 @@
                             class="slds-var-p-right_small"
                         ></lightning-icon>
                         <div>
-                            Client -
-                            {contact.data.fields.Client_Status__c.value}
+                            Client - {contact.data.fields.ClientStatus__c.value}
                         </div>
                     </div>
                 </template>
@@ -29,7 +28,7 @@
                         ></lightning-icon>
                         <div>
                             Volunteer -
-                            {contact.data.fields.Volunteer_Status__c.value}
+                            {contact.data.fields.VolunteerStatus__c.value}
                         </div>
                     </div>
                 </template>
@@ -44,12 +43,12 @@
                         ></lightning-icon>
                         <div>
                             Facilitator -
-                            {contact.data.fields.Facilitator_Status__c.value}
+                            {contact.data.fields.FacilitatorStatus__c.value}
                         </div>
                     </div>
                 </template>
                 <template
-                    if:true={contact.data.fields.Lead_Facilitator__c.value}
+                    if:true={contact.data.fields.LeadFacilitator__c.value}
                 >
                     <div style="display: flex">
                         <lightning-icon
@@ -60,12 +59,12 @@
                         ></lightning-icon>
                         <div>
                             Lead Facilitator -
-                            {contact.data.fields.Lead_Facilitator_Status__c.value}
+                            {contact.data.fields.LeadFacilitatorStatus__c.value}
                         </div>
                     </div>
                     <p></p>
                 </template>
-                <template if:true={contact.data.fields.Board_Member__c.value}>
+                <template if:true={contact.data.fields.BoardMember__c.value}>
                     <div style="display: flex">
                         <lightning-icon
                             icon-name="utility:favorite"
@@ -75,7 +74,7 @@
                         ></lightning-icon>
                         <div>
                             Board Member -
-                            {contact.data.fields.Board_Member_Status__c.value}
+                            {contact.data.fields.BoardMemberStatus__c.value}
                         </div>
                     </div>
                 </template>
@@ -89,7 +88,7 @@
                         ></lightning-icon>
                         <div>
                             Trainer -
-                            {contact.data.fields.Trainer_Status__c.value}
+                            {contact.data.fields.TrainerStatus__c.value}
                         </div>
                     </div>
                 </template>

@@ -14,7 +14,7 @@
         <type>Region</type>
     </flexiPageRegions>
     <masterLabel>Background Checks</masterLabel>
-    <sobjectType>Background_Check__c</sobjectType>
+    <sobjectType>BackgroundCheck__c</sobjectType>
     <template>
         <name>flexipage:recordHomeSimpleViewTemplate</name>
         <properties>
