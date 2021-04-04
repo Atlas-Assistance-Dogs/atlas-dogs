@@ -70,9 +70,9 @@ Insert Lead:
         - IsConverted
         - IsUnreadByOwner
         - LastName
-        - Lead_Interest__c
-        - Lead_Source_Other__c
-        - Pronoun_Other__c
+        - LeadInterest__c
+        - LeadSourceOther__c
+        - PronounOther__c
         - Pronoun__c
         - Status
         - npe01__Preferred_Email__c
@@ -122,6 +122,7 @@ Insert Account:
         - npo02__SmallestAmount__c
         - npo02__TotalMembershipOppAmount__c
         - npo02__TotalOppAmount__c
+        - npsp__CustomizableRollups_UseSkewMode__c
         - npsp__Funding_Focus__c
         - npsp__Grantmaker__c
         - npsp__Matching_Gift_Administrator_Name__c
@@ -148,35 +149,35 @@ Insert Account:
 Insert Dog__c:
     sf_object: Dog__c
     fields:
-        - Activation_Date__c
+        - ActivationDate__c
         - Active__c
         - Birthdate__c
         - Breed__c
         - Certified__c
         - Deceased__c
         - Gender__c
-        - Health_Check_Failed_Dog_Accepted__c
-        - Health_Check_Note__c
-        - Latest_Physical_Exam_Outcome__c
-        - Microchip_Number__c
+        - HealthCheckFailedDogAccepted__c
+        - HealthCheckNote__c
+        - LatestPhysicalExamOutcome__c
+        - MicrochipNumber__c
         - Name
-        - Physical_Exam_Due__c
-        - Physical_Exam_Latest__c
+        - PhysicalExamDue__c
+        - PhysicalExamLatest__c
         - Picture__c
-        - Spayed_Neutered__c
+        - SpayedNeutered__c
         - Status__c
-        - Vaccine_Due_Distemper__c
-        - Vaccine_Due_Hepatitis__c
-        - Vaccine_Due_Parainfluenza__c
-        - Vaccine_Due_Parvovirus__c
-        - Vaccine_Due_Rabies__c
-        - Vaccine_Latest_Distemper__c
-        - Vaccine_Latest_Hepatitis__c
-        - Vaccine_Latest_Parainfluenza__c
-        - Vaccine_Latest_Parvovirus__c
-        - Vaccine_Latest_Rabies__c
+        - VaccineDueDistemper__c
+        - VaccineDueHepatitis__c
+        - VaccineDueParainfluenza__c
+        - VaccineDueParvovirus__c
+        - VaccineDueRabies__c
+        - VaccineLatestDistemper__c
+        - VaccineLatestHepatitis__c
+        - VaccineLatestParainfluenza__c
+        - VaccineLatestParvovirus__c
+        - VaccineLatestRabies__c
     lookups:
-        Vet_Clinic__c:
+        VetClinic__c:
             table: Account
 Insert npsp__Address__c:
     sf_object: npsp__Address__c
@@ -215,35 +216,35 @@ Insert npsp__Address__c:
 Insert Contact:
     sf_object: Contact
     fields:
-        - Board_Member_Accepted_Date__c
-        - Board_Member_Status__c
-        - Client_Medical_Devices__c
-        - Client_Status__c
-        - Client_Team_Primary_Certification__c
-        - Client_Team_Secondary_Certification__c
-        - Criminal_Conviction_Notes__c
-        - Criminal_Conviction__c
-        - Date_Started__c
-        - Facilitator_Interview_Notes__c
-        - Facilitator_Status__c
+        - BoardMemberAcceptedDate__c
+        - BoardMemberStatus__c
+        - ClientMedicalDevices__c
+        - ClientStatus__c
+        - ClientTeamPrimaryCertification__c
+        - ClientTeamSecondaryCertification__c
+        - CriminalConvictionNotes__c
+        - CriminalConviction__c
+        - DateStarted__c
+        - FacilitatorInterviewNotes__c
+        - FacilitatorStatus__c
         - FirstName
         - LastName
-        - Lead_Comments__c
-        - Lead_Facilitator_Status__c
-        - Lead_Interest__c
-        - Lead_Source_Other__c
+        - LeadComments__c
+        - LeadFacilitatorStatus__c
+        - LeadInterest__c
+        - LeadSourceOther__c
         - Positions__c
-        - Pronoun_Other__c
+        - PronounOther__c
         - Pronoun__c
-        - Trainer_Board_Train__c
-        - Trainer_CEU_Status__c
-        - Trainer_Specialties__c
-        - Trainer_Status__c
-        - Volunteer_Access__c
-        - Volunteer_Background__c
-        - Volunteer_Focus__c
-        - Volunteer_Interview_Notes__c
-        - Volunteer_Status__c
+        - TrainerBoardTrain__c
+        - TrainerCEUStatus__c
+        - TrainerSpecialties__c
+        - TrainerStatus__c
+        - VolunteerAccess__c
+        - VolunteerBackground__c
+        - VolunteerFocus__c
+        - VolunteerInterviewNotes__c
+        - VolunteerStatus__c
         - npe01__AlternateEmail__c
         - npe01__HomeEmail__c
         - npe01__PreferredPhone__c
@@ -287,6 +288,7 @@ Insert Contact:
         - npo02__SystemHouseholdProcessor__c
         - npo02__TotalMembershipOppAmount__c
         - npo02__TotalOppAmount__c
+        - npsp__CustomizableRollups_UseSkewMode__c
         - npsp__Deceased__c
         - npsp__Do_Not_Contact__c
         - npsp__Exclude_from_Household_Formal_Greeting__c
@@ -319,8 +321,8 @@ Insert Contact:
             table: npsp__Address__c
         npsp__Primary_Affiliation__c:
             table: Account
-Insert Background_Check__c:
-    sf_object: Background_Check__c
+Insert BackgroundCheck__c:
+    sf_object: BackgroundCheck__c
     fields:
         - Date__c
         - Name
@@ -329,25 +331,25 @@ Insert Background_Check__c:
     lookups:
         Contact__c:
             table: Contact
-Insert CEU__c:
-    sf_object: CEU__c
+Insert ContinuingEducationUnit__c:
+    sf_object: ContinuingEducationUnit__c
     fields:
         - Authority__c
         - Comments__c
-        - Date_Completed__c
-        - Date_Submitted__c
+        - DateCompleted__c
+        - DateSubmitted__c
         - Name
-        - Program_Date__c
-        - Program_Hours__c
-        - Program_Title__c
+        - ProgramDate__c
+        - ProgramHours__c
+        - ProgramTitle__c
         - Quantity__c
         - Role__c
         - Status__c
     lookups:
         Trainer__c:
             table: Contact
-Insert Dog_Relationship__c:
-    sf_object: Dog_Relationship__c
+Insert DogRelationship__c:
+    sf_object: DogRelationship__c
     fields:
         - Name
         - Type__c
@@ -359,32 +361,34 @@ Insert Dog_Relationship__c:
 Insert Log__c:
     sf_object: Log__c
     fields:
-        - Client_Stress__c
+        - ClientStress__c
         - Date__c
         - Details__c
         - Name
-        - Other_Hours__c
-        - Public_Access_Hours__c
-        - Request_Support_From_Atlas__c
-        - Request_Support_From_Team__c
+        - OtherHours__c
+        - PublicAccessHours__c
+        - RequestSupportFromAtlas__c
+        - RequestSupportFromTeam__c
         - Satisfaction__c
-        - Session_Type__c
+        - SessionType__c
         - Stress__c
         - Type__c
     lookups:
         Submitter__c:
             table: Contact
-Insert Program_Assignment__c:
-    sf_object: Program_Assignment__c
+Insert ProgramAssignment__c:
+    sf_object: ProgramAssignment__c
     fields:
-        - Assigned_Date__c
-        - Completion_Date__c
+        - AssignedDate__c
+        - CompletionDate__c
+        - ExpectedCompletion__c
         - Program__c
+        - Status__c
     lookups:
         Contact__c:
             table: Contact
-Insert Contact_Log__c:
-    sf_object: Contact_Log__c
+Insert ContactLog__c:
+    sf_object: ContactLog__c
     fields:
         - Name
         - Position__c

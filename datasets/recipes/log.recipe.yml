@@ -4,7 +4,7 @@
 - object: Log__c
   count: 20
   fields:
-      Client_Stress__c:
+      ClientStress__c:
           random_choice:
               - Not at all
               - Only a little
@@ -19,17 +19,17 @@
           fake.text:
               max_nb_chars: 10000
       Name: ${{Type__c}} Log ${{Date__c}}
-      Other_Hours__c:
+      OtherHours__c:
           random_number:
               min: 0
               max: 100
-      Public_Access_Hours__c:
+      PublicAccessHours__c:
           random_number:
               min: 0
               max: 100
-      Request_Support_From_Atlas__c:
+      RequestSupportFromAtlas__c:
           fake: boolean
-      Request_Support_From_Team__c:
+      RequestSupportFromTeam__c:
           fake: boolean
       Satisfaction__c:
           random_choice:
@@ -38,7 +38,7 @@
               - Some enjoyment
               - Rather much enjoyment
               - Extreme amount of enjoyment
-      Session_Type__c:
+      SessionType__c:
           random_choice:
               - In Person
               - Virtual
@@ -56,7 +56,7 @@
               - Client
               - Facilitator
 
-- object: Contact_Log__c
+- object: ContactLog__c
   count: 100
   include: position
   fields:

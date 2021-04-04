@@ -5,7 +5,7 @@
 - object: Dog__c
   nickname: dog
   fields:
-      Activation_Date__c:
+      ActivationDate__c:
           date_between:
               start_date: 2000-01-01
               end_date: today
@@ -57,48 +57,48 @@
           random_choice:
               - Male
               - Female
-      Health_Check_Failed_Dog_Accepted__c:
+      HealthCheckFailedDogAccepted__c:
           random_choice:
               - "Yes"
               - "No"
-      Health_Check_Note__c:
+      HealthCheckNote__c:
           fake: paragraph
-      Latest_Physical_Exam_Outcome__c:
+      LatestPhysicalExamOutcome__c:
           random_choice:
               - Pass
               - Fail
-      Microchip_Number__c:
+      MicrochipNumber__c:
           fake: isbn10
-      Vaccine_Latest_Distemper__c:
+      VaccineLatestDistemper__c:
           date_between:
               start_date: -2y
               end_date: today
-      Vaccine_Latest_Hepatitis__c:
+      VaccineLatestHepatitis__c:
           date_between:
               start_date: -2y
               end_date: today
-      Vaccine_Latest_Parainfluenza__c:
+      VaccineLatestParainfluenza__c:
           date_between:
               start_date: -2y
               end_date: today
-      Vaccine_Latest_Parvovirus__c:
+      VaccineLatestParvovirus__c:
           date_between:
               start_date: -2y
               end_date: today
-      Vaccine_Latest_Rabies__c:
+      VaccineLatestRabies__c:
           date_between:
               start_date: -2y
               end_date: today
-      Physical_Exam_Latest__c:
+      PhysicalExamLatest__c:
           date_between:
               start_date: -2y
               end_date: today
-      Vaccine_Due_Distemper__c: ${{date(Vaccine_Latest_Distemper__c) + relativedelta(years=1)}}
-      Vaccine_Due_Hepatitis__c: ${{date(Vaccine_Latest_Hepatitis__c) + relativedelta(years=1)}}
-      Vaccine_Due_Parainfluenza__c: ${{date(Vaccine_Latest_Parainfluenza__c) + relativedelta(years=1)}}
-      Vaccine_Due_Parvovirus__c: ${{date(Vaccine_Latest_Parvovirus__c) + relativedelta(years=1)}}
-      Vaccine_Due_Rabies__c: ${{date(Vaccine_Latest_Rabies__c) + relativedelta(years=3)}}
-      Physical_Exam_Due__c: ${{date(Physical_Exam_Latest__c) + relativedelta(years=1)}}
+      VaccineDueDistemper__c: ${{date(VaccineLatestDistemper__c) + relativedelta(years=1)}}
+      VaccineDueHepatitis__c: ${{date(VaccineLatestHepatitis__c) + relativedelta(years=1)}}
+      VaccineDueParainfluenza__c: ${{date(VaccineLatestParainfluenza__c) + relativedelta(years=1)}}
+      VaccineDueParvovirus__c: ${{date(VaccineLatestParvovirus__c) + relativedelta(years=1)}}
+      VaccineDueRabies__c: ${{date(VaccineLatestRabies__c) + relativedelta(years=3)}}
+      PhysicalExamDue__c: ${{date(PhysicalExamLatest__c) + relativedelta(years=1)}}
       Name:
           if:
               - choice:
@@ -314,11 +314,9 @@
           fake.image_url:
               width: 60
               height: 60
-      Spayed_Neutered__c:
+      SpayedNeutered__c:
           fake: boolean
-      # Replaced_by_Dog__c:
-      #     random_reference: Dog__c
-      Vet_Clinic__c:
+      VetClinic__c:
           - object: Account
             nickname: vet_clinic
             fields:
@@ -386,7 +384,7 @@
       Email:
           fake: email
 
-- object: Dog_Relationship__c
+- object: DogRelationship__c
   fields:
       Contact__c:
           random_reference: Contact
@@ -399,7 +397,7 @@
               - Client
       Name: ${{Contact__c.FirstName}} ${{Dog__c.Name}} ${{Type__c}}
 
-- object: Dog_Relationship__c
+- object: DogRelationship__c
   fields:
       Contact__c:
           reference: vet
