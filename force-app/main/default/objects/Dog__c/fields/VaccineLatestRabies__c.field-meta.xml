@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VaccineLatestRabies__c</fullName>
+    <description>Most Recent Rabies vaccination Date</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Most recent Rabies vaccination date</inlineHelpText>
+    <label>Most Recent Rabies Vaccine</label>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Date</type>
+</CustomField>
