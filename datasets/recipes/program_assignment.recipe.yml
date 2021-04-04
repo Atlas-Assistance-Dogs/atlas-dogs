@@ -1,15 +1,15 @@
 - include_file: common.recipe.yml
 - include_file: contact.recipe.yml
 
-- object: Program_Assignment__c
+- object: ProgramAssignment__c
   fields:
-      Assigned_Date__c:
+      AssignedDate__c:
           date_between:
               start_date: 2000-01-01
               end_date: today
-      Completion_Date__c:
+      CompletionDate__c:
           date_between:
-              start_date: ${{date(Assigned_Date__c)}}
+              start_date: ${{date(AssignedDate__c)}}
               end_date: today
       Contact__c:
           reference: Person

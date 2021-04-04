@@ -21,7 +21,7 @@
           fake: boolean
       LastName:
           fake: last_name
-      Lead_Interest__c:
+      LeadInterest__c:
           random_choice:
               - Volunteering
               - Team Facilitator Certification
@@ -40,15 +40,19 @@
               - Twitter
               - Health Provider
               - Other
-      Pronoun_Other__c:
-          fake.text:
-              max_nb_chars: 10
+      PronounOther__c:
+          if:
+              - choice:
+                    when: ${{Pronoun__c == 'specify'}}
+                    pick:
+                        fake.text:
+                            max_nb_chars: 10
       Pronoun__c:
           random_choice:
               - he
               - she
               - they
-              - other
+              - specify
       Status:
           random_choice:
               - Open - Not Contacted

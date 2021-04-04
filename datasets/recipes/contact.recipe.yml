@@ -237,7 +237,7 @@
               - Twitter
               - Health Provider
               - Other
-      Lead_Source_Other__c:
+      LeadSourceOther__c:
           if:
               - choice:
                     when: ${{LeadSource == 'Other'}}
@@ -264,7 +264,7 @@
               - Pending
               # - SelectMatch  # causes problems
               - Skipped
-      Board_Member_Status__c:
+      BoardMemberStatus__c:
           if:
               - choice:
                     when: ${{Positions__c == 'Board Member'}}
@@ -280,9 +280,9 @@
                             - Offered other roles
                             - Provisionally on boarded as volunteer until next board meeting
                             - Background Check In progress
-      Client_Medical_Devices__c:
+      ClientMedicalDevices__c:
           fake: sentence
-      Client_Status__c:
+      ClientStatus__c:
           if:
               - choice:
                     when: ${{Positions__c == 'Client'}}
@@ -299,7 +299,7 @@
                             - Onboarding - Training agreement and Site update
                             - Active
                             - No More Active
-      Client_Team_Primary_Certification__c:
+      ClientTeamPrimaryCertification__c:
           random_choice:
               - Atlas
               - KPA
@@ -307,7 +307,7 @@
               - IAABC
               - CBCC
               - None
-      Client_Team_Secondary_Certification__c:
+      ClientTeamSecondaryCertification__c:
           random_choice:
               - Atlas
               - KPA
@@ -315,21 +315,21 @@
               - IAABC
               - CBCC
               - None
-      Criminal_Conviction__c:
+      CriminalConviction__c:
           fake: boolean
-      Criminal_Conviction_Notes__c:
+      CriminalConvictionNotes__c:
           fake: paragraph
-      Date_Started__c:
+      DateStarted__c:
           date_between:
               start_date: 2000-01-01
               end_date: today
-      Facilitator_Interview_Notes__c:
+      FacilitatorInterviewNotes__c:
           if:
               - choice:
                     when: ${{Positions__c == 'Team Facilitator'}}
                     pick:
                         fake: paragraph
-      Facilitator_Status__c:
+      FacilitatorStatus__c:
           if:
               - choice:
                     when: ${{Positions__c == 'Team Facilitator'}}
@@ -347,9 +347,9 @@
                             - Scheduled Interview
                             - Training Course and Workshop Pending Completion
                             - Workshop Pending Completion
-      Lead_Comments__c:
+      LeadComments__c:
           fake: paragraph
-      Lead_Facilitator_Status__c:
+      LeadFacilitatorStatus__c:
           if:
               - choice:
                     when: ${{Positions__c == 'Team Facilitator Lead'}}
@@ -367,7 +367,7 @@
                             - Scheduled Interview
                             - Training Course and Workshop Pending Completion
                             - Workshop Pending Completion
-      Lead_Interest__c:
+      LeadInterest__c:
           random_choice:
               - Volunteering
               - Team Facilitator Certification
@@ -377,10 +377,10 @@
               - Sweet Snoopers Training Program
               - Sponsorship/Donations
               - General info/Other
-      Pronoun_Other__c:
+      PronounOther__c:
           if:
               - choice:
-                    when: ${{Pronoun__c == 'Other'}}
+                    when: ${{Pronoun__c == 'specify'}}
                     pick:
                         fake.text:
                             max_nb_chars: 10
@@ -389,8 +389,8 @@
               - he
               - she
               - they
-              - other
-      Trainer_Board_Train__c:
+              - specify
+      TrainerBoardTrain__c:
           if:
               - choice:
                     when: ${{Positions__c == 'Trainer'}}
@@ -398,7 +398,7 @@
                         random_choice:
                             - true
                             - false
-      Trainer_CEU_Status__c:
+      TrainerCEUStatus__c:
           if:
               - choice:
                     when: ${{Positions__c == 'Trainer'}}
@@ -408,7 +408,7 @@
                             - In Progress
                             - Up to Date
                             - Need Renewal
-      Trainer_Specialties__c:
+      TrainerSpecialties__c:
           if:
               - choice:
                     when: ${{Positions__c == 'Trainer'}}
@@ -419,7 +419,7 @@
                             - Hearing Dog
                             - Emotional Trauma
                             - Epilepsy
-      Trainer_Status__c:
+      TrainerStatus__c:
           if:
               - choice:
                     when: ${{Positions__c == 'Trainer'}}
@@ -437,7 +437,7 @@
                             - Scheduled Interview
                             - Training Course and Workshop Pending Completion
                             - Workshop Pending Completion
-      Volunteer_Access__c:
+      VolunteerAccess__c:
           random_choice:
               - Operations- Master Docs - READ ONLY
               - Operations- Financial
@@ -465,10 +465,10 @@
               - Active Projects- Technology Infrastructure
               - Active Projects- Trainer Certification
               - Active Projects- Volunteer Recruitment and Retention
-      Volunteer_Background__c:
+      VolunteerBackground__c:
           fake.text:
               max_nb_chars: 100
-      Volunteer_Focus__c:
+      VolunteerFocus__c:
           random_choice:
               - Academy-Content Creator
               - Academy-Content Editor
@@ -493,9 +493,9 @@
               - Outreach- Veterinarians
               - Outreach- Medical Providers
               - Outreach- Diversity
-      Volunteer_Interview_Notes__c:
+      VolunteerInterviewNotes__c:
           fake: paragraph
-      Volunteer_Status__c:
+      VolunteerStatus__c:
           random_choice:
               - Initial Inquiry
               - Onboarding

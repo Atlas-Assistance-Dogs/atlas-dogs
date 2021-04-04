@@ -1,7 +1,7 @@
 #- include_file: common.recipe.yml
 - include_file: contact.recipe.yml
 
-- object: Background_Check__c
+- object: BackgroundCheck__c
   fields:
       Contact__c:
           random_reference: Contact

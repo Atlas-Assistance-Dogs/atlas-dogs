@@ -1,7 +1,7 @@
 - include_file: common.recipe.yml
 - include_file: contact.recipe.yml
 
-- object: CEU__c
+- object: ContinuingEducationUnit__c
   fields:
       Name:
           fake: catch_phrase
@@ -15,27 +15,27 @@
               - None
       Comments__c:
           fake: sentence
-      Program_Date__c:
+      ProgramDate__c:
           date_between:
               start_date: 2000-01-01
               end_date: today
-      Program_Hours__c:
+      ProgramHours__c:
           random_number:
               min: 8
               max: 2000
-      Program_Title__c:
+      ProgramTitle__c:
           fake: catch_phrase
       Quantity__c:
           random_number:
               min: 1
               max: 20
-      Date_Submitted__c:
+      DateSubmitted__c:
           date_between:
               start_date: 2000-01-01
               end_date: today
-      Date_Completed__c:
+      DateCompleted__c:
           date_between:
-              start_date: ${{date(Date_Submitted__c)}}
+              start_date: ${{date(DateSubmitted__c)}}
               end_date: today
       Role__c:
           random_choice:
