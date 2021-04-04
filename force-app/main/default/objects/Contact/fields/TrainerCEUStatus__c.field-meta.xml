@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TrainerCEUStatus__c</fullName>
+    <externalId>false</externalId>
+    <label>Trainer CEU Status</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>None</fullName>
+                <default>false</default>
+                <label>None</label>
+            </value>
+            <value>
+                <fullName>In Progress</fullName>
+                <default>false</default>
+                <label>In Progress</label>
+            </value>
+            <value>
+                <fullName>Up to Date</fullName>
+                <default>false</default>
+                <label>Up to Date</label>
+            </value>
+            <value>
+                <fullName>Need Renewal</fullName>
+                <default>false</default>
+                <label>Need Renewal</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

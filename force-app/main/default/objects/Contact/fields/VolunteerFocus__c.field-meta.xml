@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VolunteerFocus__c</fullName>
+    <externalId>false</externalId>
+    <label>Volunteer Focus</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Academy</fullName>
+                <default>false</default>
+                <label>Academy</label>
+            </value>
+            <value>
+                <fullName>ADI Accreditation</fullName>
+                <default>false</default>
+                <label>ADI Accreditation</label>
+            </value>
+            <value>
+                <fullName>Branding and Marketing</fullName>
+                <default>false</default>
+                <label>Branding and Marketing</label>
+            </value>
+            <value>
+                <fullName>Client Certification</fullName>
+                <default>false</default>
+                <label>Client Certification</label>
+            </value>
+            <value>
+                <fullName>Client Operations</fullName>
+                <default>false</default>
+                <label>Client Operations</label>
+            </value>
+            <value>
+                <fullName>Community Outreach and Education</fullName>
+                <default>false</default>
+                <label>Community Outreach and Education</label>
+            </value>
+            <value>
+                <fullName>Dog Availability</fullName>
+                <default>false</default>
+                <label>Dog Availability</label>
+            </value>
+            <value>
+                <fullName>Financial Operations</fullName>
+                <default>false</default>
+                <label>Financial Operations</label>
+            </value>
+            <value>
+                <fullName>Fund Development</fullName>
+                <default>false</default>
+                <label>Fund Development</label>
+            </value>
+            <value>
+                <fullName>Governance and Compliance &amp; Operations</fullName>
+                <default>false</default>
+                <label>Governance and Compliance &amp; Operations</label>
+            </value>
+            <value>
+                <fullName>Operations Master Docs</fullName>
+                <default>false</default>
+                <label>Operations Master Docs</label>
+            </value>
+            <value>
+                <fullName>Research and Development</fullName>
+                <default>false</default>
+                <label>Research and Development</label>
+            </value>
+            <value>
+                <fullName>Scholarships</fullName>
+                <default>false</default>
+                <label>Scholarships</label>
+            </value>
+            <value>
+                <fullName>State Registration</fullName>
+                <default>false</default>
+                <label>State Registration</label>
+            </value>
+            <value>
+                <fullName>Team Facilitator Certification</fullName>
+                <default>false</default>
+                <label>Team Facilitator Certification</label>
+            </value>
+            <value>
+                <fullName>Team Facilitator Operations</fullName>
+                <default>false</default>
+                <label>Team Facilitator Operations</label>
+            </value>
+            <value>
+                <fullName>Technology Infrastructure</fullName>
+                <default>false</default>
+                <label>Technology Infrastructure</label>
+            </value>
+            <value>
+                <fullName>Trainer Certification</fullName>
+                <default>false</default>
+                <label>Trainer Certification</label>
+            </value>
+            <value>
+                <fullName>Volunteer &amp; Staff Operations</fullName>
+                <default>false</default>
+                <label>Volunteer &amp; Staff Operations</label>
+            </value>
+            <value>
+                <fullName>Volunteer Recruitment and Retention</fullName>
+                <default>false</default>
+                <label>Volunteer Recruitment and Retention</label>
+            </value>
+            <value>
+                <fullName>Academy-Content Creator</fullName>
+                <default>false</default>
+                <label>Academy-Content Creator</label>
+            </value>
+            <value>
+                <fullName>Academy-Content Editor</fullName>
+                <default>false</default>
+                <label>Academy-Content Editor</label>
+            </value>
+            <value>
+                <fullName>Marketing- Graphic Design</fullName>
+                <default>false</default>
+                <label>Marketing- Graphic Design</label>
+            </value>
+            <value>
+                <fullName>Marketing- Video</fullName>
+                <default>false</default>
+                <label>Marketing- Video</label>
+            </value>
+            <value>
+                <fullName>Marketing- Photo</fullName>
+                <default>false</default>
+                <label>Marketing- Photo</label>
+            </value>
+            <value>
+                <fullName>Marketing- Writing</fullName>
+                <default>false</default>
+                <label>Marketing- Writing</label>
+            </value>
+            <value>
+                <fullName>Marketing- Leadership</fullName>
+                <default>false</default>
+                <label>Marketing- Leadership</label>
+            </value>
+            <value>
+                <fullName>Marketing- SEO</fullName>
+                <default>false</default>
+                <label>Marketing- SEO</label>
+            </value>
+            <value>
+                <fullName>Marketing- Website</fullName>
+                <default>false</default>
+                <label>Marketing- Website</label>
+            </value>
+            <value>
+                <fullName>Marketing- Sales</fullName>
+                <default>false</default>
+                <label>Marketing- Sales</label>
+            </value>
+            <value>
+                <fullName>Marketing- Advertising</fullName>
+                <default>false</default>
+                <label>Marketing- Advertising</label>
+            </value>
+            <value>
+                <fullName>Marketing- Events</fullName>
+                <default>false</default>
+                <label>Marketing- Events</label>
+            </value>
+            <value>
+                <fullName>Administrative- Client</fullName>
+                <default>false</default>
+                <label>Administrative- Client</label>
+            </value>
+            <value>
+                <fullName>Administrative- Volunteer</fullName>
+                <default>false</default>
+                <label>Administrative- Volunteer</label>
+            </value>
+            <value>
+                <fullName>Administrative- Trainer</fullName>
+                <default>false</default>
+                <label>Administrative- Trainer</label>
+            </value>
+            <value>
+                <fullName>Administrative- General</fullName>
+                <default>false</default>
+                <label>Administrative- General</label>
+            </value>
+            <value>
+                <fullName>Administrative- Technology</fullName>
+                <default>false</default>
+                <label>Administrative- Technology</label>
+            </value>
+            <value>
+                <fullName>Outreach- Clients</fullName>
+                <default>false</default>
+                <label>Outreach- Clients</label>
+            </value>
+            <value>
+                <fullName>Outreach- Disability Orgs</fullName>
+                <default>false</default>
+                <label>Outreach- Disability Orgs</label>
+            </value>
+            <value>
+                <fullName>Outreach- Dogs</fullName>
+                <default>false</default>
+                <label>Outreach- Dogs</label>
+            </value>
+            <value>
+                <fullName>Outreach- Veterinarians</fullName>
+                <default>false</default>
+                <label>Outreach- Veterinarians</label>
+            </value>
+            <value>
+                <fullName>Outreach- Medical Providers</fullName>
+                <default>false</default>
+                <label>Outreach- Medical Providers</label>
+            </value>
+            <value>
+                <fullName>Outreach- Diversity</fullName>
+                <default>false</default>
+                <label>Outreach- Diversity</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

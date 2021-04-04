@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TrainerSpecialties__c</fullName>
+    <externalId>false</externalId>
+    <label>Trainer Specialties</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Basic Training</fullName>
+                <default>false</default>
+                <label>Basic Training</label>
+            </value>
+            <value>
+                <fullName>Eye Dog</fullName>
+                <default>false</default>
+                <label>Eye Dog</label>
+            </value>
+            <value>
+                <fullName>Hearing Dog</fullName>
+                <default>false</default>
+                <label>Hearing Dog</label>
+            </value>
+            <value>
+                <fullName>Emotional Trauma</fullName>
+                <default>false</default>
+                <label>Emotional Trauma</label>
+            </value>
+            <value>
+                <fullName>Epilepsy</fullName>
+                <default>false</default>
+                <label>Epilepsy</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

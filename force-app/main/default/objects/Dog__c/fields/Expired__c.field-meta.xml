@@ -4,11 +4,11 @@
     <externalId>false</externalId>
     <formula>AND
 ( 
- (Vaccine_Due_Distemper__c  &lt;  TODAY()),
- (Vaccine_Due_Hepatitis__c  &lt;  TODAY()) ,
- (Vaccine_Due_Parainfluenza__c &lt;  TODAY()),
- (Vaccine_Due_Rabies__c &lt;  TODAY()),
- (Vaccine_Due_Parvovirus__c &lt;  TODAY())
+ (VaccineDueDistemper__c  &lt;  TODAY()),
+ (VaccineDueHepatitis__c  &lt;  TODAY()) ,
+ (VaccineDueParainfluenza__c &lt;  TODAY()),
+ (VaccineDueRabies__c &lt;  TODAY()),
+ (VaccineDueParvovirus__c &lt;  TODAY())
 )</formula>
     <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
     <label>Expired</label>

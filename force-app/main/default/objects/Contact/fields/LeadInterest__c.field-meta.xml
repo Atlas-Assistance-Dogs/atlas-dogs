@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LeadInterest__c</fullName>
+    <description>What are you interested in?</description>
+    <externalId>false</externalId>
+    <label>Lead Interest</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetName>LeadInterest</valueSetName>
+    </valueSet>
+    <visibleLines>6</visibleLines>
+</CustomField>
