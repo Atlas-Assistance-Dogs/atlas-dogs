@@ -1,4 +1,4 @@
-Dear {!Account.First_Name__c} {!Account.Last_Name__c},
+Dear {!Account.FirstName__c} {!Account.LastName__c},
 
 Want to thank you for your interest in joining our team in Facilitator role.. Upon reviewing your application, we would like to pass at this time and will keep your profile with us and reach out to you on future opportunities.
 

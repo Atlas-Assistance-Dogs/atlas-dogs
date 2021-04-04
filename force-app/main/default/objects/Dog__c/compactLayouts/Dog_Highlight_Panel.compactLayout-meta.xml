@@ -4,6 +4,6 @@
     <fields>Name</fields>
     <fields>Owner__c</fields>
     <fields>Status__c</fields>
-    <fields>Expiry_Date_Status__c</fields>
+    <fields>ExpiryDateStatus__c</fields>
     <label>Dog Highlight Panel</label>
 </CompactLayout>

@@ -17,8 +17,8 @@
     <tabs>standard-Contact</tabs>
     <tabs>Dog__c</tabs>
     <tabs>standard-Lead</tabs>
-    <tabs>Background_Check__c</tabs>
-    <tabs>Program_Assignment__c</tabs>
+    <tabs>BackgroundCheck__c</tabs>
+    <tabs>ProgramAssignment__c</tabs>
     <uiType>Lightning</uiType>
-    <utilityBar>Atlas_Dog_UtilityBar</utilityBar>
+    <utilityBar>AtlasDogUtilityBar</utilityBar>
 </CustomApplication>

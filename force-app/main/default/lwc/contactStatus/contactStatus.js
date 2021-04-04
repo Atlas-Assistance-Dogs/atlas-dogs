@@ -3,12 +3,12 @@ import { getRecord } from "lightning/uiRecordApi";
 
 const FIELDS = [
     "contact.Positions__c",
-    "contact.Volunteer_Status__c",
-    "contact.Client_Status__c",
-    "contact.Board_Member_Status__c",
-    "contact.Facilitator_Status__c",
-    "contact.Lead_Facilitator_Status__c",
-    "contact.Trainer_Status__c"
+    "contact.VolunteerStatus__c",
+    "contact.ClientStatus__c",
+    "contact.BoardMemberStatus__c",
+    "contact.FacilitatorStatus__c",
+    "contact.LeadFacilitatorStatus__c",
+    "contact.TrainerStatus__c"
 ];
 
 export default class ContactStatus extends LightningElement {

@@ -45,11 +45,11 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Criminal_Conviction__c</field>
+                <field>CriminalConviction__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Criminal_Conviction_Notes__c</field>
+                <field>CriminalConvictionNotes__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -57,19 +57,19 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Readonly</behavior>
-                <field>Lead_Facilitator_Status__c</field>
+                <field>LeadFacilitatorStatus__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Readonly</behavior>
-                <field>Client_Status__c</field>
+                <field>ClientStatus__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Board_Member_Status__c</field>
+                <field>BoardMemberStatus__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Board_Member_Accepted_Date__c</field>
+                <field>BoardMemberAcceptedDate__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -77,7 +77,7 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Lead_Interest__c</field>
+                <field>LeadInterest__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -85,11 +85,11 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Volunteer_Access__c</field>
+                <field>VolunteerAccess__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Lead_Source_Other__c</field>
+                <field>LeadSourceOther__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns />
@@ -135,17 +135,17 @@
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>
-        <relatedList>Contact_Log__c.Contact__c</relatedList>
+        <relatedList>ContactLog__c.Contact__c</relatedList>
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>
-        <relatedList>Background_Check__c.Contact__c</relatedList>
+        <relatedList>BackgroundCheck__c.Contact__c</relatedList>
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>
-        <fields>Assigned_Date__c</fields>
-        <fields>Completion_Date__c</fields>
-        <relatedList>Program_Assignment__c.Contact__c</relatedList>
+        <fields>AssignedDate__c</fields>
+        <fields>CompletionDate__c</fields>
+        <relatedList>ProgramAssignment__c.Contact__c</relatedList>
     </relatedLists>
     <relatedObjects>AccountId</relatedObjects>
     <showEmailCheckbox>false</showEmailCheckbox>

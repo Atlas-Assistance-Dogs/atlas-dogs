@@ -2,11 +2,11 @@
 public inherited sharing class ContactController {
     // Get the page size if available.  If not defined, return the default.
     private static Integer getPageSize() {
-        Atlas_Settings__c settings = Atlas_Settings__c.getInstance();
+        AtlasSettings__c settings = AtlasSettings__c.getInstance();
         if (settings == null) {
-            settings = new Atlas_Settings__c();
+            settings = new AtlasSettings__c();
         }
-        return (Integer) settings.Page_Size__c;
+        return (Integer) settings.PageSize__c;
     }
 
     @AuraEnabled(cacheable=true)

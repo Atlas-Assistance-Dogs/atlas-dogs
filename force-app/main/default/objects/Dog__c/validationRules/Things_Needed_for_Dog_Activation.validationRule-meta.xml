@@ -6,9 +6,9 @@
     <errorConditionFormula>AND(
 OR( 
 TODAY() &lt;  ADDMONTHS(Birthdate__c, 14),
-Health_Care_Records_Status__c  &lt;&gt; &quot;All Good&quot;  
+HealthCareRecordsStatus__c  &lt;&gt; &quot;All Good&quot;  
 ), 
  ISCHANGED(Active__c) = TRUE)</errorConditionFormula>
     <errorMessage
-  >For Activation of the Dog, It needs to be at least 14 months, Vaccinations need to be current</errorMessage>
+    >For Activation of the Dog, It needs to be at least 14 months, Vaccinations need to be current</errorMessage>
 </ValidationRule>

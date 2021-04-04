@@ -4,8 +4,8 @@
     <objectMapping>
         <inputObject>Lead</inputObject>
         <mappingFields>
-            <inputField>Lead_Interest__c</inputField>
-            <outputField>Lead_Interest__c</outputField>
+            <inputField>LeadInterest__c</inputField>
+            <outputField>LeadInterest__c</outputField>
         </mappingFields>
         <mappingFields>
             <inputField>npe01__Preferred_Email__c</inputField>
@@ -20,8 +20,8 @@
             <outputField>Pronoun__c</outputField>
         </mappingFields>
         <mappingFields>
-            <inputField>Pronoun_Other__c</inputField>
-            <outputField>Pronoun_Other__c</outputField>
+            <inputField>PronounOther__c</inputField>
+            <outputField>PronounOther__c</outputField>
         </mappingFields>
         <outputObject>Contact</outputObject>
     </objectMapping>
