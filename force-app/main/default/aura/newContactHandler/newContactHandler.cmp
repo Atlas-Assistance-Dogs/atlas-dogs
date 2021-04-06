@@ -1,4 +1,0 @@
-<aura:component implements="lightning:actionOverride" access="global" >
-    <c:newContact />
-
-</aura:component>	

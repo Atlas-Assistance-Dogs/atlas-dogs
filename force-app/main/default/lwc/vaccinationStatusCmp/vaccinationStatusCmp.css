@@ -1,19 +1,15 @@
-.greenColor{
+.greenColor {
     /*background-color: cyan;*/
     color: green !important;
 }
 
-.redColor{
-    
+.redColor {
     color: red !important;
 }
 
-
 .slds-form-element__static {
-    color:red !important;
+    color: red !important;
 }
-
-
 
 /*
 .THIS .redColor .slds-form-element_stacked .slds-form-element__control .slds-form-element__static {
