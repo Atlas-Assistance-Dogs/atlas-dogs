@@ -202,14 +202,14 @@
     </actionOverrides>
     <actionOverrides>
         <actionName>NewContact</actionName>
-        <content>NewContactHandler</content>
+        <content>ContactFormCmp</content>
         <formFactor>Large</formFactor>
         <skipRecordTypeSelect>false</skipRecordTypeSelect>
         <type>LightningComponent</type>
     </actionOverrides>
     <actionOverrides>
         <actionName>NewContact</actionName>
-        <content>NewContactHandler</content>
+        <content>ContactFormCmp</content>
         <formFactor>Small</formFactor>
         <skipRecordTypeSelect>false</skipRecordTypeSelect>
         <type>LightningComponent</type>

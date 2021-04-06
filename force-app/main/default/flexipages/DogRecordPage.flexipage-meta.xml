@@ -357,7 +357,7 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
-                <componentName>vaccination</componentName>
+                <componentName>vaccinationStatusCmp</componentName>
             </componentInstance>
         </itemInstances>
         <itemInstances>

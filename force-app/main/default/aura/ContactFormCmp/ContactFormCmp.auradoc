@@ -1,5 +1,5 @@
 <aura:documentation>
-	<aura:description>Documentation</aura:description>
+	<aura:description>Form for creating a new contact</aura:description>
 	<aura:example name="ExampleName" ref="exampleComponentName" label="Label">
 		Aura component to enable using button
 	</aura:example>

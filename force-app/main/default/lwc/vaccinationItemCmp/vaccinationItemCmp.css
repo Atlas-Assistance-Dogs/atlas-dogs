@@ -1,21 +1,19 @@
-.greenColor{
+.greenColor {
     background-color: colorBackgroundInput;
     color: black;
-    padding:spacingXxSmall;
+    padding: spacingXxSmall;
     display: inline-block;
 }
 
-.redColor{
+.redColor {
     background-color: rgb(235, 204, 204);
     color: colorTextBrandPrimary;
-    
-   
 }
 
-.red{
+.red {
     color: red;
 }
 
 .slds-form-element__static {
-    color:red !important;
+    color: red !important;
 }

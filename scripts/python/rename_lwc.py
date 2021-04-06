@@ -2,8 +2,8 @@
 
 import os, sys
 
-oldname = 'filterByRoleComponent'
-newname = 'filterByRole'
+oldname = 'vaccinationItem'
+newname = 'vaccinationItemCmp'
 
 pwd = os.curdir
 print(os.listdir(pwd))
