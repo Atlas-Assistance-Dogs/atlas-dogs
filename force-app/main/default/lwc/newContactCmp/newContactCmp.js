@@ -1,22 +1,8 @@
 import { LightningElement } from "lwc";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
 import { NavigationMixin } from "lightning/navigation";
-/*
-import CONTACT_OBJECT from '@salesforce/schema/Contact';
-
-import FNAME_FIELD from '@salesforce/schema/Contact.FirstName';
-import LNAME_FIELD from '@salesforce/schema/Contact.LastName';
-import EMAIL_FIELD from '@salesforce/schema/Contact.Email';
-import PHONE_FIELD from '@salesforce/schema/Contact.Phone';
-import SOURCE_FIELD from '@salesforce/schema/Contact.LeadSource';
-import CITY_FIELD from '@salesforce/schema/Contact.MailingCity';
-import STATE_FIELD from '@salesforce/schema/Contact.MailingState';
-import COUNTRY_FIELD from '@salesforce/schema/Contact.MailingCountry'; */
 
 export default class NewContact extends NavigationMixin(LightningElement) {
-    // contactObj = CONTACT_OBJECT;
-    //myFields = [FNAME_FIELD, LNAME_FIELD, EMAIL_FIELD, PHONE_FIELD, CITY_FIELD, STATE_FIELD, COUNTRY_FIELD, SOURCE_FIELD];
-
     handleSubmit() {
         const evt = new ShowToastEvent({
             title: "Record Submission",

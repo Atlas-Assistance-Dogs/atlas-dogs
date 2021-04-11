@@ -1,23 +1,11 @@
 <template>
-    <lightning-card
-        title="New Contact"
-        icon-name="standard:contact"
-        class="slds-p-around_medium"
-    >
-        <!--<lightning-record-form
-            object-api-name={contactObj}
-            fields={myFields}
-            columns = 2
-            onsuccess={handleSuccess}
-            oncancel={handleCancel}
-            class="slds-p-around_medium">
-        </lightning-record-form>-->
+    <c-modal title="New Contact" onclose={handleCancel} onsubmit={handleSubmit}>
         <lightning-record-edit-form
             object-api-name="Contact"
             onsuccess={handleSuccess}
             onsubmit={handleSubmit}
+            slot="body"
         >
-            <lightning-messages> </lightning-messages>
             <div class="slds-grid slds-wrap">
                 <div
                     class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2 slds-p-around_medium"
@@ -55,15 +43,10 @@
             <div class="slds-p-around_medium slds-align_absolute-center">
                 <lightning-button
                     class="slds-m-top_small slds-p-around_medium"
-                    label="Cancel"
-                    onclick={handleCancel}
-                ></lightning-button>
-                <lightning-button
-                    class="slds-m-top_small slds-p-around_medium"
                     type="submit"
                     label="Save"
                 ></lightning-button>
             </div>
         </lightning-record-edit-form>
-    </lightning-card>
+    </c-modal>
 </template>
