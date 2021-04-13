@@ -1,5 +1,9 @@
 <template>
-    <c-modal title="New Contact" onclose={handleCancel} onsubmit={handleSubmit}>
+    <c-modal-cmp
+        title="New Contact"
+        onclose={handleCancel}
+        onsubmit={handleSubmit}
+    >
         <lightning-record-edit-form
             object-api-name="Contact"
             onsuccess={handleSuccess}
@@ -40,13 +44,6 @@
                     ></lightning-input-field>
                 </div>
             </div>
-            <div class="slds-p-around_medium slds-align_absolute-center">
-                <lightning-button
-                    class="slds-m-top_small slds-p-around_medium"
-                    type="submit"
-                    label="Save"
-                ></lightning-button>
-            </div>
         </lightning-record-edit-form>
-    </c-modal>
+    </c-modal-cmp>
 </template>

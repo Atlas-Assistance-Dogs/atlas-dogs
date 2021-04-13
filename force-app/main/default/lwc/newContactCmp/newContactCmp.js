@@ -4,6 +4,7 @@ import { NavigationMixin } from "lightning/navigation";
 
 export default class NewContact extends NavigationMixin(LightningElement) {
     handleSubmit() {
+        this.template.querySelector("lightning-record-edit-form").submit();
         const evt = new ShowToastEvent({
             title: "Record Submission",
             message: "Submitted",
