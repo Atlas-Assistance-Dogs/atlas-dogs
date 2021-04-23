@@ -52,21 +52,6 @@
                 <fieldItem>Record.Status__c</fieldItem>
             </fieldInstance>
         </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldItem>Record.Active__c</fieldItem>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldItem>Record.Certified__c</fieldItem>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldItem>Record.Deceased__c</fieldItem>
-            </fieldInstance>
-        </itemInstances>
         <name>Facet-6c8a57f2-015e-43d2-b1d4-6cf40811ca1a</name>
         <type>Facet</type>
     </flexiPageRegions>

@@ -8,7 +8,8 @@ OR(
 TODAY() &lt;  ADDMONTHS(Birthdate__c, 14),
 HealthCareRecordsStatus__c  &lt;&gt; &quot;All Good&quot;  
 ), 
- ISCHANGED(Active__c) = TRUE)</errorConditionFormula>
+AND(NOT(ISPICKVAL(PRIORVALUE(Status__c), 'Active')),
+ ISPICKVAL(Status__c, 'Active')))</errorConditionFormula>
     <errorMessage
     >For Activation of the Dog, It needs to be at least 14 months, Vaccinations need to be current</errorMessage>
 </ValidationRule>

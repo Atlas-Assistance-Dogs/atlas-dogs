@@ -266,11 +266,6 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>Dog__c.Active__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
         <editable>false</editable>
         <field>Dog__c.Age__c</field>
         <readable>true</readable>
@@ -283,16 +278,6 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Dog__c.Breed__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Dog__c.Certified__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Dog__c.Deceased__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

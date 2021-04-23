@@ -17,8 +17,7 @@
           fake: phone_number
       MobilePhone:
           fake: phone_number
-      IsConverted:
-          fake: boolean
+      IsConverted: false
       LastName:
           fake: last_name
       LeadInterest__c:
