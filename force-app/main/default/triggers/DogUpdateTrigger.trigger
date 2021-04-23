@@ -1,9 +1,9 @@
 trigger DogUpdateTrigger on Dog__c(before insert, before update) {
-    AtlasSettings__c settings = AtlasSettings__c.getOrgDefaults();
+    AtlasSettings__c settings = AtlasSettings__c.getInstance();
     if (settings.VaccineRenewalYears__c == null) {
         settings = new AtlasSettings__c();
         insert settings;
-        settings = AtlasSettings__c.getOrgDefaults();
+        settings = AtlasSettings__c.getInstance();
     }
     System.debug(settings.VaccineRenewalYears__c);
 
