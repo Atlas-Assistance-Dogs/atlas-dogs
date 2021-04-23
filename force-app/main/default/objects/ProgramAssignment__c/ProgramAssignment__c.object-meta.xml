@@ -130,6 +130,16 @@
         <actionName>View</actionName>
         <type>Default</type>
     </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <formFactor>Large</formFactor>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <formFactor>Small</formFactor>
+        <type>Default</type>
+    </actionOverrides>
     <allowInChatterGroups>true</allowInChatterGroups>
     <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
     <deploymentStatus>Deployed</deploymentStatus>
@@ -151,7 +161,19 @@
         <type>AutoNumber</type>
     </nameField>
     <pluralLabel>Program Assignments</pluralLabel>
-    <searchLayouts />
+    <searchLayouts>
+        <searchResultsAdditionalFields
+        >Contact__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields
+        >Program__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields
+        >AssignedDate__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields
+        >CompletionDate__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields
+        >ExpectedCompletion__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Status__c</searchResultsAdditionalFields>
+    </searchLayouts>
     <sharingModel>ReadWrite</sharingModel>
     <visibility>Public</visibility>
 </CustomObject>
