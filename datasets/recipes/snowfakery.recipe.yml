@@ -12,4 +12,4 @@
 - include_file: program_assignment.recipe.yml
 - include_file: dog.recipe.yml
 - include_file: log.recipe.yml
-#- include_file: lead.recipe.yml
+- include_file: lead.recipe.yml

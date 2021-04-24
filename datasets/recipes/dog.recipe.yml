@@ -9,8 +9,6 @@
           date_between:
               start_date: 2000-01-01
               end_date: today
-      Active__c:
-          fake: boolean
       Birthdate__c:
           date_between:
               start_date: 2000-01-01
@@ -49,10 +47,6 @@
               - Chihuahua
               - French Bulldog
               - Pug
-      Certified__c:
-          fake: boolean
-      Deceased__c:
-          fake: boolean
       Gender__c:
           random_choice:
               - Male
@@ -316,6 +310,16 @@
               height: 60
       SpayedNeutered__c:
           fake: boolean
+      Status__c:
+          random_choice:
+              - Onboarding
+              - Waiting for Microchip Number
+              - Waiting to be Spayed-Neutered
+              - Too Young
+              - Active
+              - Certified
+              - Retired
+              - Deceased
       VetClinic__c:
           - object: Account
             nickname: vet_clinic

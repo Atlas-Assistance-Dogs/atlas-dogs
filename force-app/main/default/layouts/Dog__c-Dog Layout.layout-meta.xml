@@ -27,10 +27,6 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Active__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
                 <field>Owner__c</field>
             </layoutItems>
             <layoutItems>
@@ -82,14 +78,6 @@
             <layoutItems>
                 <behavior>Readonly</behavior>
                 <field>Eligible_byDOB__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Certified__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Deceased__c</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsTopToBottom</style>
@@ -202,7 +190,6 @@
     <miniLayout>
         <fields>Name</fields>
         <fields>MicrochipNumber__c</fields>
-        <fields>Active__c</fields>
     </miniLayout>
     <platformActionList>
         <actionListContext>Record</actionListContext>
@@ -301,11 +288,6 @@
             <field>MicrochipNumber__c</field>
             <posX>0</posX>
             <posY>1</posY>
-        </summaryLayoutItems>
-        <summaryLayoutItems>
-            <field>Active__c</field>
-            <posX>1</posX>
-            <posY>0</posY>
         </summaryLayoutItems>
         <summaryLayoutStyle>Default</summaryLayoutStyle>
     </summaryLayout>

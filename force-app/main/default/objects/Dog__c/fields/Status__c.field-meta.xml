@@ -42,6 +42,11 @@
                 <label>Certified</label>
             </value>
             <value>
+                <fullName>Retired</fullName>
+                <default>false</default>
+                <label>Retired</label>
+            </value>
+            <value>
                 <fullName>Deceased</fullName>
                 <default>false</default>
                 <label>Deceased</label>
