@@ -4,7 +4,7 @@ public with sharing class TestDogTrigger {
     }
 
     // Create a Dog with all latest shot and exam
-    static Dog__c createDog(Date exam) {
+    public static Dog__c createDog(Date exam) {
         Dog__c dog = new Dog__c(
             Name = 'Labrador',
             VaccineLatestDistemper__c = exam,
