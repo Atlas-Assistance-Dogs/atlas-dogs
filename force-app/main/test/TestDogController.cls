@@ -42,6 +42,25 @@ public with sharing class TestDogController {
     }
 
     @isTest
+    public static void getVaccinations_ReturnsNulls_WhenNoVaccinations() {
+        // Arrange
+        Dog__c saved = new Dog__c(Name = 'Labrador');
+        insert saved;
+
+        // Act
+        Test.startTest();
+        Dog__c dog = DogController.getVaccinations(saved.Id);
+        Test.stopTest();
+
+        System.assertEquals(null, dog.VaccineLatestDistemper__c);
+        System.assertEquals(null, dog.VaccineLatestHepatitis__c);
+        System.assertEquals(null, dog.VaccineLatestParainfluenza__c);
+        System.assertEquals(null, dog.VaccineLatestParvovirus__c);
+        System.assertEquals(null, dog.VaccineLatestRabies__c);
+        System.assertEquals(null, dog.PhysicalExamLatest__c);
+    }
+
+    @isTest
     public static void getVaccinations_ReturnsNotFound_WhenNoDog() {
         // Arrange
         Contact joe = new Contact(FirstName = 'Joe', LastName = 'Blow');
