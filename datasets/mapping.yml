@@ -134,39 +134,6 @@ Insert Account:
             after: Insert Contact
         npsp__Batch__c:
             table: npsp__Batch__c
-Insert Dog__c:
-    sf_object: Dog__c
-    fields:
-        - ActivationDate__c
-        - Active__c
-        - Birthdate__c
-        - Breed__c
-        - Certified__c
-        - Deceased__c
-        - Gender__c
-        - HealthCheckFailedDogAccepted__c
-        - HealthCheckNote__c
-        - LatestPhysicalExamOutcome__c
-        - MicrochipNumber__c
-        - Name
-        - PhysicalExamDue__c
-        - PhysicalExamLatest__c
-        - Picture__c
-        - SpayedNeutered__c
-        - Status__c
-        - VaccineDueDistemper__c
-        - VaccineDueHepatitis__c
-        - VaccineDueParainfluenza__c
-        - VaccineDueParvovirus__c
-        - VaccineDueRabies__c
-        - VaccineLatestDistemper__c
-        - VaccineLatestHepatitis__c
-        - VaccineLatestParainfluenza__c
-        - VaccineLatestParvovirus__c
-        - VaccineLatestRabies__c
-    lookups:
-        VetClinic__c:
-            table: Account
 Insert npsp__Address__c:
     sf_object: npsp__Address__c
     fields:
@@ -336,16 +303,38 @@ Insert ContinuingEducationUnit__c:
     lookups:
         Trainer__c:
             table: Contact
-Insert DogRelationship__c:
-    sf_object: DogRelationship__c
+Insert Dog__c:
+    sf_object: Dog__c
     fields:
+        - ActivationDate__c
+        - Birthdate__c
+        - Breed__c
+        - Gender__c
+        - HealthCheckFailedDogAccepted__c
+        - HealthCheckNote__c
+        - LatestPhysicalExamOutcome__c
+        - MicrochipNumber__c
         - Name
-        - Type__c
+        - PhysicalExamDue__c
+        - PhysicalExamLatest__c
+        - Picture__c
+        - SpayedNeutered__c
+        - Status__c
+        - VaccineDueDistemper__c
+        - VaccineDueHepatitis__c
+        - VaccineDueParainfluenza__c
+        - VaccineDueParvovirus__c
+        - VaccineDueRabies__c
+        - VaccineLatestDistemper__c
+        - VaccineLatestHepatitis__c
+        - VaccineLatestParainfluenza__c
+        - VaccineLatestParvovirus__c
+        - VaccineLatestRabies__c
     lookups:
-        Contact__c:
+        Owner__c:
             table: Contact
-        Dog__c:
-            table: Dog__c
+        VetClinic__c:
+            table: Account
 Insert Log__c:
     sf_object: Log__c
     fields:
@@ -385,3 +374,13 @@ Insert ContactLog__c:
             table: Contact
         Log__c:
             table: Log__c
+Insert DogRelationship__c:
+    sf_object: DogRelationship__c
+    fields:
+        - Name
+        - Type__c
+    lookups:
+        Contact__c:
+            table: Contact
+        Dog__c:
+            table: Dog__c
