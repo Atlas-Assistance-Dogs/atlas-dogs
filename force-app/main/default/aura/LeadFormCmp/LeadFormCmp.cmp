@@ -1,0 +1,3 @@
+<aura:component implements="lightning:actionOverride" access="global">
+    <c:newLeadCmp aura:id="modal" title="New Lead" />
+</aura:component>
