@@ -12,15 +12,25 @@ export default class ModalCmp extends LightningElement {
         this.isModalOpen = true;
     }
     @api
-    closeModal() {
+    cancelModal() {
         // to close modal set isModalOpen value as false
         this.isModalOpen = false;
         this.dispatchEvent(new CustomEvent("close"));
     }
+
+    @api
+    closeModal() {
+        // to close modal set isModalOpen value as false
+        this.isModalOpen = false;
+    }
+
     submit() {
         // to close modal set isModalOpen value as false
         //Add your code to call apex method or do some processing
-        this.isModalOpen = false;
+       // this.isModalOpen = false;
         this.dispatchEvent(new CustomEvent("submit"));
+    }
+    error(){
+        this.dispatchEvent(new CustomEvent("error"));
     }
 }

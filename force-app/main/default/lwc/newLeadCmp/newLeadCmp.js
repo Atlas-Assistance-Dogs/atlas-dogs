@@ -4,18 +4,36 @@ import { NavigationMixin } from "lightning/navigation";
 
 export default class NewLeadCmp extends NavigationMixin(LightningElement) {
 
-    handleSubmit() {
-        this.template.querySelector("lightning-record-edit-form").submit();
-        const evt = new ShowToastEvent({
-            title: "Record Submission",
-            message: "Submitted",
-            variant: "success"
-        });
+    validateFields() {
+        return [...this.template.querySelectorAll("lightning-input-field")].reduce((validSoFar, field) => {
+            return (validSoFar && field.reportValidity());
+        }, true);
+    }
 
-        this.dispatchEvent(evt);
+    handleSubmit(event) {
+        event.preventDefault();
+    
+        if (!this.validateFields()) {
+            const toast = new ShowToastEvent({
+                message: "Review all error messages below to correct your data.",
+                variant: "error",
+            });
+            this.dispatchEvent(toast);
+        }
+        else {
+            this.template.querySelector("lightning-record-edit-form").submit();
+            const evt = new ShowToastEvent({
+                title: "Record Submission",
+                message: "Submitted",
+                variant: "success"
+            });
+
+            this.dispatchEvent(evt);
+        }
     }
 
     handleSuccess(event) {
+        this.template.querySelector('c-modal-cmp').closeModal();
         const evt = new ShowToastEvent({
             title: "Lead created",
             message: "Lead created",
