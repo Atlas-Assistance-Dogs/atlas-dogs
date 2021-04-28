@@ -110,6 +110,7 @@ Insert Account:
         - npo02__SmallestAmount__c
         - npo02__TotalMembershipOppAmount__c
         - npo02__TotalOppAmount__c
+        - npsp__CustomizableRollups_UseSkewMode__c
         - npsp__Funding_Focus__c
         - npsp__Grantmaker__c
         - npsp__Matching_Gift_Administrator_Name__c
@@ -143,6 +144,7 @@ Insert npsp__Address__c:
         - npsp__Congressional_District__c
         - npsp__County_Name__c
         - npsp__Default_Address__c
+        - npsp__Exclude_from_Updates__c
         - npsp__Latest_End_Date__c
         - npsp__Latest_Start_Date__c
         - npsp__MailingCity__c
@@ -151,6 +153,8 @@ Insert npsp__Address__c:
         - npsp__MailingState__c
         - npsp__MailingStreet2__c
         - npsp__MailingStreet__c
+        - npsp__NCOA_Evaluation_Date__c
+        - npsp__NCOA_Result_Code__c
         - npsp__Pre_Verification_Address__c
         - npsp__Seasonal_End_Day__c
         - npsp__Seasonal_End_Month__c
@@ -159,6 +163,7 @@ Insert npsp__Address__c:
         - npsp__State_Lower_District__c
         - npsp__State_Upper_District__c
         - npsp__Verification_Status__c
+        - npsp__Verified_Date__c
         - npsp__Verified__c
     lookups:
         npsp__Household_Account__c:
@@ -202,6 +207,7 @@ Insert Contact:
         - npe01__Primary_Address_Type__c
         - npe01__Private__c
         - npe01__Secondary_Address_Type__c
+        - npe01__SystemAccountProcessor__c
         - npe01__WorkEmail__c
         - npe01__WorkPhone__c
         - npo02__AverageAmount__c
@@ -234,8 +240,10 @@ Insert Contact:
         - npo02__Soft_Credit_This_Year__c
         - npo02__Soft_Credit_Total__c
         - npo02__Soft_Credit_Two_Years_Ago__c
+        - npo02__SystemHouseholdProcessor__c
         - npo02__TotalMembershipOppAmount__c
         - npo02__TotalOppAmount__c
+        - npsp__CustomizableRollups_UseSkewMode__c
         - npsp__Deceased__c
         - npsp__Do_Not_Contact__c
         - npsp__Exclude_from_Household_Formal_Greeting__c
