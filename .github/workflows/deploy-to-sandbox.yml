@@ -9,10 +9,10 @@ on:
 env:
     CUMULUSCI_KEYCHAIN_CLASS: cumulusci.core.keychain.EnvironmentProjectKeychain
     CUMULUSCI_SERVICE_github: ${{ secrets.CUMULUSCI_SERVICE_github }}
-    CUMULUSCI_ORG_devint: {"username": "cumulusci@atlasdog.org.devint", "instance_url": "https://test.salesforce.com"}
-    CUMULUSCI_ORG_dave: {"username": "cumulusci@atlasdog.org.sandeepdev", "instance_url": "https://test.salesforce.com"}
-    CUMULUSCI_ORG_sandeep: {"username": "cumulusci@atlasdog.org.davedev", "instance_url": "https://test.salesforce.com"}
-    CUMULUSCI_ORG_staging: {"username": "cumulusci@atlasdog.org.staging", "instance_url": "https://test.salesforce.com"}
+    CUMULUSCI_ORG_devint: '{"username": "cumulusci@atlasdog.org.devint", "instance_url": "https://test.salesforce.com"}'
+    CUMULUSCI_ORG_dave: '{"username": "cumulusci@atlasdog.org.sandeepdev", "instance_url": "https://test.salesforce.com"}'
+    CUMULUSCI_ORG_sandeep: '{"username": "cumulusci@atlasdog.org.davedev", "instance_url": "https://test.salesforce.com"}'
+    CUMULUSCI_ORG_staging: '{"username": "cumulusci@atlasdog.org.staging", "instance_url": "https://test.salesforce.com"}'
     SFDX_CLIENT_ID: ${{ secrets.CLIENT_ID }}
     SFDX_HUB_KEY: ${{ secrets.SSH_KEY }}
     SFDX_AUDIENCE_URL: "https://test.salesforce.com"
