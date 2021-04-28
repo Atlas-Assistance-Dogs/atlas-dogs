@@ -25,15 +25,15 @@ jobs:
             - name: Set env to dev
               if: endsWith(github.ref, '/dev')
               run: |
-                  echo "::set-env name=ENVIRONMENT::dev"
+                  echo "name=dev" >> $GITHUB_ENV
             - name: Set env to staging
               if: endsWith(github.ref, '/staging')
               run: |
-                  echo "::set-env name=ENVIRONMENT::staging"
+                  echo "name=staging" >> $GITHUB_ENV
             - name: Set env to production
               if: endsWith(github.ref, '/main')
               run: |
-                  echo "::set-env name=ENVIRONMENT::production"
+                  echo "name=production" >> $GITHUB_ENV
             - uses: actions/checkout@v2
             - name: Install sfdx
               run: |
