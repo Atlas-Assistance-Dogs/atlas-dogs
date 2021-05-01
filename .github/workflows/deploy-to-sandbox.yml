@@ -10,8 +10,6 @@ env:
     CUMULUSCI_KEYCHAIN_CLASS: cumulusci.core.keychain.EnvironmentProjectKeychain
     CUMULUSCI_SERVICE_github: ${{ secrets.CUMULUSCI_SERVICE_github }}
     CUMULUSCI_ORG_devint: '{"username": "cumulusci@atlasdog.org.devint", "instance_url": "https://test.salesforce.com"}'
-    CUMULUSCI_ORG_dave: '{"username": "cumulusci@atlasdog.org.sandeepdev", "instance_url": "https://test.salesforce.com"}'
-    CUMULUSCI_ORG_sandeep: '{"username": "cumulusci@atlasdog.org.davedev", "instance_url": "https://test.salesforce.com"}'
     CUMULUSCI_ORG_staging: '{"username": "cumulusci@atlasdog.org.staging", "instance_url": "https://test.salesforce.com"}'
     SFDX_CLIENT_ID: ${{ secrets.CLIENT_ID }}
     SFDX_HUB_KEY: ${{ secrets.SSH_KEY }}
@@ -53,15 +51,7 @@ jobs:
             - name: Deploy source to devint sandbox
               run: |
                   cci flow run sandbox --org devint
-            - name: Deploy source to dave sandbox
-              if: endsWith(github.ref, '/dev')
-              run: |
-                  cci flow run sandbox --org dave
-            - name: Deploy source to sandeep sandbox
-              if: endsWith(github.ref, '/dev')
-              run: |
-                  cci flow run sandbox --org sandeep
-            - name: Deploy source to sandeep sandbox
+            - name: Deploy source to staging sandbox
               if: endsWith(github.ref, '/staging')
               run: |
                   cci flow run sandbox --org staging
