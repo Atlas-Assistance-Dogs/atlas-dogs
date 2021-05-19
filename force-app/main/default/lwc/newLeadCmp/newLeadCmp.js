@@ -4,6 +4,27 @@ import { NavigationMixin } from "lightning/navigation";
 
 export default class NewLeadCmp extends NavigationMixin(LightningElement) {
 
+    showSourceOther = false;
+    showPnounOther = false;
+
+    handlePnounChange(event){
+
+        if(event.detail.value === 'specify'){
+            this.showPnounOther = true;
+        } else {
+            this.showPnounOther = false;
+        }
+    }
+
+    handleSourceChange(event){
+
+        if(event.detail.value === 'Other'){
+            this.showSourceOther = true;
+        } else {
+            this.showSourceOther = false;
+        }
+    }
+
     validateFields() {
         return [...this.template.querySelectorAll("lightning-input-field")].reduce((validSoFar, field) => {
             return (validSoFar && field.reportValidity());
@@ -15,7 +36,7 @@ export default class NewLeadCmp extends NavigationMixin(LightningElement) {
     
         if (!this.validateFields()) {
             const toast = new ShowToastEvent({
-                message: "Review all error messages below to correct your data.",
+                message: "All fields marked with asterik are required.",
                 variant: "error",
             });
             this.dispatchEvent(toast);
