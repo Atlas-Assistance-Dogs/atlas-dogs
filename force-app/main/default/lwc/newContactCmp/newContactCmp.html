@@ -1,49 +1,75 @@
 <template>
-    <c-modal-cmp
-        title="New Contact"
-        onclose={handleCancel}
-        onsubmit={handleSubmit}
-    >
-        <lightning-record-edit-form
-            object-api-name="Contact"
-            onsuccess={handleSuccess}
-            onsubmit={handleSubmit}
-            slot="body"
-        >
+    <c-modal-cmp title="New Contact" onclose={handleCancel} onsubmit={handleSubmit}>
+        <lightning-record-edit-form object-api-name="Contact" onsuccess={handleSuccess} onsubmit={handleSubmit} onerror = {handleError} slot="body">
             <div class="slds-grid slds-wrap">
-                <div
-                    class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2 slds-p-around_medium"
-                >
-                    <lightning-input-field
-                        field-name="FirstName"
-                    ></lightning-input-field>
-                    <lightning-input-field
-                        field-name="LastName"
-                    ></lightning-input-field>
-                    <lightning-input-field
-                        field-name="Email"
-                    ></lightning-input-field>
-                    <lightning-input-field
-                        field-name="Phone"
-                    ></lightning-input-field>
+                <lightning-messages></lightning-messages>
+                <div class="slds-col slds-size_1-of-1 slds-grid slds-wrap slds-m-vertical_small" style="background-color:#f3f2f2;">
+                    <h3 class="slds-p-around_small">Contact Information</h3>
                 </div>
-                <div
-                    class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2 slds-p-around_medium"
-                >
-                    <lightning-input-field
-                        field-name="MailingCity"
-                    ></lightning-input-field>
-                    <lightning-input-field
-                        field-name="MailingState"
-                    ></lightning-input-field>
-                    <lightning-input-field
-                        field-name="MailingCountry"
-                    ></lightning-input-field>
-                    <lightning-input-field
-                        field-name="LeadSource"
-                    ></lightning-input-field>
+                <!-- <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2 slds-p-around_medium">
+                    <lightning-input-field field-name="FirstName"></lightning-input-field>
+                    <lightning-input-field field-name="LastName"></lightning-input-field>
+                    <lightning-input-field field-name="Email"></lightning-input-field>
+                    <lightning-input-field field-name="Phone"></lightning-input-field>
+                </div> -->
+                <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2 slds-p-horizontal_small">
+                    <lightning-input-field field-name="FirstName" required ></lightning-input-field>
+                    <lightning-input-field field-name="LastName" required></lightning-input-field>
+                </div>
+                <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2 slds-p-horizontal_small">
+                    <lightning-input-field field-name="Email" required></lightning-input-field>
+                    <lightning-input-field field-name="Phone"></lightning-input-field>
+                </div>
+                <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2 slds-p-horizontal_small">
+                    <lightning-input-field field-name="Pronoun__c" onchange={handlePnounChange}></lightning-input-field>
+                </div>
+                <template if:true = {showPnounOther}>
+                    <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2 slds-p-horizontal_small">
+                        <lightning-input-field field-name="PronounOther__c"></lightning-input-field>
+                    </div>
+                </template>
+                <!-- <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2 slds-p-around_medium">
+                    <lightning-input-field field-name="MailingCity"></lightning-input-field>
+                    <lightning-input-field field-name="MailingState"></lightning-input-field>
+                    <lightning-input-field field-name="MailingCountry"></lightning-input-field>
+                    <lightning-input-field field-name="MailingStreet"></lightning-input-field>
+                </div> -->
+                <div class="slds-col slds-size_1-of-1 slds-grid slds-wrap slds-m-vertical_small" style="background-color:#f3f2f2;">
+                    <h3 class="slds-p-around_small">Address Information</h3>
+                </div>
+                <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1 slds-p-horizontal_small">
+                    <lightning-input-field field-name="MailingStreet"></lightning-input-field>
+                </div>
+                <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2 slds-p-horizontal_small">
+                    <lightning-input-field field-name="MailingCity"></lightning-input-field>
+                    <lightning-input-field field-name="MailingState"></lightning-input-field>
+                </div>
+                <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2 slds-p-horizontal_small">
+                    <lightning-input-field field-name="MailingCountry"></lightning-input-field>
+                    <lightning-input-field field-name="MailingPostalCode"></lightning-input-field>
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-grid slds-wrap slds-m-vertical_small" style="background-color:#f3f2f2;">
+                    <h3 class="slds-p-around_small">Additional Information</h3>
+                </div>
+                <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1 slds-p-horizontal_small">
+                    <lightning-input-field field-name="LeadInterest__c"></lightning-input-field>
+                </div>
+                <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2 slds-p-horizontal_small">
+                    <lightning-input-field field-name="LeadSource" onchange={handleSourceChange}></lightning-input-field>
+                </div>
+                <template if:true = {showSourceOther}>
+                    <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2 slds-p-horizontal_small">
+                        <lightning-input-field field-name="LeadSourceOther__c" ></lightning-input-field>
+                    </div>
+                </template>
+                <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1 slds-p-horizontal_small">
+                    <lightning-input-field field-name="LeadComments__c"></lightning-input-field>
                 </div>
             </div>
         </lightning-record-edit-form>
     </c-modal-cmp>
 </template>
+
+       
+   
+
