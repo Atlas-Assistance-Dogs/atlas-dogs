@@ -394,10 +394,10 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
-                <componentInstanceProperties>
+               <!-- <componentInstanceProperties>
                     <name>createQuickActionName</name>
                     <value>New_Organization</value>
-                </componentInstanceProperties>
+                </componentInstanceProperties>-->
                 <componentInstanceProperties>
                     <name>lookupFieldName</name>
                     <value>Dog__c.Owner__c</value>
