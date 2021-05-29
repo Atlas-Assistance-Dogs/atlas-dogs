@@ -43,24 +43,24 @@ export default class NewContact extends NavigationMixin(LightningElement) {
         }
         else {
             this.template.querySelector("lightning-record-edit-form").submit();
-            const evt = new ShowToastEvent({
-                title: "Record Submission",
-                message: "Submitted",
-                variant: "success"
-            });
+            // const evt = new ShowToastEvent({
+            //     title: "Record Submission",
+            //     message: "Submitted",
+            //     variant: "success"
+            // });
 
-            this.dispatchEvent(evt);
+            // this.dispatchEvent(evt);
         }
     }
 
     handleSuccess(event) {
         this.template.querySelector('c-modal-cmp').closeModal();
-        const evt = new ShowToastEvent({
-            title: "Contact created",
-            message: "Lead created",
-            variant: "success"
-        });
-        this.dispatchEvent(evt);
+        // const evt = new ShowToastEvent({
+        //     title: "Contact created",
+        //     message: "Contact created",
+        //     variant: "success"
+        // });
+        // this.dispatchEvent(evt);
 
         this[NavigationMixin.Navigate]({
             type: "standard__recordPage",

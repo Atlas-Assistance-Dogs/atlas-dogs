@@ -43,24 +43,24 @@ export default class NewLeadCmp extends NavigationMixin(LightningElement) {
         }
         else {
             this.template.querySelector("lightning-record-edit-form").submit();
-            const evt = new ShowToastEvent({
-                title: "Record Submission",
-                message: "Submitted",
-                variant: "success"
-            });
+            // const evt = new ShowToastEvent({
+            //     title: "Record Submission",
+            //     message: "Submitted",
+            //     variant: "success"
+            // });
 
-            this.dispatchEvent(evt);
+            // this.dispatchEvent(evt);
         }
     }
 
     handleSuccess(event) {
         this.template.querySelector('c-modal-cmp').closeModal();
-        const evt = new ShowToastEvent({
-            title: "Lead created",
-            message: "Lead created",
-            variant: "success"
-        });
-        this.dispatchEvent(evt);
+        // const evt = new ShowToastEvent({
+        //     title: "Lead created",
+        //     message: "Lead created",
+        //     variant: "success"
+        // });
+        // this.dispatchEvent(evt);
 
         this[NavigationMixin.Navigate]({
             type: "standard__recordPage",
@@ -73,8 +73,7 @@ export default class NewLeadCmp extends NavigationMixin(LightningElement) {
     }
 
     handleError(event) {
-        console.log("handleError event");
-        console.log(JSON.stringify(event.detail));
+       
         const evt = new ShowToastEvent({
             title: "Error in Record Creation",
             message: event.detail.detail,
@@ -82,7 +81,6 @@ export default class NewLeadCmp extends NavigationMixin(LightningElement) {
         });
         this.dispatchEvent(evt);
     }
-
 
     handleCancel() {
         this[NavigationMixin.Navigate]({
