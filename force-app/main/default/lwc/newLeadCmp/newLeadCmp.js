@@ -36,7 +36,7 @@ export default class NewLeadCmp extends NavigationMixin(LightningElement) {
     
         if (!this.validateFields()) {
             const toast = new ShowToastEvent({
-                message: "All fields marked with asterik are required.",
+                message: "All fields marked with an asterix are required.",
                 variant: "error",
             });
             this.dispatchEvent(toast);
