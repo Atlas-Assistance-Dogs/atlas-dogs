@@ -1,0 +1,7 @@
+<aura:documentation>
+	<aura:description>Form for creating a new lead</aura:description>
+	<aura:example name="ExampleName" ref="exampleComponentName" label="Label">
+		Aura component to enable using button
+	</aura:example>
+</aura:documentation>
+

@@ -1,8 +1,8 @@
-import { LightningElement } from "lwc";
+import { LightningElement } from 'lwc';
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
 import { NavigationMixin } from "lightning/navigation";
 
-export default class NewContact extends NavigationMixin(LightningElement) {
+export default class NewLeadCmp extends NavigationMixin(LightningElement) {
 
     showSourceOther = false;
     showPnounOther = false;
@@ -56,8 +56,8 @@ export default class NewContact extends NavigationMixin(LightningElement) {
     handleSuccess(event) {
         this.template.querySelector('c-modal-cmp').closeModal();
         // const evt = new ShowToastEvent({
-        //     title: "Contact created",
-        //     message: "Contact created",
+        //     title: "Lead created",
+        //     message: "Lead created",
         //     variant: "success"
         // });
         // this.dispatchEvent(evt);
@@ -66,15 +66,14 @@ export default class NewContact extends NavigationMixin(LightningElement) {
             type: "standard__recordPage",
             attributes: {
                 recordId: event.detail.id,
-                objectApiName: "Contact",
+                objectApiName: "Lead",
                 actionName: "view"
             }
         });
     }
 
     handleError(event) {
-        console.log("handleError event");
-        console.log(JSON.stringify(event.detail));
+       
         const evt = new ShowToastEvent({
             title: "Error in Record Creation",
             message: event.detail.detail,
@@ -83,14 +82,14 @@ export default class NewContact extends NavigationMixin(LightningElement) {
         this.dispatchEvent(evt);
     }
 
-
     handleCancel() {
         this[NavigationMixin.Navigate]({
             type: "standard__objectPage",
             attributes: {
-                objectApiName: "Contact",
+                objectApiName: "Lead",
                 actionName: "home"
             }
         });
     }
+
 }
