@@ -236,7 +236,6 @@ Insert Contact:
         - npo02__Soft_Credit_Two_Years_Ago__c
         - npo02__TotalMembershipOppAmount__c
         - npo02__TotalOppAmount__c
-        - npsp__CustomizableRollups_UseSkewMode__c
         - npsp__Deceased__c
         - npsp__Do_Not_Contact__c
         - npsp__Exclude_from_Household_Formal_Greeting__c
