@@ -164,8 +164,9 @@
     <externalSharingModel>Private</externalSharingModel>
     <label>Background Check</label>
     <nameField>
+        <displayFormat>BC-{0000}</displayFormat>
         <label>Background Check Name</label>
-        <type>Text</type>
+        <type>AutoNumber</type>
     </nameField>
     <pluralLabel>Background Checks</pluralLabel>
     <searchLayouts>

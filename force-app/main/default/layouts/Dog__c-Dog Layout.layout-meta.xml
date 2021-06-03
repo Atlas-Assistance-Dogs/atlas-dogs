@@ -246,13 +246,7 @@
         <fields>CORE.USERS.FULL_NAME</fields>
         <relatedList>RelatedActivityList</relatedList>
     </relatedLists>
-    <!--relatedLists>
-        <fields>VERSION.CREATED_DATE</fields>
-        <fields>VERSION.LAST_UPDATE</fields>
-        <relatedList>ContentDocumentRelatedList</relatedList>
-    </relatedLists-->
     <relatedLists>
-        <fields>NAME</fields>
         <fields>Contact__c</fields>
         <fields>Type__c</fields>
         <relatedList>DogRelationship__c.Dog__c</relatedList>
@@ -275,7 +269,7 @@
     <showRunAssignmentRulesCheckbox>false</showRunAssignmentRulesCheckbox>
     <showSubmitAndAttachButton>false</showSubmitAndAttachButton>
     <summaryLayout>
-        <masterLabel>00h0U000002EK9y</masterLabel>
+        <masterLabel>00h1D0000041r4e</masterLabel>
         <sizeX>2</sizeX>
         <sizeY>2</sizeY>
         <summaryLayoutItems>
