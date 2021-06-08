@@ -156,8 +156,9 @@
     <externalSharingModel>Private</externalSharingModel>
     <label>Dog Relationship</label>
     <nameField>
+        <displayFormat>DR-{00000}</displayFormat>
         <label>Dog Relationship Name</label>
-        <type>Text</type>
+        <type>AutoNumber</type>
     </nameField>
     <pluralLabel>Dogs Relationships</pluralLabel>
     <searchLayouts />
