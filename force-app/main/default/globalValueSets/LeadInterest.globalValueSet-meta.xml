@@ -16,9 +16,9 @@
         <label>Client Certification</label>
     </customValue>
     <customValue>
-        <fullName>Owner Trainer Program</fullName>
+        <fullName>Teams Set in Motion Program</fullName>
         <default>false</default>
-        <label>Owner Trainer Program</label>
+        <label>Teams Set in Motion Program</label>
     </customValue>
     <customValue>
         <fullName>Sweet Snoopers Training Program</fullName>

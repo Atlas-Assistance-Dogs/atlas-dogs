@@ -21,9 +21,9 @@
         <label>Client</label>
     </customValue>
     <customValue>
-        <fullName>Owner Trainer</fullName>
+        <fullName>Teams Set in Motion Client</fullName>
         <default>false</default>
-        <label>Owner Trainer</label>
+        <label>Teams Set in Motion Client</label>
     </customValue>
     <masterLabel>Positions</masterLabel>
     <sorted>false</sorted>
