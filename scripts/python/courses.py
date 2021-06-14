@@ -25,7 +25,7 @@ with open('datasets/courses.csv', 'w') as csvfile:
             if client == 'Y':
                 positions.append('Client')
             if owner == 'Y':
-                positions.append('Owner Trainer')
+                positions.append('Teams Set in Motion Program')
 
             code = sis
             if code.find('testout') != -1:

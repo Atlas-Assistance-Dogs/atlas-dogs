@@ -168,7 +168,6 @@
         <excludedStandardButtons>ChangeOwner</excludedStandardButtons>
         <excludedStandardButtons>MassChangeOwner</excludedStandardButtons>
         <listViewButtons>Onboard_New_Dog</listViewButtons>
-        <searchResultsAdditionalFields>Owner__c</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>Status__c</searchResultsAdditionalFields>
         <searchResultsAdditionalFields
         >ExpiryDateStatus__c</searchResultsAdditionalFields>
