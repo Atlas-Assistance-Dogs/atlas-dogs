@@ -322,8 +322,6 @@ Insert Dog__c:
         - VaccineLatestParvovirus__c
         - VaccineLatestRabies__c
     lookups:
-        Owner__c:
-            table: Contact
         VetClinic__c:
             table: Account
 Insert Log__c:
