@@ -272,7 +272,6 @@ Insert BackgroundCheck__c:
     sf_object: BackgroundCheck__c
     fields:
         - Date__c
-        - Name
         - Notes__c
         - Result__c
     lookups:
@@ -323,8 +322,6 @@ Insert Dog__c:
         - VaccineLatestParvovirus__c
         - VaccineLatestRabies__c
     lookups:
-        Owner__c:
-            table: Contact
         VetClinic__c:
             table: Account
 Insert Log__c:
@@ -359,7 +356,6 @@ Insert ProgramAssignment__c:
 Insert ContactLog__c:
     sf_object: ContactLog__c
     fields:
-        - Name
         - Position__c
     lookups:
         Contact__c:
@@ -369,7 +365,6 @@ Insert ContactLog__c:
 Insert DogRelationship__c:
     sf_object: DogRelationship__c
     fields:
-        - Name
         - Type__c
     lookups:
         Contact__c:

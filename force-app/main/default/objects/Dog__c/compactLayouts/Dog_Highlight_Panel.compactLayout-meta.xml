@@ -2,7 +2,6 @@
 <CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Dog_Highlight_Panel</fullName>
     <fields>Name</fields>
-    <fields>Owner__c</fields>
     <fields>Status__c</fields>
     <fields>ExpiryDateStatus__c</fields>
     <label>Dog Highlight Panel</label>

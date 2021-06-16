@@ -73,11 +73,6 @@
         </itemInstances>
         <itemInstances>
             <fieldInstance>
-                <fieldItem>Record.Owner__c</fieldItem>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
                 <fieldItem>Record.Picture__c</fieldItem>
             </fieldInstance>
         </itemInstances>
@@ -392,28 +387,7 @@
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
-        <itemInstances>
-            <componentInstance>
-               <!-- <componentInstanceProperties>
-                    <name>createQuickActionName</name>
-                    <value>New_Organization</value>
-                </componentInstanceProperties>-->
-                <componentInstanceProperties>
-                    <name>lookupFieldName</name>
-                    <value>Dog__c.Owner__c</value>
-                </componentInstanceProperties>
-                <componentInstanceProperties>
-                    <name>titleFieldName</name>
-                    <value>Dog Owner Details</value>
-                </componentInstanceProperties>
-                <componentInstanceProperties>
-                    <name>updateQuickActionName</name>
-                    <value>Account.npsp__Quick_Household_Update</value>
-                </componentInstanceProperties>
-                <componentName>console:relatedRecord</componentName>
-            </componentInstance>
-        </itemInstances>
-        <itemInstances>
+       <itemInstances>
             <componentInstance>
                 <componentInstanceProperties>
                     <name>tabs</name>

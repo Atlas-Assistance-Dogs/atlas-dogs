@@ -9,7 +9,7 @@
               - Trainer
               - Client
               - Donor
-              - Owner Trainer
+              - Teams Set in Motion Client
 
 - macro: position
   fields:
@@ -22,4 +22,4 @@
               - Trainer
               - Client
               - Donor
-              - Owner Trainer
+              - Teams Set in Motion Client

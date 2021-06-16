@@ -12,6 +12,11 @@
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
+                <fullName>Owner</fullName>
+                <default>false</default>
+                <label>Owner</label>
+            </value>
+            <value>
                 <fullName>Veterinarian</fullName>
                 <default>false</default>
                 <label>Veterinarian</label>
