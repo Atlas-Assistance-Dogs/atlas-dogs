@@ -3,21 +3,18 @@ public inherited sharing class ContactController {
     // Get the page size if available.  If not defined, return the default.
     private static Integer getPageSize() {
         AtlasSettings__c settings = AtlasSettings__c.getInstance();
+       
         if (settings == null) {
             settings = new AtlasSettings__c();
         }
-        return (Integer) settings.PageSize__c;
+            return (Integer) settings.PageSize__c;
+       
     }
 
     @AuraEnabled(cacheable=true)
-    public static PagedResult getPagedContacts(
-        String searchKey,
-        Integer pageNumber
-    ) {
+    public static PagedResult getPagedContacts ( String searchKey, Integer pageNumber ) {
         String searchId = searchKey.trim();
-        String searchCriteria = (String.isBlank(searchId)
-            ? '%'
-            : '%' + searchId + '%');
+        String searchCriteria = (String.isBlank(searchId) ? '%' : '%' + searchId + '%');
 
         Integer pageSize = getPageSize();
         Integer offset = (pageNumber - 1) * pageSize;
@@ -39,24 +36,22 @@ public inherited sharing class ContactController {
 
     @AuraEnabled(cacheable=true)
     public static List<Contact> getContactsWithPosition(String position) {
-        return [
-            SELECT Id, Name
-            FROM Contact
-            WHERE Positions__c INCLUDES (:position)
-            WITH SECURITY_ENFORCED
-            ORDER BY Name
-        ];
+        return [ SELECT Id, Name
+                    FROM Contact
+                    WHERE Positions__c INCLUDES (:position)
+                    WITH SECURITY_ENFORCED
+                    ORDER BY Name
+                ];
     }
 
     // Return all the contacts with matching name
     @AuraEnabled(Cacheable=true)
     public static List<Contact> getContactsByName(String strName) {
         String strNameLike = '%' + strName + '%';
-        List<Contact> acctList = [
-            SELECT Id, Name
-            FROM Contact
-            WHERE Name LIKE :strNameLike
-        ];
+        List<Contact> acctList = [  SELECT Id, Name
+                                        FROM Contact
+                                        WHERE Name LIKE :strNameLike
+                                    ];
         return acctList;
     }
 }
