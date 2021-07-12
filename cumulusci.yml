@@ -2,11 +2,13 @@ minimum_cumulusci_version: "3.26.0"
 project:
     name: atlas-dog
     package:
-        name: atlas-dogs
+        name: AtlasDogs
+        namespace: atlasdog
         api_version: "50.0"
     dependencies:
         - github: "https://github.com/SalesforceFoundation/NPSP"
     git:
+        default_branch: "dev"
     source_format: sfdx
 
 tasks:
@@ -26,12 +28,6 @@ tasks:
             required_org_code_coverage_percent: 75
 
 flows:
-    dependencies:
-        steps:
-            1:
-                task: update_dependencies
-                options:
-                    include_beta: False
     config_qa:
         steps:
             1:
@@ -64,8 +60,8 @@ flows:
     sandbox:
         steps:
             1:
-                #     flow: dependencies
-                # 2:
+                flow: dependencies
+            2:
                 task: dx
                 options:
                     command: force:source:deploy
