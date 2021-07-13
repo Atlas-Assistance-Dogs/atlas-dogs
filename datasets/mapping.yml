@@ -53,16 +53,25 @@ Insert npsp__Batch__c:
 Insert Lead:
     sf_object: Lead
     fields:
+        - City
         - Company
+        - Country
+        - Email
         - FirstName
         - IsConverted
         - IsUnreadByOwner
         - LastName
         - LeadInterest__c
+        - LeadSource
         - LeadSourceOther__c
+        - MobilePhone
+        - Phone
+        - PostalCode
         - PronounOther__c
         - Pronoun__c
+        - State
         - Status
+        - Street
         - npe01__Preferred_Email__c
         - npe01__Preferred_Phone__c
         - npsp__CompanyCity__c
