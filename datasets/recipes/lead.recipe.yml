@@ -17,6 +17,16 @@
           fake: phone_number
       MobilePhone:
           fake: phone_number
+      Street:
+          fake: street_address
+      City:
+          fake: city
+      State:
+          fake: state
+      PostalCode:
+          fake: postalcode
+      Country:
+          fake: country
       IsConverted: false
       LastName:
           fake: last_name
