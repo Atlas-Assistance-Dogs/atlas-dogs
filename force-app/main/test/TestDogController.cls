@@ -7,38 +7,20 @@ public with sharing class TestDogController {
     public static void getVaccinations_ReturnsVaccinations() {
         // Arrange
         Date exam = Date.newInstance(2021, 1, 10);
-        Dog__c saved = TestDogTrigger.createDog(exam);
+        Date due = exam.addYears(1);
+        Dog__c saved = new Dog__c(
+            VaccineDueDistemper__c = due,
+            VaccineDueHepatitis__c = due,
+            VaccineDueParainfluenza__c = due,
+            VaccineDueParvovirus__c = due,
+            VaccineDueRabies__c = exam.addYears(2)
+        );
         insert saved;
 
         // Act
         Test.startTest();
         Dog__c dog = DogController.getVaccinations(saved.Id);
         Test.stopTest();
-
-        System.assertEquals(
-            saved.VaccineLatestDistemper__c,
-            dog.VaccineLatestDistemper__c
-        );
-        System.assertEquals(
-            saved.VaccineLatestHepatitis__c,
-            dog.VaccineLatestHepatitis__c
-        );
-        System.assertEquals(
-            saved.VaccineLatestParainfluenza__c,
-            dog.VaccineLatestParainfluenza__c
-        );
-        System.assertEquals(
-            saved.VaccineLatestParvovirus__c,
-            dog.VaccineLatestParvovirus__c
-        );
-        System.assertEquals(
-            saved.VaccineLatestRabies__c,
-            dog.VaccineLatestRabies__c
-        );
-        System.assertEquals(
-            saved.PhysicalExamLatest__c,
-            dog.PhysicalExamLatest__c
-        );
     }
 
     @isTest
@@ -52,12 +34,12 @@ public with sharing class TestDogController {
         Dog__c dog = DogController.getVaccinations(saved.Id);
         Test.stopTest();
 
-        System.assertEquals(null, dog.VaccineLatestDistemper__c);
-        System.assertEquals(null, dog.VaccineLatestHepatitis__c);
-        System.assertEquals(null, dog.VaccineLatestParainfluenza__c);
-        System.assertEquals(null, dog.VaccineLatestParvovirus__c);
-        System.assertEquals(null, dog.VaccineLatestRabies__c);
-        System.assertEquals(null, dog.PhysicalExamLatest__c);
+        System.assertEquals(null, dog.VaccineDueDistemper__c);
+        System.assertEquals(null, dog.VaccineDueHepatitis__c);
+        System.assertEquals(null, dog.VaccineDueParainfluenza__c);
+        System.assertEquals(null, dog.VaccineDueParvovirus__c);
+        System.assertEquals(null, dog.VaccineDueRabies__c);
+        System.assertEquals(null, dog.PhysicalExamDue__c);
     }
 
     @isTest

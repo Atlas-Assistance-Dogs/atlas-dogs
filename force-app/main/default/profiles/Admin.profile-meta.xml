@@ -318,11 +318,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Dog__c.LatestPhysicalExamOutcome__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
         <field>Dog__c.MicrochipNumber__c</field>
         <readable>false</readable>
     </fieldPermissions>
@@ -330,11 +325,6 @@
         <editable>true</editable>
         <field>Dog__c.PhysicalExamDue__c</field>
         <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Dog__c.PhysicalExamLatest__c</field>
-        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
@@ -374,31 +364,6 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Dog__c.VaccineDueRabies__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Dog__c.VaccineLatestDistemper__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Dog__c.VaccineLatestHepatitis__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Dog__c.VaccineLatestParainfluenza__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Dog__c.VaccineLatestParvovirus__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Dog__c.VaccineLatestRabies__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>

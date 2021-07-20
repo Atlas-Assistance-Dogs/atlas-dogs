@@ -127,71 +127,6 @@
     <flexiPageRegions>
         <itemInstances>
             <fieldInstance>
-                <fieldItem>Record.VaccineLatestDistemper__c</fieldItem>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldItem>Record.VaccineLatestHepatitis__c</fieldItem>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldItem>Record.VaccineLatestParainfluenza__c</fieldItem>
-            </fieldInstance>
-        </itemInstances>
-        <name>Facet-c6f8a4af-14e8-4df8-8185-a5cb099ed7c9</name>
-        <type>Facet</type>
-    </flexiPageRegions>
-    <flexiPageRegions>
-        <itemInstances>
-            <fieldInstance>
-                <fieldItem>Record.VaccineLatestParvovirus__c</fieldItem>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldItem>Record.VaccineLatestRabies__c</fieldItem>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldItem>Record.PhysicalExamLatest__c</fieldItem>
-            </fieldInstance>
-        </itemInstances>
-        <name>Facet-e08de4d3-4d5b-475f-be48-e5f1a879d0d8</name>
-        <type>Facet</type>
-    </flexiPageRegions>
-    <flexiPageRegions>
-        <itemInstances>
-            <componentInstance>
-                <componentInstanceProperties>
-                    <name>body</name>
-                    <value>Facet-c6f8a4af-14e8-4df8-8185-a5cb099ed7c9</value>
-                </componentInstanceProperties>
-                <componentName>flexipage:column</componentName>
-            </componentInstance>
-        </itemInstances>
-        <itemInstances>
-            <componentInstance>
-                <componentInstanceProperties>
-                    <name>body</name>
-                    <value>Facet-e08de4d3-4d5b-475f-be48-e5f1a879d0d8</value>
-                </componentInstanceProperties>
-                <componentName>flexipage:column</componentName>
-            </componentInstance>
-        </itemInstances>
-        <name>Facet-34ee7127-9909-4d68-983d-ae023f1656c1</name>
-        <type>Facet</type>
-    </flexiPageRegions>
-    <flexiPageRegions>
-        <itemInstances>
-            <fieldInstance>
-                <fieldItem>Record.LatestPhysicalExamOutcome__c</fieldItem>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
                 <fieldItem>Record.SpayedNeutered__c</fieldItem>
             </fieldInstance>
         </itemInstances>
@@ -237,10 +172,6 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
-                <componentInstanceProperties>
-                    <name>columns</name>
-                    <value>Facet-34ee7127-9909-4d68-983d-ae023f1656c1</value>
-                </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>label</name>
                     <value>Vaccination</value>

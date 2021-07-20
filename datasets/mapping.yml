@@ -316,7 +316,6 @@ Insert Dog__c:
         - MicrochipNumber__c
         - Name
         - PhysicalExamDue__c
-        - PhysicalExamLatest__c
         - Picture__c
         - SpayedNeutered__c
         - Status__c
@@ -325,11 +324,6 @@ Insert Dog__c:
         - VaccineDueParainfluenza__c
         - VaccineDueParvovirus__c
         - VaccineDueRabies__c
-        - VaccineLatestDistemper__c
-        - VaccineLatestHepatitis__c
-        - VaccineLatestParainfluenza__c
-        - VaccineLatestParvovirus__c
-        - VaccineLatestRabies__c
     lookups:
         VetClinic__c:
             table: Account
