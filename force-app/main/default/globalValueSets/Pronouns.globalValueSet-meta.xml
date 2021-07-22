@@ -20,6 +20,7 @@
         <default>false</default>
         <label>specify</label>
     </customValue>
+    <description>Pronouns for a contact</description>
     <masterLabel>Pronouns</masterLabel>
     <sorted>false</sorted>
 </GlobalValueSet>

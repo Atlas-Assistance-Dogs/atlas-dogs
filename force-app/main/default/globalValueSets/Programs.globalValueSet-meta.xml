@@ -30,6 +30,6 @@
         <default>false</default>
         <label>Sweet Snoopers Trainer</label>
     </customValue>
-    <masterLabel>Positions</masterLabel>
+    <masterLabel>Programs</masterLabel>
     <sorted>false</sorted>
 </GlobalValueSet>

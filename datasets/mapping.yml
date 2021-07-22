@@ -310,8 +310,7 @@ Insert Dog__c:
         - Birthdate__c
         - Breed__c
         - Gender__c
-        - HealthCheckFailedDogAccepted__c
-        - HealthCheckNote__c
+        - Notes__c
         - LatestPhysicalExamOutcome__c
         - MicrochipNumber__c
         - Name

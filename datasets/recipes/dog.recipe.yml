@@ -51,11 +51,7 @@
           random_choice:
               - Male
               - Female
-      HealthCheckFailedDogAccepted__c:
-          random_choice:
-              - "Yes"
-              - "No"
-      HealthCheckNote__c:
+      Notes__c:
           fake: paragraph
       LatestPhysicalExamOutcome__c:
           random_choice:
@@ -306,14 +302,12 @@
           fake: boolean
       Status__c:
           random_choice:
-              - Onboarding
-              - Waiting for Microchip Number
-              - Waiting to be Spayed-Neutered
-              - Too Young
-              - Active
+              - In Training
               - Certified
-              - Retired
-              - Deceased
+              - Decertified
+              - On Hold
+              - Inactive
+              - None
       VetClinic__c:
           - object: Account
             nickname: vet_clinic

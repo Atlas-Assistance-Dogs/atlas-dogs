@@ -136,12 +136,7 @@
     <flexiPageRegions>
         <itemInstances>
             <fieldInstance>
-                <fieldItem>Record.HealthCheckFailedDogAccepted__c</fieldItem>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldItem>Record.HealthCheckNote__c</fieldItem>
+                <fieldItem>Record.Notes__c</fieldItem>
             </fieldInstance>
         </itemInstances>
         <name>Facet-742ca1de-6d9c-421b-8a59-cf75013d18e8</name>
