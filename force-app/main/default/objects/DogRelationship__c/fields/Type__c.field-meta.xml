@@ -36,6 +36,11 @@
                 <default>false</default>
                 <label>Client</label>
             </value>
+            <value>
+                <fullName>Breeder</fullName>
+                <default>false</default>
+                <label>Breeder</label>
+            </value>
         </valueSetDefinition>
     </valueSet>
     <visibleLines>4</visibleLines>

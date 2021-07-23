@@ -298,6 +298,10 @@
           fake.image_url:
               width: 60
               height: 60
+      Program__c:
+          random_choice:
+              - Assistance Dogs Set In Motion
+              - Team Certification
       SpayedNeutered__c:
           fake: boolean
       Status__c:
@@ -395,6 +399,7 @@
               - Handler
               - Facilitator
               - Client
+              - Breeder
 
 - object: DogRelationship__c
   fields:
