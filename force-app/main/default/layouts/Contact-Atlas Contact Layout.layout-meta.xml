@@ -298,11 +298,6 @@
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>
-        <fields>Position__c</fields>
-        <relatedList>ContactLog__c.Contact__c</relatedList>
-    </relatedLists>
-    <relatedLists>
-        <fields>NAME</fields>
         <fields>Date__c</fields>
         <fields>Result__c</fields>
         <relatedList>BackgroundCheck__c.Contact__c</relatedList>

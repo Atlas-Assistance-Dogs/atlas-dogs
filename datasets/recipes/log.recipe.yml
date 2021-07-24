@@ -55,13 +55,3 @@
           random_choice:
               - Client
               - Facilitator
-
-- object: ContactLog__c
-  count: 100
-  include: position
-  fields:
-      Name: ${{Log__c.Name}}
-      Contact__c:
-          random_reference: Contact
-      Log__c:
-          random_reference: Log__c
