@@ -25,6 +25,11 @@
         <default>false</default>
         <label>Teams Set in Motion Client</label>
     </customValue>
+    <customValue>
+        <fullName>Sweet Snoopers Trainer</fullName>
+        <default>false</default>
+        <label>Sweet Snoopers Trainer</label>
+    </customValue>
     <masterLabel>Positions</masterLabel>
     <sorted>false</sorted>
 </GlobalValueSet>

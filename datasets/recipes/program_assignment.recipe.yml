@@ -5,7 +5,7 @@
   fields:
       AssignedDate__c:
           date_between:
-              start_date: 2000-01-01
+              start_date: 2015-01-01
               end_date: today
       CompletionDate__c:
           date_between:
@@ -13,7 +13,28 @@
               end_date: today
       Contact__c:
           reference: Person
-      Program__c: ${{Contact__c.Position__c}}
+      Program__c:
+          if:
+              - choice:
+                    when: ${{Contact__c.Position__c=='Trainer'}}
+                    pick:
+                        random_choice:
+                            - Sweet Snoopers Trainer
+                            - Trainer
+              - choice:
+                    when: ${{Contact__c.Position__c=='Client'}}
+                    pick: Client
+              - choice:
+                    when: ${{Contact__c.Position__c=='Teams Set in Motion Client'}}
+                    pick: Teams Set in Motion Client
+              - choice:
+                    when: ${{Contact__c.Position__c=='Team Facilitator'}}
+                    pick: Team Facilitator
+              - choice:
+                    when: ${{Contact__c.Position__c=='Team Facilitator Lead'}}
+                    pick: Team Facilitator
+              - choice:
+                    pick: Volunteer
       Status__c:
           random_choice:
               - In progress
