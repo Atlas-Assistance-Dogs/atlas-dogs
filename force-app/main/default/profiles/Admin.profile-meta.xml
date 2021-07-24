@@ -341,11 +341,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Dog__c.PhysicalExamLatest__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
         <field>Dog__c.Picture__c</field>
         <readable>false</readable>
     </fieldPermissions>
