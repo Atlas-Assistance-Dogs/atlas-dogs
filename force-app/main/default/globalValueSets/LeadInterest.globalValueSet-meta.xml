@@ -40,6 +40,11 @@
         <default>false</default>
         <label>Trainer Certification</label>
     </customValue>
+    <customValue>
+        <fullName>Assistance Dogs Set in Motion Program</fullName>
+        <default>false</default>
+        <label>Assistance Dogs Set in Motion Program</label>
+    </customValue>
     <description>What a lead is interested in</description>
     <masterLabel>I want to know more about</masterLabel>
     <sorted>false</sorted>
