@@ -389,6 +389,16 @@
       Type__c: Owner
 
 - object: DogRelationship__c
+  nickname: clientRelationship
+  fields:
+      Contact__c:
+          random_reference: Contact
+      Dog__c:
+          reference: dog
+      Type__c: Client
+
+- object: DogRelationship__c
+  nickname: humanRelationship
   fields:
       Contact__c:
           random_reference: Contact
@@ -408,3 +418,36 @@
       Dog__c:
           reference: dog
       Type__c: Veterinarian
+
+- object: PublicAccessTest__c
+  fields:
+      Assessor__c:
+          random_reference: Contact
+      AssessorComments__c:
+          fake: paragraph
+      Client__c:
+          reference: clientRelationship.Contact__c
+      DateCompleted__c:
+          date_between:
+              start_date: -1y
+              end_date: today
+      Dog__c:
+          reference: dog
+      Handler__c:
+          reference: humanRelationship.Contact__c
+      Location__c:
+          random_choice:
+              - In Person
+              - Virtual
+      ReviewComments__c:
+          fake: paragraph
+      Status__c:
+          random_choice:
+              - Passed
+              - Failed
+              - Provisionally Passed
+      Type__c:
+          random_choice:
+              - Initial
+              - Recertification
+              - Retest

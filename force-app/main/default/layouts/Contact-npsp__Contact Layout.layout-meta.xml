@@ -11,6 +11,7 @@
     <excludeButtons>EnablePrmSuperUser</excludeButtons>
     <excludeButtons>EnableSelfService</excludeButtons>
     <excludeButtons>RequestUpdate</excludeButtons>
+    <excludeButtons>RequestUseSfdc</excludeButtons>
     <excludeButtons>Share</excludeButtons>
     <excludeButtons>Submit</excludeButtons>
     <excludeButtons>ViewPartnerPortalUser</excludeButtons>
@@ -648,6 +649,36 @@
         <fields>Type__c</fields>
         <relatedList>DogRelationship__c.Contact__c</relatedList>
     </relatedLists>
+    <relatedLists>
+        <fields>DateCompleted__c</fields>
+        <fields>Status__c</fields>
+        <fields>Type__c</fields>
+        <fields>Location__c</fields>
+        <fields>Assessor__c</fields>
+        <fields>Handler__c</fields>
+        <fields>Dog__c</fields>
+        <relatedList>PublicAccessTest__c.Client__c</relatedList>
+    </relatedLists>
+    <relatedLists>
+        <fields>DateCompleted__c</fields>
+        <fields>Status__c</fields>
+        <fields>Type__c</fields>
+        <fields>Location__c</fields>
+        <fields>Assessor__c</fields>
+        <fields>Client__c</fields>
+        <fields>Dog__c</fields>
+        <relatedList>PublicAccessTest__c.Handler__c</relatedList>
+    </relatedLists>
+    <relatedLists>
+        <fields>DateCompleted__c</fields>
+        <fields>Status__c</fields>
+        <fields>Type__c</fields>
+        <fields>Location__c</fields>
+        <fields>Client__c</fields>
+        <fields>Handler__c</fields>
+        <fields>Dog__c</fields>
+        <relatedList>PublicAccessTest__c.Assessor__c</relatedList>
+    </relatedLists>
     <relatedObjects>AccountId</relatedObjects>
     <showEmailCheckbox>false</showEmailCheckbox>
     <showHighlightsPanel>false</showHighlightsPanel>
@@ -655,7 +686,7 @@
     <showRunAssignmentRulesCheckbox>false</showRunAssignmentRulesCheckbox>
     <showSubmitAndAttachButton>false</showSubmitAndAttachButton>
     <summaryLayout>
-        <masterLabel>00h0R000003ac59</masterLabel>
+        <masterLabel>00h1k000002Ii7v</masterLabel>
         <sizeX>4</sizeX>
         <sizeY>0</sizeY>
         <summaryLayoutStyle>Default</summaryLayoutStyle>
