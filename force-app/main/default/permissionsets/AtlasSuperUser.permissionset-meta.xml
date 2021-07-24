@@ -187,6 +187,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>ContinuingEducationUnit__c.AuthorityOther__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>ContinuingEducationUnit__c.Authority__c</field>
         <readable>true</readable>
     </fieldPermissions>

@@ -12,7 +12,14 @@
               - IAABC
               - CBCC
               - Atlas
+              - Other
               - None
+      AuthorityOther__c:
+          if:
+              - choice:
+                    when: ${{Authority__c=='Other'}}
+                    pick:
+                        fake: company
       Comments__c:
           fake: sentence
       ProgramDate__c:
