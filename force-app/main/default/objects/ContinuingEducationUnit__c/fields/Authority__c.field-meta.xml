@@ -36,6 +36,11 @@
                 <label>CBCC</label>
             </value>
             <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+            <value>
                 <fullName>None</fullName>
                 <default>false</default>
                 <label>None</label>
