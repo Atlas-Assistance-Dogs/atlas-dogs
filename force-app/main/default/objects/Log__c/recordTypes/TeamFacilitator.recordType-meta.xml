@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TeamFacilitator</fullName>
+    <active>true</active>
+    <description>Team Facilitator log</description>
+    <label>Team Facilitator</label>
+    <picklistValues>
+        <picklist>ClientStress__c</picklist>
+        <values>
+            <fullName>Not at all</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Only a little</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rather much</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>To some extent</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Very much</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Satisfaction__c</picklist>
+        <values>
+            <fullName>A little enjoyment</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Extreme amount of enjoyment</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No enjoyment</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rather much enjoyment</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Some enjoyment</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>SessionType__c</picklist>
+        <values>
+            <fullName>General Update</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>In Person</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Virtual</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Stress__c</picklist>
+        <values>
+            <fullName>Not at all</fullName>
+            <default>true</default>
+        </values>
+        <values>
+            <fullName>Only a little</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rather much</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>To some extent</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Very much</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Type__c</picklist>
+        <values>
+            <fullName>Client</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Facilitator</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>
