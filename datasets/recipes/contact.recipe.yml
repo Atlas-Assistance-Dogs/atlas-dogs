@@ -377,6 +377,7 @@
               - Sweet Snoopers Training Program
               - Sponsorship/Donations
               - General info/Other
+              - Assistance Dogs Set in Motion Program
       PronounOther__c:
           if:
               - choice:
