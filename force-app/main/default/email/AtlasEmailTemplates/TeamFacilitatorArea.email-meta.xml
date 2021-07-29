@@ -9,22 +9,19 @@
     <subject>TeamFacilitatorAreas</subject>
     <textOnly>Hi {!Lead.FirstName},
 
- 
 
-Thank you for reaching out. It sounds like (DOG NAME) has been doing some excellent work and progress, and could very well be ready to start Atlas&apos; program. Unfortunately, we do not have any Team Facilitators at this time who would be able to work hands-on with you. We are expanding our team of Facilitators in new locations across the US and we will hopefully have some more in your area. 
+Thank you for reaching out. It sounds like DOG NAME has been doing some excellent work and  has made great progress, and could very well be ready to start Atlas&apos; program. Unfortunately, we do not have any Team Facilitators at this time who would be able to work hands-on with you. We are expanding our team of Facilitators in new locations across the US and we will hopefully have some more in your area.
 
- 
 
-I can keep your information, and as soon as we have someone available near you, I will contact you if you are interested! 
+I can keep your information, and as soon as we have someone available near you, I will contact you if you are interested!
 
 
 
 Let me know if you have any questions.
 
- 
 
 
-Best,”</textOnly>
+Best, {!Account.Name}</textOnly>
     <type>html</type>
     <uiType>Aloha</uiType>
 </EmailTemplate>

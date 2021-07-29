@@ -9,21 +9,24 @@
     <subject>Response to application</subject>
     <textOnly>Hi {!Lead.FirstName},
 
- 
 
-Thank you for your interest in our Teams Set in Motion™ program! We would gladly welcome you into the course. 
+Thank you for your interest in our Teams Set in Motion™ program!
+
+We would gladly welcome you into the course.
+
+
 
 Please fill out this program agreement: https://www.tfaforms.com/4894204
 
- 
 
 Once you have done so we will invoice you, and once the payment is made, we will get you signed up for the course.
 
+
+
 Please let me know if you have any questions.
 
- 
 
-Best,”</textOnly>
+Best, {!Account.Name}</textOnly>
     <type>html</type>
     <uiType>Aloha</uiType>
 </EmailTemplate>
