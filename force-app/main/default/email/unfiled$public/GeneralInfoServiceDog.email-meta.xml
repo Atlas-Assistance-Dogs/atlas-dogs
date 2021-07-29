@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Someone asking for general info about how to get/train a service dog</description>
+    <encodingKey>UTF-8</encodingKey>
+    <letterhead>AtlasLetterhead_v2</letterhead>
+    <name>GeneralInfoServiceDog</name>
+    <style>freeForm</style>
+    <subject>General Info about a Service dog</subject>
+    <textOnly>Hi {!Lead.FirstName},
+
+ 
+
+Thank you for reaching out. There are a few options for obtaining/training a service dog. All of which have benefits and drawback: 
+
+ 
+
+·         Foundations that train the dog and provide the dog for free (though those can have very long waitlists and may have other type of specific criteria) 
+
+·         Organizations or companies that train the dog fully or partially and provide for a cost or in-kind donation (cost can really vary widely, wait time also varies) 
+
+·         Obtaining your own dog and training on your own (with the help of a private trainer, group classes, books or online resources etc., or an organization like ours)
+
+ 
+
+The self-training option need a lot of consideration and is not for everyone. 
+
+ 
+
+I have attached a document which gives some information and insight as to if self-training is a good option and what other options may best fit your needs (https://www.atlasdog.org/wp-content/uploads/2021/03/Guidelines-to-Self-Training-Approaches.pdf). I recommend you look over this document carefully. 
+
+ 
+
+If you were to choose the self-training route, the first step would of course be to find an appropriate dog for service work. Not all dogs are good candidates to become service dogs.
+
+ 
+
+Eventually, you may qualify for Atlas’ program. We help people once the dog is at least 14 months old and has a foundation of obedience and can pass our entry assessment test. We then work with the person/dog to really solidify their skills and become great working teams. We support our clients with public access, disability tasks, and day to day needs for the team.  
+
+ 
+
+Please let me know if you have any further questions once you have reviewed this document. 
+
+ 
+
+Best,”</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>
