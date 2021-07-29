@@ -51,11 +51,7 @@
           random_choice:
               - Male
               - Female
-      HealthCheckFailedDogAccepted__c:
-          random_choice:
-              - "Yes"
-              - "No"
-      HealthCheckNote__c:
+      Notes__c:
           fake: paragraph
       LatestPhysicalExamOutcome__c:
           random_choice:
@@ -63,36 +59,30 @@
               - Fail
       MicrochipNumber__c:
           fake: isbn10
-      VaccineLatestDistemper__c:
+      VaccineDueDistemper__c:
           date_between:
               start_date: -2y
-              end_date: today
-      VaccineLatestHepatitis__c:
+              end_date: +1y
+      VaccineDueHepatitis__c:
           date_between:
               start_date: -2y
-              end_date: today
-      VaccineLatestParainfluenza__c:
+              end_date: +1y
+      VaccineDueParainfluenza__c:
           date_between:
               start_date: -2y
-              end_date: today
-      VaccineLatestParvovirus__c:
+              end_date: +1y
+      VaccineDueParvovirus__c:
           date_between:
               start_date: -2y
-              end_date: today
-      VaccineLatestRabies__c:
+              end_date: +1y
+      VaccineDueRabies__c:
           date_between:
-              start_date: -2y
-              end_date: today
-      PhysicalExamLatest__c:
+              start_date: -4y
+              end_date: +3y
+      PhysicalExamDue__c:
           date_between:
-              start_date: -2y
-              end_date: today
-      VaccineDueDistemper__c: ${{date(VaccineLatestDistemper__c) + relativedelta(years=1)}}
-      VaccineDueHepatitis__c: ${{date(VaccineLatestHepatitis__c) + relativedelta(years=1)}}
-      VaccineDueParainfluenza__c: ${{date(VaccineLatestParainfluenza__c) + relativedelta(years=1)}}
-      VaccineDueParvovirus__c: ${{date(VaccineLatestParvovirus__c) + relativedelta(years=1)}}
-      VaccineDueRabies__c: ${{date(VaccineLatestRabies__c) + relativedelta(years=3)}}
-      PhysicalExamDue__c: ${{date(PhysicalExamLatest__c) + relativedelta(years=1)}}
+              start_date: -1y
+              end_date: +1y
       Name:
           if:
               - choice:
@@ -308,18 +298,20 @@
           fake.image_url:
               width: 60
               height: 60
+      Program__c:
+          random_choice:
+              - Assistance Dogs Set In Motion
+              - Team Certification
       SpayedNeutered__c:
           fake: boolean
       Status__c:
           random_choice:
-              - Onboarding
-              - Waiting for Microchip Number
-              - Waiting to be Spayed-Neutered
-              - Too Young
-              - Active
+              - In Training
               - Certified
-              - Retired
-              - Deceased
+              - Decertified
+              - On Hold
+              - Inactive
+              - None
       VetClinic__c:
           - object: Account
             nickname: vet_clinic
@@ -407,6 +399,7 @@
               - Handler
               - Facilitator
               - Client
+              - Breeder
 
 - object: DogRelationship__c
   fields:

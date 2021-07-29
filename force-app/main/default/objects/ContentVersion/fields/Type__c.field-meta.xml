@@ -55,6 +55,16 @@
                 <default>false</default>
                 <label>Background Check Report</label>
             </value>
+            <value>
+                <fullName>Vet Health Form</fullName>
+                <default>false</default>
+                <label>Vet Health Form</label>
+            </value>
+            <value>
+                <fullName>Vet Xray Report</fullName>
+                <default>false</default>
+                <label>Vet Xray Report</label>
+            </value>
         </valueSetDefinition>
     </valueSet>
 </CustomField>

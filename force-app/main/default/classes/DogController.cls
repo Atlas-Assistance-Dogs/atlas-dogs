@@ -5,12 +5,12 @@ public inherited sharing class DogController {
             return [
                 SELECT
                     Id,
-                    VaccineLatestDistemper__c,
-                    VaccineLatestHepatitis__c,
-                    VaccineLatestParainfluenza__c,
-                    VaccineLatestParvovirus__c,
-                    VaccineLatestRabies__c,
-                    PhysicalExamLatest__c
+                    VaccineDueDistemper__c,
+                    VaccineDueHepatitis__c,
+                    VaccineDueParainfluenza__c,
+                    VaccineDueParvovirus__c,
+                    VaccineDueRabies__c,
+                    PhysicalExamDue__c
                 FROM Dog__c
                 WHERE Id = :recordId
                 LIMIT 1

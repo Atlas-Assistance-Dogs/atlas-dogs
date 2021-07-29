@@ -40,6 +40,7 @@
         <default>false</default>
         <label>Teams Set in Motion Client</label>
     </customValue>
+    <description>Positions a contact can have</description>
     <masterLabel>Positions</masterLabel>
     <sorted>false</sorted>
 </GlobalValueSet>

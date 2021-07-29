@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>HealthCheckFailedDogAccepted__c</fullName>
+    <fullName>Program__c</fullName>
+    <description>Program the dog is in training for/certified for</description>
     <externalId>false</externalId>
-    <label>Health Check Failed Dog Accepted</label>
+    <label>Program</label>
     <required>false</required>
     <trackHistory>false</trackHistory>
     <trackTrending>false</trackTrending>
@@ -12,14 +13,14 @@
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
-                <fullName>Yes</fullName>
+                <fullName>Assistance Dogs Set In Motion</fullName>
                 <default>false</default>
-                <label>Yes</label>
+                <label>Assistance Dogs Set In Motion</label>
             </value>
             <value>
-                <fullName>No</fullName>
-                <default>true</default>
-                <label>No</label>
+                <fullName>Team Certification</fullName>
+                <default>false</default>
+                <label>Team Certification</label>
             </value>
         </valueSetDefinition>
     </valueSet>

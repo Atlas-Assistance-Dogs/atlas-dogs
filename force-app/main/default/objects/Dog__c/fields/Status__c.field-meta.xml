@@ -12,29 +12,9 @@
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
-                <fullName>Onboarding</fullName>
+                <fullName>In Training</fullName>
                 <default>false</default>
-                <label>Onboarding</label>
-            </value>
-            <value>
-                <fullName>Waiting for Microchip Number</fullName>
-                <default>false</default>
-                <label>Waiting for Microchip Number</label>
-            </value>
-            <value>
-                <fullName>Waiting to be Spayed-Neutered</fullName>
-                <default>false</default>
-                <label>Waiting to be Spayed-Neutered</label>
-            </value>
-            <value>
-                <fullName>Too Young</fullName>
-                <default>false</default>
-                <label>Too Young</label>
-            </value>
-            <value>
-                <fullName>Active</fullName>
-                <default>false</default>
-                <label>Active</label>
+                <label>In Training</label>
             </value>
             <value>
                 <fullName>Certified</fullName>
@@ -42,19 +22,24 @@
                 <label>Certified</label>
             </value>
             <value>
-                <fullName>Retired</fullName>
+                <fullName>Decertified</fullName>
                 <default>false</default>
-                <label>Retired</label>
+                <label>Decertified</label>
             </value>
             <value>
-                <fullName>Deceased</fullName>
+                <fullName>On Hold</fullName>
                 <default>false</default>
-                <label>Deceased</label>
+                <label>On Hold</label>
             </value>
             <value>
-                <fullName>Reject due to health check failure</fullName>
+                <fullName>Inactive</fullName>
                 <default>false</default>
-                <label>Rejected due to health check failure</label>
+                <label>Inctive</label>
+            </value>
+            <value>
+                <fullName>None</fullName>
+                <default>false</default>
+                <label>None</label>
             </value>
         </valueSetDefinition>
     </valueSet>
