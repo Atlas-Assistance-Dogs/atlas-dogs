@@ -26,7 +26,7 @@ Once you have done so we will invoice you, and once the payment is made, we will
 Please let me know if you have any questions.
 
 
-Best, {!Account.Name}</textOnly>
+Best, {!User.FirstName}</textOnly>
     <type>html</type>
     <uiType>Aloha</uiType>
 </EmailTemplate>

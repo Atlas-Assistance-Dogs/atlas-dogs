@@ -35,7 +35,7 @@ One your dog is old enough if they have the proper temperament, you may qualify 
 Please let me know if you have any further questions once you have reviewed this document.
 
 
-Best, {!Account.Name}</textOnly>
+Best, {!User.FirstName}</textOnly>
     <type>html</type>
     <uiType>Aloha</uiType>
 </EmailTemplate>
