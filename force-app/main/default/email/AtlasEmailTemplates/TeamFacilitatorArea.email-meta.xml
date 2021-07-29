@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Someone ready for Atlas but not in an area we have TFs</description>
+    <encodingKey>UTF-8</encodingKey>
+    <letterhead>AtlasLetterhead_v2</letterhead>
+    <name>TeamFacilitatorArea</name>
+    <style>freeForm</style>
+    <subject>TeamFacilitatorAreas</subject>
+    <textOnly>Hi {!Lead.FirstName},
+
+
+Thank you for reaching out. It sounds like DOG NAME has been doing some excellent work and  has made great progress, and could very well be ready to start Atlas&apos; program. Unfortunately, we do not have any Team Facilitators at this time who would be able to work hands-on with you. We are expanding our team of Facilitators in new locations across the US and we will hopefully have some more in your area.
+
+
+I can keep your information, and as soon as we have someone available near you, I will contact you if you are interested!
+
+
+
+Let me know if you have any questions.
+
+
+
+Best, {!Account.Name}</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>
