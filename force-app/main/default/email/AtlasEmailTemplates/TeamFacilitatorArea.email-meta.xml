@@ -21,7 +21,7 @@ Let me know if you have any questions.
 
 
 
-Best, {!Account.Name}</textOnly>
+Best, {!User.FirstName}</textOnly>
     <type>html</type>
     <uiType>Aloha</uiType>
 </EmailTemplate>

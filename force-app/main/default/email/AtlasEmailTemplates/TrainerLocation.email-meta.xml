@@ -28,7 +28,7 @@ They may also be able to point you in the direction of other trainers in your ar
 Let me know if you have any additional questions.
 
 
-Best, {!Account.Name}</textOnly>
+Best, {!User.FirstName}</textOnly>
     <type>html</type>
     <uiType>Aloha</uiType>
 </EmailTemplate>
