@@ -1,14 +1,6 @@
 public inherited sharing class FileController {
     @AuraEnabled
-    public static list<contentversion> accountFilesRetrieve(
-        Id contactId,
-        String position,
-        String docType
-    ) {
-        system.debug('Contact Id ' + contactId);
-        system.debug('position ' + position);
-        system.debug('docType ' + docType);
-
+    public static list<contentversion> accountFilesRetrieve( Id contactId, String position, String docType ) {
         list<id> lstConDocs = new List<id>();
         for (ContentDocumentLink cntLink : [
             SELECT Id, ContentDocumentId
@@ -39,28 +31,16 @@ public inherited sharing class FileController {
     }
 
     @AuraEnabled
-    public static void updateRecords(
-        Id contactId,
-        String position,
-        String docType,
-        String docName,
-        List<Id> docId
-    ) {
-        system.debug('Account Id update' + contactId);
-        system.debug('position update ' + position);
-        system.debug('docType update ' + docType);
-        system.debug('docName update ' + docName);
-        system.debug('docId update ' + docId);
-        Id parentId = contactId;
+    public static void updateRecords( Id recordId, String position, String docType, String docName, List<Id> docId ) {
+        Id parentId = recordId;
         List<ContentVersion> cvListUpdate = new List<ContentVersion>();
-        List<ContentVersion> cvList = [
-            SELECT Title, ContentDocumentId, Type__c, Positions__c
-            FROM ContentVersion
-            WHERE ContentDocumentId IN :docId
+        List<ContentVersion> cvList = [ SELECT Title, ContentDocumentId, Type__c, Positions__c, Position_Files__c,Document_Type__c
+                                        FROM ContentVersion
+                                        WHERE ContentDocumentId IN :docId
         ];
         for (ContentVersion cv : cvList) {
-            cv.Type__c = docType;
-            cv.Positions__c = position;
+            cv.Document_Type__c = docType;
+            cv.Position_Files__c = position;
             cvListUpdate.add(cv);
         }
         try {
@@ -81,30 +61,18 @@ public inherited sharing class FileController {
         }
     }
 
-    @AuraEnabled
-    public static list<contentversion> retrieveAllData(Id contactId) {
-        Id parentId = contactId;
+    @AuraEnabled(cacheable=true)
+    public static list<contentversion> retrieveAllData(Id recordId) {
+        Id parentId = recordId;
         list<id> lstConDocs = new List<id>();
-        for (ContentDocumentLink cntLink : [
-            SELECT Id, ContentDocumentId
-            FROM ContentDocumentLink
-            WHERE LinkedEntityId = :parentId
-        ]) {
+        for (ContentDocumentLink cntLink : [ SELECT Id, ContentDocumentId FROM ContentDocumentLink WHERE LinkedEntityId = :parentId]) {
             lstConDocs.add(cntLink.ContentDocumentId);
         }
 
-        system.debug('lstConDocs' + lstConDocs);
         if (!lstConDocs.isEmpty()) {
-            return [
-                SELECT
-                    Title,
-                    ContentDocumentId,
-                    Type__c,
-                    Positions__c,
-                    CreatedDate
-                FROM ContentVersion
-                WHERE ContentDocumentId IN :lstConDocs
-            ];
+            return [ SELECT Title, ContentDocumentId, Type__c, Positions__c, Position_Files__c, CreatedDate , Document_Type__c 
+                        FROM ContentVersion 
+                        WHERE ContentDocumentId IN :lstConDocs ORDER BY CreatedDate Desc];
         } else {
             return null;
         }
