@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Layout xmlns="http://soap.sforce.com/2006/04/metadata">
-    <excludeButtons>RequestUseSfdc</excludeButtons>
     <layoutSections>
         <customLabel>false</customLabel>
         <detailHeading>false</detailHeading>
@@ -289,19 +288,27 @@
         <relatedList>ProgramAssignment__c.Contact__c</relatedList>
     </relatedLists>
     <relatedLists>
-        <fields>NAME</fields>
         <fields>Date__c</fields>
+        <fields>Client__c</fields>
         <fields>RequestSupportFromAtlas__c</fields>
         <fields>RequestSupportFromTeam__c</fields>
         <fields>SessionType__c</fields>
         <relatedList>Log__c.Submitter__c</relatedList>
     </relatedLists>
     <relatedLists>
-        <fields>NAME</fields>
+        <fields>Date__c</fields>
+        <fields>RequestSupportFromAtlas__c</fields>
+        <fields>RequestSupportFromTeam__c</fields>
+        <fields>SessionType__c</fields>
         <relatedList>Log__c.Client__c</relatedList>
     </relatedLists>
     <relatedLists>
-        <fields>NAME</fields>
+        <fields>Date__c</fields>
+        <fields>Client__c</fields>
+        <fields>ClientStress__c</fields>
+        <fields>RequestSupportFromAtlas__c</fields>
+        <fields>RequestSupportFromTeam__c</fields>
+        <fields>SessionType__c</fields>
         <relatedList>Log__c.Facilitator__c</relatedList>
     </relatedLists>
     <relatedLists>
@@ -323,7 +330,7 @@
     <showRunAssignmentRulesCheckbox>false</showRunAssignmentRulesCheckbox>
     <showSubmitAndAttachButton>false</showSubmitAndAttachButton>
     <summaryLayout>
-        <masterLabel>00h0U000002xbFS</masterLabel>
+        <masterLabel>00h17000007CsYv</masterLabel>
         <sizeX>4</sizeX>
         <sizeY>0</sizeY>
         <summaryLayoutStyle>Default</summaryLayoutStyle>
