@@ -20,6 +20,11 @@
                 <default>false</default>
                 <label>Virtual</label>
             </value>
+            <value>
+                <fullName>General Update</fullName>
+                <default>false</default>
+                <label>General Update</label>
+            </value>
         </valueSetDefinition>
     </valueSet>
 </CustomField>

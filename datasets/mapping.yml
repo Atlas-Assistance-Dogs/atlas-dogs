@@ -326,22 +326,41 @@ Insert Dog__c:
     lookups:
         VetClinic__c:
             table: Account
+Insert DogRelationship__c:
+    sf_object: DogRelationship__c
+    fields:
+        - Type__c
+    lookups:
+        Contact__c:
+            table: Contact
+        Dog__c:
+            table: Dog__c
 Insert Log__c:
     sf_object: Log__c
     fields:
+        - ClientHours__c
         - ClientStress__c
         - Date__c
         - Details__c
+        - Handler__c
         - Name
         - OtherHours__c
         - PublicAccessHours__c
+        - RecordTypeId
         - RequestSupportFromAtlas__c
         - RequestSupportFromTeam__c
         - Satisfaction__c
         - SessionType__c
         - Stress__c
+        - SupportDetails__c
         - Type__c
     lookups:
+        Client__c:
+            table: Contact
+        Dog__c:
+            table: Dog__c
+        Facilitator__c:
+            table: Contact
         Submitter__c:
             table: Contact
 Insert ProgramAssignment__c:
@@ -355,21 +374,3 @@ Insert ProgramAssignment__c:
     lookups:
         Contact__c:
             table: Contact
-Insert ContactLog__c:
-    sf_object: ContactLog__c
-    fields:
-        - Position__c
-    lookups:
-        Contact__c:
-            table: Contact
-        Log__c:
-            table: Log__c
-Insert DogRelationship__c:
-    sf_object: DogRelationship__c
-    fields:
-        - Type__c
-    lookups:
-        Contact__c:
-            table: Contact
-        Dog__c:
-            table: Dog__c

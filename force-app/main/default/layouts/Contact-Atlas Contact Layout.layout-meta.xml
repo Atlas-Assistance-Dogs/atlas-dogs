@@ -298,8 +298,11 @@
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>
-        <fields>Position__c</fields>
-        <relatedList>ContactLog__c.Contact__c</relatedList>
+        <relatedList>Log__c.Client__c</relatedList>
+    </relatedLists>
+    <relatedLists>
+        <fields>NAME</fields>
+        <relatedList>Log__c.Facilitator__c</relatedList>
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>

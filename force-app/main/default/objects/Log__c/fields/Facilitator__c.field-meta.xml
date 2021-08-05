@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Facilitator__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Team Facilitator the log is referring to</description>
+    <externalId>false</externalId>
+    <label>Team Facilitator</label>
+    <referenceTo>Contact</referenceTo>
+    <relationshipLabel>Logs (Team Facilitator)</relationshipLabel>
+    <relationshipName>LogsFacilitator</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>
