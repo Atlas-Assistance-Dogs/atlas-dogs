@@ -155,8 +155,9 @@
     <externalSharingModel>Private</externalSharingModel>
     <label>Log</label>
     <nameField>
+        <displayFormat>L-{00000}</displayFormat>
         <label>Log Name</label>
-        <type>Text</type>
+        <type>AutoNumber</type>
     </nameField>
     <pluralLabel>Logs</pluralLabel>
     <searchLayouts />

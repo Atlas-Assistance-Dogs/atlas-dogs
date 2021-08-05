@@ -18,7 +18,6 @@
       Details__c:
           fake.text:
               max_nb_chars: 10000
-      Name: ${{Type__c}} Log ${{Date__c}}
       OtherHours__c:
           random_number:
               min: 0

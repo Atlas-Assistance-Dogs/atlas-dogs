@@ -343,7 +343,6 @@ Insert Log__c:
         - Date__c
         - Details__c
         - Handler__c
-        - Name
         - OtherHours__c
         - PublicAccessHours__c
         - RecordTypeId
