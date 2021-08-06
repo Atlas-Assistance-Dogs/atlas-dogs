@@ -13,6 +13,7 @@ package.xml
 
 # ignore profiles
 **/profiles/**
+!scratch-config/main/default/profiles/Admin*
 
 # NPSP files
 **/npsp__*
