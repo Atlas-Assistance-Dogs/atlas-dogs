@@ -4,7 +4,7 @@ global class Reminders implements Schedulable {
 
     global void execute(SchedulableContext SC) {
         Date month = Date.today().addMonths(1);
-        Date twoWeeks = Date.today().addDays(-14);
+        Date week = Date.today().addDays(7);
         // Find out which assignments may need reminder tasks.
         // Note we cannot join with Tasks since that is not supported.
         List<ProgramAssignment__c> assignments = [
@@ -13,7 +13,7 @@ global class Reminders implements Schedulable {
             WHERE
                 Status__c = 'In progress'
                 AND ((Program__c = 'Volunteer'
-                AND ExpectedCompletion__c <= :twoWeeks)
+                AND ExpectedCompletion__c <= :week)
                 OR (Program__c != 'Volunteer'
                 AND ExpectedCompletion__c <= :month))
         ];
@@ -22,16 +22,16 @@ global class Reminders implements Schedulable {
             SELECT id
             FROM Group
             WHERE Name = 'Program Administrator'
+            LIMIT 1
         ];
         // Create a reminder task if one hasn't been already created
         for (ProgramAssignment__c assignment : assignments) {
-            Task createdTask = [
+            List<Task> createdTasks = [
                 SELECT id
                 FROM TASK
                 WHERE WhatId = :assignment.id
-                LIMIT 1
             ];
-            if (createdTask == null) {
+            if (createdTasks.size() == 0) {
                 // Create a reminder task
                 Task newTask = new Task(
                     OwnerId = adminGroup.id,
@@ -40,9 +40,9 @@ global class Reminders implements Schedulable {
                     Type = 'Call',
                     Subject = 'Other',
                     WhatId = assignment.id,
-                    WhoId = assignment.Contact__r.id,
+                    WhoId = assignment.Contact__c,
                     IsReminderSet = true,
-                    ReminderDateTime = System.now() + 1
+                    ReminderDateTime = System.now()
                 );
                 insert newTask;
             }
