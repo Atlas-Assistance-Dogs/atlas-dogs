@@ -60,6 +60,18 @@ public inherited sharing class FileController {
             throw new AuraHandledException(ex.getMessage());
         }
     }
+    
+    @AuraEnabled
+    public static String deleteRecord(ID docId) {
+       // system.debug('docIds' + docIds);
+        try {
+            delete [SELECT Id FROM ContentDocument WHERE Id = :docId Limit 1];
+            return 'SUCCESS';
+        } catch (Exception ex) {
+            throw new AuraHandledException(ex.getMessage());
+        }
+    }
+
 
     @AuraEnabled(cacheable=true)
     public static list<contentversion> retrieveAllData(Id recordId) {
