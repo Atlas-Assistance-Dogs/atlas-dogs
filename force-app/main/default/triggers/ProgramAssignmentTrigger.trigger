@@ -8,6 +8,11 @@ trigger ProgramAssignmentTrigger on ProgramAssignment__c(
             continue; // skip any without a program
         }
         Decimal duration = Settings.programDurations.get(progAssign.Program__c);
+        if (duration == null) {
+            // default to 0 months if none found
+            duration = 0;
+        }
+
         if (progAssign.AssignedDate__c == null) {
             progAssign.AssignedDate__c = Date.today();
         }
