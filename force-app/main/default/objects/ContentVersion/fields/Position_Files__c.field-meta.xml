@@ -2,7 +2,7 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Position_Files__c</fullName>
     <externalId>false</externalId>
-    <label>Position Files</label>
+    <label>Position</label>
     <required>false</required>
     <trackHistory>false</trackHistory>
     <type>Picklist</type>
@@ -11,39 +11,40 @@
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
-                <fullName>Volunteer _Status</fullName>
+                <fullName>Volunteer</fullName>
                 <default>false</default>
-                <label>Volunteer Status</label>
+                <label>Volunteer</label>
             </value>
             <value>
-                <fullName>Board _Status</fullName>
+                <fullName>Board</fullName>
                 <default>false</default>
-                <label>Board Status</label>
+                <label>Board</label>
             </value>
             <value>
-                <fullName>Client Status</fullName>
+                <fullName>Client</fullName>
                 <default>false</default>
-                <label>Client Status</label>
+                <label>Client</label>
             </value>
             <value>
-                <fullName>Team Facilitator Status</fullName>
+                <fullName>Team_Facilitator</fullName>
                 <default>false</default>
-                <label>Team Facilitator Status</label>
+                <label>Team Facilitator</label>
             </value>
             <value>
-                <fullName>LeaFacilitator Status</fullName>
+                <fullName>Trainer</fullName>
                 <default>false</default>
-                <label>LeaFacilitator Status</label>
+                <label>Trainer</label>
             </value>
             <value>
-                <fullName>Trainer Status</fullName>
+                <fullName>Dog</fullName>
                 <default>false</default>
-                <label>Trainer Status</label>
+                <label>Dog</label>
             </value>
             <value>
-                <fullName>Dog Status</fullName>
+                <fullName>Lead_Facilitator</fullName>
                 <default>false</default>
-                <label>Dog Status</label>
+                <isActive>false</isActive>
+                <label>Lead Facilitator</label>
             </value>
         </valueSetDefinition>
     </valueSet>

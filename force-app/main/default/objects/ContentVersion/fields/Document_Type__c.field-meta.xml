@@ -42,9 +42,9 @@
                 <label>LOMI</label>
             </value>
             <value>
-                <fullName>veteran paperwork if applicable</fullName>
+                <fullName>Veteran_Paperwork</fullName>
                 <default>false</default>
-                <label>veteran paperwork if applicable</label>
+                <label>Veteran Paperwork</label>
             </value>
             <value>
                 <fullName>Client Program Agreement</fullName>
@@ -87,14 +87,14 @@
                 <label>TF Application</label>
             </value>
             <value>
-                <fullName>TF Reference letter 1</fullName>
+                <fullName>TF Reference Letter 1</fullName>
                 <default>false</default>
-                <label>TF Reference letter 1</label>
+                <label>TF Reference Letter 1</label>
             </value>
             <value>
-                <fullName>TF Reference letter 2</fullName>
+                <fullName>TF Reference Letter 2</fullName>
                 <default>false</default>
-                <label>TF Reference letter 2</label>
+                <label>TF Reference Letter 2</label>
             </value>
             <value>
                 <fullName>TF Program Agreement</fullName>
@@ -122,9 +122,9 @@
                 <label>TF Practicum</label>
             </value>
             <value>
-                <fullName>TF Infraction notices as applicable</fullName>
+                <fullName>TF Infraction Notice</fullName>
                 <default>false</default>
-                <label>TF Infraction notices as applicable</label>
+                <label>TF Infraction Notice</label>
             </value>
             <value>
                 <fullName>Trainer Application</fullName>
@@ -132,14 +132,14 @@
                 <label>Trainer Application</label>
             </value>
             <value>
-                <fullName>Trainer Reference letter 1</fullName>
+                <fullName>Trainer Reference Letter 1</fullName>
                 <default>false</default>
-                <label>Trainer Reference letter 1</label>
+                <label>Trainer Reference Letter 1</label>
             </value>
             <value>
-                <fullName>Trainer Reference letter 2</fullName>
+                <fullName>Trainer Reference Letter 2</fullName>
                 <default>false</default>
-                <label>Trainer Reference letter 2</label>
+                <label>Trainer Reference Letter 2</label>
             </value>
             <value>
                 <fullName>Trainer Program Agreement</fullName>
@@ -173,133 +173,133 @@
             </value>
         </valueSetDefinition>
         <valueSettings>
-            <controllingFieldValue>Volunteer _Status</controllingFieldValue>
-            <controllingFieldValue>Board _Status</controllingFieldValue>
+            <controllingFieldValue>Volunteer</controllingFieldValue>
+            <controllingFieldValue>Board</controllingFieldValue>
             <valueName>Media and Liability Release</valueName>
         </valueSettings>
         <valueSettings>
-            <controllingFieldValue>Volunteer _Status</controllingFieldValue>
-            <controllingFieldValue>Board _Status</controllingFieldValue>
+            <controllingFieldValue>Volunteer</controllingFieldValue>
+            <controllingFieldValue>Board</controllingFieldValue>
             <valueName>Emergency Contact</valueName>
         </valueSettings>
         <valueSettings>
-            <controllingFieldValue>Board _Status</controllingFieldValue>
+            <controllingFieldValue>Board</controllingFieldValue>
             <valueName>Conflict of Interest</valueName>
         </valueSettings>
         <valueSettings>
-            <controllingFieldValue>Board _Status</controllingFieldValue>
+            <controllingFieldValue>Board</controllingFieldValue>
             <valueName>Transmission of Notices</valueName>
         </valueSettings>
         <valueSettings>
-            <controllingFieldValue>Client Status</controllingFieldValue>
+            <controllingFieldValue>Client</controllingFieldValue>
             <valueName>Client Application</valueName>
         </valueSettings>
         <valueSettings>
-            <controllingFieldValue>Client Status</controllingFieldValue>
+            <controllingFieldValue>Client</controllingFieldValue>
             <valueName>LOMI</valueName>
         </valueSettings>
         <valueSettings>
-            <controllingFieldValue>Client Status</controllingFieldValue>
-            <valueName>veteran paperwork if applicable</valueName>
+            <controllingFieldValue>Client</controllingFieldValue>
+            <valueName>Veteran_Paperwork</valueName>
         </valueSettings>
         <valueSettings>
-            <controllingFieldValue>Client Status</controllingFieldValue>
+            <controllingFieldValue>Client</controllingFieldValue>
             <valueName>Client Program Agreement</valueName>
         </valueSettings>
         <valueSettings>
-            <controllingFieldValue>Client Status</controllingFieldValue>
+            <controllingFieldValue>Client</controllingFieldValue>
             <valueName>Client Certification Agreement</valueName>
         </valueSettings>
         <valueSettings>
-            <controllingFieldValue>Client Status</controllingFieldValue>
+            <controllingFieldValue>Client</controllingFieldValue>
             <valueName>Client Initial Certification Survey</valueName>
         </valueSettings>
         <valueSettings>
-            <controllingFieldValue>Client Status</controllingFieldValue>
+            <controllingFieldValue>Client</controllingFieldValue>
             <valueName>Assistance Dogs Set in Motion Application</valueName>
         </valueSettings>
         <valueSettings>
-            <controllingFieldValue>Client Status</controllingFieldValue>
+            <controllingFieldValue>Client</controllingFieldValue>
             <valueName>Assistance Dogs Set in Motion Program Agreement</valueName>
         </valueSettings>
         <valueSettings>
-            <controllingFieldValue>Client Status</controllingFieldValue>
+            <controllingFieldValue>Client</controllingFieldValue>
             <valueName>Teams Set in Motion Application</valueName>
         </valueSettings>
         <valueSettings>
-            <controllingFieldValue>Client Status</controllingFieldValue>
+            <controllingFieldValue>Client</controllingFieldValue>
             <valueName>Teams Set in Motion Program Agreement</valueName>
         </valueSettings>
         <valueSettings>
-            <controllingFieldValue>Team Facilitator Status</controllingFieldValue>
+            <controllingFieldValue>Team_Facilitator</controllingFieldValue>
             <valueName>TF Application</valueName>
         </valueSettings>
         <valueSettings>
-            <controllingFieldValue>Team Facilitator Status</controllingFieldValue>
-            <valueName>TF Reference letter 1</valueName>
+            <controllingFieldValue>Team_Facilitator</controllingFieldValue>
+            <valueName>TF Reference Letter 1</valueName>
         </valueSettings>
         <valueSettings>
-            <controllingFieldValue>Team Facilitator Status</controllingFieldValue>
-            <valueName>TF Reference letter 2</valueName>
+            <controllingFieldValue>Team_Facilitator</controllingFieldValue>
+            <valueName>TF Reference Letter 2</valueName>
         </valueSettings>
         <valueSettings>
-            <controllingFieldValue>Team Facilitator Status</controllingFieldValue>
+            <controllingFieldValue>Team_Facilitator</controllingFieldValue>
             <valueName>TF Program Agreement</valueName>
         </valueSettings>
         <valueSettings>
-            <controllingFieldValue>Team Facilitator Status</controllingFieldValue>
+            <controllingFieldValue>Team_Facilitator</controllingFieldValue>
             <valueName>TF Certification Agreement</valueName>
         </valueSettings>
         <valueSettings>
-            <controllingFieldValue>Team Facilitator Status</controllingFieldValue>
+            <controllingFieldValue>Team_Facilitator</controllingFieldValue>
             <valueName>TF Professional Growth Plan</valueName>
         </valueSettings>
         <valueSettings>
-            <controllingFieldValue>Team Facilitator Status</controllingFieldValue>
+            <controllingFieldValue>Team_Facilitator</controllingFieldValue>
             <valueName>TF Initial Team Certification Survey</valueName>
         </valueSettings>
         <valueSettings>
-            <controllingFieldValue>Team Facilitator Status</controllingFieldValue>
+            <controllingFieldValue>Team_Facilitator</controllingFieldValue>
             <valueName>TF Practicum</valueName>
         </valueSettings>
         <valueSettings>
-            <controllingFieldValue>Team Facilitator Status</controllingFieldValue>
-            <valueName>TF Infraction notices as applicable</valueName>
+            <controllingFieldValue>Team_Facilitator</controllingFieldValue>
+            <valueName>TF Infraction Notice</valueName>
         </valueSettings>
         <valueSettings>
-            <controllingFieldValue>Trainer Status</controllingFieldValue>
+            <controllingFieldValue>Trainer</controllingFieldValue>
             <valueName>Trainer Application</valueName>
         </valueSettings>
         <valueSettings>
-            <controllingFieldValue>Trainer Status</controllingFieldValue>
-            <valueName>Trainer Reference letter 1</valueName>
+            <controllingFieldValue>Trainer</controllingFieldValue>
+            <valueName>Trainer Reference Letter 1</valueName>
         </valueSettings>
         <valueSettings>
-            <controllingFieldValue>Trainer Status</controllingFieldValue>
-            <valueName>Trainer Reference letter 2</valueName>
+            <controllingFieldValue>Trainer</controllingFieldValue>
+            <valueName>Trainer Reference Letter 2</valueName>
         </valueSettings>
         <valueSettings>
-            <controllingFieldValue>Trainer Status</controllingFieldValue>
+            <controllingFieldValue>Trainer</controllingFieldValue>
             <valueName>Trainer Program Agreement</valueName>
         </valueSettings>
         <valueSettings>
-            <controllingFieldValue>Trainer Status</controllingFieldValue>
+            <controllingFieldValue>Trainer</controllingFieldValue>
             <valueName>Trainer Certification Agreement</valueName>
         </valueSettings>
         <valueSettings>
-            <controllingFieldValue>Trainer Status</controllingFieldValue>
+            <controllingFieldValue>Trainer</controllingFieldValue>
             <valueName>Trainer Infraction notices as applicable</valueName>
         </valueSettings>
         <valueSettings>
-            <controllingFieldValue>Dog Status</controllingFieldValue>
+            <controllingFieldValue>Dog</controllingFieldValue>
             <valueName>Vet Health Form</valueName>
         </valueSettings>
         <valueSettings>
-            <controllingFieldValue>Dog Status</controllingFieldValue>
+            <controllingFieldValue>Dog</controllingFieldValue>
             <valueName>Vet Xray Report</valueName>
         </valueSettings>
         <valueSettings>
-            <controllingFieldValue>Dog Status</controllingFieldValue>
+            <controllingFieldValue>Dog</controllingFieldValue>
             <valueName>Other Vet Records</valueName>
         </valueSettings>
     </valueSet>
