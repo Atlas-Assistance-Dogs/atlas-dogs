@@ -91,6 +91,48 @@ public with sharing class TestProgramAssignmentTrigger {
     }
 
     @isTest
+    static void insertClientProgramAssignment_SetsExpected() {
+        testInsertSetsExpected('Client');
+    }
+
+    @isTest
+    static void insertTeamFacilitatorProgramAssignment_SetsExpected() {
+        testInsertSetsExpected('Team Facilitator');
+    }
+
+    @isTest
+    static void insertTrainerProgramAssignment_SetsExpected() {
+        testInsertSetsExpected('Trainer');
+    }
+
+    @isTest
+    static void insertHandlesMissingDuration() {
+        // Arrange
+        String program = 'Volunteer';
+        Contact joe = [SELECT Id FROM Contact WHERE FirstName = 'Joe' LIMIT 1];
+        // Create a ProgramAssignment__c with Volunteer program
+        Date assigned = Date.newInstance(2021, 1, 10);
+        ProgramAssignment__c assignment = new ProgramAssignment__c(
+            AssignedDate__c = assigned,
+            Program__c = program,
+            Contact__c = joe.Id
+        );
+
+        Decimal duration = Settings.programDurations.get(program);
+
+        // Act
+        Test.startTest();
+        Database.SaveResult result = Database.insert(assignment, false);
+        Test.stopTest();
+
+        // Assert
+        System.assert(result.isSuccess());
+        ProgramAssignment__c saved = getProgramAssignment(result.getId());
+        System.assert(result.getErrors().size() == 0);
+        System.assertEquals(assigned, saved.AssignedDate__c);
+    }
+
+    @isTest
     static void insert_DoesNotChangeExpected_WhenExpectedSet() {
         // Arrange
         setProgramDurations();
