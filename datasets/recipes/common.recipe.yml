@@ -9,6 +9,11 @@
               - Trainer
               - Client
               - Donor
+              - Volunteer;Client
+              - Volunteer;Trainer
+              - Team Facilitator;Volunteer
+              - Trainer;Client
+              - Team Facilitator Lead;Volunteer;Client
 
 - macro: position
   fields:
