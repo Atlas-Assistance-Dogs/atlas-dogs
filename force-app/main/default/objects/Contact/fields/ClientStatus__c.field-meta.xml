@@ -11,60 +11,44 @@
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
-                <fullName>Initial Screening</fullName>
+                <fullName>Initial Inquiry</fullName>
                 <default>false</default>
-                <label>Initial Screening</label>
+                <label>Initial Inquiry</label>
             </value>
             <value>
-                <fullName>Not Fit</fullName>
+                <fullName>Onboarding</fullName>
                 <default>false</default>
-                <label>Not Fit</label>
+                <label>Onboarding</label>
             </value>
             <value>
-                <fullName>Initial Interview Setup</fullName>
+                <fullName>In Training</fullName>
                 <default>false</default>
-                <label>Initial Interview Setup</label>
+                <label>In Training</label>
             </value>
             <value>
-                <fullName>Background Check in Progress</fullName>
+                <fullName>Certified</fullName>
                 <default>false</default>
-                <label>Background Check in Progress</label>
+                <label>Certified</label>
             </value>
             <value>
-                <fullName>On Temporary Hold</fullName>
+                <fullName>Decertified</fullName>
                 <default>false</default>
-                <label>On Temporary Hold</label>
+                <label>Decertified</label>
             </value>
             <value>
-                <fullName>Selected</fullName>
+                <fullName>On Hold</fullName>
                 <default>false</default>
-                <label>Selected</label>
+                <label>On Hold</label>
             </value>
             <value>
-                <fullName>Course Work - In Progress</fullName>
+                <fullName>Inactive</fullName>
                 <default>false</default>
-                <label>Course Work - In Progress</label>
+                <label>Inactive</label>
             </value>
             <value>
-                <fullName>Course Work - Completed</fullName>
+                <fullName>None</fullName>
                 <default>false</default>
-                <label>Course Work - Completed</label>
-            </value>
-            <value>
-                <fullName
-                >Onboarding - Training agreement and Site update</fullName>
-                <default>false</default>
-                <label>Onboarding - Training agreement and Site update</label>
-            </value>
-            <value>
-                <fullName>Active</fullName>
-                <default>false</default>
-                <label>Active</label>
-            </value>
-            <value>
-                <fullName>No More Active</fullName>
-                <default>false</default>
-                <label>No More Active</label>
+                <label>None</label>
             </value>
         </valueSetDefinition>
     </valueSet>

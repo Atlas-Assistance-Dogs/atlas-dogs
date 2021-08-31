@@ -270,16 +270,11 @@
                     when: ${{Positions__c == 'Board Member'}}
                     pick:
                         random_choice:
+                            - Initial Inquiry
                             - Onboarding
-                            - Preliminary Interview Setup
-                            - Board Interview Committee Feedback Pending
-                            - Not a good fit
-                            - Board Interview Committee interview Setup
-                            - Awaiting Board Approval
                             - Active
-                            - Offered other roles
-                            - Provisionally on boarded as volunteer until next board meeting
-                            - Background Check In progress
+                            - Inactive
+                            - None
       ClientMedicalDevices__c:
           fake: sentence
       ClientStatus__c:
@@ -288,17 +283,14 @@
                     when: ${{Positions__c == 'Client'}}
                     pick:
                         random_choice:
-                            - Initial Screening
-                            - Not Fit
-                            - Initial Interview Setup
-                            - Background Check in Progress
-                            - On Temporary Hold
-                            - Selected
-                            - Course Work - In Progress
-                            - Course Work - Completed
-                            - Onboarding - Training agreement and Site update
-                            - Active
-                            - No More Active
+                            - Initial Inquiry
+                            - Onboarding
+                            - In Training
+                            - Certified
+                            - Decertified
+                            - On Hold
+                            - Inactive
+                            - None
       ClientTeamPrimaryCertification__c:
           random_choice:
               - Atlas
@@ -335,18 +327,13 @@
                     when: ${{Positions__c == 'Team Facilitator'}}
                     pick:
                         random_choice:
-                            - Active
-                            - Background Check In Progress
-                            - Inactive
-                            - Not Considering
-                            - Not Ready
-                            - Not Selected
+                            - Initial Inquiry
                             - Onboarding
-                            - Provisionally Active
-                            - Provisionally Selected
-                            - Scheduled Interview
-                            - Training Course and Workshop Pending Completion
-                            - Workshop Pending Completion
+                            - In Training
+                            - Certified
+                            - Inactive
+                            - Suspended
+                            - None
       LeadComments__c:
           fake: paragraph
       LeadFacilitatorStatus__c:
@@ -356,17 +343,8 @@
                     pick:
                         random_choice:
                             - Active
-                            - Background Check In Progress
                             - Inactive
-                            - Not Considering
-                            - Not Ready
-                            - Not Selected
-                            - Onboarding
-                            - Provisionally Active
-                            - Provisionally Selected
-                            - Scheduled Interview
-                            - Training Course and Workshop Pending Completion
-                            - Workshop Pending Completion
+                            - None
       LeadInterest__c:
           random_choice:
               - Volunteering
@@ -426,18 +404,13 @@
                     when: ${{Positions__c == 'Trainer'}}
                     pick:
                         random_choice:
-                            - Active
-                            - Background Check In Progress
-                            - Inactive
-                            - Not Considering
-                            - Not Ready
-                            - Not Selected
+                            - Initial Inquiry
                             - Onboarding
-                            - Provisionally Active
-                            - Provisionally Selected
-                            - Scheduled Interview
-                            - Training Course and Workshop Pending Completion
-                            - Workshop Pending Completion
+                            - In Training
+                            - Certified
+                            - Inactive
+                            - Suspended
+                            - None
       VolunteerAccess__c:
           random_choice:
               - Operations- Master Docs - READ ONLY
@@ -500,20 +473,9 @@
           random_choice:
               - Initial Inquiry
               - Onboarding
-              - Onboarding Failed
-              - Background Check in Progress
-              - Training in Progress
               - Active
               - Inactive
-              - Delayed Onboarding
-              - Not Interested
-              - Not Ready
-              - Scheduled Interview
-              - Not Selected
-              - Account Provisioning Requested
-              - Onboarding aborted - Background check failed
-              - Provisionally Selected
-              - Training Completed
+              - None
 
 # Create Primary and secondary emergency contacts for Contact
 - object: npe4__Relationship__c
