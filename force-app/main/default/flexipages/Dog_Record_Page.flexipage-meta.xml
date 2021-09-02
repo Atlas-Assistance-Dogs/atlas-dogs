@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <FlexiPage xmlns="http://soap.sforce.com/2006/04/metadata">
     <flexiPageRegions>
         <itemInstances>
@@ -159,16 +159,6 @@
         </itemInstances>
         <itemInstances>
             <fieldInstance>
-                <fieldItem>Record.HealthCheckNote__c</fieldItem>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldItem>Record.HealthCheckFailedDogAccepted__c</fieldItem>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
                 <fieldItem>Record.LatestPhysicalExamOutcome__c</fieldItem>
             </fieldInstance>
         </itemInstances>
@@ -177,28 +167,13 @@
                 <fieldItem>Record.PhysicalExamDue__c</fieldItem>
             </fieldInstance>
         </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldItem>Record.PhysicalExamLatest__c</fieldItem>
-            </fieldInstance>
-        </itemInstances>
         <name>Facet-3c2a6dd4-420e-4eea-af95-0672fea236cd</name>
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
         <itemInstances>
             <fieldInstance>
-                <fieldItem>Record.VaccineLatestHepatitis__c</fieldItem>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
                 <fieldItem>Record.VaccineDueHepatitis__c</fieldItem>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldItem>Record.VaccineLatestParvovirus__c</fieldItem>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
@@ -208,27 +183,12 @@
         </itemInstances>
         <itemInstances>
             <fieldInstance>
-                <fieldItem>Record.VaccineLatestDistemper__c</fieldItem>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
                 <fieldItem>Record.VaccineDueDistemper__c</fieldItem>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
-                <fieldItem>Record.VaccineLatestParainfluenza__c</fieldItem>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
                 <fieldItem>Record.VaccineDueParainfluenza__c</fieldItem>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldItem>Record.VaccineLatestRabies__c</fieldItem>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
@@ -393,7 +353,8 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
-                <componentName>runtime_sales_activities:activityPanel</componentName>
+                <componentName
+                >runtime_sales_activities:activityPanel</componentName>
             </componentInstance>
         </itemInstances>
         <mode>Replace</mode>

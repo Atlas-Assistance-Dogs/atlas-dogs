@@ -35,11 +35,6 @@
         <default>false</default>
         <label>Donor</label>
     </customValue>
-    <customValue>
-        <fullName>Teams Set in Motion Client</fullName>
-        <default>false</default>
-        <label>Teams Set in Motion Client</label>
-    </customValue>
     <description>Positions a contact can have</description>
     <masterLabel>Positions</masterLabel>
     <sorted>false</sorted>
