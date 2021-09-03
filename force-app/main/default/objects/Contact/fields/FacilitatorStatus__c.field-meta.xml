@@ -11,34 +11,9 @@
         <valueSetDefinition>
             <sorted>true</sorted>
             <value>
-                <fullName>Active</fullName>
+                <fullName>Initial Inquiry</fullName>
                 <default>false</default>
-                <label>Active</label>
-            </value>
-            <value>
-                <fullName>Background Check In progress</fullName>
-                <default>false</default>
-                <label>Background Check In progress</label>
-            </value>
-            <value>
-                <fullName>Inactive</fullName>
-                <default>false</default>
-                <label>Inactive</label>
-            </value>
-            <value>
-                <fullName>Not Considering</fullName>
-                <default>false</default>
-                <label>Not Considering</label>
-            </value>
-            <value>
-                <fullName>Not Ready</fullName>
-                <default>false</default>
-                <label>Not Ready</label>
-            </value>
-            <value>
-                <fullName>Not Selected</fullName>
-                <default>false</default>
-                <label>Not Selected</label>
+                <label>Initial Inquiry</label>
             </value>
             <value>
                 <fullName>Onboarding</fullName>
@@ -46,30 +21,29 @@
                 <label>Onboarding</label>
             </value>
             <value>
-                <fullName>Provisionally Active</fullName>
+                <fullName>In Training</fullName>
                 <default>false</default>
-                <label>Provisionally Active</label>
+                <label>In Training</label>
             </value>
             <value>
-                <fullName>Provisionally Selected</fullName>
+                <fullName>Certified</fullName>
                 <default>false</default>
-                <label>Provisionally Selected</label>
+                <label>Certified</label>
             </value>
             <value>
-                <fullName>Scheduled Interview</fullName>
+                <fullName>Inactive</fullName>
                 <default>false</default>
-                <label>Scheduled Interview</label>
+                <label>Inactive</label>
             </value>
             <value>
-                <fullName
-                >Training Course and Workshop Pending Completion</fullName>
+                <fullName>Suspended</fullName>
                 <default>false</default>
-                <label>Training Course and Workshop Pending Completion</label>
+                <label>Suspended</label>
             </value>
             <value>
-                <fullName>Workshop Pending Completion</fullName>
+                <fullName>None</fullName>
                 <default>false</default>
-                <label>Workshop Pending Completion</label>
+                <label>None</label>
             </value>
         </valueSetDefinition>
     </valueSet>

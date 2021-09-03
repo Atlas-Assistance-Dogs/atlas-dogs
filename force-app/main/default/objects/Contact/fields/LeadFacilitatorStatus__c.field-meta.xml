@@ -16,103 +16,14 @@
                 <label>Active</label>
             </value>
             <value>
-                <fullName>Background Check In progress</fullName>
-                <default>false</default>
-                <label>Background Check In progress</label>
-            </value>
-            <value>
                 <fullName>Inactive</fullName>
                 <default>false</default>
                 <label>Inactive</label>
             </value>
             <value>
-                <fullName>Not Considering</fullName>
+                <fullName>None</fullName>
                 <default>false</default>
-                <label>Not Considering</label>
-            </value>
-            <value>
-                <fullName>Not Ready</fullName>
-                <default>false</default>
-                <label>Not Ready</label>
-            </value>
-            <value>
-                <fullName>Not Selected</fullName>
-                <default>false</default>
-                <label>Not Selected</label>
-            </value>
-            <value>
-                <fullName>Onboarding</fullName>
-                <default>false</default>
-                <label>Onboarding</label>
-            </value>
-            <value>
-                <fullName>Provisionally Active</fullName>
-                <default>false</default>
-                <label>Provisionally Active</label>
-            </value>
-            <value>
-                <fullName>Provisionally Selected</fullName>
-                <default>false</default>
-                <label>Provisionally Selected</label>
-            </value>
-            <value>
-                <fullName>Scheduled Interview</fullName>
-                <default>false</default>
-                <label>Scheduled Interview</label>
-            </value>
-            <value>
-                <fullName
-                >Training Course and Workshop Pending Completion</fullName>
-                <default>false</default>
-                <label>Training Course and Workshop Pending Completion</label>
-            </value>
-            <value>
-                <fullName>Workshop Pending Completion</fullName>
-                <default>false</default>
-                <label>Workshop Pending Completion</label>
-            </value>
-            <value>
-                <fullName>Account Provisioning requested</fullName>
-                <default>false</default>
-                <isActive>false</isActive>
-                <label>Account Provisioning requested</label>
-            </value>
-            <value>
-                <fullName>Delayed onboarding</fullName>
-                <default>false</default>
-                <isActive>false</isActive>
-                <label>Delayed onboarding</label>
-            </value>
-            <value>
-                <fullName>Initial Inquiry</fullName>
-                <default>false</default>
-                <isActive>false</isActive>
-                <label>Initial Inquiry</label>
-            </value>
-            <value>
-                <fullName>Not interested</fullName>
-                <default>false</default>
-                <isActive>false</isActive>
-                <label>Not interested</label>
-            </value>
-            <value>
-                <fullName>Onboarding Failed</fullName>
-                <default>false</default>
-                <isActive>false</isActive>
-                <label>Onboarding Failed</label>
-            </value>
-            <value>
-                <fullName
-                >Onboarding aborted - Background Check failed</fullName>
-                <default>false</default>
-                <isActive>false</isActive>
-                <label>Onboarding aborted - Background Check failed</label>
-            </value>
-            <value>
-                <fullName>Training in progress</fullName>
-                <default>false</default>
-                <isActive>false</isActive>
-                <label>Training in progress</label>
+                <label>None</label>
             </value>
         </valueSetDefinition>
     </valueSet>
