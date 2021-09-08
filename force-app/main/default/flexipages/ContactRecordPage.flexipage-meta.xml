@@ -43,7 +43,7 @@
         </itemInstances>
         <itemInstances>
             <componentInstance>
-                <componentName>documentUploadCmp</componentName>
+                <componentName>relatedFilesCmp</componentName>
             </componentInstance>
         </itemInstances>
         <itemInstances>
