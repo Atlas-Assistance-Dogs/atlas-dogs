@@ -1,0 +1,38 @@
+<template>
+    <div class="slds-box slds-var-p-around_medium">
+        <lightning-card>
+            <h3 slot="title">
+                <div style="display: flex">
+                    <lightning-icon
+                        icon-name="standard:folder"
+                    ></lightning-icon>
+                    <p class="slds-var-p-left_medium"><b>Files</b></p>
+                </div>
+            </h3>
+            <!-- lightning button for open modal window -->
+            <lightning-button
+                variant="brand"
+                label="Upload Files"
+                title="Upload Files"
+                onclick={openModal}
+                slot="actions"
+            >
+            </lightning-button>
+            <c-document-upload-cmp
+                record-id={recordId}
+                onconfirm={handleConfirm}
+            ></c-document-upload-cmp>
+            <div>
+                <template if:true={fileUploadList}>
+                    <lightning-datatable
+                        data={fileUploadList}
+                        columns={columns}
+                        key-field="recordId"
+                        onrowaction={handleRowAction}
+                    >
+                    </lightning-datatable>
+                </template>
+            </div>
+        </lightning-card>
+    </div>
+</template>

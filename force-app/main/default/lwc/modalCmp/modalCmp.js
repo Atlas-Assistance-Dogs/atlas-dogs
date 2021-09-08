@@ -1,10 +1,11 @@
-import { LightningElement, api } from "lwc";
-import { NavigationMixin } from "lightning/navigation";
+import { LightningElement, api, track } from "lwc";
 
 export default class ModalCmp extends LightningElement {
     //Boolean variable to indicate if modal is open or not default value is true
-    isModalOpen = true;
+    @api isModalOpen = false;
     @api title;
+    @api submitlabel = "Save";
+    @api defaultClosed = false;
 
     @api
     openModal() {
@@ -24,13 +25,12 @@ export default class ModalCmp extends LightningElement {
         this.isModalOpen = false;
     }
 
-    submit() {
+    submit(event) {
         // to close modal set isModalOpen value as false
-        //Add your code to call apex method or do some processing
-       // this.isModalOpen = false;
-        this.dispatchEvent(new CustomEvent("submit"));
+        // Add your code to call apex method or do some processing
+        this.dispatchEvent(new CustomEvent("submit", event));
     }
-    error(){
+    error() {
         this.dispatchEvent(new CustomEvent("error"));
     }
 }
