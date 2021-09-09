@@ -1,14 +1,12 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>HealthCareRecordsStatus__c</fullName>
     <externalId>false</externalId>
-    <formula
-    >IF( ExpiryDateStatus__c  = &quot;Good&quot;, &quot; All Good &quot;, NULL) 
+    <formula>IF( ExpiryDateStatus__c  = &quot;Good&quot;, &quot; All Good &quot;, NULL) 
 
 &amp;
 
-IF(VaccineDueDistemper__c &lt; TODAY(),  IMAGE(&quot;/sfc/servlet.shepherd/version/renditionDownload?rendition=ORIGINALPng&amp;versionId=068c00000013Ric&amp;operationContext=CHATTER&amp;contentId=05Tc0000006l4b4&quot;,&apos;*&apos;,15,15) &amp; &quot; Distemper Vaccination is expired&quot; &amp;  BR() , IMAGE(&quot;/img/samples/rating2.gif&quot;,&apos;*&apos;) &amp; &quot; Distemper Vaccination is good until &quot; &amp;  TEXT(VaccineDueDistemper__c) &amp;  BR()) 
-
+IF(VaccineDueDistemper__c &lt; TODAY(),  IMAGE(&quot;/img/samples/rating1.gif&quot;,&apos;*&apos;) &amp; &quot; Distemper Vaccination is expired&quot; &amp;  BR() , IMAGE(&quot;/img/samples/rating2.gif&quot;,&apos;*&apos;) &amp; &quot; Distemper Vaccination is good until &quot; &amp;  TEXT(VaccineDueDistemper__c) &amp;  BR())
 &amp; 
 
 IF(VaccineDueHepatitis__c &lt; TODAY(),  IMAGE(&quot;/img/samples/rating1.gif&quot;,&apos;*&apos;) &amp; &quot; Hepatitis Vaccination is expired&quot; &amp;  BR() , IMAGE(&quot;/img/samples/rating2.gif&quot;,&apos;*&apos;) &amp; &quot; Hepatitis Vaccination is good until &quot; &amp;  TEXT(VaccineDueHepatitis__c) &amp;  BR())

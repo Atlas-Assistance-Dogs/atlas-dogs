@@ -171,15 +171,37 @@
                 <default>false</default>
                 <label>Other Vet Records</label>
             </value>
+            <value>
+                <fullName>Resume</fullName>
+                <default>false</default>
+                <label>Resume</label>
+            </value>
+            <value>
+                <fullName>Offer Letter</fullName>
+                <default>false</default>
+                <label>Offer Letter</label>
+            </value>
+            <value>
+                <fullName>I9</fullName>
+                <default>false</default>
+                <label>I9</label>
+            </value>
+            <value>
+                <fullName>W4</fullName>
+                <default>false</default>
+                <label>W4</label>
+            </value>
         </valueSetDefinition>
         <valueSettings>
             <controllingFieldValue>Volunteer</controllingFieldValue>
             <controllingFieldValue>Board</controllingFieldValue>
+            <controllingFieldValue>Staff</controllingFieldValue>
             <valueName>Media and Liability Release</valueName>
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Volunteer</controllingFieldValue>
             <controllingFieldValue>Board</controllingFieldValue>
+            <controllingFieldValue>Staff</controllingFieldValue>
             <valueName>Emergency Contact</valueName>
         </valueSettings>
         <valueSettings>
@@ -301,6 +323,22 @@
         <valueSettings>
             <controllingFieldValue>Dog</controllingFieldValue>
             <valueName>Other Vet Records</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Staff</controllingFieldValue>
+            <valueName>Resume</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Staff</controllingFieldValue>
+            <valueName>Offer Letter</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Staff</controllingFieldValue>
+            <valueName>I9</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Staff</controllingFieldValue>
+            <valueName>W4</valueName>
         </valueSettings>
     </valueSet>
 </CustomField>

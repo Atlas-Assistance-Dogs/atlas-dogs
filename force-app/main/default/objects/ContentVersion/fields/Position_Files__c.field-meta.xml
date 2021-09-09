@@ -41,6 +41,11 @@
                 <label>Dog</label>
             </value>
             <value>
+                <fullName>Staff</fullName>
+                <default>false</default>
+                <label>Staff</label>
+            </value>
+            <value>
                 <fullName>Lead_Facilitator</fullName>
                 <default>false</default>
                 <isActive>false</isActive>
