@@ -2,58 +2,160 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Type__c</fullName>
     <externalId>false</externalId>
-    <label>Type</label>
+    <label>Document Type</label>
     <required>false</required>
     <trackHistory>false</trackHistory>
     <type>Picklist</type>
     <valueSet>
+        <controllingField>Category__c</controllingField>
         <restricted>true</restricted>
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
-                <fullName>Resume</fullName>
+                <fullName>Media and Liability Release</fullName>
                 <default>false</default>
-                <label>Resume</label>
+                <label>Media and Liability Release</label>
             </value>
             <value>
-                <fullName>Reference</fullName>
+                <fullName>Emergency Contact</fullName>
                 <default>false</default>
-                <label>Reference</label>
+                <label>Emergency Contact</label>
             </value>
             <value>
-                <fullName>Application</fullName>
+                <fullName>Conflict of Interest</fullName>
                 <default>false</default>
-                <label>Application</label>
+                <label>Conflict of Interest</label>
             </value>
             <value>
-                <fullName>Provisional Agreement</fullName>
+                <fullName>Transmission of Notices</fullName>
                 <default>false</default>
-                <label>Provisional Agreement</label>
+                <label>Transmission of Notices</label>
             </value>
             <value>
-                <fullName>Volunteer Form</fullName>
+                <fullName>Client Application</fullName>
                 <default>false</default>
-                <label>Volunteer Form</label>
+                <label>Client Application</label>
             </value>
             <value>
-                <fullName>Agreement</fullName>
+                <fullName>LOMI</fullName>
                 <default>false</default>
-                <label>Agreement</label>
+                <label>LOMI</label>
             </value>
             <value>
-                <fullName>Emergency Contact Form</fullName>
+                <fullName>Veteran_Paperwork</fullName>
                 <default>false</default>
-                <label>Emergency Contact Form</label>
+                <label>Veteran Paperwork</label>
             </value>
             <value>
-                <fullName>Media Release</fullName>
+                <fullName>Client Program Agreement</fullName>
                 <default>false</default>
-                <label>Media Release</label>
+                <label>Client Program Agreement</label>
             </value>
             <value>
-                <fullName>Background Check Report</fullName>
+                <fullName>Client Certification Agreement</fullName>
                 <default>false</default>
-                <label>Background Check Report</label>
+                <label>Client Certification Agreement</label>
+            </value>
+            <value>
+                <fullName>Client Initial Certification Survey</fullName>
+                <default>false</default>
+                <label>Client Initial Certification Survey</label>
+            </value>
+            <value>
+                <fullName>Assistance Dogs Set in Motion Application</fullName>
+                <default>false</default>
+                <label>Assistance Dogs Set in Motion Application</label>
+            </value>
+            <value>
+                <fullName
+                >Assistance Dogs Set in Motion Program Agreement</fullName>
+                <default>false</default>
+                <label>Assistance Dogs Set in Motion Program Agreement</label>
+            </value>
+            <value>
+                <fullName>Teams Set in Motion Application</fullName>
+                <default>false</default>
+                <label>Teams Set in Motion Application</label>
+            </value>
+            <value>
+                <fullName>Teams Set in Motion Program Agreement</fullName>
+                <default>false</default>
+                <label>Teams Set in Motion Program Agreement</label>
+            </value>
+            <value>
+                <fullName>TF Application</fullName>
+                <default>false</default>
+                <label>TF Application</label>
+            </value>
+            <value>
+                <fullName>TF Reference Letter 1</fullName>
+                <default>false</default>
+                <label>TF Reference Letter 1</label>
+            </value>
+            <value>
+                <fullName>TF Reference Letter 2</fullName>
+                <default>false</default>
+                <label>TF Reference Letter 2</label>
+            </value>
+            <value>
+                <fullName>TF Program Agreement</fullName>
+                <default>false</default>
+                <label>TF Program Agreement</label>
+            </value>
+            <value>
+                <fullName>TF Certification Agreement</fullName>
+                <default>false</default>
+                <label>TF Certification Agreement</label>
+            </value>
+            <value>
+                <fullName>TF Professional Growth Plan</fullName>
+                <default>false</default>
+                <label>TF Professional Growth Plan</label>
+            </value>
+            <value>
+                <fullName>TF Initial Team Certification Survey</fullName>
+                <default>false</default>
+                <label>TF Initial Team Certification Survey</label>
+            </value>
+            <value>
+                <fullName>TF Practicum</fullName>
+                <default>false</default>
+                <label>TF Practicum</label>
+            </value>
+            <value>
+                <fullName>TF Infraction Notice</fullName>
+                <default>false</default>
+                <label>TF Infraction Notice</label>
+            </value>
+            <value>
+                <fullName>Trainer Application</fullName>
+                <default>false</default>
+                <label>Trainer Application</label>
+            </value>
+            <value>
+                <fullName>Trainer Reference Letter 1</fullName>
+                <default>false</default>
+                <label>Trainer Reference Letter 1</label>
+            </value>
+            <value>
+                <fullName>Trainer Reference Letter 2</fullName>
+                <default>false</default>
+                <label>Trainer Reference Letter 2</label>
+            </value>
+            <value>
+                <fullName>Trainer Program Agreement</fullName>
+                <default>false</default>
+                <label>Trainer Program Agreement</label>
+            </value>
+            <value>
+                <fullName>Trainer Certification Agreement</fullName>
+                <default>false</default>
+                <label>Trainer Certification Agreement</label>
+            </value>
+            <value>
+                <fullName>Trainer Infraction notices as applicable</fullName>
+                <default>false</default>
+                <label>Trainer Infraction notices as applicable</label>
             </value>
             <value>
                 <fullName>Vet Health Form</fullName>
@@ -65,6 +167,142 @@
                 <default>false</default>
                 <label>Vet Xray Report</label>
             </value>
+            <value>
+                <fullName>Other Vet Records</fullName>
+                <default>false</default>
+                <label>Other Vet Records</label>
+            </value>
         </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Volunteer</controllingFieldValue>
+            <controllingFieldValue>Board</controllingFieldValue>
+            <valueName>Media and Liability Release</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Volunteer</controllingFieldValue>
+            <controllingFieldValue>Board</controllingFieldValue>
+            <valueName>Emergency Contact</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Board</controllingFieldValue>
+            <valueName>Conflict of Interest</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Board</controllingFieldValue>
+            <valueName>Transmission of Notices</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Client</controllingFieldValue>
+            <valueName>Client Application</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Client</controllingFieldValue>
+            <valueName>LOMI</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Client</controllingFieldValue>
+            <valueName>Veteran_Paperwork</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Client</controllingFieldValue>
+            <valueName>Client Program Agreement</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Client</controllingFieldValue>
+            <valueName>Client Certification Agreement</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Client</controllingFieldValue>
+            <valueName>Client Initial Certification Survey</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Client</controllingFieldValue>
+            <valueName>Assistance Dogs Set in Motion Application</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Client</controllingFieldValue>
+            <valueName
+            >Assistance Dogs Set in Motion Program Agreement</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Client</controllingFieldValue>
+            <valueName>Teams Set in Motion Application</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Client</controllingFieldValue>
+            <valueName>Teams Set in Motion Program Agreement</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Team_Facilitator</controllingFieldValue>
+            <valueName>TF Application</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Team_Facilitator</controllingFieldValue>
+            <valueName>TF Reference Letter 1</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Team_Facilitator</controllingFieldValue>
+            <valueName>TF Reference Letter 2</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Team_Facilitator</controllingFieldValue>
+            <valueName>TF Program Agreement</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Team_Facilitator</controllingFieldValue>
+            <valueName>TF Certification Agreement</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Team_Facilitator</controllingFieldValue>
+            <valueName>TF Professional Growth Plan</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Team_Facilitator</controllingFieldValue>
+            <valueName>TF Initial Team Certification Survey</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Team_Facilitator</controllingFieldValue>
+            <valueName>TF Practicum</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Team_Facilitator</controllingFieldValue>
+            <valueName>TF Infraction Notice</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Trainer</controllingFieldValue>
+            <valueName>Trainer Application</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Trainer</controllingFieldValue>
+            <valueName>Trainer Reference Letter 1</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Trainer</controllingFieldValue>
+            <valueName>Trainer Reference Letter 2</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Trainer</controllingFieldValue>
+            <valueName>Trainer Program Agreement</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Trainer</controllingFieldValue>
+            <valueName>Trainer Certification Agreement</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Trainer</controllingFieldValue>
+            <valueName>Trainer Infraction notices as applicable</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Vet Health Form</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Vet Xray Report</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Other Vet Records</valueName>
+        </valueSettings>
     </valueSet>
 </CustomField>

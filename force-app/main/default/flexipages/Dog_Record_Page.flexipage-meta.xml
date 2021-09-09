@@ -224,6 +224,11 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
+                <componentName>relatedFilesCmp</componentName>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
                 <componentInstanceProperties>
                     <name>columns</name>
                     <value>Facet-7cf65a87-7ce2-4d81-bd42-542129dc9168</value>
