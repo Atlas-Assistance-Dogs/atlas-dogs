@@ -186,7 +186,7 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>ContentVersion.Positions__c</field>
+        <field>ContentVersion.Category__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
