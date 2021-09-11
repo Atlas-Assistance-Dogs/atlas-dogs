@@ -267,7 +267,7 @@
       BoardMemberStatus__c:
           if:
               - choice:
-                    when: ${{Positions__c == 'Board Member'}}
+                    when: ${{'Board Member' in Positions__c}}
                     pick:
                         random_choice:
                             - Initial Inquiry
@@ -280,7 +280,7 @@
       ClientStatus__c:
           if:
               - choice:
-                    when: ${{Positions__c == 'Client'}}
+                    when: ${{'Client' in Positions__c}}
                     pick:
                         random_choice:
                             - Initial Inquiry
@@ -318,13 +318,13 @@
       FacilitatorInterviewNotes__c:
           if:
               - choice:
-                    when: ${{Positions__c == 'Team Facilitator'}}
+                    when: ${{'Team Facilitator' in Positions__c}}
                     pick:
                         fake: paragraph
       FacilitatorStatus__c:
           if:
               - choice:
-                    when: ${{Positions__c == 'Team Facilitator'}}
+                    when: ${{'Team Facilitator' in Positions__c}}
                     pick:
                         random_choice:
                             - Initial Inquiry
@@ -339,7 +339,7 @@
       LeadFacilitatorStatus__c:
           if:
               - choice:
-                    when: ${{Positions__c == 'Team Facilitator Lead'}}
+                    when: ${{'Team Facilitator Lead' in Positions__c}}
                     pick:
                         random_choice:
                             - Active
@@ -372,7 +372,7 @@
       TrainerBoardTrain__c:
           if:
               - choice:
-                    when: ${{Positions__c == 'Trainer'}}
+                    when: ${{'Trainer' in Positions__c}}
                     pick:
                         random_choice:
                             - true
@@ -380,7 +380,7 @@
       TrainerCEUStatus__c:
           if:
               - choice:
-                    when: ${{Positions__c == 'Trainer'}}
+                    when: ${{'Trainer' in Positions__c}}
                     pick:
                         random_choice:
                             - None
@@ -390,7 +390,7 @@
       TrainerSpecialties__c:
           if:
               - choice:
-                    when: ${{Positions__c == 'Trainer'}}
+                    when: ${{'Trainer' in Positions__c}}
                     pick:
                         random_choice:
                             - Basic Training
@@ -401,7 +401,7 @@
       TrainerStatus__c:
           if:
               - choice:
-                    when: ${{Positions__c == 'Trainer'}}
+                    when: ${{'Trainer' in Positions__c}}
                     pick:
                         random_choice:
                             - Initial Inquiry

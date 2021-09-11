@@ -43,8 +43,12 @@
             <value>
                 <fullName>Lead_Facilitator</fullName>
                 <default>false</default>
-                <isActive>false</isActive>
                 <label>Lead Facilitator</label>
+            </value>
+            <value>
+                <fullName>Staff</fullName>
+                <default>false</default>
+                <label>Staff</label>
             </value>
         </valueSetDefinition>
     </valueSet>
