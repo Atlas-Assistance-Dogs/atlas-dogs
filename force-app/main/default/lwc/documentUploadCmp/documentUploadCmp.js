@@ -23,7 +23,7 @@ export default class DocumentUploadCmp extends NavigationMixin(
             ".doc",
             ".docx",
             ".txt",
-            ".xlxs",
+            ".xlsx",
             ".xls",
             ".csv"
         ];

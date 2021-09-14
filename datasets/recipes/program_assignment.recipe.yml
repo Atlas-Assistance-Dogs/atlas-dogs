@@ -20,23 +20,26 @@
       Program__c:
           if:
               - choice:
-                    when: ${{Contact__c.Position__c=='Trainer'}}
+                    when: ${{'Trainer' in Contact__c.Positions__c}}
                     pick:
                         random_choice:
                             - Sweet Snoopers Trainer
                             - Trainer
               - choice:
-                    when: ${{Contact__c.Position__c=='Client'}}
+                    when: ${{'Client' in Contact__c.Positions__c}}
                     pick: Client
               - choice:
-                    when: ${{Contact__c.Position__c=='Teams Set in Motion Client'}}
+                    when: ${{'Teams Set in Motion Client' in Contact__c.Positions__c}}
                     pick: Teams Set in Motion Client
               - choice:
-                    when: ${{Contact__c.Position__c=='Team Facilitator'}}
+                    when: ${{'Team Facilitator' in Contact__c.Positions__c}}
                     pick: Team Facilitator
               - choice:
-                    when: ${{Contact__c.Position__c=='Team Facilitator Lead'}}
+                    when: ${{'Team Facilitator Lead' in Contact__c.Positions__c}}
                     pick: Team Facilitator
+              - choice:
+                    when: ${{'Staff' in Contact__c.Positions__c}}
+                    pick: Staff
               - choice:
                     pick: Volunteer
       Status__c:
