@@ -35,6 +35,11 @@
         <default>false</default>
         <label>Donor</label>
     </customValue>
+    <customValue>
+        <fullName>Staff</fullName>
+        <default>false</default>
+        <label>Staff</label>
+    </customValue>
     <description>Positions a contact can have</description>
     <masterLabel>Positions</masterLabel>
     <sorted>false</sorted>

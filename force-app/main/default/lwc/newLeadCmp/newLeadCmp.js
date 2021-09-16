@@ -1,24 +1,21 @@
-import { LightningElement } from 'lwc';
+import { LightningElement } from "lwc";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
 import { NavigationMixin } from "lightning/navigation";
 
 export default class NewLeadCmp extends NavigationMixin(LightningElement) {
-
     showSourceOther = false;
     showPnounOther = false;
 
-    handlePnounChange(event){
-
-        if(event.detail.value === 'specify'){
+    handlePnounChange(event) {
+        if (event.detail.value === "specify") {
             this.showPnounOther = true;
         } else {
             this.showPnounOther = false;
         }
     }
 
-    handleSourceChange(event){
-
-        if(event.detail.value === 'Other'){
+    handleSourceChange(event) {
+        if (event.detail.value === "Other") {
             this.showSourceOther = true;
         } else {
             this.showSourceOther = false;
@@ -26,41 +23,29 @@ export default class NewLeadCmp extends NavigationMixin(LightningElement) {
     }
 
     validateFields() {
-        return [...this.template.querySelectorAll("lightning-input-field")].reduce((validSoFar, field) => {
-            return (validSoFar && field.reportValidity());
+        return [
+            ...this.template.querySelectorAll("lightning-input-field")
+        ].reduce((validSoFar, field) => {
+            return validSoFar && field.reportValidity();
         }, true);
     }
 
     handleSubmit(event) {
         event.preventDefault();
-    
+
         if (!this.validateFields()) {
             const toast = new ShowToastEvent({
                 message: "All fields marked with an asterix are required.",
-                variant: "error",
+                variant: "error"
             });
             this.dispatchEvent(toast);
-        }
-        else {
+        } else {
             this.template.querySelector("lightning-record-edit-form").submit();
-            // const evt = new ShowToastEvent({
-            //     title: "Record Submission",
-            //     message: "Submitted",
-            //     variant: "success"
-            // });
-
-            // this.dispatchEvent(evt);
         }
     }
 
     handleSuccess(event) {
-        this.template.querySelector('c-modal-cmp').closeModal();
-        // const evt = new ShowToastEvent({
-        //     title: "Lead created",
-        //     message: "Lead created",
-        //     variant: "success"
-        // });
-        // this.dispatchEvent(evt);
+        this.template.querySelector("c-modal-cmp").closeModal();
 
         this[NavigationMixin.Navigate]({
             type: "standard__recordPage",
@@ -73,7 +58,6 @@ export default class NewLeadCmp extends NavigationMixin(LightningElement) {
     }
 
     handleError(event) {
-       
         const evt = new ShowToastEvent({
             title: "Error in Record Creation",
             message: event.detail.detail,
@@ -91,5 +75,4 @@ export default class NewLeadCmp extends NavigationMixin(LightningElement) {
             }
         });
     }
-
 }

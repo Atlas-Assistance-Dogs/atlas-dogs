@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Position_Files__c</fullName>
+    <fullName>Category__c</fullName>
     <externalId>false</externalId>
-    <label>Position</label>
+    <label>Category</label>
     <required>false</required>
     <trackHistory>false</trackHistory>
     <type>Picklist</type>
@@ -36,11 +36,6 @@
                 <label>Trainer</label>
             </value>
             <value>
-                <fullName>Dog</fullName>
-                <default>false</default>
-                <label>Dog</label>
-            </value>
-            <value>
                 <fullName>Staff</fullName>
                 <default>false</default>
                 <label>Staff</label>
@@ -48,8 +43,12 @@
             <value>
                 <fullName>Lead_Facilitator</fullName>
                 <default>false</default>
-                <isActive>false</isActive>
                 <label>Lead Facilitator</label>
+            </value>
+            <value>
+                <fullName>Dog</fullName>
+                <default>false</default>
+                <label>Dog</label>
             </value>
         </valueSetDefinition>
     </valueSet>

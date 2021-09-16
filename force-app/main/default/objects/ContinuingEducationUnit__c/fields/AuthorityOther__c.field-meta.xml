@@ -3,8 +3,9 @@
     <fullName>AuthorityOther__c</fullName>
     <externalId>false</externalId>
     <label>CUE Authority (Other)</label>
+    <length>40</length>
     <required>false</required>
     <trackTrending>false</trackTrending>
     <type>Text</type>
-    <length>40</length>
+    <unique>false</unique>
 </CustomField>

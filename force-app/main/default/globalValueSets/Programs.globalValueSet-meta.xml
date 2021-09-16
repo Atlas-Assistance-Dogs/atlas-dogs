@@ -30,6 +30,11 @@
         <default>false</default>
         <label>Sweet Snoopers Trainer</label>
     </customValue>
+    <customValue>
+        <fullName>Staff</fullName>
+        <default>false</default>
+        <label>Staff</label>
+    </customValue>
     <masterLabel>Programs</masterLabel>
     <sorted>false</sorted>
 </GlobalValueSet>
