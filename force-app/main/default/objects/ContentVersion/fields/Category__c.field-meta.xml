@@ -36,9 +36,9 @@
                 <label>Trainer</label>
             </value>
             <value>
-                <fullName>Dog</fullName>
+                <fullName>Staff</fullName>
                 <default>false</default>
-                <label>Dog</label>
+                <label>Staff</label>
             </value>
             <value>
                 <fullName>Lead_Facilitator</fullName>
@@ -46,9 +46,9 @@
                 <label>Lead Facilitator</label>
             </value>
             <value>
-                <fullName>Staff</fullName>
+                <fullName>Dog</fullName>
                 <default>false</default>
-                <label>Staff</label>
+                <label>Dog</label>
             </value>
         </valueSetDefinition>
     </valueSet>
