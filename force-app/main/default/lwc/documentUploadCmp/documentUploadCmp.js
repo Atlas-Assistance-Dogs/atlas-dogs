@@ -1,7 +1,6 @@
-import { LightningElement, track, api, wire } from "lwc";
+import { LightningElement, track, api } from "lwc";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
 import updateRecords from "@salesforce/apex/FileController.updateRecords";
-import { refreshApex } from "@salesforce/apex";
 import { NavigationMixin } from "lightning/navigation";
 
 export default class DocumentUploadCmp extends NavigationMixin(

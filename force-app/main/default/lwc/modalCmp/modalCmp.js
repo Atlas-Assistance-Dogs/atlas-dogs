@@ -1,7 +1,7 @@
 import { LightningElement, api, track } from "lwc";
 
 export default class ModalCmp extends LightningElement {
-    //Boolean variable to indicate if modal is open or not default value is true
+    //Boolean variable to indicate if modal is open or not. default value is false
     @api isModalOpen = false;
     @api title;
     @api submitlabel = "Save";

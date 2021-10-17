@@ -1,0 +1,70 @@
+<template>
+    <c-modal-cmp
+        title="Create Log"
+        submitlabel="Save"
+        onsubmit={handleSubmit}
+        onclose={handleClose}
+    >
+        <div slot="body">
+            <lightning-checkbox-group
+                name="role"
+                label="Role"
+                options={options}
+                value={roles}
+                onchange={handleChange}
+            >
+            </lightning-checkbox-group>
+            <lightning-record-edit-form
+                object-api-name="Log__c"
+                class="slds-scrollable"
+                style="height: 25rem"
+                layout-type="full"
+            >
+                <lightning-input-field
+                    field-name="Date__c"
+                    class="category slds-p-bottom_medium"
+                ></lightning-input-field>
+                <lightning-input-field
+                    field-name="Dog__c"
+                    class="category slds-p-bottom_medium"
+                ></lightning-input-field>
+                <lightning-input-field
+                    field-name="PublicAccessHours__c"
+                    class="category slds-p-bottom_medium"
+                ></lightning-input-field>
+                <lightning-input-field
+                    field-name="Handler__c"
+                    class="category slds-p-bottom_medium"
+                ></lightning-input-field>
+                <lightning-input-field
+                    field-name="OtherHours__c"
+                    class="category slds-p-bottom_medium"
+                ></lightning-input-field>
+                <lightning-input-field
+                    field-name="Details__c"
+                    class="category slds-p-bottom_medium"
+                ></lightning-input-field>
+                <lightning-input-field
+                    field-name="RequestSupportFromTeam__c"
+                    class="category slds-p-bottom_medium"
+                ></lightning-input-field>
+                <lightning-input-field
+                    field-name="SupportDetails__c"
+                    class="category slds-p-bottom_medium"
+                ></lightning-input-field>
+                <lightning-input-field
+                    field-name="ClientStress__c"
+                    class="category slds-p-bottom_medium"
+                ></lightning-input-field>
+                <lightning-input-field
+                    field-name="Satisfaction__c"
+                    class="category slds-p-bottom_medium"
+                ></lightning-input-field>
+                <lightning-input-field
+                    field-name="RequestSupportFromAtlas__c"
+                    class="category slds-p-bottom_medium"
+                ></lightning-input-field>
+            </lightning-record-edit-form>
+        </div>
+    </c-modal-cmp>
+</template>

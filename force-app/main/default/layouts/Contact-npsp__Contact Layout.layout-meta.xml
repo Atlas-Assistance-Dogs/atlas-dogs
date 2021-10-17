@@ -624,14 +624,6 @@
     <relatedLists>
         <fields>NAME</fields>
         <fields>Date__c</fields>
-        <fields>RequestSupportFromAtlas__c</fields>
-        <fields>RequestSupportFromTeam__c</fields>
-        <fields>SessionType__c</fields>
-        <relatedList>Log__c.Submitter__c</relatedList>
-    </relatedLists>
-    <relatedLists>
-        <fields>NAME</fields>
-        <fields>Date__c</fields>
         <fields>Result__c</fields>
         <relatedList>BackgroundCheck__c.Contact__c</relatedList>
     </relatedLists>

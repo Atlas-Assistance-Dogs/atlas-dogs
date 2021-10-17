@@ -33,6 +33,11 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
+                <componentName>relatedLogsCmp</componentName>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
                 <componentInstanceProperties>
                     <name>displayOption</name>
                     <value>BOTH</value>

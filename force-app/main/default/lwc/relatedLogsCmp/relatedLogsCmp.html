@@ -1,0 +1,37 @@
+<template>
+    <div class="slds-box slds-var-p-around_medium">
+        <lightning-card>
+            <h3 slot="title">
+                <div style="display: flex">
+                    <lightning-icon icon-name="utility:note"></lightning-icon>
+                    <p class="slds-var-p-left_medium"><b>Logs</b></p>
+                </div>
+            </h3>
+            <!-- lightning button for open modal window -->
+            <lightning-button
+                variant="brand"
+                label="Add log"
+                title="Add log"
+                onclick={openModal}
+                slot="actions"
+            >
+            </lightning-button>
+            <c-log-create-cmp
+                record-id={recordId}
+                oncreate={handleCreate}
+            ></c-log-create-cmp>
+            <lightning-datatable
+                key-field="id"
+                columns={columns}
+                data={data}
+                hide-checkbox-column
+                default-sort-direction={defaultSortDirection}
+                sorted-direction={sortDirection}
+                sorted-by={sortedBy}
+                onsort={handleSort}
+                onrowaction={handleRowAction}
+            >
+            </lightning-datatable>
+        </lightning-card>
+    </div>
+</template>

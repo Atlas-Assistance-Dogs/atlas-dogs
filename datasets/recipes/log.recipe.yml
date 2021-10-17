@@ -3,6 +3,7 @@
 
 - object: Log__c
   count: 20
+  nickname: log
   fields:
       ClientStress__c:
           random_choice:
@@ -13,7 +14,7 @@
               - Very much
       Date__c:
           date_between:
-              start_date: 2000-01-01
+              start_date: 2015-01-01
               end_date: today
       Details__c:
           fake.text:
@@ -48,9 +49,22 @@
               - To some extent
               - Rather much
               - Very much
-      Submitter__c:
-          random_reference: Contact
       Type__c:
           random_choice:
               - Client
               - Facilitator
+
+- object: ContactLog__c
+  count: 2
+  fields:
+      Contact__c:
+          random_reference: Contact
+      Log__c:
+          reference: log
+      Role__c:
+          random_choice:
+              - Submitter
+              - Client
+              - Team Facilitator
+              - Submitter;Client
+              - Submitter;Team Facilitator
