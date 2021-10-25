@@ -1,8 +1,8 @@
 import { LightningElement, api } from "lwc";
+import { ShowToastEvent } from "lightning/platformShowToastEvent";
 import createRelatedLog from "@salesforce/apex/ContactController.createRelatedLog";
-import { NavigationMixin } from "lightning/navigation";
 
-export default class LogCreateCmp extends NavigationMixin(LightningElement) {
+export default class LogCreateCmp extends LightningElement {
     @api recordId;
     roles = [];
 
@@ -21,12 +21,14 @@ export default class LogCreateCmp extends NavigationMixin(LightningElement) {
     }
 
     closeModal() {
-        this.template.querySelector("c-modal-cmp").closeModal();
+        // this.template.querySelector("c-modal-cmp").closeModal();
     }
 
     handleChange(event) {
         this.roles = event.detail.value;
     }
+
+    handleClose() {}
 
     @api
     handleSubmit(event) {
@@ -46,7 +48,7 @@ export default class LogCreateCmp extends NavigationMixin(LightningElement) {
         })
             .then(() => {
                 self.dispatchEvent(new CustomEvent("create"));
-                self.closeModal();
+                this.closeModal();
             })
             .catch((error) => {
                 this.dispatchEvent(
@@ -58,6 +60,4 @@ export default class LogCreateCmp extends NavigationMixin(LightningElement) {
                 );
             });
     }
-
-    handleClose() {}
 }
