@@ -1,5 +1,10 @@
 import { LightningElement, api, wire } from "lwc";
 import getRelatedLogs from "@salesforce/apex/ContactController.getRelatedLogs";
+import { refreshApex } from "@salesforce/apex";
+
+// Import message service features required for publishing and the message channel
+import { publish, MessageContext } from "lightning/messageService";
+import logForm from "@salesforce/messageChannel/LogForm__c";
 
 const actions = [
     { label: "Edit", name: "edit" },
@@ -41,6 +46,9 @@ export default class RelatedLogsCmp extends LightningElement {
         }
     ];
 
+    @wire(MessageContext)
+    messageContext;
+
     defaultSortDirection = "asc";
     sortDirection = "asc";
     sortedBy;
@@ -72,7 +80,19 @@ export default class RelatedLogsCmp extends LightningElement {
         this.sortedBy = sortedBy;
     }
 
-    handleRowAction(event) {}
+    handleRowAction(event) {
+        const actionName = event.detail.action.name;
+        const row = event.detail.row;
+        switch (actionName) {
+            case "delete":
+                this.deleteLog(row.id);
+                break;
+            case "edit":
+                const payload = { mode: "edit", recordId: row.id };
+                publish(this.messageContext, logForm, payload);
+                break;
+        }
+    }
 
     @wire(getRelatedLogs, { contactId: "$recordId" })
     getLogs(result) {
@@ -90,7 +110,7 @@ export default class RelatedLogsCmp extends LightningElement {
                     satisfaction: cl.Log__r.Satisfaction__c,
                     requestSupportFromAtlas:
                         cl.Log__r.RequestSupportFromAtlas__c,
-                    id: cl.Contact__c
+                    id: cl.Id
                 };
             });
         } else if (result.error) {
@@ -105,11 +125,12 @@ export default class RelatedLogsCmp extends LightningElement {
         }
     }
 
-    openModal() {
-        this.template.querySelector("c-log-create-cmp").openModal();
+    createLog(event) {
+        const payload = { mode: "create" };
+        publish(this.messageContext, logForm, payload);
     }
 
-    handleCreate() {
+    handleChange() {
         refreshApex(this.wiredLogs);
     }
 }

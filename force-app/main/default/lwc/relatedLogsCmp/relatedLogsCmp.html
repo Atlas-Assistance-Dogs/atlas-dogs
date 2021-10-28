@@ -12,14 +12,14 @@
                 variant="brand"
                 label="Add log"
                 title="Add log"
-                onclick={openModal}
+                onclick={createLog}
                 slot="actions"
             >
             </lightning-button>
-            <c-log-create-cmp
-                record-id={recordId}
-                oncreate={handleCreate}
-            ></c-log-create-cmp>
+            <c-log-form-cmp
+                contact-id={recordId}
+                onlogchanged={handleChange}
+            ></c-log-form-cmp>
             <lightning-datatable
                 key-field="id"
                 columns={columns}
