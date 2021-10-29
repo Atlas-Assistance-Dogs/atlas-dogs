@@ -1,6 +1,14 @@
 import { LightningElement, api, wire } from "lwc";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
 import createRelatedLog from "@salesforce/apex/ContactController.createRelatedLog";
+import getRelatedLog from "@salesforce/apex/ContactController.getRelatedLog";
+import updateRelatedLog from "@salesforce/apex/ContactController.updateRelatedLog";
+
+import ROLE_FIELD from "@salesforce/schema/ContactLog__c.Role__c";
+import DATE_FIELD from "@salesforce/schema/Log__c.Date__c";
+import DOG_FIELD from "@salesforce/schema/Log__c.Dog__c";
+import PAH_FIELD from "@salesforce/schema/Log__c.PublicAccessHours__c";
+import HANDLER_FIELD from "@salesforce/schema/Log__c.Handler__c";
 
 // Import message service features required for subscribing and the message channel
 import {
@@ -10,17 +18,18 @@ import {
     MessageContext
 } from "lightning/messageService";
 import logForm from "@salesforce/messageChannel/LogForm__c";
-/*
-import NAME_FIELD from "@salesforce/schema/Contact.Name";
-import TITLE_FIELD from "@salesforce/schema/Contact.Title";
-import PHONE_FIELD from "@salesforce/schema/Contact.Phone";
-import EMAIL_FIELD from "@salesforce/schema/Contact.Email";
-import PICTURE_FIELD from "@salesforce/schema/Contact.Picture__c";
-*/
 
 export default class LogFormCmp extends LightningElement {
     @api contactId;
     roles = [];
+    title = "Create Log";
+    fields = {
+        role: ROLE_FIELD,
+        date: DATE_FIELD,
+        dog: DOG_FIELD,
+        publicAccessHours: PAH_FIELD,
+        handler: HANDLER_FIELD
+    };
 
     get options() {
         return [
@@ -54,9 +63,22 @@ export default class LogFormCmp extends LightningElement {
             (a, x) => ({ ...a, [x.fieldName]: x.value }),
             {}
         );
+        let roles = this.roles.join(";");
+        if (this.mode === "create") {
+            this.createLog(roles, record);
+        } else {
+            this.updateLog(roles, record);
+        }
+    }
+
+    @wire(MessageContext)
+    messageContext;
+
+    // Create a new log
+    createLog(roles, record) {
         createRelatedLog({
             contactId: this.contactId,
-            roles: this.roles.join(";"),
+            roles: roles,
             log: record
         })
             .then(() => {
@@ -67,15 +89,34 @@ export default class LogFormCmp extends LightningElement {
                 this.dispatchEvent(
                     new ShowToastEvent({
                         title: "Error!!",
-                        message: error.message,
+                        message: error.body.message,
                         variant: "error"
                     })
                 );
             });
     }
 
-    @wire(MessageContext)
-    messageContext;
+    // Update an existing log and ContactLog
+    updateLog(roles, record) {
+        record["Id"] = this.logRecordId;
+        updateRelatedLog({
+            contactLog: { Id: this.recordId, Role__c: roles },
+            log: record
+        })
+            .then(() => {
+                this.dispatchEvent(new CustomEvent("logchanged"));
+                this.closeModal();
+            })
+            .catch((error) => {
+                this.dispatchEvent(
+                    new ShowToastEvent({
+                        title: "Error!!",
+                        message: error.body.message,
+                        variant: "error"
+                    })
+                );
+            });
+    }
 
     // Encapsulate logic for Lightning message service subscribe and unsubsubscribe
     subscribeToMessageChannel() {
@@ -98,6 +139,13 @@ export default class LogFormCmp extends LightningElement {
     handleMessage(message) {
         this.recordId = message.recordId;
         this.mode = message.mode;
+        this.title = this.mode[0].toUpperCase() + this.mode.slice(1) + " Log";
+        if (message.recordId) {
+            getRelatedLog({ recordId: this.recordId }).then((data) => {
+                this.roles = data.Role__c.split(";");
+                this.logRecordId = data.Log__c;
+            });
+        }
         this.openModal();
     }
 

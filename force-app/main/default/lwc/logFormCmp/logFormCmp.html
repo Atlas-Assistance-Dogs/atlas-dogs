@@ -1,6 +1,6 @@
 <template>
     <c-modal-cmp
-        title="Create Log"
+        title={title}
         submitlabel="Save"
         onsubmit={handleSubmit}
         onclose={handleClose}
@@ -19,17 +19,18 @@
                 class="slds-scrollable"
                 style="height: 25rem"
                 layout-type="full"
+                record-id={logRecordId}
             >
                 <lightning-input-field
-                    field-name="Date__c"
+                    field-name={fields.date}
                     class="category slds-p-bottom_medium"
                 ></lightning-input-field>
                 <lightning-input-field
-                    field-name="Dog__c"
+                    field-name={fields.dog}
                     class="category slds-p-bottom_medium"
                 ></lightning-input-field>
                 <lightning-input-field
-                    field-name="PublicAccessHours__c"
+                    field-name={fields.publicAccessHours}
                     class="category slds-p-bottom_medium"
                 ></lightning-input-field>
                 <lightning-input-field

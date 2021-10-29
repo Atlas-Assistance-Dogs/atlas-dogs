@@ -103,4 +103,29 @@ public inherited sharing class ContactController {
             throw new AuraHandledException(e.getMessage());
         }
     }
+
+    // Get the contact log and log from the ContactLog id
+    @AuraEnabled(Cacheable=true)
+    public static ContactLog__c getRelatedLog(id recordId) {
+        try {
+            return [
+                SELECT Role__c, Log__c
+                FROM ContactLog__c
+                WHERE Id = :recordId
+                LIMIT 1
+            ];
+        } catch (Exception e) {
+            throw new AuraHandledException(e.getMessage());
+        }
+    }
+
+    @AuraEnabled(Cacheable=false)
+    public static void updateRelatedLog(ContactLog__c contactLog, Log__c log) {
+        try {
+            update log;
+            update contactLog;
+        } catch (Exception e) {
+            throw new AuraHandledException(e.getMessage());
+        }
+    }
 }
