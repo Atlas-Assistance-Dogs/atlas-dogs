@@ -1,14 +1,21 @@
 import { LightningElement, api, wire } from "lwc";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
-import createRelatedLog from "@salesforce/apex/ContactController.createRelatedLog";
-import getRelatedLog from "@salesforce/apex/ContactController.getRelatedLog";
-import updateRelatedLog from "@salesforce/apex/ContactController.updateRelatedLog";
+import createRelatedLog from "@salesforce/apex/LogController.createRelatedLog";
+import getRelatedLog from "@salesforce/apex/LogController.getRelatedLog";
+import updateRelatedLog from "@salesforce/apex/LogController.updateRelatedLog";
 
 import ROLE_FIELD from "@salesforce/schema/ContactLog__c.Role__c";
 import DATE_FIELD from "@salesforce/schema/Log__c.Date__c";
 import DOG_FIELD from "@salesforce/schema/Log__c.Dog__c";
 import PAH_FIELD from "@salesforce/schema/Log__c.PublicAccessHours__c";
 import HANDLER_FIELD from "@salesforce/schema/Log__c.Handler__c";
+import OTHER_HOURS_FIELD from "@salesforce/schema/Log__c.OtherHours__c";
+import DETAILS_FIELD from "@salesforce/schema/Log__c.Details__c";
+import TEAM_SUPPORT_FIELD from "@salesforce/schema/Log__c.RequestSupportFromTeam__c";
+import SUPPORT_DETAILS_FIELD from "@salesforce/schema/Log__c.SupportDetails__c";
+import CLIENT_STRESS_FIELD from "@salesforce/schema/Log__c.ClientStress__c";
+import SATISFACTION_FIELD from "@salesforce/schema/Log__c.Satisfaction__c";
+import ATLAS_SUPPORT_FIELD from "@salesforce/schema/Log__c.RequestSupportFromAtlas__c";
 
 // Import message service features required for subscribing and the message channel
 import {
@@ -28,7 +35,14 @@ export default class LogFormCmp extends LightningElement {
         date: DATE_FIELD,
         dog: DOG_FIELD,
         publicAccessHours: PAH_FIELD,
-        handler: HANDLER_FIELD
+        handler: HANDLER_FIELD,
+        otherHours: OTHER_HOURS_FIELD,
+        details: DETAILS_FIELD,
+        teamSupport: TEAM_SUPPORT_FIELD,
+        supportDetails: SUPPORT_DETAILS_FIELD,
+        clientStress: CLIENT_STRESS_FIELD,
+        satisfaction: SATISFACTION_FIELD,
+        atlasSupport: ATLAS_SUPPORT_FIELD
     };
 
     get options() {

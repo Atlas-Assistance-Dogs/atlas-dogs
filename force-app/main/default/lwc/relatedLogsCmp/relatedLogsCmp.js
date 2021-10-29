@@ -1,5 +1,7 @@
 import { LightningElement, api, wire } from "lwc";
-import getRelatedLogs from "@salesforce/apex/ContactController.getRelatedLogs";
+import { ShowToastEvent } from "lightning/platformShowToastEvent";
+import getRelatedLogs from "@salesforce/apex/LogController.getRelatedLogs";
+import deleteRelatedLog from "@salesforce/apex/LogController.deleteRelatedLog";
 import { refreshApex } from "@salesforce/apex";
 
 // Import message service features required for publishing and the message channel
@@ -128,6 +130,22 @@ export default class RelatedLogsCmp extends LightningElement {
     createLog(event) {
         const payload = { mode: "create" };
         publish(this.messageContext, logForm, payload);
+    }
+
+    deleteLog(recordId) {
+        deleteRelatedLog({ recordId: recordId })
+            .then(() => {
+                this.handleChange();
+            })
+            .catch((error) => {
+                this.dispatchEvent(
+                    new ShowToastEvent({
+                        title: "Error!!",
+                        message: error.body.message,
+                        variant: "error"
+                    })
+                );
+            });
     }
 
     handleChange() {

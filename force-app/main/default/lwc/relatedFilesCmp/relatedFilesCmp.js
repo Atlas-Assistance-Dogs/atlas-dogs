@@ -108,7 +108,7 @@ export default class RelatedFiles extends LightningElement {
                 this.dispatchEvent(
                     new ShowToastEvent({
                         title: "Error!!",
-                        message: error.message,
+                        message: error.body.message,
                         variant: "error"
                     })
                 );
