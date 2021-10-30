@@ -53,6 +53,11 @@
         </itemInstances>
         <itemInstances>
             <componentInstance>
+                <componentName>relatedPatsCmp</componentName>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
                 <componentInstanceProperties>
                     <name>relatedListComponentOverride</name>
                     <value>NONE</value>

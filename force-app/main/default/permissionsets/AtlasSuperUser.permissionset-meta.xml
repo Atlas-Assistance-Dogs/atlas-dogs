@@ -657,6 +657,10 @@
         <visibility>Visible</visibility>
     </tabSettings>
     <tabSettings>
+        <tab>Log__c</tab>
+        <visibility>Visible</visibility>
+    </tabSettings>
+    <tabSettings>
         <tab>ProgramAssignment__c</tab>
         <visibility>Visible</visibility>
     </tabSettings>
