@@ -4,25 +4,27 @@
             <h3 slot="title">
                 <div style="display: flex">
                     <lightning-icon
-                        icon-name="standard:logging"
+                        icon-name="standard:visits"
                     ></lightning-icon>
-                    <p class="slds-var-p-left_medium"><b>Logs</b></p>
+                    <p class="slds-var-p-left_medium">
+                        <b>Public Access Tests</b>
+                    </p>
                 </div>
             </h3>
             <!-- lightning button for open modal window -->
             <lightning-button
                 label="New"
                 title="New"
-                onclick={createLog}
+                onclick={createPat}
                 slot="actions"
             >
             </lightning-button>
-            <c-log-form-cmp
+            <c-pat-form-cmp
                 contact-id={recordId}
-                onlogchanged={handleChange}
-            ></c-log-form-cmp>
+                onchanged={handleChange}
+            ></c-pat-form-cmp>
             <lightning-datatable
-                key-field="id"
+                key-field="Id"
                 columns={columns}
                 data={data}
                 hide-checkbox-column

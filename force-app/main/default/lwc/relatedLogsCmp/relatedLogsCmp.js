@@ -116,7 +116,7 @@ export default class RelatedLogsCmp extends LightningElement {
     @wire(getRelatedLogs, { contactId: "$recordId" })
     getLogs(result) {
         this.wiredLogs = result;
-        if (result.data) {
+        if (result?.data ?? false) {
             console.log(result.data);
             this.data = result.data.map((cl) => {
                 return {
