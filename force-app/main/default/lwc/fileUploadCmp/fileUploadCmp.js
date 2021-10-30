@@ -8,10 +8,11 @@ export default class DocumentUploadCmp extends NavigationMixin(
 ) {
     @api recordId;
     @track fileUploadList = [];
-    @track fileID = [];
+    @track fileIDs = [];
     isErrorMessage = false;
     message = "";
     fileName;
+    contentType = "Emergency Contact";
 
     get acceptedFormats() {
         return [
@@ -40,44 +41,40 @@ export default class DocumentUploadCmp extends NavigationMixin(
     handleUploadFinished(event) {
         this.isErrorMessage = false;
         this.message = "File Uploaded Successfully";
-        const uploadedFiles = event.detail.files;
-        for (let i = 0; i < uploadedFiles.length; i++) {
-            this.fileName += uploadedFiles[i].name + ", ";
-            this.fileID.push(uploadedFiles[i].documentId);
-        }
+        const uploadedFiles = event.detail.files.map((doc) => doc.documentId);
+        this.updateFiles(
+            this.template.querySelector(".category").value,
+            this.template.querySelector(".type").value,
+            uploadedFiles
+        );
     }
 
     handleSubmit(event) {
         event.preventDefault();
-        var category = this.template.querySelector(".category").value;
-        var docType = this.template.querySelector(".type").value;
-        this.updateFiles(category, docType);
+        this.closeModal();
     }
 
-    updateFiles(category, docType) {
+    updateFiles(category, docType, files) {
         updateRecords({
-            recordId: this.recordId,
             category: category,
             docType: docType,
-            docName: this.fileName,
-            docId: this.fileID
+            docIds: files
         })
             .then((data) => {
                 this.dispatchEvent(
                     new ShowToastEvent({
-                        title: "Files Loaded",
+                        title: "Files Assigned to Category and Type",
                         message: data,
                         variant: "success"
                     })
                 );
-                this.dispatchEvent(new CustomEvent("confirm"));
-                this.closeModal();
+                this.dispatchEvent(new CustomEvent("update"));
             })
             .catch((error) => {
                 this.dispatchEvent(
                     new ShowToastEvent({
                         title: "Error!!",
-                        message: error.message,
+                        message: error.body.message,
                         variant: "error"
                     })
                 );

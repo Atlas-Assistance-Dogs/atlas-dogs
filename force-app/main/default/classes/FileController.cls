@@ -1,6 +1,6 @@
 public inherited sharing class FileController {
     @AuraEnabled
-    public static list<contentversion> contactFilesRetrieve(
+    public static List<ContentVersion> contactFilesRetrieve(
         Id contactId,
         String category,
         String docType
@@ -36,28 +36,21 @@ public inherited sharing class FileController {
 
     @AuraEnabled
     public static void updateRecords(
-        Id recordId,
         String category,
         String docType,
-        String docName,
-        List<Id> docId
+        List<Id> docIds
     ) {
-        System.debug('Category = ' + category);
-        System.debug('Type = ' + docType);
-        Id parentId = recordId;
-        List<ContentVersion> cvListUpdate = new List<ContentVersion>();
         List<ContentVersion> cvList = [
             SELECT Title, ContentDocumentId, Type__c, Category__c
             FROM ContentVersion
-            WHERE ContentDocumentId IN :docId
+            WHERE ContentDocumentId IN :docIds
         ];
         for (ContentVersion cv : cvList) {
             cv.Type__c = docType;
             cv.Category__c = category;
-            cvListUpdate.add(cv);
         }
         try {
-            update cvListUpdate;
+            update cvList;
         } catch (DmlException ex) {
             throw new AuraHandledException(ex.getMessage());
         }
@@ -76,11 +69,49 @@ public inherited sharing class FileController {
 
     @AuraEnabled
     public static String deleteRecord(ID docId) {
-        // system.debug('docIds' + docIds);
         try {
             delete [SELECT Id FROM ContentDocument WHERE Id = :docId LIMIT 1];
             return 'SUCCESS';
         } catch (Exception ex) {
+            throw new AuraHandledException(ex.getMessage());
+        }
+    }
+    @AuraEnabled
+    public static ContentVersion getContentVersion(Id recordId) {
+        try {
+            return [
+                SELECT
+                    Title,
+                    ContentDocumentId,
+                    Type__c,
+                    Category__c,
+                    CreatedDate
+                FROM ContentVersion
+                WHERE Id = :recordId
+                LIMIT 1
+            ];
+        } catch (Exception e) {
+            throw new AuraHandledException(e.getMessage());
+        }
+    }
+
+    @AuraEnabled
+    public static void updateContentVersion(
+        String category,
+        String docType,
+        Id recordId
+    ) {
+        try {
+            ContentVersion cv = [
+                SELECT Type__c, Category__c
+                FROM ContentVersion
+                WHERE Id = :recordId
+                LIMIT 1
+            ];
+            cv.Type__c = docType;
+            cv.Category__c = category;
+            update cv;
+        } catch (DmlException ex) {
             throw new AuraHandledException(ex.getMessage());
         }
     }

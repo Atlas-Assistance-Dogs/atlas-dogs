@@ -155,10 +155,20 @@ export default class LogFormCmp extends LightningElement {
         this.mode = message.mode;
         this.title = this.mode[0].toUpperCase() + this.mode.slice(1) + " Log";
         if (message.recordId) {
-            getRelatedLog({ recordId: this.recordId }).then((data) => {
-                this.roles = data.Role__c.split(";");
-                this.logRecordId = data.Log__c;
-            });
+            getRelatedLog({ recordId: this.recordId })
+                .then((data) => {
+                    this.roles = data.Role__c.split(";");
+                    this.logRecordId = data.Log__c;
+                })
+                .catch((error) => {
+                    this.dispatchEvent(
+                        new ShowToastEvent({
+                            title: "Error!!",
+                            message: error.body.message,
+                            variant: "error"
+                        })
+                    );
+                });
         }
         this.openModal();
     }

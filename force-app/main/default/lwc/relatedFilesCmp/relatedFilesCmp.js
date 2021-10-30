@@ -5,8 +5,11 @@ import { refreshApex } from "@salesforce/apex";
 import { NavigationMixin } from "lightning/navigation";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
 
+// Import message service features required for publishing and the message channel
+import { publish, MessageContext } from "lightning/messageService";
+import updateFile from "@salesforce/messageChannel/UpdateFile__c";
+
 const actions = [
-    { label: "Show details", name: "show_details" },
     { label: "Edit", name: "edit" },
     { label: "Delete", name: "delete" }
 ];
@@ -14,11 +17,13 @@ const actions = [
 const COLS = [
     {
         label: "File Name",
-        fieldName: "Title",
-        type: "fileUpload",
+        type: "button",
         typeAttributes: {
-            acceptedFileFormats: ".jpg,.jpeg,.pdf,.png",
-            recordId: { fieldName: "Id" }
+            name: "view",
+            label: { fieldName: "Title" },
+            variant: "base",
+            iconName: "utility:file",
+            iconPosition: "left"
         }
     },
     { label: "Category", fieldName: "Category__c" },
@@ -27,14 +32,14 @@ const COLS = [
     { type: "action", typeAttributes: { rowActions: actions } }
 ];
 
-export default class RelatedFiles extends LightningElement {
+export default class RelatedFiles extends NavigationMixin(LightningElement) {
     @api objectApiName;
     @api recordId;
     columns = COLS;
     @track fileUploadList;
 
     openModal() {
-        this.template.querySelector("c-document-upload-cmp").openModal();
+        this.template.querySelector("c-file-upload-cmp").openModal();
     }
 
     @wire(retrieveAllData, { recordId: "$recordId" }) filesLst(result) {
@@ -53,9 +58,12 @@ export default class RelatedFiles extends LightningElement {
         }
     }
 
-    handleConfirm() {
+    handleUpdate() {
         refreshApex(this.wiredFilesList);
     }
+
+    @wire(MessageContext)
+    messageContext;
 
     handleRowAction(event) {
         const actionName = event.detail.action.name;
@@ -64,10 +72,11 @@ export default class RelatedFiles extends LightningElement {
             case "delete":
                 this.deleteCons(row);
                 break;
-            // TODO: add edit document record
             case "edit":
+                const payload = { recordId: row.Id, fileName: row.Title };
+                publish(this.messageContext, updateFile, payload);
                 break;
-            case "show_details":
+            case "view":
                 this.navigateToFiles(row);
                 break;
             default:

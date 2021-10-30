@@ -14,19 +14,36 @@ const actions = [
 ];
 
 const COLS = [
-    { label: "Date", fieldName: "date", type: "date", sortable: true },
-    { label: "Role", fieldName: "role", sortable: true },
-    { label: "Public Access Hours", fieldName: "publicAccessHours" },
-    { label: "Other Hours", fieldName: "otherHours" },
     {
-        label: "Request Support from Team",
-        fieldName: "requestSupportFromTeam"
+        label: "Date",
+        fieldName: "date",
+        type: "date",
+        sortable: true
+    },
+    { label: "Role", fieldName: "role", sortable: true, initialWidth: 140 },
+    {
+        label: "PA Hours",
+        fieldName: "publicAccessHours",
+        type: "number",
+        editable: "true"
+    },
+    {
+        label: "Other Hours",
+        fieldName: "otherHours",
+        type: "number",
+        editable: "true"
+    },
+    {
+        label: "Team Support?",
+        fieldName: "requestSupportFromTeam",
+        type: "boolean"
     },
     { label: "Stress", fieldName: "stress" },
     { label: "Satisfaction", fieldName: "satisfaction" },
     {
-        label: "Request Support from Atlas",
-        fieldName: "requestSupportFromAtlas"
+        label: "Atlas Support?",
+        fieldName: "requestSupportFromAtlas",
+        type: "boolean"
     },
     { type: "action", typeAttributes: { rowActions: actions } }
 ];

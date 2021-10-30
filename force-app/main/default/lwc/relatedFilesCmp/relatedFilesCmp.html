@@ -9,30 +9,33 @@
                     <p class="slds-var-p-left_medium"><b>Files</b></p>
                 </div>
             </h3>
-            <!-- lightning button for open modal window -->
+            <!-- lightning button for upload files modal -->
             <lightning-button
-                variant="brand"
                 label="Upload Files"
                 title="Upload Files"
                 onclick={openModal}
                 slot="actions"
             >
             </lightning-button>
-            <c-document-upload-cmp
+            <c-file-upload-cmp
                 record-id={recordId}
-                onconfirm={handleConfirm}
-            ></c-document-upload-cmp>
-            <div>
-                <template if:true={fileUploadList}>
-                    <lightning-datatable
-                        data={fileUploadList}
-                        columns={columns}
-                        key-field="recordId"
-                        onrowaction={handleRowAction}
-                    >
-                    </lightning-datatable>
-                </template>
-            </div>
+                onupdate={handleUpdate}
+            ></c-file-upload-cmp>
+            <c-file-update-cmp
+                version-id={versionId}
+                file-name={currentFileName}
+                onupdate={handleUpdate}
+            ></c-file-update-cmp>
+            <template if:true={fileUploadList}>
+                <lightning-datatable
+                    data={fileUploadList}
+                    columns={columns}
+                    hide-checkbox-column
+                    key-field="recordId"
+                    onrowaction={handleRowAction}
+                >
+                </lightning-datatable>
+            </template>
         </lightning-card>
     </div>
 </template>
