@@ -1,16 +1,9 @@
 <template>
-    <div class="slds-box slds-var-p-around_medium">
-        <lightning-card>
-            <h3 slot="title">
-                <div style="display: flex">
-                    <lightning-icon
-                        icon-name="standard:visits"
-                    ></lightning-icon>
-                    <p class="slds-var-p-left_medium">
-                        <b>Public Access Tests</b>
-                    </p>
-                </div>
-            </h3>
+    <c-related-object-cmp
+        title="Public Access Tests"
+        icon-name="standard:visits"
+    >
+        <div slot="actions">
             <!-- lightning button for open modal window -->
             <lightning-button
                 label="New"
@@ -23,18 +16,22 @@
                 contact-id={recordId}
                 onchanged={handleChange}
             ></c-pat-form-cmp>
-            <lightning-datatable
-                key-field="Id"
-                columns={columns}
-                data={data}
-                hide-checkbox-column
-                default-sort-direction={defaultSortDirection}
-                sorted-direction={sortDirection}
-                sorted-by={sortedBy}
-                onsort={handleSort}
-                onrowaction={handleRowAction}
-            >
-            </lightning-datatable>
-        </lightning-card>
-    </div>
+        </div>
+        <div slot="list">
+            <template if:true={data}>
+                <lightning-datatable
+                    key-field="Id"
+                    columns={columns}
+                    data={data}
+                    hide-checkbox-column
+                    default-sort-direction={defaultSortDirection}
+                    sorted-direction={sortDirection}
+                    sorted-by={sortedBy}
+                    onsort={handleSort}
+                    onrowaction={handleRowAction}
+                >
+                </lightning-datatable>
+            </template>
+        </div>
+    </c-related-object-cmp>
 </template>

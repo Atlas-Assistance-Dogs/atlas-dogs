@@ -1,14 +1,6 @@
 <template>
-    <div class="slds-box slds-var-p-around_medium">
-        <lightning-card>
-            <h3 slot="title">
-                <div style="display: flex">
-                    <lightning-icon
-                        icon-name="standard:folder"
-                    ></lightning-icon>
-                    <p class="slds-var-p-left_medium"><b>Files</b></p>
-                </div>
-            </h3>
+    <c-related-object-cmp title="Files" icon-name="standard:folder">
+        <div slot="actions">
             <!-- lightning button for upload files modal -->
             <lightning-button
                 label="Upload Files"
@@ -26,6 +18,8 @@
                 file-name={currentFileName}
                 onupdate={handleUpdate}
             ></c-file-update-cmp>
+        </div>
+        <div slot="list">
             <template if:true={fileUploadList}>
                 <lightning-datatable
                     data={fileUploadList}
@@ -36,6 +30,6 @@
                 >
                 </lightning-datatable>
             </template>
-        </lightning-card>
-    </div>
+        </div>
+    </c-related-object-cmp>
 </template>
