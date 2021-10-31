@@ -33,6 +33,11 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
+                <componentName>relatedLogsCmp</componentName>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
                 <componentInstanceProperties>
                     <name>displayOption</name>
                     <value>BOTH</value>
@@ -44,6 +49,11 @@
         <itemInstances>
             <componentInstance>
                 <componentName>relatedFilesCmp</componentName>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentName>relatedPatsCmp</componentName>
             </componentInstance>
         </itemInstances>
         <itemInstances>

@@ -289,6 +289,7 @@ Insert BackgroundCheck__c:
 Insert ContinuingEducationUnit__c:
     sf_object: ContinuingEducationUnit__c
     fields:
+        - AuthorityOther__c
         - Authority__c
         - Comments__c
         - DateCompleted__c
@@ -310,12 +311,13 @@ Insert Dog__c:
         - Birthdate__c
         - Breed__c
         - Gender__c
-        - Notes__c
         - LatestPhysicalExamOutcome__c
         - MicrochipNumber__c
         - Name
+        - Notes__c
         - PhysicalExamDue__c
         - Picture__c
+        - Program__c
         - SpayedNeutered__c
         - Status__c
         - VaccineDueDistemper__c
@@ -354,14 +356,17 @@ Insert Log__c:
         - SupportDetails__c
         - Type__c
     lookups:
-        Client__c:
-            table: Contact
         Dog__c:
             table: Dog__c
-        Facilitator__c:
+Insert ContactLog__c:
+    sf_object: ContactLog__c
+    fields:
+        - Role__c
+    lookups:
+        Contact__c:
             table: Contact
-        Submitter__c:
-            table: Contact
+        Log__c:
+            table: Log__c
 Insert ProgramAssignment__c:
     sf_object: ProgramAssignment__c
     fields:
@@ -372,4 +377,22 @@ Insert ProgramAssignment__c:
         - Status__c
     lookups:
         Contact__c:
+            table: Contact
+Insert PublicAccessTest__c:
+    sf_object: PublicAccessTest__c
+    fields:
+        - AssessorComments__c
+        - DateCompleted__c
+        - Location__c
+        - ReviewComments__c
+        - Status__c
+        - Type__c
+    lookups:
+        Assessor__c:
+            table: Contact
+        Client__c:
+            table: Contact
+        Dog__c:
+            table: Dog__c
+        Handler__c:
             table: Contact

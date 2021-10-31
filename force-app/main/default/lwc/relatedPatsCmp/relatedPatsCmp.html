@@ -1,0 +1,37 @@
+<template>
+    <c-related-object-cmp
+        title="Public Access Tests"
+        icon-name="standard:visits"
+    >
+        <div slot="actions">
+            <!-- lightning button for open modal window -->
+            <lightning-button
+                label="New"
+                title="New"
+                onclick={createPat}
+                slot="actions"
+            >
+            </lightning-button>
+            <c-pat-form-cmp
+                contact-id={recordId}
+                onchanged={handleChange}
+            ></c-pat-form-cmp>
+        </div>
+        <div slot="list">
+            <template if:true={data}>
+                <lightning-datatable
+                    key-field="Id"
+                    columns={columns}
+                    data={data}
+                    hide-checkbox-column
+                    default-sort-direction={defaultSortDirection}
+                    sorted-direction={sortDirection}
+                    sorted-by={sortedBy}
+                    onsort={handleSort}
+                    onrowaction={handleRowAction}
+                >
+                </lightning-datatable>
+            </template>
+        </div>
+    </c-related-object-cmp>
+</template>

@@ -1,14 +1,14 @@
 <template>
     <c-modal-cmp
-        title="Upload File"
-        submitlabel="Confirm"
+        title="Update File Attributes"
+        submitlabel="Submit"
         onsubmit={handleSubmit}
     >
         <lightning-record-edit-form
             slot="body"
             object-api-name="ContentVersion"
             class="slds-scrollable"
-            style="height: 25rem"
+            record-id={recordId}
         >
             <lightning-messages></lightning-messages>
             <lightning-input-field
@@ -19,22 +19,20 @@
                 field-name="Type__c"
                 class="type slds-p-top_medium"
             ></lightning-input-field>
-            <div class="fileUpload slds-p-vertical_medium" style="width: auto">
-                <lightning-file-upload
-                    label="Add Files"
-                    name="fileUploader"
-                    accept={acceptedFormats}
-                    record-id={recordId}
-                    onuploadfinished={handleUploadFinished}
-                    slot="actions"
-                    multiple
-                ></lightning-file-upload>
-            </div>
+            <lightning-button
+                label={currentCv.Title}
+                variant="base"
+                name="view"
+                icon-name="utility:file"
+                icon-position="left"
+                onclick={handleView}
+            >
+            </lightning-button>
             <template if:true={isErrorMessage}>
-                <span class="slds-text-color_error">{errorMessage}</span>
+                <span class="slds-text-color_error">{message}</span>
             </template>
             <template if:false={isErrorMessage}>
-                <span class="slds-text-color_success">{errorMessage}</span>
+                <span class="slds-text-color_success">{message}</span>
             </template>
         </lightning-record-edit-form>
     </c-modal-cmp>

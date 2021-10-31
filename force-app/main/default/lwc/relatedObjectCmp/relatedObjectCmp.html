@@ -1,0 +1,37 @@
+<template>
+    <article class="slds-card slds-card_boundary">
+        <div class="slds-page-header">
+            <div class="slds-media slds-media--center slds-has-flexi-truncate">
+                <div class="slds-page-header__col-title">
+                    <div class="slds-media slds-media_center">
+                        <div class="slds-media__figure">
+                            <lightning-icon
+                                icon-name={iconName}
+                                size="small"
+                            ></lightning-icon>
+                        </div>
+                        <div class="slds-media__body">
+                            <div class="slds-page-header__name">
+                                <div class="slds-page-header__name-title">
+                                    <h1
+                                        class="slds-page-header__title slds-truncate"
+                                    >
+                                        {title}
+                                    </h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-page-header__col-actions actions">
+                    <div class="slds-page-header__controls">
+                        <div class="slds-page-header__control">
+                            <slot name="actions"></slot>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <slot name="list"></slot>
+    </article>
+</template>
