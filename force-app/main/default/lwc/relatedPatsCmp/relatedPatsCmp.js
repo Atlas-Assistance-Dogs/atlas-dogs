@@ -120,7 +120,7 @@ export default class RelatedPatsCmp extends NavigationMixin(LightningElement) {
         if (result.data) {
             this.data = result.data.map((pat) => {
                 var xpat = Object.assign({}, pat);
-                xpat["role"] = this.getRole(pat);
+                xpat["role"] = this.getRoles(pat);
                 xpat["dogName"] = pat.Dog__r.Name;
                 return xpat;
             });
@@ -136,16 +136,18 @@ export default class RelatedPatsCmp extends NavigationMixin(LightningElement) {
         }
     }
 
-    getRole(pat) {
+    getRoles(pat) {
+        let roles = [];
         if (pat.Assessor__c === this.recordId) {
-            return "Assessor";
+            roles.push("Assessor");
         }
         if (pat.Client__c === this.recordId) {
-            return "Client";
+            roles.push("Client");
         }
         if (pat.Handler__c === this.recordId) {
-            return "Handler";
+            roles.push("Handler");
         }
+        return roles.join(";");
     }
 
     createPat(event) {
