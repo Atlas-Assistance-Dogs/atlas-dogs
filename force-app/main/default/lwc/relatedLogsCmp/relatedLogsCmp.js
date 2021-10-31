@@ -116,8 +116,8 @@ export default class RelatedLogsCmp extends LightningElement {
     @wire(getRelatedLogs, { contactId: "$recordId" })
     getLogs(result) {
         this.wiredLogs = result;
-        if (result?.data ?? false) {
-            console.log(result.data);
+        this.data = null;
+        if (result.data) {
             this.data = result.data.map((cl) => {
                 return {
                     role: cl.Role__c,
@@ -132,8 +132,10 @@ export default class RelatedLogsCmp extends LightningElement {
                     id: cl.Id
                 };
             });
+            if (this.data.length === 0) {
+                this.data = null;
+            }
         } else if (result.error) {
-            this.logs = [];
             this.dispatchEvent(
                 new ShowToastEvent({
                     title: "Error!!",
