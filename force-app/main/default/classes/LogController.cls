@@ -34,11 +34,7 @@ public with sharing class LogController {
     }
 
     @AuraEnabled(Cacheable=false)
-    public static void createRelatedLog(
-        id contactId,
-        string roles,
-        Log__c log
-    ) {
+    public static void createLog(Log__c log) {
         try {
             insert log;
         } catch (Exception e) {
@@ -46,35 +42,8 @@ public with sharing class LogController {
         }
     }
 
-    // Get the log from the Log id
-    @AuraEnabled(Cacheable=true)
-    public static Log__c getRelatedLog(id recordId) {
-        try {
-            return [
-                SELECT
-                    Client__c,
-                    Date__c,
-                    PublicAccessHours__c,
-                    OtherHours__c,
-                    Details__c,
-                    RequestSupportFromTeam__c,
-                    Submitter__c,
-                    SupportDetails__c,
-                    Stress__c,
-                    Satisfaction__c,
-                    RequestSupportFromAtlas__c,
-                    TeamFacilitator__c
-                FROM Log__c
-                WHERE Id = :recordId
-                LIMIT 1
-            ];
-        } catch (Exception e) {
-            throw new AuraHandledException(e.getMessage());
-        }
-    }
-
     @AuraEnabled(Cacheable=false)
-    public static void updateRelatedLog(Log__c log) {
+    public static void updateLog(Log__c log) {
         try {
             update log;
         } catch (Exception e) {
@@ -84,7 +53,7 @@ public with sharing class LogController {
 
     // Delete the Log record
     @AuraEnabled(Cacheable=false)
-    public static void deleteRelatedLog(Id recordId) {
+    public static void deleteLog(Id recordId) {
         try {
             delete [SELECT Id FROM Log__c WHERE Id = :recordId];
         } catch (Exception ex) {
