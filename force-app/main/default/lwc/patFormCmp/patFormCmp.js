@@ -108,7 +108,7 @@ export default class PatFormCmp extends LightningElement {
             });
     }
 
-    // Update an existing log and ContactLog
+    // Update an existing PAT
     editPat(record) {
         //record["Id"] = this.recordId;
         updatePat({ record: record })

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Client__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Client the log refers to</description>
+    <externalId>false</externalId>
+    <label>Client</label>
+    <referenceTo>Contact</referenceTo>
+    <relationshipLabel>Logs (Client)</relationshipLabel>
+    <relationshipName>LogsClient</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

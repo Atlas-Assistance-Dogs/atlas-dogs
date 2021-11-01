@@ -124,6 +124,9 @@ export default class RelatedPatsCmp extends NavigationMixin(LightningElement) {
                 xpat["dogName"] = pat.Dog__r.Name;
                 return xpat;
             });
+            if (this.data.length == 0) {
+                this.data = null;
+            }
         } else if (result.error) {
             this.logs = [];
             this.dispatchEvent(
