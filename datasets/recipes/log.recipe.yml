@@ -3,8 +3,13 @@
 
 - object: Log__c
   count: 20
-  nickname: log
   fields:
+      Client__c:
+          random_reference: Contact
+      ClientHours__c:
+          random_number:
+              min: 0
+              max: 100
       ClientStress__c:
           random_choice:
               - Not at all
@@ -17,8 +22,11 @@
               start_date: 2015-01-01
               end_date: today
       Details__c:
-          fake.text:
-              max_nb_chars: 10000
+          fake: paragraph
+      Dog__c:
+          random_reference: Dog__c
+      Handler__c:
+          fake: FirstName
       OtherHours__c:
           random_number:
               min: 0
@@ -49,22 +57,13 @@
               - To some extent
               - Rather much
               - Very much
+      Submitter__c:
+          random_reference: Contact
+      SupportDetails__c:
+          fake: paragraph
+      Facilitator__c:
+          random_reference: Contact
       Type__c:
           random_choice:
               - Client
               - Facilitator
-
-- object: ContactLog__c
-  count: 2
-  fields:
-      Contact__c:
-          random_reference: Contact
-      Log__c:
-          reference: log
-      Role__c:
-          random_choice:
-              - Submitter
-              - Client
-              - Team Facilitator
-              - Submitter;Client
-              - Submitter;Team Facilitator

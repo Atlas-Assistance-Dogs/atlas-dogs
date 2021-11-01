@@ -1,8 +1,7 @@
 import { LightningElement, api, wire } from "lwc";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
-import createRelatedLog from "@salesforce/apex/LogController.createRelatedLog";
-import getRelatedLog from "@salesforce/apex/LogController.getRelatedLog";
-import updateRelatedLog from "@salesforce/apex/LogController.updateRelatedLog";
+import createLog from "@salesforce/apex/LogController.createLog";
+import updateLog from "@salesforce/apex/LogController.updateLog";
 
 import ATLAS_SUPPORT_FIELD from "@salesforce/schema/Log__c.RequestSupportFromAtlas__c";
 import CLIENT_FIELD from "@salesforce/schema/Log__c.Client__c";
@@ -16,7 +15,7 @@ import PAH_FIELD from "@salesforce/schema/Log__c.PublicAccessHours__c";
 import SATISFACTION_FIELD from "@salesforce/schema/Log__c.Satisfaction__c";
 import SUBMITTER_FIELD from "@salesforce/schema/Log__c.Submitter__c";
 import SUPPORT_DETAILS_FIELD from "@salesforce/schema/Log__c.SupportDetails__c";
-import TEAM_FACILITATOR_FIELD from "@salesforce/schema/Log__c.TeamFacilitator__c";
+import TEAM_FACILITATOR_FIELD from "@salesforce/schema/Log__c.Facilitator__c";
 import TEAM_SUPPORT_FIELD from "@salesforce/schema/Log__c.RequestSupportFromTeam__c";
 
 // Import message service features required for subscribing and the message channel
@@ -106,7 +105,7 @@ export default class LogFormCmp extends LightningElement {
                     break;
 
                 case "Team Facilitator":
-                    record["TeamFacilitator__c"] = this.contactId;
+                    record["Facilitator__c"] = this.contactId;
                     break;
 
                 default:
@@ -114,9 +113,9 @@ export default class LogFormCmp extends LightningElement {
             }
         }
         if (this.mode === "create") {
-            this.createLog(record);
+            this.newLog(record);
         } else {
-            this.updateLog(record);
+            this.editLog(record);
         }
     }
 
@@ -124,8 +123,8 @@ export default class LogFormCmp extends LightningElement {
     messageContext;
 
     // Create a new log
-    createLog(record) {
-        createRelatedLog({
+    newLog(record) {
+        createLog({
             log: record
         })
             .then(() => {
@@ -144,9 +143,9 @@ export default class LogFormCmp extends LightningElement {
     }
 
     // Update an existing log and ContactLog
-    updateLog(record) {
+    editLog(record) {
         record["Id"] = this.recordId;
-        updateRelatedLog({
+        updateLog({
             log: record
         })
             .then(() => {

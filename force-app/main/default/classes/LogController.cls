@@ -20,13 +20,13 @@ public with sharing class LogController {
                     Stress__c,
                     Submitter__c,
                     SupportDetails__c,
-                    TeamFacilitator__c,
+                    Facilitator__c,
                     Type__c
                 FROM Log__c
                 WHERE
                     Client__c = :contactId
                     OR Submitter__c = :contactId
-                    OR TeamFacilitator__c = :contactId
+                    OR Facilitator__c = :contactId
             ];
         } catch (Exception e) {
             throw new AuraHandledException(e.getMessage());

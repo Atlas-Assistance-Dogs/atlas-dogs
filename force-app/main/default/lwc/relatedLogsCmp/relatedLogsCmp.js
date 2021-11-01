@@ -1,7 +1,7 @@
 import { LightningElement, api, wire } from "lwc";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
 import getRelatedLogs from "@salesforce/apex/LogController.getRelatedLogs";
-import deleteRelatedLog from "@salesforce/apex/LogController.deleteRelatedLog";
+import deleteRelatedLog from "@salesforce/apex/LogController.deleteLog";
 import { refreshApex } from "@salesforce/apex";
 
 import ATLAS_SUPPORT_FIELD from "@salesforce/schema/Log__c.RequestSupportFromAtlas__c";
