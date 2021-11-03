@@ -83,7 +83,7 @@ export default class RelatedBackgroundChecksCmp extends NavigationMixin(
         const row = event.detail.row;
         switch (actionName) {
             case "delete":
-                this.deleteCheck(row.id);
+                this.deleteCheck(row.recordId);
                 break;
             case "edit":
                 const payload = { mode: "edit", recordId: row.recordId };
