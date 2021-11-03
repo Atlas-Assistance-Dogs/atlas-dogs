@@ -86,7 +86,7 @@ export default class RelatedBackgroundChecksCmp extends NavigationMixin(
                 this.deleteCheck(row.id);
                 break;
             case "edit":
-                const payload = { mode: "edit", recordId: row.Id };
+                const payload = { mode: "edit", recordId: row.recordId };
                 publish(this.messageContext, backgroundCheckForm, payload);
                 break;
             case "view":
@@ -111,9 +111,9 @@ export default class RelatedBackgroundChecksCmp extends NavigationMixin(
     @wire(getRelatedChecks, { contactId: "$recordId" })
     getChecks(result) {
         this.wiredChecks = result;
-        //this.data = null;
+        this.data = null;
         if (result.data) {
-            this.data = data;
+            this.data = result.data;
             if (this.data.length === 0) {
                 this.data = null;
             }

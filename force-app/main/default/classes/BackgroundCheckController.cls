@@ -13,11 +13,12 @@ public with sharing class BackgroundCheckController {
             for (BackgroundCheck__c bgc : checks) {
                 BackgroundCheck outCheck = new BackgroundCheck();
                 outCheck.recordId = bgc.Id;
+                outCheck.completedDate = bgc.Date__c;
                 outCheck.result = bgc.Result__c;
                 List<ContentVersion> files = FileController.getRelatedFiles(
                     bgc.Id
                 );
-                if (!files.isEmpty()) {
+                if (files != null && !files.isEmpty()) {
                     outCheck.documentId = files[0].ContentDocumentId;
                     outCheck.fileName = files[0].Title;
                 }
@@ -45,7 +46,18 @@ public with sharing class BackgroundCheckController {
     ) {
         try {
             insert check;
-            FileController.relateFile(documentId, check.Id);
+            if (documentId != null) {
+                FileController.relateFile(documentId, check.Id);
+            }
+        } catch (Exception e) {
+            throw new AuraHandledException(e.getMessage());
+        }
+    }
+
+    @AuraEnabled
+    public static void updateBackgroundCheck(BackgroundCheck__c check) {
+        try {
+            update check;
         } catch (Exception e) {
             throw new AuraHandledException(e.getMessage());
         }
