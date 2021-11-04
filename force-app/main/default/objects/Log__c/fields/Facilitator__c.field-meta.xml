@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Contact__c</fullName>
+    <fullName>Facilitator__c</fullName>
     <deleteConstraint>SetNull</deleteConstraint>
-    <description>Contact associated with a log</description>
+    <description>Team Facilitator for a log</description>
     <externalId>false</externalId>
-    <label>Contact</label>
+    <label>Team Facilitator</label>
     <referenceTo>Contact</referenceTo>
-    <relationshipLabel>Contact Logs</relationshipLabel>
-    <relationshipName>Contact_Logs</relationshipName>
+    <relationshipLabel>Logs (Team Facilitator)</relationshipLabel>
+    <relationshipName>LogsTeamFacilitator</relationshipName>
     <required>false</required>
     <trackTrending>false</trackTrending>
     <type>Lookup</type>

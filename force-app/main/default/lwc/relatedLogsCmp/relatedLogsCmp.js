@@ -1,8 +1,16 @@
 import { LightningElement, api, wire } from "lwc";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
 import getRelatedLogs from "@salesforce/apex/LogController.getRelatedLogs";
-import deleteRelatedLog from "@salesforce/apex/LogController.deleteRelatedLog";
+import deleteRelatedLog from "@salesforce/apex/LogController.deleteLog";
 import { refreshApex } from "@salesforce/apex";
+
+import ATLAS_SUPPORT_FIELD from "@salesforce/schema/Log__c.RequestSupportFromAtlas__c";
+import STRESS_FIELD from "@salesforce/schema/Log__c.Stress__c";
+import DATE_FIELD from "@salesforce/schema/Log__c.Date__c";
+import OTHER_HOURS_FIELD from "@salesforce/schema/Log__c.OtherHours__c";
+import PAH_FIELD from "@salesforce/schema/Log__c.PublicAccessHours__c";
+import SATISFACTION_FIELD from "@salesforce/schema/Log__c.Satisfaction__c";
+import TEAM_SUPPORT_FIELD from "@salesforce/schema/Log__c.RequestSupportFromTeam__c";
 
 // Import message service features required for publishing and the message channel
 import { publish, MessageContext } from "lightning/messageService";
@@ -16,33 +24,33 @@ const actions = [
 const COLS = [
     {
         label: "Date",
-        fieldName: "date",
+        fieldName: DATE_FIELD.fieldApiName,
         type: "date",
         sortable: true
     },
-    { label: "Role", fieldName: "role", sortable: true, initialWidth: 140 },
+    { label: "Role", fieldName: "roles", sortable: true, initialWidth: 140 },
     {
         label: "PA Hours",
-        fieldName: "publicAccessHours",
+        fieldName: PAH_FIELD.fieldApiName,
         type: "number",
         editable: "true"
     },
     {
         label: "Other Hours",
-        fieldName: "otherHours",
+        fieldName: OTHER_HOURS_FIELD.fieldApiName,
         type: "number",
         editable: "true"
     },
     {
         label: "Team Support?",
-        fieldName: "requestSupportFromTeam",
+        fieldName: TEAM_SUPPORT_FIELD.fieldApiName,
         type: "boolean"
     },
-    { label: "Stress", fieldName: "stress" },
-    { label: "Satisfaction", fieldName: "satisfaction" },
+    { label: "Stress", fieldName: STRESS_FIELD.fieldApiName },
+    { label: "Satisfaction", fieldName: SATISFACTION_FIELD.fieldApiName },
     {
         label: "Atlas Support?",
-        fieldName: "requestSupportFromAtlas",
+        fieldName: ATLAS_SUPPORT_FIELD.fieldApiName,
         type: "boolean"
     },
     { type: "action", typeAttributes: { rowActions: actions } }
@@ -51,19 +59,7 @@ const COLS = [
 export default class RelatedLogsCmp extends LightningElement {
     @api recordId;
     columns = COLS;
-    data = [
-        {
-            role: "Client",
-            date: new Date(2015, 3, 17),
-            publicAccessHours: 10,
-            otherHours: 2.5,
-            requestSupportFromTeam: true,
-            stress: "Some",
-            satisfaction: "Lots",
-            requestSupportFromAtlas: false,
-            id: "0031700001HvS9jAAF"
-        }
-    ];
+    data = [];
 
     @wire(MessageContext)
     messageContext;
@@ -107,7 +103,7 @@ export default class RelatedLogsCmp extends LightningElement {
                 this.deleteLog(row.id);
                 break;
             case "edit":
-                const payload = { mode: "edit", recordId: row.id };
+                const payload = { mode: "edit", recordId: row.Id };
                 publish(this.messageContext, logForm, payload);
                 break;
         }
@@ -118,19 +114,10 @@ export default class RelatedLogsCmp extends LightningElement {
         this.wiredLogs = result;
         this.data = null;
         if (result.data) {
-            this.data = result.data.map((cl) => {
-                return {
-                    role: cl.Role__c,
-                    date: cl.Log__r.Date__c,
-                    publicAccessHours: cl.Log__r.PublicAccessHours__c,
-                    otherHours: cl.Log__r.OtherHours__c,
-                    requestSupportFromTeam: cl.Log__r.RequestSupportFromTeam__c,
-                    stress: cl.Log__r.Stress__c,
-                    satisfaction: cl.Log__r.Satisfaction__c,
-                    requestSupportFromAtlas:
-                        cl.Log__r.RequestSupportFromAtlas__c,
-                    id: cl.Id
-                };
+            this.data = result.data.map((log) => {
+                var newLog = Object.assign({}, log);
+                newLog["roles"] = this.getRoles(log);
+                return newLog;
             });
             if (this.data.length === 0) {
                 this.data = null;
@@ -144,6 +131,20 @@ export default class RelatedLogsCmp extends LightningElement {
                 })
             );
         }
+    }
+
+    getRoles(log) {
+        let roles = [];
+        if (log.Client__c === this.recordId) {
+            roles.push("Client");
+        }
+        if (log.Submitter__c === this.recordId) {
+            roles.push("Submitter");
+        }
+        if (log.TeamFacilitator__c === this.recordId) {
+            roles.push("Team Facilitator");
+        }
+        return roles.join(";");
     }
 
     createLog(event) {

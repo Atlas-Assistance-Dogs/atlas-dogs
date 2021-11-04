@@ -1,21 +1,32 @@
 public with sharing class LogController {
     @AuraEnabled(Cacheable=true)
-    public static List<ContactLog__c> getRelatedLogs(id contactId) {
+    public static List<Log__c> getRelatedLogs(id contactId) {
         try {
             return [
                 SELECT
-                    Role__c,
-                    Log__r.Date__c,
-                    Log__r.PublicAccessHours__c,
-                    Log__r.OtherHours__c,
-                    Log__r.Details__c,
-                    Log__r.RequestSupportFromTeam__c,
-                    Log__r.SupportDetails__c,
-                    Log__r.Stress__c,
-                    Log__r.Satisfaction__c,
-                    Log__r.RequestSupportFromAtlas__c
-                FROM ContactLog__c
-                WHERE Contact__c = :contactId
+                    Client__c,
+                    ClientHours__c,
+                    ClientStress__c,
+                    Date__c,
+                    Details__c,
+                    Dog__c,
+                    Handler__c,
+                    OtherHours__c,
+                    PublicAccessHours__c,
+                    RequestSupportFromAtlas__c,
+                    RequestSupportFromTeam__c,
+                    Satisfaction__c,
+                    SessionType__c,
+                    Stress__c,
+                    Submitter__c,
+                    SupportDetails__c,
+                    Facilitator__c,
+                    Type__c
+                FROM Log__c
+                WHERE
+                    Client__c = :contactId
+                    OR Submitter__c = :contactId
+                    OR Facilitator__c = :contactId
             ];
         } catch (Exception e) {
             throw new AuraHandledException(e.getMessage());
@@ -23,73 +34,28 @@ public with sharing class LogController {
     }
 
     @AuraEnabled(Cacheable=false)
-    public static void createRelatedLog(
-        id contactId,
-        string roles,
-        Log__c log
-    ) {
+    public static void createLog(Log__c log) {
         try {
             insert log;
-            System.debug(roles);
-            ContactLog__c contactLog = new ContactLog__c(
-                Role__c = roles,
-                Contact__c = contactId,
-                Log__c = log.Id
-            );
-            insert contactLog;
-            System.debug(contactLog);
-        } catch (Exception e) {
-            throw new AuraHandledException(e.getMessage());
-        }
-    }
-
-    // Get the contact log and log from the ContactLog id
-    @AuraEnabled(Cacheable=true)
-    public static ContactLog__c getRelatedLog(id recordId) {
-        try {
-            return [
-                SELECT Role__c, Log__c
-                FROM ContactLog__c
-                WHERE Id = :recordId
-                LIMIT 1
-            ];
         } catch (Exception e) {
             throw new AuraHandledException(e.getMessage());
         }
     }
 
     @AuraEnabled(Cacheable=false)
-    public static void updateRelatedLog(ContactLog__c contactLog, Log__c log) {
+    public static void updateLog(Log__c log) {
         try {
             update log;
-            update contactLog;
         } catch (Exception e) {
             throw new AuraHandledException(e.getMessage());
         }
     }
 
-    // Delete the ContactLog object and the associated Log record if there are no other
-    // ContactLogs for it
+    // Delete the Log record
     @AuraEnabled(Cacheable=false)
-    public static void deleteRelatedLog(Id recordId) {
+    public static void deleteLog(Id recordId) {
         try {
-            ContactLog__c contactLog = [
-                SELECT Id, Log__c
-                FROM ContactLog__c
-                WHERE Id = :recordid
-            ];
-            Id logId = contactLog.Log__c;
-            delete contactLog;
-
-            List<ContactLog__c> others = [
-                SELECT Id
-                FROM ContactLog__c
-                WHERE Log__c = :logId
-            ];
-            if (others.isEmpty()) {
-                // delete the log record also
-                delete [SELECT Id FROM Log__c WHERE Id = :logId];
-            }
+            delete [SELECT Id FROM Log__c WHERE Id = :recordId];
         } catch (Exception ex) {
             throw new AuraHandledException(ex.getMessage());
         }

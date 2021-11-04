@@ -1,21 +1,22 @@
 import { LightningElement, api, wire } from "lwc";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
-import createRelatedLog from "@salesforce/apex/LogController.createRelatedLog";
-import getRelatedLog from "@salesforce/apex/LogController.getRelatedLog";
-import updateRelatedLog from "@salesforce/apex/LogController.updateRelatedLog";
+import createLog from "@salesforce/apex/LogController.createLog";
+import updateLog from "@salesforce/apex/LogController.updateLog";
 
-import ROLE_FIELD from "@salesforce/schema/ContactLog__c.Role__c";
+import ATLAS_SUPPORT_FIELD from "@salesforce/schema/Log__c.RequestSupportFromAtlas__c";
+import CLIENT_FIELD from "@salesforce/schema/Log__c.Client__c";
+import CLIENT_STRESS_FIELD from "@salesforce/schema/Log__c.ClientStress__c";
 import DATE_FIELD from "@salesforce/schema/Log__c.Date__c";
+import DETAILS_FIELD from "@salesforce/schema/Log__c.Details__c";
 import DOG_FIELD from "@salesforce/schema/Log__c.Dog__c";
-import PAH_FIELD from "@salesforce/schema/Log__c.PublicAccessHours__c";
 import HANDLER_FIELD from "@salesforce/schema/Log__c.Handler__c";
 import OTHER_HOURS_FIELD from "@salesforce/schema/Log__c.OtherHours__c";
-import DETAILS_FIELD from "@salesforce/schema/Log__c.Details__c";
-import TEAM_SUPPORT_FIELD from "@salesforce/schema/Log__c.RequestSupportFromTeam__c";
-import SUPPORT_DETAILS_FIELD from "@salesforce/schema/Log__c.SupportDetails__c";
-import CLIENT_STRESS_FIELD from "@salesforce/schema/Log__c.ClientStress__c";
+import PAH_FIELD from "@salesforce/schema/Log__c.PublicAccessHours__c";
 import SATISFACTION_FIELD from "@salesforce/schema/Log__c.Satisfaction__c";
-import ATLAS_SUPPORT_FIELD from "@salesforce/schema/Log__c.RequestSupportFromAtlas__c";
+import SUBMITTER_FIELD from "@salesforce/schema/Log__c.Submitter__c";
+import SUPPORT_DETAILS_FIELD from "@salesforce/schema/Log__c.SupportDetails__c";
+import TEAM_FACILITATOR_FIELD from "@salesforce/schema/Log__c.Facilitator__c";
+import TEAM_SUPPORT_FIELD from "@salesforce/schema/Log__c.RequestSupportFromTeam__c";
 
 // Import message service features required for subscribing and the message channel
 import {
@@ -28,10 +29,14 @@ import logForm from "@salesforce/messageChannel/LogForm__c";
 
 export default class LogFormCmp extends LightningElement {
     @api contactId;
+    recordId;
     roles = [];
     title = "Create Log";
     fields = {
-        role: ROLE_FIELD,
+        role: "roles",
+        client: CLIENT_FIELD,
+        submitter: SUBMITTER_FIELD,
+        facilitator: TEAM_FACILITATOR_FIELD,
         date: DATE_FIELD,
         dog: DOG_FIELD,
         publicAccessHours: PAH_FIELD,
@@ -51,6 +56,18 @@ export default class LogFormCmp extends LightningElement {
             { label: "Client", value: "Client" },
             { label: "Team Facilitator", value: "Team Facilitator" }
         ];
+    }
+
+    get isClient() {
+        return this.roles.includes("Client");
+    }
+
+    get isSubmitter() {
+        return this.roles.includes("Submitter");
+    }
+
+    get isFacilitator() {
+        return this.roles.includes("Team Facilitator");
     }
 
     @api
@@ -73,15 +90,32 @@ export default class LogFormCmp extends LightningElement {
         let fields = [
             ...this.template.querySelectorAll("lightning-input-field")
         ];
-        let record = fields.reduce(
+        var record = fields.reduce(
             (a, x) => ({ ...a, [x.fieldName]: x.value }),
             {}
         );
-        let roles = this.roles.join(";");
+        for (var idx = 0; idx < this.roles.length; idx++) {
+            switch (this.roles[idx]) {
+                case "Client":
+                    record["Client__c"] = this.contactId;
+                    break;
+
+                case "Submitter":
+                    record["Submitter__c"] = this.contactId;
+                    break;
+
+                case "Team Facilitator":
+                    record["Facilitator__c"] = this.contactId;
+                    break;
+
+                default:
+                    break;
+            }
+        }
         if (this.mode === "create") {
-            this.createLog(roles, record);
+            this.newLog(record);
         } else {
-            this.updateLog(roles, record);
+            this.editLog(record);
         }
     }
 
@@ -89,14 +123,12 @@ export default class LogFormCmp extends LightningElement {
     messageContext;
 
     // Create a new log
-    createLog(roles, record) {
-        createRelatedLog({
-            contactId: this.contactId,
-            roles: roles,
+    newLog(record) {
+        createLog({
             log: record
         })
             .then(() => {
-                this.dispatchEvent(new CustomEvent("logchanged"));
+                this.dispatchEvent(new CustomEvent("changed"));
                 this.closeModal();
             })
             .catch((error) => {
@@ -111,14 +143,13 @@ export default class LogFormCmp extends LightningElement {
     }
 
     // Update an existing log and ContactLog
-    updateLog(roles, record) {
-        record["Id"] = this.logRecordId;
-        updateRelatedLog({
-            contactLog: { Id: this.recordId, Role__c: roles },
+    editLog(record) {
+        record["Id"] = this.recordId;
+        updateLog({
             log: record
         })
             .then(() => {
-                this.dispatchEvent(new CustomEvent("logchanged"));
+                this.dispatchEvent(new CustomEvent("changed"));
                 this.closeModal();
             })
             .catch((error) => {
@@ -154,22 +185,6 @@ export default class LogFormCmp extends LightningElement {
         this.recordId = message.recordId;
         this.mode = message.mode;
         this.title = this.mode[0].toUpperCase() + this.mode.slice(1) + " Log";
-        if (message.recordId) {
-            getRelatedLog({ recordId: this.recordId })
-                .then((data) => {
-                    this.roles = data.Role__c.split(";");
-                    this.logRecordId = data.Log__c;
-                })
-                .catch((error) => {
-                    this.dispatchEvent(
-                        new ShowToastEvent({
-                            title: "Error!!",
-                            message: error.body.message,
-                            variant: "error"
-                        })
-                    );
-                });
-        }
         this.openModal();
     }
 

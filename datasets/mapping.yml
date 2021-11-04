@@ -356,17 +356,14 @@ Insert Log__c:
         - SupportDetails__c
         - Type__c
     lookups:
+        Client__c:
+            table: Contact
         Dog__c:
             table: Dog__c
-Insert ContactLog__c:
-    sf_object: ContactLog__c
-    fields:
-        - Role__c
-    lookups:
-        Contact__c:
+        Facilitator__c:
             table: Contact
-        Log__c:
-            table: Log__c
+        Submitter__c:
+            table: Contact
 Insert ProgramAssignment__c:
     sf_object: ProgramAssignment__c
     fields:
