@@ -6,6 +6,11 @@ export default class NewLeadCmp extends NavigationMixin(LightningElement) {
     showSourceOther = false;
     showPnounOther = false;
 
+    // Standard lifecycle hooks used run when loaded
+    renderedCallback() {
+        this.template.querySelector("c-modal-cmp").openModal();
+    }
+
     handlePnounChange(event) {
         if (event.detail.value === "specify") {
             this.showPnounOther = true;
@@ -45,8 +50,6 @@ export default class NewLeadCmp extends NavigationMixin(LightningElement) {
     }
 
     handleSuccess(event) {
-        this.template.querySelector("c-modal-cmp").closeModal();
-
         this[NavigationMixin.Navigate]({
             type: "standard__recordPage",
             attributes: {
