@@ -163,4 +163,21 @@ public inherited sharing class FileController {
             throw new AuraHandledException(e.getMessage());
         }
     }
+
+    @AuraEnabled
+    public static void relateFiles(List<Id> documentIds, Id recordId) {
+        try {
+            List<ContentDocumentLink> links = new List<ContentDocumentLink>();
+            for (Id documentId : documentIds) {
+                ContentDocumentLink link = new ContentDocumentLink(
+                    ContentDocumentId = documentId,
+                    LinkedEntityId = recordId
+                );
+                links.add(link);
+            }
+            insert links;
+        } catch (Exception e) {
+            throw new AuraHandledException(e.getMessage());
+        }
+    }
 }

@@ -121,7 +121,7 @@ export default class RelatedPatsCmp extends NavigationMixin(LightningElement) {
             this.data = result.data.map((pat) => {
                 var xpat = Object.assign({}, pat);
                 xpat["role"] = this.getRoles(pat);
-                xpat["dogName"] = pat.Dog__r.Name;
+                xpat["dogName"] = pat.Dog__r?.Name ?? "";
                 return xpat;
             });
             if (this.data.length == 0) {

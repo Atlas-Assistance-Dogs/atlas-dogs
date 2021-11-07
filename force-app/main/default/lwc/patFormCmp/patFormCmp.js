@@ -1,9 +1,10 @@
 import { LightningElement, api, wire } from "lwc";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
+import { NavigationMixin } from "lightning/navigation";
+import getRelatedFiles from "@salesforce/apex/FileController.getRelatedFiles";
 import createPat from "@salesforce/apex/PublicAccessTestController.createPat";
 import updatePat from "@salesforce/apex/PublicAccessTestController.updatePat";
-
-import PAT_OBJECT from "@salesforce/schema/PublicAccessTest__c";
+import { refreshApex } from "@salesforce/apex";
 
 import ASSESSOR_FIELD from "@salesforce/schema/PublicAccessTest__c.Assessor__c";
 import ASSESSOR_COMMENTS_FIELD from "@salesforce/schema/PublicAccessTest__c.AssessorComments__c";
@@ -25,12 +26,28 @@ import {
 } from "lightning/messageService";
 import patForm from "@salesforce/messageChannel/PatForm__c";
 
-export default class PatFormCmp extends LightningElement {
+const COLS = [
+    {
+        label: "Files",
+        type: "button",
+        typeAttributes: {
+            name: "view",
+            label: { fieldName: "name" },
+            variant: "base",
+            iconName: "utility:file",
+            iconPosition: "left"
+        }
+    }
+];
+
+export default class PatFormCmp extends NavigationMixin(LightningElement) {
     @api contactId;
     recordId;
-    roles = "Client";
+    role = "Client";
     title = "Public Access Test Record";
     mode = "create";
+    relatedFiles = [];
+    wiredFilesList;
     object = ASSESSOR_FIELD.objectApiName;
     fields = {
         assessor: ASSESSOR_FIELD,
@@ -44,6 +61,22 @@ export default class PatFormCmp extends LightningElement {
         status: STATUS_FIELD,
         type: TYPE_FIELD
     };
+
+    columns = COLS;
+    get acceptedFormats() {
+        return [
+            ".pdf",
+            ".png",
+            ".jpg",
+            ".jpeg",
+            ".doc",
+            ".docx",
+            ".txt",
+            ".xlsx",
+            ".xls",
+            ".zip"
+        ];
+    }
 
     get options() {
         return [
@@ -63,7 +96,7 @@ export default class PatFormCmp extends LightningElement {
     }
 
     handleChange(event) {
-        this.roles = event.detail.value;
+        this.role = event.detail.value;
     }
 
     handleClose() {}
@@ -73,10 +106,23 @@ export default class PatFormCmp extends LightningElement {
         let fields = [
             ...this.template.querySelectorAll("lightning-input-field")
         ];
-        let record = fields.reduce(
+        var record = fields.reduce(
             (a, x) => ({ ...a, [x.fieldName]: x.value }),
             {}
         );
+        switch (this.role) {
+            case "Client":
+                record.Client__c = this.contactId;
+                break;
+
+            case "Assessor":
+                record.Assessor__c = this.contactId;
+                break;
+
+            case "Handler":
+                record.Handler__c = this.contactId;
+                break;
+        }
         record.Id = this.recordId;
         if (this.mode === "create") {
             this.createNewPat(record);
@@ -91,7 +137,8 @@ export default class PatFormCmp extends LightningElement {
     // Create a new log
     createNewPat(record) {
         createPat({
-            record: record
+            record: record,
+            documentIds: this.relatedFiles.map((file) => file.documentId)
         })
             .then(() => {
                 this.dispatchEvent(new CustomEvent("changed"));
@@ -110,7 +157,6 @@ export default class PatFormCmp extends LightningElement {
 
     // Update an existing PAT
     editPat(record) {
-        //record["Id"] = this.recordId;
         updatePat({ record: record })
             .then(() => {
                 this.dispatchEvent(new CustomEvent("changed"));
@@ -147,7 +193,6 @@ export default class PatFormCmp extends LightningElement {
     // Handler for message received by component
     handleMessage(message) {
         this.recordId = message.recordId;
-        //this.title = this.mode[0].toUpperCase() + this.mode.slice(1) + " Log";
         this.mode = message.recordId ? "edit" : "create";
         this.openModal();
     }
@@ -159,5 +204,60 @@ export default class PatFormCmp extends LightningElement {
 
     disconnectedCallback() {
         this.unsubscribeToMessageChannel();
+    }
+
+    @wire(getRelatedFiles, { recordId: "$recordId" }) filesLst(result) {
+        this.wiredFilesList = result;
+        if (result.data) {
+            this.relatedFiles = result.data.map((data) => {
+                return {
+                    name: data.Title,
+                    documentId: data.ContentDocumentId
+                };
+            });
+        } else if (result.error) {
+            this.relatedFiles = [];
+            this.dispatchEvent(
+                new ShowToastEvent({
+                    title: "Error!!",
+                    message: result.error.message,
+                    variant: "error"
+                })
+            );
+        }
+    }
+
+    handleUpdate() {
+        refreshApex(this.wiredFilesList);
+    }
+
+    handleUploadFinished(event) {
+        this.isErrorMessage = false;
+        this.message = "File Uploaded Successfully";
+        this.relatedFiles = event.detail.files;
+    }
+
+    handleRowAction(event) {
+        const actionName = event.detail.action.name;
+        const row = event.detail.row;
+        switch (actionName) {
+            case "view":
+                this.navigateToFiles(row);
+                break;
+            default:
+        }
+    }
+
+    navigateToFiles(currentRow) {
+        let currentRecordID = currentRow.documentId;
+        this[NavigationMixin.Navigate]({
+            type: "standard__namedPage",
+            attributes: {
+                pageName: "filePreview"
+            },
+            state: {
+                selectedRecordId: currentRecordID
+            }
+        });
     }
 }

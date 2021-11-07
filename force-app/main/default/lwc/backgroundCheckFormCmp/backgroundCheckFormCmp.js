@@ -139,7 +139,7 @@ export default class BackgroundCheckFormCmp extends NavigationMixin(
         updateBackgroundCheck({
             check: record
         })
-            .then((data) => {
+            .then(() => {
                 this.dispatchEvent(new CustomEvent("changed"));
                 this.closeModal();
             })

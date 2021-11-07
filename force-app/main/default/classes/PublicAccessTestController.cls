@@ -36,6 +36,7 @@ public with sharing class PublicAccessTestController {
                     Client__c,
                     DateCompleted__c,
                     Dog__c,
+                    Dog__r.Name,
                     Handler__c,
                     Location__c,
                     ReviewComments__c,
@@ -51,9 +52,15 @@ public with sharing class PublicAccessTestController {
     }
 
     @AuraEnabled
-    public static void createPat(PublicAccessTest__c record) {
+    public static void createPat(
+        PublicAccessTest__c record,
+        List<Id> documentIds
+    ) {
         try {
             insert record;
+            if (documentIds != null) {
+                FileController.relateFiles(documentIds, record.Id);
+            }
         } catch (Exception e) {
             throw new AuraHandledException(e.getMessage());
         }
