@@ -46,7 +46,7 @@ export default class PatFormCmp extends NavigationMixin(LightningElement) {
     role = "Client";
     title = "Public Access Test Record";
     mode = "create";
-    relatedFiles = [];
+    relatedFiles = null;
     wiredFilesList;
     object = ASSESSOR_FIELD.objectApiName;
     fields = {
@@ -84,6 +84,18 @@ export default class PatFormCmp extends NavigationMixin(LightningElement) {
             { label: "Client", value: "Client" },
             { label: "Handler", value: "Handler" }
         ];
+    }
+
+    get isAssessor() {
+        return this.role === "Assessor";
+    }
+
+    get isClient() {
+        return this.role === "Client";
+    }
+
+    get isHandler() {
+        return this.role === "Handler";
     }
 
     @api
@@ -138,7 +150,7 @@ export default class PatFormCmp extends NavigationMixin(LightningElement) {
     createNewPat(record) {
         createPat({
             record: record,
-            documentIds: this.relatedFiles.map((file) => file.documentId)
+            documentIds: this.relatedFiles?.map((file) => file.documentId)
         })
             .then(() => {
                 this.dispatchEvent(new CustomEvent("changed"));
@@ -193,7 +205,13 @@ export default class PatFormCmp extends NavigationMixin(LightningElement) {
     // Handler for message received by component
     handleMessage(message) {
         this.recordId = message.recordId;
+        if (this.recordId) {
+            refreshApex(this.wiredFilesList);
+        } else {
+            this.relatedFiles = null;
+        }
         this.mode = message.recordId ? "edit" : "create";
+        this.role = message.role;
         this.openModal();
     }
 
@@ -208,6 +226,7 @@ export default class PatFormCmp extends NavigationMixin(LightningElement) {
 
     @wire(getRelatedFiles, { recordId: "$recordId" }) filesLst(result) {
         this.wiredFilesList = result;
+        this.relatedFiles = null;
         if (result.data) {
             this.relatedFiles = result.data.map((data) => {
                 return {
@@ -216,7 +235,7 @@ export default class PatFormCmp extends NavigationMixin(LightningElement) {
                 };
             });
         } else if (result.error) {
-            this.relatedFiles = [];
+            this.relatedFiles = null;
             this.dispatchEvent(
                 new ShowToastEvent({
                     title: "Error!!",

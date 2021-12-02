@@ -13,4 +13,8 @@
         <fieldName>mode</fieldName>
         <description>Mode is Create, Update, or View</description>
     </lightningMessageFields>
+    <lightningMessageFields>
+        <fieldName>role</fieldName>
+        <description>Role the contact has for the record.</description>
+    </lightningMessageFields>
 </LightningMessageChannel>

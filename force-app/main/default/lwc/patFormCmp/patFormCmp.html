@@ -10,7 +10,7 @@
                 name="role"
                 label="Role"
                 options={options}
-                value={roles}
+                value={role}
                 onchange={handleChange}
             >
             </lightning-radio-group>
@@ -34,19 +34,19 @@
                     field-name={fields.location}
                     class="category slds-p-bottom_medium"
                 ></lightning-input-field>
-                <template if:false={submitter}>
+                <template if:false={isAssessor}>
                     <lightning-input-field
                         field-name={fields.assessor}
                         class="category slds-p-bottom_medium"
                     ></lightning-input-field>
                 </template>
-                <template if:false={client}>
+                <template if:false={isClient}>
                     <lightning-input-field
                         field-name={fields.client}
                         class="category slds-p-bottom_medium"
                     ></lightning-input-field>
                 </template>
-                <template if:false={handler}>
+                <template if:false={isHandler}>
                     <lightning-input-field
                         field-name={fields.handler}
                         class="category slds-p-bottom_medium"
