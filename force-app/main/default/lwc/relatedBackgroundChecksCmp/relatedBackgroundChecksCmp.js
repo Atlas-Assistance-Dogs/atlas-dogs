@@ -16,7 +16,7 @@ const actions = [
 
 const COLS = [
     {
-        label: "Date",
+        label: "Completed Date",
         fieldName: "completedDate",
         type: "date",
         sortable: true
