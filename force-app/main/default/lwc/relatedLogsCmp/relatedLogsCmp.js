@@ -103,7 +103,11 @@ export default class RelatedLogsCmp extends LightningElement {
                 this.deleteLog(row.id);
                 break;
             case "edit":
-                const payload = { mode: "edit", recordId: row.Id };
+                const payload = {
+                    mode: "edit",
+                    recordId: row.Id,
+                    roles: row.roles
+                };
                 publish(this.messageContext, logForm, payload);
                 break;
         }
