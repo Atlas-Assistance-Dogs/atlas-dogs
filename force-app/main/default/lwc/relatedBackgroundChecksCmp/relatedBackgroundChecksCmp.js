@@ -21,7 +21,7 @@ const COLS = [
         type: "date",
         sortable: true
     },
-    { label: "Result", fieldName: "result", sortable: true },
+    { label: "Status", fieldName: "status", sortable: true },
     {
         label: "File",
         type: "button",

@@ -62,7 +62,7 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>BackgroundCheck__c.Result__c</field>
+        <field>BackgroundCheck__c.Status__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>

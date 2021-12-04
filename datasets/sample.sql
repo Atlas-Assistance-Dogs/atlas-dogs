@@ -206,16 +206,16 @@ CREATE TABLE "BackgroundCheck__c" (
 	id INTEGER NOT NULL, 
 	"Date__c" VARCHAR(255), 
 	"Notes__c" VARCHAR(255), 
-	"Result__c" VARCHAR(255), 
+	"Status__c" VARCHAR(255), 
 	"Contact__c" VARCHAR(255), 
 	PRIMARY KEY (id)
 );
 INSERT INTO "BackgroundCheck__c" VALUES(1,'2003-03-24','Both three agree drive eight foot. Sense officer investment into.','Pass','6');
-INSERT INTO "BackgroundCheck__c" VALUES(2,'2010-12-20','Sure measure whole feeling situation next quite. Over house point pick by your recognize. Firm they clear activity final discussion. Hospital base work finish moment which.','None','33');
+INSERT INTO "BackgroundCheck__c" VALUES(2,'2010-12-20','Sure measure whole feeling situation next quite. Over house point pick by your recognize. Firm they clear activity final discussion. Hospital base work finish moment which.','Pending','33');
 INSERT INTO "BackgroundCheck__c" VALUES(3,'2018-11-25','Technology how which already your there. Here who official drop. Realize interview debate sell voice see.','Fail','72');
 INSERT INTO "BackgroundCheck__c" VALUES(4,'2008-02-16','Time however charge crime leader child. Early pay receive remain.','Pass','28');
 INSERT INTO "BackgroundCheck__c" VALUES(5,'2000-08-14','Skill structure woman eye discuss. Environmental able write discuss day. Draw my people share. He indicate place.','Fail','17');
-INSERT INTO "BackgroundCheck__c" VALUES(6,'2002-07-27','Building bit firm. Continue realize however floor positive.','None','61');
+INSERT INTO "BackgroundCheck__c" VALUES(6,'2002-07-27','Building bit firm. Continue realize however floor positive.','Pending','61');
 INSERT INTO "BackgroundCheck__c" VALUES(7,'2010-02-19','Eat tough western our learn appear after. During author field ago month particularly increase.','Fail','87');
 CREATE TABLE "Contact" (
 	id INTEGER NOT NULL, 

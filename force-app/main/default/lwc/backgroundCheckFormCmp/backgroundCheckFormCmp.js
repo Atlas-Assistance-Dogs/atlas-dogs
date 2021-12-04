@@ -9,7 +9,7 @@ import { refreshApex } from "@salesforce/apex";
 import CONTACT_FIELD from "@salesforce/schema/BackgroundCheck__c.Contact__c";
 import DATE_FIELD from "@salesforce/schema/BackgroundCheck__c.Date__c";
 import NOTES_FIELD from "@salesforce/schema/BackgroundCheck__c.Notes__c";
-import RESULT_FIELD from "@salesforce/schema/BackgroundCheck__c.Result__c";
+import RESULT_FIELD from "@salesforce/schema/BackgroundCheck__c.Status__c";
 
 // Import message service features required for subscribing and the message channel
 import {

@@ -282,7 +282,7 @@ Insert BackgroundCheck__c:
     fields:
         - Date__c
         - Notes__c
-        - Result__c
+        - Status__c
     lookups:
         Contact__c:
             table: Contact
