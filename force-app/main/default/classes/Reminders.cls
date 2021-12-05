@@ -1,5 +1,14 @@
 global class Reminders implements Schedulable {
+    private final String groupName;
+
+    // default constructor
     public Reminders() {
+        groupName = 'Program Administrator';
+    }
+
+    // used for test
+    public Reminders(String name) {
+        groupName = name;
     }
 
     global void execute(SchedulableContext SC) {
@@ -21,10 +30,11 @@ global class Reminders implements Schedulable {
         Group adminGroup = [
             SELECT id
             FROM Group
-            WHERE Name = 'Program Administrator'
+            WHERE Name = :groupName
             LIMIT 1
         ];
-        // Create a reminder task if one hasn't been already created
+
+        // Create a reminder task if one wasn't already created
         for (ProgramAssignment__c assignment : assignments) {
             List<Task> createdTasks = [
                 SELECT id
