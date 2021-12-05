@@ -116,9 +116,9 @@ public inherited sharing class FileController {
     }
 
     @AuraEnabled(cacheable=true)
-    public static list<ContentVersion> getRelatedFiles(Id recordId) {
+    public static List<ContentVersion> getRelatedFiles(Id recordId) {
         Id parentId = recordId;
-        list<Id> lstConDocs = new List<Id>();
+        List<Id> lstConDocs = new List<Id>();
         for (ContentDocumentLink cntLink : [
             SELECT Id, ContentDocumentId
             FROM ContentDocumentLink
