@@ -1,8 +1,5 @@
 @isTest
 public class TestBackgroundCheckController {
-    public TestBackgroundCheckController() {
-    }
-
     @isTest
     public static void getRelatedChecks_ReturnsEmptyList_WhenNone() {
         Contact contact = new Contact(
