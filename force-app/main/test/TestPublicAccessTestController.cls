@@ -184,6 +184,33 @@ public class TestPublicAccessTestController {
     }
 
     @isTest
+    public static void createPat_ReturnsException() {
+        insertContacts();
+
+        PublicAccessTest__c pat = new PublicAccessTest__c(
+            Assessor__c = fido.Id,
+            Handler__c = jill.Id,
+            AssessorComments__c = 'AssessorComments',
+            DateCompleted__c = Date.today().addDays(-2),
+            Dog__c = fido.Id,
+            ReviewComments__c = 'ReviewComments',
+            Status__c = 'Provisionally Passed',
+            Type__c = 'Retest'
+        );
+        Boolean thrown = false;
+
+        Test.startTest();
+        try {
+            PublicAccessTestController.createPat(pat, null);
+        } catch (AuraHandledException e) {
+            thrown = true;
+        }
+        Test.stopTest();
+
+        System.assert(thrown);
+    }
+
+    @isTest
     public static void createPat_InsertsPat() {
         insertContacts();
 

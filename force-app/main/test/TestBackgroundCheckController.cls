@@ -50,7 +50,7 @@ public class TestBackgroundCheckController {
         BackgroundCheck__c bgCheck = new BackgroundCheck__c(
             Contact__c = jill.Id,
             Date__c = Date.today(),
-            Status__c = 'Passed'
+            Status__c = 'Pass'
         );
         insert bgCheck;
 
