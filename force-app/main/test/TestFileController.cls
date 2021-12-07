@@ -415,4 +415,46 @@ public with sharing class TestFileController {
 
         System.assert(thrown);
     }
+
+    @isTest
+    public static void getRelatedFiles_ThrowsException_WhenNullRecord() {
+        Boolean thrown = false;
+
+        Test.startTest();
+        try {
+            FileController.getRelatedFiles(null);
+        } catch (AuraHandledException e) {
+            thrown = true;
+        }
+
+        Test.stopTest();
+
+        System.assert(thrown);
+    }
+
+    @isTest
+    public static void getRelatedFiles_ReturnsEmptyList_WhenNoRecords() {
+        Dog__c ace = new Dog__c(Name = 'Ace');
+        insert ace;
+
+        Test.startTest();
+        List<ContentVersion> related = FileController.getRelatedFiles(ace.Id);
+
+        Test.stopTest();
+
+        System.assert(related.isEmpty());
+    }
+
+    @isTest
+    public static void getRelatedFiles_ReturnsRelatedRecords() {
+        Dog__c ace = new Dog__c(Name = 'Ace');
+        insert ace;
+
+        Test.startTest();
+        List<ContentVersion> related = FileController.getRelatedFiles(ace.Id);
+
+        Test.stopTest();
+
+        System.assert(related.isEmpty());
+    }
 }
