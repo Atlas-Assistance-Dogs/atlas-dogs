@@ -48,7 +48,8 @@ public with sharing class TestFileController {
                 Origin,
                 VersionData,
                 Category__c,
-                Type__c
+                Type__c,
+                CreatedDate
             FROM ContentVersion
         ];
         return documents;
@@ -209,5 +210,209 @@ public with sharing class TestFileController {
         List<ContentVersion> remaining = [SELECT Id FROM ContentVersion];
         System.assertEquals(1, remaining.size());
         System.assertEquals(documents[0].Id, remaining[0].Id);
+    }
+
+    @isTest
+    public static void deleteRecord_ThrowsException_WhenNullId() {
+        Boolean thrown = false;
+
+        Test.startTest();
+        try {
+            FileController.deleteRecord(null);
+        } catch (AuraHandledException e) {
+            thrown = true;
+        }
+
+        Test.stopTest();
+
+        System.assert(thrown);
+    }
+
+    @isTest
+    public static void deleteRecord_HandlesBadId() {
+        List<ContentVersion> documents = insertRecords();
+
+        Test.startTest();
+        FileController.deleteRecord(documents[0].Id);
+        Test.stopTest();
+
+        List<ContentVersion> remaining = [SELECT Id FROM ContentVersion];
+        System.assertEquals(documents.size(), remaining.size());
+    }
+
+    @isTest
+    public static void deleteRecord_DeletesExpectedRecord() {
+        List<ContentVersion> documents = insertRecords();
+        Test.startTest();
+        FileController.deleteRecord(documents[0].ContentDocumentId);
+        Test.stopTest();
+
+        List<ContentVersion> remaining = [SELECT Id FROM ContentVersion];
+        System.assertEquals(documents.size() - 1, remaining.size());
+        for (ContentVersion actual : remaining) {
+            System.assertNotEquals(documents[0].Id, actual.Id);
+        }
+    }
+
+    @isTest
+    public static void getContentVersion_ThrowsException_WhenIdNull() {
+        Boolean thrown = false;
+
+        Test.startTest();
+        try {
+            FileController.getContentVersion(null);
+        } catch (AuraHandledException e) {
+            thrown = true;
+        }
+
+        Test.stopTest();
+
+        System.assert(thrown);
+    }
+
+    @isTest
+    public static void getContentVersion_ThrowsException_WhenNoRecord() {
+        List<ContentVersion> documents = insertRecords();
+        Boolean thrown = false;
+
+        Test.startTest();
+        try {
+            FileController.getContentVersion(documents[0].ContentDocumentId);
+        } catch (AuraHandledException e) {
+            thrown = true;
+        }
+
+        Test.stopTest();
+
+        System.assert(thrown);
+    }
+
+    @isTest
+    public static void getContentVersion_ReturnsRecordData() {
+        List<ContentVersion> documents = insertRecords();
+
+        Test.startTest();
+        ContentVersion actual = FileController.getContentVersion(
+            documents[0].Id
+        );
+        Test.stopTest();
+
+        ContentVersion expected = documents[0];
+        System.assertEquals(expected.Id, actual.Id);
+        System.assertEquals(expected.Title, actual.Title);
+        System.assertEquals(
+            expected.ContentDocumentId,
+            actual.ContentDocumentId
+        );
+        System.assertEquals(expected.Type__c, actual.Type__c);
+        System.assertEquals(expected.Category__c, actual.Category__c);
+        System.assertEquals(expected.CreatedDate, actual.CreatedDate);
+    }
+
+    @isTest
+    public static void updateContentVersion_ThrowsException_WhenNullId() {
+        Boolean thrown = false;
+        Test.startTest();
+        try {
+            FileController.updateContentVersion(
+                'Trainer',
+                'Trainer Infraction notices as applicable',
+                null
+            );
+        } catch (AuraHandledException e) {
+            thrown = true;
+        }
+        Test.stopTest();
+
+        System.assert(thrown);
+    }
+
+    @isTest
+    public static void updateContentVersion_ThrowsException_WhenBadId() {
+        Dog__c ace = new Dog__c(Name = 'Ace');
+        insert ace;
+        Boolean thrown = false;
+        Test.startTest();
+        try {
+            FileController.updateContentVersion(
+                'Trainer',
+                'Trainer Infraction notices as applicable',
+                ace.Id
+            );
+        } catch (AuraHandledException e) {
+            thrown = true;
+        }
+
+        Test.stopTest();
+
+        System.assert(thrown);
+    }
+
+    @isTest
+    public static void updateContentVersion_HandlesNullParameters() {
+        Dog__c ace = new Dog__c(Name = 'Ace');
+        insert ace;
+        Boolean thrown = false;
+        Test.startTest();
+        try {
+            FileController.updateContentVersion(null, null, ace.Id);
+        } catch (AuraHandledException e) {
+            thrown = true;
+        }
+        Test.stopTest();
+
+        System.assert(thrown);
+    }
+
+    @isTest
+    public static void updateContentVersion_ThrowsException_WhenNoMatch() {
+        Dog__c ace = new Dog__c(Name = 'Ace');
+        insert ace;
+        Boolean thrown = false;
+        Test.startTest();
+        try {
+            FileController.updateContentVersion(
+                'Dog',
+                'Vet Health Form',
+                ace.Id
+            );
+        } catch (AuraHandledException e) {
+            thrown = true;
+        }
+        Test.stopTest();
+
+        System.assert(thrown);
+    }
+
+    @isTest
+    public static void updateContentVersion_ThrowsException_WhenInvalidType() {
+        ContentVersion cv = new ContentVersion(
+            Title = 'TestDocument1',
+            PathOnClient = 'TestDocument1.jpg',
+            Origin = 'H',
+            VersionData = Blob.valueOf('Document Body 1'),
+            Category__c = 'Volunteer',
+            Type__c = 'Media and Liability Release'
+        );
+        insert cv;
+
+        cv = [SELECT ContentDocumentId FROM ContentVersion LIMIT 1];
+
+        Boolean thrown = false;
+
+        Test.startTest();
+        try {
+            FileController.updateContentVersion(
+                'Doggie',
+                'Health Form',
+                cv.ContentDocumentId
+            );
+        } catch (AuraHandledException e) {
+            thrown = true;
+        }
+
+        Test.stopTest();
+
+        System.assert(thrown);
     }
 }

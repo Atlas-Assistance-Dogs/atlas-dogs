@@ -39,10 +39,13 @@ public inherited sharing class FileController {
 
     @AuraEnabled
     public static String deleteRecord(ID docId) {
+        if (docId == null) {
+            throw new AuraHandledException('docId must be non-null');
+        }
         try {
             delete [SELECT Id FROM ContentDocument WHERE Id = :docId LIMIT 1];
             return 'SUCCESS';
-        } catch (Exception ex) {
+        } catch (DmlException ex) {
             throw new AuraHandledException(ex.getMessage());
         }
     }
@@ -81,6 +84,10 @@ public inherited sharing class FileController {
             cv.Type__c = docType;
             cv.Category__c = category;
             update cv;
+        } catch (NullPointerException ex) {
+            throw new AuraHandledException(ex.getMessage());
+        } catch (QueryException ex) {
+            throw new AuraHandledException(ex.getMessage());
         } catch (DmlException ex) {
             throw new AuraHandledException(ex.getMessage());
         }
