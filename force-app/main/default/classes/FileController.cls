@@ -95,6 +95,9 @@ public inherited sharing class FileController {
 
     @AuraEnabled(cacheable=true)
     public static List<ContentVersion> getRelatedFiles(Id recordId) {
+        if (recordId == null) {
+            throw new AuraHandledException('recordId must not be null');
+        }
         Id parentId = recordId;
         List<Id> lstConDocs = new List<Id>();
         for (ContentDocumentLink cntLink : [
@@ -118,7 +121,7 @@ public inherited sharing class FileController {
                 ORDER BY CreatedDate DESC
             ];
         } else {
-            return null;
+            return new List<ContentVersion>();
         }
     }
 
@@ -137,8 +140,12 @@ public inherited sharing class FileController {
                 WHERE ContentDocumentId = :link.ContentDocumentId
                 LIMIT 1
             ];
-        } catch (Exception e) {
-            throw new AuraHandledException(e.getMessage());
+        } catch (NullPointerException ex) {
+            throw new AuraHandledException(ex.getMessage());
+        } catch (QueryException ex) {
+            throw new AuraHandledException(ex.getMessage());
+        } catch (DmlException ex) {
+            throw new AuraHandledException(ex.getMessage());
         }
     }
 
@@ -154,8 +161,12 @@ public inherited sharing class FileController {
                 links.add(link);
             }
             insert links;
-        } catch (Exception e) {
-            throw new AuraHandledException(e.getMessage());
+        } catch (NullPointerException ex) {
+            throw new AuraHandledException(ex.getMessage());
+        } catch (QueryException ex) {
+            throw new AuraHandledException(ex.getMessage());
+        } catch (DmlException ex) {
+            throw new AuraHandledException(ex.getMessage());
         }
     }
 }

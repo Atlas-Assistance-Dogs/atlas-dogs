@@ -450,11 +450,172 @@ public with sharing class TestFileController {
         Dog__c ace = new Dog__c(Name = 'Ace');
         insert ace;
 
+        List<ContentVersion> documents = insertRecords();
+
+        // delete all but the first document
+        List<Id> ids = new List<Id>();
+        for (Integer idx = 0; idx < documents.size(); idx++) {
+            ids.add(documents[idx].ContentDocumentId);
+        }
+
+        FileController.relateFiles(ids, ace.Id);
+
         Test.startTest();
         List<ContentVersion> related = FileController.getRelatedFiles(ace.Id);
 
         Test.stopTest();
 
-        System.assert(related.isEmpty());
+        System.assertEquals(documents.size(), related.size());
+    }
+
+    @isTest
+    public static void relateFile_ThrowsException_WhenNullDocumentId() {
+        Dog__c ace = new Dog__c(Name = 'Ace');
+        insert ace;
+
+        Boolean thrown = false;
+
+        Test.startTest();
+        try {
+            ContentVersion result = FileController.relateFile(null, ace.Id);
+        } catch (AuraHandledException e) {
+            thrown = true;
+        }
+
+        Test.stopTest();
+
+        System.assert(thrown);
+    }
+
+    @isTest
+    public static void relateFile_ThrowsException_WhenNullId() {
+        List<ContentVersion> documents = insertRecords();
+
+        Boolean thrown = false;
+
+        Test.startTest();
+        try {
+            ContentVersion result = FileController.relateFile(
+                documents[0].ContentDocumentId,
+                null
+            );
+        } catch (AuraHandledException e) {
+            thrown = true;
+        }
+
+        Test.stopTest();
+
+        System.assert(thrown);
+    }
+
+    @isTest
+    public static void relateFile_RelatesDocument() {
+        Dog__c ace = new Dog__c(Name = 'Ace');
+        insert ace;
+        List<ContentVersion> documents = insertRecords();
+        ContentVersion document = documents[0];
+
+        Test.startTest();
+        ContentVersion result = FileController.relateFile(
+            document.ContentDocumentId,
+            ace.Id
+        );
+        Test.stopTest();
+
+        ContentDocumentLink link = [
+            SELECT ContentDocumentId, LinkedEntityId
+            FROM ContentDocumentLink
+            WHERE
+                ContentDocumentId = :document.ContentDocumentId
+                AND LinkedEntityId = :ace.Id
+            LIMIT 1
+        ];
+        System.assert(link != null);
+        System.assertEquals(
+            document.ContentDocumentId,
+            result.ContentDocumentId
+        );
+        System.assertEquals(document.Title, result.Title);
+        System.assertEquals(document.CreatedDate, result.CreatedDate);
+    }
+
+    @isTest
+    public static void relateFiles_ThrowsException_WhenNullList() {
+        Dog__c ace = new Dog__c(Name = 'Ace');
+        insert ace;
+
+        Boolean thrown = false;
+
+        Test.startTest();
+        try {
+            FileController.relateFiles(null, ace.Id);
+        } catch (AuraHandledException e) {
+            thrown = true;
+        }
+
+        Test.stopTest();
+
+        System.assert(thrown);
+    }
+
+    @isTest
+    public static void relateFiles_ThrowsException_WhenNullId() {
+        List<ContentVersion> documents = insertRecords();
+        List<Id> docIds = new List<Id>();
+        for (ContentVersion cv : documents) {
+            docIds.add(cv.ContentDocumentId);
+        }
+
+        Boolean thrown = false;
+
+        Test.startTest();
+        try {
+            FileController.relateFiles(docIds, null);
+        } catch (AuraHandledException e) {
+            thrown = true;
+        }
+
+        Test.stopTest();
+
+        System.assert(thrown);
+    }
+
+    @isTest
+    public static void relateFiles_DoesNothing_WhenNoRelatedDocuments() {
+        Dog__c ace = new Dog__c(Name = 'Ace');
+        insert ace;
+
+        Test.startTest();
+        FileController.relateFiles(new List<Id>(), ace.Id);
+        Test.stopTest();
+
+        List<ContentDocumentLink> links = [
+            SELECT ContentDocumentId, LinkedEntityId
+            FROM ContentDocumentLink
+            WHERE LinkedEntityId = :ace.Id
+        ];
+        System.assert(links.isEmpty());
+    }
+
+    @isTest
+    public static void relateFiles_RelatesDocuments() {
+        Dog__c ace = new Dog__c(Name = 'Ace');
+        insert ace;
+        List<ContentVersion> documents = insertRecords();
+        List<Id> docIds = new List<Id>();
+        for (ContentVersion cv : documents) {
+            docIds.add(cv.ContentDocumentId);
+        }
+
+        Test.startTest();
+        FileController.relateFiles(docIds, ace.Id);
+        Test.stopTest();
+
+        List<ContentDocumentLink> links = [
+            SELECT ContentDocumentId, LinkedEntityId
+            FROM ContentDocumentLink
+            WHERE LinkedEntityId = :ace.Id
+        ];
+        System.assertEquals(docIds.size(), links.size());
     }
 }
