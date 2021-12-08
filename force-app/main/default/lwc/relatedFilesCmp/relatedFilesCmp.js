@@ -1,5 +1,5 @@
 import { LightningElement, api, wire, track } from "lwc";
-import retrieveAllData from "@salesforce/apex/FileController.retrieveAllData";
+import getRelatedFiles from "@salesforce/apex/FileController.getRelatedFiles";
 import deleteRecord from "@salesforce/apex/FileController.deleteRecord";
 import { refreshApex } from "@salesforce/apex";
 import { NavigationMixin } from "lightning/navigation";
@@ -42,7 +42,7 @@ export default class RelatedFiles extends NavigationMixin(LightningElement) {
         this.template.querySelector("c-file-upload-cmp").openModal();
     }
 
-    @wire(retrieveAllData, { recordId: "$recordId" }) filesLst(result) {
+    @wire(getRelatedFiles, { recordId: "$recordId" }) filesLst(result) {
         this.wiredFilesList = result;
         if (result.data) {
             this.fileUploadList = result.data;

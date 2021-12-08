@@ -14,7 +14,6 @@ public inherited sharing class FileController {
             lstConDocs.add(cntLink.ContentDocumentId);
         }
 
-        system.debug('lstConDocs' + lstConDocs);
         if (!lstConDocs.isEmpty()) {
             return [
                 SELECT
@@ -117,7 +116,7 @@ public inherited sharing class FileController {
     }
 
     @AuraEnabled(cacheable=true)
-    public static list<ContentVersion> retrieveAllData(Id recordId) {
+    public static list<ContentVersion> getRelatedFiles(Id recordId) {
         Id parentId = recordId;
         list<Id> lstConDocs = new List<Id>();
         for (ContentDocumentLink cntLink : [
@@ -142,6 +141,26 @@ public inherited sharing class FileController {
             ];
         } else {
             return null;
+        }
+    }
+
+    @AuraEnabled
+    public static ContentVersion relateFile(Id documentId, Id recordId) {
+        try {
+            ContentDocumentLink link = new ContentDocumentLink(
+                ContentDocumentId = documentId,
+                LinkedEntityId = recordId
+            );
+            insert link;
+
+            return [
+                SELECT Title, ContentDocumentId, CreatedDate
+                FROM ContentVersion
+                WHERE ContentDocumentId = :link.ContentDocumentId
+                LIMIT 1
+            ];
+        } catch (Exception e) {
+            throw new AuraHandledException(e.getMessage());
         }
     }
 }
