@@ -44,10 +44,10 @@ export default class RelatedFiles extends NavigationMixin(LightningElement) {
 
     @wire(getRelatedFiles, { recordId: "$recordId" }) filesLst(result) {
         this.wiredFilesList = result;
-        if (result.data) {
+        this.fileUploadList = null;
+        if (result.data && result.data.length > 0) {
             this.fileUploadList = result.data;
         } else if (result.error) {
-            this.fileUploadList = [];
             this.dispatchEvent(
                 new ShowToastEvent({
                     title: "Error!!",
