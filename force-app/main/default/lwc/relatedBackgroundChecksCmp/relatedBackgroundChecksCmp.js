@@ -16,12 +16,12 @@ const actions = [
 
 const COLS = [
     {
-        label: "Date",
+        label: "Completed Date",
         fieldName: "completedDate",
         type: "date",
         sortable: true
     },
-    { label: "Result", fieldName: "result", sortable: true },
+    { label: "Status", fieldName: "status", sortable: true },
     {
         label: "File",
         type: "button",

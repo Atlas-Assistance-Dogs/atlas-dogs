@@ -10,6 +10,10 @@
         >This is the record Id to view or edit, can be empty for create.</description>
     </lightningMessageFields>
     <lightningMessageFields>
+        <fieldName>roles</fieldName>
+        <description>Roles the contact has for the record.</description>
+    </lightningMessageFields>
+    <lightningMessageFields>
         <fieldName>mode</fieldName>
         <description>Mode is Create, Update, or View</description>
     </lightningMessageFields>

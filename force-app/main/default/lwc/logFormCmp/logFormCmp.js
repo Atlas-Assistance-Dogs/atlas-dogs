@@ -185,6 +185,7 @@ export default class LogFormCmp extends LightningElement {
         this.recordId = message.recordId;
         this.mode = message.mode;
         this.title = this.mode[0].toUpperCase() + this.mode.slice(1) + " Log";
+        this.roles = message.roles;
         this.openModal();
     }
 

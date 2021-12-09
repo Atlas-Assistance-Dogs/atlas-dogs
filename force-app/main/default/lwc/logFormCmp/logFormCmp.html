@@ -6,14 +6,14 @@
         onclose={handleClose}
     >
         <div slot="body">
-            <lightning-checkbox-group
+            <lightning-radio-group
                 name="role"
                 label="Role"
                 options={options}
                 value={roles}
                 onchange={handleChange}
             >
-            </lightning-checkbox-group>
+            </lightning-radio-group>
             <lightning-record-edit-form
                 object-api-name="Log__c"
                 class="slds-scrollable"

@@ -6,36 +6,40 @@ public with sharing class TestReminders {
     public static String CRON_EXP = '0 0 0 15 3 ? 2022';
     private static Group adminGroup;
     private static Contact joe;
+    private static final String GROUP_NAME = 'Program_Administrator';
 
+    /*
+      Create an admin group with Tasks as mapping objects for test.
+      Change the name a bit to make sure the scheduable class doesn't accidentally
+      grab the existing group.  For some reason, the Apex test is still grabbing
+      the 'Program Administrator' group in the tests, and failing because it doesn't
+      like the mapping.
+    */
     static void createRecords() {
-        //adminGroup = new Group(Name = 'Program Administrator', Type = 'Queue');
-        //insert adminGroup;
-        adminGroup = [
-            SELECT id
-            FROM Group
-            WHERE Name = 'Program Administrator'
-            LIMIT 1
-        ];
-
-        joe = new Contact(FirstName = 'Joe', LastName = 'Blow');
-        insert joe;
+        adminGroup = new Group(Name = GROUP_NAME, Type = 'Queue');
+        insert adminGroup;
 
         QueueSobject mappingObject = new QueueSobject(
             QueueId = adminGroup.Id,
             SobjectType = 'Task'
         );
+
         System.runAs(new User(Id = UserInfo.getUserId())) {
             insert mappingObject;
         }
+
+        joe = new Contact(FirstName = 'Joe', LastName = 'Blow');
+        insert joe;
     }
 
     static testMethod void jobDoesNotCreateTasks_WhenNoAssignments() {
+        createRecords();
         Test.startTest();
         // Schedule the test job
         String jobId = System.schedule(
             'ScheduledApexTest',
             CRON_EXP,
-            new Reminders()
+            new Reminders(GROUP_NAME)
         );
         // Verify the scheduled job has not run yet.
         List<Task> tasks = [SELECT Id FROM Task];
@@ -117,7 +121,7 @@ public with sharing class TestReminders {
         String jobId = System.schedule(
             'ScheduledApexTest',
             CRON_EXP,
-            new Reminders()
+            new Reminders(GROUP_NAME)
         );
         // Verify the scheduled job has not run yet.
         List<Task> tasks = [SELECT Id FROM Task WHERE WhatId IN :assignmentIds];
@@ -144,7 +148,7 @@ public with sharing class TestReminders {
         String jobId = System.schedule(
             'ScheduledApexTest',
             CRON_EXP,
-            new Reminders()
+            new Reminders(GROUP_NAME)
         );
         // Verify the scheduled job has not run yet.
         List<Task> tasks = [SELECT Id FROM Task WHERE WhatId = :assignment.Id];
@@ -255,7 +259,7 @@ public with sharing class TestReminders {
         String jobId = System.schedule(
             'ScheduledApexTest',
             CRON_EXP,
-            new Reminders()
+            new Reminders(GROUP_NAME)
         );
         // Verify the scheduled job has not run yet.
         List<Task> tasks = [SELECT Id FROM Task WHERE WhatId IN :assignmentIds];
@@ -314,7 +318,7 @@ public with sharing class TestReminders {
         String jobId = System.schedule(
             'ScheduledApexTest',
             CRON_EXP,
-            new Reminders()
+            new Reminders(GROUP_NAME)
         );
         // Verify the scheduled job has not run yet.
         List<Task> tasks = [SELECT Id FROM Task WHERE WhatId IN :assignmentIds];
@@ -349,7 +353,7 @@ public with sharing class TestReminders {
         String jobId = System.schedule(
             'ScheduledApexTest',
             CRON_EXP,
-            new Reminders()
+            new Reminders(GROUP_NAME)
         );
         // Verify the scheduled job has not run yet.
         List<Task> tasks = [SELECT Id FROM Task WHERE WhatId IN :assignmentIds];

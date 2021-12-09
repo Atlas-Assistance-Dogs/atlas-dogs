@@ -624,7 +624,7 @@
     <relatedLists>
         <fields>NAME</fields>
         <fields>Date__c</fields>
-        <fields>Result__c</fields>
+        <fields>Status__c</fields>
         <relatedList>BackgroundCheck__c.Contact__c</relatedList>
     </relatedLists>
     <relatedLists>

@@ -4,7 +4,7 @@ public with sharing class BackgroundCheckController {
     public static List<BackgroundCheck> getRelatedChecks(Id contactId) {
         try {
             List<BackgroundCheck__c> checks = [
-                SELECT Contact__c, Date__c, Notes__c, Result__c
+                SELECT Contact__c, Date__c, Notes__c, Status__c
                 FROM BackgroundCheck__c
                 WHERE Contact__c = :contactId
             ];
@@ -14,7 +14,7 @@ public with sharing class BackgroundCheckController {
                 BackgroundCheck outCheck = new BackgroundCheck();
                 outCheck.recordId = bgc.Id;
                 outCheck.completedDate = bgc.Date__c;
-                outCheck.result = bgc.Result__c;
+                outCheck.status = bgc.Status__c;
                 List<ContentVersion> files = FileController.getRelatedFiles(
                     bgc.Id
                 );

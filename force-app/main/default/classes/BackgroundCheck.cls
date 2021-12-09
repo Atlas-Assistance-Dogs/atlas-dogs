@@ -10,7 +10,7 @@ public with sharing class BackgroundCheck {
     public String fileName { get; set; }
 
     @AuraEnabled
-    public String result { get; set; }
+    public String status { get; set; }
 
     @AuraEnabled
     public Date completedDate { get; set; }

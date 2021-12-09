@@ -6,14 +6,14 @@
         onclose={handleClose}
     >
         <div slot="body">
-            <!--lightning-checkbox-group
+            <lightning-radio-group
                 name="role"
                 label="Role"
                 options={options}
-                value={roles}
+                value={role}
                 onchange={handleChange}
             >
-            </lightning-checkbox-group-->
+            </lightning-radio-group>
             <lightning-record-edit-form
                 object-api-name={object}
                 record-id={recordId}
@@ -34,18 +34,24 @@
                     field-name={fields.location}
                     class="category slds-p-bottom_medium"
                 ></lightning-input-field>
-                <lightning-input-field
-                    field-name={fields.assessor}
-                    class="category slds-p-bottom_medium"
-                ></lightning-input-field>
-                <lightning-input-field
-                    field-name={fields.client}
-                    class="category slds-p-bottom_medium"
-                ></lightning-input-field>
-                <lightning-input-field
-                    field-name={fields.handler}
-                    class="category slds-p-bottom_medium"
-                ></lightning-input-field>
+                <template if:false={isAssessor}>
+                    <lightning-input-field
+                        field-name={fields.assessor}
+                        class="category slds-p-bottom_medium"
+                    ></lightning-input-field>
+                </template>
+                <template if:false={isClient}>
+                    <lightning-input-field
+                        field-name={fields.client}
+                        class="category slds-p-bottom_medium"
+                    ></lightning-input-field>
+                </template>
+                <template if:false={isHandler}>
+                    <lightning-input-field
+                        field-name={fields.handler}
+                        class="category slds-p-bottom_medium"
+                    ></lightning-input-field>
+                </template>
                 <lightning-input-field
                     field-name={fields.dog}
                     class="category slds-p-bottom_medium"
@@ -59,6 +65,25 @@
                     class="category slds-p-bottom_medium"
                 ></lightning-input-field>
             </lightning-record-edit-form>
+            <lightning-file-upload
+                label="Add File"
+                name="fileUploader"
+                accept={acceptedFormats}
+                record-id={recordId}
+                onuploadfinished={handleUploadFinished}
+                multiple="true"
+                slot="actions"
+            ></lightning-file-upload>
+            <template if:true={relatedFiles}>
+                <lightning-datatable
+                    data={relatedFiles}
+                    columns={columns}
+                    hide-checkbox-column
+                    key-field="documentId"
+                    onrowaction={handleRowAction}
+                >
+                </lightning-datatable>
+            </template>
         </div>
     </c-modal-cmp>
 </template>

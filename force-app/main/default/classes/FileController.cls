@@ -1,54 +1,23 @@
 public inherited sharing class FileController {
     @AuraEnabled
-    public static List<ContentVersion> contactFilesRetrieve(
-        Id contactId,
-        String category,
-        String docType
-    ) {
-        list<id> lstConDocs = new List<id>();
-        for (ContentDocumentLink cntLink : [
-            SELECT Id, ContentDocumentId
-            FROM ContentDocumentLink
-            WHERE LinkedEntityId = :contactId
-        ]) {
-            lstConDocs.add(cntLink.ContentDocumentId);
-        }
-
-        if (!lstConDocs.isEmpty()) {
-            return [
-                SELECT
-                    Title,
-                    ContentDocumentId,
-                    Type__c,
-                    Category__c,
-                    CreatedDate
-                FROM ContentVersion
-                WHERE
-                    ContentDocumentId IN :lstConDocs
-                    AND Category__c = :category
-                    AND Type__c = :docType
-            ];
-        } else {
-            return null;
-        }
-    }
-
-    @AuraEnabled
     public static void updateRecords(
         String category,
         String docType,
         List<Id> docIds
     ) {
-        List<ContentVersion> cvList = [
-            SELECT Title, ContentDocumentId, Type__c, Category__c
-            FROM ContentVersion
-            WHERE ContentDocumentId IN :docIds
-        ];
-        for (ContentVersion cv : cvList) {
-            cv.Type__c = docType;
-            cv.Category__c = category;
+        if (docIds == null) {
+            throw new AuraHandledException('docIds must be non-null');
         }
         try {
+            List<ContentVersion> cvList = [
+                SELECT Title, ContentDocumentId, Type__c, Category__c
+                FROM ContentVersion
+                WHERE ContentDocumentId IN :docIds
+            ];
+            for (ContentVersion cv : cvList) {
+                cv.Type__c = docType;
+                cv.Category__c = category;
+            }
             update cvList;
         } catch (DmlException ex) {
             throw new AuraHandledException(ex.getMessage());
@@ -56,22 +25,27 @@ public inherited sharing class FileController {
     }
 
     @AuraEnabled
-    public static String deleteRecords(List<String> docIds) {
-        system.debug('docIds' + docIds);
+    public static String deleteRecords(List<Id> docIds) {
+        if (docIds == null) {
+            throw new AuraHandledException('docIds must be non-null');
+        }
         try {
             delete [SELECT Id FROM ContentDocument WHERE Id = :docIds];
             return 'SUCCESS';
-        } catch (Exception ex) {
+        } catch (DmlException ex) {
             throw new AuraHandledException(ex.getMessage());
         }
     }
 
     @AuraEnabled
     public static String deleteRecord(ID docId) {
+        if (docId == null) {
+            throw new AuraHandledException('docId must be non-null');
+        }
         try {
             delete [SELECT Id FROM ContentDocument WHERE Id = :docId LIMIT 1];
             return 'SUCCESS';
-        } catch (Exception ex) {
+        } catch (DmlException ex) {
             throw new AuraHandledException(ex.getMessage());
         }
     }
@@ -110,15 +84,22 @@ public inherited sharing class FileController {
             cv.Type__c = docType;
             cv.Category__c = category;
             update cv;
+        } catch (NullPointerException ex) {
+            throw new AuraHandledException(ex.getMessage());
+        } catch (QueryException ex) {
+            throw new AuraHandledException(ex.getMessage());
         } catch (DmlException ex) {
             throw new AuraHandledException(ex.getMessage());
         }
     }
 
     @AuraEnabled(cacheable=true)
-    public static list<ContentVersion> getRelatedFiles(Id recordId) {
+    public static List<ContentVersion> getRelatedFiles(Id recordId) {
+        if (recordId == null) {
+            throw new AuraHandledException('recordId must not be null');
+        }
         Id parentId = recordId;
-        list<Id> lstConDocs = new List<Id>();
+        List<Id> lstConDocs = new List<Id>();
         for (ContentDocumentLink cntLink : [
             SELECT Id, ContentDocumentId
             FROM ContentDocumentLink
@@ -140,7 +121,7 @@ public inherited sharing class FileController {
                 ORDER BY CreatedDate DESC
             ];
         } else {
-            return null;
+            return new List<ContentVersion>();
         }
     }
 
@@ -159,8 +140,33 @@ public inherited sharing class FileController {
                 WHERE ContentDocumentId = :link.ContentDocumentId
                 LIMIT 1
             ];
-        } catch (Exception e) {
-            throw new AuraHandledException(e.getMessage());
+        } catch (NullPointerException ex) {
+            throw new AuraHandledException(ex.getMessage());
+        } catch (QueryException ex) {
+            throw new AuraHandledException(ex.getMessage());
+        } catch (DmlException ex) {
+            throw new AuraHandledException(ex.getMessage());
+        }
+    }
+
+    @AuraEnabled
+    public static void relateFiles(List<Id> documentIds, Id recordId) {
+        try {
+            List<ContentDocumentLink> links = new List<ContentDocumentLink>();
+            for (Id documentId : documentIds) {
+                ContentDocumentLink link = new ContentDocumentLink(
+                    ContentDocumentId = documentId,
+                    LinkedEntityId = recordId
+                );
+                links.add(link);
+            }
+            insert links;
+        } catch (NullPointerException ex) {
+            throw new AuraHandledException(ex.getMessage());
+        } catch (QueryException ex) {
+            throw new AuraHandledException(ex.getMessage());
+        } catch (DmlException ex) {
+            throw new AuraHandledException(ex.getMessage());
         }
     }
 }

@@ -9,7 +9,7 @@ import { refreshApex } from "@salesforce/apex";
 import CONTACT_FIELD from "@salesforce/schema/BackgroundCheck__c.Contact__c";
 import DATE_FIELD from "@salesforce/schema/BackgroundCheck__c.Date__c";
 import NOTES_FIELD from "@salesforce/schema/BackgroundCheck__c.Notes__c";
-import RESULT_FIELD from "@salesforce/schema/BackgroundCheck__c.Result__c";
+import RESULT_FIELD from "@salesforce/schema/BackgroundCheck__c.Status__c";
 
 // Import message service features required for subscribing and the message channel
 import {
@@ -72,7 +72,7 @@ export default class BackgroundCheckFormCmp extends NavigationMixin(
     getFiles(result) {
         this.wiredCv = result;
         this.currentCv = null;
-        if (result.data && result.data.length > 0) {
+        if (result.data) {
             this.currentCv = result.data[0];
         } else if (result.error) {
             this.dispatchEvent(
@@ -89,7 +89,19 @@ export default class BackgroundCheckFormCmp extends NavigationMixin(
         this.isErrorMessage = false;
         this.message = "File Uploaded Successfully";
         this.uploadedFile = event.detail.files[0];
+        this.currentCv = {
+            Title: this.getFileNameWithoutExtension(this.uploadedFile.name),
+            ContentDocumentId: this.uploadedFile.documentId
+        };
         refreshApex();
+    }
+
+    getFileNameWithoutExtension(name) {
+        let parts = name.split(".");
+        if (parts.length > 1) {
+            return parts.slice(0, -1).join(".");
+        }
+        return name;
     }
 
     handleSubmit(event) {
@@ -139,7 +151,7 @@ export default class BackgroundCheckFormCmp extends NavigationMixin(
         updateBackgroundCheck({
             check: record
         })
-            .then((data) => {
+            .then(() => {
                 this.dispatchEvent(new CustomEvent("changed"));
                 this.closeModal();
             })

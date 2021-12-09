@@ -2,7 +2,7 @@
 <ListView xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>All</fullName>
     <columns>Contact__c</columns>
-    <columns>Result__c</columns>
+    <columns>Status__c</columns>
     <columns>Date__c</columns>
     <columns>Notes__c</columns>
     <filterScope>Everything</filterScope>

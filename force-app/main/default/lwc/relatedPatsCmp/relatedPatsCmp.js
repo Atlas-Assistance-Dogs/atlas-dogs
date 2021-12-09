@@ -99,7 +99,11 @@ export default class RelatedPatsCmp extends NavigationMixin(LightningElement) {
                 this.deletePat(row.Id);
                 break;
             case "edit":
-                const payload = { mode: "edit", recordId: row.Id };
+                const payload = {
+                    mode: "edit",
+                    recordId: row.Id,
+                    role: row.role
+                };
                 publish(this.messageContext, patForm, payload);
                 break;
             case "dog":
@@ -120,8 +124,8 @@ export default class RelatedPatsCmp extends NavigationMixin(LightningElement) {
         if (result.data) {
             this.data = result.data.map((pat) => {
                 var xpat = Object.assign({}, pat);
-                xpat["role"] = this.getRoles(pat);
-                xpat["dogName"] = pat.Dog__r.Name;
+                xpat.role = this.getRoles(pat);
+                xpat.dogName = pat.Dog__r?.Name ?? "";
                 return xpat;
             });
             if (this.data.length == 0) {
