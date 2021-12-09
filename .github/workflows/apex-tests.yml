@@ -4,6 +4,7 @@ on:
     push:
         branches:
             - dev
+    workflow_dispatch:
 
 env:
     CUMULUSCI_KEYCHAIN_CLASS: cumulusci.core.keychain.EnvironmentProjectKeychain
