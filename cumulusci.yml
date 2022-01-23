@@ -27,6 +27,10 @@ tasks:
         options:
             required_org_code_coverage_percent: 75
 
+    create_package_version:
+        options:
+            create_unlocked_dependency_packages: True
+
 flows:
     config_qa:
         steps:
@@ -66,3 +70,26 @@ flows:
                 options:
                     command: force:source:deploy
                     extra: -p force-app/main/default
+
+    release_2gp_beta:
+        steps:
+            1:
+                task: create_package_version
+                options:
+                    create_unlocked_dependency_packages: True
+                    package_type: Managed
+                    package_name: $project_config.project__package__name
+                    skip_validation: False
+                    ancestor_id: latest_github_release
+                    version_base: latest_github_release
+                    version_type: minor
+                    force_upload: True
+
+orgs:
+    scratch:
+        build:
+            config_file: orgs/build.json
+
+sources:
+    npsp:
+        github: https://github.com/SalesforceFoundation/NPSP
