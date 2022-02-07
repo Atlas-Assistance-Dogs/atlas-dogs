@@ -31,6 +31,11 @@ tasks:
         options:
             create_unlocked_dependency_packages: True
 
+    uninstall_packaged_incremental:
+        options:
+            ignore_types:
+                ["RecordType", "CustomObjectTranslation", "QuickAction"]
+
 flows:
     config_qa:
         steps:
