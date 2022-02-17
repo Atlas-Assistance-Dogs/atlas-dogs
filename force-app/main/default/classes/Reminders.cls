@@ -12,7 +12,7 @@ global class Reminders implements Schedulable {
     }
 
     global void execute(SchedulableContext SC) {
-        Date month = Date.today().addMonths(1);
+        Date month = Date.today().addDays(30);
         Date week = Date.today().addDays(7);
         // Find out which assignments may need reminder tasks.
         // Note we cannot join with Tasks since that is not supported.
@@ -21,9 +21,11 @@ global class Reminders implements Schedulable {
             FROM ProgramAssignment__c
             WHERE
                 Status__c = 'In progress'
-                AND ((Program__c = 'Volunteer'
+                AND (((Program__c = 'Volunteer'
+                OR Program__c = 'Staff')
                 AND ExpectedCompletion__c <= :week)
                 OR (Program__c != 'Volunteer'
+                AND Program__c != 'Staff'
                 AND ExpectedCompletion__c <= :month))
         ];
 

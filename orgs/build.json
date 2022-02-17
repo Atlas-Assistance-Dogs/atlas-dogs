@@ -1,5 +1,5 @@
 {
-    "orgName": "atlas-dog - Dev Org",
+    "orgName": "atlas-dog - Build Test Org",
     "edition": "Developer",
     "settings": {
         "lightningExperienceSettings": {
@@ -19,12 +19,6 @@
         },
         "enhancedNotesSettings": {
             "enableEnhancedNotes": true
-        },
-        "languageSettings": {
-            "enableTranslationWorkbench": true
-        },
-        "emailAdministrationSettings": {
-            "enableEnhancedEmailEnabled": true
         }
     },
     "objectSettings": {

@@ -2,11 +2,13 @@ minimum_cumulusci_version: "3.26.0"
 project:
     name: atlas-dog
     package:
-        name: atlas-dogs
+        name: AtlasDogs
+        namespace: atlas1
         api_version: "50.0"
     dependencies:
         - github: "https://github.com/SalesforceFoundation/NPSP"
     git:
+        default_branch: "dev"
     source_format: sfdx
 
 tasks:
@@ -25,13 +27,16 @@ tasks:
         options:
             required_org_code_coverage_percent: 15
 
+    create_package_version:
+        options:
+            create_unlocked_dependency_packages: True
+
+    uninstall_packaged_incremental:
+        options:
+            ignore_types:
+                ["RecordType", "CustomObjectTranslation", "QuickAction"]
+
 flows:
-    dependencies:
-        steps:
-            1:
-                task: update_dependencies
-                options:
-                    include_beta: False
     config_qa:
         steps:
             1:
@@ -64,9 +69,32 @@ flows:
     sandbox:
         steps:
             1:
-                #     flow: dependencies
-                # 2:
+                flow: dependencies
+            2:
                 task: dx
                 options:
                     command: force:source:deploy
                     extra: -p force-app/main/default
+
+    release_2gp_beta:
+        steps:
+            1:
+                task: create_package_version
+                options:
+                    create_unlocked_dependency_packages: True
+                    package_type: Managed
+                    package_name: $project_config.project__package__name
+                    skip_validation: False
+                    ancestor_id: latest_github_release
+                    version_base: latest_github_release
+                    version_type: minor
+                    force_upload: True
+
+orgs:
+    scratch:
+        build:
+            config_file: orgs/build.json
+
+sources:
+    npsp:
+        github: https://github.com/SalesforceFoundation/NPSP

@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
     <available>true</available>
-    <description>Someone asking for general info about how to get/train a service dog</description>
+    <description
+    >Someone asking for general info about how to get/train a service dog</description>
     <encodingKey>UTF-8</encodingKey>
     <letterhead>AtlasLetterhead_v2</letterhead>
     <name>GeneralInfoServiceDog</name>
