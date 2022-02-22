@@ -13,7 +13,7 @@ env:
     CUMULUSCI_ORG_packaging: '{"username": "package@atlasdog.org", "instance_url": "https://login.salesforce.com"}'
     SFDX_CLIENT_ID: ${{ secrets.CLIENT_ID }}
     SFDX_HUB_KEY: ${{ secrets.SSH_KEY }}
-    SFDX_AUDIENCE_URL: "https://login.salesforce.com"
+    SFDX_AUDIENCE_URL: "https://atlasassistancedogs-dev-ed.my.salesforce.com/"
 
 jobs:
     package:
