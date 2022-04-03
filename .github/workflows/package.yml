@@ -3,7 +3,6 @@ name: Create Package
 on:
     push:
         branches:
-            - dev
             - staging
             - main
 
@@ -55,10 +54,6 @@ jobs:
               if: endsWith(github.ref, '/main')
               run: |
                   cci flow run release_production --org packaging
-    test:
-        name: "Test package"
-        runs-on: ubuntu-latest
-        steps:
             - name: install the latest beta version of the project in a scratch org, and run Apex tests against it.
               if: "!endsWith(github.ref, '/main')"
               run: |
