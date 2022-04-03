@@ -1,0 +1,3 @@
+<aura:component implements="lightning:actionOverride" access="global">
+    <c:newDogCmp aura:id="modal" title="New Dog" />
+</aura:component>
