@@ -6,7 +6,6 @@
     <errorConditionFormula>AND(
 OR( 
 TODAY() &lt;  ADDMONTHS(Birthdate__c, 14),
-ExpiryDateStatus__c = &quot;Good&quot;,
 VaccineDueDistemper__c &gt; TODAY(),
 VaccineDueHepatitis__c &gt; TODAY(),
 VaccineDueParainfluenza__c &gt; TODAY(),
