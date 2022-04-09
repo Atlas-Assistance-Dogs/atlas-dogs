@@ -40,7 +40,7 @@ public with sharing class BackgroundCheckController {
     }
 
     @AuraEnabled
-    public static void addBackgroundCheck(
+    public static Id addBackgroundCheck(
         BackgroundCheck__c check,
         Id documentId
     ) {
@@ -49,6 +49,7 @@ public with sharing class BackgroundCheckController {
             if (documentId != null) {
                 FileController.relateFile(documentId, check.Id);
             }
+            return check.Id;
         } catch (Exception e) {
             throw new AuraHandledException(e.getMessage());
         }
