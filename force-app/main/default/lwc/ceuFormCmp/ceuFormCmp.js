@@ -64,6 +64,7 @@ export default class CeuFormCmp extends NavigationMixin(LightningElement) {
         status: STATUS_FIELD,
         trainer: TRAINER_FIELD
     };
+    authority = "Atlas";
 
     columns = COLS;
     get acceptedFormats() {
@@ -93,7 +94,11 @@ export default class CeuFormCmp extends NavigationMixin(LightningElement) {
     handleClose() {}
 
     get isAuthorityOther() {
-        return true;
+        return this.authority === "Other";
+    }
+
+    handleAuthorityChange(event) {
+        this.authority = event.target.value;
     }
 
     handleSubmit(event) {
@@ -182,7 +187,7 @@ export default class CeuFormCmp extends NavigationMixin(LightningElement) {
             this.relatedFiles = null;
         }
         this.mode = message.recordId ? "edit" : "create";
-        this.role = message.role;
+        this.authority = message.authority;
         this.openModal();
     }
 
@@ -224,7 +229,7 @@ export default class CeuFormCmp extends NavigationMixin(LightningElement) {
     handleUploadFinished(event) {
         this.isErrorMessage = false;
         this.message = "File Uploaded Successfully";
-        this.relatedFiles = event.detail.files;
+        this.relatedFiles = this.relatedFiles.concat(event.detail.files);
     }
 
     handleRowAction(event) {

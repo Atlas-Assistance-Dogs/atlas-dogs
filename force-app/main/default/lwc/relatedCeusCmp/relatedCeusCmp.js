@@ -71,7 +71,10 @@ export default class RelatedCeusCmp extends NavigationMixin(LightningElement) {
                 this.deleteCeu(row.Id);
                 break;
             case "edit":
-                const payload = { mode: "edit", recordId: row.Id };
+                const payload = {
+                    authority: row.Authority__c,
+                    recordId: row.Id
+                };
                 publish(this.messageContext, ceuForm, payload);
                 break;
             case "view":

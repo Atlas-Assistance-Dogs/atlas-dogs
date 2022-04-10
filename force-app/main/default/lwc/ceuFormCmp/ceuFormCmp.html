@@ -13,6 +13,7 @@
                 <lightning-input-field
                     field-name={fields.authority}
                     class="category slds-p-bottom_medium"
+                    onchange={handleAuthorityChange}
                 ></lightning-input-field>
                 <template if:true={isAuthorityOther}>
                     <lightning-input-field
