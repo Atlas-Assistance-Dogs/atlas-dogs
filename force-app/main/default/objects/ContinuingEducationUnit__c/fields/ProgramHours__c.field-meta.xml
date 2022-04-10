@@ -4,7 +4,7 @@
     <externalId>false</externalId>
     <label>Program Hours</label>
     <precision>5</precision>
-    <required>false</required>
+    <required>true</required>
     <scale>1</scale>
     <trackTrending>false</trackTrending>
     <type>Number</type>

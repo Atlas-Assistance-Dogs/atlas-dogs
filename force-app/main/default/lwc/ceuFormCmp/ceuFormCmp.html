@@ -1,0 +1,89 @@
+<template>
+    <c-modal-cmp
+        title={title}
+        submitlabel="Save"
+        onsubmit={handleSubmit}
+        onclose={handleClose}
+    >
+        <div slot="body">
+            <lightning-record-edit-form
+                object-api-name={object}
+                record-id={recordId}
+            >
+                <lightning-input-field
+                    field-name={fields.authority}
+                    class="category slds-p-bottom_medium"
+                ></lightning-input-field>
+                <template if:true={isAuthorityOther}>
+                    <lightning-input-field
+                        field-name={fields.authorityOther}
+                        class="category slds-p-bottom_medium"
+                    ></lightning-input-field>
+                </template>
+                <lightning-input-field
+                    field-name={fields.dateCompleted}
+                    class="category slds-p-bottom_medium"
+                ></lightning-input-field>
+                <template if:true={recordId}>
+                    <lightning-input-field
+                        field-name={fields.dateSubmitted}
+                        class="category slds-p-bottom_medium"
+                    ></lightning-input-field>
+                </template>
+                <lightning-input-field
+                    field-name={fields.programDate}
+                    class="category slds-p-bottom_medium"
+                ></lightning-input-field>
+                <lightning-input-field
+                    field-name={fields.programHours}
+                    class="category slds-p-bottom_medium"
+                ></lightning-input-field>
+                <lightning-input-field
+                    field-name={fields.programTitle}
+                    class="category slds-p-bottom_medium"
+                ></lightning-input-field>
+                <lightning-input-field
+                    field-name={fields.quantity}
+                    class="category slds-p-bottom_medium"
+                ></lightning-input-field>
+                <lightning-input-field
+                    field-name={fields.role}
+                    class="category slds-p-bottom_medium"
+                ></lightning-input-field>
+                <lightning-input-field
+                    field-name={fields.status}
+                    class="category slds-p-bottom_medium"
+                ></lightning-input-field>
+                <div if:false={contactId}>
+                    <lightning-input-field
+                        field-name={fields.trainer}
+                        class="category slds-p-bottom_medium"
+                    ></lightning-input-field>
+                </div>
+                <lightning-input-field
+                    field-name={fields.comments}
+                    class="category slds-p-bottom_medium"
+                ></lightning-input-field>
+            </lightning-record-edit-form>
+            <lightning-file-upload
+                label="Add File"
+                name="fileUploader"
+                accept={acceptedFormats}
+                record-id={recordId}
+                onuploadfinished={handleUploadFinished}
+                multiple="true"
+                slot="actions"
+            ></lightning-file-upload>
+            <template if:true={relatedFiles}>
+                <lightning-datatable
+                    data={relatedFiles}
+                    columns={columns}
+                    hide-checkbox-column
+                    key-field="documentId"
+                    onrowaction={handleRowAction}
+                >
+                </lightning-datatable>
+            </template>
+        </div>
+    </c-modal-cmp>
+</template>
