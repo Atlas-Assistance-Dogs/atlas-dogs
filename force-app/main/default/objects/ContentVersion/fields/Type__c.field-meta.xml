@@ -47,9 +47,9 @@
                 <label>Veteran Paperwork</label>
             </value>
             <value>
-                <fullName>Client Initial Certification Survey</fullName>
+                <fullName>Client Certification Survey</fullName>
                 <default>false</default>
-                <label>Initial Certification Survey</label>
+                <label>Certification Survey</label>
             </value>
             <value>
                 <fullName>Reference Letter</fullName>
@@ -72,9 +72,9 @@
                 <label>Professional Growth Plan</label>
             </value>
             <value>
-                <fullName>Initial Team Certification Survey</fullName>
+                <fullName>Team Certification Survey</fullName>
                 <default>false</default>
-                <label>Initial Team Certification Survey</label>
+                <label>Team Certification Survey</label>
             </value>
             <value>
                 <fullName>Practicum</fullName>
@@ -165,7 +165,7 @@
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Client</controllingFieldValue>
-            <valueName>Client Initial Certification Survey</valueName>
+            <valueName>Client Certification Survey</valueName>
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Client</controllingFieldValue>
@@ -210,7 +210,7 @@
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Team_Facilitator</controllingFieldValue>
-            <valueName>Initial Team Certification Survey</valueName>
+            <valueName>Team Certification Survey</valueName>
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Team_Facilitator</controllingFieldValue>
