@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <LightningMessageChannel xmlns="http://soap.sforce.com/2006/04/metadata">
-    <masterLabel>Background Check Form</masterLabel>
-    <isExposed>true</isExposed>
     <description
     >Lightning Message Channel to show Create/View/Update Background Check Form.</description>
+    <isExposed>true</isExposed>
     <lightningMessageFields>
-        <fieldName>recordId</fieldName>
         <description
         >This is the record Id to view or edit, can be empty for create.</description>
+        <fieldName>recordId</fieldName>
     </lightningMessageFields>
+    <masterLabel>Background Check Form</masterLabel>
 </LightningMessageChannel>

@@ -435,6 +435,10 @@
           reference: dog
       Handler__c:
           reference: humanRelationship.Contact__c
+      Instance__c:
+          random_number:
+              min: 1
+              max: 6
       Location__c:
           random_choice:
               - In Person

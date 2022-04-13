@@ -4,7 +4,7 @@
     <description>Relative location of the test</description>
     <externalId>false</externalId>
     <label>Location</label>
-    <required>false</required>
+    <required>true</required>
     <trackTrending>false</trackTrending>
     <type>Picklist</type>
     <valueSet>
