@@ -380,6 +380,7 @@ Insert PublicAccessTest__c:
     fields:
         - AssessorComments__c
         - DateCompleted__c
+        - Instance__c
         - Location__c
         - ReviewComments__c
         - Status__c

@@ -16,7 +16,7 @@
                 <field>DateCompleted__c</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Edit</behavior>
+                <behavior>Required</behavior>
                 <field>Status__c</field>
             </layoutItems>
             <layoutItems>
@@ -24,7 +24,7 @@
                 <field>Type__c</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Edit</behavior>
+                <behavior>Required</behavior>
                 <field>Location__c</field>
             </layoutItems>
             <layoutItems>
@@ -34,6 +34,10 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>ReviewComments__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Required</behavior>
+                <field>Instance__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
@@ -46,7 +50,7 @@
                 <field>Assessor__c</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Edit</behavior>
+                <behavior>Required</behavior>
                 <field>Client__c</field>
             </layoutItems>
             <layoutItems>
@@ -54,7 +58,7 @@
                 <field>Handler__c</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Edit</behavior>
+                <behavior>Required</behavior>
                 <field>Dog__c</field>
             </layoutItems>
         </layoutColumns>

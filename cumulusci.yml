@@ -4,9 +4,10 @@ project:
     package:
         name: AtlasDogs
         namespace: atlas1
-        api_version: "50.0"
+        api_version: "54.0"
     dependencies:
         - github: "https://github.com/SalesforceFoundation/NPSP"
+        - github: "https://github.com/SalesforceFoundation/Volunteers-for-Salesforce"
     git:
         default_branch: "dev"
     source_format: sfdx
