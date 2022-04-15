@@ -35,6 +35,11 @@
         <default>false</default>
         <label>Staff</label>
     </customValue>
+    <customValue>
+        <fullName>Assistance Dogs Set in Motion Client</fullName>
+        <default>false</default>
+        <label>Assistance Dogs Set in Motion Client</label>
+    </customValue>
     <masterLabel>Programs</masterLabel>
     <sorted>false</sorted>
 </GlobalValueSet>
