@@ -179,8 +179,6 @@ Insert Contact:
         - BoardMemberStatus__c
         - ClientMedicalDevices__c
         - ClientStatus__c
-        - ClientTeamPrimaryCertification__c
-        - ClientTeamSecondaryCertification__c
         - CriminalConvictionNotes__c
         - CriminalConviction__c
         - DateStarted__c
@@ -328,6 +326,21 @@ Insert Dog__c:
     lookups:
         VetClinic__c:
             table: Account
+Insert Team__c:
+    sf_object: Team__c
+    fields:
+        - Name
+        - NextPatDue__c
+        - PatCount__c
+        - PrimaryCertification__c
+        - SecondaryCertification__c
+    lookups:
+        Facilitator__c:
+            table: Contact
+        Handler__c:
+            table: Contact
+        Trainer__c:
+            table: Contact
 Insert DogRelationship__c:
     sf_object: DogRelationship__c
     fields:
@@ -337,6 +350,8 @@ Insert DogRelationship__c:
             table: Contact
         Dog__c:
             table: Dog__c
+        Team__c:
+            table: Team__c
 Insert Log__c:
     sf_object: Log__c
     fields:
@@ -380,17 +395,13 @@ Insert PublicAccessTest__c:
     fields:
         - AssessorComments__c
         - DateCompleted__c
-        - Instance__c
         - Location__c
         - ReviewComments__c
         - Status__c
         - Type__c
+        - ValidUntil__c
     lookups:
         Assessor__c:
             table: Contact
-        Client__c:
-            table: Contact
-        Dog__c:
-            table: Dog__c
-        Handler__c:
-            table: Contact
+        Team__c:
+            table: Team__c
