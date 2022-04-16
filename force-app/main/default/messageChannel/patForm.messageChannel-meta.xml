@@ -13,8 +13,8 @@
         <fieldName>mode</fieldName>
     </lightningMessageFields>
     <lightningMessageFields>
-        <description>Role the contact has for the record.</description>
-        <fieldName>role</fieldName>
+        <description>Status of the PAT.</description>
+        <fieldName>status</fieldName>
     </lightningMessageFields>
     <masterLabel>Public Access Test Form</masterLabel>
 </LightningMessageChannel>

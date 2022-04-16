@@ -6,14 +6,6 @@
         onclose={handleClose}
     >
         <div slot="body">
-            <lightning-radio-group
-                name="role"
-                label="Role"
-                options={options}
-                value={role}
-                onchange={handleChange}
-            >
-            </lightning-radio-group>
             <lightning-record-edit-form
                 object-api-name={object}
                 record-id={recordId}
@@ -25,7 +17,15 @@
                 <lightning-input-field
                     field-name={fields.status}
                     class="category slds-p-bottom_medium"
+                    onchange={handleChange}
                 ></lightning-input-field>
+                <div if:true={passed}>
+                    <lightning-input-field
+                        field-name={fields.validUntil}
+                        class="category slds-p-bottom_medium"
+                        onchange={updateDueDate}
+                    ></lightning-input-field>
+                </div>
                 <lightning-input-field
                     field-name={fields.type}
                     class="category slds-p-bottom_medium"
@@ -34,26 +34,8 @@
                     field-name={fields.location}
                     class="category slds-p-bottom_medium"
                 ></lightning-input-field>
-                <template if:false={isAssessor}>
-                    <lightning-input-field
-                        field-name={fields.assessor}
-                        class="category slds-p-bottom_medium"
-                    ></lightning-input-field>
-                </template>
-                <template if:false={isClient}>
-                    <lightning-input-field
-                        field-name={fields.client}
-                        class="category slds-p-bottom_medium"
-                    ></lightning-input-field>
-                </template>
-                <template if:false={isHandler}>
-                    <lightning-input-field
-                        field-name={fields.handler}
-                        class="category slds-p-bottom_medium"
-                    ></lightning-input-field>
-                </template>
                 <lightning-input-field
-                    field-name={fields.dog}
+                    field-name={fields.assessor}
                     class="category slds-p-bottom_medium"
                 ></lightning-input-field>
                 <lightning-input-field

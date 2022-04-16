@@ -58,12 +58,12 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Contact.ClientTeamPrimaryCertification__c</field>
+        <field>Team__c.PrimaryCertification__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Contact.ClientTeamSecondaryCertification__c</field>
+        <field>Team__c.SecondaryCertification__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -109,6 +109,16 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Contact.LeadSourceOther__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Team__c.NextPatDue__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Team__c.PatCount__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -493,12 +503,17 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>PublicAccessTest__c.Handler__c</field>
+        <field>Team__c.Handler__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
         <field>PublicAccessTest__c.ReviewComments__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>PublicAccessTest__c.ValidUntil__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

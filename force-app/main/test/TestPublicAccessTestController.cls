@@ -63,7 +63,6 @@ public class TestPublicAccessTestController {
                 Assessor__c = jill.Id,
                 AssessorComments__c = 'AssessorComments__c',
                 DateCompleted__c = Date.today().addDays(-2),
-                Dog__c = fido.Id,
                 Location__c = 'In Person',
                 ReviewComments__c = 'ReviewComments__c',
                 Status__c = 'Passed',
@@ -73,10 +72,8 @@ public class TestPublicAccessTestController {
 
         pats.add(
             new PublicAccessTest__c(
-                Client__c = jill.Id,
                 AssessorComments__c = 'AssessorComments__c',
                 DateCompleted__c = Date.today().addDays(-2),
-                Dog__c = fido.Id,
                 Location__c = 'In Person',
                 ReviewComments__c = 'ReviewComments__c',
                 Status__c = 'Passed',
@@ -86,10 +83,8 @@ public class TestPublicAccessTestController {
 
         pats.add(
             new PublicAccessTest__c(
-                Handler__c = jill.Id,
                 AssessorComments__c = 'AssessorComments__c',
                 DateCompleted__c = Date.today().addDays(-2),
-                Dog__c = fido.Id,
                 Location__c = 'In Person',
                 ReviewComments__c = 'ReviewComments__c',
                 Status__c = 'Passed',
@@ -116,7 +111,6 @@ public class TestPublicAccessTestController {
                 Assessor__c = jill.Id,
                 AssessorComments__c = 'AssessorComments 1',
                 DateCompleted__c = Date.today(),
-                Dog__c = fido.Id,
                 Location__c = 'In Person',
                 ReviewComments__c = 'ReviewComments 1',
                 Status__c = 'Passed',
@@ -126,10 +120,8 @@ public class TestPublicAccessTestController {
 
         pats.add(
             new PublicAccessTest__c(
-                Client__c = jill.Id,
                 AssessorComments__c = 'AssessorComments 2',
                 DateCompleted__c = Date.today().addDays(-1),
-                Dog__c = fido.Id,
                 Location__c = 'Virtual',
                 ReviewComments__c = 'ReviewComments 2',
                 Status__c = 'Failed',
@@ -139,10 +131,8 @@ public class TestPublicAccessTestController {
 
         pats.add(
             new PublicAccessTest__c(
-                Handler__c = jill.Id,
                 AssessorComments__c = 'AssessorComments 3',
                 DateCompleted__c = Date.today().addDays(-2),
-                Dog__c = fido.Id,
                 ReviewComments__c = 'ReviewComments 3',
                 Status__c = 'Provisionally Passed',
                 Type__c = 'Retest'
@@ -170,9 +160,6 @@ public class TestPublicAccessTestController {
                 expected.DateCompleted__c,
                 actual.DateCompleted__c
             );
-            System.assertEquals(expected.Dog__c, actual.Dog__c);
-            System.assertEquals(fido.Name, actual.Dog__r.Name);
-            System.assertEquals(expected.Handler__c, actual.Handler__c);
             System.assertEquals(expected.Location__c, actual.Location__c);
             System.assertEquals(
                 expected.ReviewComments__c,
@@ -189,10 +176,8 @@ public class TestPublicAccessTestController {
 
         PublicAccessTest__c pat = new PublicAccessTest__c(
             Assessor__c = fido.Id,
-            Handler__c = jill.Id,
             AssessorComments__c = 'AssessorComments',
             DateCompleted__c = Date.today().addDays(-2),
-            Dog__c = fido.Id,
             ReviewComments__c = 'ReviewComments',
             Status__c = 'Provisionally Passed',
             Type__c = 'Retest'
@@ -216,10 +201,8 @@ public class TestPublicAccessTestController {
 
         PublicAccessTest__c expected = new PublicAccessTest__c(
             Assessor__c = jack.Id,
-            Handler__c = jill.Id,
             AssessorComments__c = 'AssessorComments',
             DateCompleted__c = Date.today().addDays(-2),
-            Dog__c = fido.Id,
             ReviewComments__c = 'ReviewComments',
             Status__c = 'Provisionally Passed',
             Type__c = 'Retest'
@@ -233,11 +216,7 @@ public class TestPublicAccessTestController {
             SELECT
                 Assessor__c,
                 AssessorComments__c,
-                Client__c,
                 DateCompleted__c,
-                Dog__c,
-                Dog__r.Name,
-                Handler__c,
                 Location__c,
                 ReviewComments__c,
                 Status__c,
@@ -252,9 +231,6 @@ public class TestPublicAccessTestController {
             actual.AssessorComments__c
         );
         System.assertEquals(expected.DateCompleted__c, actual.DateCompleted__c);
-        System.assertEquals(expected.Dog__c, actual.Dog__c);
-        System.assertEquals(fido.Name, actual.Dog__r.Name);
-        System.assertEquals(expected.Handler__c, actual.Handler__c);
         System.assertEquals(expected.Location__c, actual.Location__c);
         System.assertEquals(
             expected.ReviewComments__c,
@@ -270,10 +246,8 @@ public class TestPublicAccessTestController {
 
         PublicAccessTest__c expected = new PublicAccessTest__c(
             Assessor__c = jack.Id,
-            Handler__c = jill.Id,
             AssessorComments__c = 'AssessorComments',
             DateCompleted__c = Date.today().addDays(-2),
-            Dog__c = fido.Id,
             ReviewComments__c = 'ReviewComments',
             Status__c = 'Provisionally Passed',
             Type__c = 'Retest'
@@ -305,11 +279,7 @@ public class TestPublicAccessTestController {
             SELECT
                 Assessor__c,
                 AssessorComments__c,
-                Client__c,
                 DateCompleted__c,
-                Dog__c,
-                Dog__r.Name,
-                Handler__c,
                 Location__c,
                 ReviewComments__c,
                 Status__c,
@@ -347,10 +317,8 @@ public class TestPublicAccessTestController {
         insertContacts();
         PublicAccessTest__c pat = new PublicAccessTest__c(
             Assessor__c = jack.Id,
-            Handler__c = jill.Id,
             AssessorComments__c = 'AssessorComments',
             DateCompleted__c = Date.today().addDays(-2),
-            Dog__c = fido.Id,
             ReviewComments__c = 'ReviewComments',
             Status__c = 'Provisionally Passed',
             Type__c = 'Retest'
@@ -373,10 +341,8 @@ public class TestPublicAccessTestController {
         insertContacts();
         PublicAccessTest__c pat = new PublicAccessTest__c(
             Assessor__c = jack.Id,
-            Handler__c = jill.Id,
             AssessorComments__c = 'AssessorComments',
             DateCompleted__c = Date.today().addDays(-2),
-            Dog__c = fido.Id,
             ReviewComments__c = 'ReviewComments',
             Status__c = 'Provisionally Passed',
             Type__c = 'Retest'
@@ -384,10 +350,8 @@ public class TestPublicAccessTestController {
         insert pat;
 
         pat.Assessor__c = jill.Id;
-        pat.Handler__c = jack.Id;
         pat.AssessorComments__c = 'Different comments';
         pat.DateCompleted__c = Date.today();
-        pat.Dog__c = rover.Id;
         pat.ReviewComments__c = 'Different review comments';
         pat.Status__c = 'Failed';
         pat.Type__c = 'Initial';
@@ -400,11 +364,7 @@ public class TestPublicAccessTestController {
             SELECT
                 Assessor__c,
                 AssessorComments__c,
-                Client__c,
                 DateCompleted__c,
-                Dog__c,
-                Dog__r.Name,
-                Handler__c,
                 Location__c,
                 ReviewComments__c,
                 Status__c,
@@ -418,9 +378,6 @@ public class TestPublicAccessTestController {
             actual.AssessorComments__c
         );
         System.assertEquals(pat.DateCompleted__c, actual.DateCompleted__c);
-        System.assertEquals(pat.Dog__c, actual.Dog__c);
-        System.assertEquals(rover.Name, actual.Dog__r.Name);
-        System.assertEquals(pat.Handler__c, actual.Handler__c);
         System.assertEquals(pat.Location__c, actual.Location__c);
         System.assertEquals(pat.ReviewComments__c, actual.ReviewComments__c);
         System.assertEquals(pat.Status__c, actual.Status__c);
@@ -461,10 +418,8 @@ public class TestPublicAccessTestController {
         insertContacts();
         PublicAccessTest__c pat = new PublicAccessTest__c(
             Assessor__c = jack.Id,
-            Handler__c = jill.Id,
             AssessorComments__c = 'AssessorComments',
             DateCompleted__c = Date.today().addDays(-2),
-            Dog__c = fido.Id,
             ReviewComments__c = 'ReviewComments',
             Status__c = 'Provisionally Passed',
             Type__c = 'Retest'

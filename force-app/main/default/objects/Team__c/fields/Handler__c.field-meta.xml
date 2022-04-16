@@ -6,7 +6,7 @@
     <externalId>false</externalId>
     <label>Handler</label>
     <referenceTo>Contact</referenceTo>
-    <relationshipName>Public_Access_Tests1</relationshipName>
+    <relationshipName>Team</relationshipName>
     <required>false</required>
     <trackTrending>false</trackTrending>
     <type>Lookup</type>
