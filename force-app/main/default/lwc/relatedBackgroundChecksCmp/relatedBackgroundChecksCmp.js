@@ -30,7 +30,8 @@ const COLS = [
             label: { fieldName: "fileName" },
             variant: "base",
             iconName: "utility:file",
-            iconPosition: "left"
+            iconPosition: "left",
+            disabled: { fieldName: "noFile" }
         }
     },
     { type: "action", typeAttributes: { rowActions: actions } }

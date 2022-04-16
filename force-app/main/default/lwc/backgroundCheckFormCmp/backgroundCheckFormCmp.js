@@ -101,6 +101,17 @@ export default class BackgroundCheckFormCmp extends NavigationMixin(
         if (this.uploadedFile) {
             documentId = this.uploadedFile.documentId;
         }
+        if (!documentId && !this.currentCv) {
+            this.dispatchEvent(
+                new ShowToastEvent({
+                    title: "Error!!",
+                    message:
+                        "A document must be assigned to the background check.",
+                    variant: "error"
+                })
+            );
+            return;
+        }
         if (!this.recordId) {
             this.createBC(record, documentId);
         } else {
