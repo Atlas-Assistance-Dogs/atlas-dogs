@@ -144,6 +144,11 @@
     <platformActionList>
         <actionListContext>Record</actionListContext>
         <platformActionListItems>
+            <actionName>NewTask</actionName>
+            <actionType>QuickAction</actionType>
+            <sortOrder>0</sortOrder>
+        </platformActionListItems>
+        <platformActionListItems>
             <actionName>LogACall</actionName>
             <actionType>QuickAction</actionType>
             <sortOrder>1</sortOrder>
@@ -162,11 +167,6 @@
             <actionName>SendEmail</actionName>
             <actionType>QuickAction</actionType>
             <sortOrder>4</sortOrder>
-        </platformActionListItems>
-        <platformActionListItems>
-            <actionName>NewTask</actionName>
-            <actionType>QuickAction</actionType>
-            <sortOrder>0</sortOrder>
         </platformActionListItems>
     </platformActionList>
     <quickActionList>
@@ -196,15 +196,8 @@
     <relatedLists>
         <fields>Contact__c</fields>
         <fields>Type__c</fields>
+        <fields>Team__c</fields>
         <relatedList>DogRelationship__c.Dog__c</relatedList>
-    </relatedLists>
-    <relatedLists>
-        <fields>DateCompleted__c</fields>
-        <fields>Status__c</fields>
-        <fields>Type__c</fields>
-        <fields>Assessor__c</fields>
-        <fields>Client__c</fields>
-        <relatedList>PublicAccessTest__c.Dog__c</relatedList>
     </relatedLists>
     <relatedLists>
         <fields>TASK.SUBJECT</fields>
@@ -224,7 +217,7 @@
     <showRunAssignmentRulesCheckbox>false</showRunAssignmentRulesCheckbox>
     <showSubmitAndAttachButton>false</showSubmitAndAttachButton>
     <summaryLayout>
-        <masterLabel>00h56000003Z3dy</masterLabel>
+        <masterLabel>00h1D000006rWIg</masterLabel>
         <sizeX>2</sizeX>
         <sizeY>2</sizeY>
         <summaryLayoutItems>
