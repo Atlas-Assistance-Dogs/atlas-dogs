@@ -239,11 +239,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>ContinuingEducationUnit__c.DateSubmitted__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
         <field>ContinuingEducationUnit__c.ProgramTitle__c</field>
         <readable>false</readable>
     </fieldPermissions>
