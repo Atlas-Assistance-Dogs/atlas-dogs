@@ -15,12 +15,14 @@ public with sharing class BackgroundCheckController {
                 outCheck.recordId = bgc.Id;
                 outCheck.completedDate = bgc.Date__c;
                 outCheck.status = bgc.Status__c;
+                outCheck.noFile = true;
                 List<ContentVersion> files = FileController.getRelatedFiles(
                     bgc.Id
                 );
                 if (files != null && !files.isEmpty()) {
                     outCheck.documentId = files[0].ContentDocumentId;
                     outCheck.fileName = files[0].Title;
+                    outCheck.noFile = false;
                 }
                 bgChecks.add(outCheck);
             }
