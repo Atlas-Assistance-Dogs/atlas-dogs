@@ -413,17 +413,7 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Log__c.Client__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
         <field>Log__c.Details__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Log__c.Dog__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -436,17 +426,7 @@
         <field>Log__c.Handler__c</field>
         <readable>false</readable>
     </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Log__c.OtherHours__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Log__c.PublicAccessHours__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
+   <fieldPermissions>
         <editable>false</editable>
         <field>Log__c.RequestSupportFromAtlas__c</field>
         <readable>false</readable>
@@ -463,17 +443,7 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Log__c.SessionType__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
         <field>Log__c.Stress__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Log__c.Submitter__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
