@@ -2,8 +2,12 @@
 public class TestPublicAccessTestController {
     private static Contact jack;
     private static Contact jill;
+    private static Contact henry;
+    private static Contact frank;
+    private static Contact tonya;
     private static Dog__c fido;
     private static Dog__c rover;
+    private static Team__c team;
     private static void insertContacts() {
         List<Contact> contacts = new List<Contact>();
         contacts.add(
@@ -20,14 +24,68 @@ public class TestPublicAccessTestController {
                 Email = 'jill@test.com'
             )
         );
+        contacts.add(
+            new Contact(
+                FirstName = 'Frank',
+                LastName = 'Facilitator',
+                Email = 'frank@test.com'
+            )
+        );
+        contacts.add(
+            new Contact(
+                FirstName = 'Henry',
+                LastName = 'Handler',
+                Email = 'henry@test.com'
+            )
+        );
+        contacts.add(
+            new Contact(
+                FirstName = 'Tonya',
+                LastName = 'Trainer',
+                Email = 'tonya@test.com'
+            )
+        );
         insert contacts;
 
         jack = contacts[0];
         jill = contacts[1];
+        frank = contacts[2];
+        henry = contacts[3];
+        tonya = contacts[4];
 
         fido = new Dog__c(Name = 'Fido');
         rover = new Dog__c(Name = 'Rover');
         insert new List<Dog__c>{ fido, rover };
+
+        team = new Team__c(
+            Facilitator__c = frank.Id,
+            Handler__c = henry.Id,
+            NextPatDue__c = Date.today().addMonths(3),
+            PatCount__c = 2,
+            PrimaryCertification__c = 'Atlas',
+            SecondaryCertification__c = '',
+            Trainer__c = tonya.Id
+        );
+        insert team;
+
+        List<DogRelationShip__c> relationships = new List<DogRelationShip__c>();
+        relationships.add(
+            new DogRelationShip__c(
+                Contact__c = jill.Id,
+                Dog__c = fido.Id,
+                Team__c = team.Id,
+                Type__c = 'Client'
+            )
+        );
+        relationships.add(
+            new DogRelationShip__c(
+                Contact__c = henry.Id,
+                Dog__c = fido.Id,
+                Team__c = team.Id,
+                Type__c = 'Handler'
+            )
+        );
+        insert relationships;
     }
 
     @isTest
@@ -66,6 +124,7 @@ public class TestPublicAccessTestController {
                 Location__c = 'In Person',
                 ReviewComments__c = 'ReviewComments__c',
                 Status__c = 'Passed',
+                Team__c = team.Id,
                 Type__c = 'Recertification'
             )
         );
@@ -77,6 +136,7 @@ public class TestPublicAccessTestController {
                 Location__c = 'In Person',
                 ReviewComments__c = 'ReviewComments__c',
                 Status__c = 'Passed',
+                Team__c = team.Id,
                 Type__c = 'Recertification'
             )
         );
@@ -88,6 +148,7 @@ public class TestPublicAccessTestController {
                 Location__c = 'In Person',
                 ReviewComments__c = 'ReviewComments__c',
                 Status__c = 'Passed',
+                Team__c = team.Id,
                 Type__c = 'Recertification'
             )
         );
@@ -103,7 +164,7 @@ public class TestPublicAccessTestController {
     }
 
     @isTest
-    public static void getRelatedPats_ReturnsAllPatsForTheContact() {
+    public static void getRelatedPats_ReturnsAllPatsForTheTeam() {
         insertContacts();
         List<PublicAccessTest__c> pats = new List<PublicAccessTest__c>();
         pats.add(
@@ -114,6 +175,7 @@ public class TestPublicAccessTestController {
                 Location__c = 'In Person',
                 ReviewComments__c = 'ReviewComments 1',
                 Status__c = 'Passed',
+                Team__c = team.Id,
                 Type__c = 'Initial'
             )
         );
@@ -125,6 +187,7 @@ public class TestPublicAccessTestController {
                 Location__c = 'Virtual',
                 ReviewComments__c = 'ReviewComments 2',
                 Status__c = 'Failed',
+                Team__c = team.Id,
                 Type__c = 'Recertification'
             )
         );
@@ -133,8 +196,10 @@ public class TestPublicAccessTestController {
             new PublicAccessTest__c(
                 AssessorComments__c = 'AssessorComments 3',
                 DateCompleted__c = Date.today().addDays(-2),
+                Location__c = 'Virtual',
                 ReviewComments__c = 'ReviewComments 3',
                 Status__c = 'Provisionally Passed',
+                Team__c = team.Id,
                 Type__c = 'Retest'
             )
         );
@@ -142,7 +207,7 @@ public class TestPublicAccessTestController {
 
         Test.startTest();
         List<PublicAccessTest__c> result = PublicAccessTestController.getRelatedPats(
-            jill.Id
+            team.Id
         );
         Test.stopTest();
 
@@ -178,8 +243,10 @@ public class TestPublicAccessTestController {
             Assessor__c = fido.Id,
             AssessorComments__c = 'AssessorComments',
             DateCompleted__c = Date.today().addDays(-2),
+            Location__c = 'Virtual',
             ReviewComments__c = 'ReviewComments',
             Status__c = 'Provisionally Passed',
+            Team__c = team.Id,
             Type__c = 'Retest'
         );
         Boolean thrown = false;
@@ -203,8 +270,10 @@ public class TestPublicAccessTestController {
             Assessor__c = jack.Id,
             AssessorComments__c = 'AssessorComments',
             DateCompleted__c = Date.today().addDays(-2),
+            Location__c = 'Virtual',
             ReviewComments__c = 'ReviewComments',
             Status__c = 'Provisionally Passed',
+            Team__c = team.Id,
             Type__c = 'Retest'
         );
 
@@ -220,6 +289,7 @@ public class TestPublicAccessTestController {
                 Location__c,
                 ReviewComments__c,
                 Status__c,
+                Team__c,
                 Type__c
             FROM PublicAccessTest__c
             LIMIT 1
@@ -248,8 +318,10 @@ public class TestPublicAccessTestController {
             Assessor__c = jack.Id,
             AssessorComments__c = 'AssessorComments',
             DateCompleted__c = Date.today().addDays(-2),
+            Location__c = 'Virtual',
             ReviewComments__c = 'ReviewComments',
             Status__c = 'Provisionally Passed',
+            Team__c = team.Id,
             Type__c = 'Retest'
         );
 
@@ -283,6 +355,7 @@ public class TestPublicAccessTestController {
                 Location__c,
                 ReviewComments__c,
                 Status__c,
+                Team__c,
                 Type__c
             FROM PublicAccessTest__c
             LIMIT 1
@@ -319,8 +392,10 @@ public class TestPublicAccessTestController {
             Assessor__c = jack.Id,
             AssessorComments__c = 'AssessorComments',
             DateCompleted__c = Date.today().addDays(-2),
+            Location__c = 'Virtual',
             ReviewComments__c = 'ReviewComments',
             Status__c = 'Provisionally Passed',
+            Team__c = team.Id,
             Type__c = 'Retest'
         );
         Boolean thrown = false;
@@ -343,8 +418,10 @@ public class TestPublicAccessTestController {
             Assessor__c = jack.Id,
             AssessorComments__c = 'AssessorComments',
             DateCompleted__c = Date.today().addDays(-2),
+            Location__c = 'Virtual',
             ReviewComments__c = 'ReviewComments',
             Status__c = 'Provisionally Passed',
+            Team__c = team.Id,
             Type__c = 'Retest'
         );
         insert pat;
@@ -368,6 +445,7 @@ public class TestPublicAccessTestController {
                 Location__c,
                 ReviewComments__c,
                 Status__c,
+                Team__c,
                 Type__c
             FROM PublicAccessTest__c
             LIMIT 1
@@ -420,8 +498,10 @@ public class TestPublicAccessTestController {
             Assessor__c = jack.Id,
             AssessorComments__c = 'AssessorComments',
             DateCompleted__c = Date.today().addDays(-2),
+            Location__c = 'In Person',
             ReviewComments__c = 'ReviewComments',
             Status__c = 'Provisionally Passed',
+            Team__c = team.Id,
             Type__c = 'Retest'
         );
         insert pat;
