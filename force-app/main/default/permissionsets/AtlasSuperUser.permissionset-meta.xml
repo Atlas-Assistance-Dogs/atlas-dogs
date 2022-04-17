@@ -153,22 +153,17 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Contact.VolunteerBackground__c</field>
+        <field>Contact.GW_Volunteers__Volunteer_Skills__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Contact.VolunteerFocus__c</field>
+        <field>Contact.GW_Volunteers__Volunteer_Notes__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Contact.VolunteerInterviewNotes__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Contact.VolunteerStatus__c</field>
+        <field>Contact.GW_Volunteers__Volunteer_Status__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

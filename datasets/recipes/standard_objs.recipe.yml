@@ -4,6 +4,7 @@
 #       name: The Account
 
 - object: Campaign
+  nickname: Campaign
   just_once: True
   fields:
       name: The Campaign

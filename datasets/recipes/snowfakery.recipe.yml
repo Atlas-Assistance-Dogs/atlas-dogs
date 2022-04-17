@@ -2,6 +2,7 @@
 #
 # cci task run generate_and_load_from_yaml -o generator_yaml datasets/recipes/snowfakery.recipe.yml -o num_records 100 -o num_records_tablename Contact --org dev
 #
+- include_file: volunteer-jobs.recipe.yml
 - include_file: common.recipe.yml
 - include_file: Account_npsp.recipe.yml
 - include_file: contact.recipe.yml

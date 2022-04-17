@@ -111,11 +111,7 @@
         <layoutColumns>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>VolunteerStatus__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>VolunteerFocus__c</field>
+                <field>GW_Volunteers__Volunteer_Status__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -123,7 +119,7 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>VolunteerBackground__c</field>
+                <field>GW_Volunteers__Volunteer_Skills__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
