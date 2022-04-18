@@ -196,7 +196,6 @@
     <relatedLists>
         <fields>Contact__c</fields>
         <fields>Type__c</fields>
-        <fields>Team__c</fields>
         <relatedList>DogRelationship__c.Dog__c</relatedList>
     </relatedLists>
     <relatedLists>

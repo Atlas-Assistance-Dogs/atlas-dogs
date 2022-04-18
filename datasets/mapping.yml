@@ -1,3 +1,15 @@
+Insert ContentVersion:
+    sf_object: ContentVersion
+    fields:
+        - Category__c
+        - ContentLocation
+        - IsAssetEnabled
+        - IsMajorVersion
+        - Origin
+        - SharingOption
+        - SharingPrivacy
+        - Title
+        - Type__c
 Insert npo02__Household__c:
     sf_object: npo02__Household__c
     fields:
@@ -58,6 +70,10 @@ Insert Lead:
         - Country
         - Email
         - FirstName
+        - GW_Volunteers__Volunteer_Availability__c
+        - GW_Volunteers__Volunteer_Notes__c
+        - GW_Volunteers__Volunteer_Skills__c
+        - GW_Volunteers__Volunteer_Status__c
         - IsConverted
         - IsUnreadByOwner
         - LastName
@@ -142,6 +158,30 @@ Insert Account:
             after: Insert Contact
         npsp__Batch__c:
             table: npsp__Batch__c
+Insert Dog__c:
+    sf_object: Dog__c
+    fields:
+        - ActivationDate__c
+        - Birthdate__c
+        - Breed__c
+        - Gender__c
+        - LatestPhysicalExamOutcome__c
+        - MicrochipNumber__c
+        - Name
+        - Notes__c
+        - PhysicalExamDue__c
+        - Picture__c
+        - Program__c
+        - SpayedNeutered__c
+        - Status__c
+        - VaccineDueDistemper__c
+        - VaccineDueHepatitis__c
+        - VaccineDueParainfluenza__c
+        - VaccineDueParvovirus__c
+        - VaccineDueRabies__c
+    lookups:
+        VetClinic__c:
+            table: Account
 Insert npsp__Address__c:
     sf_object: npsp__Address__c
     fields:
@@ -185,6 +225,14 @@ Insert Contact:
         - FacilitatorInterviewNotes__c
         - FacilitatorStatus__c
         - FirstName
+        - GW_Volunteers__Volunteer_Auto_Reminder_Email_Opt_Out__c
+        - GW_Volunteers__Volunteer_Availability__c
+        - GW_Volunteers__Volunteer_Last_Web_Signup_Date__c
+        - GW_Volunteers__Volunteer_Manager_Notes__c
+        - GW_Volunteers__Volunteer_Notes__c
+        - GW_Volunteers__Volunteer_Organization__c
+        - GW_Volunteers__Volunteer_Skills__c
+        - GW_Volunteers__Volunteer_Status__c
         - LastName
         - LeadComments__c
         - LeadFacilitatorStatus__c
@@ -302,45 +350,6 @@ Insert ContinuingEducationUnit__c:
     lookups:
         Trainer__c:
             table: Contact
-Insert Dog__c:
-    sf_object: Dog__c
-    fields:
-        - ActivationDate__c
-        - Birthdate__c
-        - Breed__c
-        - Gender__c
-        - LatestPhysicalExamOutcome__c
-        - MicrochipNumber__c
-        - Name
-        - Notes__c
-        - PhysicalExamDue__c
-        - Picture__c
-        - Program__c
-        - SpayedNeutered__c
-        - Status__c
-        - VaccineDueDistemper__c
-        - VaccineDueHepatitis__c
-        - VaccineDueParainfluenza__c
-        - VaccineDueParvovirus__c
-        - VaccineDueRabies__c
-    lookups:
-        VetClinic__c:
-            table: Account
-Insert Team__c:
-    sf_object: Team__c
-    fields:
-        - Name
-        - NextPatDue__c
-        - PatCount__c
-        - PrimaryCertification__c
-        - SecondaryCertification__c
-    lookups:
-        Facilitator__c:
-            table: Contact
-        Handler__c:
-            table: Contact
-        Trainer__c:
-            table: Contact
 Insert DogRelationship__c:
     sf_object: DogRelationship__c
     fields:
@@ -350,8 +359,6 @@ Insert DogRelationship__c:
             table: Contact
         Dog__c:
             table: Dog__c
-        Team__c:
-            table: Team__c
 Insert Log__c:
     sf_object: Log__c
     fields:
@@ -389,6 +396,21 @@ Insert ProgramAssignment__c:
         - Status__c
     lookups:
         Contact__c:
+            table: Contact
+Insert Team__c:
+    sf_object: Team__c
+    fields:
+        - Name
+        - PatCount__c
+        - PatValidUntil__c
+        - PrimaryCertification__c
+        - SecondaryCertification__c
+    lookups:
+        Client__c:
+            table: Contact
+        Dog__c:
+            table: Dog__c
+        Handler__c:
             table: Contact
 Insert PublicAccessTest__c:
     sf_object: PublicAccessTest__c

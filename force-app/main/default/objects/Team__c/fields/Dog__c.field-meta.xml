@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Trainer__c</fullName>
+    <fullName>Dog__c</fullName>
     <deleteConstraint>SetNull</deleteConstraint>
-    <description>Trainer in the team</description>
+    <description>Dog on the team</description>
     <externalId>false</externalId>
-    <label>Trainer</label>
-    <referenceTo>Contact</referenceTo>
+    <label>Dog</label>
+    <referenceTo>Dog__c</referenceTo>
     <relationshipLabel>Teams</relationshipLabel>
     <relationshipName>Teams</relationshipName>
     <required>false</required>

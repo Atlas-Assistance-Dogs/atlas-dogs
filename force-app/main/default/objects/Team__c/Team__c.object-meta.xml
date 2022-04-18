@@ -161,20 +161,18 @@
     </nameField>
     <pluralLabel>Teams</pluralLabel>
     <searchLayouts>
-        <searchResultsAdditionalFields
-        >Facilitator__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Client__c</searchResultsAdditionalFields>
         <searchResultsAdditionalFields
         >Handler__c</searchResultsAdditionalFields>
         <searchResultsAdditionalFields
-        >NextPatDue__c</searchResultsAdditionalFields>
+        >PatValidUntil__c</searchResultsAdditionalFields>
         <searchResultsAdditionalFields
         >PatCount__c</searchResultsAdditionalFields>
         <searchResultsAdditionalFields
         >PrimaryCertification__c</searchResultsAdditionalFields>
         <searchResultsAdditionalFields
         >SecondaryCertification__c</searchResultsAdditionalFields>
-        <searchResultsAdditionalFields
-        >Trainer__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Dog__c</searchResultsAdditionalFields>
     </searchLayouts>
     <sharingModel>ReadWrite</sharingModel>
     <visibility>Public</visibility>

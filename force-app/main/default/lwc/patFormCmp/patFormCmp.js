@@ -17,7 +17,7 @@ import TEAM_FIELD from "@salesforce/schema/PublicAccessTest__c.Team__c";
 import TYPE_FIELD from "@salesforce/schema/PublicAccessTest__c.Type__c";
 import VALID_UNTIL_FIELD from "@salesforce/schema/PublicAccessTest__c.ValidUntil__c";
 
-import PAT_DUE_FIELD from "@salesforce/schema/Team__c.NextPatDue__c";
+import PAT_DUE_FIELD from "@salesforce/schema/Team__c.PatValidUntil__c";
 import PAT_COUNT_FIELD from "@salesforce/schema/Team__c.PatCount__c";
 
 // Import message service features required for subscribing and the message channel

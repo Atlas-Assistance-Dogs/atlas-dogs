@@ -73,10 +73,10 @@
         <apexClass>TestProgramAssignmentTrigger</apexClass>
         <enabled>true</enabled>
     </classAccesses>
-    <classAccesses>
+    <!--classAccesses>
         <apexClass>TestPublicAccessTestController</apexClass>
         <enabled>true</enabled>
-    </classAccesses>
+    </classAccesses-->
     <classAccesses>
         <apexClass>TestReminders</apexClass>
         <enabled>true</enabled>
@@ -301,11 +301,6 @@
         <editable>false</editable>
         <field>DogRelationship__c.Dog__c</field>
         <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>DogRelationship__c.Team__c</field>
-        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
@@ -564,7 +559,7 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Team__c.Facilitator__c</field>
+        <field>Team__c.Client__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -574,7 +569,7 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Team__c.NextPatDue__c</field>
+        <field>Team__c.PatValidUntil__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -594,7 +589,7 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Team__c.Trainer__c</field>
+        <field>Team__c.Dog__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

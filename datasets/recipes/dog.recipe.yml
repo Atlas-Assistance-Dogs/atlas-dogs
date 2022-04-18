@@ -379,11 +379,11 @@
 - object: Team__c
   nickname: team
   fields:
-      Facilitator__c:
+      Client__c:
           random_reference: Contact
       Handler__c:
           random_reference: Contact
-      NextPatDue__c:
+      PatValidUntil__c:
           date_between:
               start_date: today
               end_date: +1y
@@ -393,22 +393,28 @@
               max: 5
       PrimaryCertification__c:
           random_choice:
-              - Atlas
-              - KPA
-              - CCPDT
-              - IAABC
-              - CBCC
-              - None
+              - Allergen Alert
+              - Autism
+              - Diabetes Alert
+              - Hearing Alert
+              - Medical Alert
+              - Medical Assistance
+              - Mobility
+              - Psychiatric
+              - Seizure Response
       SecondaryCertification__c:
           random_choice:
-              - Atlas
-              - KPA
-              - CCPDT
-              - IAABC
-              - CBCC
-              - None
-      Trainer__c:
-          random_reference: Contact
+              - Allergen Alert
+              - Autism
+              - Diabetes Alert
+              - Hearing Alert
+              - Medical Alert
+              - Medical Assistance
+              - Mobility
+              - Psychiatric
+              - Seizure Response
+      Dog__c:
+          reference: dog
 
 - object: DogRelationship__c
   fields:
@@ -422,11 +428,9 @@
   nickname: clientRelationship
   fields:
       Contact__c:
-          random_reference: Contact
+          reference: team.Client__c
       Dog__c:
           reference: dog
-      Team__c:
-          reference: team
       Type__c: Client
 
 - object: DogRelationship__c
@@ -479,7 +483,4 @@
               - Initial
               - Recertification
               - Retest
-      ValidUntil__c:
-          date_between:
-              start_date: today
-              end_date: +1y
+      ValidUntil__c: ${{ date(DateCompleted__c) + relativedelta(months=12) }}

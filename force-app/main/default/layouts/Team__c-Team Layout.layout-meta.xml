@@ -21,7 +21,11 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Facilitator__c</field>
+                <field>Client__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Handler__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
@@ -35,11 +39,11 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>NextPatDue__c</field>
+                <field>PatValidUntil__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Trainer__c</field>
+                <field>Dog__c</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsTopToBottom</style>
@@ -74,12 +78,6 @@
         <style>CustomLinks</style>
     </layoutSections>
     <relatedLists>
-        <fields>Contact__c</fields>
-        <fields>Dog__c</fields>
-        <fields>Type__c</fields>
-        <relatedList>DogRelationship__c.Team__c</relatedList>
-    </relatedLists>
-    <relatedLists>
         <relatedList>RelatedContentNoteList</relatedList>
     </relatedLists>
     <relatedLists>
@@ -97,7 +95,7 @@
     <showRunAssignmentRulesCheckbox>false</showRunAssignmentRulesCheckbox>
     <showSubmitAndAttachButton>false</showSubmitAndAttachButton>
     <summaryLayout>
-        <masterLabel>00h1D000006rXql</masterLabel>
+        <masterLabel>00h2D0000027ZMf</masterLabel>
         <sizeX>4</sizeX>
         <sizeY>0</sizeY>
         <summaryLayoutStyle>Default</summaryLayoutStyle>
