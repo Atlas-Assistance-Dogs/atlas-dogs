@@ -189,14 +189,6 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>ClientTeamPrimaryCertification__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>ClientTeamSecondaryCertification__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
                 <field>ClientMedicalDevices__c</field>
             </layoutItems>
         </layoutColumns>
