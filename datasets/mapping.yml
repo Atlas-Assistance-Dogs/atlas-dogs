@@ -1,15 +1,3 @@
-Insert ContentVersion:
-    sf_object: ContentVersion
-    fields:
-        - Category__c
-        - ContentLocation
-        - IsAssetEnabled
-        - IsMajorVersion
-        - Origin
-        - SharingOption
-        - SharingPrivacy
-        - Title
-        - Type__c
 Insert npo02__Household__c:
     sf_object: npo02__Household__c
     fields:

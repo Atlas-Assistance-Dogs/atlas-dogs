@@ -62,11 +62,6 @@
         </itemInstances>
         <itemInstances>
             <componentInstance>
-                <componentName>relatedPatsCmp</componentName>
-            </componentInstance>
-        </itemInstances>
-        <itemInstances>
-            <componentInstance>
                 <componentName>relatedBackgroundChecksCmp</componentName>
             </componentInstance>
         </itemInstances>
