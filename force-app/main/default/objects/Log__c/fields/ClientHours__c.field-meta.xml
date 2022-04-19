@@ -4,7 +4,7 @@
     <description
     >Number of hours the Team Facilitator has worked with the client since the last log</description>
     <externalId>false</externalId>
-    <label>Client Hours</label>
+    <label>Hours Worked with Client</label>
     <precision>4</precision>
     <required>false</required>
     <scale>0</scale>
