@@ -105,6 +105,17 @@ export default class PatFormCmp extends NavigationMixin(LightningElement) {
 
     handleSubmit(event) {
         event.preventDefault();
+        const documents = this.relatedFiles?.map((file) => file.documentId);
+        if (!documents) {
+            this.dispatchEvent(
+                new ShowToastEvent({
+                    title: "Error!!",
+                    message: "At least one file is required for a PAT.",
+                    variant: "error"
+                })
+            );
+            return;
+        }
         let fields = [
             ...this.template.querySelectorAll("lightning-input-field")
         ];
@@ -117,7 +128,7 @@ export default class PatFormCmp extends NavigationMixin(LightningElement) {
         }
         record.Id = this.recordId;
         if (this.mode === "create") {
-            this.createNewPat(record);
+            this.createNewPat(record, documents);
         } else {
             this.editPat(record);
         }
@@ -127,10 +138,10 @@ export default class PatFormCmp extends NavigationMixin(LightningElement) {
     messageContext;
 
     // Create a new log
-    createNewPat(record) {
+    createNewPat(record, documents) {
         createPat({
             record: record,
-            documentIds: this.relatedFiles?.map((file) => file.documentId)
+            documentIds: documents
         })
             .then(() => {
                 this.dispatchEvent(new CustomEvent("changed"));
@@ -234,8 +245,11 @@ export default class PatFormCmp extends NavigationMixin(LightningElement) {
 
     handleUploadFinished(event) {
         this.isErrorMessage = false;
-        this.message = "File Uploaded Successfully";
-        this.relatedFiles.concat(event.detail.files);
+        if (this.relatedFiles) {
+            this.relatedFiles = this.relatedFiles.concat(event.detail.files);
+        } else {
+            this.relatedFiles = event.detail.files;
+        }
     }
 
     handleRowAction(event) {
