@@ -11,15 +11,6 @@ import DATE_FIELD from "@salesforce/schema/BackgroundCheck__c.Date__c";
 import NOTES_FIELD from "@salesforce/schema/BackgroundCheck__c.Notes__c";
 import RESULT_FIELD from "@salesforce/schema/BackgroundCheck__c.Status__c";
 
-// Import message service features required for subscribing and the message channel
-import {
-    subscribe,
-    unsubscribe,
-    APPLICATION_SCOPE,
-    MessageContext
-} from "lightning/messageService";
-import backgroundCheckForm from "@salesforce/messageChannel/BackgroundCheckForm__c";
-
 export default class BackgroundCheckFormCmp extends NavigationMixin(
     LightningElement
 ) {
@@ -28,8 +19,6 @@ export default class BackgroundCheckFormCmp extends NavigationMixin(
     currentCv;
     wiredCv;
     message;
-    contentType = "Background Check";
-    title = "Background Check";
 
     objectName = CONTACT_FIELD.objectApiName;
 
@@ -53,15 +42,6 @@ export default class BackgroundCheckFormCmp extends NavigationMixin(
             ".xls",
             ".csv"
         ];
-    }
-
-    @api
-    openModal() {
-        this.message = "";
-        this.template.querySelector("c-modal-cmp").openModal();
-    }
-    closeModal() {
-        this.template.querySelector("c-modal-cmp").closeModal();
     }
 
     get hasFile() {
@@ -104,6 +84,7 @@ export default class BackgroundCheckFormCmp extends NavigationMixin(
         return name;
     }
 
+    @api
     handleSubmit(event) {
         event.preventDefault();
         let fields = [
@@ -113,10 +94,23 @@ export default class BackgroundCheckFormCmp extends NavigationMixin(
             (a, x) => ({ ...a, [x.fieldName]: x.value }),
             {}
         );
-        record.Contact__c = this.contactId;
+        if (this.contactId) {
+            record.Contact__c = this.contactId;
+        }
         var documentId = null;
         if (this.uploadedFile) {
             documentId = this.uploadedFile.documentId;
+        }
+        if (!documentId && !this.currentCv) {
+            this.dispatchEvent(
+                new ShowToastEvent({
+                    title: "Error!!",
+                    message:
+                        "A document must be assigned to the background check.",
+                    variant: "error"
+                })
+            );
+            return;
         }
         if (!this.recordId) {
             this.createBC(record, documentId);
@@ -131,9 +125,8 @@ export default class BackgroundCheckFormCmp extends NavigationMixin(
             check: record,
             documentId: documentId
         })
-            .then((data) => {
-                this.dispatchEvent(new CustomEvent("changed"));
-                this.closeModal();
+            .then((id) => {
+                this.dispatchEvent(new CustomEvent("changed", { detail: id }));
             })
             .catch((error) => {
                 this.dispatchEvent(
@@ -143,7 +136,6 @@ export default class BackgroundCheckFormCmp extends NavigationMixin(
                         variant: "error"
                     })
                 );
-                this.closeModal();
             });
     }
 
@@ -152,8 +144,9 @@ export default class BackgroundCheckFormCmp extends NavigationMixin(
             check: record
         })
             .then(() => {
-                this.dispatchEvent(new CustomEvent("changed"));
-                this.closeModal();
+                this.dispatchEvent(
+                    new CustomEvent("changed", { detail: this.recordId })
+                );
             })
             .catch((error) => {
                 this.dispatchEvent(
@@ -163,44 +156,6 @@ export default class BackgroundCheckFormCmp extends NavigationMixin(
                         variant: "error"
                     })
                 );
-                this.closeModal();
             });
-    }
-
-    @wire(MessageContext)
-    messageContext;
-
-    // Encapsulate logic for Lightning message service subscribe and unsubsubscribe
-    subscribeToMessageChannel() {
-        if (!this.subscription) {
-            this.subscription = subscribe(
-                this.messageContext,
-                backgroundCheckForm,
-                (message) => this.handleMessage(message),
-                { scope: APPLICATION_SCOPE }
-            );
-        }
-    }
-
-    unsubscribeToMessageChannel() {
-        unsubscribe(this.subscription);
-        this.subscription = null;
-    }
-
-    // Handler for message received by component
-    handleMessage(message) {
-        this.recordId = message.recordId;
-        this.currentCv = null;
-        refreshApex();
-        this.openModal();
-    }
-
-    // Standard lifecycle hooks used to subscribe and unsubsubscribe to the message channel
-    connectedCallback() {
-        this.subscribeToMessageChannel();
-    }
-
-    disconnectedCallback() {
-        this.unsubscribeToMessageChannel();
     }
 }

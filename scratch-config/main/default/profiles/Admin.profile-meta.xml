@@ -80,11 +80,6 @@
     <custom>false</custom>
     <fieldPermissions>
         <editable>false</editable>
-        <field>BackgroundCheck__c.Date__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
         <field>BackgroundCheck__c.Notes__c</field>
         <readable>false</readable>
     </fieldPermissions>
