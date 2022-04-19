@@ -73,10 +73,10 @@
         <apexClass>TestProgramAssignmentTrigger</apexClass>
         <enabled>true</enabled>
     </classAccesses>
-    <!--classAccesses>
+    <classAccesses>
         <apexClass>TestPublicAccessTestController</apexClass>
         <enabled>true</enabled>
-    </classAccesses-->
+    </classAccesses>
     <classAccesses>
         <apexClass>TestReminders</apexClass>
         <enabled>true</enabled>
@@ -563,33 +563,33 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>false</editable>
-        <field>Team__c.Handler__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Team__c.PatValidUntil__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Team__c.PatCount__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Team__c.PrimaryCertification__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Team__c.SecondaryCertification__c</field>
-        <readable>false</readable>
+        <editable>true</editable>
+        <field>Team__c.Dog__c</field>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Team__c.Dog__c</field>
+        <field>Team__c.Handler__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Team__c.PatCount__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Team__c.PatValidUntil__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Team__c.PrimaryCertification__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Team__c.SecondaryCertification__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

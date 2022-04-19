@@ -94,7 +94,9 @@ export default class PatFormCmp extends NavigationMixin(LightningElement) {
     }
 
     handleChange(event) {
-        this.passed = event.detail.value === "Passed";
+        this.passed =
+            event.detail.value === "Passed" ||
+            event.detail.value === "Provisionally Passed";
     }
 
     updateDueDate(event) {}
@@ -189,7 +191,9 @@ export default class PatFormCmp extends NavigationMixin(LightningElement) {
             this.relatedFiles = null;
         }
         this.mode = message.recordId ? "edit" : "create";
-        this.passed = message.status === "Passed";
+        this.passed =
+            message.status === "Passed" ||
+            message.status === "Provisionally Passed";
         this.openModal();
     }
 

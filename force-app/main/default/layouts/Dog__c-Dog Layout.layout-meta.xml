@@ -199,6 +199,15 @@
         <relatedList>DogRelationship__c.Dog__c</relatedList>
     </relatedLists>
     <relatedLists>
+        <fields>NAME</fields>
+        <fields>Client__c</fields>
+        <fields>Handler__c</fields>
+        <fields>PrimaryCertification__c</fields>
+        <fields>SecondaryCertification__c</fields>
+        <fields>PatValidUntil__c</fields>
+        <relatedList>Team__c.Dog__c</relatedList>
+    </relatedLists>
+    <relatedLists>
         <fields>TASK.SUBJECT</fields>
         <fields>TASK.WHO_NAME</fields>
         <fields>ACTIVITY.TASK</fields>
@@ -216,7 +225,7 @@
     <showRunAssignmentRulesCheckbox>false</showRunAssignmentRulesCheckbox>
     <showSubmitAndAttachButton>false</showSubmitAndAttachButton>
     <summaryLayout>
-        <masterLabel>00h1D000006rWIg</masterLabel>
+        <masterLabel>00h0R000006yhn6</masterLabel>
         <sizeX>2</sizeX>
         <sizeY>2</sizeY>
         <summaryLayoutItems>
