@@ -227,9 +227,11 @@ export default class CeuFormCmp extends NavigationMixin(LightningElement) {
     }
 
     handleUploadFinished(event) {
-        this.isErrorMessage = false;
-        this.message = "File Uploaded Successfully";
-        this.relatedFiles = this.relatedFiles.concat(event.detail.files);
+        if (this.relatedFiles) {
+            this.relatedFiles = this.relatedFiles.concat(event.detail.files);
+        } else {
+            this.relatedFiles = event.detail.files;
+        }
     }
 
     handleRowAction(event) {

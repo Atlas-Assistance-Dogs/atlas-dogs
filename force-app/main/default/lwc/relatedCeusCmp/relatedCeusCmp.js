@@ -20,6 +20,7 @@ const COLS = [
     { label: "Date Completed", fieldName: "DateCompleted__c", type: "date" },
     { label: "Program Hours", fieldName: "ProgramHours__c", type: "number" },
     { label: "Role", fieldName: "Role__c" },
+    { label: "Status", fieldName: "Status__c" },
     { type: "action", typeAttributes: { rowActions: actions } }
 ];
 
