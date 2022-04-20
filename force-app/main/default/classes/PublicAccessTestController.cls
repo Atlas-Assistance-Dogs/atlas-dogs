@@ -1,25 +1,19 @@
 public with sharing class PublicAccessTestController {
     @AuraEnabled(Cacheable=true)
-    public static List<PublicAccessTest__c> getRelatedPats(id contactId) {
+    public static List<PublicAccessTest__c> getRelatedPats(id recordId) {
         try {
             return [
                 SELECT
                     Assessor__c,
                     AssessorComments__c,
-                    Client__c,
                     DateCompleted__c,
-                    Dog__c,
-                    Dog__r.Name,
-                    Handler__c,
                     Location__c,
                     ReviewComments__c,
                     Status__c,
+                    Team__c,
                     Type__c
                 FROM PublicAccessTest__c
-                WHERE
-                    Assessor__c = :contactId
-                    OR Client__c = :contactId
-                    OR Handler__c = :contactId
+                WHERE Assessor__c = :recordId OR Team__c = :recordId
             ];
         } catch (Exception e) {
             throw new AuraHandledException(e.getMessage());

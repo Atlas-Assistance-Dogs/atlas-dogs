@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Handler__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Handler in the team, if not the client</description>
+    <externalId>false</externalId>
+    <label>Handler</label>
+    <referenceTo>Contact</referenceTo>
+    <relationshipName>Team</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

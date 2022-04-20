@@ -162,10 +162,10 @@
           fake: postalcode
       OtherCountry:
           fake: country
-      OtherLatitude:
-          fake: latitude
-      OtherLongitude:
-          fake: longitude
+      #   OtherLatitude:
+      #       fake: latitude
+      #   OtherLongitude:
+      #       fake: longitude
       OtherGeocodeAccuracy:
           random_choice:
               - Address
@@ -189,10 +189,10 @@
           fake: postalcode
       MailingCountry:
           fake: country
-      MailingLatitude:
-          fake: latitude
-      MailingLongitude:
-          fake: longitude
+      #   MailingLatitude:
+      #       fake: latitude
+      #   MailingLongitude:
+      #       fake: longitude
       MailingGeocodeAccuracy:
           random_choice:
               - Address
@@ -291,22 +291,6 @@
                             - On Hold
                             - Inactive
                             - None
-      ClientTeamPrimaryCertification__c:
-          random_choice:
-              - Atlas
-              - KPA
-              - CCPDT
-              - IAABC
-              - CBCC
-              - None
-      ClientTeamSecondaryCertification__c:
-          random_choice:
-              - Atlas
-              - KPA
-              - CCPDT
-              - IAABC
-              - CBCC
-              - None
       CriminalConviction__c:
           fake: boolean
       CriminalConvictionNotes__c:
