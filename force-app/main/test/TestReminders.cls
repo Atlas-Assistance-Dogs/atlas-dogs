@@ -3,7 +3,7 @@ public with sharing class TestReminders {
     // Dummy CRON expression: midnight on March 15.
     // Because this is a test, job executes
     // immediately after Test.stopTest().
-    public static String CRON_EXP = '0 0 0 15 3 ? 2033';
+    public static String CRON_EXP = '0 0 0 15 3 ? 2026';
     private static Group adminGroup;
     private static Contact joe;
     private static final String GROUP_NAME = 'Program_Administrator';
