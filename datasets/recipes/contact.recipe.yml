@@ -425,12 +425,26 @@
               - Active Projects- Volunteer Recruitment and Retention
       GW_Volunteers__Volunteer_Skills__c:
           random_choice:
-              - Computer usage
-              - Manual labor
-              - Marketing
-              - Fundraising
-              - Event Planning
-              - Landscaping
+              - Marketing and Branding
+              - Sales
+              - Website development
+              - SEO
+              - Outreach/Networking
+              - Fundraising/Grants
+              - Medical/Mental Health
+              - Financial/Bookkeeping
+              - Legal
+              - Education/Course Development
+              - Technology/Infrastructure
+              - Writing/Communications
+              - Project/Program Management
+              - Nonprofit Leadership
+              - Dog Training/Behavior/Veterinary
+              - Disability Advocacy
+              - Administration
+              - Photography/Videography
+              - Social Media
+              - Graphic Design
       GW_Volunteers__Volunteer_Notes__c:
           fake: paragraph
       GW_Volunteers__Volunteer_Status__c:
