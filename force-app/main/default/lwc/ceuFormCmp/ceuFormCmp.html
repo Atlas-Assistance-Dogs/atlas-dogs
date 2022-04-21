@@ -75,7 +75,7 @@
                 multiple="true"
                 slot="actions"
             ></lightning-file-upload>
-            <template if:true={relatedFiles}>
+            <template if:true={hasFiles}>
                 <lightning-datatable
                     data={relatedFiles}
                     columns={columns}

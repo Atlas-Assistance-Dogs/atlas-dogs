@@ -103,6 +103,18 @@ export default class CeuFormCmp extends NavigationMixin(LightningElement) {
 
     handleSubmit(event) {
         event.preventDefault();
+        const docIds = this.relatedFiles?.map((file) => file.documentId);
+        if (!docIds || docIds.length === 0) {
+            this.dispatchEvent(
+                new ShowToastEvent({
+                    title: "Error!!",
+                    message: "At least one file is required!",
+                    variant: "error"
+                })
+            );
+            return;
+        }
+
         let fields = [
             ...this.template.querySelectorAll("lightning-input-field")
         ];
@@ -113,7 +125,7 @@ export default class CeuFormCmp extends NavigationMixin(LightningElement) {
         record.Id = this.recordId;
         record.Trainer__c = this.contactId;
         if (this.mode === "create") {
-            this.createNewCeu(record);
+            this.createNewCeu(record, docIds);
         } else {
             this.editCeu(record);
         }
@@ -123,10 +135,10 @@ export default class CeuFormCmp extends NavigationMixin(LightningElement) {
     messageContext;
 
     // Create a new log
-    createNewCeu(record) {
+    createNewCeu(record, docIds) {
         createCeu({
             record: record,
-            documentIds: this.relatedFiles?.map((file) => file.documentId)
+            documentIds: docIds
         })
             .then(() => {
                 this.dispatchEvent(new CustomEvent("changed"));
@@ -198,6 +210,10 @@ export default class CeuFormCmp extends NavigationMixin(LightningElement) {
 
     disconnectedCallback() {
         this.unsubscribeToMessageChannel();
+    }
+
+    get hasFiles() {
+        return this.relatedFiles !== null && this.relatedFiles.length > 0;
     }
 
     @wire(getRelatedFiles, { recordId: "$recordId" }) filesLst(result) {
