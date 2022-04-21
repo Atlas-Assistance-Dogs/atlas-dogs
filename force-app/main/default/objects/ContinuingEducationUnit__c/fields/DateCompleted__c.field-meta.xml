@@ -3,7 +3,7 @@
     <fullName>DateCompleted__c</fullName>
     <externalId>false</externalId>
     <label>Date Completed</label>
-    <required>false</required>
+    <required>true</required>
     <trackTrending>false</trackTrending>
     <type>Date</type>
 </CustomField>

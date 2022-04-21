@@ -67,6 +67,11 @@
         </itemInstances>
         <itemInstances>
             <componentInstance>
+                <componentName>relatedCeusCmp</componentName>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
                 <componentInstanceProperties>
                     <name>relatedListComponentOverride</name>
                     <value>NONE</value>
