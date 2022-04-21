@@ -1,3 +1,6 @@
+/* This can be run using Anonymous Apex:
+sfdx force:apex:execute -f datasets/recipes/cleanup.apex -u atlas-dog__qa
+*/
 list<PublicAccessTest__c> pats = [select id from PublicAccessTest__c];
 delete pats;
 list<Log__c> logs = [select id from Log__c];
@@ -30,3 +33,7 @@ list<Account> accounts = [select id from Account];
 delete accounts;
 list<Campaign> campaigns = [select id from Campaign];
 delete campaigns;
+list<npo02__Household__c> households = [select id from npo02__Household__c];
+delete households;
+list<npsp__Batch__c> batches = [select id from npsp__Batch__c];
+delete batches;
