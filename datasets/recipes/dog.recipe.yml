@@ -332,10 +332,6 @@
                     fake: postalcode
                 ShippingCountry:
                     fake: country
-                ShippingLatitude:
-                    fake: latitude
-                ShippingLongitude:
-                    fake: longitude
                 Phone:
                     fake: phone_number
                 Fax:
@@ -380,6 +376,47 @@
       Email:
           fake: email
 
+- object: Team__c
+  nickname: team
+  fields:
+      Client__c:
+          random_reference: Contact
+      Handler__c:
+          random_reference: Contact
+      Name: ${{ Client__c.FirstName }}-${{ Dog__c.Name }}
+      PatValidUntil__c:
+          date_between:
+              start_date: today
+              end_date: +1y
+      PatCount__c:
+          random_number:
+              min: 0
+              max: 5
+      PrimaryCertification__c:
+          random_choice:
+              - Allergen Alert
+              - Autism
+              - Diabetes Alert
+              - Hearing Alert
+              - Medical Alert
+              - Medical Assistance
+              - Mobility
+              - Psychiatric
+              - Seizure Response
+      SecondaryCertification__c:
+          random_choice:
+              - Allergen Alert
+              - Autism
+              - Diabetes Alert
+              - Hearing Alert
+              - Medical Alert
+              - Medical Assistance
+              - Mobility
+              - Psychiatric
+              - Seizure Response
+      Dog__c:
+          reference: dog
+
 - object: DogRelationship__c
   fields:
       Contact__c:
@@ -392,7 +429,7 @@
   nickname: clientRelationship
   fields:
       Contact__c:
-          random_reference: Contact
+          reference: team.Client__c
       Dog__c:
           reference: dog
       Type__c: Client
@@ -425,16 +462,10 @@
           random_reference: Contact
       AssessorComments__c:
           fake: paragraph
-      Client__c:
-          reference: clientRelationship.Contact__c
       DateCompleted__c:
           date_between:
               start_date: -1y
               end_date: today
-      Dog__c:
-          reference: dog
-      Handler__c:
-          reference: humanRelationship.Contact__c
       Location__c:
           random_choice:
               - In Person
@@ -446,8 +477,11 @@
               - Passed
               - Failed
               - Provisionally Passed
+      Team__c:
+          reference: team
       Type__c:
           random_choice:
               - Initial
               - Recertification
               - Retest
+      ValidUntil__c: ${{ date(DateCompleted__c) + relativedelta(months=12) }}

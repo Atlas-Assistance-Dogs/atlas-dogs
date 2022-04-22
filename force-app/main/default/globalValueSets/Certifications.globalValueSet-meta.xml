@@ -1,36 +1,51 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
     <customValue>
-        <fullName>Atlas</fullName>
-        <default>true</default>
-        <label>Atlas</label>
+        <fullName>Allergen Alert</fullName>
+        <default>false</default>
+        <label>Allergen Alert</label>
     </customValue>
     <customValue>
-        <fullName>KPA</fullName>
+        <fullName>Autism</fullName>
         <default>false</default>
-        <label>KPA</label>
+        <label>Autism</label>
     </customValue>
     <customValue>
-        <fullName>CCPDT</fullName>
+        <fullName>Diabetes Alert</fullName>
         <default>false</default>
-        <label>CCPDT</label>
+        <label>Diabetes Alert</label>
     </customValue>
     <customValue>
-        <fullName>IAABC</fullName>
+        <fullName>Hearing Alert</fullName>
         <default>false</default>
-        <label>IAABC</label>
+        <label>Hearing Alert</label>
     </customValue>
     <customValue>
-        <fullName>CBCC</fullName>
+        <fullName>Medical Alert</fullName>
         <default>false</default>
-        <label>CBCC</label>
+        <label>Medical Alert</label>
     </customValue>
     <customValue>
-        <fullName>None</fullName>
+        <fullName>Medical Assistance</fullName>
         <default>false</default>
-        <label>None</label>
+        <label>Medical Assistance</label>
     </customValue>
-    <description>Client Dog Team Certifications</description>
-    <masterLabel>Certifications</masterLabel>
+    <customValue>
+        <fullName>Mobility</fullName>
+        <default>false</default>
+        <label>Mobility</label>
+    </customValue>
+    <customValue>
+        <fullName>Psychiatric</fullName>
+        <default>false</default>
+        <label>Psychiatric</label>
+    </customValue>
+    <customValue>
+        <fullName>Seizure Response</fullName>
+        <default>false</default>
+        <label>Seizure Response</label>
+    </customValue>
+    <description>PAT Certifications</description>
+    <masterLabel>PAT Certifications</masterLabel>
     <sorted>false</sorted>
 </GlobalValueSet>

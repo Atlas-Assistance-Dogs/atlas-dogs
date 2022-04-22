@@ -8,14 +8,17 @@ import { refreshApex } from "@salesforce/apex";
 
 import ASSESSOR_FIELD from "@salesforce/schema/PublicAccessTest__c.Assessor__c";
 import ASSESSOR_COMMENTS_FIELD from "@salesforce/schema/PublicAccessTest__c.AssessorComments__c";
-import CLIENT_FIELD from "@salesforce/schema/PublicAccessTest__c.Client__c";
 import DATE_FIELD from "@salesforce/schema/PublicAccessTest__c.DateCompleted__c";
-import DOG_FIELD from "@salesforce/schema/PublicAccessTest__c.Dog__c";
-import HANDLER_FIELD from "@salesforce/schema/PublicAccessTest__c.Handler__c";
+import HANDLER_FIELD from "@salesforce/schema/Team__c.Handler__c";
 import LOCATION_FIELD from "@salesforce/schema/PublicAccessTest__c.Location__c";
 import REVIEW_COMMENTS_FIELD from "@salesforce/schema/PublicAccessTest__c.ReviewComments__c";
 import STATUS_FIELD from "@salesforce/schema/PublicAccessTest__c.Status__c";
+import TEAM_FIELD from "@salesforce/schema/PublicAccessTest__c.Team__c";
 import TYPE_FIELD from "@salesforce/schema/PublicAccessTest__c.Type__c";
+import VALID_UNTIL_FIELD from "@salesforce/schema/PublicAccessTest__c.ValidUntil__c";
+
+import PAT_DUE_FIELD from "@salesforce/schema/Team__c.PatValidUntil__c";
+import PAT_COUNT_FIELD from "@salesforce/schema/Team__c.PatCount__c";
 
 // Import message service features required for subscribing and the message channel
 import {
@@ -41,25 +44,28 @@ const COLS = [
 ];
 
 export default class PatFormCmp extends NavigationMixin(LightningElement) {
-    @api contactId;
+    @api teamId;
     recordId;
-    role = "Client";
     title = "Public Access Test Record";
+    passed = false;
     mode = "create";
     relatedFiles = null;
     wiredFilesList;
     object = ASSESSOR_FIELD.objectApiName;
+    teamObject = PAT_COUNT_FIELD.objectApiName;
     fields = {
         assessor: ASSESSOR_FIELD,
         assessorComments: ASSESSOR_COMMENTS_FIELD,
-        client: CLIENT_FIELD,
         date: DATE_FIELD,
-        dog: DOG_FIELD,
         handler: HANDLER_FIELD,
         location: LOCATION_FIELD,
         reviewComments: REVIEW_COMMENTS_FIELD,
         status: STATUS_FIELD,
-        type: TYPE_FIELD
+        team: TEAM_FIELD,
+        type: TYPE_FIELD,
+        patDue: PAT_DUE_FIELD,
+        patCount: PAT_COUNT_FIELD,
+        validUntil: VALID_UNTIL_FIELD
     };
 
     columns = COLS;
@@ -78,26 +84,6 @@ export default class PatFormCmp extends NavigationMixin(LightningElement) {
         ];
     }
 
-    get options() {
-        return [
-            { label: "Assessor", value: "Assessor" },
-            { label: "Client", value: "Client" },
-            { label: "Handler", value: "Handler" }
-        ];
-    }
-
-    get isAssessor() {
-        return this.role === "Assessor";
-    }
-
-    get isClient() {
-        return this.role === "Client";
-    }
-
-    get isHandler() {
-        return this.role === "Handler";
-    }
-
     @api
     openModal() {
         this.template.querySelector("c-modal-cmp").openModal();
@@ -108,13 +94,28 @@ export default class PatFormCmp extends NavigationMixin(LightningElement) {
     }
 
     handleChange(event) {
-        this.role = event.detail.value;
+        this.passed =
+            event.detail.value === "Passed" ||
+            event.detail.value === "Provisionally Passed";
     }
+
+    updateDueDate(event) {}
 
     handleClose() {}
 
     handleSubmit(event) {
         event.preventDefault();
+        const documents = this.relatedFiles?.map((file) => file.documentId);
+        if (!documents) {
+            this.dispatchEvent(
+                new ShowToastEvent({
+                    title: "Error!!",
+                    message: "At least one file is required for a PAT.",
+                    variant: "error"
+                })
+            );
+            return;
+        }
         let fields = [
             ...this.template.querySelectorAll("lightning-input-field")
         ];
@@ -122,22 +123,12 @@ export default class PatFormCmp extends NavigationMixin(LightningElement) {
             (a, x) => ({ ...a, [x.fieldName]: x.value }),
             {}
         );
-        switch (this.role) {
-            case "Client":
-                record.Client__c = this.contactId;
-                break;
-
-            case "Assessor":
-                record.Assessor__c = this.contactId;
-                break;
-
-            case "Handler":
-                record.Handler__c = this.contactId;
-                break;
+        if (this.teamId) {
+            record.Team__c = this.teamId;
         }
         record.Id = this.recordId;
         if (this.mode === "create") {
-            this.createNewPat(record);
+            this.createNewPat(record, documents);
         } else {
             this.editPat(record);
         }
@@ -147,10 +138,10 @@ export default class PatFormCmp extends NavigationMixin(LightningElement) {
     messageContext;
 
     // Create a new log
-    createNewPat(record) {
+    createNewPat(record, documents) {
         createPat({
             record: record,
-            documentIds: this.relatedFiles?.map((file) => file.documentId)
+            documentIds: documents
         })
             .then(() => {
                 this.dispatchEvent(new CustomEvent("changed"));
@@ -211,7 +202,9 @@ export default class PatFormCmp extends NavigationMixin(LightningElement) {
             this.relatedFiles = null;
         }
         this.mode = message.recordId ? "edit" : "create";
-        this.role = message.role;
+        this.passed =
+            message.status === "Passed" ||
+            message.status === "Provisionally Passed";
         this.openModal();
     }
 
@@ -252,8 +245,11 @@ export default class PatFormCmp extends NavigationMixin(LightningElement) {
 
     handleUploadFinished(event) {
         this.isErrorMessage = false;
-        this.message = "File Uploaded Successfully";
-        this.relatedFiles = event.detail.files;
+        if (this.relatedFiles) {
+            this.relatedFiles = this.relatedFiles.concat(event.detail.files);
+        } else {
+            this.relatedFiles = event.detail.files;
+        }
     }
 
     handleRowAction(event) {

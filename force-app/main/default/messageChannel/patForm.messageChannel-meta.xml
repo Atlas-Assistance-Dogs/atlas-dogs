@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <LightningMessageChannel xmlns="http://soap.sforce.com/2006/04/metadata">
-    <masterLabel>Public Access Test Form</masterLabel>
-    <isExposed>true</isExposed>
     <description
     >Lightning Message Channel to show Create/View/Update PAT Form.</description>
+    <isExposed>true</isExposed>
     <lightningMessageFields>
-        <fieldName>recordId</fieldName>
         <description
         >This is the record Id to view or edit, empty for create.</description>
+        <fieldName>recordId</fieldName>
     </lightningMessageFields>
     <lightningMessageFields>
-        <fieldName>mode</fieldName>
         <description>Mode is Create, Update, or View</description>
+        <fieldName>mode</fieldName>
     </lightningMessageFields>
     <lightningMessageFields>
-        <fieldName>role</fieldName>
-        <description>Role the contact has for the record.</description>
+        <description>Status of the PAT.</description>
+        <fieldName>status</fieldName>
     </lightningMessageFields>
+    <masterLabel>Public Access Test Form</masterLabel>
 </LightningMessageChannel>

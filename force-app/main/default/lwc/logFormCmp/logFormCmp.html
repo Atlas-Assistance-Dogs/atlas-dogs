@@ -6,93 +6,145 @@
         onclose={handleClose}
     >
         <div slot="body">
-            <lightning-radio-group
+            <lightning-checkbox-group
                 name="role"
                 label="Role"
                 options={options}
                 value={roles}
                 onchange={handleChange}
             >
-            </lightning-radio-group>
+            </lightning-checkbox-group>
             <lightning-record-edit-form
-                object-api-name="Log__c"
+                object-api-name={objectName}
                 class="slds-scrollable"
                 style="height: 25rem"
                 layout-type="full"
                 record-id={recordId}
             >
-                <div class="slds-grid">
+                <div class="slds-grid slds-wrap">
                     <div class="slds-col slds-size_1-of-2">
-                        <!-- Your lightning-input-field components here -->
                         <lightning-input-field
                             field-name={fields.date}
                             class="category slds-p-bottom_medium"
                         ></lightning-input-field>
+                    </div>
+                    <div
+                        if:false={isSubmitter}
+                        class="slds-col slds-size_1-of-2"
+                    >
+                        <lightning-input-field
+                            field-name={fields.submitter}
+                            class="category slds-p-bottom_medium"
+                        ></lightning-input-field>
+                    </div>
+                    <div if:false={isClient} class="slds-col slds-size_1-of-2">
+                        <lightning-input-field
+                            field-name={fields.client}
+                            class="category slds-p-bottom_medium"
+                        ></lightning-input-field>
+                    </div>
+                    <div class="slds-col slds-size_1-of-2">
+                        <lightning-input-field
+                            field-name={fields.dog}
+                            class="category slds-p-bottom_medium"
+                        ></lightning-input-field>
+                    </div>
+                    <div
+                        if:false={isFacilitator}
+                        class="slds-col slds-size_1-of-2"
+                    >
+                        <lightning-input-field
+                            field-name={fields.facilitator}
+                            class="category slds-p-bottom_medium"
+                        ></lightning-input-field>
+                    </div>
+                    <div class="slds-col slds-size_1-of-2">
+                        <lightning-input-field
+                            field-name={fields.handler}
+                            class="category slds-p-bottom_medium"
+                        ></lightning-input-field>
+                    </div>
+                    <div
+                        if:true={isFacilitator}
+                        class="slds-col slds-size_1-of-2"
+                    >
+                        <lightning-input-field
+                            field-name={fields.lesson}
+                            class="category slds-p-bottom_medium"
+                            required
+                        ></lightning-input-field>
+                    </div>
+                    <div
+                        if:true={isFacilitator}
+                        class="slds-col slds-size_1-of-2"
+                    >
+                        <lightning-input-field
+                            field-name={fields.clientHours}
+                            class="category slds-p-bottom_medium"
+                        ></lightning-input-field>
+                    </div>
+                    <div class="slds-col slds-size_1-of-2">
                         <lightning-input-field
                             field-name={fields.publicAccessHours}
                             class="category slds-p-bottom_medium"
                         ></lightning-input-field>
+                    </div>
+                    <div class="slds-col slds-size_1-of-2">
                         <lightning-input-field
                             field-name={fields.otherHours}
                             class="category slds-p-bottom_medium"
                         ></lightning-input-field>
+                    </div>
+                    <div class="slds-col slds-size_2-of-2">
+                        <lightning-input-field
+                            field-name={fields.details}
+                            class="category slds-p-bottom_medium"
+                        ></lightning-input-field>
+                    </div>
+                    <div class="slds-col slds-size_1-of-2">
                         <lightning-input-field
                             field-name={fields.teamSupport}
                             class="category slds-p-bottom_medium"
+                            onchange={handleTeamSupportChange}
                         ></lightning-input-field>
+                    </div>
+                    <div
+                        if:true={wantSupport}
+                        class="slds-col slds-size_2-of-2"
+                    >
+                        <lightning-input-field
+                            field-name={fields.supportDetails}
+                            class="category slds-p-bottom_medium"
+                        ></lightning-input-field>
+                    </div>
+                    <div class="slds-col slds-size_1-of-2">
                         <lightning-input-field
                             field-name={fields.atlasSupport}
                             class="category slds-p-bottom_medium"
                         ></lightning-input-field>
                     </div>
                     <div class="slds-col slds-size_1-of-2">
-                        <!-- More lightning-input-field components here -->
                         <lightning-input-field
-                            field-name={fields.dog}
+                            field-name={fields.stress}
                             class="category slds-p-bottom_medium"
                         ></lightning-input-field>
-                        <template if:false={isClient}>
-                            <lightning-input-field
-                                field-name={fields.client}
-                                class="category slds-p-bottom_medium"
-                            ></lightning-input-field>
-                        </template>
-                        <template if:false={isSubmitter}>
-                            <lightning-input-field
-                                field-name={fields.submitter}
-                                class="category slds-p-bottom_medium"
-                            ></lightning-input-field>
-                        </template>
-                        <template if:false={isFacilitator}>
-                            <lightning-input-field
-                                field-name={fields.facilitator}
-                                class="category slds-p-bottom_medium"
-                            ></lightning-input-field>
-                        </template>
+                    </div>
+                    <div
+                        if:true={isFacilitator}
+                        class="slds-col slds-size_1-of-2"
+                    >
                         <lightning-input-field
-                            field-name={fields.handler}
+                            field-name={fields.clientStress}
                             class="category slds-p-bottom_medium"
                         ></lightning-input-field>
-                        <template if:true={isFacilitator}>
-                            <lightning-input-field
-                                field-name={fields.clientStress}
-                                class="category slds-p-bottom_medium"
-                            ></lightning-input-field>
-                        </template>
+                    </div>
+                    <div if:true={isClient} class="slds-col slds-size_1-of-2">
                         <lightning-input-field
                             field-name={fields.satisfaction}
                             class="category slds-p-bottom_medium"
                         ></lightning-input-field>
                     </div>
                 </div>
-                <lightning-input-field
-                    field-name={fields.details}
-                    class="category slds-p-bottom_medium"
-                ></lightning-input-field>
-                <lightning-input-field
-                    field-name={fields.supportDetails}
-                    class="category slds-p-bottom_medium"
-                ></lightning-input-field>
             </lightning-record-edit-form>
         </div>
     </c-modal-cmp>

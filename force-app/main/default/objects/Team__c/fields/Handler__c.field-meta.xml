@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Client__c</fullName>
+    <fullName>Handler__c</fullName>
     <deleteConstraint>SetNull</deleteConstraint>
-    <description>Client being assessed in the PAT</description>
+    <description>Handler in the team, if not the client</description>
     <externalId>false</externalId>
-    <label>Client</label>
+    <label>Handler</label>
     <referenceTo>Contact</referenceTo>
-    <relationshipName>Public_Access_Tests</relationshipName>
+    <relationshipName>Team</relationshipName>
     <required>false</required>
     <trackTrending>false</trackTrending>
     <type>Lookup</type>

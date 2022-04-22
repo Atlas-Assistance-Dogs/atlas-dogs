@@ -1,0 +1,91 @@
+<template>
+    <c-modal-cmp title="New Dog" onclose={handleCancel} onsubmit={handleSubmit}>
+        <lightning-record-edit-form
+            object-api-name="Dog__c"
+            onsuccess={handleSuccess}
+            onsubmit={handleSubmit}
+            onerror={handleError}
+            slot="body"
+        >
+            <div class="slds-grid slds-wrap">
+                <lightning-messages></lightning-messages>
+                <div
+                    class="slds-col slds-size_1-of-1 slds-grid slds-wrap slds-m-vertical_small"
+                    style="background-color: #f3f2f2"
+                >
+                    <h3 class="slds-p-around_small">Dog Information</h3>
+                </div>
+                <div
+                    class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2 slds-p-horizontal_small"
+                >
+                    <lightning-input-field
+                        field-name="Name"
+                        required
+                    ></lightning-input-field>
+                    <lightning-input-field
+                        field-name="Breed__c"
+                        required
+                    ></lightning-input-field>
+                    <lightning-input-field
+                        field-name="Gender__c"
+                        required
+                    ></lightning-input-field>
+                    <lightning-input-field
+                        field-name="SpayedNeutered__c"
+                    ></lightning-input-field>
+                </div>
+                <div
+                    class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2 slds-p-horizontal_small"
+                >
+                    <lightning-input-field
+                        field-name="Birthdate__c"
+                    ></lightning-input-field>
+                    <lightning-input-field
+                        field-name="Status__c"
+                        required
+                        default="None"
+                    ></lightning-input-field>
+                    <lightning-input-field
+                        field-name="ActivationDate__c"
+                    ></lightning-input-field>
+                    <lightning-input-field
+                        field-name="MicrochipNumber__c"
+                    ></lightning-input-field>
+                </div>
+                <div
+                    class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2 slds-p-horizontal_small"
+                >
+                    <lightning-input-field
+                        field-name="VetClinic__c"
+                    ></lightning-input-field>
+                    <lightning-input-field
+                        field-name="LatestPhysicalExamOutcome__c"
+                        required
+                    ></lightning-input-field>
+                    <lightning-input-field
+                        field-name="PhysicalExamDue__c"
+                    ></lightning-input-field>
+                </div>
+                <div
+                    class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2 slds-p-horizontal_small"
+                >
+                    <lightning-input-field
+                        field-name="VaccineDueHepatitis__c"
+                    ></lightning-input-field>
+                    <lightning-input-field
+                        field-name="VaccineDueDistemper__c"
+                    ></lightning-input-field>
+                    <lightning-input-field
+                        field-name="VaccineDueParainfluenza__c"
+                    ></lightning-input-field>
+                    <lightning-input-field
+                        field-name="VaccineDueParvovirus__c"
+                    ></lightning-input-field>
+                    <lightning-input-field
+                        field-name="VaccineDueRabies__c"
+                    ></lightning-input-field>
+                </div>
+            </div>
+        </lightning-record-edit-form>
+    </c-modal-cmp>
+</template>

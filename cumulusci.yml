@@ -4,9 +4,10 @@ project:
     package:
         name: AtlasDogs
         namespace: atlas1
-        api_version: "50.0"
+        api_version: "54.0"
     dependencies:
         - github: "https://github.com/SalesforceFoundation/NPSP"
+        - github: "https://github.com/SalesforceFoundation/Volunteers-for-Salesforce"
     git:
         default_branch: "dev"
     source_format: sfdx
@@ -46,8 +47,8 @@ flows:
                 task: assign_permission_sets
                 options:
                     api_names: Atlas_Super_User
-            3:
-                task: load_dataset
+            # 3:
+            #     task: load_dataset
     config_dev:
         steps:
             1:

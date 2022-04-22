@@ -21,24 +21,10 @@ const actions = [
 
 const COLS = [
     {
-        label: "Role",
-        fieldName: "role",
-        sortable: true
-    },
-    {
         label: "Date Completed",
         fieldName: DATE_FIELD.fieldApiName,
         type: "date",
         sortable: true
-    },
-    {
-        label: "Dog",
-        type: "button",
-        typeAttributes: {
-            name: "dog",
-            label: { fieldName: "dogName" },
-            variant: "base"
-        }
     },
     {
         label: "Location",
@@ -102,7 +88,7 @@ export default class RelatedPatsCmp extends NavigationMixin(LightningElement) {
                 const payload = {
                     mode: "edit",
                     recordId: row.Id,
-                    role: row.role
+                    status: row.Status__c
                 };
                 publish(this.messageContext, patForm, payload);
                 break;
@@ -118,14 +104,12 @@ export default class RelatedPatsCmp extends NavigationMixin(LightningElement) {
         }
     }
 
-    @wire(getRelatedPats, { contactId: "$recordId" })
+    @wire(getRelatedPats, { recordId: "$recordId" })
     getPats(result) {
         this.wiredPats = result;
         if (result.data) {
             this.data = result.data.map((pat) => {
                 var xpat = Object.assign({}, pat);
-                xpat.role = this.getRoles(pat);
-                xpat.dogName = pat.Dog__r?.Name ?? "";
                 return xpat;
             });
             if (this.data.length == 0) {
@@ -141,20 +125,6 @@ export default class RelatedPatsCmp extends NavigationMixin(LightningElement) {
                 })
             );
         }
-    }
-
-    getRoles(pat) {
-        let roles = [];
-        if (pat.Assessor__c === this.recordId) {
-            roles.push("Assessor");
-        }
-        if (pat.Client__c === this.recordId) {
-            roles.push("Client");
-        }
-        if (pat.Handler__c === this.recordId) {
-            roles.push("Handler");
-        }
-        return roles.join(";");
     }
 
     createPat(event) {

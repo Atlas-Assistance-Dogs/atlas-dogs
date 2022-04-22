@@ -26,6 +26,16 @@
                 <label>Client</label>
             </value>
             <value>
+                <fullName>Teams Set in Motion</fullName>
+                <default>false</default>
+                <label>Teams Set in Motion</label>
+            </value>
+            <value>
+                <fullName>Assistance Dogs Set in Motion</fullName>
+                <default>false</default>
+                <label>Assistance Dogs Set in Motion</label>
+            </value>
+            <value>
                 <fullName>Team_Facilitator</fullName>
                 <default>false</default>
                 <label>Team Facilitator</label>
@@ -39,11 +49,6 @@
                 <fullName>Staff</fullName>
                 <default>false</default>
                 <label>Staff</label>
-            </value>
-            <value>
-                <fullName>Lead_Facilitator</fullName>
-                <default>false</default>
-                <label>Lead Facilitator</label>
             </value>
             <value>
                 <fullName>Dog</fullName>

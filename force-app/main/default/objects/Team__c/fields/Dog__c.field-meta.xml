@@ -2,11 +2,12 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Dog__c</fullName>
     <deleteConstraint>SetNull</deleteConstraint>
-    <description>Dog in the PAT team</description>
+    <description>Dog on the team</description>
     <externalId>false</externalId>
     <label>Dog</label>
     <referenceTo>Dog__c</referenceTo>
-    <relationshipName>Public_Access_Tests</relationshipName>
+    <relationshipLabel>Teams</relationshipLabel>
+    <relationshipName>Teams</relationshipName>
     <required>false</required>
     <trackTrending>false</trackTrending>
     <type>Lookup</type>

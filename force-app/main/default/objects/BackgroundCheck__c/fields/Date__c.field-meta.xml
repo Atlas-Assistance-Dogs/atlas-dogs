@@ -3,8 +3,8 @@
     <fullName>Date__c</fullName>
     <description>Date background check was requested</description>
     <externalId>false</externalId>
-    <label>Completed Date</label>
-    <required>false</required>
+    <label>Date</label>
+    <required>true</required>
     <trackTrending>false</trackTrending>
     <type>Date</type>
 </CustomField>

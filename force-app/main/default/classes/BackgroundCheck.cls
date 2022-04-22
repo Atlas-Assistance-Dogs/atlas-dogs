@@ -10,6 +10,9 @@ public with sharing class BackgroundCheck {
     public String fileName { get; set; }
 
     @AuraEnabled
+    public Boolean noFile { get; set; }
+
+    @AuraEnabled
     public String status { get; set; }
 
     @AuraEnabled

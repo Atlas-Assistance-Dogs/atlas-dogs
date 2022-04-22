@@ -4,13 +4,18 @@
     <description>Status of the PAT</description>
     <externalId>false</externalId>
     <label>Status</label>
-    <required>false</required>
+    <required>true</required>
     <trackTrending>false</trackTrending>
     <type>Picklist</type>
     <valueSet>
         <restricted>true</restricted>
         <valueSetDefinition>
             <sorted>false</sorted>
+            <value>
+                <fullName>Pending Review</fullName>
+                <default>false</default>
+                <label>Pending Review</label>
+            </value>
             <value>
                 <fullName>Passed</fullName>
                 <default>false</default>

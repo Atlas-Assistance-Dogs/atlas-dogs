@@ -3,6 +3,26 @@
     <actionOverrides>
         <actionName>View</actionName>
         <comment
+        >Action override created by Lightning App Builder during activation.</comment>
+        <content>ContactRecordPage</content>
+        <formFactor>Small</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+        <pageOrSobjectType>Contact</pageOrSobjectType>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <comment
+        >Action override created by Lightning App Builder during activation.</comment>
+        <content>ContactRecordPage</content>
+        <formFactor>Large</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+        <pageOrSobjectType>Contact</pageOrSobjectType>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <comment
         >Action override updated by Lightning App Builder during activation.</comment>
         <content>Dog_Record_Page</content>
         <formFactor>Small</formFactor>
@@ -24,21 +44,21 @@
         <actionName>View</actionName>
         <comment
         >Action override created by Lightning App Builder during activation.</comment>
-        <content>ContactRecordPage</content>
+        <content>Team</content>
         <formFactor>Small</formFactor>
         <skipRecordTypeSelect>false</skipRecordTypeSelect>
         <type>Flexipage</type>
-        <pageOrSobjectType>Contact</pageOrSobjectType>
+        <pageOrSobjectType>Team__c</pageOrSobjectType>
     </actionOverrides>
     <actionOverrides>
         <actionName>View</actionName>
         <comment
         >Action override created by Lightning App Builder during activation.</comment>
-        <content>ContactRecordPage</content>
+        <content>Team</content>
         <formFactor>Large</formFactor>
         <skipRecordTypeSelect>false</skipRecordTypeSelect>
         <type>Flexipage</type>
-        <pageOrSobjectType>Contact</pageOrSobjectType>
+        <pageOrSobjectType>Team__c</pageOrSobjectType>
     </actionOverrides>
     <brand>
         <headerColor>#ED8B00</headerColor>
@@ -54,6 +74,7 @@
     <navType>Standard</navType>
     <setupExperience>all</setupExperience>
     <tabs>standard-Account</tabs>
+    <tabs>Team__c</tabs>
     <tabs>standard-Contact</tabs>
     <tabs>Dog__c</tabs>
     <tabs>standard-Lead</tabs>

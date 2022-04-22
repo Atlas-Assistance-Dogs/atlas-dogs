@@ -14,7 +14,7 @@ public with sharing class TestFileController {
                 Origin = 'H',
                 VersionData = Blob.valueOf('Document Body 1'),
                 Category__c = 'Volunteer',
-                Type__c = 'Media and Liability Release'
+                Type__c = 'Agreement'
             )
         );
         documents.add(
@@ -24,7 +24,7 @@ public with sharing class TestFileController {
                 Origin = 'H',
                 VersionData = Blob.valueOf('Document Body 2'),
                 Category__c = 'Board',
-                Type__c = 'Emergency Contact'
+                Type__c = 'Conflict of Interest'
             )
         );
         documents.add(
@@ -64,11 +64,7 @@ public with sharing class TestFileController {
         }
 
         Test.startTest();
-        FileController.updateRecords(
-            'Trainer',
-            'Trainer Infraction notices as applicable',
-            docIds
-        );
+        FileController.updateRecords('Trainer', 'Infraction Notice', docIds);
         Test.stopTest();
 
         List<ContentVersion> results = [
@@ -78,10 +74,7 @@ public with sharing class TestFileController {
 
         for (ContentVersion actual : results) {
             System.assertEquals('Trainer', actual.Category__c);
-            System.assertEquals(
-                'Trainer Infraction notices as applicable',
-                actual.Type__c
-            );
+            System.assertEquals('Infraction Notice', actual.Type__c);
         }
     }
 
@@ -142,7 +135,7 @@ public with sharing class TestFileController {
             Origin = 'H',
             VersionData = Blob.valueOf('Document Body 1'),
             Category__c = 'Volunteer',
-            Type__c = 'Media and Liability Release'
+            Type__c = 'Agreement'
         );
         insert cv;
 
@@ -392,7 +385,7 @@ public with sharing class TestFileController {
             Origin = 'H',
             VersionData = Blob.valueOf('Document Body 1'),
             Category__c = 'Volunteer',
-            Type__c = 'Media and Liability Release'
+            Type__c = 'Application'
         );
         insert cv;
 

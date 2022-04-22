@@ -1,0 +1,29 @@
+<template>
+    <c-related-object-cmp title="CEUs" icon-name="custom:custom47">
+        <div slot="actions">
+            <!-- lightning button for open modal window -->
+            <lightning-button label="New" title="New" onclick={createCeu}>
+            </lightning-button>
+            <c-ceu-form-cmp
+                contact-id={recordId}
+                onchanged={handleChange}
+            ></c-ceu-form-cmp>
+        </div>
+        <div slot="list">
+            <template if:true={data}>
+                <lightning-datatable
+                    key-field="recordId"
+                    columns={columns}
+                    data={data}
+                    hide-checkbox-column
+                    default-sort-direction={defaultSortDirection}
+                    sorted-direction={sortDirection}
+                    sorted-by={sortedBy}
+                    onsort={handleSort}
+                    onrowaction={handleRowAction}
+                >
+                </lightning-datatable>
+            </template>
+        </div>
+    </c-related-object-cmp>
+</template>

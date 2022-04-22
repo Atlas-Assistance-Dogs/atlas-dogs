@@ -4,7 +4,9 @@
     <columns>NAME</columns>
     <columns>Age__c</columns>
     <columns>Breed__c</columns>
-    <columns>CREATEDBY_USER</columns>
+    <columns>Gender__c</columns>
+    <columns>Status__c</columns>
+    <columns>HealthCareRecordsStatus__c</columns>
     <filterScope>Everything</filterScope>
     <label>All</label>
 </ListView>

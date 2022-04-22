@@ -271,10 +271,38 @@ public with sharing class TestLogController {
 
     @isTest
     public static void deleteLog_DeletesLog() {
+        getContacts();
         List<Log__c> logs = new List<Log__c>();
-        logs.add(new Log__c(Date__c = Date.today().addDays(-2)));
-        logs.add(new Log__c(Date__c = Date.today().addDays(-1)));
-        logs.add(new Log__c(Date__c = Date.today()));
+        logs.add(
+            new Log__c(
+                Date__c = Date.today().addDays(-2),
+                Client__c = client.Id,
+                Dog__c = dog.Id,
+                OtherHours__c = 0,
+                PublicAccessHours__c = 0,
+                Submitter__c = submitter.Id
+            )
+        );
+        logs.add(
+            new Log__c(
+                Date__c = Date.today().addDays(-1),
+                Client__c = client.Id,
+                Dog__c = dog.Id,
+                OtherHours__c = 0,
+                PublicAccessHours__c = 0,
+                Submitter__c = submitter.Id
+            )
+        );
+        logs.add(
+            new Log__c(
+                Date__c = Date.today(),
+                Client__c = client.Id,
+                Dog__c = dog.Id,
+                OtherHours__c = 0,
+                PublicAccessHours__c = 0,
+                Submitter__c = submitter.Id
+            )
+        );
         insert logs;
 
         Test.startTest();
@@ -292,10 +320,38 @@ public with sharing class TestLogController {
 
     @isTest
     public static void updateLog_UpdatesLog() {
+        getContacts();
         List<Log__c> logs = new List<Log__c>();
-        logs.add(new Log__c(Date__c = Date.today().addDays(-2)));
-        logs.add(new Log__c(Date__c = Date.today().addDays(-1)));
-        logs.add(new Log__c(Date__c = Date.today()));
+        logs.add(
+            new Log__c(
+                Date__c = Date.today().addDays(-2),
+                Client__c = client.Id,
+                Dog__c = dog.Id,
+                OtherHours__c = 0,
+                PublicAccessHours__c = 0,
+                Submitter__c = submitter.Id
+            )
+        );
+        logs.add(
+            new Log__c(
+                Date__c = Date.today().addDays(-1),
+                Client__c = client.Id,
+                Dog__c = dog.Id,
+                OtherHours__c = 0,
+                PublicAccessHours__c = 0,
+                Submitter__c = submitter.Id
+            )
+        );
+        logs.add(
+            new Log__c(
+                Date__c = Date.today(),
+                Client__c = client.Id,
+                Dog__c = dog.Id,
+                OtherHours__c = 0,
+                PublicAccessHours__c = 0,
+                Submitter__c = submitter.Id
+            )
+        );
         insert logs;
 
         Test.startTest();
@@ -313,7 +369,14 @@ public with sharing class TestLogController {
     @isTest
     public static void updateLog_ThrowsException_WhenMissingDate() {
         getContacts();
-        Log__c log = new Log__c(Date__c = Date.today().addDays(-2));
+        Log__c log = new Log__c(
+            Date__c = Date.today().addDays(-2),
+            Client__c = client.Id,
+            Dog__c = dog.Id,
+            OtherHours__c = 0,
+            PublicAccessHours__c = 0,
+            Submitter__c = submitter.Id
+        );
         insert log;
 
         Test.startTest();

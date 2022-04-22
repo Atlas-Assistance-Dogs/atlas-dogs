@@ -7,10 +7,10 @@
             <!-- lightning button for open modal window -->
             <lightning-button label="New" title="New" onclick={createCheck}>
             </lightning-button>
-            <c-background-check-form-cmp
+            <c-related-background-check-cmp
                 contact-id={recordId}
                 onchanged={handleChange}
-            ></c-background-check-form-cmp>
+            ></c-related-background-check-cmp>
         </div>
         <div slot="list">
             <template if:true={data}>
