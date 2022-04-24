@@ -134,7 +134,7 @@
         <actionName>View</actionName>
         <comment
         >Action override updated by Lightning App Builder during activation.</comment>
-        <content>Dog_Record_Page</content>
+        <content>DogRecordPage</content>
         <formFactor>Large</formFactor>
         <skipRecordTypeSelect>false</skipRecordTypeSelect>
         <type>Flexipage</type>
@@ -143,7 +143,7 @@
         <actionName>View</actionName>
         <comment
         >Action override updated by Lightning App Builder during activation.</comment>
-        <content>Dog_Record_Page</content>
+        <content>DogRecordPage</content>
         <formFactor>Small</formFactor>
         <skipRecordTypeSelect>false</skipRecordTypeSelect>
         <type>Flexipage</type>

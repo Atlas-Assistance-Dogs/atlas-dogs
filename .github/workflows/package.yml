@@ -3,15 +3,14 @@ name: Create Package
 on:
     push:
         branches:
-            - dev
             - staging
             - main
 
 env:
     CUMULUSCI_KEYCHAIN_CLASS: cumulusci.core.keychain.EnvironmentProjectKeychain
     CUMULUSCI_SERVICE_github: ${{ secrets.CUMULUSCI_SERVICE_github }}
-    CUMULUSCI_ORG_packaging: '{"username": "package@atlasdog.org", "instance_url": "https://login.salesforce.com"}'
-    SFDX_CLIENT_ID: ${{ secrets.CLIENT_ID }}
+    CUMULUSCI_ORG_packaging: '{"username": "package@atlasdog.org", "instance_url": "https://atlasassistancedogs-dev-ed.my.salesforce.com/"}'
+    SFDX_CLIENT_ID: ${{ secrets.PACKAGING_CLIENT_ID }}
     SFDX_HUB_KEY: ${{ secrets.SSH_KEY }}
     SFDX_AUDIENCE_URL: "https://atlasassistancedogs-dev-ed.my.salesforce.com/"
 
@@ -20,10 +19,6 @@ jobs:
         name: "Create package"
         runs-on: ubuntu-latest
         steps:
-            - name: Set env to dev
-              if: endsWith(github.ref, '/dev')
-              run: |
-                  echo "name=dev" >> $GITHUB_ENV
             - name: Set env to staging
               if: endsWith(github.ref, '/staging')
               run: |
@@ -59,19 +54,3 @@ jobs:
               if: endsWith(github.ref, '/main')
               run: |
                   cci flow run release_production --org packaging
-            - name: Uploads a new beta version of the managed package
-              if: endsWith(github.ref, '/dev')
-              run: |
-                  cci task run upload_beta --org packaging --name package_version
-    test:
-        name: "Test package"
-        runs-on: ubuntu-latest
-        steps:
-            - name: install the latest beta version of the project in a scratch org, and run Apex tests against it.
-              if: "!endsWith(github.ref, '/main')"
-              run: |
-                  cci flow run ci_beta --org beta
-            - name: install the latest release version of the project in a scratch org, and run Apex tests against it.
-              if: endsWith(github.ref, '/main')
-              run: |
-                  cci flow run ci_release --org release
