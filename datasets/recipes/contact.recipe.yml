@@ -423,43 +423,37 @@
               - Active Projects- Technology Infrastructure
               - Active Projects- Trainer Certification
               - Active Projects- Volunteer Recruitment and Retention
-      VolunteerBackground__c:
-          fake.text:
-              max_nb_chars: 100
-      VolunteerFocus__c:
+      GW_Volunteers__Volunteer_Skills__c:
           random_choice:
-              - Academy-Content Creator
-              - Academy-Content Editor
-              - Marketing- Graphic Design
-              - Marketing- Video
-              - Marketing- Photo
-              - Marketing- Writing
-              - Marketing- Leadership
-              - Marketing- SEO
-              - Marketing- Website
-              - Marketing- Sales
-              - Marketing- Advertising
-              - Marketing- Events
-              - Administrative- Client
-              - Administrative- Volunteer
-              - Administrative- Trainer
-              - Administrative- General
-              - Administrative- Technology
-              - Outreach- Clients
-              - Outreach- Disability Orgs
-              - Outreach- Dogs
-              - Outreach- Veterinarians
-              - Outreach- Medical Providers
-              - Outreach- Diversity
-      VolunteerInterviewNotes__c:
+              - Marketing and Branding
+              - Sales
+              - Website development
+              - SEO
+              - Outreach/Networking
+              - Fundraising/Grants
+              - Medical/Mental Health
+              - Financial/Bookkeeping
+              - Legal
+              - Education/Course Development
+              - Technology/Infrastructure
+              - Writing/Communications
+              - Project/Program Management
+              - Nonprofit Leadership
+              - Dog Training/Behavior/Veterinary
+              - Disability Advocacy
+              - Administration
+              - Photography/Videography
+              - Social Media
+              - Graphic Design
+      GW_Volunteers__Volunteer_Notes__c:
           fake: paragraph
-      VolunteerStatus__c:
+      GW_Volunteers__Volunteer_Status__c:
           random_choice:
-              - Initial Inquiry
+              - Prospective
               - Onboarding
               - Active
               - Inactive
-              - None
+              - New Sign Up
 
 # Create Primary and secondary emergency contacts for Contact
 - object: npe4__Relationship__c
