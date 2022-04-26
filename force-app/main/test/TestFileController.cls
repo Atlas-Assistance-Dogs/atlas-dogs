@@ -24,7 +24,7 @@ public with sharing class TestFileController {
                 Origin = 'H',
                 VersionData = Blob.valueOf('Document Body 2'),
                 Category__c = 'Board',
-                Type__c = 'Conflict of Interest'
+                Type__c = 'CoI'
             )
         );
         documents.add(
