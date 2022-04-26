@@ -27,12 +27,12 @@
                 <label>Agreement</label>
             </value>
             <value>
-                <fullName>Conflict of Interest</fullName>
+                <fullName>CoI</fullName>
                 <default>false</default>
                 <label>Conflict of Interest</label>
             </value>
             <value>
-                <fullName>Transmission of Notices</fullName>
+                <fullName>ToN</fullName>
                 <default>false</default>
                 <label>Transmission of Notices</label>
             </value>
@@ -42,39 +42,34 @@
                 <label>LOMI</label>
             </value>
             <value>
-                <fullName>Veteran_Paperwork</fullName>
+                <fullName>VAPW</fullName>
                 <default>false</default>
                 <label>Veteran Paperwork</label>
             </value>
             <value>
-                <fullName>Client Certification Survey</fullName>
+                <fullName>Survey</fullName>
                 <default>false</default>
                 <label>Certification Survey</label>
             </value>
             <value>
-                <fullName>Reference Letter</fullName>
+                <fullName>Reference</fullName>
                 <default>false</default>
                 <label>Reference Letter</label>
             </value>
             <value>
-                <fullName>Program Agreement</fullName>
+                <fullName>ProgAgreement</fullName>
                 <default>false</default>
                 <label>Program Agreement</label>
             </value>
             <value>
-                <fullName>Certification Agreement</fullName>
+                <fullName>CertAgreement</fullName>
                 <default>false</default>
                 <label>Certification Agreement</label>
             </value>
             <value>
-                <fullName>Professional Growth Plan</fullName>
+                <fullName>ProfGrowthPlan</fullName>
                 <default>false</default>
                 <label>Professional Growth Plan</label>
-            </value>
-            <value>
-                <fullName>Team Certification Survey</fullName>
-                <default>false</default>
-                <label>Team Certification Survey</label>
             </value>
             <value>
                 <fullName>Practicum</fullName>
@@ -82,22 +77,22 @@
                 <label>Practicum</label>
             </value>
             <value>
-                <fullName>Infraction Notice</fullName>
+                <fullName>InfrNotice</fullName>
                 <default>false</default>
                 <label>Infraction Notice</label>
             </value>
-           <value>
-                <fullName>Vet Health Form</fullName>
+            <value>
+                <fullName>HealthForm</fullName>
                 <default>false</default>
                 <label>Vet Health Form</label>
             </value>
             <value>
-                <fullName>Vet Xray Report</fullName>
+                <fullName>Xray</fullName>
                 <default>false</default>
                 <label>Vet Xray Report</label>
             </value>
             <value>
-                <fullName>Vaccinations and Exams</fullName>
+                <fullName>VacExams</fullName>
                 <default>false</default>
                 <label>Vaccinations and Exams</label>
             </value>
@@ -107,7 +102,7 @@
                 <label>Resume</label>
             </value>
             <value>
-                <fullName>Offer Letter</fullName>
+                <fullName>Offer</fullName>
                 <default>false</default>
                 <label>Offer Letter</label>
             </value>
@@ -125,35 +120,39 @@
         <valueSettings>
             <controllingFieldValue>Volunteer</controllingFieldValue>
             <controllingFieldValue>Board</controllingFieldValue>
+            <controllingFieldValue>Client</controllingFieldValue>
+            <controllingFieldValue>TSiM</controllingFieldValue>
+            <controllingFieldValue>ADSiM</controllingFieldValue>
+            <controllingFieldValue>Facilitator</controllingFieldValue>
+            <controllingFieldValue>Trainer</controllingFieldValue>
+            <controllingFieldValue>Staff</controllingFieldValue>
+            <valueName>Application</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Volunteer</controllingFieldValue>
+            <controllingFieldValue>Board</controllingFieldValue>
             <controllingFieldValue>Staff</controllingFieldValue>
             <valueName>Agreement</valueName>
         </valueSettings>
         <valueSettings>
-            <controllingFieldValue>Client</controllingFieldValue>
-            <controllingFieldValue
-            >Assistance Dogs Set in Motion</controllingFieldValue>
-            <controllingFieldValue>Teams Set in Motion</controllingFieldValue>
-            <valueName>PreApplication</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Client</controllingFieldValue>
-            <controllingFieldValue
-            >Assistance Dogs Set in Motion</controllingFieldValue>
-            <controllingFieldValue>Teams Set in Motion</controllingFieldValue>
             <controllingFieldValue>Volunteer</controllingFieldValue>
             <controllingFieldValue>Board</controllingFieldValue>
             <controllingFieldValue>Staff</controllingFieldValue>
-            <controllingFieldValue>Team_Facilitator</controllingFieldValue>
-            <controllingFieldValue>Trainer</controllingFieldValue>
-            <valueName>Application</valueName>
+            <valueName>Resume</valueName>
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Board</controllingFieldValue>
-            <valueName>Conflict of Interest</valueName>
+            <valueName>CoI</valueName>
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Board</controllingFieldValue>
-            <valueName>Transmission of Notices</valueName>
+            <valueName>ToN</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Client</controllingFieldValue>
+            <controllingFieldValue>TSiM</controllingFieldValue>
+            <controllingFieldValue>ADSiM</controllingFieldValue>
+            <valueName>PreApplication</valueName>
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Client</controllingFieldValue>
@@ -161,87 +160,47 @@
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Client</controllingFieldValue>
-            <valueName>Veteran_Paperwork</valueName>
+            <valueName>VAPW</valueName>
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Client</controllingFieldValue>
-            <valueName>Client Certification Survey</valueName>
+            <valueName>Survey</valueName>
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Client</controllingFieldValue>
-            <valueName>Assistance Dogs Set in Motion Application</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Client</controllingFieldValue>
-            <valueName
-            >Assistance Dogs Set in Motion Program Agreement</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Client</controllingFieldValue>
-            <valueName>Teams Set in Motion Application</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Client</controllingFieldValue>
-            <valueName>Teams Set in Motion Program Agreement</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Client</controllingFieldValue>
-            <controllingFieldValue>Team_Facilitator</controllingFieldValue>
+            <controllingFieldValue>TSiM</controllingFieldValue>
+            <controllingFieldValue>ADSiM</controllingFieldValue>
+            <controllingFieldValue>Facilitator</controllingFieldValue>
             <controllingFieldValue>Trainer</controllingFieldValue>
-            <valueName>Certification Agreement</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Team_Facilitator</controllingFieldValue>
-            <controllingFieldValue>Trainer</controllingFieldValue>
-            <valueName>Reference Letter</valueName>
+            <valueName>ProgAgreement</valueName>
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Client</controllingFieldValue>
-            <controllingFieldValue
-            >Assistance Dogs Set in Motion</controllingFieldValue>
-            <controllingFieldValue>Teams Set in Motion</controllingFieldValue>
-            <controllingFieldValue>Team_Facilitator</controllingFieldValue>
+            <controllingFieldValue>Facilitator</controllingFieldValue>
             <controllingFieldValue>Trainer</controllingFieldValue>
-            <valueName>Program Agreement</valueName>
+            <valueName>CertAgreement</valueName>
         </valueSettings>
         <valueSettings>
-            <controllingFieldValue>Team_Facilitator</controllingFieldValue>
-            <valueName>Professional Growth Plan</valueName>
+            <controllingFieldValue>Facilitator</controllingFieldValue>
+            <controllingFieldValue>Trainer</controllingFieldValue>
+            <valueName>Reference</valueName>
         </valueSettings>
         <valueSettings>
-            <controllingFieldValue>Team_Facilitator</controllingFieldValue>
-            <valueName>Team Certification Survey</valueName>
+            <controllingFieldValue>Facilitator</controllingFieldValue>
+            <valueName>ProfGrowthPlan</valueName>
         </valueSettings>
         <valueSettings>
-            <controllingFieldValue>Team_Facilitator</controllingFieldValue>
+            <controllingFieldValue>Facilitator</controllingFieldValue>
             <valueName>Practicum</valueName>
         </valueSettings>
         <valueSettings>
-            <controllingFieldValue>Team_Facilitator</controllingFieldValue>
+            <controllingFieldValue>Facilitator</controllingFieldValue>
             <controllingFieldValue>Trainer</controllingFieldValue>
-            <valueName>Infraction Notice</valueName>
-        </valueSettings>
-       <valueSettings>
-            <controllingFieldValue>Dog</controllingFieldValue>
-            <valueName>Vet Health Form</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Dog</controllingFieldValue>
-            <valueName>Vet Xray Report</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Dog</controllingFieldValue>
-            <valueName>Vaccinations and Exams</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Board</controllingFieldValue>
-            <controllingFieldValue>Staff</controllingFieldValue>
-            <controllingFieldValue>Volunteer</controllingFieldValue>
-            <valueName>Resume</valueName>
+            <valueName>InfrNotice</valueName>
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Staff</controllingFieldValue>
-            <valueName>Offer Letter</valueName>
+            <valueName>Offer</valueName>
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Staff</controllingFieldValue>
@@ -250,6 +209,18 @@
         <valueSettings>
             <controllingFieldValue>Staff</controllingFieldValue>
             <valueName>I9</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>HealthForm</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>Xray</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>VacExams</valueName>
         </valueSettings>
     </valueSet>
 </CustomField>

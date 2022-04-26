@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BoardCoIReceived__c</fullName>
+    <description
+    >The date the most recent version of Board Conflict of Interest was uploaded</description>
+    <externalId>false</externalId>
+    <label>Last Board Conflict of Interest</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Date</type>
+</CustomField>
