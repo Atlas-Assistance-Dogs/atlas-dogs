@@ -6,6 +6,15 @@
     <externalId>false</externalId>
     <formula>IF(
 AND(
+TODAY() + 60 &lt; (PhysicalExamDue__c ),
+TODAY() + 60 &lt; (VaccineDueDistemper__c ),
+TODAY() + 60 &lt; (VaccineDueHepatitis__c ),
+TODAY() + 60 &lt; (VaccineDueParainfluenza__c),
+TODAY() + 60 &lt; (VaccineDueParvovirus__c ),
+TODAY() + 60 &lt; (VaccineDueRabies__c )
+),
+&apos;Good &apos; &amp; IMAGE(&apos;/img/msg_icons/confirm16.png&apos;, &apos;*&apos;),
+IF(AND(
 TODAY() &lt; (PhysicalExamDue__c ),
 TODAY() &lt; (VaccineDueDistemper__c ),
 TODAY() &lt; (VaccineDueHepatitis__c ),
@@ -13,8 +22,8 @@ TODAY() &lt; (VaccineDueParainfluenza__c),
 TODAY() &lt; (VaccineDueParvovirus__c ),
 TODAY() &lt; (VaccineDueRabies__c )
 ),
-&apos;Good&apos;,
-&apos;Expired&apos; &amp;  IMAGE(&quot;/img/samples/rating1.gif&quot;, &apos;*&apos;) )</formula>
+&apos;Due Soon &apos; &amp; IMAGE(&apos;/img/msg_icons/warning16.png&apos;, &apos;*&apos;),
+&apos;Expired &apos; &amp;  IMAGE(&apos;/img/msg_icons/error16.png&apos;, &apos;*&apos;)) )</formula>
     <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
     <label>Health Record Status</label>
     <required>false</required>
