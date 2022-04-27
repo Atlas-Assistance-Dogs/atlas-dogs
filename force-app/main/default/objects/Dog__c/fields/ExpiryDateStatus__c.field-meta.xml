@@ -13,7 +13,7 @@ TODAY() + 60 &lt; (VaccineDueParainfluenza__c),
 TODAY() + 60 &lt; (VaccineDueParvovirus__c ),
 TODAY() + 60 &lt; (VaccineDueRabies__c )
 ),
-&apos;Good &apos; &amp; IMAGE(&apos;/img/msg_icons/confirm16.png&apos;, &apos;*&apos;),
+IMAGE(&apos;/img/msg_icons/confirm16.png&apos;, &apos;*&apos;) &amp; &apos; Good&apos;,
 IF(AND(
 TODAY() &lt; (PhysicalExamDue__c ),
 TODAY() &lt; (VaccineDueDistemper__c ),
@@ -22,8 +22,8 @@ TODAY() &lt; (VaccineDueParainfluenza__c),
 TODAY() &lt; (VaccineDueParvovirus__c ),
 TODAY() &lt; (VaccineDueRabies__c )
 ),
-&apos;Due Soon &apos; &amp; IMAGE(&apos;/img/msg_icons/warning16.png&apos;, &apos;*&apos;),
-&apos;Expired &apos; &amp;  IMAGE(&apos;/img/msg_icons/error16.png&apos;, &apos;*&apos;)) )</formula>
+IMAGE(&apos;/img/msg_icons/warning16.png&apos;, &apos;*&apos;) &amp; &apos; Due Soon&apos;,
+IMAGE(&apos;/img/msg_icons/error16.png&apos;, &apos;*&apos;)) &amp; &apos; Expired&apos;)</formula>
     <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
     <label>Health Record Status</label>
     <required>false</required>
