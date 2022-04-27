@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TrainerIndicator__c</fullName>
+    <description>Visual indicator of trainer status</description>
+    <externalId>false</externalId>
+    <formula>IMAGE( 
+CASE(TrainerStatus__c, 
+&quot;Initial Inquiry&quot;, &quot;/img/icon/omni24.png&quot;,
+&quot;Onboarding&quot;, &quot;/img/icon/sossession16.png&quot;, 
+&quot;In Training&quot;, &quot;/img/icon/csquestions16.png&quot;,
+&quot;Certified&quot;, &quot;/img/msg_icons/confirm16.png&quot;,
+&quot;Inactive&quot;, &quot;/img/icon/resourceAbsence16.png&quot;,
+&quot;Suspended&quot; &quot;/img/msg_icons/error16.png&quot;,
+&quot;/img/x.gif&quot;), 
+&quot;Trainer status&quot;)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Trainer</label>
+    <required>false</required>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>
