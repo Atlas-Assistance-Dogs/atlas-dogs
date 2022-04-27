@@ -1,5 +1,6 @@
 import { LightningElement, api, track, wire } from "lwc";
 import { getRecord } from "lightning/uiRecordApi";
+import { getProgramAssignments } from "@salesforce/apex/ContactController.getProgramAssignments";
 
 import BOARD_MEMBER_STATUS_FIELD from "@salesforce/schema/Contact.BoardMemberStatus__c";
 import CLIENT_STATUS_FIELD from "@salesforce/schema/Contact.ClientStatus__c";
@@ -43,6 +44,12 @@ export default class ContactStatus extends LightningElement {
         } else if (error) {
             this.error = error;
             this.contact = undefined;
+        }
+    }
+
+    @wire(getProgramAssignments, { recordId: "$recordId" })
+    getPrograms({ error, data }) {
+        if (data) {
         }
     }
 
