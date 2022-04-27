@@ -6,6 +6,7 @@
     <externalId>false</externalId>
     <label>Last  Vet Xray Report</label>
     <required>false</required>
-    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
     <type>Date</type>
 </CustomField>
