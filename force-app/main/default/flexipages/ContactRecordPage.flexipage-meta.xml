@@ -195,6 +195,12 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
+                <componentName>contactStatusCmp</componentName>
+                <identifier>c_contactStatusCmp1</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
                 <componentName>lbpm:actionList</componentName>
                 <identifier>lbpm_actionList1</identifier>
             </componentInstance>
