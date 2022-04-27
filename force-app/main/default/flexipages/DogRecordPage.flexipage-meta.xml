@@ -92,7 +92,7 @@
         </itemInstances>
         <itemInstances>
             <fieldInstance>
-                <fieldItem>Record.Age__c</fieldItem>
+                <fieldItem>Record.AgeYears__c</fieldItem>
                 <identifier>RecordAge__cField</identifier>
             </fieldInstance>
         </itemInstances>

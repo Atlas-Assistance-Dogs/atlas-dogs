@@ -3,5 +3,6 @@
     <fullName>Dog_Highlight_Panel</fullName>
     <fields>Name</fields>
     <fields>Status__c</fields>
+    <fields>ExpiryDateStatus__c</fields>
     <label>Dog Highlight Panel</label>
 </CompactLayout>

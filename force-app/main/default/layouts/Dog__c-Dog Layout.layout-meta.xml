@@ -23,7 +23,7 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Readonly</behavior>
-                <field>Age__c</field>
+                <field>AgeYears__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -225,7 +225,7 @@
     <showRunAssignmentRulesCheckbox>false</showRunAssignmentRulesCheckbox>
     <showSubmitAndAttachButton>false</showSubmitAndAttachButton>
     <summaryLayout>
-        <masterLabel>00h0R000006yhn6</masterLabel>
+        <masterLabel>00h0R000007Pjns</masterLabel>
         <sizeX>2</sizeX>
         <sizeY>2</sizeY>
         <summaryLayoutItems>

@@ -3,26 +3,24 @@
     <fullName>HealthCareRecordsStatus__c</fullName>
     <externalId>false</externalId>
     <formula
-    >IF(VaccineDueDistemper__c &lt; TODAY(),  IMAGE(&quot;/img/samples/rating1.gif&quot;,&apos;*&apos;) &amp; &quot; Distemper Vaccination is expired&quot; &amp;  BR() , IMAGE(&quot;/img/samples/rating2.gif&quot;,&apos;*&apos;) &amp; &quot; Distemper Vaccination is good until &quot; &amp;  TEXT(VaccineDueDistemper__c) &amp;  BR())
+    >IF(TODAY() &lt; VaccineDueDistemper__c, IF(TODAY() + 60 &lt; VaccineDueDistemper__c, IMAGE(&quot;/img/msg_icons/confirm16.gif&quot;, &apos;*&apos;), IMAGE(&quot;/img/msg_icons/warning16.gif&quot;, &apos;*&apos;)) &amp; &quot; Distemper Vaccination is good until &quot; &amp; TEXT(VaccineDueDistemper__c),
+ IMAGE(&quot;/img/msg_icons/error16.gif&quot;, &apos;*&apos;) &amp; &quot; Distemper Vaccination is expired&quot;) &amp; BR()
+&amp; 
+IF(TODAY() &lt; VaccineDueHepatitis__c, IF(TODAY() + 60 &lt; VaccineDueHepatitis__c, IMAGE(&quot;/img/msg_icons/confirm16.gif&quot;, &apos;*&apos;), IMAGE(&quot;/img/msg_icons/warning16.gif&quot;, &apos;*&apos;)) &amp; &quot; Hepatitis Vaccination is good until &quot; &amp; TEXT(VaccineDueHepatitis__c),
+ IMAGE(&quot;/img/msg_icons/error16.gif&quot;, &apos;*&apos;) &amp; &quot; Hepatitis Vaccination is expired&quot;) &amp; BR()
+&amp; 
+IF(TODAY() &lt; VaccineDueParainfluenza__c, IF(TODAY() + 60 &lt; VaccineDueParainfluenza__c, IMAGE(&quot;/img/msg_icons/confirm16.gif&quot;, &apos;*&apos;), IMAGE(&quot;/img/msg_icons/warning16.gif&quot;, &apos;*&apos;)) &amp; &quot; Parainflunenza Vaccination is good until &quot; &amp; TEXT(VaccineDueParainfluenza__c),
+ IMAGE(&quot;/img/msg_icons/error16.gif&quot;, &apos;*&apos;) &amp; &quot; Parainflunenza Vaccination is expired&quot;) &amp; BR()
+&amp; 
+IF(TODAY() &lt; VaccineDueParvovirus__c, IF(TODAY() + 60 &lt; VaccineDueParvovirus__c, IMAGE(&quot;/img/msg_icons/confirm16.gif&quot;, &apos;*&apos;), IMAGE(&quot;/img/msg_icons/warning16.gif&quot;, &apos;*&apos;)) &amp; &quot; Parvovirus Vaccination is good until &quot; &amp; TEXT(VaccineDueParvovirus__c),
+ IMAGE(&quot;/img/msg_icons/error16.gif&quot;, &apos;*&apos;) &amp; &quot; Parvovirus Vaccination is expired&quot;) &amp; BR()
+&amp; 
+IF(TODAY() &lt; VaccineDueRabies__c, IF(TODAY() + 60 &lt; VaccineDueRabies__c, IMAGE(&quot;/img/msg_icons/confirm16.gif&quot;, &apos;*&apos;), IMAGE(&quot;/img/msg_icons/warning16.gif&quot;, &apos;*&apos;)) &amp; &quot; Rabies Vaccination is good until &quot; &amp; TEXT(VaccineDueRabies__c),
+ IMAGE(&quot;/img/msg_icons/error16.gif&quot;, &apos;*&apos;) &amp; &quot; Rabies Vaccination is expired&quot;) &amp; BR()
 &amp; 
 
-IF(VaccineDueHepatitis__c &lt; TODAY(),  IMAGE(&quot;/img/samples/rating1.gif&quot;,&apos;*&apos;) &amp; &quot; Hepatitis Vaccination is expired&quot; &amp;  BR() , IMAGE(&quot;/img/samples/rating2.gif&quot;,&apos;*&apos;) &amp; &quot; Hepatitis Vaccination is good until &quot; &amp;  TEXT(VaccineDueHepatitis__c) &amp;  BR())
-
-&amp; 
-
-IF(VaccineDueParainfluenza__c &lt; TODAY(),  IMAGE(&quot;/img/samples/rating1.gif&quot;,&apos;*&apos;) &amp; &quot; Parainflunenza Vaccination is expired&quot; &amp;  BR() , IMAGE(&quot;/img/samples/rating2.gif&quot;,&apos;*&apos;) &amp; &quot; Parainflunenza Vaccination is good until &quot; &amp;  TEXT(VaccineDueParainfluenza__c) &amp;  BR())
-
-&amp; 
-
-IF(VaccineDueParvovirus__c  &lt; TODAY(),  IMAGE(&quot;/img/samples/rating1.gif&quot;,&apos;*&apos;) &amp; &quot; Paravovirus Vaccination is expired&quot; &amp;  BR() , IMAGE(&quot;/img/samples/rating2.gif&quot;,&apos;*&apos;) &amp; &quot; Paravovirus Vaccination is good until &quot; &amp;  TEXT(VaccineDueParvovirus__c) &amp;  BR())
-
-&amp; 
-
-IF(VaccineDueRabies__c &lt; TODAY(),  IMAGE(&quot;/img/samples/rating1.gif&quot;,&apos;*&apos;) &amp; &quot; Rabies Vaccination is expired&quot; &amp;  BR() , IMAGE(&quot;/img/samples/rating2.gif&quot;,&apos;*&apos;) &amp; &quot; Rabies Vaccination is good until &quot; &amp;  TEXT(VaccineDueRabies__c) &amp;  BR())
-
-&amp; 
-
-IF(PhysicalExamDue__c &lt; TODAY(),  IMAGE(&quot;/img/samples/rating1.gif&quot;,&apos;*&apos;) &amp; &quot; Physical Exam is not up to date&quot; &amp;  BR() , IMAGE(&quot;/img/samples/rating2.gif&quot;,&apos;*&apos;) &amp; &quot; Physical Exam is good until &quot; &amp;  TEXT(PhysicalExamDue__c) &amp;  BR())</formula>
+IF(TODAY() &lt; PhysicalExamDue__c, IF(TODAY() + 60 &lt; PhysicalExamDue__c, IMAGE(&quot;/img/msg_icons/confirm16.gif&quot;, &apos;*&apos;), IMAGE(&quot;/img/msg_icons/warning16.gif&quot;, &apos;*&apos;)) &amp; &quot; Physical Exam is good until &quot; &amp; TEXT(PhysicalExamDue__c),
+ IMAGE(&quot;/img/msg_icons/error16.gif&quot;, &apos;*&apos;) &amp; &quot; Physical Exam is not up to date&quot;)</formula>
     <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
     <label>Health Care Records Status</label>
     <required>false</required>

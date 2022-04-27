@@ -176,9 +176,15 @@
     <pluralLabel>Dogs</pluralLabel>
     <searchLayouts>
         <excludedStandardButtons>OpenListInQuip</excludedStandardButtons>
-        <excludedStandardButtons>ChangeOwner</excludedStandardButtons>
         <excludedStandardButtons>MassChangeOwner</excludedStandardButtons>
+        <excludedStandardButtons>ChangeOwner</excludedStandardButtons>
+        <searchResultsAdditionalFields
+        >AgeYears__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Breed__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Gender__c</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>Status__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields
+        >HealthCareRecordsStatus__c</searchResultsAdditionalFields>
     </searchLayouts>
     <sharingModel>ReadWrite</sharingModel>
     <visibility>Public</visibility>
