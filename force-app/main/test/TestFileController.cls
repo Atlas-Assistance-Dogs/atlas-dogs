@@ -24,7 +24,7 @@ public with sharing class TestFileController {
                 Origin = 'H',
                 VersionData = Blob.valueOf('Document Body 2'),
                 Category__c = 'Board',
-                Type__c = 'Conflict of Interest'
+                Type__c = 'CoI'
             )
         );
         documents.add(
@@ -64,7 +64,7 @@ public with sharing class TestFileController {
         }
 
         Test.startTest();
-        FileController.updateRecords('Trainer', 'Infraction Notice', docIds);
+        FileController.updateRecords('Trainer', 'InfrNotice', docIds);
         Test.stopTest();
 
         List<ContentVersion> results = [
@@ -74,7 +74,7 @@ public with sharing class TestFileController {
 
         for (ContentVersion actual : results) {
             System.assertEquals('Trainer', actual.Category__c);
-            System.assertEquals('Infraction Notice', actual.Type__c);
+            System.assertEquals('InfrNotice', actual.Type__c);
         }
     }
 
@@ -83,11 +83,7 @@ public with sharing class TestFileController {
         Boolean thrown = false;
         Test.startTest();
         try {
-            FileController.updateRecords(
-                'Trainer',
-                'Trainer Infraction notices as applicable',
-                null
-            );
+            FileController.updateRecords('Trainer', 'InfrNotice', null);
         } catch (AuraHandledException e) {
             thrown = true;
         }
@@ -99,11 +95,7 @@ public with sharing class TestFileController {
     @isTest
     public static void updateRecords_HandlesEmptyList() {
         Test.startTest();
-        FileController.updateRecords(
-            'Trainer',
-            'Trainer Infraction notices as applicable',
-            new List<Id>()
-        );
+        FileController.updateRecords('Trainer', 'InfrNotice', new List<Id>());
         Test.stopTest();
     }
 
@@ -307,11 +299,7 @@ public with sharing class TestFileController {
         Boolean thrown = false;
         Test.startTest();
         try {
-            FileController.updateContentVersion(
-                'Trainer',
-                'Trainer Infraction notices as applicable',
-                null
-            );
+            FileController.updateContentVersion('Trainer', 'Reference', null);
         } catch (AuraHandledException e) {
             thrown = true;
         }
@@ -329,7 +317,7 @@ public with sharing class TestFileController {
         try {
             FileController.updateContentVersion(
                 'Trainer',
-                'Trainer Infraction notices as applicable',
+                'ProgAgreement',
                 ace.Id
             );
         } catch (AuraHandledException e) {

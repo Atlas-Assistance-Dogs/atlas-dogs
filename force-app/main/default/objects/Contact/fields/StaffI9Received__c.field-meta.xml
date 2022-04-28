@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>StaffI9Received__c</fullName>
+    <description
+    >The date the most recent version of Staff I9 was uploaded</description>
+    <externalId>false</externalId>
+    <label>Last Staff I9</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Date</type>
+</CustomField>

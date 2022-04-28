@@ -55,7 +55,7 @@ export default class DocumentUploadCmp extends NavigationMixin(
         updateContentVersion({
             category: category,
             docType: docType,
-            recordId: this.versionId
+            recordId: this.recordId
         })
             .then((data) => {
                 this.dispatchEvent(
