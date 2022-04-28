@@ -319,11 +319,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Contact.TSiMPreApplicationReceived__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>Contact.TSiMProgAgreementReceived__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -394,17 +389,7 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Contact.VolunteerInterviewNotes__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>Contact.VolunteerResumeReceived__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Contact.VolunteerStatus__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
