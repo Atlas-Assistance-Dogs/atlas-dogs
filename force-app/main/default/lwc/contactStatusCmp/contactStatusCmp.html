@@ -3,19 +3,24 @@
         title="Position(s) with Status"
         icon-name="standard:user_role"
     >
-        <template if:true={contact}>
-            <div
-                for:each={roles}
-                for:item="role"
-                key={role.position}
-                class="slds-m-around_medium slds-grid"
-            >
-                <c-contact-status-indicator-cmp
-                    position={role.position}
-                    status={role.status}
-                >
-                </c-contact-status-indicator-cmp>
-            </div>
-        </template>
+        <div class="slds-m-around_medium slds-grid">
+            <template if:true={contact}>
+                <template for:each={roles} for:item="role">
+                    <c-contact-status-indicator-cmp
+                        position={role.position}
+                        status={role.status}
+                        key={role.position}
+                    >
+                    </c-contact-status-indicator-cmp>
+                </template>
+                <template if:true={otherPrograms}>
+                    <c-contact-status-indicator-cmp
+                        position={otherPrograms.position}
+                        status={otherPrograms.status}
+                    >
+                    </c-contact-status-indicator-cmp>
+                </template>
+            </template>
+        </div>
     </lightning-card>
 </template>

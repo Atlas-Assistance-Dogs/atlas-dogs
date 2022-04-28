@@ -2,10 +2,14 @@
     <div class="slds-media slds-media_center">
         <div class="slds-media__figure">
             <span class="slds-avatar slds-avatar_medium">
-                <img alt="Status" src={image} title={position} />
+                <lightning-icon
+                    icon-name={image}
+                    alternative-text="Status"
+                    title={position}
+                ></lightning-icon>
             </span>
         </div>
-        <div class="slds-media__body">
+        <div class="slds-media__body slds-m-right_medium">
             <p>{position}</p>
         </div>
     </div>

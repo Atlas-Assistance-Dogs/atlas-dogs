@@ -16,6 +16,11 @@
                 <label>Initial Inquiry</label>
             </value>
             <value>
+                <fullName>In ADSiM</fullName>
+                <default>false</default>
+                <label>In ADSiM</label>
+            </value>
+            <value>
                 <fullName>Onboarding</fullName>
                 <default>false</default>
                 <label>Onboarding</label>

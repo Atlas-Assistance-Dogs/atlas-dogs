@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Layout xmlns="http://soap.sforce.com/2006/04/metadata">
-    <excludeButtons>RequestUseSfdc</excludeButtons>
     <layoutSections>
         <customLabel>false</customLabel>
         <detailHeading>false</detailHeading>
@@ -476,6 +475,7 @@
         <fields>Program2__c</fields>
         <fields>AssignedDate__c</fields>
         <fields>CompletionDate__c</fields>
+        <fields>Status__c</fields>
         <relatedList>ProgramAssignment__c.Contact__c</relatedList>
     </relatedLists>
     <relatedLists>
@@ -516,7 +516,7 @@
     <showRunAssignmentRulesCheckbox>false</showRunAssignmentRulesCheckbox>
     <showSubmitAndAttachButton>false</showSubmitAndAttachButton>
     <summaryLayout>
-        <masterLabel>00h0R000007PjpF</masterLabel>
+        <masterLabel>00hJ000000757lX</masterLabel>
         <sizeX>4</sizeX>
         <sizeY>0</sizeY>
         <summaryLayoutStyle>Default</summaryLayoutStyle>

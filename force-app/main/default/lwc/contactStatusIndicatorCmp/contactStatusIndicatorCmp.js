@@ -7,26 +7,25 @@ export default class ContactStatusIndicatorCmp extends LightningElement {
     get image() {
         switch (this.status) {
             case "Initial Inquiry":
-                return "/img/icon/questions32.png";
+                return "standard:question_feed";
             case "Onboarding":
-                return "/img/icon/sossession32.png";
+                return "standard:flow";
+            case "In ADSiM":
             case "In Training":
             case "In Progress":
-                return "/img/rypple/32-coaching.png";
+                return "standard:education";
             case "Prospective":
                 return "/img/icon/livechatvisitor32.png";
             case "Certified":
             case "Active":
             case "Completed":
-                return "/img/msg_icons/confirm32.png";
+                return "standard:task2";
             case "Inactive":
+            case "On Hold":
             case "Discontinued":
-                return "/img/msg_icons/warning32.png";
-            case "Removed":
-            case "Suspended":
-                return "/img/msg_icons/error32.png";
+                return "standard:waits";
             default:
-                return "/img/x.gif";
+                return "standard:empty";
         }
     }
 }
