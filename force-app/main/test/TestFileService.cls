@@ -571,30 +571,6 @@ public with sharing class TestFileService {
     }
 
     @isTest
-    public static void updateDate_TSiMPreApplication_SetsDate() {
-        Contact contact = new Contact(
-            FirstName = 'Test',
-            LastName = 'Contact',
-            Email = 'abc@abc.com'
-        );
-        insert contact;
-        ContentVersion cv = createLink('TSiM', 'PreApplication', contact.Id);
-        FileService.updateDate(cv, contact.Id);
-
-        contact = [
-            SELECT TSiMPreApplicationReceived__c
-            FROM Contact
-            WHERE Id = :contact.Id
-            LIMIT 1
-        ];
-        system.assertEquals(
-            Date.today(),
-            contact.TSiMPreApplicationReceived__c,
-            'PreApplicationReceived not set'
-        );
-    }
-
-    @isTest
     public static void updateDate_ADSiMPreApplication_SetsDate() {
         Contact contact = new Contact(
             FirstName = 'Test',
@@ -1107,6 +1083,130 @@ public with sharing class TestFileService {
             Date.today(),
             contact.StaffI9Received__c,
             'I9Received not set'
+        );
+    }
+
+    @isTest
+    public static void updateDate_VolunteerContactForm_SetsDate() {
+        Contact contact = new Contact(
+            FirstName = 'Test',
+            LastName = 'Contact',
+            Email = 'abc@abc.com'
+        );
+        insert contact;
+        ContentVersion cv = createLink('Volunteer', 'ContactForm', contact.Id);
+        FileService.updateDate(cv, contact.Id);
+
+        contact = [
+            SELECT VolunteerContactFormReceived__c
+            FROM Contact
+            WHERE Id = :contact.Id
+            LIMIT 1
+        ];
+        system.assertEquals(
+            Date.today(),
+            contact.VolunteerContactFormReceived__c,
+            'ContactFormReceived not set'
+        );
+    }
+
+    @isTest
+    public static void updateDate_BoardContactForm_SetsDate() {
+        Contact contact = new Contact(
+            FirstName = 'Test',
+            LastName = 'Contact',
+            Email = 'abc@abc.com'
+        );
+        insert contact;
+        ContentVersion cv = createLink('Board', 'ContactForm', contact.Id);
+        FileService.updateDate(cv, contact.Id);
+
+        contact = [
+            SELECT BoardContactFormReceived__c
+            FROM Contact
+            WHERE Id = :contact.Id
+            LIMIT 1
+        ];
+        system.assertEquals(
+            Date.today(),
+            contact.BoardContactFormReceived__c,
+            'ContactFormReceived not set'
+        );
+    }
+
+    @isTest
+    public static void updateDate_ClientContactForm_SetsDate() {
+        Contact contact = new Contact(
+            FirstName = 'Test',
+            LastName = 'Contact',
+            Email = 'abc@abc.com'
+        );
+        insert contact;
+        ContentVersion cv = createLink('Client', 'ContactForm', contact.Id);
+        FileService.updateDate(cv, contact.Id);
+
+        contact = [
+            SELECT ClientContactFormReceived__c
+            FROM Contact
+            WHERE Id = :contact.Id
+            LIMIT 1
+        ];
+        system.assertEquals(
+            Date.today(),
+            contact.ClientContactFormReceived__c,
+            'ContactFormReceived not set'
+        );
+    }
+
+    @isTest
+    public static void updateDate_FacilitatorContactForm_SetsDate() {
+        Contact contact = new Contact(
+            FirstName = 'Test',
+            LastName = 'Contact',
+            Email = 'abc@abc.com'
+        );
+        insert contact;
+        ContentVersion cv = createLink(
+            'Facilitator',
+            'ContactForm',
+            contact.Id
+        );
+        FileService.updateDate(cv, contact.Id);
+
+        contact = [
+            SELECT FacilitatorContactFormReceived__c
+            FROM Contact
+            WHERE Id = :contact.Id
+            LIMIT 1
+        ];
+        system.assertEquals(
+            Date.today(),
+            contact.FacilitatorContactFormReceived__c,
+            'ContactFormReceived not set'
+        );
+    }
+
+    @isTest
+    public static void updateDate_TrainerContactForm_SetsDate() {
+        Contact contact = new Contact(
+            FirstName = 'Test',
+            LastName = 'Contact',
+            Email = 'abc@abc.com'
+        );
+        insert contact;
+        ContentVersion cv = createLink('Trainer', 'ContactForm', contact.Id);
+        FileService.updateDate(cv, contact.Id);
+
+        contact = [
+            SELECT TrainerContactFormReceived__c
+            FROM Contact
+            WHERE Id = :contact.Id
+            LIMIT 1
+        ];
+        system.assertEquals(
+            Date.today(),
+            contact.TrainerContactFormReceived__c,
+            'ContactFormReceived not set'
         );
     }
 }

@@ -22,6 +22,11 @@
                 <label>Application</label>
             </value>
             <value>
+                <fullName>ContactForm</fullName>
+                <default>false</default>
+                <label>Contact Form</label>
+            </value>
+            <value>
                 <fullName>Agreement</fullName>
                 <default>false</default>
                 <label>Agreement</label>
@@ -150,7 +155,6 @@
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Client</controllingFieldValue>
-            <controllingFieldValue>TSiM</controllingFieldValue>
             <controllingFieldValue>ADSiM</controllingFieldValue>
             <valueName>PreApplication</valueName>
         </valueSettings>
@@ -173,6 +177,14 @@
             <controllingFieldValue>Facilitator</controllingFieldValue>
             <controllingFieldValue>Trainer</controllingFieldValue>
             <valueName>ProgAgreement</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Client</controllingFieldValue>
+            <controllingFieldValue>Board</controllingFieldValue>
+            <controllingFieldValue>Facilitator</controllingFieldValue>
+            <controllingFieldValue>Trainer</controllingFieldValue>
+            <controllingFieldValue>Volunteer</controllingFieldValue>
+            <valueName>ContactForm</valueName>
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Client</controllingFieldValue>
