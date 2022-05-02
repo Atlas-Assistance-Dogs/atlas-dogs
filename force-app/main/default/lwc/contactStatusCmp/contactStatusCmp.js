@@ -3,19 +3,25 @@ import { getRecord } from "lightning/uiRecordApi";
 import getProgramAssignments from "@salesforce/apex/ContactController.getProgramAssignments";
 
 import BOARD_MEMBER_STATUS_FIELD from "@salesforce/schema/Contact.BoardMemberStatus__c";
+import CLIENT_CERT_AGREEMENT_RECEIVED from "@salesforce/schema/Contact.ClientCertAgreementReceived__c";
 import CLIENT_STATUS_FIELD from "@salesforce/schema/Contact.ClientStatus__c";
+import FACILITATOR_CERT_AGREEMENT_RECEIVED from "@salesforce/schema/Contact.FacilitatorCertAgreementReceived__c";
 import FACILITATOR_STATUS_FIELD from "@salesforce/schema/Contact.FacilitatorStatus__c";
 import LEAD_FACILITATOR_STATUS_FIELD from "@salesforce/schema/Contact.LeadFacilitatorStatus__c";
 import POSITIONS_FIELD from "@salesforce/schema/Contact.Positions__c";
+import TRAINER_CERT_AGREEMENT_RECEIVED from "@salesforce/schema/Contact.TrainerCertAgreementReceived__c";
 import TRAINER_STATUS_FIELD from "@salesforce/schema/Contact.TrainerStatus__c";
 import VOLUNTEER_STATUS_FIELD from "@salesforce/schema/Contact.GW_Volunteers__Volunteer_Status__c";
 
 const FIELDS = [
     BOARD_MEMBER_STATUS_FIELD,
+    CLIENT_CERT_AGREEMENT_RECEIVED,
     CLIENT_STATUS_FIELD,
+    FACILITATOR_CERT_AGREEMENT_RECEIVED,
     FACILITATOR_STATUS_FIELD,
     LEAD_FACILITATOR_STATUS_FIELD,
     POSITIONS_FIELD,
+    TRAINER_CERT_AGREEMENT_RECEIVED,
     TRAINER_STATUS_FIELD,
     VOLUNTEER_STATUS_FIELD
 ];
@@ -29,9 +35,12 @@ const POSITIONS = [
     "Other Programs"
 ];
 
-const OTHER_PROGRAMS = [
-    "Teams Set in Motion Client",
-    "Assistance Dogs Set in Motion Client"
+const STANDARD_PROGRAMS = [
+    "Volunteer",
+    "Team Facilitator",
+    "Trainer",
+    "Client",
+    "Staff"
 ];
 
 export default class ContactStatus extends LightningElement {
@@ -65,7 +74,7 @@ export default class ContactStatus extends LightningElement {
             };
             for (var idx = 0; idx < data.length; idx++) {
                 var pa = data[idx];
-                if (OTHER_PROGRAMS.find((x) => x === pa.Program__c)) {
+                if (STANDARD_PROGRAMS.find((x) => x !== pa.Program__c)) {
                     // we want to prioritize 'In Progress' as a status
                     if (this.otherPrograms.status !== "In Progress") {
                         this.otherPrograms.status = pa.Status__c;
@@ -98,12 +107,17 @@ export default class ContactStatus extends LightningElement {
                     if (
                         roleNames.includes(role) ||
                         roleNames.includes("Team Facilitator Lead")
-                    )
+                    ) {
+                        const status = this.fineTuneStatus(
+                            this.contact.fields.FacilitatorStatus__c.value,
+                            this.contact.fields
+                                .FacilitatorCertAgreementReceived__c.value
+                        );
                         this.roles.push({
                             position: role,
-                            status: this.contact.fields.FacilitatorStatus__c
-                                .value
+                            status: status
                         });
+                    }
                     break;
 
                 case "Board":
@@ -116,22 +130,51 @@ export default class ContactStatus extends LightningElement {
                     break;
 
                 case "Client":
-                    if (roleNames.includes(role))
+                    if (roleNames.includes(role)) {
+                        const status = this.fineTuneStatus(
+                            this.contact.fields.ClientStatus__c.value,
+                            this.contact.fields.ClientCertAgreementReceived__c
+                                .value
+                        );
                         this.roles.push({
                             position: role,
-                            status: this.contact.fields.ClientStatus__c.value
+                            status: status
                         });
+                    }
                     break;
 
                 case "Trainer":
-                    if (roleNames.includes(role))
+                    if (roleNames.includes(role)) {
+                        const status = this.fineTuneStatus(
+                            this.contact.fields.TrainerStatus__c.value,
+                            this.contact.fields.TrainerCertAgreementReceived__c
+                                .value
+                        );
                         this.roles.push({
                             position: role,
-                            status: this.contact.fields.FacilitatorStatus__c
-                                .value
+                            status: status
                         });
+                    }
                     break;
             }
         });
+    }
+
+    addDays(date, days) {
+        var newDate = new Date(date);
+        newDate.setDate(date.getDate() + days);
+        return newDate;
+    }
+
+    fineTuneStatus(status, certDate) {
+        const today = new Date();
+        if (certDate != null) {
+            if (this.addDays(certDate, 365) < today) {
+                status = "Action Needed";
+            } else if (this.addDays(certDate, 270) < today) {
+                status = "Action Needed Soon";
+            }
+        }
+        return status;
     }
 }

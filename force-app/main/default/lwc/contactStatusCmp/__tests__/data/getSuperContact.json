@@ -1,0 +1,34 @@
+{
+    "fields": {
+        "Positions__c": {
+            "value": "Volunteer;Team Facilitator;Team Facilitator Lead;Board Member;Trainer;Client;Donor;Staff"
+        },
+        "BoardMemberStatus__c": {
+            "value": "Initial Inquiry"
+        },
+        "ClientCertAgreementReceived__c": {
+            "value": "Fri Apr 29 2021"
+        },
+        "ClientStatus__c": {
+            "value": "In ADSiM"
+        },
+        "FacilitatorCertAgreementReceived__c": {
+            "value": "2022-04-30T03:14:13.702Z"
+        },
+        "FacilitatorStatus__c": {
+            "value": "Onboarding"
+        },
+        "LeadFacilitatorStatus__c": {
+            "value": "Active"
+        },
+        "TrainerCertAgreementReceived__c": {
+            "value": "Fri Apr 29 2022"
+        },
+        "TrainerStatus__c": {
+            "value": "Inactive"
+        },
+        "GW_Volunteers__Volunteer_Status__c": {
+            "value": "Active"
+        }
+    }
+}
