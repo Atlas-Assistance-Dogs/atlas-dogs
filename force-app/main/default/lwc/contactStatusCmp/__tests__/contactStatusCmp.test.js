@@ -286,4 +286,173 @@ describe("c-contact-status-cmp", () => {
             expect(indicator.status).toBe("Action Needed");
         });
     });
+
+    it("Contact has Other in training", () => {
+        let daysAgo = new Date();
+        daysAgo.setDate(daysAgo.getDate() - 370);
+        const contact = {
+            fields: {
+                Positions__c: { value: null },
+                PuppyRaiserStatus__c: { value: undefined },
+                PuppyCertAgreementReceived__c: { value: undefined }
+            }
+        };
+        const programAssignments = [
+            {
+                AssignedDate__c: new Date(),
+                CompletionDate__c: undefined,
+                ExpectedCompletion__c: new Date(),
+                Program2__c: "number",
+                Program2__r: { Name: "Medical Alert", Standalone__c: true },
+                Status__c: "In Progress"
+            }
+        ];
+        const element = createElement("c-contact-status-cmp", {
+            is: ContactStatusCmp
+        });
+        document.body.appendChild(element);
+
+        // Emit mock record into the wired field
+        getRecord.emit(contact);
+        getProgramAssignments.emit(programAssignments);
+
+        // Resolve a promise to wait for a rerender of the new content.
+        return Promise.resolve().then(() => {
+            const indicators = element.shadowRoot.querySelectorAll(
+                "c-contact-status-indicator-cmp"
+            );
+            // Child is the mock, not the real component
+            expect(indicators).not.toBeNull();
+            expect(indicators.length).toBe(1);
+            const indicator = indicators[0];
+            expect(indicator.position).toBe("Other");
+            expect(indicator.status).toBe("In Progress");
+        });
+    });
+
+    it("Contact has Other in training when one program complete", () => {
+        let daysAgo = new Date();
+        daysAgo.setDate(daysAgo.getDate() - 370);
+        const contact = {
+            fields: {
+                Positions__c: { value: null },
+                PuppyRaiserStatus__c: { value: undefined },
+                PuppyCertAgreementReceived__c: { value: undefined }
+            }
+        };
+        const programAssignments = [
+            {
+                AssignedDate__c: new Date(),
+                CompletionDate__c: undefined,
+                ExpectedCompletion__c: new Date(),
+                Program2__c: "number",
+                Program2__r: { Name: "Medical Alert", Standalone__c: true },
+                Status__c: "In Progress"
+            },
+            {
+                AssignedDate__c: new Date(),
+                CompletionDate__c: undefined,
+                ExpectedCompletion__c: new Date(),
+                Program2__c: "number",
+                Program2__r: { Name: "Fitness", Standalone__c: true },
+                Status__c: "Completed"
+            },
+            {
+                AssignedDate__c: new Date(),
+                CompletionDate__c: undefined,
+                ExpectedCompletion__c: new Date(),
+                Program2__c: "number",
+                Program2__r: { Name: "Fitness", Standalone__c: true },
+                Status__c: "Discontinued"
+            },
+            {
+                AssignedDate__c: new Date(),
+                CompletionDate__c: undefined,
+                ExpectedCompletion__c: new Date(),
+                Program2__c: "number",
+                Program2__r: { Name: "Fitness", Standalone__c: true },
+                Status__c: "Removed"
+            }
+        ];
+        const element = createElement("c-contact-status-cmp", {
+            is: ContactStatusCmp
+        });
+        document.body.appendChild(element);
+
+        // Emit mock record into the wired field
+        getRecord.emit(contact);
+        getProgramAssignments.emit(programAssignments);
+
+        // Resolve a promise to wait for a rerender of the new content.
+        return Promise.resolve().then(() => {
+            const indicators = element.shadowRoot.querySelectorAll(
+                "c-contact-status-indicator-cmp"
+            );
+            // Child is the mock, not the real component
+            expect(indicators).not.toBeNull();
+            expect(indicators.length).toBe(1);
+            const indicator = indicators[0];
+            expect(indicator.position).toBe("Other");
+            expect(indicator.status).toBe("In Progress");
+        });
+    });
+
+    it("Contact has Other Decertifed/Suspended when all program complete", () => {
+        let daysAgo = new Date();
+        daysAgo.setDate(daysAgo.getDate() - 370);
+        const contact = {
+            fields: {
+                Positions__c: { value: null },
+                PuppyRaiserStatus__c: { value: undefined },
+                PuppyCertAgreementReceived__c: { value: undefined }
+            }
+        };
+        const programAssignments = [
+            {
+                AssignedDate__c: new Date(),
+                CompletionDate__c: undefined,
+                ExpectedCompletion__c: new Date(),
+                Program2__c: "number",
+                Program2__r: { Name: "Fitness", Standalone__c: true },
+                Status__c: "Completed"
+            },
+            {
+                AssignedDate__c: new Date(),
+                CompletionDate__c: undefined,
+                ExpectedCompletion__c: new Date(),
+                Program2__c: "number",
+                Program2__r: { Name: "Fitness", Standalone__c: true },
+                Status__c: "Discontinued"
+            },
+            {
+                AssignedDate__c: new Date(),
+                CompletionDate__c: undefined,
+                ExpectedCompletion__c: new Date(),
+                Program2__c: "number",
+                Program2__r: { Name: "Fitness", Standalone__c: true },
+                Status__c: "Removed"
+            }
+        ];
+        const element = createElement("c-contact-status-cmp", {
+            is: ContactStatusCmp
+        });
+        document.body.appendChild(element);
+
+        // Emit mock record into the wired field
+        getRecord.emit(contact);
+        getProgramAssignments.emit(programAssignments);
+
+        // Resolve a promise to wait for a rerender of the new content.
+        return Promise.resolve().then(() => {
+            const indicators = element.shadowRoot.querySelectorAll(
+                "c-contact-status-indicator-cmp"
+            );
+            // Child is the mock, not the real component
+            expect(indicators).not.toBeNull();
+            expect(indicators.length).toBe(1);
+            const indicator = indicators[0];
+            expect(indicator.position).toBe("Other");
+            expect(indicator.status).toBe("Decertifed/Suspended");
+        });
+    });
 });

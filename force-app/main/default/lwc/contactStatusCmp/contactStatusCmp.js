@@ -59,10 +59,11 @@ export default class ContactStatus extends LightningElement {
         if (data) {
             this.contact = data;
             const positions = this.contact.fields.Positions__c;
-            if (!positions) return;
-            const roleNames = positions.value.split(";");
-            this.getRoleData(roleNames);
-            this.error = undefined;
+            if (positions && positions.value) {
+                const roleNames = positions.value.split(";");
+                this.getRoleData(roleNames);
+                this.error = undefined;
+            }
         } else if (error) {
             this.error = error;
             this.contact = undefined;
@@ -79,10 +80,13 @@ export default class ContactStatus extends LightningElement {
             };
             for (var idx = 0; idx < data.length; idx++) {
                 var pa = data[idx];
-                if (STANDARD_PROGRAMS.find((x) => x !== pa.Program__c)) {
+                if (pa.Program2__r.Standalone__c) {
                     // we want to prioritize 'In Progress' as a status
-                    if (this.otherPrograms.status !== "In Progress") {
+                    if (pa.Status__c === "In Progress") {
                         this.otherPrograms.status = pa.Status__c;
+                        break; // we don't care about any other programs
+                    } else {
+                        this.otherPrograms.status = "Decertifed/Suspended";
                     }
                 }
             }
