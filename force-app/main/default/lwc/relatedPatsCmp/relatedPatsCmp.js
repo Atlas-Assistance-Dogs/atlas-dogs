@@ -12,7 +12,7 @@ import TYPE_FIELD from "@salesforce/schema/PublicAccessTest__c.Type__c";
 
 // Import message service features required for publishing and the message channel
 import { publish, MessageContext } from "lightning/messageService";
-import patForm from "@salesforce/messageChannel/PatForm__c";
+import patForm from "@salesforce/messageChannel/patForm__c";
 
 const actions = [
     { label: "Edit", name: "edit" },

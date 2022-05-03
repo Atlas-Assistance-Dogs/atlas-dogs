@@ -14,7 +14,7 @@ import TEAM_SUPPORT_FIELD from "@salesforce/schema/Log__c.RequestSupportFromTeam
 
 // Import message service features required for publishing and the message channel
 import { publish, MessageContext } from "lightning/messageService";
-import logForm from "@salesforce/messageChannel/LogForm__c";
+import logForm from "@salesforce/messageChannel/logForm__c";
 
 const actions = [
     { label: "Edit", name: "edit" },

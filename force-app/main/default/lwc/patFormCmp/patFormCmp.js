@@ -27,7 +27,7 @@ import {
     APPLICATION_SCOPE,
     MessageContext
 } from "lightning/messageService";
-import patForm from "@salesforce/messageChannel/PatForm__c";
+import patForm from "@salesforce/messageChannel/patForm__c";
 
 const COLS = [
     {

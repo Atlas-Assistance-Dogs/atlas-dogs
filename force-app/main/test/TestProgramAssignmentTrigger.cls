@@ -6,16 +6,19 @@ public with sharing class TestProgramAssignmentTrigger {
         insert joe;
     }
 
-    static void setProgramDurations() {
+    public static List<Program__c> programs;
+
+    public static void setProgramDurations() {
         // Set some durations, all different to make testing more clear
-        Settings.programDurations = new Map<String, Decimal>{
-            'Volunteer' => 0.5,
-            'Client' => 3,
-            'Team Facilitator' => 4,
-            'Teams Set in Motion Client' => 5,
-            'Trainer' => 6
-        };
-        System.debug('Set programDurations');
+        programs = new List<Program__c>();
+        programs.Add(new Program__c(Name = 'Volunteer', Months__c = 0.5, Reminder__c = 7));
+        programs.Add(new Program__c(Name = 'Client', Months__c = 3, Reminder__c = 30));
+        programs.Add(new Program__c(Name = 'Team Facilitator', Months__c =  4, Reminder__c = 30));
+        programs.Add(new Program__c(Name = 'Teams Set in Motion Client', Months__c =  5, Reminder__c = 30));
+        programs.Add(new Program__c(Name = 'Trainer', Months__c =  6, Reminder__c = 14));
+        programs.Add(new Program__c(Name = 'Medical Disability', Months__c =  7, Reminder__c = 21));
+        programs.Add(new Program__c(Name = 'Medical Disability [CEU]', Months__c =  8, Reminder__c = 0));
+        insert programs;
     }
 
     static ProgramAssignment__c getProgramAssignment(Id ProgramAssignmentId) {
@@ -25,7 +28,7 @@ public with sharing class TestProgramAssignmentTrigger {
                 CompletionDate__c,
                 Contact__c,
                 ExpectedCompletion__c,
-                Program__c,
+                Program2__c,
                 Status__c
             FROM ProgramAssignment__c
             WHERE id = :ProgramAssignmentId
@@ -40,8 +43,8 @@ public with sharing class TestProgramAssignmentTrigger {
         setProgramDurations();
         Contact joe = [SELECT Id FROM Contact WHERE FirstName = 'Joe' LIMIT 1];
         ProgramAssignment__c ProgramAssignment = new ProgramAssignment__c(
-            Program__c = 'Volunteer',
-            Contact__c = joe.id,
+            Program2__c = programs[0].Id,
+            Contact__c = joe.Id,
             AssignedDate__c = Date.today()
         );
 
@@ -57,19 +60,18 @@ public with sharing class TestProgramAssignmentTrigger {
         System.assertEquals(Date.today(), saved.AssignedDate__c);
     }
 
-    static void testInsertSetsExpected(String program) {
+    static void testInsertSetsExpected(string programName) {
         // Arrange
         setProgramDurations();
+        Program__c program = [SELECT Id, Months__c FROM Program__c WHERE Name = :programName LIMIT 1];
         Contact joe = [SELECT Id FROM Contact WHERE FirstName = 'Joe' LIMIT 1];
         // Create a ProgramAssignment__c with Volunteer program
         Date assigned = Date.newInstance(2021, 1, 10);
         ProgramAssignment__c assignment = new ProgramAssignment__c(
             AssignedDate__c = assigned,
-            Program__c = program,
+            Program2__c = program.Id,
             Contact__c = joe.Id
         );
-
-        Decimal duration = Settings.programDurations.get(program);
 
         // Act
         Test.startTest();
@@ -79,7 +81,7 @@ public with sharing class TestProgramAssignmentTrigger {
         // Assert
         System.assert(result.isSuccess());
         ProgramAssignment__c saved = getProgramAssignment(result.getId());
-        Date expected = assigned.addDays((Integer) (duration * 30));
+        Date expected = assigned.addDays((Integer) (program.Months__c * 30));
         System.assert(result.getErrors().size() == 0);
         System.assertEquals(expected, saved.ExpectedCompletion__c);
         System.assertEquals(assigned, saved.AssignedDate__c);
@@ -108,17 +110,16 @@ public with sharing class TestProgramAssignmentTrigger {
     @isTest
     static void insertHandlesMissingDuration() {
         // Arrange
-        String program = 'Volunteer';
+        Program__c program = new Program__c(Name = 'Volunteer', Months__c = 0);
+        insert program;
         Contact joe = [SELECT Id FROM Contact WHERE FirstName = 'Joe' LIMIT 1];
         // Create a ProgramAssignment__c with Volunteer program
         Date assigned = Date.newInstance(2021, 1, 10);
         ProgramAssignment__c assignment = new ProgramAssignment__c(
             AssignedDate__c = assigned,
-            Program__c = program,
+            Program2__c = program.Id,
             Contact__c = joe.Id
         );
-
-        Decimal duration = Settings.programDurations.get(program);
 
         // Act
         Test.startTest();
@@ -143,7 +144,7 @@ public with sharing class TestProgramAssignmentTrigger {
         ProgramAssignment__c assignment = new ProgramAssignment__c(
             AssignedDate__c = assigned,
             ExpectedCompletion__c = expected,
-            Program__c = 'Volunteer',
+            Program2__c = programs[0].Id,
             Contact__c = joe.Id
         );
 
@@ -167,6 +168,7 @@ public with sharing class TestProgramAssignmentTrigger {
         ProgramAssignment__c programAssignment = new ProgramAssignment__c(
             AssignedDate__c = assigned,
             ExpectedCompletion__c = Date.today(),
+            Program2__c = programs[0].Id,
             Contact__c = joe.Id
         );
         insert programAssignment;

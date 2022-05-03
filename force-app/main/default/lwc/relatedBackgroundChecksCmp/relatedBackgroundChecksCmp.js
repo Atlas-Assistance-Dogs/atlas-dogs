@@ -7,7 +7,7 @@ import { refreshApex } from "@salesforce/apex";
 
 // Import message service features required for publishing and the message channel
 import { publish, MessageContext } from "lightning/messageService";
-import backgroundCheckForm from "@salesforce/messageChannel/BackgroundCheckForm__c";
+import backgroundCheckForm from "@salesforce/messageChannel/backgroundCheckForm__c";
 
 const actions = [
     { label: "Edit", name: "edit" },

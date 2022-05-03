@@ -7,7 +7,7 @@ import { ShowToastEvent } from "lightning/platformShowToastEvent";
 
 // Import message service features required for publishing and the message channel
 import { publish, MessageContext } from "lightning/messageService";
-import updateFile from "@salesforce/messageChannel/UpdateFile__c";
+import updateFile from "@salesforce/messageChannel/updateFile__c";
 
 const actions = [
     { label: "Edit", name: "edit" },

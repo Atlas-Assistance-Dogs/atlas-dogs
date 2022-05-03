@@ -7,7 +7,7 @@ import { refreshApex } from "@salesforce/apex";
 
 // Import message service features required for publishing and the message channel
 import { publish, MessageContext } from "lightning/messageService";
-import ceuForm from "@salesforce/messageChannel/CeuForm__c";
+import ceuForm from "@salesforce/messageChannel/ceuForm__c";
 
 const actions = [
     { label: "Edit", name: "edit" },
