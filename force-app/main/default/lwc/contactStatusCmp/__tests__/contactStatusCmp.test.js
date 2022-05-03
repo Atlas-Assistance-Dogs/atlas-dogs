@@ -253,4 +253,37 @@ describe("c-contact-status-cmp", () => {
             expect(indicator.status).toBe("Inactive");
         });
     });
+
+    it("Puppy Raiser has action needed", () => {
+        let daysAgo = new Date();
+        daysAgo.setDate(daysAgo.getDate() - 370);
+        const contact = {
+            fields: {
+                Positions__c: { value: "Puppy Raiser" },
+                PuppyRaiserStatus__c: { value: "Certified" },
+                PuppyCertAgreementReceived__c: { value: daysAgo }
+            }
+        };
+        const element = createElement("c-contact-status-cmp", {
+            is: ContactStatusCmp
+        });
+        document.body.appendChild(element);
+
+        // Emit mock record into the wired field
+        getRecord.emit(contact);
+        getProgramAssignments.emit([]);
+
+        // Resolve a promise to wait for a rerender of the new content.
+        return Promise.resolve().then(() => {
+            const indicators = element.shadowRoot.querySelectorAll(
+                "c-contact-status-indicator-cmp"
+            );
+            // Child is the mock, not the real component
+            expect(indicators).not.toBeNull();
+            expect(indicators.length).toBe(1);
+            const indicator = indicators[0];
+            expect(indicator.position).toBe("Puppy Raiser");
+            expect(indicator.status).toBe("Action Needed");
+        });
+    });
 });
