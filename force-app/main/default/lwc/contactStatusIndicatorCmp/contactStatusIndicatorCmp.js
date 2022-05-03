@@ -20,6 +20,10 @@ export default class ContactStatusIndicatorCmp extends LightningElement {
             case "Active":
             case "Completed":
                 return "standard:task2";
+            case "Action Needed Soon":
+                return "custom:custom82";
+            case "Action Needed":
+                return "standard:actions_and_buttons";
             case "Inactive":
             case "On Hold":
             case "Discontinued":

@@ -9,6 +9,8 @@ import FACILITATOR_CERT_AGREEMENT_RECEIVED from "@salesforce/schema/Contact.Faci
 import FACILITATOR_STATUS_FIELD from "@salesforce/schema/Contact.FacilitatorStatus__c";
 import LEAD_FACILITATOR_STATUS_FIELD from "@salesforce/schema/Contact.LeadFacilitatorStatus__c";
 import POSITIONS_FIELD from "@salesforce/schema/Contact.Positions__c";
+import PUPPY_CERT_AGREEMENT_RECEIVED from "@salesforce/schema/Contact.PuppyCertAgreementReceived__c";
+import PUPPY_STATUS_FIELD from "@salesforce/schema/Contact.PuppyRaiserStatus__c";
 import TRAINER_CERT_AGREEMENT_RECEIVED from "@salesforce/schema/Contact.TrainerCertAgreementReceived__c";
 import TRAINER_STATUS_FIELD from "@salesforce/schema/Contact.TrainerStatus__c";
 import VOLUNTEER_STATUS_FIELD from "@salesforce/schema/Contact.GW_Volunteers__Volunteer_Status__c";
@@ -21,6 +23,8 @@ const FIELDS = [
     FACILITATOR_STATUS_FIELD,
     LEAD_FACILITATOR_STATUS_FIELD,
     POSITIONS_FIELD,
+    PUPPY_CERT_AGREEMENT_RECEIVED,
+    PUPPY_STATUS_FIELD,
     TRAINER_CERT_AGREEMENT_RECEIVED,
     TRAINER_STATUS_FIELD,
     VOLUNTEER_STATUS_FIELD
@@ -29,6 +33,7 @@ const FIELDS = [
 const POSITIONS = [
     "Volunteer",
     "Team Facilitator",
+    "Puppy Raiser",
     "Board",
     "Client",
     "Trainer",
@@ -120,6 +125,20 @@ export default class ContactStatus extends LightningElement {
                     }
                     break;
 
+                case "Puppy Raiser":
+                    if (roleNames.includes(role)) {
+                        const status = this.fineTuneStatus(
+                            this.contact.fields.PuppyRaiserStatus__c.value,
+                            this.contact.fields.PuppyCertAgreementReceived__c
+                                .value
+                        );
+                        this.roles.push({
+                            position: role,
+                            status: status
+                        });
+                    }
+                    break;
+
                 case "Board":
                     if (roleNames.includes("Board Member"))
                         this.roles.push({
@@ -162,7 +181,7 @@ export default class ContactStatus extends LightningElement {
 
     addDays(date, days) {
         var newDate = new Date(date);
-        newDate.setDate(date.getDate() + days);
+        newDate.setDate(newDate.getDate() + days);
         return newDate;
     }
 

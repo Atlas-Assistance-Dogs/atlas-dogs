@@ -41,6 +41,11 @@
                 <label>Team Facilitator</label>
             </value>
             <value>
+                <fullName>Puppy</fullName>
+                <default>false</default>
+                <label>Puppy Raiser</label>
+            </value>
+            <value>
                 <fullName>Trainer</fullName>
                 <default>false</default>
                 <label>Trainer</label>
