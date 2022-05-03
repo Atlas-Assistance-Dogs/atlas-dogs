@@ -70,7 +70,9 @@ public inherited sharing class ContactController {
                     AssignedDate__c,
                     CompletionDate__c,
                     ExpectedCompletion__c,
-                    Program__c,
+                    Program2__c,
+                    Program2__r.Name,
+                    Program2__r.Standalone__c,
                     Status__c
                 FROM ProgramAssignment__c
                 WHERE Contact__c = :contactId
