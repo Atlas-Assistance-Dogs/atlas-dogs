@@ -11,13 +11,13 @@ public with sharing class TestProgramAssignmentTrigger {
     public static void setProgramDurations() {
         // Set some durations, all different to make testing more clear
         programs = new List<Program__c>();
-        programs.Add(new Program__c(Name = 'Volunteer', Months__c = 0.5));
-        programs.Add(new Program__c(Name = 'Client', Months__c = 3));
-        programs.Add(new Program__c(Name = 'Team Facilitator', Months__c =  4));
-        programs.Add(new Program__c(Name = 'Teams Set in Motion Client', Months__c =  5));
-        programs.Add(new Program__c(Name = 'Trainer', Months__c =  6));
-        programs.Add(new Program__c(Name = 'Medical Disability', Months__c =  7));
-        programs.Add(new Program__c(Name = 'Medical Disability [CEU]', Months__c =  8));
+        programs.Add(new Program__c(Name = 'Volunteer', Months__c = 0.5, Reminder__c = 7));
+        programs.Add(new Program__c(Name = 'Client', Months__c = 3, Reminder__c = 30));
+        programs.Add(new Program__c(Name = 'Team Facilitator', Months__c =  4, Reminder__c = 30));
+        programs.Add(new Program__c(Name = 'Teams Set in Motion Client', Months__c =  5, Reminder__c = 30));
+        programs.Add(new Program__c(Name = 'Trainer', Months__c =  6, Reminder__c = 14));
+        programs.Add(new Program__c(Name = 'Medical Disability', Months__c =  7, Reminder__c = 21));
+        programs.Add(new Program__c(Name = 'Medical Disability [CEU]', Months__c =  8, Reminder__c = 0));
         insert programs;
     }
 

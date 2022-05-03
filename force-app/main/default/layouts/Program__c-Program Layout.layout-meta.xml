@@ -23,6 +23,10 @@
                 <behavior>Edit</behavior>
                 <field>Current__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Required</behavior>
+                <field>Reminder__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>

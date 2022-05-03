@@ -163,6 +163,7 @@
     <searchLayouts>
         <searchResultsAdditionalFields>CEU__c</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>Months__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Reminder__c</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>Current__c</searchResultsAdditionalFields>
     </searchLayouts>
     <sharingModel>ReadWrite</sharingModel>

@@ -226,7 +226,7 @@ public with sharing class TestReminders {
         assignments.add(
             new ProgramAssignment__c(
                 AssignedDate__c = Date.today().addDays(-2),
-                ExpectedCompletion__c = Date.today().addDays(16),
+                ExpectedCompletion__c = Date.today().addDays(14),
                 Program2__c = TestProgramAssignmentTrigger.programs[4].Id,
                 Status__c = 'In progress',
                 Contact__c = joe.Id
@@ -235,7 +235,7 @@ public with sharing class TestReminders {
         assignments.add(
             new ProgramAssignment__c(
                 AssignedDate__c = Date.today().addDays(-2),
-                ExpectedCompletion__c = Date.today().addDays(22),
+                ExpectedCompletion__c = Date.today().addDays(21),
                 Program2__c = TestProgramAssignmentTrigger.programs[5].Id,
                 Status__c = 'In progress',
                 Contact__c = joe.Id
