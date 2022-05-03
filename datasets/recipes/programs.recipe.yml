@@ -1,7 +1,7 @@
 - object: Program__c
   nickname: client_program
   fields:
-    Name: 'Client'
+    Name: 'Client Certification'
     CEU__c: false
     Current__c: true
     Months__c: 6
@@ -13,6 +13,7 @@
     CEU__c: false
     Current__c: true
     Months__c: 1
+    Standalone__c: true
 
 - object: Program__c
   fields:
@@ -20,6 +21,7 @@
     CEU__c: true
     Current__c: true
     Months__c: 1.5
+    Standalone__c: true
 
 - object: Program__c
   fields:
@@ -27,6 +29,7 @@
     CEU__c: false
     Current__c: true
     Months__c: 1
+    Standalone__c: true
 
 - object: Program__c
   fields:
@@ -34,6 +37,7 @@
     CEU__c: false
     Current__c: true
     Months__c: 1.5
+    Standalone__c: true
 
 - object: Program__c
   fields:
@@ -41,6 +45,7 @@
     CEU__c: false
     Current__c: true
     Months__c: 1
+    Standalone__c: true
 
 - object: Program__c
   fields:
@@ -48,6 +53,7 @@
     CEU__c: false
     Current__c: true
     Months__c: 1.5
+    Standalone__c: true
 
 - object: Program__c
   fields:
@@ -55,6 +61,7 @@
     CEU__c: true
     Current__c: true
     Months__c: 4
+    Standalone__c: true
 
 - object: Program__c
   fields:
@@ -62,6 +69,7 @@
     CEU__c: false
     Current__c: true
     Months__c: 1
+    Standalone__c: true
 
 - object: Program__c
   fields:
@@ -69,6 +77,14 @@
     CEU__c: true
     Current__c: true
     Months__c: 1.5
+    Standalone__c: true
+
+- object: Program__c
+  fields:
+    Name: 'Puppy Raiser'
+    Current__c: true
+    Months__c: 4
+    Reminder__c: 30
 
 - object: Program__c
   fields:
@@ -76,6 +92,7 @@
     CEU__c: false
     Current__c: true
     Months__c: 1
+    Standalone__c: true
 
 - object: Program__c
   fields:
@@ -83,6 +100,7 @@
     CEU__c: true
     Current__c: true
     Months__c: 1.5
+    Standalone__c: true
 
 - object: Program__c
   fields:
@@ -90,6 +108,7 @@
     CEU__c: true
     Current__c: true
     Months__c: 4
+    Standalone__c: true
 
 - object: Program__c
   fields:
@@ -97,6 +116,7 @@
     CEU__c: false
     Current__c: true
     Months__c: 1
+    Standalone__c: true
 
 - object: Program__c
   fields:
@@ -104,6 +124,7 @@
     CEU__c: false
     Current__c: true
     Months__c: 1.5
+    Standalone__c: true
 
 - object: Program__c
   nickname: staff_program
@@ -121,6 +142,7 @@
     CEU__c: true
     Current__c: true
     Months__c: 3
+    Standalone__c: true
 
 - object: Program__c
   nickname: facilitator_program
@@ -130,6 +152,7 @@
     Current__c: true
     Months__c: 4
     Reminder__c: 30
+    Standalone__c: true
 
 - object: Program__c
   fields:
@@ -137,12 +160,13 @@
     CEU__c: false
     Current__c: true
     Months__c: 6
+    Standalone__c: true
 
 - object: Program__c
   nickname: trainer_program
   fields:
-    Name: 'Trainer'
-    CEU__c: false
+    Name: 'Trainer Certification'
+    CEU__c: true
     Current__c: true
     Months__c: 9
     Reminder__c: 30

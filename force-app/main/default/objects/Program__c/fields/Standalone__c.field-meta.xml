@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Standalone__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Program isn&apos;t part of a certification program.  Program goes into &quot;Other&quot; category if checked.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Program isn&apos;t part of a certification program.</inlineHelpText>
+    <label>Standalone Program</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

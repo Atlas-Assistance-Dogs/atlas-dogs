@@ -50,10 +50,6 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>Settings</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
         <apexClass>TeamController</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -700,11 +696,6 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>ProgramAssignment__c.CEU__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
         <editable>false</editable>
         <field>ProgramAssignment__c.CompletionDate__c</field>
         <readable>false</readable>
@@ -720,11 +711,6 @@
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>false</editable>
-        <field>ProgramDuration__mdt.CEU__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
         <editable>true</editable>
         <field>Program__c.CEU__c</field>
         <readable>true</readable>
@@ -737,6 +723,16 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Program__c.Months__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Program__c.Reminder__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Program__c.Standalone__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -830,9 +826,6 @@
     </layoutAssignments>
     <layoutAssignments>
         <layout>ProgramAssignment__c-Program Assignment Layout</layout>
-    </layoutAssignments>
-    <layoutAssignments>
-        <layout>ProgramDuration__mdt-ProgramDuration Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
         <layout>Program__c-Program Layout</layout>

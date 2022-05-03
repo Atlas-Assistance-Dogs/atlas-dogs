@@ -2,6 +2,7 @@
 <ListView xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>All</fullName>
     <columns>NAME</columns>
+    <columns>Standalone__c</columns>
     <columns>CEU__c</columns>
     <columns>Months__c</columns>
     <columns>Reminder__c</columns>

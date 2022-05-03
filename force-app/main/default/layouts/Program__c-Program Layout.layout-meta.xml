@@ -24,8 +24,12 @@
                 <field>Current__c</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Required</behavior>
+                <behavior>Edit</behavior>
                 <field>Reminder__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Standalone__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
