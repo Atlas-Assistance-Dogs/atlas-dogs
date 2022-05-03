@@ -449,11 +449,11 @@
           fake: paragraph
       GW_Volunteers__Volunteer_Status__c:
           random_choice:
-              - Prospective
+              - Initial Inquiry
               - Onboarding
               - Active
               - Inactive
-              - New Sign Up
+              - None
 
 # Create Primary and secondary emergency contacts for Contact
 - object: npe4__Relationship__c

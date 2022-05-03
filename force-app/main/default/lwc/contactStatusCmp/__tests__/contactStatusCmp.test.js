@@ -88,4 +88,169 @@ describe("c-contact-status-cmp", () => {
             }
         });
     });
+
+    it("Client has action soon", () => {
+        let daysAgo = new Date();
+        daysAgo.setDate(daysAgo.getDate() - 300);
+        const client = {
+            fields: {
+                Positions__c: { value: "Client" },
+                ClientStatus__c: { value: "Certified" },
+                ClientCertAgreementReceived__c: { value: daysAgo }
+            }
+        };
+        const element = createElement("c-contact-status-cmp", {
+            is: ContactStatusCmp
+        });
+        document.body.appendChild(element);
+
+        // Emit mock record into the wired field
+        getRecord.emit(client);
+        getProgramAssignments.emit([]);
+
+        // Resolve a promise to wait for a rerender of the new content.
+        return Promise.resolve().then(() => {
+            const indicators = element.shadowRoot.querySelectorAll(
+                "c-contact-status-indicator-cmp"
+            );
+            // Child is the mock, not the real component
+            expect(indicators).not.toBeNull();
+            expect(indicators.length).toBe(1);
+            const indicator = indicators[0];
+            expect(indicator.position).toBe("Client");
+            expect(indicator.status).toBe("Action Needed Soon");
+        });
+    });
+
+    it("Team Facilitator has action needed", () => {
+        let daysAgo = new Date();
+        daysAgo.setDate(daysAgo.getDate() - 370);
+        const contact = {
+            fields: {
+                Positions__c: { value: "Team Facilitator" },
+                FacilitatorStatus__c: { value: "Active" },
+                FacilitatorCertAgreementReceived__c: { value: daysAgo }
+            }
+        };
+        const element = createElement("c-contact-status-cmp", {
+            is: ContactStatusCmp
+        });
+        document.body.appendChild(element);
+
+        // Emit mock record into the wired field
+        getRecord.emit(contact);
+        getProgramAssignments.emit([]);
+
+        // Resolve a promise to wait for a rerender of the new content.
+        return Promise.resolve().then(() => {
+            const indicators = element.shadowRoot.querySelectorAll(
+                "c-contact-status-indicator-cmp"
+            );
+            // Child is the mock, not the real component
+            expect(indicators).not.toBeNull();
+            expect(indicators.length).toBe(1);
+            const indicator = indicators[0];
+            expect(indicator.position).toBe("Team Facilitator");
+            expect(indicator.status).toBe("Action Needed");
+        });
+    });
+
+    it("Trainer has action needed", () => {
+        let daysAgo = new Date();
+        daysAgo.setDate(daysAgo.getDate() - 365);
+        const contact = {
+            fields: {
+                Positions__c: { value: "Trainer" },
+                TrainerStatus__c: { value: "Active" },
+                TrainerCertAgreementReceived__c: { value: daysAgo }
+            }
+        };
+        const element = createElement("c-contact-status-cmp", {
+            is: ContactStatusCmp
+        });
+        document.body.appendChild(element);
+
+        // Emit mock record into the wired field
+        getRecord.emit(contact);
+        getProgramAssignments.emit([]);
+
+        // Resolve a promise to wait for a rerender of the new content.
+        return Promise.resolve().then(() => {
+            const indicators = element.shadowRoot.querySelectorAll(
+                "c-contact-status-indicator-cmp"
+            );
+            // Child is the mock, not the real component
+            expect(indicators).not.toBeNull();
+            expect(indicators.length).toBe(1);
+            const indicator = indicators[0];
+            expect(indicator.position).toBe("Trainer");
+            expect(indicator.status).toBe("Action Needed");
+        });
+    });
+
+    it("Trainer has action needed soon", () => {
+        let daysAgo = new Date();
+        daysAgo.setDate(daysAgo.getDate() - 364);
+        const contact = {
+            fields: {
+                Positions__c: { value: "Trainer" },
+                TrainerStatus__c: { value: "Active" },
+                TrainerCertAgreementReceived__c: { value: daysAgo }
+            }
+        };
+        const element = createElement("c-contact-status-cmp", {
+            is: ContactStatusCmp
+        });
+        document.body.appendChild(element);
+
+        // Emit mock record into the wired field
+        getRecord.emit(contact);
+        getProgramAssignments.emit([]);
+
+        // Resolve a promise to wait for a rerender of the new content.
+        return Promise.resolve().then(() => {
+            const indicators = element.shadowRoot.querySelectorAll(
+                "c-contact-status-indicator-cmp"
+            );
+            // Child is the mock, not the real component
+            expect(indicators).not.toBeNull();
+            expect(indicators.length).toBe(1);
+            const indicator = indicators[0];
+            expect(indicator.position).toBe("Trainer");
+            expect(indicator.status).toBe("Action Needed Soon");
+        });
+    });
+
+    it("Trainer is no longer active", () => {
+        let daysAgo = new Date();
+        daysAgo.setDate(daysAgo.getDate() - 400);
+        const contact = {
+            fields: {
+                Positions__c: { value: "Trainer" },
+                TrainerStatus__c: { value: "Inactive" },
+                TrainerCertAgreementReceived__c: { value: daysAgo }
+            }
+        };
+        const element = createElement("c-contact-status-cmp", {
+            is: ContactStatusCmp
+        });
+        document.body.appendChild(element);
+
+        // Emit mock record into the wired field
+        getRecord.emit(contact);
+        getProgramAssignments.emit([]);
+
+        // Resolve a promise to wait for a rerender of the new content.
+        return Promise.resolve().then(() => {
+            const indicators = element.shadowRoot.querySelectorAll(
+                "c-contact-status-indicator-cmp"
+            );
+            // Child is the mock, not the real component
+            expect(indicators).not.toBeNull();
+            expect(indicators.length).toBe(1);
+            const indicator = indicators[0];
+            expect(indicator.position).toBe("Trainer");
+            expect(indicator.status).toBe("Inactive");
+        });
+    });
 });

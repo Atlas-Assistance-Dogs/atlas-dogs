@@ -168,7 +168,10 @@ export default class ContactStatus extends LightningElement {
 
     fineTuneStatus(status, certDate) {
         const today = new Date();
-        if (certDate != null) {
+        if (
+            status === "Active" ||
+            (status === "Certified" && certDate != null)
+        ) {
             if (this.addDays(certDate, 365) < today) {
                 status = "Action Needed";
             } else if (this.addDays(certDate, 270) < today) {
