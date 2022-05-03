@@ -9,7 +9,7 @@ import {
     APPLICATION_SCOPE,
     MessageContext
 } from "lightning/messageService";
-import backgroundCheckForm from "@salesforce/messageChannel/BackgroundCheckForm__c";
+import backgroundCheckForm from "@salesforce/messageChannel/backgroundCheckForm__c";
 
 export default class RelatedBackgroundCheckCmp extends NavigationMixin(
     LightningElement

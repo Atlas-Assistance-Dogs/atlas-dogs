@@ -473,7 +473,7 @@
     </relatedContent>
     <relatedLists>
         <fields>NAME</fields>
-        <fields>Program__c</fields>
+        <fields>Program2__c</fields>
         <fields>AssignedDate__c</fields>
         <fields>CompletionDate__c</fields>
         <relatedList>ProgramAssignment__c.Contact__c</relatedList>

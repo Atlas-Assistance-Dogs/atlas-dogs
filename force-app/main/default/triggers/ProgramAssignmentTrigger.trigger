@@ -4,14 +4,10 @@ trigger ProgramAssignmentTrigger on ProgramAssignment__c(
 ) {
     System.debug(Trigger.new);
     for (ProgramAssignment__c progAssign : Trigger.new) {
-        if (progAssign.Program__c == null) {
+        if (progAssign.Program2__c == null) {
             continue; // skip any without a program
         }
-        Decimal duration = Settings.programDurations.get(progAssign.Program__c);
-        if (duration == null) {
-            // default to 0 months if none found
-            duration = 0;
-        }
+        Program__c program = [SELECT Months__c FROM Program__c WHERE Id = :progAssign.Program__c LIMIT 1];
 
         if (progAssign.AssignedDate__c == null) {
             progAssign.AssignedDate__c = Date.today();
@@ -19,7 +15,7 @@ trigger ProgramAssignmentTrigger on ProgramAssignment__c(
 
         if (progAssign.ExpectedCompletion__c == null) {
             progAssign.ExpectedCompletion__c = progAssign.AssignedDate__c.addDays(
-                (Integer) (duration * 30)
+                (Integer) (program.Months__c * 30)
             );
         }
     }

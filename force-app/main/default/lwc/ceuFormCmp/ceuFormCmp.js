@@ -26,7 +26,7 @@ import {
     APPLICATION_SCOPE,
     MessageContext
 } from "lightning/messageService";
-import ceuForm from "@salesforce/messageChannel/CeuForm__c";
+import ceuForm from "@salesforce/messageChannel/ceuForm__c";
 
 const COLS = [
     {

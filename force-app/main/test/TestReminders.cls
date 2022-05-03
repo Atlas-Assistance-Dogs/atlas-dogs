@@ -16,6 +16,7 @@ public with sharing class TestReminders {
       like the mapping.
     */
     static void createRecords() {
+        TestProgramAssignmentTrigger.setProgramDurations();
         adminGroup = new Group(Name = GROUP_NAME, Type = 'Queue');
         insert adminGroup;
 
@@ -59,7 +60,7 @@ public with sharing class TestReminders {
             new ProgramAssignment__c(
                 AssignedDate__c = Date.today().addDays(-2),
                 ExpectedCompletion__c = Date.today().addDays(12),
-                Program__c = 'Volunteer',
+                Program2__c = TestProgramAssignmentTrigger.programs[0].Id,
                 Status__c = 'In progress',
                 Contact__c = joe.Id
             )
@@ -68,7 +69,7 @@ public with sharing class TestReminders {
             new ProgramAssignment__c(
                 AssignedDate__c = Date.today().addDays(-2),
                 ExpectedCompletion__c = Date.today().addMonths(2),
-                Program__c = 'Team Facilitator',
+                Program2__c = TestProgramAssignmentTrigger.programs[1].Id,
                 Status__c = 'In progress',
                 Contact__c = joe.Id
             )
@@ -77,7 +78,7 @@ public with sharing class TestReminders {
             new ProgramAssignment__c(
                 AssignedDate__c = Date.today().addDays(-2),
                 ExpectedCompletion__c = Date.today().addMonths(3),
-                Program__c = 'Trainer',
+                Program2__c = TestProgramAssignmentTrigger.programs[2].Id,
                 Status__c = 'In progress',
                 Contact__c = joe.Id
             )
@@ -86,7 +87,7 @@ public with sharing class TestReminders {
             new ProgramAssignment__c(
                 AssignedDate__c = Date.today().addDays(-2),
                 ExpectedCompletion__c = Date.today().addMonths(3),
-                Program__c = 'Client',
+                Program2__c = TestProgramAssignmentTrigger.programs[3].Id,
                 Status__c = 'In progress',
                 Contact__c = joe.Id
             )
@@ -95,7 +96,7 @@ public with sharing class TestReminders {
             new ProgramAssignment__c(
                 AssignedDate__c = Date.today().addDays(-2),
                 ExpectedCompletion__c = Date.today().addMonths(4),
-                Program__c = 'Teams Set in Motion Client',
+                Program2__c = TestProgramAssignmentTrigger.programs[4].Id,
                 Status__c = 'In progress',
                 Contact__c = joe.Id
             )
@@ -104,7 +105,7 @@ public with sharing class TestReminders {
             new ProgramAssignment__c(
                 AssignedDate__c = Date.today().addDays(-2),
                 ExpectedCompletion__c = Date.today().addMonths(5),
-                Program__c = 'Sweet Snoopers Trainer',
+                Program2__c = TestProgramAssignmentTrigger.programs[5].Id,
                 Status__c = 'In progress',
                 Contact__c = joe.Id
             )
@@ -138,7 +139,7 @@ public with sharing class TestReminders {
         ProgramAssignment__c assignment = new ProgramAssignment__c(
             AssignedDate__c = Date.today().addDays(-8),
             ExpectedCompletion__c = Date.today().addDays(7),
-            Program__c = 'Volunteer',
+            Program2__c = TestProgramAssignmentTrigger.programs[0].Id,
             Status__c = 'In progress',
             Contact__c = joe.Id
         );
@@ -190,7 +191,7 @@ public with sharing class TestReminders {
             new ProgramAssignment__c(
                 AssignedDate__c = Date.today().addDays(-2),
                 ExpectedCompletion__c = Date.today().addDays(2),
-                Program__c = 'Volunteer',
+                Program2__c = TestProgramAssignmentTrigger.programs[0].Id,
                 Status__c = 'In progress',
                 Contact__c = joe.Id
             )
@@ -199,7 +200,7 @@ public with sharing class TestReminders {
             new ProgramAssignment__c(
                 AssignedDate__c = Date.today().addDays(-2),
                 ExpectedCompletion__c = Date.today().addDays(21),
-                Program__c = 'Team Facilitator',
+                Program2__c = TestProgramAssignmentTrigger.programs[1].Id,
                 Status__c = 'In progress',
                 Contact__c = joe.Id
             )
@@ -208,7 +209,7 @@ public with sharing class TestReminders {
             new ProgramAssignment__c(
                 AssignedDate__c = Date.today().addDays(-2),
                 ExpectedCompletion__c = Date.today().addDays(29),
-                Program__c = 'Trainer',
+                Program2__c = TestProgramAssignmentTrigger.programs[2].Id,
                 Status__c = 'In progress',
                 Contact__c = joe.Id
             )
@@ -217,7 +218,7 @@ public with sharing class TestReminders {
             new ProgramAssignment__c(
                 AssignedDate__c = Date.today().addDays(-2),
                 ExpectedCompletion__c = Date.today().addDays(30),
-                Program__c = 'Client',
+                Program2__c = TestProgramAssignmentTrigger.programs[3].Id,
                 Status__c = 'In progress',
                 Contact__c = joe.Id
             )
@@ -226,7 +227,7 @@ public with sharing class TestReminders {
             new ProgramAssignment__c(
                 AssignedDate__c = Date.today().addDays(-2),
                 ExpectedCompletion__c = Date.today().addDays(16),
-                Program__c = 'Teams Set in Motion Client',
+                Program2__c = TestProgramAssignmentTrigger.programs[4].Id,
                 Status__c = 'In progress',
                 Contact__c = joe.Id
             )
@@ -235,7 +236,7 @@ public with sharing class TestReminders {
             new ProgramAssignment__c(
                 AssignedDate__c = Date.today().addDays(-2),
                 ExpectedCompletion__c = Date.today().addDays(22),
-                Program__c = 'Sweet Snoopers Trainer',
+                Program2__c = TestProgramAssignmentTrigger.programs[5].Id,
                 Status__c = 'In progress',
                 Contact__c = joe.Id
             )

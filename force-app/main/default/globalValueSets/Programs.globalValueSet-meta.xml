@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
     <customValue>
         <fullName>Volunteer</fullName>
@@ -26,9 +26,9 @@
         <label>Teams Set in Motion Client</label>
     </customValue>
     <customValue>
-        <fullName>Sweet Snoopers Trainer</fullName>
+        <fullName>Sweet Snoopers</fullName>
         <default>false</default>
-        <label>Sweet Snoopers Trainer</label>
+        <label>Sweet Snoopers</label>
     </customValue>
     <customValue>
         <fullName>Staff</fullName>
@@ -39,6 +39,46 @@
         <fullName>Assistance Dogs Set in Motion Client</fullName>
         <default>false</default>
         <label>Assistance Dogs Set in Motion Client</label>
+    </customValue>
+    <customValue>
+        <fullName>Service Dog Selection</fullName>
+        <default>false</default>
+        <label>Service Dog Selection</label>
+    </customValue>
+    <customValue>
+        <fullName>Service Dogs Foundations</fullName>
+        <default>false</default>
+        <label>Service Dogs Foundations</label>
+    </customValue>
+    <customValue>
+        <fullName>Service Dog Training Bundle</fullName>
+        <default>false</default>
+        <label>Service Dog Training Bundle</label>
+    </customValue>
+    <customValue>
+        <fullName>Mobility Disability</fullName>
+        <default>false</default>
+        <label>Mobility Disability</label>
+    </customValue>
+    <customValue>
+        <fullName>Medical Disability</fullName>
+        <default>false</default>
+        <label>Medical Disability</label>
+    </customValue>
+    <customValue>
+        <fullName>Psychiatric Disability</fullName>
+        <default>false</default>
+        <label>Psychiatric Disability</label>
+    </customValue>
+    <customValue>
+        <fullName>Fitness</fullName>
+        <default>false</default>
+        <label>Fitness</label>
+    </customValue>
+    <customValue>
+        <fullName>OT Advanced Bundle</fullName>
+        <default>false</default>
+        <label>OT Advanced Bundle</label>
     </customValue>
     <masterLabel>Programs</masterLabel>
     <sorted>false</sorted>

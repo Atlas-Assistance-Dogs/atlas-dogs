@@ -17,15 +17,15 @@ global class Reminders implements Schedulable {
         // Find out which assignments may need reminder tasks.
         // Note we cannot join with Tasks since that is not supported.
         List<ProgramAssignment__c> assignments = [
-            SELECT id, Contact__c, ExpectedCompletion__c
+            SELECT id, Contact__c, ExpectedCompletion__c, Program2__r.Name
             FROM ProgramAssignment__c
             WHERE
                 Status__c = 'In progress'
-                AND (((Program__c = 'Volunteer'
-                OR Program__c = 'Staff')
+                AND (((Program2__r.Name = 'Volunteer'
+                OR Program2__r.Name = 'Staff')
                 AND ExpectedCompletion__c <= :week)
-                OR (Program__c != 'Volunteer'
-                AND Program__c != 'Staff'
+                OR (Program2__r.Name != 'Volunteer'
+                AND Program2__r.Name != 'Staff'
                 AND ExpectedCompletion__c <= :month))
         ];
 
