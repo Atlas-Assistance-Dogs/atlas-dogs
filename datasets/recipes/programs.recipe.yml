@@ -1,0 +1,157 @@
+- object: Program__c
+  nickname: client_program
+  fields:
+    Name: 'Client'
+    CEU__c: false
+    Current__c: true
+    Months__c: 6
+    Reminder__c: 30
+
+- object: Program__c
+  fields:
+    Name: 'Fitness'
+    CEU__c: false
+    Current__c: true
+    Months__c: 1
+
+- object: Program__c
+  fields:
+    Name: 'Fitness [CEU]'
+    CEU__c: true
+    Current__c: true
+    Months__c: 1.5
+
+- object: Program__c
+  fields:
+    Name: 'Medical Disability'
+    CEU__c: false
+    Current__c: true
+    Months__c: 1
+
+- object: Program__c
+  fields:
+    Name: 'Medical Disability [CEU]'
+    CEU__c: false
+    Current__c: true
+    Months__c: 1.5
+
+- object: Program__c
+  fields:
+    Name: 'Medical Disability'
+    CEU__c: false
+    Current__c: true
+    Months__c: 1
+
+- object: Program__c
+  fields:
+    Name: 'Medical Disability [CEU]'
+    CEU__c: false
+    Current__c: true
+    Months__c: 1.5
+
+- object: Program__c
+  fields:
+    Name: 'OT Advanced Bundle [CEU]'
+    CEU__c: true
+    Current__c: true
+    Months__c: 4
+
+- object: Program__c
+  fields:
+    Name: 'Psychiatric Disability'
+    CEU__c: false
+    Current__c: true
+    Months__c: 1
+
+- object: Program__c
+  fields:
+    Name: 'Psychiatric Disability [CEU]'
+    CEU__c: true
+    Current__c: true
+    Months__c: 1.5
+
+- object: Program__c
+  fields:
+    Name: 'Service Dog Selection'
+    CEU__c: false
+    Current__c: true
+    Months__c: 1
+
+- object: Program__c
+  fields:
+    Name: 'Service Dog Selection [CEU]'
+    CEU__c: true
+    Current__c: true
+    Months__c: 1.5
+
+- object: Program__c
+  fields:
+    Name: 'Service Dog Training Bundle'
+    CEU__c: true
+    Current__c: true
+    Months__c: 4
+
+- object: Program__c
+  fields:
+    Name: 'Service Dogs Foundations'
+    CEU__c: false
+    Current__c: true
+    Months__c: 1
+
+- object: Program__c
+  fields:
+    Name: 'Service Dogs Foundations [CEU]'
+    CEU__c: false
+    Current__c: true
+    Months__c: 1.5
+
+- object: Program__c
+  nickname: staff_program
+  fields:
+    Name: 'Staff'
+    CEU__c: false
+    Current__c: true
+    Months__c: .3
+    Reminder__c: 7
+
+- object: Program__c
+  nickname: snoopers_program
+  fields:
+    Name: 'Sweet Snoopers [CEU]'
+    CEU__c: true
+    Current__c: true
+    Months__c: 3
+
+- object: Program__c
+  nickname: facilitator_program
+  fields:
+    Name: 'Team Facilitator'
+    CEU__c: false
+    Current__c: true
+    Months__c: 4
+    Reminder__c: 30
+
+- object: Program__c
+  fields:
+    Name: 'Teams Set in Motion Client'
+    CEU__c: false
+    Current__c: true
+    Months__c: 6
+
+- object: Program__c
+  nickname: trainer_program
+  fields:
+    Name: 'Trainer'
+    CEU__c: false
+    Current__c: true
+    Months__c: 9
+    Reminder__c: 30
+
+- object: Program__c
+  nickname: volunteer_program
+  fields:
+    Name: 'Volunteer'
+    CEU__c: false
+    Current__c: true
+    Months__c: .5
+    Reminder__c: 7

@@ -23,25 +23,26 @@
                     when: ${{'Trainer' in Contact__c.Positions__c}}
                     pick:
                         random_choice:
-                            - Sweet Snoopers Trainer
-                            - Trainer
+                            reference: trainer_program
               - choice:
                     when: ${{'Client' in Contact__c.Positions__c}}
-                    pick: Client
-              - choice:
-                    when: ${{'Teams Set in Motion Client' in Contact__c.Positions__c}}
-                    pick: Teams Set in Motion Client
+                    pick:
+                        reference: client_program
               - choice:
                     when: ${{'Team Facilitator' in Contact__c.Positions__c}}
-                    pick: Team Facilitator
+                    pick:
+                        reference: facilitator_program
               - choice:
                     when: ${{'Team Facilitator Lead' in Contact__c.Positions__c}}
-                    pick: Team Facilitator
+                    pick:
+                        reference: facilitator_program
               - choice:
                     when: ${{'Staff' in Contact__c.Positions__c}}
-                    pick: Staff
+                    pick:
+                        reference: staff_program
               - choice:
-                    pick: Volunteer
+                    pick:
+                        reference: volunteer_program
       Status__c:
           random_choice:
               - In progress
