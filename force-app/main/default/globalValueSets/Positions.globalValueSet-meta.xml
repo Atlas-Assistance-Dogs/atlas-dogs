@@ -40,6 +40,11 @@
         <default>false</default>
         <label>Staff</label>
     </customValue>
+    <customValue>
+        <fullName>Puppy Raiser</fullName>
+        <default>false</default>
+        <label>Puppy Raiser</label>
+    </customValue>
     <description>Positions a contact can have</description>
     <masterLabel>Positions</masterLabel>
     <sorted>false</sorted>

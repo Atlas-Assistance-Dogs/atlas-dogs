@@ -129,6 +129,7 @@
             <controllingFieldValue>TSiM</controllingFieldValue>
             <controllingFieldValue>ADSiM</controllingFieldValue>
             <controllingFieldValue>Facilitator</controllingFieldValue>
+            <controllingFieldValue>Puppy</controllingFieldValue>
             <controllingFieldValue>Trainer</controllingFieldValue>
             <controllingFieldValue>Staff</controllingFieldValue>
             <valueName>Application</valueName>
@@ -175,6 +176,7 @@
             <controllingFieldValue>TSiM</controllingFieldValue>
             <controllingFieldValue>ADSiM</controllingFieldValue>
             <controllingFieldValue>Facilitator</controllingFieldValue>
+            <controllingFieldValue>Puppy</controllingFieldValue>
             <controllingFieldValue>Trainer</controllingFieldValue>
             <valueName>ProgAgreement</valueName>
         </valueSettings>
@@ -182,6 +184,7 @@
             <controllingFieldValue>Client</controllingFieldValue>
             <controllingFieldValue>Board</controllingFieldValue>
             <controllingFieldValue>Facilitator</controllingFieldValue>
+            <controllingFieldValue>Puppy</controllingFieldValue>
             <controllingFieldValue>Trainer</controllingFieldValue>
             <controllingFieldValue>Volunteer</controllingFieldValue>
             <valueName>ContactForm</valueName>
@@ -189,11 +192,13 @@
         <valueSettings>
             <controllingFieldValue>Client</controllingFieldValue>
             <controllingFieldValue>Facilitator</controllingFieldValue>
+            <controllingFieldValue>Puppy</controllingFieldValue>
             <controllingFieldValue>Trainer</controllingFieldValue>
             <valueName>CertAgreement</valueName>
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Facilitator</controllingFieldValue>
+            <controllingFieldValue>Puppy</controllingFieldValue>
             <controllingFieldValue>Trainer</controllingFieldValue>
             <valueName>Reference</valueName>
         </valueSettings>
@@ -207,6 +212,7 @@
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Facilitator</controllingFieldValue>
+            <controllingFieldValue>Puppy</controllingFieldValue>
             <controllingFieldValue>Trainer</controllingFieldValue>
             <valueName>InfrNotice</valueName>
         </valueSettings>

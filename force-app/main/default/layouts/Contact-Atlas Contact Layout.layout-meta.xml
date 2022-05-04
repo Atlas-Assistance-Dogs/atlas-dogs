@@ -101,6 +101,10 @@
                 <behavior>Edit</behavior>
                 <field>Description</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>npsp__Do_Not_Contact__c</field>
+            </layoutItems>
         </layoutColumns>
         <style>OneColumn</style>
     </layoutSections>
@@ -234,10 +238,6 @@
                 <behavior>Edit</behavior>
                 <field>LeadFacilitatorStatus__c</field>
             </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>FacilitatorInterviewNotes__c</field>
-            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
@@ -267,6 +267,41 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>FacilitatorProfGrowthPlanReceived__c</field>
+            </layoutItems>
+        </layoutColumns>
+        <style>TwoColumnsLeftToRight</style>
+    </layoutSections>
+    <layoutSections>
+        <customLabel>true</customLabel>
+        <detailHeading>true</detailHeading>
+        <editHeading>true</editHeading>
+        <label>Puppy Raiser Specific Details</label>
+        <layoutColumns>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>PuppyRaiserStatus__c</field>
+            </layoutItems>
+        </layoutColumns>
+        <layoutColumns>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>PuppyApplicationReceived__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>PuppyReferenceReceived__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>PuppyProgAgreementReceived__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>PuppyCertAgreementReceived__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>PuppyInfrNoticeReceived__c</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsLeftToRight</style>
@@ -472,11 +507,13 @@
         </relatedContentItems>
     </relatedContent>
     <relatedLists>
-        <fields>NAME</fields>
         <fields>Program2__c</fields>
         <fields>AssignedDate__c</fields>
         <fields>CompletionDate__c</fields>
+        <fields>Status__c</fields>
         <relatedList>ProgramAssignment__c.Contact__c</relatedList>
+        <sortField>Status__c</sortField>
+        <sortOrder>Asc</sortOrder>
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>
@@ -509,6 +546,9 @@
         <fields>Type__c</fields>
         <relatedList>DogRelationship__c.Contact__c</relatedList>
     </relatedLists>
+    <relatedLists>
+        <relatedList>RelatedContentNoteList</relatedList>
+    </relatedLists>
     <relatedObjects>AccountId</relatedObjects>
     <showEmailCheckbox>false</showEmailCheckbox>
     <showHighlightsPanel>false</showHighlightsPanel>
@@ -516,7 +556,7 @@
     <showRunAssignmentRulesCheckbox>false</showRunAssignmentRulesCheckbox>
     <showSubmitAndAttachButton>false</showSubmitAndAttachButton>
     <summaryLayout>
-        <masterLabel>00h0R000007PjpF</masterLabel>
+        <masterLabel>00h7e000000cc18</masterLabel>
         <sizeX>4</sizeX>
         <sizeY>0</sizeY>
         <summaryLayoutStyle>Default</summaryLayoutStyle>

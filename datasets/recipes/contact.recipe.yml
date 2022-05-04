@@ -293,18 +293,10 @@
                             - None
       CriminalConviction__c:
           fake: boolean
-      CriminalConvictionNotes__c:
-          fake: paragraph
       DateStarted__c:
           date_between:
               start_date: 2000-01-01
               end_date: today
-      FacilitatorInterviewNotes__c:
-          if:
-              - choice:
-                    when: ${{'Team Facilitator' in Positions__c}}
-                    pick:
-                        fake: paragraph
       FacilitatorStatus__c:
           if:
               - choice:
@@ -353,6 +345,19 @@
               - she
               - they
               - specify
+      PuppyRaiserStatus__c:
+          if:
+              - choice:
+                    when: ${{'Puppy Raiser' in Positions__c}}
+                    pick:
+                        random_choice:
+                            - Initial Inquiry
+                            - Onboarding
+                            - In Training
+                            - Certified
+                            - Inactive
+                            - Suspended
+                            - None
       TrainerBoardTrain__c:
           if:
               - choice:
@@ -449,11 +454,11 @@
           fake: paragraph
       GW_Volunteers__Volunteer_Status__c:
           random_choice:
-              - Prospective
+              - Initial Inquiry
               - Onboarding
               - Active
               - Inactive
-              - New Sign Up
+              - None
 
 # Create Primary and secondary emergency contacts for Contact
 - object: npe4__Relationship__c

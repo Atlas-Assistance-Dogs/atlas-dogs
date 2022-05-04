@@ -6,6 +6,7 @@
               - Team Facilitator
               - Team Facilitator Lead
               - Board Member
+              - Puppy Raiser
               - Trainer
               - Client
               - Donor
@@ -15,6 +16,8 @@
               - Trainer;Client
               - Team Facilitator Lead;Volunteer;Client
               - Staff
+              - Puppy Raiser;Client
+              - Puppy Raiser;Volunteer
 
 - macro: position
   fields:
@@ -24,6 +27,7 @@
               - Team Facilitator
               - Team Facilitator Lead
               - Board Member
+              - Puppy Raiser
               - Trainer
               - Client
               - Donor

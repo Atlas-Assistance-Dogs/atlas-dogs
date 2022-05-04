@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>TrainerStatus__c</fullName>
+    <fullName>PuppyRaiserStatus__c</fullName>
     <externalId>false</externalId>
-    <label>Trainer Status</label>
+    <label>Puppy Raiser Status</label>
     <required>false</required>
     <trackFeedHistory>false</trackFeedHistory>
     <type>Picklist</type>
     <valueSet>
         <restricted>true</restricted>
         <valueSetDefinition>
-            <sorted>false</sorted>
+            <sorted>true</sorted>
             <value>
                 <fullName>Initial Inquiry</fullName>
                 <default>false</default>
@@ -29,11 +29,6 @@
                 <fullName>Certified</fullName>
                 <default>false</default>
                 <label>Certified</label>
-            </value>
-            <value>
-                <fullName>Active</fullName>
-                <default>false</default>
-                <label>Active</label>
             </value>
             <value>
                 <fullName>Inactive</fullName>

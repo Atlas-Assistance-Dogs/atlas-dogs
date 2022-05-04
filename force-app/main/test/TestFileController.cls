@@ -5,7 +5,7 @@ public with sharing class TestFileController {
     private PublicAccessTest__c pat;
     private BackgroundCheck__c check;
 
-    private static List<ContentVersion> insertRecords() {
+    public static List<ContentVersion> insertRecords() {
         List<ContentVersion> documents = new List<ContentVersion>();
         documents.add(
             new ContentVersion(
