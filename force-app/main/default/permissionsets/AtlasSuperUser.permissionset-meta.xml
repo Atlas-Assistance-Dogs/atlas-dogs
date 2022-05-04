@@ -5,10 +5,6 @@
         <visible>true</visible>
     </applicationVisibilities>
     <classAccesses>
-        <apexClass>ContactController</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
         <apexClass>DogController</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -294,12 +290,12 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Contact.PuppyReferenceReceived__c</field>
+        <field>Contact.PuppyRaiserStatus__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Contact.PuppyRaiserStatus__c</field>
+        <field>Contact.PuppyReferenceReceived__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -519,6 +515,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Dog__c.HealthFormReceived__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Dog__c.LatestPhysicalExamOutcome__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -559,6 +560,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Dog__c.VacExamsReceived__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Dog__c.VaccineDueDistemper__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -585,6 +591,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Dog__c.VetClinic__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Dog__c.XrayReceived__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

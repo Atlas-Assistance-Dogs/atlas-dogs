@@ -298,14 +298,32 @@
     <flexiPageRegions>
         <itemInstances>
             <fieldInstance>
-                <fieldItem>Record.CreatedById</fieldItem>
-                <identifier>RecordCreatedByIdField</identifier>
+                <fieldItem>Record.HealthFormReceived__c</fieldItem>
+                <identifier>RecordHealthFormReceived__cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.VacExamsReceived__c</fieldItem>
+                <identifier>RecordVacExamsReceived__cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.XrayReceived__c</fieldItem>
+                <identifier>RecordXrayReceived__cField</identifier>
             </fieldInstance>
         </itemInstances>
         <name>Facet-a38728ed-d9ea-4462-bae0-89aab16779ec</name>
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.CreatedById</fieldItem>
+                <identifier>RecordCreatedByIdField</identifier>
+            </fieldInstance>
+        </itemInstances>
         <itemInstances>
             <fieldInstance>
                 <fieldItem>Record.LastModifiedById</fieldItem>

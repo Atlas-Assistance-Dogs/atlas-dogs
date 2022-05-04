@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <Profile xmlns="http://soap.sforce.com/2006/04/metadata">
     <applicationVisibilities>
         <application>AtlasAssistanceDogs</application>
@@ -11,10 +11,6 @@
     </classAccesses>
     <classAccesses>
         <apexClass>BackgroundCheckController</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>ContactController</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -42,6 +38,10 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>ProgramAssignmentController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>PublicAccessTestController</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -58,7 +58,7 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>TestContactController</apexClass>
+        <apexClass>TestCeuController</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -78,6 +78,10 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>TestProgramAssignmentController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>TestProgramAssignmentTrigger</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -87,6 +91,10 @@
     </classAccesses>
     <classAccesses>
         <apexClass>TestReminders</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>TestTeamController</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <custom>false</custom>
@@ -332,12 +340,12 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Contact.PuppyReferenceReceived__c</field>
+        <field>Contact.PuppyRaiserStatus__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Contact.PuppyRaiserStatus__c</field>
+        <field>Contact.PuppyReferenceReceived__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -556,9 +564,9 @@
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>false</editable>
+        <editable>true</editable>
         <field>Dog__c.HealthFormReceived__c</field>
-        <readable>false</readable>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
@@ -601,9 +609,9 @@
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>false</editable>
+        <editable>true</editable>
         <field>Dog__c.VacExamsReceived__c</field>
-        <readable>false</readable>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
@@ -636,9 +644,9 @@
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>false</editable>
+        <editable>true</editable>
         <field>Dog__c.XrayReceived__c</field>
-        <readable>false</readable>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
