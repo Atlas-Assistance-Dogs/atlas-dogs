@@ -345,6 +345,19 @@
               - she
               - they
               - specify
+      PuppyRaiserStatus__c:
+          if:
+              - choice:
+                    when: ${{'Puppy Raiser' in Positions__c}}
+                    pick:
+                        random_choice:
+                            - Initial Inquiry
+                            - Onboarding
+                            - In Training
+                            - Certified
+                            - Inactive
+                            - Suspended
+                            - None
       TrainerBoardTrain__c:
           if:
               - choice:

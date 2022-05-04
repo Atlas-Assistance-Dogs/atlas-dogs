@@ -1,6 +1,6 @@
 import { LightningElement, api, track, wire } from "lwc";
 import { getRecord } from "lightning/uiRecordApi";
-import getProgramAssignments from "@salesforce/apex/ContactController.getProgramAssignments";
+import getProgramAssignments from "@salesforce/apex/ProgramAssignmentController.getProgramAssignments";
 
 import BOARD_MEMBER_STATUS_FIELD from "@salesforce/schema/Contact.BoardMemberStatus__c";
 import CLIENT_CERT_AGREEMENT_RECEIVED from "@salesforce/schema/Contact.ClientCertAgreementReceived__c";

@@ -7,6 +7,7 @@ public with sharing class TeamController {
                     Client__c,
                     Dog__c,
                     Handler__c,
+                    Name,
                     PatValidUntil__c,
                     PatCount__c,
                     PrimaryCertification__c,
