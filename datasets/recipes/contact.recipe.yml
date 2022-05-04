@@ -293,18 +293,10 @@
                             - None
       CriminalConviction__c:
           fake: boolean
-      CriminalConvictionNotes__c:
-          fake: paragraph
       DateStarted__c:
           date_between:
               start_date: 2000-01-01
               end_date: today
-      FacilitatorInterviewNotes__c:
-          if:
-              - choice:
-                    when: ${{'Team Facilitator' in Positions__c}}
-                    pick:
-                        fake: paragraph
       FacilitatorStatus__c:
           if:
               - choice:
