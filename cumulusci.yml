@@ -26,7 +26,7 @@ tasks:
 
     run_tests:
         options:
-            required_org_code_coverage_percent: 15
+            managed: true
 
     create_package_version:
         options:

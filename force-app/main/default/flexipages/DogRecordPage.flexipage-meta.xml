@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <FlexiPage xmlns="http://soap.sforce.com/2006/04/metadata">
     <flexiPageRegions>
         <itemInstances>
@@ -161,6 +161,56 @@
     <flexiPageRegions>
         <itemInstances>
             <fieldInstance>
+                <fieldItem>Record.HealthFormReceived__c</fieldItem>
+                <identifier>RecordHealthFormReceived_cField1</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.XrayReceived__c</fieldItem>
+                <identifier>RecordXrayReceived_cField1</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.VacExamsReceived__c</fieldItem>
+                <identifier>RecordVacExamsReceived_cField1</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <name>Facet-cdbd746c-fcb1-41cd-b933-0ef8261b1f9c</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <name>Facet-eeaf99d8-f6f2-4edc-8810-c45b215772e2</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>body</name>
+                    <value>Facet-cdbd746c-fcb1-41cd-b933-0ef8261b1f9c</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:column</componentName>
+                <identifier>flexipage_column1</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>body</name>
+                    <value>Facet-eeaf99d8-f6f2-4edc-8810-c45b215772e2</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:column</componentName>
+                <identifier>flexipage_column7</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>Facet-837ed4db-1698-4b82-8d79-6ffa8a9097de</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <fieldInstance>
                 <fieldItem>Record.VetClinic__c</fieldItem>
                 <identifier>RecordVetClinic__cField</identifier>
             </fieldInstance>
@@ -247,8 +297,15 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
-                <componentName>relatedFilesCmp</componentName>
-                <identifier>relatedFilesCmp</identifier>
+                <componentInstanceProperties>
+                    <name>columns</name>
+                    <value>Facet-837ed4db-1698-4b82-8d79-6ffa8a9097de</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>label</name>
+                </componentInstanceProperties>
+                <componentName>flexipage:fieldSection</componentName>
+                <identifier>flexipage_fieldSection1</identifier>
             </componentInstance>
         </itemInstances>
         <itemInstances>
@@ -297,67 +354,6 @@
     </flexiPageRegions>
     <flexiPageRegions>
         <itemInstances>
-            <fieldInstance>
-                <fieldItem>Record.CreatedById</fieldItem>
-                <identifier>RecordCreatedByIdField</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <name>Facet-a38728ed-d9ea-4462-bae0-89aab16779ec</name>
-        <type>Facet</type>
-    </flexiPageRegions>
-    <flexiPageRegions>
-        <itemInstances>
-            <fieldInstance>
-                <fieldItem>Record.LastModifiedById</fieldItem>
-                <identifier>RecordLastModifiedByIdField</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <name>Facet-8b164df4-65a7-4cdb-8e29-86b65cf5bdab</name>
-        <type>Facet</type>
-    </flexiPageRegions>
-    <flexiPageRegions>
-        <itemInstances>
-            <componentInstance>
-                <componentInstanceProperties>
-                    <name>body</name>
-                    <value>Facet-a38728ed-d9ea-4462-bae0-89aab16779ec</value>
-                </componentInstanceProperties>
-                <componentName>flexipage:column</componentName>
-                <identifier>flexipage_column5</identifier>
-            </componentInstance>
-        </itemInstances>
-        <itemInstances>
-            <componentInstance>
-                <componentInstanceProperties>
-                    <name>body</name>
-                    <value>Facet-8b164df4-65a7-4cdb-8e29-86b65cf5bdab</value>
-                </componentInstanceProperties>
-                <componentName>flexipage:column</componentName>
-                <identifier>flexipage_column6</identifier>
-            </componentInstance>
-        </itemInstances>
-        <name>Facet-722d918b-2937-43f8-9c6d-ffc3d6cb4764</name>
-        <type>Facet</type>
-    </flexiPageRegions>
-    <flexiPageRegions>
-        <itemInstances>
-            <componentInstance>
-                <componentInstanceProperties>
-                    <name>columns</name>
-                    <value>Facet-722d918b-2937-43f8-9c6d-ffc3d6cb4764</value>
-                </componentInstanceProperties>
-                <componentInstanceProperties>
-                    <name>label</name>
-                </componentInstanceProperties>
-                <componentName>flexipage:fieldSection</componentName>
-                <identifier>flexipage_fieldSection3</identifier>
-            </componentInstance>
-        </itemInstances>
-        <name>Facet-5e758b45-ffc7-4f79-b370-4af265763364</name>
-        <type>Facet</type>
-    </flexiPageRegions>
-    <flexiPageRegions>
-        <itemInstances>
             <componentInstance>
                 <componentInstanceProperties>
                     <name>body</name>
@@ -399,20 +395,6 @@
                 <identifier>relatedListsTab</identifier>
             </componentInstance>
         </itemInstances>
-        <itemInstances>
-            <componentInstance>
-                <componentInstanceProperties>
-                    <name>body</name>
-                    <value>Facet-5e758b45-ffc7-4f79-b370-4af265763364</value>
-                </componentInstanceProperties>
-                <componentInstanceProperties>
-                    <name>title</name>
-                    <value>Other</value>
-                </componentInstanceProperties>
-                <componentName>flexipage:tab</componentName>
-                <identifier>customTab2</identifier>
-            </componentInstance>
-        </itemInstances>
         <name>Facet-a5a7cea0-a9ba-4f09-8a92-8b036d23dea8</name>
         <type>Facet</type>
     </flexiPageRegions>
@@ -434,8 +416,7 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
-                <componentName
-                >runtime_sales_activities:activityPanel</componentName>
+                <componentName>runtime_sales_activities:activityPanel</componentName>
                 <identifier>runtime_sales_activities_activityPanel</identifier>
             </componentInstance>
         </itemInstances>
