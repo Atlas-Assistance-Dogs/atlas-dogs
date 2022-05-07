@@ -3,96 +3,24 @@
         title="Position(s) with Status"
         icon-name="standard:user_role"
     >
-        <template if:true={contact.data}>
-            <div class="slds-m-around_medium slds-var-p-left_large">
-                <template if:true={contact.data.fields.Client__c.value}>
-                    <div style="display: flex">
-                        <lightning-icon
-                            icon-name="utility:favorite"
-                            title="Volunteer"
-                            size="xx-small"
-                            class="slds-var-p-right_small"
-                        ></lightning-icon>
-                        <div>
-                            Client - {contact.data.fields.ClientStatus__c.value}
-                        </div>
-                    </div>
+        <div class="slds-m-around_medium slds-grid">
+            <template if:true={contact}>
+                <template for:each={roles} for:item="role">
+                    <c-contact-status-indicator-cmp
+                        position={role.position}
+                        status={role.status}
+                        key={role.position}
+                    >
+                    </c-contact-status-indicator-cmp>
                 </template>
-                <template if:true={contact.data.fields.Volunteer__c.value}>
-                    <div style="display: flex">
-                        <lightning-icon
-                            icon-name="utility:favorite"
-                            title="Volunteer"
-                            size="xx-small"
-                            class="slds-var-p-right_small"
-                        ></lightning-icon>
-                        <div>
-                            Volunteer -
-                            {contact.data.fields.VolunteerStatus__c.value}
-                        </div>
-                    </div>
+                <template if:true={otherPrograms}>
+                    <c-contact-status-indicator-cmp
+                        position={otherPrograms.position}
+                        status={otherPrograms.status}
+                    >
+                    </c-contact-status-indicator-cmp>
                 </template>
-
-                <template if:true={contact.data.fields.Facilitator__c.value}>
-                    <div style="display: flex">
-                        <lightning-icon
-                            icon-name="utility:favorite"
-                            title="Volunteer"
-                            size="xx-small"
-                            class="slds-var-p-right_small"
-                        ></lightning-icon>
-                        <div>
-                            Facilitator -
-                            {contact.data.fields.FacilitatorStatus__c.value}
-                        </div>
-                    </div>
-                </template>
-                <template
-                    if:true={contact.data.fields.LeadFacilitator__c.value}
-                >
-                    <div style="display: flex">
-                        <lightning-icon
-                            icon-name="utility:favorite"
-                            title="Volunteer"
-                            size="xx-small"
-                            class="slds-var-p-right_small"
-                        ></lightning-icon>
-                        <div>
-                            Lead Facilitator -
-                            {contact.data.fields.LeadFacilitatorStatus__c.value}
-                        </div>
-                    </div>
-                    <p></p>
-                </template>
-                <template if:true={contact.data.fields.BoardMember__c.value}>
-                    <div style="display: flex">
-                        <lightning-icon
-                            icon-name="utility:favorite"
-                            title="Volunteer"
-                            size="xx-small"
-                            class="slds-var-p-right_small"
-                        ></lightning-icon>
-                        <div>
-                            Board Member -
-                            {contact.data.fields.BoardMemberStatus__c.value}
-                        </div>
-                    </div>
-                </template>
-                <template if:true={contact.data.fields.Trainer__c.value}>
-                    <div style="display: flex">
-                        <lightning-icon
-                            icon-name="utility:favorite"
-                            title="Volunteer"
-                            size="xx-small"
-                            class="slds-var-p-right_small"
-                        ></lightning-icon>
-                        <div>
-                            Trainer -
-                            {contact.data.fields.TrainerStatus__c.value}
-                        </div>
-                    </div>
-                </template>
-            </div>
-        </template>
+            </template>
+        </div>
     </lightning-card>
 </template>

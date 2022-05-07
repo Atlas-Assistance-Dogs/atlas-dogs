@@ -1,3 +1,11 @@
+Insert Program__c:
+    sf_object: Program__c
+    fields:
+        - CEU__c
+        - Current__c
+        - Months__c
+        - Name
+        - Reminder__c
 Insert npo02__Household__c:
     sf_object: npo02__Household__c
     fields:
@@ -203,14 +211,34 @@ Insert npsp__Address__c:
 Insert Contact:
     sf_object: Contact
     fields:
+        - ADSiMApplicationReceived__c
+        - ADSiMPreApplicationReceived__c
+        - ADSiMProgAgreementReceived__c
+        - BoardAgreementReceived__c
+        - BoardApplicationReceived__c
+        - BoardCoIReceived__c
         - BoardMemberAcceptedDate__c
         - BoardMemberStatus__c
+        - BoardResumeReceived__c
+        - BoardToNReceived__c
+        - ClientApplicationReceived__c
+        - ClientCertAgreementReceived__c
+        - ClientLOMIReceived__c
         - ClientMedicalDevices__c
+        - ClientPreApplicationReceived__c
+        - ClientProgAgreementReceived__c
         - ClientStatus__c
-        - CriminalConvictionNotes__c
+        - ClientSurveyReceived__c
+        - ClientVAPWReceived__c
         - CriminalConviction__c
         - DateStarted__c
-        - FacilitatorInterviewNotes__c
+        - FacilitatorApplicationReceived__c
+        - FacilitatorCertAgreementReceived__c
+        - FacilitatorInfrNoticeReceived__c
+        - FacilitatorPracticumReceived__c
+        - FacilitatorProfGrowthPlanReceived__c
+        - FacilitatorProgAgreementReceived__c
+        - FacilitatorReferenceReceived__c
         - FacilitatorStatus__c
         - FirstName
         - GW_Volunteers__Volunteer_Auto_Reminder_Email_Opt_Out__c
@@ -229,15 +257,28 @@ Insert Contact:
         - Positions__c
         - PronounOther__c
         - Pronoun__c
+        - StaffAgreementReceived__c
+        - StaffApplicationReceived__c
+        - StaffI9Received__c
+        - StaffOfferReceived__c
+        - StaffResumeReceived__c
+        - StaffW4Received__c
+        - TSiMApplicationReceived__c
+        - TSiMProgAgreementReceived__c
+        - TrainerApplicationReceived__c
         - TrainerBoardTrain__c
         - TrainerCEUStatus__c
+        - TrainerCertAgreementReceived__c
+        - TrainerInfrNoticeReceived__c
+        - TrainerProgAgreementReceived__c
+        - TrainerReferenceReceived__c
         - TrainerSpecialties__c
         - TrainerStatus__c
         - VolunteerAccess__c
-        - VolunteerBackground__c
+        - VolunteerAgreementReceived__c
+        - VolunteerApplicationReceived__c
         - VolunteerFocus__c
-        - VolunteerInterviewNotes__c
-        - VolunteerStatus__c
+        - VolunteerResumeReceived__c
         - npe01__AlternateEmail__c
         - npe01__HomeEmail__c
         - npe01__PreferredPhone__c
@@ -380,11 +421,12 @@ Insert ProgramAssignment__c:
         - AssignedDate__c
         - CompletionDate__c
         - ExpectedCompletion__c
-        - Program__c
         - Status__c
     lookups:
         Contact__c:
             table: Contact
+        Program2__c:
+            table: Program__c
 Insert Team__c:
     sf_object: Team__c
     fields:

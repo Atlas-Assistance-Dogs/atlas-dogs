@@ -28,7 +28,7 @@ import {
     APPLICATION_SCOPE,
     MessageContext
 } from "lightning/messageService";
-import logForm from "@salesforce/messageChannel/LogForm__c";
+import logForm from "@salesforce/messageChannel/logForm__c";
 
 export default class LogFormCmp extends LightningElement {
     @api contactId;

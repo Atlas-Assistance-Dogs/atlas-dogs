@@ -1,0 +1,437 @@
+# TODO: record types
+# To run this code against an org called 'qa':
+#
+# cci task run generate_and_load_from_yaml -o generator_yaml datasets/recipes/volunteer-jobs.recipe.yml --org qa
+#
+# Look at examples/salesforce/Opportunity.recipe.yml for more examples.
+- include_file: standard_objs.recipe.yml
+
+- object: GW_Volunteers__Volunteer_Job__c
+  nickname: Academy
+  fields:
+      GW_Volunteers__Description__c: Academy decscription
+      GW_Volunteers__Skills_Needed__c: Marketing and Branding
+      GW_Volunteers__Campaign__c:
+          reference: Campaign
+      GW_Volunteers__Ongoing__c: true
+      Name: Academy
+
+- object: GW_Volunteers__Volunteer_Job__c
+  nickname: ADI Accreditation
+  fields:
+      GW_Volunteers__Description__c: ADI Accreditation decscription
+      GW_Volunteers__Skills_Needed__c: Writing/Communications
+      GW_Volunteers__Campaign__c:
+          reference: Campaign
+      GW_Volunteers__Ongoing__c: true
+      Name: ADI Accreditation
+
+- object: GW_Volunteers__Volunteer_Job__c
+  nickname: Branding and Marketing
+  fields:
+      GW_Volunteers__Description__c: Branding and Marketing decscription
+      GW_Volunteers__Skills_Needed__c: Marketing and Branding
+      GW_Volunteers__Campaign__c:
+          reference: Campaign
+      GW_Volunteers__Ongoing__c: true
+      Name: Branding and Marketing
+
+- object: GW_Volunteers__Volunteer_Job__c
+  nickname: Client Certification
+  fields:
+      GW_Volunteers__Description__c: Client Certification decscription
+      GW_Volunteers__Skills_Needed__c: Writing/Communications
+      GW_Volunteers__Campaign__c:
+          reference: Campaign
+      GW_Volunteers__Ongoing__c: true
+      Name: Client Certification
+
+- object: GW_Volunteers__Volunteer_Job__c
+  nickname: Client Operations
+  fields:
+      GW_Volunteers__Description__c: Client Operations
+      GW_Volunteers__Skills_Needed__c: Administration
+      GW_Volunteers__Campaign__c:
+          reference: Campaign
+      GW_Volunteers__Ongoing__c: true
+      Name: Client Operations
+
+- object: GW_Volunteers__Volunteer_Job__c
+  nickname: Community Outreach and Education
+  fields:
+      GW_Volunteers__Description__c: Community Outreach and Education
+      GW_Volunteers__Skills_Needed__c: Outreach/Networking
+      GW_Volunteers__Campaign__c:
+          reference: Campaign
+      GW_Volunteers__Ongoing__c: true
+      Name: Community Outreach and Education
+
+- object: GW_Volunteers__Volunteer_Job__c
+  nickname: Dog Availability
+  fields:
+      GW_Volunteers__Description__c: Dog Availability
+      GW_Volunteers__Skills_Needed__c: Administration
+      GW_Volunteers__Campaign__c:
+          reference: Campaign
+      GW_Volunteers__Ongoing__c: true
+      Name: Dog Availability
+
+- object: GW_Volunteers__Volunteer_Job__c
+  nickname: Financial Operations
+  fields:
+      GW_Volunteers__Description__c: Financial Operations
+      GW_Volunteers__Skills_Needed__c: Financial/Bookkeeping
+      GW_Volunteers__Campaign__c:
+          reference: Campaign
+      GW_Volunteers__Ongoing__c: true
+      Name: Financial Operations
+
+- object: GW_Volunteers__Volunteer_Job__c
+  nickname: Fund Development
+  fields:
+      GW_Volunteers__Description__c: Fund Development
+      GW_Volunteers__Skills_Needed__c: Fundraising/Grants
+      GW_Volunteers__Campaign__c:
+          reference: Campaign
+      GW_Volunteers__Ongoing__c: true
+      Name: Fund Development
+
+- object: GW_Volunteers__Volunteer_Job__c
+  nickname: Governance and Compliance and Operations
+  fields:
+      GW_Volunteers__Description__c: Governance and Compliance and Operations
+      GW_Volunteers__Skills_Needed__c: Legal
+      GW_Volunteers__Campaign__c:
+          reference: Campaign
+      GW_Volunteers__Ongoing__c: true
+      Name: Governance and Compliance and Operations
+
+- object: GW_Volunteers__Volunteer_Job__c
+  nickname: Operations Master Docs
+  fields:
+      GW_Volunteers__Description__c: Operations Master Docs
+      GW_Volunteers__Skills_Needed__c: Writing/Communications
+      GW_Volunteers__Campaign__c:
+          reference: Campaign
+      GW_Volunteers__Ongoing__c: true
+      Name: Operations Master Docs
+
+- object: GW_Volunteers__Volunteer_Job__c
+  nickname: Research and Development
+  fields:
+      GW_Volunteers__Description__c: Research and Development
+      GW_Volunteers__Skills_Needed__c: Dog Training/Behavior/Veterinary
+      GW_Volunteers__Campaign__c:
+          reference: Campaign
+      GW_Volunteers__Ongoing__c: true
+      Name: Research and Development
+
+- object: GW_Volunteers__Volunteer_Job__c
+  nickname: Scholarships
+  fields:
+      GW_Volunteers__Description__c: Scholarships
+      GW_Volunteers__Skills_Needed__c: Fundraising/Grants
+      GW_Volunteers__Campaign__c:
+          reference: Campaign
+      GW_Volunteers__Ongoing__c: true
+      Name: Scholarships
+
+- object: GW_Volunteers__Volunteer_Job__c
+  nickname: State Registration
+  fields:
+      GW_Volunteers__Description__c: State Registration
+      GW_Volunteers__Skills_Needed__c: Legal
+      GW_Volunteers__Campaign__c:
+          reference: Campaign
+      GW_Volunteers__Ongoing__c: true
+      Name: State Registration
+
+- object: GW_Volunteers__Volunteer_Job__c
+  nickname: Team Facilitator Certification
+  fields:
+      GW_Volunteers__Description__c: Team Facilitator Certification
+      GW_Volunteers__Skills_Needed__c: Administration
+      GW_Volunteers__Campaign__c:
+          reference: Campaign
+      GW_Volunteers__Ongoing__c: true
+      Name: Team Facilitator Certification
+
+- object: GW_Volunteers__Volunteer_Job__c
+  nickname: Team Facilitator Operations
+  fields:
+      GW_Volunteers__Description__c: Team Facilitator Operations
+      GW_Volunteers__Skills_Needed__c: Administration
+      GW_Volunteers__Campaign__c:
+          reference: Campaign
+      GW_Volunteers__Ongoing__c: true
+      Name: Team Facilitator Operations
+
+- object: GW_Volunteers__Volunteer_Job__c
+  nickname: Technology Infrastructure
+  fields:
+      GW_Volunteers__Description__c: Technology Infrastructure
+      GW_Volunteers__Skills_Needed__c: Technology/Infrastructure
+      GW_Volunteers__Campaign__c:
+          reference: Campaign
+      GW_Volunteers__Ongoing__c: true
+      Name: Technology Infrastructure
+
+- object: GW_Volunteers__Volunteer_Job__c
+  nickname: Trainer Certification
+  fields:
+      GW_Volunteers__Description__c: Trainer Certification
+      GW_Volunteers__Skills_Needed__c: Dog Training/Behavior/Veterinary
+      GW_Volunteers__Campaign__c:
+          reference: Campaign
+      GW_Volunteers__Ongoing__c: true
+      Name: Trainer Certification
+
+- object: GW_Volunteers__Volunteer_Job__c
+  nickname: Volunteer and Staff Operations
+  fields:
+      GW_Volunteers__Description__c: Volunteer and Staff Operations
+      GW_Volunteers__Skills_Needed__c: Administration
+      GW_Volunteers__Campaign__c:
+          reference: Campaign
+      GW_Volunteers__Ongoing__c: true
+      Name: Volunteer and Staff Operations
+
+- object: GW_Volunteers__Volunteer_Job__c
+  nickname: Volunteer Recruitment and Retention
+  fields:
+      GW_Volunteers__Description__c: Volunteer Recruitment and Retention
+      GW_Volunteers__Skills_Needed__c: Outreach/Networking
+      GW_Volunteers__Campaign__c:
+          reference: Campaign
+      GW_Volunteers__Ongoing__c: true
+      Name: Volunteer Recruitment and Retention
+
+- object: GW_Volunteers__Volunteer_Job__c
+  nickname: Academy-Content Creator
+  fields:
+      GW_Volunteers__Description__c: Academy-Content Creator
+      GW_Volunteers__Skills_Needed__c: Education/Course Development
+      GW_Volunteers__Campaign__c:
+          reference: Campaign
+      GW_Volunteers__Ongoing__c: true
+      Name: Academy-Content Creator
+
+- object: GW_Volunteers__Volunteer_Job__c
+  nickname: Academy-Content Editor
+  fields:
+      GW_Volunteers__Description__c: Academy-Content Editor
+      GW_Volunteers__Skills_Needed__c: Education/Course Development
+      GW_Volunteers__Campaign__c:
+          reference: Campaign
+      GW_Volunteers__Ongoing__c: true
+      Name: Academy-Content Editor
+
+- object: GW_Volunteers__Volunteer_Job__c
+  nickname: Marketing- Graphic Design
+  fields:
+      GW_Volunteers__Description__c: Marketing- Graphic Design
+      GW_Volunteers__Skills_Needed__c: Graphic Design
+      GW_Volunteers__Campaign__c:
+          reference: Campaign
+      GW_Volunteers__Ongoing__c: true
+      Name: Marketing- Graphic Design
+
+- object: GW_Volunteers__Volunteer_Job__c
+  nickname: Marketing- Video
+  fields:
+      GW_Volunteers__Description__c: Marketing- Video
+      GW_Volunteers__Skills_Needed__c: Photography/Videography
+      GW_Volunteers__Campaign__c:
+          reference: Campaign
+      GW_Volunteers__Ongoing__c: true
+      Name: Marketing- Video
+
+- object: GW_Volunteers__Volunteer_Job__c
+  nickname: Marketing- Photo
+  fields:
+      GW_Volunteers__Description__c: Marketing- Photo
+      GW_Volunteers__Skills_Needed__c: Photography/Videography
+      GW_Volunteers__Campaign__c:
+          reference: Campaign
+      GW_Volunteers__Ongoing__c: true
+      Name: Marketing- Photo
+
+- object: GW_Volunteers__Volunteer_Job__c
+  nickname: Marketing- Writing
+  fields:
+      GW_Volunteers__Description__c: Marketing- Writing
+      GW_Volunteers__Skills_Needed__c: Writing/Communications
+      GW_Volunteers__Campaign__c:
+          reference: Campaign
+      GW_Volunteers__Ongoing__c: true
+      Name: Marketing- Writing
+
+- object: GW_Volunteers__Volunteer_Job__c
+  nickname: Marketing- Leadership
+  fields:
+      GW_Volunteers__Description__c: Marketing- Leadership
+      GW_Volunteers__Skills_Needed__c: Marketing and Branding
+      GW_Volunteers__Campaign__c:
+          reference: Campaign
+      GW_Volunteers__Ongoing__c: true
+      Name: Marketing- Leadership
+
+- object: GW_Volunteers__Volunteer_Job__c
+  nickname: Marketing- SEO
+  fields:
+      GW_Volunteers__Description__c: Marketing- SEO
+      GW_Volunteers__Skills_Needed__c: SEO
+      GW_Volunteers__Campaign__c:
+          reference: Campaign
+      GW_Volunteers__Ongoing__c: true
+      Name: Marketing- SEO
+
+- object: GW_Volunteers__Volunteer_Job__c
+  nickname: Marketing- Website
+  fields:
+      GW_Volunteers__Description__c: Marketing- Website
+      GW_Volunteers__Skills_Needed__c: Website development
+      GW_Volunteers__Campaign__c:
+          reference: Campaign
+      GW_Volunteers__Ongoing__c: true
+      Name: Marketing- Website
+
+- object: GW_Volunteers__Volunteer_Job__c
+  nickname: Marketing- Sales
+  fields:
+      GW_Volunteers__Description__c: Marketing- Sales
+      GW_Volunteers__Skills_Needed__c: Sales
+      GW_Volunteers__Campaign__c:
+          reference: Campaign
+      GW_Volunteers__Ongoing__c: true
+      Name: Marketing- Sales
+
+- object: GW_Volunteers__Volunteer_Job__c
+  nickname: Marketing- Advertising
+  fields:
+      GW_Volunteers__Description__c: Marketing- Advertising
+      GW_Volunteers__Skills_Needed__c: Marketing and Branding
+      GW_Volunteers__Campaign__c:
+          reference: Campaign
+      GW_Volunteers__Ongoing__c: true
+      Name: Marketing- Advertising
+
+- object: GW_Volunteers__Volunteer_Job__c
+  nickname: Marketing- Events
+  fields:
+      GW_Volunteers__Description__c: Marketing- Events
+      GW_Volunteers__Skills_Needed__c: Project/Program Management
+      GW_Volunteers__Campaign__c:
+          reference: Campaign
+      GW_Volunteers__Ongoing__c: true
+      Name: Marketing- Events
+
+- object: GW_Volunteers__Volunteer_Job__c
+  nickname: Administrative- Client
+  fields:
+      GW_Volunteers__Description__c: Administrative- Client
+      GW_Volunteers__Skills_Needed__c: Administration
+      GW_Volunteers__Campaign__c:
+          reference: Campaign
+      GW_Volunteers__Ongoing__c: true
+      Name: Administrative- Client
+
+- object: GW_Volunteers__Volunteer_Job__c
+  nickname: Administrative- Volunteer
+  fields:
+      GW_Volunteers__Description__c: Administrative- Volunteer
+      GW_Volunteers__Skills_Needed__c: Administration
+      GW_Volunteers__Campaign__c:
+          reference: Campaign
+      GW_Volunteers__Ongoing__c: true
+      Name: Administrative- Volunteer
+
+- object: GW_Volunteers__Volunteer_Job__c
+  nickname: Administrative- Trainer
+  fields:
+      GW_Volunteers__Description__c: Administrative- Trainer
+      GW_Volunteers__Skills_Needed__c: Administration
+      GW_Volunteers__Campaign__c:
+          reference: Campaign
+      GW_Volunteers__Ongoing__c: true
+      Name: Administrative- Trainer
+
+- object: GW_Volunteers__Volunteer_Job__c
+  nickname: Administrative- General
+  fields:
+      GW_Volunteers__Description__c: Administrative- General
+      GW_Volunteers__Skills_Needed__c: Administration
+      GW_Volunteers__Campaign__c:
+          reference: Campaign
+      GW_Volunteers__Ongoing__c: true
+      Name: Administrative- General
+
+- object: GW_Volunteers__Volunteer_Job__c
+  nickname: Administrative- Technology
+  fields:
+      GW_Volunteers__Description__c: Administrative- Technology
+      GW_Volunteers__Skills_Needed__c: Administration
+      GW_Volunteers__Campaign__c:
+          reference: Campaign
+      GW_Volunteers__Ongoing__c: true
+      Name: Administrative- Technology
+
+- object: GW_Volunteers__Volunteer_Job__c
+  nickname: Outreach- Clients
+  fields:
+      GW_Volunteers__Description__c: Outreach- Clients
+      GW_Volunteers__Skills_Needed__c: Outreach/Networking
+      GW_Volunteers__Campaign__c:
+          reference: Campaign
+      GW_Volunteers__Ongoing__c: true
+      Name: Outreach- Clients
+
+- object: GW_Volunteers__Volunteer_Job__c
+  nickname: Outreach- Disability Orgs
+  fields:
+      GW_Volunteers__Description__c: Outreach- Disability Orgs
+      GW_Volunteers__Skills_Needed__c: Outreach/Networking
+      GW_Volunteers__Campaign__c:
+          reference: Campaign
+      GW_Volunteers__Ongoing__c: true
+      Name: Outreach- Disability Orgs
+
+- object: GW_Volunteers__Volunteer_Job__c
+  nickname: Outreach- Dogs
+  fields:
+      GW_Volunteers__Description__c: Outreach- Dogs
+      GW_Volunteers__Skills_Needed__c: Outreach/Networking
+      GW_Volunteers__Campaign__c:
+          reference: Campaign
+      GW_Volunteers__Ongoing__c: true
+      Name: Outreach- Dogs
+
+- object: GW_Volunteers__Volunteer_Job__c
+  nickname: Outreach- Veterinarians
+  fields:
+      GW_Volunteers__Description__c: Outreach- Veterinarians
+      GW_Volunteers__Skills_Needed__c: Outreach/Networking
+      GW_Volunteers__Campaign__c:
+          reference: Campaign
+      GW_Volunteers__Ongoing__c: true
+      Name: Outreach- Veterinarians
+
+- object: GW_Volunteers__Volunteer_Job__c
+  nickname: Outreach- Medical Providers
+  fields:
+      GW_Volunteers__Description__c: Outreach- Medical Providers
+      GW_Volunteers__Skills_Needed__c: Outreach/Networking
+      GW_Volunteers__Campaign__c:
+          reference: Campaign
+      GW_Volunteers__Ongoing__c: true
+      Name: Outreach- Medical Providers
+
+- object: GW_Volunteers__Volunteer_Job__c
+  nickname: Outreach- Diversity
+  fields:
+      GW_Volunteers__Description__c: Outreach- Diversity
+      GW_Volunteers__Skills_Needed__c: Outreach/Networking
+      GW_Volunteers__Campaign__c:
+          reference: Campaign
+      GW_Volunteers__Ongoing__c: true
+      Name: Outreach- Diversity

@@ -1,5 +1,5 @@
 <aura:component
-    implements="lightning:actionOverride, force:hasRecordId, force:hasSObjectName"
+    implements="lightning:actionOverride,force:hasRecordId,force:hasSObjectName"
     access="global"
 >
     <c:editBackgroundCheckCmp aura:id="modal" recordId="{!v.recordId}" />

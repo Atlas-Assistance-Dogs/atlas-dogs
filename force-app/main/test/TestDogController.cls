@@ -1,8 +1,5 @@
 @isTest
 public with sharing class TestDogController {
-    public TestDogController() {
-    }
-
     @isTest
     public static void getVaccinations_ReturnsVaccinations() {
         // Arrange

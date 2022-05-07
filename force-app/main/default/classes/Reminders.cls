@@ -12,21 +12,21 @@ global class Reminders implements Schedulable {
     }
 
     global void execute(SchedulableContext SC) {
-        Date month = Date.today().addDays(30);
-        Date week = Date.today().addDays(7);
         // Find out which assignments may need reminder tasks.
         // Note we cannot join with Tasks since that is not supported.
+        // NOTE: We need to use literals when filtering dates, so break down by weeks and hit the
+        // ones we expect to see most
         List<ProgramAssignment__c> assignments = [
-            SELECT id, Contact__c, ExpectedCompletion__c
+            SELECT id, Contact__c, ExpectedCompletion__c, Program2__r.Name, Program2__r.Reminder__c
             FROM ProgramAssignment__c
             WHERE
                 Status__c = 'In progress'
-                AND (((Program__c = 'Volunteer'
-                OR Program__c = 'Staff')
-                AND ExpectedCompletion__c <= :week)
-                OR (Program__c != 'Volunteer'
-                AND Program__c != 'Staff'
-                AND ExpectedCompletion__c <= :month))
+                AND Program2__r.Reminder__c != 0
+                AND ((Program2__r.Reminder__c >= 30 AND ExpectedCompletion__c <= NEXT_N_DAYS:30)
+                OR (Program2__r.Reminder__c >= 21 AND ExpectedCompletion__c <= NEXT_N_DAYS:21)
+                OR (Program2__r.Reminder__c >= 14 AND ExpectedCompletion__c <= NEXT_N_DAYS:14)
+                OR (Program2__r.Reminder__c >= 7 AND ExpectedCompletion__c <= NEXT_N_DAYS:7)
+                OR (ExpectedCompletion__c = TODAY))
         ];
 
         Group adminGroup = [
@@ -38,6 +38,9 @@ global class Reminders implements Schedulable {
 
         // Create a reminder task if one wasn't already created
         for (ProgramAssignment__c assignment : assignments) {
+            if (Date.today().addDays((integer)assignment.Program2__r.Reminder__c) < assignment.ExpectedCompletion__c) {
+                continue; // don't need to remind yet
+            }
             List<Task> createdTasks = [
                 SELECT id
                 FROM TASK
