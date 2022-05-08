@@ -7,6 +7,10 @@
         {
             "path": "scratch-config",
             "default": false
+        },
+        {
+            "path": "unpackaged/pre",
+            "default": false
         }
     ],
     "namespace": "atlasdog",
