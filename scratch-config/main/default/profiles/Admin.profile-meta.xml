@@ -140,7 +140,7 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Contact.BoardContactFormReceived__c</field>
+        <field>Contact.ContactFormReceived__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -171,11 +171,6 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Contact.ClientCertAgreementReceived__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Contact.ClientContactFormReceived__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -231,11 +226,6 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Contact.FacilitatorCertAgreementReceived__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Contact.FacilitatorContactFormReceived__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -325,11 +315,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Contact.PuppyContactFormReceived__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
         <field>Contact.PuppyInfrNoticeReceived__c</field>
         <readable>false</readable>
     </fieldPermissions>
@@ -410,11 +395,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Contact.TrainerContactFormReceived__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
         <field>Contact.TrainerInfrNoticeReceived__c</field>
         <readable>false</readable>
     </fieldPermissions>
@@ -451,11 +431,6 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Contact.VolunteerApplicationReceived__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Contact.VolunteerContactFormReceived__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>

@@ -258,26 +258,26 @@ public with sharing class FileService {
             }
 
             if (cv.Category__c == 'Volunteer' && cv.Type__c == 'ContactForm') {
-                contact.VolunteerContactFormReceived__c = cv.LastModifiedDate.date();
+                contact.ContactFormReceived__c = cv.LastModifiedDate.date();
             }
 
             if (cv.Category__c == 'Board' && cv.Type__c == 'ContactForm') {
-                contact.BoardContactFormReceived__c = cv.LastModifiedDate.date();
+                contact.ContactFormReceived__c = cv.LastModifiedDate.date();
             }
 
             if (cv.Category__c == 'Client' && cv.Type__c == 'ContactForm') {
-                contact.ClientContactFormReceived__c = cv.LastModifiedDate.date();
+                contact.ContactFormReceived__c = cv.LastModifiedDate.date();
             }
 
             if (
                 cv.Category__c == 'Facilitator' &&
                 cv.Type__c == 'ContactForm'
             ) {
-                contact.FacilitatorContactFormReceived__c = cv.LastModifiedDate.date();
+                contact.ContactFormReceived__c = cv.LastModifiedDate.date();
             }
 
             if (cv.Category__c == 'Trainer' && cv.Type__c == 'ContactForm') {
-                contact.TrainerContactFormReceived__c = cv.LastModifiedDate.date();
+                contact.ContactFormReceived__c = cv.LastModifiedDate.date();
             }
         }
         update contact;

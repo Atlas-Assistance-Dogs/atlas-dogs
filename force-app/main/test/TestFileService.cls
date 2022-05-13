@@ -1098,14 +1098,14 @@ public with sharing class TestFileService {
         FileService.updateDate(cv, contact.Id);
 
         contact = [
-            SELECT VolunteerContactFormReceived__c
+            SELECT ContactFormReceived__c
             FROM Contact
             WHERE Id = :contact.Id
             LIMIT 1
         ];
         system.assertEquals(
             Date.today(),
-            contact.VolunteerContactFormReceived__c,
+            contact.ContactFormReceived__c,
             'ContactFormReceived not set'
         );
     }
@@ -1122,14 +1122,14 @@ public with sharing class TestFileService {
         FileService.updateDate(cv, contact.Id);
 
         contact = [
-            SELECT BoardContactFormReceived__c
+            SELECT ContactFormReceived__c
             FROM Contact
             WHERE Id = :contact.Id
             LIMIT 1
         ];
         system.assertEquals(
             Date.today(),
-            contact.BoardContactFormReceived__c,
+            contact.ContactFormReceived__c,
             'ContactFormReceived not set'
         );
     }
@@ -1146,14 +1146,14 @@ public with sharing class TestFileService {
         FileService.updateDate(cv, contact.Id);
 
         contact = [
-            SELECT ClientContactFormReceived__c
+            SELECT ContactFormReceived__c
             FROM Contact
             WHERE Id = :contact.Id
             LIMIT 1
         ];
         system.assertEquals(
             Date.today(),
-            contact.ClientContactFormReceived__c,
+            contact.ContactFormReceived__c,
             'ContactFormReceived not set'
         );
     }
@@ -1174,14 +1174,14 @@ public with sharing class TestFileService {
         FileService.updateDate(cv, contact.Id);
 
         contact = [
-            SELECT FacilitatorContactFormReceived__c
+            SELECT ContactFormReceived__c
             FROM Contact
             WHERE Id = :contact.Id
             LIMIT 1
         ];
         system.assertEquals(
             Date.today(),
-            contact.FacilitatorContactFormReceived__c,
+            contact.ContactFormReceived__c,
             'ContactFormReceived not set'
         );
     }
@@ -1198,14 +1198,14 @@ public with sharing class TestFileService {
         FileService.updateDate(cv, contact.Id);
 
         contact = [
-            SELECT TrainerContactFormReceived__c
+            SELECT ContactFormReceived__c
             FROM Contact
             WHERE Id = :contact.Id
             LIMIT 1
         ];
         system.assertEquals(
             Date.today(),
-            contact.TrainerContactFormReceived__c,
+            contact.ContactFormReceived__c,
             'ContactFormReceived not set'
         );
     }
