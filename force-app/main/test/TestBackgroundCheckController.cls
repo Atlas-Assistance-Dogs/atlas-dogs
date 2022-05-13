@@ -108,7 +108,7 @@ public class TestBackgroundCheckController {
             WHERE Id = :document.Id
         ]
         .ContentDocumentId;
-        FileController.relateFile(contentDocumentId, bgCheck.Id);
+        FileController.relateFile(contentDocumentId, bgCheck.Id, Date.today());
 
         Test.startTest();
         List<BackgroundCheck> checks = BackgroundCheckController.getRelatedChecks(

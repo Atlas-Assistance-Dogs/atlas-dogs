@@ -49,7 +49,7 @@ public with sharing class BackgroundCheckController {
         try {
             insert check;
             if (documentId != null) {
-                FileController.relateFile(documentId, check.Id);
+                FileController.relateFile(documentId, check.Id, Date.today());
             }
             return check.Id;
         } catch (Exception e) {

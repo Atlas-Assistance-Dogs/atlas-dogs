@@ -13,6 +13,7 @@ export default class DocumentUploadCmp extends NavigationMixin(
     message = "";
     fileName;
     contentType = "Emergency Contact";
+    today = Date.now();
 
     get acceptedFormats() {
         return [
@@ -45,6 +46,7 @@ export default class DocumentUploadCmp extends NavigationMixin(
         this.updateFiles(
             this.template.querySelector(".category").value,
             this.template.querySelector(".type").value,
+            this.template.querySelector(".date").value,
             uploadedFiles
         );
     }
@@ -54,10 +56,11 @@ export default class DocumentUploadCmp extends NavigationMixin(
         this.closeModal();
     }
 
-    updateFiles(category, docType, files) {
+    updateFiles(category, docType, date, files) {
         updateRecords({
             category: category,
             docType: docType,
+            date: date,
             docIds: files
         })
             .then((data) => {

@@ -1,7 +1,7 @@
 public with sharing class FileService {
-    // Update the date for the record tied to these files.
+    // Update the docDate for the record tied to these files.
     // Must all be linked to the same entity
-    public static void updateDates(List<ContentVersion> cvs) {
+    public static void updateDates(List<ContentVersion> cvs, Date docDate) {
         if (cvs == null || cvs.size() == 0)
             return;
 
@@ -20,15 +20,15 @@ public with sharing class FileService {
         ]) {
             // note there is a limit of one cv above, so we can update all of them here
             if (cv.Category__c == 'Dog') {
-                updateDogDate(cvs, cntLink.LinkedEntityId);
+                updateDogDate(cvs, cntLink.LinkedEntityId, docDate);
             } else {
                 // this is related to a contact
-                updateContactDate(cvs, cntLink.LinkedEntityId);
+                updateContactDate(cvs, cntLink.LinkedEntityId, docDate);
             }
         }
     }
     // Update the date for the record tied to a file
-    public static void updateDate(ContentVersion cv) {
+    public static void updateDate(ContentVersion cv, Date docDate) {
         if (cv.Category__c == null || cv.Type__c == null)
             return; // nothing to do here
         cv = [
@@ -43,33 +43,35 @@ public with sharing class FileService {
             FROM ContentDocumentLink
             WHERE ContentDocumentId = :cv.ContentDocumentId
         ]) {
-            updateDate(cv, cntLink.LinkedEntityId);
+            updateDate(cv, cntLink.LinkedEntityId, docDate);
         }
     }
 
-    // Update the last date for a file
-    public static void updateDate(ContentVersion cv, Id recordId) {
+    // Update the last docDate for a file
+    public static void updateDate(ContentVersion cv, Id recordId, Date docDate) {
         if (cv.Category__c == null || cv.Type__c == null)
             return;
 
         if (cv.Category__c == 'Dog') {
-            updateDogDate(new List<ContentVersion>{ cv }, recordId);
+            updateDogDate(new List<ContentVersion>{ cv }, recordId, docDate);
         } else {
             // this is related to a contact
-            updateContactDate(new List<ContentVersion>{ cv }, recordId);
+            updateContactDate(new List<ContentVersion>{ cv }, recordId, docDate);
         }
     }
-    // Update the last received date for the contact for the document category and type
+    // Update the last received docDate for the contact for the document category and type
     private static void updateContactDate(
         List<ContentVersion> cvs,
-        Id recordId
+        Id recordId,
+        Date docDate
     ) {
         Set<string> fields = new Set<string>();
         List<Id> ids = new List<Id>();
         for (ContentVersion cv : cvs) {
+            string category = (cv.Type__c == 'ContactForm') ? '' : cv.Category__c;
             string field = string.format(
                 '{0}{1}Received__c',
-                new List<Object>{ cv.Category__c, cv.Type__c.replace(' ', '') }
+                new List<Object>{ category, cv.Type__c.replace(' ', '') }
             );
             fields.add(field);
             ids.add(cv.Id);
@@ -94,197 +96,178 @@ public with sharing class FileService {
 
         for (ContentVersion cv : cvs) {
             if (cv.Category__c == 'Volunteer' && cv.Type__c == 'Application') {
-                contact.VolunteerApplicationReceived__c = cv.LastModifiedDate.date();
+                contact.VolunteerApplicationReceived__c = docDate;
             }
 
             if (cv.Category__c == 'Board' && cv.Type__c == 'Application') {
-                contact.BoardApplicationReceived__c = cv.LastModifiedDate.date();
+                contact.BoardApplicationReceived__c = docDate;
             }
 
             if (cv.Category__c == 'Client' && cv.Type__c == 'Application') {
-                contact.ClientApplicationReceived__c = cv.LastModifiedDate.date();
+                contact.ClientApplicationReceived__c = docDate;
             }
 
             if (cv.Category__c == 'TSiM' && cv.Type__c == 'Application') {
-                contact.TSiMApplicationReceived__c = cv.LastModifiedDate.date();
+                contact.TSiMApplicationReceived__c = docDate;
             }
 
             if (cv.Category__c == 'ADSiM' && cv.Type__c == 'Application') {
-                contact.ADSiMApplicationReceived__c = cv.LastModifiedDate.date();
+                contact.ADSiMApplicationReceived__c = docDate;
             }
 
             if (
                 cv.Category__c == 'Facilitator' &&
                 cv.Type__c == 'Application'
             ) {
-                contact.FacilitatorApplicationReceived__c = cv.LastModifiedDate.date();
+                contact.FacilitatorApplicationReceived__c = docDate;
             }
 
             if (cv.Category__c == 'Trainer' && cv.Type__c == 'Application') {
-                contact.TrainerApplicationReceived__c = cv.LastModifiedDate.date();
+                contact.TrainerApplicationReceived__c = docDate;
             }
 
             if (cv.Category__c == 'Staff' && cv.Type__c == 'Application') {
-                contact.StaffApplicationReceived__c = cv.LastModifiedDate.date();
+                contact.StaffApplicationReceived__c = docDate;
             }
 
             if (cv.Category__c == 'Volunteer' && cv.Type__c == 'Agreement') {
-                contact.VolunteerAgreementReceived__c = cv.LastModifiedDate.date();
+                contact.VolunteerAgreementReceived__c = docDate;
             }
 
             if (cv.Category__c == 'Board' && cv.Type__c == 'Agreement') {
-                contact.BoardAgreementReceived__c = cv.LastModifiedDate.date();
+                contact.BoardAgreementReceived__c = docDate;
             }
 
             if (cv.Category__c == 'Staff' && cv.Type__c == 'Agreement') {
-                contact.StaffAgreementReceived__c = cv.LastModifiedDate.date();
+                contact.StaffAgreementReceived__c = docDate;
             }
 
             if (cv.Category__c == 'Volunteer' && cv.Type__c == 'Resume') {
-                contact.VolunteerResumeReceived__c = cv.LastModifiedDate.date();
+                contact.VolunteerResumeReceived__c = docDate;
             }
 
             if (cv.Category__c == 'Board' && cv.Type__c == 'Resume') {
-                contact.BoardResumeReceived__c = cv.LastModifiedDate.date();
+                contact.BoardResumeReceived__c = docDate;
             }
 
             if (cv.Category__c == 'Staff' && cv.Type__c == 'Resume') {
-                contact.StaffResumeReceived__c = cv.LastModifiedDate.date();
+                contact.StaffResumeReceived__c = docDate;
             }
 
             if (cv.Category__c == 'Board' && cv.Type__c == 'CoI') {
-                contact.BoardCoIReceived__c = cv.LastModifiedDate.date();
+                contact.BoardCoIReceived__c = docDate;
             }
 
             if (cv.Category__c == 'Board' && cv.Type__c == 'ToN') {
-                contact.BoardToNReceived__c = cv.LastModifiedDate.date();
+                contact.BoardToNReceived__c = docDate;
             }
 
             if (cv.Category__c == 'Client' && cv.Type__c == 'PreApplication') {
-                contact.ClientPreApplicationReceived__c = cv.LastModifiedDate.date();
+                contact.ClientPreApplicationReceived__c = docDate;
             }
 
             if (cv.Category__c == 'ADSiM' && cv.Type__c == 'PreApplication') {
-                contact.ADSiMPreApplicationReceived__c = cv.LastModifiedDate.date();
+                contact.ADSiMPreApplicationReceived__c = docDate;
             }
 
             if (cv.Category__c == 'Client' && cv.Type__c == 'LOMI') {
-                contact.ClientLOMIReceived__c = cv.LastModifiedDate.date();
+                contact.ClientLOMIReceived__c = docDate;
             }
 
             if (cv.Category__c == 'Client' && cv.Type__c == 'VAPW') {
-                contact.ClientVAPWReceived__c = cv.LastModifiedDate.date();
+                contact.ClientVAPWReceived__c = docDate;
             }
 
             if (cv.Category__c == 'Client' && cv.Type__c == 'Survey') {
-                contact.ClientSurveyReceived__c = cv.LastModifiedDate.date();
+                contact.ClientSurveyReceived__c = docDate;
             }
 
             if (cv.Category__c == 'Client' && cv.Type__c == 'ProgAgreement') {
-                contact.ClientProgAgreementReceived__c = cv.LastModifiedDate.date();
+                contact.ClientProgAgreementReceived__c = docDate;
             }
 
             if (cv.Category__c == 'TSiM' && cv.Type__c == 'ProgAgreement') {
-                contact.TSiMProgAgreementReceived__c = cv.LastModifiedDate.date();
+                contact.TSiMProgAgreementReceived__c = docDate;
             }
 
             if (cv.Category__c == 'ADSiM' && cv.Type__c == 'ProgAgreement') {
-                contact.ADSiMProgAgreementReceived__c = cv.LastModifiedDate.date();
+                contact.ADSiMProgAgreementReceived__c = docDate;
             }
 
             if (
                 cv.Category__c == 'Facilitator' &&
                 cv.Type__c == 'ProgAgreement'
             ) {
-                contact.FacilitatorProgAgreementReceived__c = cv.LastModifiedDate.date();
+                contact.FacilitatorProgAgreementReceived__c = docDate;
             }
 
             if (cv.Category__c == 'Trainer' && cv.Type__c == 'ProgAgreement') {
-                contact.TrainerProgAgreementReceived__c = cv.LastModifiedDate.date();
+                contact.TrainerProgAgreementReceived__c = docDate;
             }
 
             if (cv.Category__c == 'Client' && cv.Type__c == 'CertAgreement') {
-                contact.ClientCertAgreementReceived__c = cv.LastModifiedDate.date();
+                contact.ClientCertAgreementReceived__c = docDate;
             }
 
             if (
                 cv.Category__c == 'Facilitator' &&
                 cv.Type__c == 'CertAgreement'
             ) {
-                contact.FacilitatorCertAgreementReceived__c = cv.LastModifiedDate.date();
+                contact.FacilitatorCertAgreementReceived__c = docDate;
             }
 
             if (cv.Category__c == 'Trainer' && cv.Type__c == 'CertAgreement') {
-                contact.TrainerCertAgreementReceived__c = cv.LastModifiedDate.date();
+                contact.TrainerCertAgreementReceived__c = docDate;
             }
 
             if (cv.Category__c == 'Facilitator' && cv.Type__c == 'Reference') {
-                contact.FacilitatorReferenceReceived__c = cv.LastModifiedDate.date();
+                contact.FacilitatorReferenceReceived__c = docDate;
             }
 
             if (cv.Category__c == 'Trainer' && cv.Type__c == 'Reference') {
-                contact.TrainerReferenceReceived__c = cv.LastModifiedDate.date();
+                contact.TrainerReferenceReceived__c = docDate;
             }
 
             if (
                 cv.Category__c == 'Facilitator' &&
                 cv.Type__c == 'ProfGrowthPlan'
             ) {
-                contact.FacilitatorProfGrowthPlanReceived__c = cv.LastModifiedDate.date();
+                contact.FacilitatorProfGrowthPlanReceived__c = docDate;
             }
 
             if (cv.Category__c == 'Facilitator' && cv.Type__c == 'Practicum') {
-                contact.FacilitatorPracticumReceived__c = cv.LastModifiedDate.date();
+                contact.FacilitatorPracticumReceived__c = docDate;
             }
 
             if (cv.Category__c == 'Facilitator' && cv.Type__c == 'InfrNotice') {
-                contact.FacilitatorInfrNoticeReceived__c = cv.LastModifiedDate.date();
+                contact.FacilitatorInfrNoticeReceived__c = docDate;
             }
 
             if (cv.Category__c == 'Trainer' && cv.Type__c == 'InfrNotice') {
-                contact.TrainerInfrNoticeReceived__c = cv.LastModifiedDate.date();
+                contact.TrainerInfrNoticeReceived__c = docDate;
             }
 
             if (cv.Category__c == 'Staff' && cv.Type__c == 'Offer') {
-                contact.StaffOfferReceived__c = cv.LastModifiedDate.date();
+                contact.StaffOfferReceived__c = docDate;
             }
 
             if (cv.Category__c == 'Staff' && cv.Type__c == 'W4') {
-                contact.StaffW4Received__c = cv.LastModifiedDate.date();
+                contact.StaffW4Received__c = docDate;
             }
 
             if (cv.Category__c == 'Staff' && cv.Type__c == 'I9') {
-                contact.StaffI9Received__c = cv.LastModifiedDate.date();
+                contact.StaffI9Received__c = docDate;
             }
 
-            if (cv.Category__c == 'Volunteer' && cv.Type__c == 'ContactForm') {
-                contact.ContactFormReceived__c = cv.LastModifiedDate.date();
-            }
-
-            if (cv.Category__c == 'Board' && cv.Type__c == 'ContactForm') {
-                contact.ContactFormReceived__c = cv.LastModifiedDate.date();
-            }
-
-            if (cv.Category__c == 'Client' && cv.Type__c == 'ContactForm') {
-                contact.ContactFormReceived__c = cv.LastModifiedDate.date();
-            }
-
-            if (
-                cv.Category__c == 'Facilitator' &&
-                cv.Type__c == 'ContactForm'
-            ) {
-                contact.ContactFormReceived__c = cv.LastModifiedDate.date();
-            }
-
-            if (cv.Category__c == 'Trainer' && cv.Type__c == 'ContactForm') {
-                contact.ContactFormReceived__c = cv.LastModifiedDate.date();
+            if (cv.Type__c == 'ContactForm') {
+                contact.ContactFormReceived__c = docDate;
             }
         }
         update contact;
     }
 
-    // Update the last received date for the contact for the document type
-    private static void updateDogDate(List<ContentVersion> cvs, Id recordId) {
+    // Update the last received docDate for the contact for the document type
+    private static void updateDogDate(List<ContentVersion> cvs, Id recordId, Date docDate) {
         // this is related to a dog
         Set<string> fields = new Set<string>();
         List<Id> ids = new List<Id>();
@@ -317,15 +300,15 @@ public with sharing class FileService {
 
         for (ContentVersion cv : cvs) {
             if (cv.Type__c == 'HealthForm') {
-                dog.HealthFormReceived__c = cv.LastModifiedDate.date();
+                dog.HealthFormReceived__c = docDate;
             }
 
             if (cv.Type__c == 'Xray') {
-                dog.XrayReceived__c = cv.LastModifiedDate.date();
+                dog.XrayReceived__c = docDate;
             }
 
             if (cv.Type__c == 'VacExams') {
-                dog.VacExamsReceived__c = cv.LastModifiedDate.date();
+                dog.VacExamsReceived__c = docDate;
             }
         }
         update dog;

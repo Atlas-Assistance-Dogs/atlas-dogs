@@ -49,7 +49,7 @@ public with sharing class TestFileService {
 
         ContentVersion cv = createLink(null, null, bgCheck.Id);
 
-        FileService.updateDate(cv, bgCheck.Id);
+        FileService.updateDate(cv, bgCheck.Id, Date.today());
         // no assert here.  Test passes if no exception
     }
 
@@ -60,7 +60,7 @@ public with sharing class TestFileService {
         ContentVersion cv = createLink('Dog', 'HealthForm', dog.Id);
 
         // Act
-        FileService.updateDate(cv);
+        FileService.updateDate(cv, Date.today());
 
         // Assert
         dog = [
@@ -87,7 +87,7 @@ public with sharing class TestFileService {
         ContentVersion cv = createLink('Client', 'Application', contact.Id);
 
         // Act
-        FileService.updateDate(cv);
+        FileService.updateDate(cv, Date.today());
 
         // Assert
         contact = [
@@ -108,7 +108,7 @@ public with sharing class TestFileService {
         Dog__c dog = new Dog__c(Name = 'Fido', HealthFormReceived__c = null);
         insert dog;
         ContentVersion cv = createLink('Dog', 'HealthForm', dog.Id);
-        FileService.updateDate(cv, dog.Id);
+        FileService.updateDate(cv, dog.Id, Date.today());
 
         dog = [
             SELECT HealthFormReceived__c
@@ -128,7 +128,7 @@ public with sharing class TestFileService {
         Dog__c dog = new Dog__c(Name = 'Fido', XrayReceived__c = null);
         insert dog;
         ContentVersion cv = createLink('Dog', 'Xray', dog.Id);
-        FileService.updateDate(cv, dog.Id);
+        FileService.updateDate(cv, dog.Id, Date.today());
 
         dog = [SELECT XrayReceived__c FROM Dog__c WHERE Id = :dog.Id LIMIT 1];
         system.assertEquals(
@@ -143,7 +143,7 @@ public with sharing class TestFileService {
         Dog__c dog = new Dog__c(Name = 'Fido', VacExamsReceived__c = null);
         insert dog;
         ContentVersion cv = createLink('Dog', 'VacExams', dog.Id);
-        FileService.updateDate(cv, dog.Id);
+        FileService.updateDate(cv, dog.Id, Date.today());
 
         dog = [
             SELECT VacExamsReceived__c
@@ -167,7 +167,7 @@ public with sharing class TestFileService {
         );
         insert contact;
         ContentVersion cv = createLink('Volunteer', 'Application', contact.Id);
-        FileService.updateDate(cv, contact.Id);
+        FileService.updateDate(cv, contact.Id, Date.today());
 
         contact = [
             SELECT VolunteerApplicationReceived__c
@@ -191,7 +191,7 @@ public with sharing class TestFileService {
         );
         insert contact;
         ContentVersion cv = createLink('Board', 'Application', contact.Id);
-        FileService.updateDate(cv, contact.Id);
+        FileService.updateDate(cv, contact.Id, Date.today());
 
         contact = [
             SELECT BoardApplicationReceived__c
@@ -215,7 +215,7 @@ public with sharing class TestFileService {
         );
         insert contact;
         ContentVersion cv = createLink('Client', 'Application', contact.Id);
-        FileService.updateDate(cv, contact.Id);
+        FileService.updateDate(cv, contact.Id, Date.today());
 
         contact = [
             SELECT ClientApplicationReceived__c
@@ -239,7 +239,7 @@ public with sharing class TestFileService {
         );
         insert contact;
         ContentVersion cv = createLink('TSiM', 'Application', contact.Id);
-        FileService.updateDate(cv, contact.Id);
+        FileService.updateDate(cv, contact.Id, Date.today());
 
         contact = [
             SELECT TSiMApplicationReceived__c
@@ -263,7 +263,7 @@ public with sharing class TestFileService {
         );
         insert contact;
         ContentVersion cv = createLink('ADSiM', 'Application', contact.Id);
-        FileService.updateDate(cv, contact.Id);
+        FileService.updateDate(cv, contact.Id, Date.today());
 
         contact = [
             SELECT ADSiMApplicationReceived__c
@@ -291,7 +291,7 @@ public with sharing class TestFileService {
             'Application',
             contact.Id
         );
-        FileService.updateDate(cv, contact.Id);
+        FileService.updateDate(cv, contact.Id, Date.today());
 
         contact = [
             SELECT FacilitatorApplicationReceived__c
@@ -315,7 +315,7 @@ public with sharing class TestFileService {
         );
         insert contact;
         ContentVersion cv = createLink('Trainer', 'Application', contact.Id);
-        FileService.updateDate(cv, contact.Id);
+        FileService.updateDate(cv, contact.Id, Date.today());
 
         contact = [
             SELECT TrainerApplicationReceived__c
@@ -339,7 +339,7 @@ public with sharing class TestFileService {
         );
         insert contact;
         ContentVersion cv = createLink('Staff', 'Application', contact.Id);
-        FileService.updateDate(cv, contact.Id);
+        FileService.updateDate(cv, contact.Id, Date.today());
 
         contact = [
             SELECT StaffApplicationReceived__c
@@ -363,7 +363,7 @@ public with sharing class TestFileService {
         );
         insert contact;
         ContentVersion cv = createLink('Volunteer', 'Agreement', contact.Id);
-        FileService.updateDate(cv, contact.Id);
+        FileService.updateDate(cv, contact.Id, Date.today());
 
         contact = [
             SELECT VolunteerAgreementReceived__c
@@ -387,7 +387,7 @@ public with sharing class TestFileService {
         );
         insert contact;
         ContentVersion cv = createLink('Board', 'Agreement', contact.Id);
-        FileService.updateDate(cv, contact.Id);
+        FileService.updateDate(cv, contact.Id, Date.today());
 
         contact = [
             SELECT BoardAgreementReceived__c
@@ -411,7 +411,7 @@ public with sharing class TestFileService {
         );
         insert contact;
         ContentVersion cv = createLink('Staff', 'Agreement', contact.Id);
-        FileService.updateDate(cv, contact.Id);
+        FileService.updateDate(cv, contact.Id, Date.today());
 
         contact = [
             SELECT StaffAgreementReceived__c
@@ -435,7 +435,7 @@ public with sharing class TestFileService {
         );
         insert contact;
         ContentVersion cv = createLink('Volunteer', 'Resume', contact.Id);
-        FileService.updateDate(cv, contact.Id);
+        FileService.updateDate(cv, contact.Id, Date.today());
 
         contact = [
             SELECT VolunteerResumeReceived__c
@@ -459,7 +459,7 @@ public with sharing class TestFileService {
         );
         insert contact;
         ContentVersion cv = createLink('Board', 'Resume', contact.Id);
-        FileService.updateDate(cv, contact.Id);
+        FileService.updateDate(cv, contact.Id, Date.today());
 
         contact = [
             SELECT BoardResumeReceived__c
@@ -483,7 +483,7 @@ public with sharing class TestFileService {
         );
         insert contact;
         ContentVersion cv = createLink('Staff', 'Resume', contact.Id);
-        FileService.updateDate(cv, contact.Id);
+        FileService.updateDate(cv, contact.Id, Date.today());
 
         contact = [
             SELECT StaffResumeReceived__c
@@ -507,7 +507,7 @@ public with sharing class TestFileService {
         );
         insert contact;
         ContentVersion cv = createLink('Board', 'CoI', contact.Id);
-        FileService.updateDate(cv, contact.Id);
+        FileService.updateDate(cv, contact.Id, Date.today());
 
         contact = [
             SELECT BoardCoIReceived__c
@@ -531,7 +531,7 @@ public with sharing class TestFileService {
         );
         insert contact;
         ContentVersion cv = createLink('Board', 'ToN', contact.Id);
-        FileService.updateDate(cv, contact.Id);
+        FileService.updateDate(cv, contact.Id, Date.today());
 
         contact = [
             SELECT BoardToNReceived__c
@@ -555,7 +555,7 @@ public with sharing class TestFileService {
         );
         insert contact;
         ContentVersion cv = createLink('Client', 'PreApplication', contact.Id);
-        FileService.updateDate(cv, contact.Id);
+        FileService.updateDate(cv, contact.Id, Date.today());
 
         contact = [
             SELECT ClientPreApplicationReceived__c
@@ -579,7 +579,7 @@ public with sharing class TestFileService {
         );
         insert contact;
         ContentVersion cv = createLink('ADSiM', 'PreApplication', contact.Id);
-        FileService.updateDate(cv, contact.Id);
+        FileService.updateDate(cv, contact.Id, Date.today());
 
         contact = [
             SELECT ADSiMPreApplicationReceived__c
@@ -603,7 +603,7 @@ public with sharing class TestFileService {
         );
         insert contact;
         ContentVersion cv = createLink('Client', 'LOMI', contact.Id);
-        FileService.updateDate(cv, contact.Id);
+        FileService.updateDate(cv, contact.Id, Date.today());
 
         contact = [
             SELECT ClientLOMIReceived__c
@@ -627,7 +627,7 @@ public with sharing class TestFileService {
         );
         insert contact;
         ContentVersion cv = createLink('Client', 'VAPW', contact.Id);
-        FileService.updateDate(cv, contact.Id);
+        FileService.updateDate(cv, contact.Id, Date.today());
 
         contact = [
             SELECT ClientVAPWReceived__c
@@ -651,7 +651,7 @@ public with sharing class TestFileService {
         );
         insert contact;
         ContentVersion cv = createLink('Client', 'Survey', contact.Id);
-        FileService.updateDate(cv, contact.Id);
+        FileService.updateDate(cv, contact.Id, Date.today());
 
         contact = [
             SELECT ClientSurveyReceived__c
@@ -675,7 +675,7 @@ public with sharing class TestFileService {
         );
         insert contact;
         ContentVersion cv = createLink('Client', 'ProgAgreement', contact.Id);
-        FileService.updateDate(cv, contact.Id);
+        FileService.updateDate(cv, contact.Id, Date.today());
 
         contact = [
             SELECT ClientProgAgreementReceived__c
@@ -699,7 +699,7 @@ public with sharing class TestFileService {
         );
         insert contact;
         ContentVersion cv = createLink('TSiM', 'ProgAgreement', contact.Id);
-        FileService.updateDate(cv, contact.Id);
+        FileService.updateDate(cv, contact.Id, Date.today());
 
         contact = [
             SELECT TSiMProgAgreementReceived__c
@@ -723,7 +723,7 @@ public with sharing class TestFileService {
         );
         insert contact;
         ContentVersion cv = createLink('ADSiM', 'ProgAgreement', contact.Id);
-        FileService.updateDate(cv, contact.Id);
+        FileService.updateDate(cv, contact.Id, Date.today());
 
         contact = [
             SELECT ADSiMProgAgreementReceived__c
@@ -751,7 +751,7 @@ public with sharing class TestFileService {
             'ProgAgreement',
             contact.Id
         );
-        FileService.updateDate(cv, contact.Id);
+        FileService.updateDate(cv, contact.Id, Date.today());
 
         contact = [
             SELECT FacilitatorProgAgreementReceived__c
@@ -775,7 +775,7 @@ public with sharing class TestFileService {
         );
         insert contact;
         ContentVersion cv = createLink('Trainer', 'ProgAgreement', contact.Id);
-        FileService.updateDate(cv, contact.Id);
+        FileService.updateDate(cv, contact.Id, Date.today());
 
         contact = [
             SELECT TrainerProgAgreementReceived__c
@@ -799,7 +799,7 @@ public with sharing class TestFileService {
         );
         insert contact;
         ContentVersion cv = createLink('Client', 'CertAgreement', contact.Id);
-        FileService.updateDate(cv, contact.Id);
+        FileService.updateDate(cv, contact.Id, Date.today());
 
         contact = [
             SELECT ClientCertAgreementReceived__c
@@ -827,7 +827,7 @@ public with sharing class TestFileService {
             'CertAgreement',
             contact.Id
         );
-        FileService.updateDate(cv, contact.Id);
+        FileService.updateDate(cv, contact.Id, Date.today());
 
         contact = [
             SELECT FacilitatorCertAgreementReceived__c
@@ -851,7 +851,7 @@ public with sharing class TestFileService {
         );
         insert contact;
         ContentVersion cv = createLink('Trainer', 'CertAgreement', contact.Id);
-        FileService.updateDate(cv, contact.Id);
+        FileService.updateDate(cv, contact.Id, Date.today());
 
         contact = [
             SELECT TrainerCertAgreementReceived__c
@@ -875,7 +875,7 @@ public with sharing class TestFileService {
         );
         insert contact;
         ContentVersion cv = createLink('Facilitator', 'Reference', contact.Id);
-        FileService.updateDate(cv, contact.Id);
+        FileService.updateDate(cv, contact.Id, Date.today());
 
         contact = [
             SELECT FacilitatorReferenceReceived__c
@@ -899,7 +899,7 @@ public with sharing class TestFileService {
         );
         insert contact;
         ContentVersion cv = createLink('Trainer', 'Reference', contact.Id);
-        FileService.updateDate(cv, contact.Id);
+        FileService.updateDate(cv, contact.Id, Date.today());
 
         contact = [
             SELECT TrainerReferenceReceived__c
@@ -927,7 +927,7 @@ public with sharing class TestFileService {
             'ProfGrowthPlan',
             contact.Id
         );
-        FileService.updateDate(cv, contact.Id);
+        FileService.updateDate(cv, contact.Id, Date.today());
 
         contact = [
             SELECT FacilitatorProfGrowthPlanReceived__c
@@ -951,7 +951,7 @@ public with sharing class TestFileService {
         );
         insert contact;
         ContentVersion cv = createLink('Facilitator', 'Practicum', contact.Id);
-        FileService.updateDate(cv, contact.Id);
+        FileService.updateDate(cv, contact.Id, Date.today());
 
         contact = [
             SELECT FacilitatorPracticumReceived__c
@@ -975,7 +975,7 @@ public with sharing class TestFileService {
         );
         insert contact;
         ContentVersion cv = createLink('Facilitator', 'InfrNotice', contact.Id);
-        FileService.updateDate(cv, contact.Id);
+        FileService.updateDate(cv, contact.Id, Date.today());
 
         contact = [
             SELECT FacilitatorInfrNoticeReceived__c
@@ -999,7 +999,7 @@ public with sharing class TestFileService {
         );
         insert contact;
         ContentVersion cv = createLink('Trainer', 'InfrNotice', contact.Id);
-        FileService.updateDate(cv, contact.Id);
+        FileService.updateDate(cv, contact.Id, Date.today());
 
         contact = [
             SELECT TrainerInfrNoticeReceived__c
@@ -1023,7 +1023,7 @@ public with sharing class TestFileService {
         );
         insert contact;
         ContentVersion cv = createLink('Staff', 'Offer', contact.Id);
-        FileService.updateDate(cv, contact.Id);
+        FileService.updateDate(cv, contact.Id, Date.today());
 
         contact = [
             SELECT StaffOfferReceived__c
@@ -1047,7 +1047,7 @@ public with sharing class TestFileService {
         );
         insert contact;
         ContentVersion cv = createLink('Staff', 'W4', contact.Id);
-        FileService.updateDate(cv, contact.Id);
+        FileService.updateDate(cv, contact.Id, Date.today());
 
         contact = [
             SELECT StaffW4Received__c
@@ -1071,7 +1071,7 @@ public with sharing class TestFileService {
         );
         insert contact;
         ContentVersion cv = createLink('Staff', 'I9', contact.Id);
-        FileService.updateDate(cv, contact.Id);
+        FileService.updateDate(cv, contact.Id, Date.today());
 
         contact = [
             SELECT StaffI9Received__c
@@ -1095,7 +1095,7 @@ public with sharing class TestFileService {
         );
         insert contact;
         ContentVersion cv = createLink('Volunteer', 'ContactForm', contact.Id);
-        FileService.updateDate(cv, contact.Id);
+        FileService.updateDate(cv, contact.Id, Date.today());
 
         contact = [
             SELECT ContactFormReceived__c
@@ -1119,7 +1119,7 @@ public with sharing class TestFileService {
         );
         insert contact;
         ContentVersion cv = createLink('Board', 'ContactForm', contact.Id);
-        FileService.updateDate(cv, contact.Id);
+        FileService.updateDate(cv, contact.Id, Date.today());
 
         contact = [
             SELECT ContactFormReceived__c
@@ -1143,7 +1143,7 @@ public with sharing class TestFileService {
         );
         insert contact;
         ContentVersion cv = createLink('Client', 'ContactForm', contact.Id);
-        FileService.updateDate(cv, contact.Id);
+        FileService.updateDate(cv, contact.Id, Date.today());
 
         contact = [
             SELECT ContactFormReceived__c
@@ -1171,7 +1171,7 @@ public with sharing class TestFileService {
             'ContactForm',
             contact.Id
         );
-        FileService.updateDate(cv, contact.Id);
+        FileService.updateDate(cv, contact.Id, Date.today());
 
         contact = [
             SELECT ContactFormReceived__c
@@ -1195,7 +1195,7 @@ public with sharing class TestFileService {
         );
         insert contact;
         ContentVersion cv = createLink('Trainer', 'ContactForm', contact.Id);
-        FileService.updateDate(cv, contact.Id);
+        FileService.updateDate(cv, contact.Id, Date.today());
 
         contact = [
             SELECT ContactFormReceived__c
