@@ -9,7 +9,7 @@
             "default": false
         }
     ],
-    "namespace": "atlasdog",
+    "namespace": "atlas1",
     "sfdcLoginUrl": "https://login.salesforce.com",
     "sourceApiVersion": "54.0",
     "packageAliases": {}
