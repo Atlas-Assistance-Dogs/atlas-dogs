@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Type__c</fullName>
     <externalId>false</externalId>
@@ -137,6 +137,18 @@
         <valueSettings>
             <controllingFieldValue>Volunteer</controllingFieldValue>
             <controllingFieldValue>Board</controllingFieldValue>
+            <controllingFieldValue>Client</controllingFieldValue>
+            <controllingFieldValue>TSiM</controllingFieldValue>
+            <controllingFieldValue>ADSiM</controllingFieldValue>
+            <controllingFieldValue>Facilitator</controllingFieldValue>
+            <controllingFieldValue>Puppy</controllingFieldValue>
+            <controllingFieldValue>Trainer</controllingFieldValue>
+            <controllingFieldValue>Staff</controllingFieldValue>
+            <valueName>ContactForm</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Volunteer</controllingFieldValue>
+            <controllingFieldValue>Board</controllingFieldValue>
             <controllingFieldValue>Staff</controllingFieldValue>
             <valueName>Agreement</valueName>
         </valueSettings>
@@ -179,15 +191,6 @@
             <controllingFieldValue>Puppy</controllingFieldValue>
             <controllingFieldValue>Trainer</controllingFieldValue>
             <valueName>ProgAgreement</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Client</controllingFieldValue>
-            <controllingFieldValue>Board</controllingFieldValue>
-            <controllingFieldValue>Facilitator</controllingFieldValue>
-            <controllingFieldValue>Puppy</controllingFieldValue>
-            <controllingFieldValue>Trainer</controllingFieldValue>
-            <controllingFieldValue>Volunteer</controllingFieldValue>
-            <valueName>ContactForm</valueName>
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Client</controllingFieldValue>
