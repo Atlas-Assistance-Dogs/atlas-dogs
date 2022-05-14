@@ -4,6 +4,10 @@ import getContentVersion from "@salesforce/apex/FileController.getContentVersion
 import updateContentVersion from "@salesforce/apex/FileController.updateContentVersion";
 import { NavigationMixin } from "lightning/navigation";
 
+import CATEGORY_FIELD from "@salesforce/schema/ContentVersion.Category__c";
+import TYPE_FIELD from "@salesforce/schema/ContentVersion.Type__c";
+import DATE_FIELD from "@salesforce/schema/ContentVersion.Date__c";
+
 // Import message service features required for subscribing and the message channel
 import {
     subscribe,
@@ -20,6 +24,12 @@ export default class DocumentUploadCmp extends NavigationMixin(
     @api currentCv = { ContentDocumentId: "", Title: "blank" };
     contentType = "Emergency Contact";
 
+    fields = {
+        category: CATEGORY_FIELD,
+        type: TYPE_FIELD,
+        date: DATE_FIELD
+    };
+    
     @api
     openModal() {
         this.message = "";
@@ -46,15 +56,17 @@ export default class DocumentUploadCmp extends NavigationMixin(
         event.preventDefault();
         this.updateFile(
             this.template.querySelector(".category").value,
-            this.template.querySelector(".type").value
+            this.template.querySelector(".type").value,
+            this.template.querySelector(".date").value,
         );
         this.closeModal();
     }
 
-    updateFile(category, docType) {
+    updateFile(category, docType, docDate) {
         updateContentVersion({
             category: category,
             docType: docType,
+            docDate: docDate,
             recordId: this.recordId
         })
             .then((data) => {

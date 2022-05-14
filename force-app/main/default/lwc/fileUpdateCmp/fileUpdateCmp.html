@@ -12,12 +12,16 @@
         >
             <lightning-messages></lightning-messages>
             <lightning-input-field
-                field-name="Category__c"
+                field-name={fields.category}
                 class="category slds-p-bottom_medium"
             ></lightning-input-field>
             <lightning-input-field
-                field-name="Type__c"
+                field-name={fields.type}
                 class="type slds-p-top_medium"
+            ></lightning-input-field>
+            <lightning-input-field
+                field-name={fields.date}
+                class="date slds-p-top_medium"
             ></lightning-input-field>
             <lightning-button
                 label={currentCv.Title}

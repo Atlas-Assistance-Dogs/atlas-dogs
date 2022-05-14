@@ -427,6 +427,7 @@ public with sharing class TestFileController {
 
         System.assertEquals('Dog', cv.Category__c);
         System.assertEquals('HealthForm', cv.Type__c);
+        System.assertEquals(Date.today(), cv.Date__c);
     }
 
     @isTest
