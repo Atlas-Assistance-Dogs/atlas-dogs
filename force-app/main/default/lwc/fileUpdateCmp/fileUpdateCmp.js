@@ -57,7 +57,7 @@ export default class DocumentUploadCmp extends NavigationMixin(
         this.updateFile(
             this.template.querySelector(".category").value,
             this.template.querySelector(".type").value,
-            this.template.querySelector(".date").value,
+            this.template.querySelector(".date").value
         );
         this.closeModal();
     }

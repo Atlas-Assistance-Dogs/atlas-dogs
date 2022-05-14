@@ -3,6 +3,10 @@ import { ShowToastEvent } from "lightning/platformShowToastEvent";
 import updateRecords from "@salesforce/apex/FileController.updateRecords";
 import { NavigationMixin } from "lightning/navigation";
 
+import CATEGORY_FIELD from "@salesforce/schema/ContentVersion.Category__c";
+import TYPE_FIELD from "@salesforce/schema/ContentVersion.Type__c";
+import DATE_FIELD from "@salesforce/schema/ContentVersion.Date__c";
+
 export default class DocumentUploadCmp extends NavigationMixin(
     LightningElement
 ) {
@@ -13,7 +17,12 @@ export default class DocumentUploadCmp extends NavigationMixin(
     message = "";
     fileName;
     contentType = "Emergency Contact";
-    today = Date.now();
+
+    fields = {
+        category: CATEGORY_FIELD,
+        type: TYPE_FIELD,
+        date: DATE_FIELD
+    };
 
     get acceptedFormats() {
         return [
@@ -60,7 +69,7 @@ export default class DocumentUploadCmp extends NavigationMixin(
         updateRecords({
             category: category,
             docType: docType,
-            date: date,
+            docDate: date,
             docIds: files
         })
             .then((data) => {
