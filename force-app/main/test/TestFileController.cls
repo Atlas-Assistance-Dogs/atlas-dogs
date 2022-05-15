@@ -14,7 +14,8 @@ public with sharing class TestFileController {
                 Origin = 'H',
                 VersionData = Blob.valueOf('Document Body 1'),
                 Category__c = 'Volunteer',
-                Type__c = 'Agreement'
+                Type__c = 'Agreement',
+                Date__c = Date.today().addDays(-2)
             )
         );
         documents.add(
@@ -24,7 +25,8 @@ public with sharing class TestFileController {
                 Origin = 'H',
                 VersionData = Blob.valueOf('Document Body 2'),
                 Category__c = 'Board',
-                Type__c = 'CoI'
+                Type__c = 'CoI',
+                Date__c = Date.today().addDays(-1)
             )
         );
         documents.add(
@@ -34,7 +36,8 @@ public with sharing class TestFileController {
                 Origin = 'H',
                 VersionData = Blob.valueOf('Document Body 3'),
                 Category__c = 'Staff',
-                Type__c = 'Resume'
+                Type__c = 'Resume',
+                Date__c = Date.today()
             )
         );
         insert documents;
@@ -49,7 +52,7 @@ public with sharing class TestFileController {
                 VersionData,
                 Category__c,
                 Type__c,
-                CreatedDate
+                Date__c
             FROM ContentVersion
         ];
         return documents;
@@ -68,13 +71,14 @@ public with sharing class TestFileController {
         Test.stopTest();
 
         List<ContentVersion> results = [
-            SELECT Id, Category__c, Type__c
+            SELECT Id, Category__c, Type__c, Date__c
             FROM ContentVersion
         ];
 
         for (ContentVersion actual : results) {
             System.assertEquals('Trainer', actual.Category__c);
             System.assertEquals('InfrNotice', actual.Type__c);
+            System.assertEquals(Date.today(), actual.Date__c);
         }
     }
 
@@ -293,7 +297,7 @@ public with sharing class TestFileController {
         );
         System.assertEquals(expected.Type__c, actual.Type__c);
         System.assertEquals(expected.Category__c, actual.Category__c);
-        System.assertEquals(expected.CreatedDate, actual.CreatedDate);
+        System.assertEquals(expected.Date__c, actual.Date__c);
     }
 
     @isTest
@@ -413,21 +417,22 @@ public with sharing class TestFileController {
             Type__c = 'Application'
         );
         insert cv;
+        Date yesterday = Date.today().addDays(-1);
 
         Test.startTest();
         FileController.updateContentVersion(
             'Dog',
             'HealthForm',
-            Date.today(),
+            yesterday,
             cv.Id
         );
 
         Test.stopTest();
-        cv = [SELECT Category__c, Type__c FROM ContentVersion WHERE Id = :cv.Id LIMIT 1];
+        cv = [SELECT Category__c, Type__c, Date__c FROM ContentVersion WHERE Id = :cv.Id LIMIT 1];
 
         System.assertEquals('Dog', cv.Category__c);
         System.assertEquals('HealthForm', cv.Type__c);
-        System.assertEquals(Date.today(), cv.Date__c);
+        System.assertEquals(yesterday, cv.Date__c);
     }
 
     @isTest
@@ -552,7 +557,7 @@ public with sharing class TestFileController {
             result.ContentDocumentId
         );
         System.assertEquals(document.Title, result.Title);
-        System.assertEquals(document.CreatedDate, result.CreatedDate);
+        System.assertEquals(document.Date__c, result.Date__c);
     }
 
     @isTest
