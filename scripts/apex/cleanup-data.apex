@@ -6,8 +6,14 @@
 //     SFDX: Execute Anonymous Apex with Editor Contents
 // sfdx force:apex:execute -f scripts/apex/cleanup-data.apex
 
+List<Log__c> logs = [SELECT Id from Log__c];
+delete logs;
+
 List<DogRelationship__c> drs = [SELECT Id FROM DogRelationship__c];
 delete drs;
+
+List<PublicAccessTest__c> pats = [SELECT Id FROM PublicAccessTest__c];
+delete pats;
 
 List<Team__c> teams = [SELECT Id FROM Team__c];
 delete teams;
@@ -44,6 +50,9 @@ delete leads;
 
 List<Program__c> programs = [SELECT Id FROM Program__c];
 delete programs;
+
+List<Entitlement> entitlements = [SELECT Id FROM Entitlement];
+delete entitlements;
 
 List<Account> accounts = [SELECT Id FROM Account];
 delete accounts;
