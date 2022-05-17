@@ -1,6 +1,6 @@
 # Generate a set of data for the Atlas community
 #
-# cci task run generate_and_load_from_yaml -o generator_yaml datasets/recipes/snowfakery.recipe.yml -o num_records 100 -o num_records_tablename Contact --org dev
+# cci task run generate_and_load_from_yaml -o generator_yaml datasets/recipes/snowfakery.recipe.yml -o num_records 100 -o num_records_tablename Contact -o ignore_row_errors true --org dev
 #
 - include_file: common.recipe.yml
 - include_file: volunteer-jobs.recipe.yml
