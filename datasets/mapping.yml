@@ -391,6 +391,15 @@ Insert ContinuingEducationUnit__c:
   lookups:
     Trainer__c:
       table: Contact
+Insert npe4__Relationship__c:
+  sf_object: npe4__Relationship__c
+  fields:
+  - npe4__Type__c
+  lookups:
+    npe4__Contact__c:
+      table: Contact
+    npe4__RelatedContact__c:
+      table: Contact
 Insert DogRelationship__c:
   sf_object: DogRelationship__c
   fields:
@@ -469,3 +478,17 @@ Insert PublicAccessTest__c:
       table: Contact
     Team__c:
       table: Team__c
+Insert Campaign:
+  sf_object: Campaign
+  fields:
+  - Name
+Insert GW_Volunteers__Volunteer_Job__c:
+  sf_object: GW_Volunteers__Volunteer_Job__c
+  fields:
+  - GW_Volunteers__Description__c
+  - GW_Volunteers__Skills_Needed__c
+  - GW_Volunteers__Ongoing__c
+  - Name
+  lookups:
+    GW_Volunteers__Campaign__c:
+        table: Campaign
