@@ -47,10 +47,6 @@ flows:
 
     config_dev:
         steps:
-            1: # for now, use mdapi deploy for post, since it isn't tied to our namespace
-                task: dx
-                options:
-                    command: force:mdapi:deploy -d unpackaged/post
             3:
                 task: assign_permission_sets
                 options:
