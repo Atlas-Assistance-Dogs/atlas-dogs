@@ -23,8 +23,6 @@
           fake: first_name
       npe01__AlternateEmail__c:
           fake: email
-      npe01__HomeEmail__c:
-          fake: email
       npe01__Primary_Address_Type__c:
           random_choice:
               - Home
@@ -222,6 +220,7 @@
       #   reference: BossContact # you need to have defined this Contact elsewhere
       Email:
           fake: email
+      npe01__HomeEmail__c: ${{ Email }}
       Title:
           fake: job
       Department:
@@ -341,10 +340,10 @@
                             max_nb_chars: 10
       Pronoun__c:
           random_choice:
-              - he
-              - she
-              - they
-              - specify
+              - He/Him
+              - She/Her
+              - They/Them
+              - Specify
       PuppyRaiserStatus__c:
           if:
               - choice:
@@ -462,7 +461,6 @@
 
 # Create Primary and secondary emergency contacts for Contact
 - object: npe4__Relationship__c
-  just_once: True
   fields:
       npe4__Contact__c:
           reference: Person
@@ -506,11 +504,9 @@
                     fake: phone_number
                 AssistantPhone:
                     fake: phone_number
-                Email:
-                    fake: email
+                Email: ${{ npe01__HomeEmail__c }}
 
 - object: npe4__Relationship__c
-  just_once: True
   fields:
       npe4__Contact__c:
           reference: Person
@@ -554,5 +550,44 @@
                     fake: phone_number
                 AssistantPhone:
                     fake: phone_number
-                Email:
-                    fake: email
+                Email: ${{ npe01__HomeEmail__c }}
+
+- object: npe4__Relationship__c
+  fields:
+      npe4__Contact__c:
+          reference: Person
+      npe4__Type__c:
+          random_choice:
+              - Trainer
+              - Client
+              - Volunteer
+              - Team Facilitator
+              - Team Facilitator Lead
+              - Volunteer Lead
+              - Handler
+              - TSiM Referral
+              - Trainer Referral
+              - Friend
+              - Family
+              - Coworker
+              - Father
+              - Mother
+              - Parent
+              - Son
+              - Daughter
+              - Child
+              - Aunt
+              - Uncle
+              - Husband
+              - Wife
+              - Partner
+              - Cousin
+              - Grandmother
+              - Grandfather
+              - Grandparent
+              - Grandson
+              - Granddaughter
+              - Grandchild
+              - Employer
+      npe4__RelatedContact__c:
+          random_reference: Contact

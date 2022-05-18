@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
     <applicationVisibilities>
         <application>AtlasAssistanceDogs</application>
@@ -10,10 +10,6 @@
     </classAccesses>
     <classAccesses>
         <apexClass>FileController</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>PagedResult</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <description>Ability to access all objects, flows, etc.</description>
@@ -124,11 +120,16 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Contact.ContactFormReceived__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Contact.CriminalConviction__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>false</editable>
+        <editable>true</editable>
         <field>Contact.DateStarted__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -184,8 +185,7 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field
-        >Contact.GW_Volunteers__Volunteer_Auto_Reminder_Email_Opt_Out__c</field>
+        <field>Contact.GW_Volunteers__Volunteer_Auto_Reminder_Email_Opt_Out__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -230,6 +230,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Contact.Language__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Contact.LeadComments__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -251,6 +256,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Contact.LeadSourceOther__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Contact.OtherLanguages__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

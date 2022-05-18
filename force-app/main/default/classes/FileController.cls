@@ -3,6 +3,7 @@ public inherited sharing class FileController {
     public static void updateRecords(
         String category,
         String docType,
+        Date docDate,
         List<Id> docIds
     ) {
         if (docIds == null) {
@@ -10,16 +11,17 @@ public inherited sharing class FileController {
         }
         try {
             List<ContentVersion> cvList = [
-                SELECT Title, ContentDocumentId, Type__c, Category__c
+                SELECT Title, ContentDocumentId, Type__c, Category__c, Date__c
                 FROM ContentVersion
                 WHERE ContentDocumentId IN :docIds
             ];
             for (ContentVersion cv : cvList) {
                 cv.Type__c = docType;
                 cv.Category__c = category;
+                cv.Date__c = docDate;
             }
             update cvList;
-            FileService.updateDates(cvList);
+            FileService.updateDates(cvList, docDate);
         } catch (DmlException ex) {
             throw new AuraHandledException(ex.getMessage());
         }
@@ -57,9 +59,9 @@ public inherited sharing class FileController {
                 SELECT
                     Title,
                     ContentDocumentId,
-                    Type__c,
                     Category__c,
-                    CreatedDate
+                    Type__c,
+                    Date__c
                 FROM ContentVersion
                 WHERE Id = :recordId
                 LIMIT 1
@@ -73,19 +75,21 @@ public inherited sharing class FileController {
     public static void updateContentVersion(
         String category,
         String docType,
+        Date docDate,
         Id recordId
     ) {
         try {
             ContentVersion cv = [
-                SELECT Type__c, Category__c
+                SELECT Category__c, Type__c, Date__c
                 FROM ContentVersion
                 WHERE Id = :recordId
                 LIMIT 1
             ];
             cv.Type__c = docType;
             cv.Category__c = category;
+            cv.Date__c = docDate;
             update cv;
-            FileService.updateDate(cv);
+            FileService.updateDate(cv, docDate);
         } catch (NullPointerException ex) {
             throw new AuraHandledException(ex.getMessage());
         } catch (QueryException ex) {
@@ -115,12 +119,12 @@ public inherited sharing class FileController {
                 SELECT
                     Title,
                     ContentDocumentId,
-                    Type__c,
                     Category__c,
-                    CreatedDate
+                    Type__c,
+                    Date__c
                 FROM ContentVersion
                 WHERE ContentDocumentId IN :lstConDocs
-                ORDER BY CreatedDate DESC
+                ORDER BY Date__c DESC
             ];
         } else {
             return new List<ContentVersion>();
@@ -128,7 +132,7 @@ public inherited sharing class FileController {
     }
 
     @AuraEnabled
-    public static ContentVersion relateFile(Id documentId, Id recordId) {
+    public static ContentVersion relateFile(Id documentId, Id recordId, Date docDate) {
         try {
             ContentDocumentLink link = new ContentDocumentLink(
                 ContentDocumentId = documentId,
@@ -140,7 +144,7 @@ public inherited sharing class FileController {
                 SELECT
                     Title,
                     ContentDocumentId,
-                    CreatedDate,
+                    Date__c,
                     LastModifiedDate,
                     Category__c,
                     Type__c
@@ -148,7 +152,7 @@ public inherited sharing class FileController {
                 WHERE ContentDocumentId = :link.ContentDocumentId
                 LIMIT 1
             ];
-            FileService.updateDate(cv, recordId);
+            FileService.updateDate(cv, recordId, docDate);
             return cv;
         } catch (NullPointerException ex) {
             throw new AuraHandledException(ex.getMessage());

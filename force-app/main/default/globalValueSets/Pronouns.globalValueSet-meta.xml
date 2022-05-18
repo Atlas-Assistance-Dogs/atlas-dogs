@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
     <customValue>
-        <fullName>they</fullName>
+        <fullName>They/Them</fullName>
         <default>false</default>
-        <label>they/them</label>
+        <label>They/Them</label>
     </customValue>
     <customValue>
-        <fullName>he</fullName>
+        <fullName>He/Him</fullName>
         <default>false</default>
-        <label>he/him</label>
+        <label>He/Him</label>
     </customValue>
     <customValue>
-        <fullName>she</fullName>
+        <fullName>She/Her</fullName>
         <default>false</default>
-        <label>she/her</label>
+        <label>She/Her</label>
     </customValue>
     <customValue>
-        <fullName>specify</fullName>
+        <fullName>Specify</fullName>
         <default>false</default>
-        <label>specify</label>
+        <label>Specify</label>
     </customValue>
     <description>Pronouns for a contact</description>
     <masterLabel>Pronouns</masterLabel>

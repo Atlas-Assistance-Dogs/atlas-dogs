@@ -5,6 +5,10 @@ import { refreshApex } from "@salesforce/apex";
 import { NavigationMixin } from "lightning/navigation";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
 
+import CATEGORY_FIELD from "@salesforce/schema/ContentVersion.Category__c";
+import TYPE_FIELD from "@salesforce/schema/ContentVersion.Type__c";
+import DATE_FIELD from "@salesforce/schema/ContentVersion.Date__c";
+
 // Import message service features required for publishing and the message channel
 import { publish, MessageContext } from "lightning/messageService";
 import updateFile from "@salesforce/messageChannel/updateFile__c";
@@ -26,9 +30,9 @@ const COLS = [
             iconPosition: "left"
         }
     },
-    { label: "Category", fieldName: "Category__c" },
-    { label: "Document Type", fieldName: "Type__c" },
-    { label: "Document Date", fieldName: "CreatedDate", type: "date" },
+    { label: "Category", fieldName: CATEGORY_FIELD.fieldApiName },
+    { label: "Document Type", fieldName: TYPE_FIELD.fieldApiName },
+    { label: "Document Date", fieldName: DATE_FIELD.fieldApiName, type: "date" },
     { type: "action", typeAttributes: { rowActions: actions } }
 ];
 

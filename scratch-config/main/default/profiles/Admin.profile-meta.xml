@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <Profile xmlns="http://soap.sforce.com/2006/04/metadata">
     <applicationVisibilities>
         <application>AtlasAssistanceDogs</application>
@@ -31,10 +31,6 @@
     </classAccesses>
     <classAccesses>
         <apexClass>LogController</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>PagedResult</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -140,11 +136,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Contact.BoardContactFormReceived__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
         <field>Contact.BoardMemberAcceptedDate__c</field>
         <readable>false</readable>
     </fieldPermissions>
@@ -171,11 +162,6 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Contact.ClientCertAgreementReceived__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Contact.ClientContactFormReceived__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -215,6 +201,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Contact.ContactFormReceived__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Contact.CriminalConviction__c</field>
         <readable>false</readable>
     </fieldPermissions>
@@ -231,11 +222,6 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Contact.FacilitatorCertAgreementReceived__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Contact.FacilitatorContactFormReceived__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -279,6 +265,11 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>true</editable>
+        <field>Contact.Language__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>false</editable>
         <field>Contact.LeadComments__c</field>
         <readable>false</readable>
@@ -297,6 +288,11 @@
         <editable>false</editable>
         <field>Contact.LeadSourceOther__c</field>
         <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Contact.OtherLanguages__c</field>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
@@ -321,11 +317,6 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Contact.PuppyCertAgreementReceived__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Contact.PuppyContactFormReceived__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -410,11 +401,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Contact.TrainerContactFormReceived__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
         <field>Contact.TrainerInfrNoticeReceived__c</field>
         <readable>false</readable>
     </fieldPermissions>
@@ -451,11 +437,6 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Contact.VolunteerApplicationReceived__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Contact.VolunteerContactFormReceived__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>

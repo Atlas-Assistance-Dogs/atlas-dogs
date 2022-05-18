@@ -4,7 +4,7 @@
     <description
     >The date the most recent version of Puppy Raiser Application was uploaded</description>
     <externalId>false</externalId>
-    <label>Last Puppy Application</label>
+    <label>Last Puppy Raiser Application</label>
     <required>false</required>
     <trackFeedHistory>false</trackFeedHistory>
     <type>Date</type>

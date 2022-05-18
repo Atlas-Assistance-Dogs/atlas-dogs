@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>TrainerContactFormReceived__c</fullName>
-    <description
-    >The date the most recent version of Trainer ContactForm was uploaded</description>
+    <fullName>ContactFormReceived__c</fullName>
+    <description>The date the most recent version of Contact Form was uploaded</description>
     <externalId>false</externalId>
-    <label>Last Trainer ContactForm</label>
+    <label>Last Contact Form</label>
     <required>false</required>
     <trackFeedHistory>false</trackFeedHistory>
     <type>Date</type>

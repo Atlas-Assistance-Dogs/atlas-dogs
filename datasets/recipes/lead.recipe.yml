@@ -59,10 +59,10 @@
                             max_nb_chars: 10
       Pronoun__c:
           random_choice:
-              - he
-              - she
-              - they
-              - specify
+              - He/Him
+              - She/Her
+              - They/Them
+              - Specify
       Status:
           random_choice:
               - Open - Not Contacted
