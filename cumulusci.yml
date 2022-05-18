@@ -54,7 +54,7 @@ flows:
             4:
                 task: load_dataset
 
-    dev_org:
+    deploy_unmanaged:
         steps:
             3.1:
                 task: dx_push
