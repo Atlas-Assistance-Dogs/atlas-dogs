@@ -236,6 +236,7 @@ Insert Contact:
   - ClientVAPWReceived__c
   - CriminalConviction__c
   - DateStarted__c
+  - Email
   - FacilitatorApplicationReceived__c
   - FacilitatorCertAgreementReceived__c
   - FacilitatorInfrNoticeReceived__c
@@ -260,6 +261,7 @@ Insert Contact:
   - LeadInterest__c
   - LeadSourceOther__c
   - OtherLanguages__c
+  - Phone
   - Positions__c
   - PronounOther__c
   - Pronoun__c
