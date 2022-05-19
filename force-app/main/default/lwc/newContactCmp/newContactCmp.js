@@ -24,7 +24,6 @@ import DESCRIPTION_FIELD from "@salesforce/schema/Contact.Description";
 
 export default class NewContact extends NavigationMixin(LightningElement) {
     showSourceOther = false;
-    showPronounOther = false;
 
     field = {
         firstName: FIRST_NAME_FIELD,
@@ -47,13 +46,10 @@ export default class NewContact extends NavigationMixin(LightningElement) {
         birthDate: BIRTHDATE_FIELD,
         description: DESCRIPTION_FIELD
     };
+
     // Standard lifecycle hooks used run when loaded
     renderedCallback() {
         this.template.querySelector("c-modal-cmp").openModal();
-    }
-
-    handlePronounChange(event) {
-        this.showPronounOther = event.detail.value === "Specify";
     }
 
     handleSourceChange(event) {

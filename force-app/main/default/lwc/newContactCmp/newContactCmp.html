@@ -17,11 +17,9 @@
                 <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2 slds-p-horizontal_small">
                     <lightning-input-field field-name={field.pronoun} onchange={handlePronounChange}></lightning-input-field>
                 </div>
-                <template if:true={showPronounOther}>
-                    <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2 slds-p-horizontal_small">
-                        <lightning-input-field field-name={field.pronounOther}></lightning-input-field>
-                    </div>
-                </template>
+                <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2 slds-p-horizontal_small">
+                    <lightning-input-field field-name={field.pronounOther}></lightning-input-field>
+                </div>
                 <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2 slds-p-horizontal_small">
                     <lightning-input-field field-name={field.language}></lightning-input-field>
                 </div>
