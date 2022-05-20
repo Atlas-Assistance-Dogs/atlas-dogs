@@ -14,7 +14,8 @@ public with sharing class TestFileController {
                 Origin = 'H',
                 VersionData = Blob.valueOf('Document Body 1'),
                 Category__c = 'Volunteer',
-                Type__c = 'Agreement'
+                Type__c = 'Agreement',
+                Date__c = Date.today().addDays(-2)
             )
         );
         documents.add(
@@ -24,7 +25,8 @@ public with sharing class TestFileController {
                 Origin = 'H',
                 VersionData = Blob.valueOf('Document Body 2'),
                 Category__c = 'Board',
-                Type__c = 'CoI'
+                Type__c = 'CoI',
+                Date__c = Date.today().addDays(-1)
             )
         );
         documents.add(
@@ -34,7 +36,8 @@ public with sharing class TestFileController {
                 Origin = 'H',
                 VersionData = Blob.valueOf('Document Body 3'),
                 Category__c = 'Staff',
-                Type__c = 'Resume'
+                Type__c = 'Resume',
+                Date__c = Date.today()
             )
         );
         insert documents;
@@ -49,7 +52,7 @@ public with sharing class TestFileController {
                 VersionData,
                 Category__c,
                 Type__c,
-                CreatedDate
+                Date__c
             FROM ContentVersion
         ];
         return documents;
@@ -64,17 +67,18 @@ public with sharing class TestFileController {
         }
 
         Test.startTest();
-        FileController.updateRecords('Trainer', 'InfrNotice', docIds);
+        FileController.updateRecords('Trainer', 'InfrNotice', Date.today(), docIds);
         Test.stopTest();
 
         List<ContentVersion> results = [
-            SELECT Id, Category__c, Type__c
+            SELECT Id, Category__c, Type__c, Date__c
             FROM ContentVersion
         ];
 
         for (ContentVersion actual : results) {
             System.assertEquals('Trainer', actual.Category__c);
             System.assertEquals('InfrNotice', actual.Type__c);
+            System.assertEquals(Date.today(), actual.Date__c);
         }
     }
 
@@ -83,7 +87,7 @@ public with sharing class TestFileController {
         Boolean thrown = false;
         Test.startTest();
         try {
-            FileController.updateRecords('Trainer', 'InfrNotice', null);
+            FileController.updateRecords('Trainer', 'InfrNotice', Date.today(), null);
         } catch (AuraHandledException e) {
             thrown = true;
         }
@@ -95,14 +99,14 @@ public with sharing class TestFileController {
     @isTest
     public static void updateRecords_HandlesEmptyList() {
         Test.startTest();
-        FileController.updateRecords('Trainer', 'InfrNotice', new List<Id>());
+        FileController.updateRecords('Trainer', 'InfrNotice', Date.today(), new List<Id>());
         Test.stopTest();
     }
 
     @isTest
     public static void updateRecords_HandlesNullParameters() {
         Test.startTest();
-        FileController.updateRecords(null, null, new List<Id>());
+        FileController.updateRecords(null, null, null, new List<Id>());
         Test.stopTest();
     }
 
@@ -114,6 +118,7 @@ public with sharing class TestFileController {
         FileController.updateRecords(
             'Dog',
             'Vet Health Form',
+            null,
             new List<Id>{ ace.Id }
         );
         Test.stopTest();
@@ -140,6 +145,7 @@ public with sharing class TestFileController {
             FileController.updateRecords(
                 'Doggie',
                 'Health Form',
+                Date.today(),
                 new List<Id>{ cv.ContentDocumentId }
             );
         } catch (AuraHandledException e) {
@@ -291,7 +297,7 @@ public with sharing class TestFileController {
         );
         System.assertEquals(expected.Type__c, actual.Type__c);
         System.assertEquals(expected.Category__c, actual.Category__c);
-        System.assertEquals(expected.CreatedDate, actual.CreatedDate);
+        System.assertEquals(expected.Date__c, actual.Date__c);
     }
 
     @isTest
@@ -299,7 +305,7 @@ public with sharing class TestFileController {
         Boolean thrown = false;
         Test.startTest();
         try {
-            FileController.updateContentVersion('Trainer', 'Reference', null);
+            FileController.updateContentVersion('Trainer', 'Reference', null, null);
         } catch (AuraHandledException e) {
             thrown = true;
         }
@@ -318,6 +324,7 @@ public with sharing class TestFileController {
             FileController.updateContentVersion(
                 'Trainer',
                 'ProgAgreement',
+                Date.today(),
                 ace.Id
             );
         } catch (AuraHandledException e) {
@@ -336,7 +343,7 @@ public with sharing class TestFileController {
         Boolean thrown = false;
         Test.startTest();
         try {
-            FileController.updateContentVersion(null, null, ace.Id);
+            FileController.updateContentVersion(null, null, null, ace.Id);
         } catch (AuraHandledException e) {
             thrown = true;
         }
@@ -355,6 +362,7 @@ public with sharing class TestFileController {
             FileController.updateContentVersion(
                 'Dog',
                 'Vet Health Form',
+                Date.today(),
                 ace.Id
             );
         } catch (AuraHandledException e) {
@@ -386,6 +394,7 @@ public with sharing class TestFileController {
             FileController.updateContentVersion(
                 'Doggie',
                 'Health Form',
+                Date.today(),
                 cv.ContentDocumentId
             );
         } catch (AuraHandledException e) {
@@ -395,6 +404,35 @@ public with sharing class TestFileController {
         Test.stopTest();
 
         System.assert(thrown);
+    }
+
+    @isTest
+    public static void updateContentVersion_Updates_WhenGoodData() {
+        ContentVersion cv = new ContentVersion(
+            Title = 'TestDocument1',
+            PathOnClient = 'TestDocument1.jpg',
+            Origin = 'H',
+            VersionData = Blob.valueOf('Document Body 1'),
+            Category__c = 'Volunteer',
+            Type__c = 'Application'
+        );
+        insert cv;
+        Date yesterday = Date.today().addDays(-1);
+
+        Test.startTest();
+        FileController.updateContentVersion(
+            'Dog',
+            'HealthForm',
+            yesterday,
+            cv.Id
+        );
+
+        Test.stopTest();
+        cv = [SELECT Category__c, Type__c, Date__c FROM ContentVersion WHERE Id = :cv.Id LIMIT 1];
+
+        System.assertEquals('Dog', cv.Category__c);
+        System.assertEquals('HealthForm', cv.Type__c);
+        System.assertEquals(yesterday, cv.Date__c);
     }
 
     @isTest
@@ -458,7 +496,7 @@ public with sharing class TestFileController {
 
         Test.startTest();
         try {
-            ContentVersion result = FileController.relateFile(null, ace.Id);
+            ContentVersion result = FileController.relateFile(null, ace.Id, Date.today());
         } catch (AuraHandledException e) {
             thrown = true;
         }
@@ -478,7 +516,8 @@ public with sharing class TestFileController {
         try {
             ContentVersion result = FileController.relateFile(
                 documents[0].ContentDocumentId,
-                null
+                null,
+                Date.today()
             );
         } catch (AuraHandledException e) {
             thrown = true;
@@ -499,7 +538,8 @@ public with sharing class TestFileController {
         Test.startTest();
         ContentVersion result = FileController.relateFile(
             document.ContentDocumentId,
-            ace.Id
+            ace.Id,
+            Date.today()
         );
         Test.stopTest();
 
@@ -517,7 +557,7 @@ public with sharing class TestFileController {
             result.ContentDocumentId
         );
         System.assertEquals(document.Title, result.Title);
-        System.assertEquals(document.CreatedDate, result.CreatedDate);
+        System.assertEquals(document.Date__c, result.Date__c);
     }
 
     @isTest

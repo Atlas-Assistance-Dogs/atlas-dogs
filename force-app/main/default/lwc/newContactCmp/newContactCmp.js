@@ -2,29 +2,58 @@ import { LightningElement } from "lwc";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
 import { NavigationMixin } from "lightning/navigation";
 
+import FIRST_NAME_FIELD from "@salesforce/schema/Contact.FirstName";
+import LAST_NAME_FIELD from "@salesforce/schema/Contact.LastName";
+import EMAIL_FIELD from "@salesforce/schema/Contact.Email";
+import PHONE_FIELD from "@salesforce/schema/Contact.Phone";
+import PRONOUN_FIELD from "@salesforce/schema/Contact.Pronoun__c";
+import PRONOUN_OTHER_FIELD from "@salesforce/schema/Contact.PronounOther__c";
+import STREET_FIELD from "@salesforce/schema/Contact.MailingStreet";
+import CITY_FIELD from "@salesforce/schema/Contact.MailingCity";
+import STATE_FIELD from "@salesforce/schema/Contact.MailingState";
+import COUNTRY_FIELD from "@salesforce/schema/Contact.MailingCountry";
+import POSTAL_CODE_FIELD from "@salesforce/schema/Contact.MailingPostalCode";
+import INTEREST_FIELD from "@salesforce/schema/Contact.LeadInterest__c";
+import LEAD_SOURCE_FIELD from "@salesforce/schema/Contact.LeadSource";
+import OTHER_SOURCE_FIELD from "@salesforce/schema/Contact.LeadSourceOther__c";
+import LEAD_COMMENTS_FIELD from "@salesforce/schema/Contact.LeadComments__c";
+import LANGUAGE_FIELD from "@salesforce/schema/Contact.Language__c";
+import OTHER_LANGUAGES_FIELD from "@salesforce/schema/Contact.OtherLanguages__c";
+import BIRTHDATE_FIELD from "@salesforce/schema/Contact.Birthdate";
+import DESCRIPTION_FIELD from "@salesforce/schema/Contact.Description";
+
 export default class NewContact extends NavigationMixin(LightningElement) {
     showSourceOther = false;
-    showPnounOther = false;
+
+    field = {
+        firstName: FIRST_NAME_FIELD,
+        lastName: LAST_NAME_FIELD,
+        email: EMAIL_FIELD,
+        phone: PHONE_FIELD,
+        pronoun: PRONOUN_FIELD,
+        pronounOther: PRONOUN_OTHER_FIELD,
+        street: STREET_FIELD,
+        city: CITY_FIELD,
+        state: STATE_FIELD,
+        country: COUNTRY_FIELD,
+        postalCode: POSTAL_CODE_FIELD,
+        interest: INTEREST_FIELD,
+        leadSource: LEAD_SOURCE_FIELD,
+        otherSource: OTHER_SOURCE_FIELD,
+        leadComments: LEAD_COMMENTS_FIELD,
+        language: LANGUAGE_FIELD,
+        otherLanguages: OTHER_LANGUAGES_FIELD,
+        birthDate: BIRTHDATE_FIELD,
+        description: DESCRIPTION_FIELD
+    };
 
     // Standard lifecycle hooks used run when loaded
     renderedCallback() {
         this.template.querySelector("c-modal-cmp").openModal();
     }
 
-    handlePnounChange(event) {
-        if (event.detail.value === "specify") {
-            this.showPnounOther = true;
-        } else {
-            this.showPnounOther = false;
-        }
-    }
-
     handleSourceChange(event) {
-        if (event.detail.value === "Other") {
-            this.showSourceOther = true;
-        } else {
-            this.showSourceOther = false;
-        }
+        this.showSourceOther = event.detail.value === "Other";
     }
 
     validateFields() {

@@ -40,31 +40,25 @@ tasks:
 flows:
     config_qa:
         steps:
-            1:
-                task: dx_push
-                when: org_config.scratch
-            2:
+            3:
                 task: assign_permission_sets
                 options:
                     api_names: Atlas_Super_User
-            # 3:
-            #     task: load_dataset
+
     config_dev:
         steps:
-            1:
-                task: dx_push
-                when: org_config.scratch
-            2:
+            3:
                 task: assign_permission_sets
                 options:
                     api_names: AtlasSuperUser
-            3:
+            4:
                 task: load_dataset
 
-    dev_org:
+    deploy_unmanaged:
         steps:
-            2:
-                flow: None
+            3.1:
+                task: dx_push
+                when: project_config.project__source_format == "sfdx" and org_config.scratch
 
     # Flow to deploy current source to a sandbox for dev or verification
     sandbox:

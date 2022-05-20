@@ -2,7 +2,6 @@ trigger ProgramAssignmentTrigger on ProgramAssignment__c(
     before insert,
     before update
 ) {
-    System.debug(Trigger.new);
     for (ProgramAssignment__c progAssign : Trigger.new) {
         if (progAssign.Program2__c == null) {
             continue; // skip any without a program
