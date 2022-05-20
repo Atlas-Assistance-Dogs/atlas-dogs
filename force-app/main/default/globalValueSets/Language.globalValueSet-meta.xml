@@ -2,7 +2,7 @@
 <GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
     <customValue>
         <fullName>English</fullName>
-        <default>true</default>
+        <default>false</default>
         <label>English</label>
     </customValue>
     <customValue>
