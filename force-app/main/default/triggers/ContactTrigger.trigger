@@ -1,11 +1,15 @@
 trigger ContactTrigger on Contact (before insert, before update) {
     for (Contact newContact : Trigger.new) {
-        //Get Old Values
-        Contact oldContact = trigger.oldMap.get(newContact.Id);
+        string oldEmail = null;
+        if (Trigger.isUpdate) {
+            //Get Old Value
+            Contact oldContact = trigger.oldMap.get(newContact.Id);
+            oldEmail = oldContact.Email;
+        }
         
         // Check if value is updated
-        if (oldContact.Email != newContact.Email) {
-            newContact.npe01_HomeEmail__c = Email;
+        if (oldEmail != newContact.Email) {
+            newContact.npe01__HomeEmail__c = newContact.Email;
         }
     }
 }
