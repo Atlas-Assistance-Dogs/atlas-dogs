@@ -3,7 +3,9 @@ import { ShowToastEvent } from "lightning/platformShowToastEvent";
 import { NavigationMixin } from "lightning/navigation";
 
 import FIRST_NAME_FIELD from "@salesforce/schema/Contact.FirstName";
+import MIDDLE_NAME_FIELD from "@salesforce/schema/Contact.MiddleName";
 import LAST_NAME_FIELD from "@salesforce/schema/Contact.LastName";
+import NAME_SUFFIX_FIELD from "@salesforce/schema/Contact.Suffix";
 import EMAIL_FIELD from "@salesforce/schema/Contact.Email";
 import PHONE_FIELD from "@salesforce/schema/Contact.Phone";
 import PRONOUN_FIELD from "@salesforce/schema/Contact.Pronoun__c";
@@ -27,7 +29,9 @@ export default class NewContact extends NavigationMixin(LightningElement) {
 
     field = {
         firstName: FIRST_NAME_FIELD,
+        middleName: MIDDLE_NAME_FIELD,
         lastName: LAST_NAME_FIELD,
+        suffix: NAME_SUFFIX_FIELD,
         email: EMAIL_FIELD,
         phone: PHONE_FIELD,
         pronoun: PRONOUN_FIELD,
