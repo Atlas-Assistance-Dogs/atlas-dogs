@@ -25,6 +25,10 @@
         },
         "emailAdministrationSettings": {
             "enableEnhancedEmailEnabled": true
+        },
+        "nameSettings": {
+            "enableMiddleName": true,
+            "enableNameSuffix": true
         }
     },
     "objectSettings": {

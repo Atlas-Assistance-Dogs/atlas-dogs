@@ -11,9 +11,14 @@
         <label>Spanish</label>
     </customValue>
     <customValue>
-        <fullName>Chinese</fullName>
+        <fullName>Mandarin</fullName>
         <default>false</default>
-        <label>Chinese</label>
+        <label>Mandarin</label>
+    </customValue>
+    <customValue>
+        <fullName>Cantonese</fullName>
+        <default>false</default>
+        <label>Cantonese</label>
     </customValue>
     <customValue>
         <fullName>Tagalog</fullName>
