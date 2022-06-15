@@ -1,7 +1,7 @@
 <template>
     <c-modal-cmp title="New Dog" onclose={handleCancel} onsubmit={handleSubmit}>
         <lightning-record-edit-form
-            object-api-name="Dog__c"
+            object-api-name={object}
             onsuccess={handleSuccess}
             onsubmit={handleSubmit}
             onerror={handleError}
@@ -19,70 +19,70 @@
                     class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2 slds-p-horizontal_small"
                 >
                     <lightning-input-field
-                        field-name="Name"
+                        field-name={fields.name}
                         required
                     ></lightning-input-field>
                     <lightning-input-field
-                        field-name="Breed__c"
+                        field-name={fields.breed}
                         required
                     ></lightning-input-field>
                     <lightning-input-field
-                        field-name="Gender__c"
+                        field-name={fields.gender}
                         required
                     ></lightning-input-field>
                     <lightning-input-field
-                        field-name="SpayedNeutered__c"
+                        field-name={fields.spayed}
                     ></lightning-input-field>
                 </div>
                 <div
                     class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2 slds-p-horizontal_small"
                 >
                     <lightning-input-field
-                        field-name="Birthdate__c"
+                        field-name={fields.birthdate}
                     ></lightning-input-field>
                     <lightning-input-field
-                        field-name="Status__c"
+                        field-name={fields.status}
                         required
                         default="None"
                     ></lightning-input-field>
                     <lightning-input-field
-                        field-name="ActivationDate__c"
+                        field-name={fields.activation}
                     ></lightning-input-field>
                     <lightning-input-field
-                        field-name="MicrochipNumber__c"
+                        field-name={fields.microchip}
                     ></lightning-input-field>
                 </div>
                 <div
                     class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2 slds-p-horizontal_small"
                 >
                     <lightning-input-field
-                        field-name="VetClinic__c"
+                        field-name={fields.vet}
                     ></lightning-input-field>
                     <lightning-input-field
-                        field-name="LatestPhysicalExamOutcome__c"
+                        field-name={fields.health}
                         required
                     ></lightning-input-field>
                     <lightning-input-field
-                        field-name="PhysicalExamDue__c"
+                        field-name={fields.examDue}
                     ></lightning-input-field>
                 </div>
                 <div
                     class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2 slds-p-horizontal_small"
                 >
                     <lightning-input-field
-                        field-name="VaccineDueHepatitis__c"
+                        field-name={fields.hepDue}
                     ></lightning-input-field>
                     <lightning-input-field
-                        field-name="VaccineDueDistemper__c"
+                        field-name={fields.distemperDue}
                     ></lightning-input-field>
                     <lightning-input-field
-                        field-name="VaccineDueParainfluenza__c"
+                        field-name={fields.parainfluenzaDue}
                     ></lightning-input-field>
                     <lightning-input-field
-                        field-name="VaccineDueParvovirus__c"
+                        field-name={fields.parvovirusDue}
                     ></lightning-input-field>
                     <lightning-input-field
-                        field-name="VaccineDueRabies__c"
+                        field-name={fields.rabiesDue}
                     ></lightning-input-field>
                 </div>
             </div>
