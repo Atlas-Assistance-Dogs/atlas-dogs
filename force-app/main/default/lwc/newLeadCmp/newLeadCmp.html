@@ -14,8 +14,7 @@
             <div class="slds-grid slds-wrap">
                 <lightning-messages></lightning-messages>
                 <div
-                    class="slds-col slds-size_1-of-1 slds-grid slds-wrap slds-m-vertical_small"
-                    style="background-color: #f3f2f2"
+                    class="slds-col slds-size_1-of-1 slds-grid slds-wrap slds-m-vertical_small slds-theme_shade"
                 >
                     <h3 class="slds-p-around_small">Lead Information</h3>
                 </div>
@@ -23,12 +22,12 @@
                     class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2 slds-p-horizontal_small"
                 >
                     <lightning-input-field
-                        field-name="Company"
+                        field-name={fields.company}
                         value="N/A"
                         required
                     ></lightning-input-field>
                     <lightning-input-field
-                        field-name="LeadSource"
+                        field-name={fields.source}
                         required
                         onchange={handleSourceChange}
                     ></lightning-input-field>
@@ -37,12 +36,12 @@
                     class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2 slds-p-horizontal_small"
                 >
                     <lightning-input-field
-                        field-name="Status"
+                        field-name={fields.status}
                         required
                     ></lightning-input-field>
                     <template if:true={showSourceOther}>
                         <lightning-input-field
-                            field-name="LeadSourceOther__c"
+                            field-name={fields.sourceOther}
                         ></lightning-input-field>
                     </template>
                 </div>
@@ -50,11 +49,7 @@
                     class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2 slds-p-horizontal_small"
                 >
                     <lightning-input-field
-                        field-name="FirstName"
-                        required
-                    ></lightning-input-field>
-                    <lightning-input-field
-                        field-name="LastName"
+                        field-name={fields.name}
                         required
                     ></lightning-input-field>
                 </div>
@@ -62,18 +57,18 @@
                     class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2 slds-p-horizontal_small"
                 >
                     <lightning-input-field
-                        field-name="Email"
+                        field-name={fields.email}
                         required
                     ></lightning-input-field>
                     <lightning-input-field
-                        field-name="Phone"
+                        field-name={fields.phone}
                     ></lightning-input-field>
                 </div>
                 <div
                     class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1 slds-p-horizontal_small"
                 >
                     <lightning-input-field
-                        field-name="Pronoun__c"
+                        field-name={fields.pronoun}
                         onchange={handlePnounChange}
                     ></lightning-input-field>
                 </div>
@@ -82,7 +77,7 @@
                         class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1 slds-p-horizontal_small"
                     >
                         <lightning-input-field
-                            field-name="PronounOther__c"
+                            field-name={fields.pronounOther}
                         ></lightning-input-field>
                     </div>
                 </template>
@@ -95,8 +90,7 @@
                 </div>
 
                 <div
-                    class="slds-col slds-size_1-of-1 slds-grid slds-wrap slds-m-vertical_small"
-                    style="background-color: #f3f2f2"
+                    class="slds-col slds-size_1-of-1 slds-grid slds-wrap slds-m-vertical_small slds-theme_shade"
                 >
                     <h3 class="slds-p-around_small">Address Information</h3>
                 </div>
@@ -104,32 +98,31 @@
                     class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1 slds-p-horizontal_small"
                 >
                     <lightning-input-field
-                        field-name="Street"
+                        field-name={fields.street}
                     ></lightning-input-field>
                 </div>
                 <div
                     class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2 slds-p-horizontal_small"
                 >
                     <lightning-input-field
-                        field-name="City"
+                        field-name={fields.city}
                     ></lightning-input-field>
                     <lightning-input-field
-                        field-name="State"
+                        field-name={fields.state}
                     ></lightning-input-field>
                 </div>
                 <div
                     class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2 slds-p-horizontal_small"
                 >
                     <lightning-input-field
-                        field-name="Country"
+                        field-name={fields.country}
                     ></lightning-input-field>
                     <lightning-input-field
-                        field-name="PostalCode"
+                        field-name={fields.postalCode}
                     ></lightning-input-field>
                 </div>
                 <div
-                    class="slds-col slds-size_1-of-1 slds-grid slds-wrap slds-m-vertical_small"
-                    style="background-color: #f3f2f2"
+                    class="slds-col slds-size_1-of-1 slds-grid slds-wrap slds-m-vertical_small slds-theme_shade"
                 >
                     <h3 class="slds-p-around_small">Comment</h3>
                 </div>
@@ -137,7 +130,7 @@
                     class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1 slds-p-horizontal_small"
                 >
                     <lightning-input-field
-                        field-name="Description"
+                        field-name={fields.description}
                     ></lightning-input-field>
                 </div>
             </div>
