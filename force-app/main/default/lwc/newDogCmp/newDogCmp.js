@@ -75,7 +75,7 @@ export default class NewDogCmp extends NavigationMixin(LightningElement) {
             type: "standard__recordPage",
             attributes: {
                 recordId: event.detail.id,
-                objectApiName: "Dog",
+                objectApiName: this.object,
                 actionName: "view"
             }
         });
@@ -94,7 +94,7 @@ export default class NewDogCmp extends NavigationMixin(LightningElement) {
         this[NavigationMixin.Navigate]({
             type: "standard__objectPage",
             attributes: {
-                objectApiName: "Dog__c",
+                objectApiName: this.object,
                 actionName: "home"
             }
         });

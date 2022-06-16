@@ -91,7 +91,7 @@ export default class NewLeadCmp extends NavigationMixin(LightningElement) {
             type: "standard__recordPage",
             attributes: {
                 recordId: event.detail.id,
-                objectApiName: "Lead",
+                objectApiName: this.object,
                 actionName: "view"
             }
         });
@@ -110,7 +110,7 @@ export default class NewLeadCmp extends NavigationMixin(LightningElement) {
         this[NavigationMixin.Navigate]({
             type: "standard__objectPage",
             attributes: {
-                objectApiName: "Lead",
+                objectApiName: this.object,
                 actionName: "home"
             }
         });
