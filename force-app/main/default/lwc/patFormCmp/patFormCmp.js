@@ -124,7 +124,7 @@ export default class PatFormCmp extends NavigationMixin(LightningElement) {
             {}
         );
         if (this.teamId) {
-            record.Team__c = this.teamId;
+            record[TEAM_FIELD.fieldApiName] = this.teamId;
         }
         record.Id = this.recordId;
         if (this.mode === "create") {
