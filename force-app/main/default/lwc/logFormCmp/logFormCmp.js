@@ -109,15 +109,16 @@ export default class LogFormCmp extends LightningElement {
         for (var idx = 0; idx < this.roles.length; idx++) {
             switch (this.roles[idx]) {
                 case "Client":
-                    record["Client__c"] = this.contactId;
+                    record[CLIENT_FIELD.fieldApiName] = this.contactId;
                     break;
 
                 case "Submitter":
-                    record["Submitter__c"] = this.contactId;
+                    record[SUBMITTER_FIELD.fieldApiName] = this.contactId;
                     break;
 
                 case "Team Facilitator":
-                    record["Facilitator__c"] = this.contactId;
+                    record[TEAM_FACILITATOR_FIELD.fieldApiName] =
+                        this.contactId;
                     break;
 
                 default:

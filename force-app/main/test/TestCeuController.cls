@@ -151,7 +151,7 @@ public with sharing class TestCeuController {
     }
 
     @isTest
-    public static void udateCeu_ReturnsError() {
+    public static void updateCeu_ReturnsError() {
         setup();
         aceCeu.Status__c = 'Wrong';
         Boolean hasError = false;

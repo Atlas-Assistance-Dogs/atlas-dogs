@@ -14,6 +14,9 @@ import PUPPY_STATUS_FIELD from "@salesforce/schema/Contact.PuppyRaiserStatus__c"
 import TRAINER_CERT_AGREEMENT_RECEIVED from "@salesforce/schema/Contact.TrainerCertAgreementReceived__c";
 import TRAINER_STATUS_FIELD from "@salesforce/schema/Contact.TrainerStatus__c";
 import VOLUNTEER_STATUS_FIELD from "@salesforce/schema/Contact.GW_Volunteers__Volunteer_Status__c";
+import PROGRAM_FIELD from "@salesforce/schema/ProgramAssignment__c.Program2__c";
+import STANDALONE_FIELD from "@salesforce/schema/Program__c.Standalone__c";
+import PROGRAM_ASSIGNMENT_STATUS_FIELD from "@salesforce/schema/ProgramAssignment__c.Status__c";
 
 const FIELDS = [
     BOARD_MEMBER_STATUS_FIELD,
@@ -58,7 +61,7 @@ export default class ContactStatus extends LightningElement {
     getContact({ error, data }) {
         if (data) {
             this.contact = data;
-            const positions = this.contact.fields.Positions__c;
+            const positions = this.contact.fields[POSITIONS_FIELD.fieldApiName];
             if (positions && positions.value) {
                 const roleNames = positions.value.split(";");
                 this.getRoleData(roleNames);
@@ -80,10 +83,18 @@ export default class ContactStatus extends LightningElement {
             };
             for (var idx = 0; idx < data.length; idx++) {
                 var pa = data[idx];
-                if (pa.Program2__r.Standalone__c) {
+                const progRef = PROGRAM_FIELD.fieldApiName.replace(
+                    "__c",
+                    "__r"
+                );
+                if (pa[progRef] && pa[progRef][STANDALONE_FIELD.fieldApiName]) {
                     // we want to prioritize 'In Progress' as a status
-                    if (pa.Status__c === "In Progress") {
-                        this.otherPrograms.status = pa.Status__c;
+                    if (
+                        pa[PROGRAM_ASSIGNMENT_STATUS_FIELD.fieldApiName] ===
+                        "In Progress"
+                    ) {
+                        this.otherPrograms.status =
+                            pa[PROGRAM_ASSIGNMENT_STATUS_FIELD.fieldApiName];
                         break; // we don't care about any other programs
                     } else {
                         this.otherPrograms.status = "Decertifed/Suspended";
@@ -107,8 +118,9 @@ export default class ContactStatus extends LightningElement {
                     if (roleNames.includes(role))
                         this.roles.push({
                             position: role,
-                            status: this.contact.fields
-                                .GW_Volunteers__Volunteer_Status__c.value
+                            status: this.contact.fields[
+                                VOLUNTEER_STATUS_FIELD.fieldApiName
+                            ].value
                         });
                     break;
 
@@ -118,9 +130,12 @@ export default class ContactStatus extends LightningElement {
                         roleNames.includes("Team Facilitator Lead")
                     ) {
                         const status = this.fineTuneStatus(
-                            this.contact.fields.FacilitatorStatus__c.value,
-                            this.contact.fields
-                                .FacilitatorCertAgreementReceived__c.value
+                            this.contact.fields[
+                                FACILITATOR_STATUS_FIELD.fieldApiName
+                            ].value,
+                            this.contact.fields[
+                                FACILITATOR_CERT_AGREEMENT_RECEIVED.fieldApiName
+                            ].value
                         );
                         this.roles.push({
                             position: role,
@@ -132,9 +147,11 @@ export default class ContactStatus extends LightningElement {
                 case "Puppy Raiser":
                     if (roleNames.includes(role)) {
                         const status = this.fineTuneStatus(
-                            this.contact.fields.PuppyRaiserStatus__c.value,
-                            this.contact.fields.PuppyCertAgreementReceived__c
-                                .value
+                            this.contact.fields[PUPPY_STATUS_FIELD.fieldApiName]
+                                .value,
+                            this.contact.fields[
+                                PUPPY_CERT_AGREEMENT_RECEIVED.fieldApiName
+                            ].value
                         );
                         this.roles.push({
                             position: role,
@@ -147,17 +164,21 @@ export default class ContactStatus extends LightningElement {
                     if (roleNames.includes("Board Member"))
                         this.roles.push({
                             position: role,
-                            status: this.contact.fields.BoardMemberStatus__c
-                                .value
+                            status: this.contact.fields[
+                                BOARD_MEMBER_STATUS_FIELD.fieldApiName
+                            ].value
                         });
                     break;
 
                 case "Client":
                     if (roleNames.includes(role)) {
                         const status = this.fineTuneStatus(
-                            this.contact.fields.ClientStatus__c.value,
-                            this.contact.fields.ClientCertAgreementReceived__c
-                                .value
+                            this.contact.fields[
+                                CLIENT_STATUS_FIELD.fieldApiName
+                            ].value,
+                            this.contact.fields[
+                                CLIENT_CERT_AGREEMENT_RECEIVED.fieldApiName
+                            ].value
                         );
                         this.roles.push({
                             position: role,
@@ -169,9 +190,12 @@ export default class ContactStatus extends LightningElement {
                 case "Trainer":
                     if (roleNames.includes(role)) {
                         const status = this.fineTuneStatus(
-                            this.contact.fields.TrainerStatus__c.value,
-                            this.contact.fields.TrainerCertAgreementReceived__c
-                                .value
+                            this.contact.fields[
+                                TRAINER_STATUS_FIELD.fieldApiName
+                            ].value,
+                            this.contact.fields[
+                                TRAINER_CERT_AGREEMENT_RECEIVED.fieldApiName
+                            ].value
                         );
                         this.roles.push({
                             position: role,

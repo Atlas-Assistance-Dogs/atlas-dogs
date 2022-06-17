@@ -5,6 +5,14 @@ import getRelatedCeus from "@salesforce/apex/ContinuingEducationUnitController.g
 import deleteCeu from "@salesforce/apex/ContinuingEducationUnitController.deleteCeu";
 import { refreshApex } from "@salesforce/apex";
 
+import AUTHORITY_FIELD from "@salesforce/schema/ContinuingEducationUnit__c.Authority__c";
+import AUTHORITY_OTHER_FIELD from "@salesforce/schema/ContinuingEducationUnit__c.AuthorityOther__c";
+import DATE_COMPLETED_FIELD from "@salesforce/schema/ContinuingEducationUnit__c.DateCompleted__c";
+import PROGRAM_DATE_FIELD from "@salesforce/schema/ContinuingEducationUnit__c.ProgramDate__c";
+import PROGRAM_HOURS_FIELD from "@salesforce/schema/ContinuingEducationUnit__c.ProgramHours__c";
+import ROLE_FIELD from "@salesforce/schema/ContinuingEducationUnit__c.Role__c";
+import STATUS_FIELD from "@salesforce/schema/ContinuingEducationUnit__c.Status__c";
+
 // Import message service features required for publishing and the message channel
 import { publish, MessageContext } from "lightning/messageService";
 import ceuForm from "@salesforce/messageChannel/ceuForm__c";
@@ -16,11 +24,23 @@ const actions = [
 
 const COLS = [
     { label: "Authority", fieldName: "authority" },
-    { label: "Program Date", fieldName: "ProgramDate__c", type: "date" },
-    { label: "Date Completed", fieldName: "DateCompleted__c", type: "date" },
-    { label: "Program Hours", fieldName: "ProgramHours__c", type: "number" },
-    { label: "Role", fieldName: "Role__c" },
-    { label: "Status", fieldName: "Status__c" },
+    {
+        label: "Program Date",
+        fieldName: PROGRAM_DATE_FIELD.fieldApiName,
+        type: "date"
+    },
+    {
+        label: "Date Completed",
+        fieldName: DATE_COMPLETED_FIELD.fieldApiName,
+        type: "date"
+    },
+    {
+        label: "Program Hours",
+        fieldName: PROGRAM_HOURS_FIELD.fieldApiName,
+        type: "number"
+    },
+    { label: "Role", fieldName: ROLE_FIELD.fieldApiName },
+    { label: "Status", fieldName: STATUS_FIELD.fieldApiName },
     { type: "action", typeAttributes: { rowActions: actions } }
 ];
 
@@ -104,9 +124,9 @@ export default class RelatedCeusCmp extends NavigationMixin(LightningElement) {
         if (result.data) {
             this.data = result.data.map((ceu) => {
                 var newCeu = Object.assign({}, ceu);
-                newCeu["authority"] = ceu.Authority__c;
+                newCeu["authority"] = ceu[AUTHORITY_FIELD.fieldApiName];
                 if (newCeu.authority === "Other") {
-                    newCeu.authority = ceu.AuthorityOther__c;
+                    newCeu.authority = ceu[AUTHORITY_OTHER_FIELD.fieldApiName];
                 }
                 return newCeu;
             });

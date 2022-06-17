@@ -24,6 +24,7 @@ import DESCRIPTION_FIELD from "@salesforce/schema/Contact.Description";
 export default class NewContact extends NavigationMixin(LightningElement) {
     showSourceOther = false;
 
+    object = NAME_FIELD.objectApiName;
     field = {
         name: NAME_FIELD,
         email: EMAIL_FIELD,
@@ -81,7 +82,7 @@ export default class NewContact extends NavigationMixin(LightningElement) {
             type: "standard__recordPage",
             attributes: {
                 recordId: event.detail.id,
-                objectApiName: "Contact",
+                objectApiName: this.object,
                 actionName: "view"
             }
         });
@@ -102,7 +103,7 @@ export default class NewContact extends NavigationMixin(LightningElement) {
         this[NavigationMixin.Navigate]({
             type: "standard__objectPage",
             attributes: {
-                objectApiName: "Contact",
+                objectApiName: this.object,
                 actionName: "home"
             }
         });
