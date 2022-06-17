@@ -123,7 +123,7 @@ export default class CeuFormCmp extends NavigationMixin(LightningElement) {
             {}
         );
         record.Id = this.recordId;
-        record.Trainer__c = this.contactId;
+        record[TRAINER_FIELD.fieldApiName] = this.contactId;
         if (this.mode === "create") {
             this.createNewCeu(record, docIds);
         } else {

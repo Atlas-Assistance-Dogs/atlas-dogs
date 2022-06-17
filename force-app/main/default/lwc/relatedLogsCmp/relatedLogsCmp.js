@@ -6,6 +6,9 @@ import { refreshApex } from "@salesforce/apex";
 
 import ATLAS_SUPPORT_FIELD from "@salesforce/schema/Log__c.RequestSupportFromAtlas__c";
 import STRESS_FIELD from "@salesforce/schema/Log__c.Stress__c";
+import CLIENT_FIELD from "@salesforce/schema/Log__c.Client__c";
+import SUBMITTER_FIELD from "@salesforce/schema/Log__c.Submitter__c";
+import FACILITATOR_FIELD from "@salesforce/schema/Log__c.Facilitator__c";
 import DATE_FIELD from "@salesforce/schema/Log__c.Date__c";
 import OTHER_HOURS_FIELD from "@salesforce/schema/Log__c.OtherHours__c";
 import PAH_FIELD from "@salesforce/schema/Log__c.PublicAccessHours__c";
@@ -139,13 +142,13 @@ export default class RelatedLogsCmp extends LightningElement {
 
     getRoles(log) {
         let roles = [];
-        if (log.Client__c === this.recordId) {
+        if (log[CLIENT_FIELD.fieldApiName] === this.recordId) {
             roles.push("Client");
         }
-        if (log.Submitter__c === this.recordId) {
+        if (log[SUBMITTER_FIELD.fieldApiName] === this.recordId) {
             roles.push("Submitter");
         }
-        if (log.TeamFacilitator__c === this.recordId) {
+        if (log[FACILITATOR_FIELD.fieldApiName] === this.recordId) {
             roles.push("Team Facilitator");
         }
         return roles.join(";");

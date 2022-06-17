@@ -95,7 +95,7 @@ export default class BackgroundCheckFormCmp extends NavigationMixin(
             {}
         );
         if (this.contactId) {
-            record.Contact__c = this.contactId;
+            record[CONTACT_FIELD.fieldApiName] = this.contactId;
         }
         var documentId = null;
         if (this.uploadedFile) {
