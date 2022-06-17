@@ -14,8 +14,9 @@ import PUPPY_STATUS_FIELD from "@salesforce/schema/Contact.PuppyRaiserStatus__c"
 import TRAINER_CERT_AGREEMENT_RECEIVED from "@salesforce/schema/Contact.TrainerCertAgreementReceived__c";
 import TRAINER_STATUS_FIELD from "@salesforce/schema/Contact.TrainerStatus__c";
 import VOLUNTEER_STATUS_FIELD from "@salesforce/schema/Contact.GW_Volunteers__Volunteer_Status__c";
-import STANDALONE_PROGRAM_FIELD from "@salesforce/schema/ProgramAssignment__c.Program2__r.Standalone__c";
-import PROGRAM_STATUS_FIELD from "@salesforce/schema/ProgramAssignment__c.Status__c";
+import PROGRAM_FIELD from "@salesforce/schema/ProgramAssignment__c.Program2__c";
+import STANDALONE_FIELD from "@salesforce/schema/Program__c.Standalone__c";
+import PROGRAM_ASSIGNMENT_STATUS_FIELD from "@salesforce/schema/ProgramAssignment__c.Status__c";
 
 const FIELDS = [
     BOARD_MEMBER_STATUS_FIELD,
@@ -60,7 +61,7 @@ export default class ContactStatus extends LightningElement {
     getContact({ error, data }) {
         if (data) {
             this.contact = data;
-            const positions = this.contact.fields.Positions__c;
+            const positions = this.contact.fields[POSITIONS_FIELD.fieldApiName];
             if (positions && positions.value) {
                 const roleNames = positions.value.split(";");
                 this.getRoleData(roleNames);
@@ -82,11 +83,18 @@ export default class ContactStatus extends LightningElement {
             };
             for (var idx = 0; idx < data.length; idx++) {
                 var pa = data[idx];
-                if (pa[STANDALONE_PROGRAM_FIELD.fieldApiName]) {
+                const progRef = PROGRAM_FIELD.fieldApiName.replace(
+                    "__c",
+                    "__r"
+                );
+                if (pa[progRef] && pa[progRef][STANDALONE_FIELD.fieldApiName]) {
                     // we want to prioritize 'In Progress' as a status
-                    if (pa.Status__c === "In Progress") {
+                    if (
+                        pa[PROGRAM_ASSIGNMENT_STATUS_FIELD.fieldApiName] ===
+                        "In Progress"
+                    ) {
                         this.otherPrograms.status =
-                            pa[PROGRAM_STATUS_FIELD.fieldApiName];
+                            pa[PROGRAM_ASSIGNMENT_STATUS_FIELD.fieldApiName];
                         break; // we don't care about any other programs
                     } else {
                         this.otherPrograms.status = "Decertifed/Suspended";
