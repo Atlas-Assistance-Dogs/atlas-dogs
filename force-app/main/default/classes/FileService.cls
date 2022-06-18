@@ -13,6 +13,9 @@ public with sharing class FileService{
         for (ContentDocumentLink cntLink : [SELECT Id, LinkedEntityId
                                             FROM ContentDocumentLink
                                             WHERE ContentDocumentId = :cv.ContentDocumentId]){
+            if (String.isBlank(cv.Category__c) || String.isBlank(cv.Type__c)){
+                continue;
+            }
             // note there is a limit of one cv above, so we can update all of them here
             if (cv.Category__c == 'Dog'){
                 updateDogDate(cvs, cntLink.LinkedEntityId, docDate);
@@ -25,7 +28,7 @@ public with sharing class FileService{
 
     // Update the date for the record tied to a file
     public static void updateDate(ContentVersion cv, Date docDate){
-        if (cv.Category__c == null || cv.Type__c == null)
+        if (String.isBlank(cv.Category__c) || String.isBlank(cv.Type__c))
             return;
         // nothing to do here
         cv = [SELECT Id, ContentDocumentId, Category__c, Type__c
@@ -42,7 +45,7 @@ public with sharing class FileService{
 
     // Update the last docDate for a file
     public static void updateDate(ContentVersion cv, Id recordId, Date docDate){
-        if (cv.Category__c == null || cv.Type__c == null)
+        if (String.isBlank(cv.Category__c) || String.isBlank(cv.Type__c))
             return;
         if (cv.Category__c == 'Dog'){
             updateDogDate(new List<ContentVersion>{ cv }, recordId, docDate);
