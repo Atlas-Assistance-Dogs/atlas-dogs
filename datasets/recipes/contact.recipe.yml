@@ -410,11 +410,16 @@
                     when: ${{'Trainer' in Positions__c}}
                     pick:
                         random_choice:
-                            - Basic Training
-                            - Eye Dog
-                            - Hearing Dog
-                            - Emotional Trauma
-                            - Epilepsy
+                            - Psychiatric
+                            - Mobility
+                            - Diabetes Alert
+                            - Autism
+                            - Seisure Response
+                            - Medical Incident Assist
+                            - Hearing Alert
+                            - Narcolepsy Alert
+                            - Mobility;Autism
+                            - Autism;Psychiatric
       TrainerStatus__c:
           if:
               - choice:

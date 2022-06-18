@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>TrainerSpecialties__c</fullName>
     <externalId>false</externalId>
@@ -11,29 +11,49 @@
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
-                <fullName>Basic Training</fullName>
+                <fullName>Psychiatric</fullName>
                 <default>false</default>
-                <label>Basic Training</label>
+                <label>Psychiatric</label>
             </value>
             <value>
-                <fullName>Eye Dog</fullName>
+                <fullName>Mobility</fullName>
                 <default>false</default>
-                <label>Eye Dog</label>
+                <label>Mobility</label>
             </value>
             <value>
-                <fullName>Hearing Dog</fullName>
+                <fullName>Diabetes Alert</fullName>
                 <default>false</default>
-                <label>Hearing Dog</label>
+                <label>Diabetes Alert</label>
             </value>
             <value>
-                <fullName>Emotional Trauma</fullName>
+                <fullName>Autism</fullName>
                 <default>false</default>
-                <label>Emotional Trauma</label>
+                <label>Autism</label>
             </value>
             <value>
-                <fullName>Epilepsy</fullName>
+                <fullName>Allergen Detection</fullName>
                 <default>false</default>
-                <label>Epilepsy</label>
+                <label>Allergen Detection</label>
+            </value>
+            <value>
+                <fullName>Seizure Response</fullName>
+                <default>false</default>
+                <label>Seizure Response</label>
+            </value>
+            <value>
+                <fullName>Medical Incident Assist</fullName>
+                <default>false</default>
+                <label>Medical Incident Assist</label>
+            </value>
+            <value>
+                <fullName>Hearing Alert</fullName>
+                <default>false</default>
+                <label>Hearing Alert</label>
+            </value>
+            <value>
+                <fullName>Narcolepsy Alert</fullName>
+                <default>false</default>
+                <label>Narcolepsy Alert</label>
             </value>
         </valueSetDefinition>
     </valueSet>
