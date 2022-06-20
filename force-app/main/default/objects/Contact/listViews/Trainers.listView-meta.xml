@@ -8,7 +8,7 @@
     <columns>Pronoun__c</columns>
     <columns>Language__c</columns>
     <columns>CONTACT.ADDRESS2_STATE</columns>
-    <columns>TrainerProgAgreementReceived__c</columns>
+    <columns>TrainerCertificationValidUntil__c</columns>
     <columns>TrainerStatus__c</columns>
     <filterScope>Everything</filterScope>
     <filters>

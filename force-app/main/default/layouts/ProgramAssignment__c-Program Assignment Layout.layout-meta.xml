@@ -29,7 +29,7 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Required</behavior>
-                <field>Program2__c</field>
+                <field>Program__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>

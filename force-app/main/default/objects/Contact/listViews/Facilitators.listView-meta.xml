@@ -8,7 +8,7 @@
     <columns>Pronoun__c</columns>
     <columns>Language__c</columns>
     <columns>CONTACT.ADDRESS2_STATE</columns>
-    <columns>FacilitatorProgAgreementReceived__c</columns>
+    <columns>FacilitatorCertificationValidUntil__c</columns>
     <columns>FacilitatorStatus__c</columns>
     <filterScope>Everything</filterScope>
     <filters>

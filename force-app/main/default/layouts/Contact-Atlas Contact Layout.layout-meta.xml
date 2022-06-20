@@ -543,7 +543,7 @@
         </relatedContentItems>
     </relatedContent>
     <relatedLists>
-        <fields>Program2__c</fields>
+        <fields>Program__c</fields>
         <fields>AssignedDate__c</fields>
         <fields>CompletionDate__c</fields>
         <fields>Status__c</fields>

@@ -8,7 +8,7 @@
     <columns>Pronoun__c</columns>
     <columns>Language__c</columns>
     <columns>CONTACT.ADDRESS2_STATE</columns>
-    <columns>BoardAgreementReceived__c</columns>
+    <columns>BoardTermValidUntil__c</columns>
     <columns>BoardMemberStatus__c</columns>
     <filterScope>Everything</filterScope>
     <filters>

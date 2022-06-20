@@ -820,7 +820,7 @@ CREATE TABLE "ProgramAssignment__c" (
 	"ExpectedCompletion__c" VARCHAR(255), 
 	"Status__c" VARCHAR(255), 
 	"Contact__c" VARCHAR(255), 
-	"Program2__c" VARCHAR(255), 
+	"Program__c" VARCHAR(255), 
 	PRIMARY KEY (id)
 );
 INSERT INTO "ProgramAssignment__c" VALUES(1,'2021-07-12','2021-07-25','2022-05-09','Completed','59','54');
