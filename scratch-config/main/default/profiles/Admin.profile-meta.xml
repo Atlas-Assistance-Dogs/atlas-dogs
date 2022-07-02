@@ -163,6 +163,11 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>Contact.BoardTermValidUntil__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>Contact.BoardToNReceived__c</field>
         <readable>true</readable>
@@ -236,6 +241,11 @@
         <editable>true</editable>
         <field>Contact.FacilitatorCertAgreementReceived__c</field>
         <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Contact.FacilitatorCertificationValidUntil__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
@@ -396,6 +406,11 @@
         <editable>true</editable>
         <field>Contact.TrainerCertAgreementReceived__c</field>
         <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Contact.TrainerCertificationValidUntil__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>

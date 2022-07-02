@@ -15,6 +15,11 @@
     <description>Ability to access all objects, flows, etc.</description>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Account.Email__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>BackgroundCheck__c.Notes__c</field>
         <readable>true</readable>
     </fieldPermissions>
