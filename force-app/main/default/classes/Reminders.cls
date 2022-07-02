@@ -17,15 +17,15 @@ global class Reminders implements Schedulable {
         // NOTE: We need to use literals when filtering dates, so break down by weeks and hit the
         // ones we expect to see most
         List<ProgramAssignment__c> assignments = [
-            SELECT id, Contact__c, ExpectedCompletion__c, Program2__r.Name, Program2__r.Reminder__c
+            SELECT id, Contact__c, ExpectedCompletion__c, Program__r.Name, Program__r.Reminder__c
             FROM ProgramAssignment__c
             WHERE
                 Status__c = 'In progress'
-                AND Program2__r.Reminder__c != 0
-                AND ((Program2__r.Reminder__c >= 30 AND ExpectedCompletion__c <= NEXT_N_DAYS:30)
-                OR (Program2__r.Reminder__c >= 21 AND ExpectedCompletion__c <= NEXT_N_DAYS:21)
-                OR (Program2__r.Reminder__c >= 14 AND ExpectedCompletion__c <= NEXT_N_DAYS:14)
-                OR (Program2__r.Reminder__c >= 7 AND ExpectedCompletion__c <= NEXT_N_DAYS:7)
+                AND Program__r.Reminder__c != 0
+                AND ((Program__r.Reminder__c >= 30 AND ExpectedCompletion__c <= NEXT_N_DAYS:30)
+                OR (Program__r.Reminder__c >= 21 AND ExpectedCompletion__c <= NEXT_N_DAYS:21)
+                OR (Program__r.Reminder__c >= 14 AND ExpectedCompletion__c <= NEXT_N_DAYS:14)
+                OR (Program__r.Reminder__c >= 7 AND ExpectedCompletion__c <= NEXT_N_DAYS:7)
                 OR (ExpectedCompletion__c = TODAY))
         ];
 
@@ -38,7 +38,7 @@ global class Reminders implements Schedulable {
 
         // Create a reminder task if one wasn't already created
         for (ProgramAssignment__c assignment : assignments) {
-            if (Date.today().addDays((integer)assignment.Program2__r.Reminder__c) < assignment.ExpectedCompletion__c) {
+            if (Date.today().addDays((integer)assignment.Program__r.Reminder__c) < assignment.ExpectedCompletion__c) {
                 continue; // don't need to remind yet
             }
             List<Task> createdTasks = [

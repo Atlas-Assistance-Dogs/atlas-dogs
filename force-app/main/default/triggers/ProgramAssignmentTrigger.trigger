@@ -3,10 +3,10 @@ trigger ProgramAssignmentTrigger on ProgramAssignment__c(
     before update
 ) {
     for (ProgramAssignment__c progAssign : Trigger.new) {
-        if (progAssign.Program2__c == null) {
+        if (progAssign.Program__c == null) {
             continue; // skip any without a program
         }
-        Program__c program = [SELECT Months__c FROM Program__c WHERE Id = :progAssign.Program2__c LIMIT 1];
+        Program__c program = [SELECT Months__c FROM Program__c WHERE Id = :progAssign.Program__c LIMIT 1];
 
         if (progAssign.AssignedDate__c == null) {
             progAssign.AssignedDate__c = Date.today();

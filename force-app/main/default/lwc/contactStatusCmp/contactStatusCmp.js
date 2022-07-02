@@ -14,7 +14,7 @@ import PUPPY_STATUS_FIELD from "@salesforce/schema/Contact.PuppyRaiserStatus__c"
 import TRAINER_CERT_AGREEMENT_RECEIVED from "@salesforce/schema/Contact.TrainerCertAgreementReceived__c";
 import TRAINER_STATUS_FIELD from "@salesforce/schema/Contact.TrainerStatus__c";
 import VOLUNTEER_STATUS_FIELD from "@salesforce/schema/Contact.GW_Volunteers__Volunteer_Status__c";
-import PROGRAM_FIELD from "@salesforce/schema/ProgramAssignment__c.Program2__c";
+import PROGRAM_FIELD from "@salesforce/schema/ProgramAssignment__c.Program__c";
 import STANDALONE_FIELD from "@salesforce/schema/Program__c.Standalone__c";
 import PROGRAM_ASSIGNMENT_STATUS_FIELD from "@salesforce/schema/ProgramAssignment__c.Status__c";
 

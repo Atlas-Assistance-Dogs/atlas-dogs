@@ -5,8 +5,10 @@
     <columns>ACCOUNT.NAME</columns>
     <columns>CONTACT.PHONE1</columns>
     <columns>CONTACT.EMAIL</columns>
-    <columns>CONTACT.TITLE</columns>
-    <columns>CORE.USERS.ALIAS</columns>
+    <columns>Pronoun__c</columns>
+    <columns>Language__c</columns>
+    <columns>Positions__c</columns>
+    <columns>CONTACT.ADDRESS2_STATE</columns>
     <filterScope>Everything</filterScope>
     <label>All</label>
 </ListView>

@@ -448,7 +448,7 @@ Insert ProgramAssignment__c:
   lookups:
     Contact__c:
       table: Contact
-    Program2__c:
+    Program__c:
       table: Program__c
 Insert Team__c:
   sf_object: Team__c

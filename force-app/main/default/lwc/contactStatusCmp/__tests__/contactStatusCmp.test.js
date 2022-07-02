@@ -302,7 +302,7 @@ describe("c-contact-status-cmp", () => {
                 AssignedDate__c: new Date(),
                 CompletionDate__c: undefined,
                 ExpectedCompletion__c: new Date(),
-                Program2__c: "number",
+                Program__c: "number",
                 Program2__r: { Name: "Medical Alert", Standalone__c: true },
                 Status__c: "In Progress"
             }
@@ -345,7 +345,7 @@ describe("c-contact-status-cmp", () => {
                 AssignedDate__c: new Date(),
                 CompletionDate__c: undefined,
                 ExpectedCompletion__c: new Date(),
-                Program2__c: "number",
+                Program__c: "number",
                 Program2__r: { Name: "Medical Alert", Standalone__c: true },
                 Status__c: "In Progress"
             },
@@ -353,7 +353,7 @@ describe("c-contact-status-cmp", () => {
                 AssignedDate__c: new Date(),
                 CompletionDate__c: undefined,
                 ExpectedCompletion__c: new Date(),
-                Program2__c: "number",
+                Program__c: "number",
                 Program2__r: { Name: "Fitness", Standalone__c: true },
                 Status__c: "Completed"
             },
@@ -361,7 +361,7 @@ describe("c-contact-status-cmp", () => {
                 AssignedDate__c: new Date(),
                 CompletionDate__c: undefined,
                 ExpectedCompletion__c: new Date(),
-                Program2__c: "number",
+                Program__c: "number",
                 Program2__r: { Name: "Fitness", Standalone__c: true },
                 Status__c: "Discontinued"
             },
@@ -369,7 +369,7 @@ describe("c-contact-status-cmp", () => {
                 AssignedDate__c: new Date(),
                 CompletionDate__c: undefined,
                 ExpectedCompletion__c: new Date(),
-                Program2__c: "number",
+                Program__c: "number",
                 Program2__r: { Name: "Fitness", Standalone__c: true },
                 Status__c: "Removed"
             }
@@ -412,7 +412,7 @@ describe("c-contact-status-cmp", () => {
                 AssignedDate__c: new Date(),
                 CompletionDate__c: undefined,
                 ExpectedCompletion__c: new Date(),
-                Program2__c: "number",
+                Program__c: "number",
                 Program2__r: { Name: "Fitness", Standalone__c: true },
                 Status__c: "Completed"
             },
@@ -420,7 +420,7 @@ describe("c-contact-status-cmp", () => {
                 AssignedDate__c: new Date(),
                 CompletionDate__c: undefined,
                 ExpectedCompletion__c: new Date(),
-                Program2__c: "number",
+                Program__c: "number",
                 Program2__r: { Name: "Fitness", Standalone__c: true },
                 Status__c: "Discontinued"
             },
@@ -428,7 +428,7 @@ describe("c-contact-status-cmp", () => {
                 AssignedDate__c: new Date(),
                 CompletionDate__c: undefined,
                 ExpectedCompletion__c: new Date(),
-                Program2__c: "number",
+                Program__c: "number",
                 Program2__r: { Name: "Fitness", Standalone__c: true },
                 Status__c: "Removed"
             }

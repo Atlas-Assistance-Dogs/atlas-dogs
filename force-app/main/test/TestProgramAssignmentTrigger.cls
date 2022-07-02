@@ -28,7 +28,7 @@ public with sharing class TestProgramAssignmentTrigger {
                 CompletionDate__c,
                 Contact__c,
                 ExpectedCompletion__c,
-                Program2__c,
+                Program__c,
                 Status__c
             FROM ProgramAssignment__c
             WHERE id = :ProgramAssignmentId
@@ -43,7 +43,7 @@ public with sharing class TestProgramAssignmentTrigger {
         setProgramDurations();
         Contact joe = [SELECT Id FROM Contact WHERE FirstName = 'Joe' LIMIT 1];
         ProgramAssignment__c ProgramAssignment = new ProgramAssignment__c(
-            Program2__c = programs[0].Id,
+            Program__c = programs[0].Id,
             Contact__c = joe.Id,
             AssignedDate__c = Date.today()
         );
@@ -69,7 +69,7 @@ public with sharing class TestProgramAssignmentTrigger {
         Date assigned = Date.newInstance(2021, 1, 10);
         ProgramAssignment__c assignment = new ProgramAssignment__c(
             AssignedDate__c = assigned,
-            Program2__c = program.Id,
+            Program__c = program.Id,
             Contact__c = joe.Id
         );
 
@@ -117,7 +117,7 @@ public with sharing class TestProgramAssignmentTrigger {
         Date assigned = Date.newInstance(2021, 1, 10);
         ProgramAssignment__c assignment = new ProgramAssignment__c(
             AssignedDate__c = assigned,
-            Program2__c = program.Id,
+            Program__c = program.Id,
             Contact__c = joe.Id
         );
 
@@ -144,7 +144,7 @@ public with sharing class TestProgramAssignmentTrigger {
         ProgramAssignment__c assignment = new ProgramAssignment__c(
             AssignedDate__c = assigned,
             ExpectedCompletion__c = expected,
-            Program2__c = programs[0].Id,
+            Program__c = programs[0].Id,
             Contact__c = joe.Id
         );
 
@@ -168,7 +168,7 @@ public with sharing class TestProgramAssignmentTrigger {
         ProgramAssignment__c programAssignment = new ProgramAssignment__c(
             AssignedDate__c = assigned,
             ExpectedCompletion__c = Date.today(),
-            Program2__c = programs[0].Id,
+            Program__c = programs[0].Id,
             Contact__c = joe.Id
         );
         insert programAssignment;

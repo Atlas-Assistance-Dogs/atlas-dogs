@@ -41,21 +41,21 @@ private class TestProgramAssignmentController {
             AssignedDate__c = Date.today().addYears(-1),
             CompletionDate__c = Date.today().addMonths(-10),
             ExpectedCompletion__c = Date.today().addMonths(-9),
-            Program2__c = [SELECT Id FROM Program__c WHERE Name = 'Volunteer' LIMIT 1].Id,
+            Program__c = [SELECT Id FROM Program__c WHERE Name = 'Volunteer' LIMIT 1].Id,
             Status__c = 'Completed'
         ));
         pas.add(new ProgramAssignment__c(
             Contact__c = client.Id,
             AssignedDate__c = Date.today().addYears(-1),
             ExpectedCompletion__c = Date.today().addMonths(1),
-            Program2__c = [SELECT Id FROM Program__c WHERE Name = 'Medical Disability' LIMIT 1].Id,
+            Program__c = [SELECT Id FROM Program__c WHERE Name = 'Medical Disability' LIMIT 1].Id,
             Status__c = 'In Progress'
         ));
         pas.add(new ProgramAssignment__c(
             Contact__c = trainer.Id,
             AssignedDate__c = Date.today().addYears(-3),
             ExpectedCompletion__c = Date.today().addMonths(-16),
-            Program2__c = [SELECT Id FROM Program__c WHERE Name = 'Client' LIMIT 1].Id,
+            Program__c = [SELECT Id FROM Program__c WHERE Name = 'Client' LIMIT 1].Id,
             Status__c = 'Discontinued'
         ));
         insert pas;

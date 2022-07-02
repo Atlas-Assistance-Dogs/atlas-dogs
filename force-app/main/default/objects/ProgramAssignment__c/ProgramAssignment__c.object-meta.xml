@@ -165,7 +165,7 @@
         <searchResultsAdditionalFields
         >Contact__c</searchResultsAdditionalFields>
         <searchResultsAdditionalFields
-        >Program2__c</searchResultsAdditionalFields>
+        >Program__c</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>Status__c</searchResultsAdditionalFields>
         <searchResultsAdditionalFields
         >AssignedDate__c</searchResultsAdditionalFields>
