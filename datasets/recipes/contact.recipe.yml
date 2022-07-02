@@ -141,8 +141,6 @@
           random_number:
               min: 1
               max: 100000
-      # npsp__Primary_Affiliation__c:
-      #   reference: Organization # you need to have defined an Account with the nickname Organization
       Salutation:
           random_choice:
               - Mr.
@@ -160,10 +158,6 @@
           fake: postalcode
       OtherCountry:
           fake: country
-      #   OtherLatitude:
-      #       fake: latitude
-      #   OtherLongitude:
-      #       fake: longitude
       OtherGeocodeAccuracy:
           random_choice:
               - Address
@@ -229,33 +223,33 @@
           fake: name
       Language__c:
           random_choice:
-              - English: 85%
-              - Spanish: 5%
-              - Chinese: 1%
-              - Tagalog: 1%
-              - Vietnamese: 1%
-              - Arabic: 1%
-              - French: 1%
-              - Korean: 1%
-              - Russian: 1%
-              - German: 1%
-              - Italian: 1%
-              - Portuguese: 1%
+              English: 85%
+              Spanish: 5%
+              Chinese: 1%
+              Tagalog: 1%
+              Vietnamese: 1%
+              Arabic: 1%
+              French: 1%
+              Korean: 1%
+              Russian: 1%
+              German: 1%
+              Italian: 1%
+              Portuguese: 1%
       OtherLanguages__c:
           random_choice:
-              - English: 1%
-              - Spanish: 5%
-              - Chinese: 1%
-              - Tagalog: 1%
-              - Vietnamese: 1%
-              - Arabic: 1%
-              - French: 1%
-              - Korean: 1%
-              - Russian: 1%
-              - German: 1%
-              - Italian: 1%
-              - Portuguese: 1%
-              - Spanish;French: 1%
+              English: 1%
+              Spanish: 5%
+              Chinese: 1%
+              Tagalog: 1%
+              Vietnamese: 1%
+              Arabic: 1%
+              French: 1%
+              Korean: 1%
+              Russian: 1%
+              German: 1%
+              Italian: 1%
+              Portuguese: 1%
+              Spanish;French: 1%
       LeadSource:
           random_choice:
               - Website
@@ -273,8 +267,8 @@
                         fake: company
       Birthdate:
           date_between:
-              start_date: -1y
-              end_date: today
+              start_date: -90y
+              end_date: -5y
       Description:
           fake.text:
               max_nb_chars: 100
@@ -394,16 +388,6 @@
                         random_choice:
                             - true
                             - false
-      TrainerCEUStatus__c:
-          if:
-              - choice:
-                    when: ${{'Trainer' in Positions__c}}
-                    pick:
-                        random_choice:
-                            - None
-                            - In Progress
-                            - Up to Date
-                            - Need Renewal
       TrainerSpecialties__c:
           if:
               - choice:
