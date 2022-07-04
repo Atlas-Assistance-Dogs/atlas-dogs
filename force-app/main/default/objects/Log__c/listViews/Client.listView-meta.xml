@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <ListView xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>All</fullName>
-    <columns>Type__c</columns>
+    <fullName>Client</fullName>
     <columns>Date__c</columns>
     <columns>Submitter__c</columns>
     <columns>Client__c</columns>
@@ -11,5 +10,10 @@
     <columns>RequestSupportFromAtlas__c</columns>
     <columns>RequestSupportFromTeam__c</columns>
     <filterScope>Everything</filterScope>
-    <label>All</label>
+    <filters>
+        <field>Type__c</field>
+        <operation>equals</operation>
+        <value>Client</value>
+    </filters>
+    <label>Client</label>
 </ListView>

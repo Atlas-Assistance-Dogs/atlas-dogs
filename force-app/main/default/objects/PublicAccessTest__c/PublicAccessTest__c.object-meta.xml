@@ -162,7 +162,16 @@
         <type>AutoNumber</type>
     </nameField>
     <pluralLabel>PATs</pluralLabel>
-    <searchLayouts />
+    <searchLayouts>
+        <searchResultsAdditionalFields
+        >DateCompleted__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Status__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Team__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields
+        >ValidUntil__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields
+        >Assessor__c</searchResultsAdditionalFields>
+    </searchLayouts>
     <sharingModel>ReadWrite</sharingModel>
     <visibility>Public</visibility>
 </CustomObject>
