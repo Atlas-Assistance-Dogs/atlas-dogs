@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>GenderIdentity__c</fullName>
+    <externalId>false</externalId>
+    <label>Gender Identity</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Woman/female</fullName>
+                <default>false</default>
+                <label>Woman/female</label>
+            </value>
+            <value>
+                <fullName>Transgender woman/female</fullName>
+                <default>false</default>
+                <label>Transgender woman/female</label>
+            </value>
+            <value>
+                <fullName>Man/male</fullName>
+                <default>false</default>
+                <label>Man/male</label>
+            </value>
+            <value>
+                <fullName>Transgender man/male</fullName>
+                <default>false</default>
+                <label>Transgender man/male</label>
+            </value>
+            <value>
+                <fullName>Non-binary/gender queer</fullName>
+                <default>false</default>
+                <label>Non-binary/gender queer</label>
+            </value>
+            <value>
+                <fullName>Agender</fullName>
+                <default>false</default>
+                <label>Agender</label>
+            </value>
+            <value>
+                <fullName>Prefer to self-describe</fullName>
+                <default>false</default>
+                <label>Prefer to self-describe</label>
+            </value>
+            <value>
+                <fullName>Prefer not to answer</fullName>
+                <default>false</default>
+                <label>Prefer not to answer</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

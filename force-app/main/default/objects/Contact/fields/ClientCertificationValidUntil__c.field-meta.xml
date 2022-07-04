@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>PronounOther__c</fullName>
+    <fullName>ClientCertificationValidUntil__c</fullName>
+    <description>Date that the client certification is valid until</description>
     <externalId>false</externalId>
-    <label>Specified Pronoun</label>
-    <length>20</length>
+    <label>Client Certification Valid Until</label>
     <required>false</required>
     <trackFeedHistory>false</trackFeedHistory>
-    <type>Text</type>
-    <unique>false</unique>
+    <type>Date</type>
 </CustomField>

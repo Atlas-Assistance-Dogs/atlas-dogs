@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>PronounOther__c</fullName>
+    <fullName>SpecifiedSexualOrientation__c</fullName>
     <externalId>false</externalId>
-    <label>Specified Pronoun</label>
-    <length>20</length>
+    <label>Specified Sexual Orientation</label>
+    <length>60</length>
     <required>false</required>
     <trackFeedHistory>false</trackFeedHistory>
     <type>Text</type>
