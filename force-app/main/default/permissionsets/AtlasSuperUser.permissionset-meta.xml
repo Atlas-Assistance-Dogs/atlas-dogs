@@ -135,7 +135,7 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Contact.ClientValidUntil__c</field>
+        <field>Contact.ClientCertificationValidUntil__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

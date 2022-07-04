@@ -27,7 +27,7 @@ public with sharing class TestTeamTrigger {
     }
 
     private static Contact getContact(Id contactId) {
-        return [SELECT Id, ClientValidUntil__c from Contact where Id = :contactId];
+        return [SELECT Id, ClientCertificationValidUntil__c from Contact where Id = :contactId];
     }
 
     private static Team__c getTeam(Id teamId) {
@@ -48,7 +48,7 @@ public with sharing class TestTeamTrigger {
         System.assert(result.getErrors().size() == 0);
         Team__c team = getTeam(result.getId());
         Contact contact = getContact(team.Client__c);
-        System.assertEquals(contact.ClientValidUntil__c, team.PatValidUntil__c);
+        System.assertEquals(contact.ClientCertificationValidUntil__c, team.PatValidUntil__c);
     }
 
     @isTest
@@ -68,6 +68,6 @@ public with sharing class TestTeamTrigger {
         System.assert(result.getErrors().size() == 0);
         Team__c team = getTeam(result.getId());
         Contact contact = getContact(team.Client__c);
-        System.assertEquals(contact.ClientValidUntil__c, team.PatValidUntil__c);
+        System.assertEquals(contact.ClientCertificationValidUntil__c, team.PatValidUntil__c);
     }
 }
