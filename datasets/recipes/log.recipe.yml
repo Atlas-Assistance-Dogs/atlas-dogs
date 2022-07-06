@@ -63,7 +63,7 @@
           fake: paragraph
       Facilitator__c:
           random_reference: Contact
-      Type__c:
+      RecordType:
           random_choice:
               - Client
-              - Facilitator
+              - Team Facilitator

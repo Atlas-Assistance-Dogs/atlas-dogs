@@ -93,7 +93,6 @@ public with sharing class TestLogController {
             actual.SupportDetails__c
         );
         System.assertEquals(expected.Facilitator__c, actual.Facilitator__c);
-        System.assertEquals(expected.Type__c, actual.Type__c);
     }
 
     @isTest
@@ -150,8 +149,7 @@ public with sharing class TestLogController {
                 Stress__c = 'Not at all',
                 Submitter__c = submitter.Id,
                 SupportDetails__c = 'Support details',
-                Facilitator__c = facilitator.Id,
-                Type__c = 'Client'
+                Facilitator__c = facilitator.Id
             )
         );
         logs.add(
@@ -172,8 +170,7 @@ public with sharing class TestLogController {
                 Stress__c = 'Not at all',
                 Submitter__c = other.Id,
                 SupportDetails__c = 'Support details',
-                Facilitator__c = other.Id,
-                Type__c = 'Client'
+                Facilitator__c = other.Id
             )
         );
         insert logs;
@@ -212,13 +209,12 @@ public with sharing class TestLogController {
             Stress__c = 'Not at all',
             Submitter__c = submitter.Id,
             SupportDetails__c = 'Support details',
-            Facilitator__c = other.Id,
-            Type__c = 'Client'
+            Facilitator__c = other.Id
         );
 
         Test.startTest();
 
-        LogController.createLog(log);
+        LogController.createLog(log, 'Client');
 
         Test.stopTest();
 
@@ -240,8 +236,7 @@ public with sharing class TestLogController {
                 Stress__c,
                 Submitter__c,
                 SupportDetails__c,
-                Facilitator__c,
-                Type__c
+                Facilitator__c
             FROM Log__c
             WHERE Date__c = :yesterday
             LIMIT 1
@@ -259,7 +254,7 @@ public with sharing class TestLogController {
 
         Boolean exceptionThrown = false;
         try {
-            LogController.createLog(log);
+            LogController.createLog(log, 'Client');
         } catch (AuraHandledException exc) {
             exceptionThrown = true;
         }

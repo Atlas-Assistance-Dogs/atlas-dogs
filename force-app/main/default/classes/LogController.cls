@@ -21,7 +21,7 @@ public with sharing class LogController {
                     Submitter__c,
                     SupportDetails__c,
                     Facilitator__c,
-                    Type__c
+                    RecordTypeId
                 FROM Log__c
                 WHERE
                     Client__c = :contactId
@@ -34,8 +34,9 @@ public with sharing class LogController {
     }
 
     @AuraEnabled(Cacheable=false)
-    public static void createLog(Log__c log) {
+    public static void createLog(Log__c log, string type) {
         try {
+            log.RecordTypeId = [Select Id From RecordType WHERE Name = :type and SobjectType ='Log__c' limit 1].Id;
             insert log;
         } catch (Exception e) {
             throw new AuraHandledException(e.getMessage());
