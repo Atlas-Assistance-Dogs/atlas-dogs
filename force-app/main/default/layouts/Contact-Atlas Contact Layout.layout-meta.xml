@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <Layout xmlns="http://soap.sforce.com/2006/04/metadata">
     <excludeButtons>RequestUseSfdc</excludeButtons>
     <layoutSections>
@@ -380,7 +380,7 @@
                 <field>LeadFacilitatorStatus__c</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Edit</behavior>
+                <behavior>Readonly</behavior>
                 <field>FacilitatorCertificationValidUntil__c</field>
             </layoutItems>
         </layoutColumns>
@@ -499,7 +499,7 @@
         <detailHeading>true</detailHeading>
         <editHeading>true</editHeading>
         <label>Staff Specific Details</label>
-        <layoutColumns/>
+        <layoutColumns />
         <layoutColumns>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -533,8 +533,8 @@
         <detailHeading>false</detailHeading>
         <editHeading>true</editHeading>
         <label>Additional Information</label>
-        <layoutColumns/>
-        <layoutColumns/>
+        <layoutColumns />
+        <layoutColumns />
         <style>TwoColumnsLeftToRight</style>
     </layoutSections>
     <layoutSections>
@@ -542,9 +542,9 @@
         <detailHeading>false</detailHeading>
         <editHeading>false</editHeading>
         <label>Custom Links</label>
-        <layoutColumns/>
-        <layoutColumns/>
-        <layoutColumns/>
+        <layoutColumns />
+        <layoutColumns />
+        <layoutColumns />
         <style>CustomLinks</style>
     </layoutSections>
     <layoutSections>
