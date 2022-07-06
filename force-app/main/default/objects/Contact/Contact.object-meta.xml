@@ -369,11 +369,13 @@
         <searchResultsAdditionalFields
         >CONTACT.EMAIL</searchResultsAdditionalFields>
         <searchResultsAdditionalFields
-        >CORE.USERS.ALIAS</searchResultsAdditionalFields>
+        >Pronoun__c</searchResultsAdditionalFields>
         <searchResultsAdditionalFields
-        >npe01__Home_Address__c</searchResultsAdditionalFields>
+        >Language__c</searchResultsAdditionalFields>
         <searchResultsAdditionalFields
         >Positions__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields
+        >CONTACT.ADDRESS2_STATE</searchResultsAdditionalFields>
     </searchLayouts>
     <sharingModel>ControlledByParent</sharingModel>
 </CustomObject>

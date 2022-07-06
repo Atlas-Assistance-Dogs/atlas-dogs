@@ -160,7 +160,20 @@
         <type>Text</type>
     </nameField>
     <pluralLabel>CEUs</pluralLabel>
-    <searchLayouts />
+    <searchLayouts>
+        <searchResultsAdditionalFields
+        >ProgramTitle__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields
+        >DateCompleted__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields
+        >Quantity__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Status__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields
+        >Trainer__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Role__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields
+        >Comments__c</searchResultsAdditionalFields>
+    </searchLayouts>
     <sharingModel>ReadWrite</sharingModel>
     <visibility>Public</visibility>
 </CustomObject>
