@@ -11,6 +11,8 @@ public with sharing class TestLogController {
     private static Contact facilitator;
     private static Contact other;
     private static Dog__c dog;
+    private static ID CLIENT_ID;
+    private static ID FACILITATOR_ID;
 
     @testSetup
     static void setup() {
@@ -29,6 +31,10 @@ public with sharing class TestLogController {
 
         dog = new Dog__c(Name = DOG_NAME);
         insert dog;
+
+        Map<String, Schema.RecordTypeInfo> recordTypes = Schema.SObjectType.Log__c.getRecordTypeInfosByName();
+        CLIENT_ID = recordTypes.get('Client').getRecordTypeId();
+        FACILITATOR_ID = recordTypes.get('Team Facilitator').getRecordTypeId();
     }
 
     static void getContacts() {
@@ -214,7 +220,7 @@ public with sharing class TestLogController {
 
         Test.startTest();
 
-        LogController.createLog(log, 'Client');
+        LogController.createLog(log);
 
         Test.stopTest();
 
@@ -236,7 +242,8 @@ public with sharing class TestLogController {
                 Stress__c,
                 Submitter__c,
                 SupportDetails__c,
-                Facilitator__c
+                Facilitator__c,
+                RecordTypeId
             FROM Log__c
             WHERE Date__c = :yesterday
             LIMIT 1
@@ -254,7 +261,7 @@ public with sharing class TestLogController {
 
         Boolean exceptionThrown = false;
         try {
-            LogController.createLog(log, 'Client');
+            LogController.createLog(log);
         } catch (AuraHandledException exc) {
             exceptionThrown = true;
         }

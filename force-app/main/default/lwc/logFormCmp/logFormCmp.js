@@ -66,6 +66,7 @@ export default class LogFormCmp extends LightningElement {
     recordTypes;
 
     get options() {
+        if (!this.objectInfo || !this.objectInfo.data) return;
         // Returns a map of record type Ids
         const rtis = this.objectInfo.data.recordTypeInfos;
         this.recordTypes = rtis;
@@ -107,11 +108,11 @@ export default class LogFormCmp extends LightningElement {
     }
 
     handleSubmitterChange(event) {
-        this.isSubmitter = event.detail.value;
+        this.isSubmitter = event.target.checked;
     }
 
     handleTypeChange(event) {
-        this.role = event.detail.value;
+        this.recordTypeId = event.detail.value;
     }
 
     handleTeamSupportChange(event) {
@@ -208,6 +209,7 @@ export default class LogFormCmp extends LightningElement {
         this.mode = message.mode;
         this.title = this.mode[0].toUpperCase() + this.mode.slice(1) + " Log";
         this.recordTypeId = message.recordTypeId;
+        this.isSubmitter = message.roles.includes('Submitter');
         this.openModal();
     }
 
