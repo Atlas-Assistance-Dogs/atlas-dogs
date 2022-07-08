@@ -10,9 +10,9 @@
     <columns>RequestSupportFromAtlas__c</columns>
     <filterScope>Everything</filterScope>
     <filters>
-        <field>Type__c</field>
+        <field>RECORDTYPE</field>
         <operation>equals</operation>
-        <value>Facilitator</value>
+        <value>Log__c.TeamFacilitator</value>
     </filters>
     <label>Facilitator</label>
 </ListView>

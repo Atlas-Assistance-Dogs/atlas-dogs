@@ -109,7 +109,8 @@ export default class RelatedLogsCmp extends LightningElement {
                 const payload = {
                     mode: "edit",
                     recordId: row.Id,
-                    roles: row.roles
+                    roles: row.roles,
+                    recordTypeId: row.RecordTypeId
                 };
                 publish(this.messageContext, logForm, payload);
                 break;
@@ -141,7 +142,7 @@ export default class RelatedLogsCmp extends LightningElement {
     }
 
     getRoles(log) {
-        let roles = [];
+        var roles = [];
         if (log[CLIENT_FIELD.fieldApiName] === this.recordId) {
             roles.push("Client");
         }

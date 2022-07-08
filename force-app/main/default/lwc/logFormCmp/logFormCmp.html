@@ -6,14 +6,6 @@
         onclose={handleClose}
     >
         <div slot="body">
-            <lightning-checkbox-group
-                name="role"
-                label="Role"
-                options={options}
-                value={roles}
-                onchange={handleChange}
-            >
-            </lightning-checkbox-group>
             <lightning-record-edit-form
                 object-api-name={objectName}
                 class="slds-scrollable"
@@ -22,6 +14,23 @@
                 record-id={recordId}
             >
                 <div class="slds-grid slds-wrap">
+                    <div class="slds-col slds-size_1-of-2">
+                        <lightning-input
+                            type="checkbox"
+                            label="Submitter"
+                            onchange={handleSubmitterChange}
+                        ></lightning-input>
+                    </div>
+                    <div class="slds-col slds-size_1-of-2">
+                        <lightning-radio-group
+                            name="recordtype"
+                            label="Record Type"
+                            options={options}
+                            value={recordTypeId}
+                            onchange={handleTypeChange}
+                        >
+                        </lightning-radio-group>
+                    </div>
                     <div class="slds-col slds-size_1-of-2">
                         <lightning-input-field
                             field-name={fields.date}
@@ -37,7 +46,7 @@
                             class="category slds-p-bottom_medium"
                         ></lightning-input-field>
                     </div>
-                    <div if:false={isClient} class="slds-col slds-size_1-of-2">
+                    <div class="slds-col slds-size_1-of-2">
                         <lightning-input-field
                             field-name={fields.client}
                             class="category slds-p-bottom_medium"
@@ -49,10 +58,7 @@
                             class="category slds-p-bottom_medium"
                         ></lightning-input-field>
                     </div>
-                    <div
-                        if:false={isFacilitator}
-                        class="slds-col slds-size_1-of-2"
-                    >
+                    <div class="slds-col slds-size_1-of-2">
                         <lightning-input-field
                             field-name={fields.facilitator}
                             class="category slds-p-bottom_medium"
@@ -64,20 +70,14 @@
                             class="category slds-p-bottom_medium"
                         ></lightning-input-field>
                     </div>
-                    <div
-                        if:true={isFacilitator}
-                        class="slds-col slds-size_1-of-2"
-                    >
+                    <div if:true={isFacilitator} class="slds-col slds-size_1-of-2">
                         <lightning-input-field
                             field-name={fields.lesson}
                             class="category slds-p-bottom_medium"
                             required
                         ></lightning-input-field>
                     </div>
-                    <div
-                        if:true={isFacilitator}
-                        class="slds-col slds-size_1-of-2"
-                    >
+                    <div if:true={isFacilitator} class="slds-col slds-size_1-of-2">
                         <lightning-input-field
                             field-name={fields.clientHours}
                             class="category slds-p-bottom_medium"

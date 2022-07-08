@@ -34,9 +34,8 @@ public with sharing class LogController {
     }
 
     @AuraEnabled(Cacheable=false)
-    public static void createLog(Log__c log, string type) {
+    public static void createLog(Log__c log) {
         try {
-            log.RecordTypeId = [Select Id From RecordType WHERE Name = :type and SobjectType ='Log__c' limit 1].Id;
             insert log;
         } catch (Exception e) {
             throw new AuraHandledException(e.getMessage());

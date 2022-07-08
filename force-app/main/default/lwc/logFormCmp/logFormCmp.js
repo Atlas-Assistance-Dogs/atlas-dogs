@@ -1,5 +1,7 @@
 import { LightningElement, api, wire } from "lwc";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
+import { getObjectInfo } from "lightning/uiObjectInfoApi";
+import LOG_OBJECT from "@salesforce/schema/Log__c";
 import createLog from "@salesforce/apex/LogController.createLog";
 import updateLog from "@salesforce/apex/LogController.updateLog";
 
@@ -33,7 +35,7 @@ import logForm from "@salesforce/messageChannel/logForm__c";
 export default class LogFormCmp extends LightningElement {
     @api contactId;
     recordId;
-    roles = [];
+    isSubmitter = false;
     title = "Create Log";
     fields = {
         role: "roles",
@@ -58,25 +60,42 @@ export default class LogFormCmp extends LightningElement {
     objectName = ATLAS_SUPPORT_FIELD.objectApiName;
     wantSupport = false;
 
+    @wire(getObjectInfo, { objectApiName: LOG_OBJECT })
+    objectInfo;
+
+    recordTypes;
+
     get options() {
-        return [
-            { label: "Submitter", value: "Submitter" },
-            { label: "Client", value: "Client" },
-            { label: "Team Facilitator", value: "Team Facilitator" }
-        ];
+        // Returns a map of record type Ids
+        const rtis = this.objectInfo.data.recordTypeInfos;
+        this.recordTypes = rtis;
+        return Object.keys(rtis)
+            .map((id) => {
+                if (rtis[id].name !== "Master") {
+                    return { label: rtis[id].name, value: id };
+                }
+            })
+            .filter((x) => x);
     }
+    recordTypeId;
 
     get isClient() {
-        return this.roles.includes("Client");
-    }
-
-    get isSubmitter() {
-        return this.roles.includes("Submitter");
+        try {
+            this.recordTypes[this.recordTypeId].name === "Client";
+        }
+        catch {
+            return false;
+        }
     }
 
     get isFacilitator() {
-        return this.roles.includes("Team Facilitator");
-    }
+        try {
+            return this.recordTypes[this.recordTypeId].name === "Team Facilitator";
+        }
+        catch {
+            return false;
+        }
+     }
 
     @api
     openModal() {
@@ -87,8 +106,12 @@ export default class LogFormCmp extends LightningElement {
         this.template.querySelector("c-modal-cmp").closeModal();
     }
 
-    handleChange(event) {
-        this.roles = event.detail.value;
+    handleSubmitterChange(event) {
+        this.isSubmitter = event.detail.value;
+    }
+
+    handleTypeChange(event) {
+        this.role = event.detail.value;
     }
 
     handleTeamSupportChange(event) {
@@ -106,25 +129,11 @@ export default class LogFormCmp extends LightningElement {
             (a, x) => ({ ...a, [x.fieldName]: x.value }),
             {}
         );
-        for (var idx = 0; idx < this.roles.length; idx++) {
-            switch (this.roles[idx]) {
-                case "Client":
-                    record[CLIENT_FIELD.fieldApiName] = this.contactId;
-                    break;
-
-                case "Submitter":
-                    record[SUBMITTER_FIELD.fieldApiName] = this.contactId;
-                    break;
-
-                case "Team Facilitator":
-                    record[TEAM_FACILITATOR_FIELD.fieldApiName] =
-                        this.contactId;
-                    break;
-
-                default:
-                    break;
-            }
+        record.RecordTypeId = this.recordTypeId;
+        if (this.isSubmitter) {
+            record[SUBMITTER_FIELD.fieldApiName] = this.contactId;
         }
+
         if (this.mode === "create") {
             this.newLog(record);
         } else {
@@ -198,11 +207,7 @@ export default class LogFormCmp extends LightningElement {
         this.recordId = message.recordId;
         this.mode = message.mode;
         this.title = this.mode[0].toUpperCase() + this.mode.slice(1) + " Log";
-        if (message.roles) {
-            this.roles = message.roles;
-        } else {
-            this.roles = [];
-        }
+        this.recordTypeId = message.recordTypeId;
         this.openModal();
     }
 
