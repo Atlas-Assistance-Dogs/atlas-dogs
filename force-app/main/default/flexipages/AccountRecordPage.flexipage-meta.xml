@@ -45,12 +45,6 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
-                <componentName>cooper:companyInsightTeaserCard</componentName>
-                <identifier>cooper_companyInsightTeaserCard</identifier>
-            </componentInstance>
-        </itemInstances>
-        <itemInstances>
-            <componentInstance>
                 <componentInstanceProperties>
                     <name>displayOption</name>
                     <value>BOTH</value>
@@ -239,7 +233,7 @@
         <name>sidebar</name>
         <type>Region</type>
     </flexiPageRegions>
-    <masterLabel>Account Record Page</masterLabel>
+    <masterLabel>Atlas Account Record Page</masterLabel>
     <parentFlexiPage>sfa__Account_rec_L</parentFlexiPage>
     <sobjectType>Account</sobjectType>
     <template>

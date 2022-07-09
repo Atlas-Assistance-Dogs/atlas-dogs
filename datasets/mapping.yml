@@ -428,7 +428,6 @@ Insert Log__c:
         - SessionType__c
         - Stress__c
         - SupportDetails__c
-        - Type__c
     lookups:
         Client__c:
             table: Contact

@@ -11,9 +11,9 @@
     <columns>RequestSupportFromTeam__c</columns>
     <filterScope>Everything</filterScope>
     <filters>
-        <field>Type__c</field>
+        <field>RECORDTYPE</field>
         <operation>equals</operation>
-        <value>Client</value>
+        <value>Log__c.Client</value>
     </filters>
     <label>Client</label>
 </ListView>

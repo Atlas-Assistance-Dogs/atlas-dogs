@@ -13,6 +13,10 @@
         <fieldName>roles</fieldName>
     </lightningMessageFields>
     <lightningMessageFields>
+        <description>Record Type Id.</description>
+        <fieldName>recordTypeId</fieldName>
+    </lightningMessageFields>
+    <lightningMessageFields>
         <description>Mode is Create, Update, or View</description>
         <fieldName>mode</fieldName>
     </lightningMessageFields>

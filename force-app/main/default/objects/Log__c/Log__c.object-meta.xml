@@ -161,20 +161,15 @@
     </nameField>
     <pluralLabel>Logs</pluralLabel>
     <searchLayouts>
-        <searchResultsAdditionalFields>Type__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>RECORDTYPE</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>Date__c</searchResultsAdditionalFields>
-        <searchResultsAdditionalFields
-        >Submitter__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Submitter__c</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>Client__c</searchResultsAdditionalFields>
-        <searchResultsAdditionalFields
-        >Handler__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Handler__c</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>Dog__c</searchResultsAdditionalFields>
-        <searchResultsAdditionalFields
-        >Facilitator__c</searchResultsAdditionalFields>
-        <searchResultsAdditionalFields
-        >RequestSupportFromAtlas__c</searchResultsAdditionalFields>
-        <searchResultsAdditionalFields
-        >RequestSupportFromTeam__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Facilitator__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>RequestSupportFromAtlas__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>RequestSupportFromTeam__c</searchResultsAdditionalFields>
     </searchLayouts>
     <sharingModel>ReadWrite</sharingModel>
     <visibility>Public</visibility>

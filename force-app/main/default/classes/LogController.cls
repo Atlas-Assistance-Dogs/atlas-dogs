@@ -21,7 +21,7 @@ public with sharing class LogController {
                     Submitter__c,
                     SupportDetails__c,
                     Facilitator__c,
-                    Type__c
+                    RecordTypeId
                 FROM Log__c
                 WHERE
                     Client__c = :contactId
