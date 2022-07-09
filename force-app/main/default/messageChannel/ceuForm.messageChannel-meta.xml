@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <LightningMessageChannel xmlns="http://soap.sforce.com/2006/04/metadata">
-    <masterLabel>CEU Form</masterLabel>
-    <isExposed>true</isExposed>
     <description
     >Lightning Message Channel to show Create/View/Update Continuing Education Units Form.</description>
+    <isExposed>true</isExposed>
     <lightningMessageFields>
-        <fieldName>recordId</fieldName>
         <description
         >This is the record Id to view or edit, can be empty for create.</description>
+        <fieldName>recordId</fieldName>
     </lightningMessageFields>
     <lightningMessageFields>
-        <fieldName>authority</fieldName>
         <description>The authority if editing an existing record.</description>
+        <fieldName>authority</fieldName>
     </lightningMessageFields>
+    <masterLabel>CEU Form</masterLabel>
 </LightningMessageChannel>

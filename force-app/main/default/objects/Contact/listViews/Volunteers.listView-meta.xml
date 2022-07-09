@@ -5,8 +5,12 @@
     <columns>ACCOUNT.NAME</columns>
     <columns>CONTACT.PHONE1</columns>
     <columns>CONTACT.EMAIL</columns>
-    <columns>CONTACT.TITLE</columns>
-    <columns>CORE.USERS.ALIAS</columns>
+    <columns>Pronoun__c</columns>
+    <columns>Language__c</columns>
+    <columns>CONTACT.ADDRESS2_STATE</columns>
+    <columns>VolunteerAgreementReceived__c</columns>
+    <columns>GW_Volunteers__Volunteer_Status__c</columns>
+    <columns>CONTACT.REPORTS_TO.NAME</columns>
     <filterScope>Everything</filterScope>
     <filters>
         <field>Positions__c</field>

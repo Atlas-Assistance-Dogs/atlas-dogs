@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>RaceEthnicity__c</fullName>
+    <externalId>false</externalId>
+    <label>Race/Ethnicity</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>American Indian or Alaska Native</fullName>
+                <default>false</default>
+                <label>American Indian or Alaska Native</label>
+            </value>
+            <value>
+                <fullName>Asian or Asian American</fullName>
+                <default>false</default>
+                <label>Asian or Asian American</label>
+            </value>
+            <value>
+                <fullName>Black or African American</fullName>
+                <default>false</default>
+                <label>Black or African American</label>
+            </value>
+            <value>
+                <fullName>Hispanic, Latinx, or Spanish origin</fullName>
+                <default>false</default>
+                <label>Hispanic, Latinx, or Spanish origin</label>
+            </value>
+            <value>
+                <fullName>Middle Eastern or North African</fullName>
+                <default>false</default>
+                <label>Middle Eastern or North African</label>
+            </value>
+            <value>
+                <fullName>Native Hawaiian or Pacific Islander</fullName>
+                <default>false</default>
+                <label>Native Hawaiian or Pacific Islander</label>
+            </value>
+            <value>
+                <fullName>White</fullName>
+                <default>false</default>
+                <label>White</label>
+            </value>
+            <value>
+                <fullName>Another race or ethnicity not listed</fullName>
+                <default>false</default>
+                <label>Another race or ethnicity not listed</label>
+            </value>
+            <value>
+                <fullName>Prefer not to answer</fullName>
+                <default>false</default>
+                <label>Prefer not to answer</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

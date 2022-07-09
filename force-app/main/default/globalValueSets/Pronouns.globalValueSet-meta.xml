@@ -18,7 +18,12 @@
     <customValue>
         <fullName>Specify</fullName>
         <default>false</default>
-        <label>Specify</label>
+        <label>Prefer to self-describe</label>
+    </customValue>
+    <customValue>
+        <fullName>Prefer not to answer</fullName>
+        <default>false</default>
+        <label>Prefer not to answer</label>
     </customValue>
     <description>Pronouns for a contact</description>
     <masterLabel>Pronouns</masterLabel>

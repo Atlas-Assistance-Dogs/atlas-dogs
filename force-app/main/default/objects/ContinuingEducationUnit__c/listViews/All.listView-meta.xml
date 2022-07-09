@@ -3,4 +3,12 @@
     <fullName>All</fullName>
     <filterScope>Everything</filterScope>
     <label>All</label>
+    <columns>ProgramTitle__c</columns>
+    <columns>Authority__c</columns>
+    <columns>DateCompleted__c</columns>
+    <columns>Quantity__c</columns>
+    <columns>Status__c</columns>
+    <columns>Trainer__c</columns>
+    <columns>Role__c</columns>
+    <columns>Comments__c</columns>
 </ListView>

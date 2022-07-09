@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>AbilityStatus__c</fullName>
+    <externalId>false</externalId>
+    <label>Ability Status</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Vision impairment</fullName>
+                <default>false</default>
+                <label>Vision impairment</label>
+            </value>
+            <value>
+                <fullName>Hearing impairment</fullName>
+                <default>false</default>
+                <label>Hearing impairment</label>
+            </value>
+            <value>
+                <fullName
+                >Learning disability/cognitive processing disability</fullName>
+                <default>false</default>
+                <label
+                >Learning disability/cognitive processing disability</label>
+            </value>
+            <value>
+                <fullName>Chronic medical illness</fullName>
+                <default>false</default>
+                <label>Chronic medical illness</label>
+            </value>
+            <value>
+                <fullName>Psychological disorder</fullName>
+                <default>false</default>
+                <label>Psychological disorder</label>
+            </value>
+            <value>
+                <fullName>Mobility impairment</fullName>
+                <default>false</default>
+                <label>Mobility impairment</label>
+            </value>
+            <value>
+                <fullName>Sensory processing disorder</fullName>
+                <default>false</default>
+                <label>Sensory processing disorder</label>
+            </value>
+            <value>
+                <fullName>Intellectual disability</fullName>
+                <default>false</default>
+                <label>Intellectual disability</label>
+            </value>
+            <value>
+                <fullName>None/do not identify with a disability</fullName>
+                <default>false</default>
+                <label>None/do not identify with a disability</label>
+            </value>
+            <value>
+                <fullName>Prefer to self-describe</fullName>
+                <default>false</default>
+                <label>Prefer to self-describe</label>
+            </value>
+            <value>
+                <fullName>Prefer not to answer</fullName>
+                <default>false</default>
+                <label>Prefer not to answer</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

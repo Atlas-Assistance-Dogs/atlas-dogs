@@ -199,7 +199,7 @@
           date_between:
               start_date: ${{date(AssignedDate__c)}}
               end_date: today
-      Program2__c:
+      Program__c:
           if:
               - choice:
                     when: ${{'Trainer' in Contact__c.Positions__c}}
