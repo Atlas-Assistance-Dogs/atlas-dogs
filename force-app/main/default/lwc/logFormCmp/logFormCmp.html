@@ -29,6 +29,7 @@
                             options={options}
                             value={recordTypeId}
                             onchange={handleTypeChange}
+                            required
                         >
                         </lightning-radio-group>
                     </div>
@@ -71,14 +72,20 @@
                             class="category slds-p-bottom_medium"
                         ></lightning-input-field>
                     </div>
-                    <div if:true={isFacilitator} class="slds-col slds-size_1-of-2">
+                    <div
+                        if:true={isFacilitator}
+                        class="slds-col slds-size_1-of-2"
+                    >
                         <lightning-input-field
                             field-name={fields.lesson}
                             class="category slds-p-bottom_medium"
                             required
                         ></lightning-input-field>
                     </div>
-                    <div if:true={isFacilitator} class="slds-col slds-size_1-of-2">
+                    <div
+                        if:true={isFacilitator}
+                        class="slds-col slds-size_1-of-2"
+                    >
                         <lightning-input-field
                             field-name={fields.clientHours}
                             class="category slds-p-bottom_medium"

@@ -83,20 +83,20 @@ export default class LogFormCmp extends LightningElement {
     get isClient() {
         try {
             this.recordTypes[this.recordTypeId].name === "Client";
-        }
-        catch {
+        } catch {
             return false;
         }
     }
 
     get isFacilitator() {
         try {
-            return this.recordTypes[this.recordTypeId].name === "Team Facilitator";
-        }
-        catch {
+            return (
+                this.recordTypes[this.recordTypeId].name === "Team Facilitator"
+            );
+        } catch {
             return false;
         }
-     }
+    }
 
     @api
     openModal() {
@@ -130,6 +130,16 @@ export default class LogFormCmp extends LightningElement {
             (a, x) => ({ ...a, [x.fieldName]: x.value }),
             {}
         );
+        if (!this.recordTypeId) {
+            this.dispatchEvent(
+                new ShowToastEvent({
+                    title: "Error!!",
+                    message: "A record type is required",
+                    variant: "error"
+                })
+            );
+            return;
+        }
         record.RecordTypeId = this.recordTypeId;
         if (this.isSubmitter) {
             record[SUBMITTER_FIELD.fieldApiName] = this.contactId;
@@ -209,7 +219,7 @@ export default class LogFormCmp extends LightningElement {
         this.mode = message.mode;
         this.title = this.mode[0].toUpperCase() + this.mode.slice(1) + " Log";
         this.recordTypeId = message.recordTypeId;
-        this.isSubmitter = message.roles.includes('Submitter');
+        this.isSubmitter = message.roles?.includes("Submitter");
         this.openModal();
     }
 
