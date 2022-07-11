@@ -49,7 +49,7 @@ export default class NewLeadCmp extends NavigationMixin(LightningElement) {
     }
 
     handlePnounChange(event) {
-        if (event.detail.value === "specify") {
+        if (event.detail.value === "Specify") {
             this.showPnounOther = true;
         } else {
             this.showPnounOther = false;
