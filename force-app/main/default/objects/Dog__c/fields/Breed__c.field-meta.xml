@@ -4,7 +4,7 @@
     <description>Describes the dog&apos;s breed</description>
     <externalId>false</externalId>
     <label>Breed</label>
-    <length>65</length>
+    <length>128</length>
     <required>false</required>
     <trackHistory>false</trackHistory>
     <trackTrending>false</trackTrending>
