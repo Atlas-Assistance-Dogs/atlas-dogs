@@ -4,7 +4,7 @@
     <description>Handler(s) the log pertains to</description>
     <externalId>false</externalId>
     <label>Handler(s)</label>
-    <length>40</length>
+    <length>128</length>
     <required>false</required>
     <trackTrending>false</trackTrending>
     <type>Text</type>

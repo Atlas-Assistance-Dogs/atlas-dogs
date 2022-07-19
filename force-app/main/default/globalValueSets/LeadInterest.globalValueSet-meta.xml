@@ -45,6 +45,16 @@
         <default>false</default>
         <label>Assistance Dogs Set in Motion Program</label>
     </customValue>
+    <customValue>
+        <fullName>Puppy Raising</fullName>
+        <default>false</default>
+        <label>Puppy Raising</label>
+    </customValue>
+    <customValue>
+        <fullName>Standalone Specialty Courses</fullName>
+        <default>false</default>
+        <label>Standalone Specialty Courses</label>
+    </customValue>
     <description>What a lead is interested in</description>
     <masterLabel>I want to know more about</masterLabel>
     <sorted>false</sorted>

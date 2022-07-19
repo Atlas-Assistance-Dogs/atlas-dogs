@@ -44,6 +44,11 @@
                 <label>Team Facilitator Lead</label>
             </value>
             <value>
+                <fullName>Puppy Raiser</fullName>
+                <default>false</default>
+                <label>Puppy Raiser</label>
+            </value>
+            <value>
                 <fullName>Volunteer Lead</fullName>
                 <default>false</default>
                 <label>Volunteer Lead</label>
