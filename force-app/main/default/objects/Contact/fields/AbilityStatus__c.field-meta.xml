@@ -11,14 +11,14 @@
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
-                <fullName>Vision impairment</fullName>
+                <fullName>Blind/Low vision</fullName>
                 <default>false</default>
-                <label>Vision impairment</label>
+                <label>Blind/Low vision</label>
             </value>
             <value>
-                <fullName>Hearing impairment</fullName>
+                <fullName>Deaf/Hard of hearing</fullName>
                 <default>false</default>
-                <label>Hearing impairment</label>
+                <label>Deaf/Hard of hearing</label>
             </value>
             <value>
                 <fullName
@@ -33,14 +33,14 @@
                 <label>Chronic medical illness</label>
             </value>
             <value>
-                <fullName>Psychological disorder</fullName>
+                <fullName>Mental health condition</fullName>
                 <default>false</default>
-                <label>Psychological disorder</label>
+                <label>Mental health condition</label>
             </value>
             <value>
-                <fullName>Mobility impairment</fullName>
+                <fullName>Mobility/ambulatory difficulty</fullName>
                 <default>false</default>
-                <label>Mobility impairment</label>
+                <label>Mobility/ambulatory difficulty</label>
             </value>
             <value>
                 <fullName>Sensory processing disorder</fullName>

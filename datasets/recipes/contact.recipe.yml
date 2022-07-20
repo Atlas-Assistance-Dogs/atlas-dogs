@@ -223,7 +223,7 @@
           fake: name
       Language__c:
           random_choice:
-              English: 85%
+              English: 83%
               Spanish: 5%
               Chinese: 1%
               Tagalog: 1%
@@ -235,6 +235,8 @@
               German: 1%
               Italian: 1%
               Portuguese: 1%
+              Japanese: 1%
+              American Sign Language: 1%
       OtherLanguages__c:
           random_choice:
               English: 1%
@@ -249,7 +251,22 @@
               German: 1%
               Italian: 1%
               Portuguese: 1%
+              Japanese: 1%
+              American Sign Language: 1%
               Spanish;French: 1%
+      AbilityStatus__c:
+          random_choice:
+              - Blind/Low vision
+              - Deaf/Hard of hearing
+              - Learning disability/cognitive processing disability
+              - Chronic medical illness
+              - Mental health condition
+              - Mobility/ambulatory difficulty
+              - Sensory processing disorder
+              - Intellectual disability
+              - None/do not identify with a disability
+              - Prefer to self-describe
+              - Prefer not to answer
       LeadSource:
           random_choice:
               - Website
@@ -366,7 +383,8 @@
               - He/Him
               - She/Her
               - They/Them
-              - Specify
+              - Prefer to self-describe
+              - Prefer not to answer
       PuppyRaiserStatus__c:
           if:
               - choice:

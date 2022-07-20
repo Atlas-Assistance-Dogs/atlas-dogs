@@ -70,6 +70,11 @@
         <default>false</default>
         <label>Portuguese</label>
     </customValue>
+    <customValue>
+        <fullName>American Sign Language</fullName>
+        <default>false</default>
+        <label>American Sign Language</label>
+    </customValue>
     <masterLabel>Language</masterLabel>
     <sorted>false</sorted>
 </GlobalValueSet>
