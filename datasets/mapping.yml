@@ -257,7 +257,6 @@ Insert Contact:
         - GW_Volunteers__Volunteer_Status__c
         - Language__c
         - LastName
-        - LeadComments__c
         - LeadFacilitatorStatus__c
         - LeadInterest__c
         - LeadSourceOther__c

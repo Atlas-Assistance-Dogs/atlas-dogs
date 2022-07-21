@@ -349,8 +349,6 @@
                             - Inactive
                             - Suspended
                             - None
-      LeadComments__c:
-          fake: paragraph
       LeadFacilitatorStatus__c:
           if:
               - choice:
