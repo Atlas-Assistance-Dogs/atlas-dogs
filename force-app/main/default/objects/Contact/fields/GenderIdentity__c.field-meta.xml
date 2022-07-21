@@ -5,7 +5,7 @@
     <label>Gender Identity</label>
     <required>false</required>
     <trackFeedHistory>false</trackFeedHistory>
-    <type>MultiselectPicklist</type>
+    <type>Picklist</type>
     <valueSet>
         <restricted>true</restricted>
         <valueSetDefinition>
@@ -52,5 +52,4 @@
             </value>
         </valueSetDefinition>
     </valueSet>
-    <visibleLines>4</visibleLines>
 </CustomField>
