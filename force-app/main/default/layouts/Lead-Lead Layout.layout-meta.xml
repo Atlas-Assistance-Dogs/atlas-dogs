@@ -194,15 +194,6 @@
         <relatedList>RelatedHistoryList</relatedList>
     </relatedLists>
     <relatedLists>
-        <fields>CAMPAIGN.NAME</fields>
-        <fields>CAMPAIGN.START_DATE</fields>
-        <fields>CAMPAIGN.CAMPAIGN_TYPE</fields>
-        <fields>CM.STATUS</fields>
-        <fields>CM.RESPONDED</fields>
-        <fields>CM.LAST_UPDATE</fields>
-        <relatedList>RelatedCampaignList</relatedList>
-    </relatedLists>
-    <relatedLists>
         <fields>ACTIVITY.SUBJECT</fields>
         <fields>EMAIL_STATUS.CREATED_DATE</fields>
         <fields>EMAIL_STATUS.FIRST_OPEN_DATE</fields>
