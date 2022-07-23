@@ -198,6 +198,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Contact.ClientCertificationValidUntil__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Contact.ClientLOMIReceived__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -229,11 +234,6 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Contact.ClientVAPWReceived__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Contact.ClientCertificationValidUntil__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -304,11 +304,6 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Contact.Language__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Contact.LeadComments__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -877,13 +872,6 @@
         <readable>true</readable>
     </fieldPermissions>
     <layoutAssignments>
-        <layout>Account-Account Layout</layout>
-    </layoutAssignments>
-    <layoutAssignments>
-        <layout>Account-Account Layout</layout>
-        <recordType>Account.Default</recordType>
-    </layoutAssignments>
-    <layoutAssignments>
         <layout>BackgroundCheck__c-Background Check Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
@@ -909,7 +897,7 @@
         <recordType>Log__c.Client</recordType>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>Log__c-Client Log Layout</layout>
+        <layout>Log__c-Facilitator Log Layout</layout>
         <recordType>Log__c.TeamFacilitator</recordType>
     </layoutAssignments>
     <layoutAssignments>

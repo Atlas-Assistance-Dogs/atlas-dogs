@@ -46,6 +46,11 @@
         <label>Korean</label>
     </customValue>
     <customValue>
+        <fullName>Japanese</fullName>
+        <default>false</default>
+        <label>Japanese</label>
+    </customValue>
+    <customValue>
         <fullName>Russian</fullName>
         <default>false</default>
         <label>Russian</label>
@@ -64,6 +69,11 @@
         <fullName>Portuguese</fullName>
         <default>false</default>
         <label>Portuguese</label>
+    </customValue>
+    <customValue>
+        <fullName>American Sign Language</fullName>
+        <default>false</default>
+        <label>American Sign Language</label>
     </customValue>
     <masterLabel>Language</masterLabel>
     <sorted>false</sorted>

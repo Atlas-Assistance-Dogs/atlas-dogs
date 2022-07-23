@@ -3,7 +3,7 @@
     <fullName>SpecifiedSexualOrientation__c</fullName>
     <externalId>false</externalId>
     <label>Specified Sexual Orientation</label>
-    <length>60</length>
+    <length>128</length>
     <required>false</required>
     <trackFeedHistory>false</trackFeedHistory>
     <type>Text</type>

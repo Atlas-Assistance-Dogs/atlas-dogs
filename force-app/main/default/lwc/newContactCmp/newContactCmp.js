@@ -15,7 +15,6 @@ import POSTAL_CODE_FIELD from "@salesforce/schema/Contact.MailingPostalCode";
 import INTEREST_FIELD from "@salesforce/schema/Contact.LeadInterest__c";
 import LEAD_SOURCE_FIELD from "@salesforce/schema/Contact.LeadSource";
 import OTHER_SOURCE_FIELD from "@salesforce/schema/Contact.LeadSourceOther__c";
-import LEAD_COMMENTS_FIELD from "@salesforce/schema/Contact.LeadComments__c";
 import LANGUAGE_FIELD from "@salesforce/schema/Contact.Language__c";
 import OTHER_LANGUAGES_FIELD from "@salesforce/schema/Contact.OtherLanguages__c";
 import BIRTHDATE_FIELD from "@salesforce/schema/Contact.Birthdate";
@@ -39,7 +38,6 @@ export default class NewContact extends NavigationMixin(LightningElement) {
         interest: INTEREST_FIELD,
         leadSource: LEAD_SOURCE_FIELD,
         otherSource: OTHER_SOURCE_FIELD,
-        leadComments: LEAD_COMMENTS_FIELD,
         language: LANGUAGE_FIELD,
         otherLanguages: OTHER_LANGUAGES_FIELD,
         birthDate: BIRTHDATE_FIELD,

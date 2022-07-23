@@ -4,7 +4,7 @@
     <description>Alternate lead source</description>
     <externalId>false</externalId>
     <label>Lead Source Other</label>
-    <length>120</length>
+    <length>128</length>
     <required>false</required>
     <trackFeedHistory>false</trackFeedHistory>
     <type>Text</type>
