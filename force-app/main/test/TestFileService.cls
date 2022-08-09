@@ -1,6 +1,6 @@
 @isTest
 public with sharing class TestFileService {
-    private static ContentVersion createLink(
+    public static ContentVersion createLink(
         string category,
         string type,
         Date docDate,
