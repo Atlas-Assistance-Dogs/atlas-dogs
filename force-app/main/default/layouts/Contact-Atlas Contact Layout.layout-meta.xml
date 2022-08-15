@@ -259,14 +259,6 @@
                 <behavior>Edit</behavior>
                 <field>ADSiMProgAgreementReceived__c</field>
             </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>TSiMApplicationReceived__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>TSiMProgAgreementReceived__c</field>
-            </layoutItems>
         </layoutColumns>
         <style>TwoColumnsLeftToRight</style>
     </layoutSections>
