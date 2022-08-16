@@ -26,9 +26,9 @@
                 <label>Client</label>
             </value>
             <value>
-                <fullName>TSiM</fullName>
+                <fullName>Standalone</fullName>
                 <default>false</default>
-                <label>Teams Set in Motion</label>
+                <label>Standalone Programs</label>
             </value>
             <value>
                 <fullName>ADSiM</fullName>
