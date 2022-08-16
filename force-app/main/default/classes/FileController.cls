@@ -123,7 +123,7 @@ public inherited sharing class FileController {
                     Type__c,
                     Date__c
                 FROM ContentVersion
-                WHERE ContentDocumentId IN :lstConDocs
+                WHERE ContentDocumentId IN :lstConDocs AND FileType != 'SNOTE'
                 ORDER BY Date__c DESC
             ];
         } else {
