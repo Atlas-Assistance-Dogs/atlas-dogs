@@ -21,7 +21,6 @@ public inherited sharing class FileController {
                 cv.Date__c = docDate;
             }
             update cvList;
-            FileService.updateDates(cvList, docDate);
         } catch (DmlException ex) {
             throw new AuraHandledException(ex.getMessage());
         }
