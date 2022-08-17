@@ -32,7 +32,7 @@ const COLS = [
     },
     { label: "Category", fieldName: CATEGORY_FIELD.fieldApiName },
     { label: "Document Type", fieldName: TYPE_FIELD.fieldApiName },
-    { label: "Document Date", fieldName: DATE_FIELD.fieldApiName, type: "date" },
+    { label: "Document Date", fieldName: DATE_FIELD.fieldApiName, type: "date-local" },
     { type: "action", typeAttributes: { rowActions: actions } }
 ];
 

@@ -11,5 +11,10 @@ trigger ContactTrigger on Contact (before insert, before update) {
         if (oldEmail != newContact.Email) {
             newContact.npe01__HomeEmail__c = newContact.Email;
         }
+
+        // Set PreferredName if not already set
+        if (String.isBlank(newContact.PreferredName__c)) {
+            newContact.PreferredName__c = newContact.FirstName;
+        }
     }
 }
