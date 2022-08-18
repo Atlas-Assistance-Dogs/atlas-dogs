@@ -277,8 +277,6 @@ Insert Contact:
         - StaffOfferReceived__c
         - StaffResumeReceived__c
         - StaffW4Received__c
-        - TSiMApplicationReceived__c
-        - TSiMProgAgreementReceived__c
         - TrainerApplicationReceived__c
         - TrainerBoardTrain__c
         - TrainerCertAgreementReceived__c
