@@ -67,10 +67,12 @@ public with sharing class FileService{
         List<Id> ids = new List<Id>();
         for (ContentVersion cv : cvs){
             string category = (cv.Type__c == 'ContactForm') ? '' : cv.Category__c;
+            if (category == 'Standalone') continue;
             string field = string.format('{0}{1}Received__c', new List<Object>{ category, cv.Type__c.replace(' ', '') });
             fields.add(field);
             ids.add(cv.Id);
         }
+        if (fields.size() == 0) return;
         string fieldList = string.join(new List<string>(fields), ',');
         string query = string.format('SELECT Id, {0} FROM Contact WHERE Id = :recordId', new List<Object>{ fieldList });
         List<Contact> contacts = Database.query(query);
@@ -226,16 +228,6 @@ public with sharing class FileService{
 
                 if (cv.Type__c == 'W4' && isLater(contact.StaffW4Received__c, docDate)){
                     contact.StaffW4Received__c = docDate;
-                }
-            }
-
-            if (cv.Category__c == 'TSiM'){
-                if (cv.Type__c == 'Application' && isLater(contact.TSiMApplicationReceived__c, docDate)){
-                    contact.TSiMApplicationReceived__c = docDate;
-                }
-
-                if (cv.Type__c == 'ProgAgreement' && isLater(contact.TSiMProgAgreementReceived__c, docDate)){
-                    contact.TSiMProgAgreementReceived__c = docDate;
                 }
             }
 

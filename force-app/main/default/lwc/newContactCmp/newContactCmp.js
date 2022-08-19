@@ -5,6 +5,7 @@ import { NavigationMixin } from "lightning/navigation";
 import NAME_FIELD from "@salesforce/schema/Contact.Name";
 import EMAIL_FIELD from "@salesforce/schema/Contact.Email";
 import PHONE_FIELD from "@salesforce/schema/Contact.Phone";
+import PREFERRED_NAME_FIELD from "@salesforce/schema/Contact.PreferredName__c";
 import PRONOUN_FIELD from "@salesforce/schema/Contact.Pronoun__c";
 import PRONOUN_OTHER_FIELD from "@salesforce/schema/Contact.PronounOther__c";
 import STREET_FIELD from "@salesforce/schema/Contact.MailingStreet";
@@ -28,6 +29,7 @@ export default class NewContact extends NavigationMixin(LightningElement) {
         name: NAME_FIELD,
         email: EMAIL_FIELD,
         phone: PHONE_FIELD,
+        preferredName: PREFERRED_NAME_FIELD,
         pronoun: PRONOUN_FIELD,
         pronounOther: PRONOUN_OTHER_FIELD,
         street: STREET_FIELD,
@@ -72,6 +74,10 @@ export default class NewContact extends NavigationMixin(LightningElement) {
             this.dispatchEvent(toast);
         } else {
             this.template.querySelector("lightning-record-edit-form").submit();
+            const toast = new ShowToastEvent({
+                message: "Creating Contact."
+            });
+            this.dispatchEvent(toast);
         }
     }
 
