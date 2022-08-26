@@ -1,8 +1,9 @@
 public with sharing class LogController {
     @AuraEnabled(Cacheable=true)
-    public static List<Log__c> getRelatedLogs(id contactId) {
+    public static RelatedObjects getRelatedLogs(id contactId) {
+        RelatedObjects related = new RelatedObjects();
         try {
-            return [
+            related.items = [
                 SELECT
                     Client__c,
                     ClientHours__c,
@@ -27,7 +28,18 @@ public with sharing class LogController {
                     Client__c = :contactId
                     OR Submitter__c = :contactId
                     OR Facilitator__c = :contactId
+                ORDER BY Date__c DESC NULLS LAST
+                LIMIT 6
             ];
+            related.total = [
+                SELECT COUNT() FROM Log__c
+                WHERE
+                    Client__c = :contactId
+                    OR Submitter__c = :contactId
+                    OR Facilitator__c = :contactId
+                ];
+            System.debug(related);
+            return related;
         } catch (Exception e) {
             throw new AuraHandledException(e.getMessage());
         }

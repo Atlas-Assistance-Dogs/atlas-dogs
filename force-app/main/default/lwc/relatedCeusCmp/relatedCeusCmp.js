@@ -130,6 +130,7 @@ export default class RelatedCeusCmp extends NavigationMixin(LightningElement) {
                 }
                 return newCeu;
             });
+            this.total = this.data.length;
             if (this.data.length === 0) {
                 this.data = null;
             }

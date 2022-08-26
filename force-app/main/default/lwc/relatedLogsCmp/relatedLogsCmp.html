@@ -1,5 +1,5 @@
 <template>
-    <c-related-object-cmp title="Logs" icon-name="standard:logging">
+    <c-related-object-cmp title="Logs" icon-name="standard:logging" total={total}>
         <div slot="actions">
             <!-- lightning button for open modal window -->
             <lightning-button label="New" title="New" onclick={createLog}>
@@ -24,6 +24,11 @@
                 >
                 </lightning-datatable>
             </template>
+        </div>
+        <div slot="footer">
+            <lightning-button class="slds-m-horizontal_x-small" variant="base" label="View all Submitter Logs" title="Submitter Logs" onclick={handleSubmitterClick}></lightning-button>
+            <lightning-button class="slds-m-horizontal_x-small" variant="base" label="View all Client Logs" title="Client Logs" onclick={handleClientClick}></lightning-button>
+            <lightning-button class="slds-m-horizontal_x-small" variant="base" label="View all Facilitator Logs" title="Facilitator Logs" onclick={handleFacilitatorClick}></lightning-button>
         </div>
     </c-related-object-cmp>
 </template>

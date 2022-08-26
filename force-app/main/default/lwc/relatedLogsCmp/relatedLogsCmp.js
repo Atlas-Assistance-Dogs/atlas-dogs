@@ -1,5 +1,6 @@
 import { LightningElement, api, wire } from "lwc";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
+import { NavigationMixin } from "lightning/navigation";
 import getRelatedLogs from "@salesforce/apex/LogController.getRelatedLogs";
 import deleteRelatedLog from "@salesforce/apex/LogController.deleteLog";
 import { refreshApex } from "@salesforce/apex";
@@ -7,6 +8,7 @@ import { refreshApex } from "@salesforce/apex";
 import ATLAS_SUPPORT_FIELD from "@salesforce/schema/Log__c.RequestSupportFromAtlas__c";
 import STRESS_FIELD from "@salesforce/schema/Log__c.Stress__c";
 import CLIENT_FIELD from "@salesforce/schema/Log__c.Client__c";
+import CLIENT_REFERENCE from "@salesforce/schema/Log__c.Client__r.Name";
 import SUBMITTER_FIELD from "@salesforce/schema/Log__c.Submitter__c";
 import FACILITATOR_FIELD from "@salesforce/schema/Log__c.Facilitator__c";
 import DATE_FIELD from "@salesforce/schema/Log__c.Date__c";
@@ -28,7 +30,7 @@ const COLS = [
     {
         label: "Date",
         fieldName: DATE_FIELD.fieldApiName,
-        type: "date",
+        type: "date-local",
         sortable: true
     },
     { label: "Role", fieldName: "roles", sortable: true, initialWidth: 140 },
@@ -59,7 +61,7 @@ const COLS = [
     { type: "action", typeAttributes: { rowActions: actions } }
 ];
 
-export default class RelatedLogsCmp extends LightningElement {
+export default class RelatedLogsCmp extends NavigationMixin(LightningElement) {
     @api recordId;
     columns = COLS;
     data = [];
@@ -121,12 +123,13 @@ export default class RelatedLogsCmp extends LightningElement {
     getLogs(result) {
         this.wiredLogs = result;
         this.data = null;
-        if (result.data) {
-            this.data = result.data.map((log) => {
+        if (result.data && result.data.items) {
+            this.data = result.data.items.map((log) => {
                 var newLog = Object.assign({}, log);
                 newLog["roles"] = this.getRoles(log);
                 return newLog;
             });
+            this.total = result.data.total;
             if (this.data.length === 0) {
                 this.data = null;
             }
@@ -185,5 +188,57 @@ export default class RelatedLogsCmp extends LightningElement {
 
     handleChange() {
         refreshApex(this.wiredLogs);
+    }
+
+    navigateRelatedClientView() {
+        this[NavigationMixin.Navigate]({
+            type: 'standard__recordRelationshipPage',
+            attributes: {
+                recordId: this.recordId,
+                objectApiName: CLIENT_FIELD.objectApiName,
+                relationshipApiName: CLIENT_FIELD.relationshipApiName,
+                actionName: 'view'
+            },
+        });
+    }
+
+    handleFacilitatorClick() {
+        this[NavigationMixin.Navigate]({
+            type: 'standard__recordRelationshipPage',
+            attributes: {
+                recordId: this.recordId,
+                objectApiName: FACILITATOR_FIELD.objectApiName,
+                relationshipApiName: FACILITATOR_FIELD.relationshipApiName,
+                actionName: 'view'
+            },
+        });
+    }
+
+    handleSubmitterClick() {
+        this[NavigationMixin.Navigate]({
+            type: 'standard__recordRelationshipPage',
+            attributes: {
+                recordId: this.recordId,
+                objectApiName: SUBMITTER_FIELD.objectApiName,
+                relationshipApiName: SUBMITTER_FIELD.relationshipApiName,
+                actionName: 'view'
+            },
+        });
+    }
+
+    handleClientClick() {
+        this[NavigationMixin.Navigate]({
+            type: 'standard__objectPage',
+            attributes: {
+                objectApiName: 'Log__c',
+                actionName: 'list'
+            },
+            state: {
+                // 'filterName' is a property on the page 'state'
+                // and identifies the target list view.
+                // It may also be an 18 character list view id.
+                filterName: 'Client' // or by 18 char '00BT0000002TONQMA4'
+            }
+        });
     }
 }
