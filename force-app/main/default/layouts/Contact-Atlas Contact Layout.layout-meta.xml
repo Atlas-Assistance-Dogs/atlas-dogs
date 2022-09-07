@@ -434,6 +434,10 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
+                <field>PuppyContractReceived__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
                 <field>PuppyCertAgreementReceived__c</field>
             </layoutItems>
             <layoutItems>

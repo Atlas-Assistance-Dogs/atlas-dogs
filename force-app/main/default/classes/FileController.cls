@@ -124,6 +124,7 @@ public inherited sharing class FileController {
                 FROM ContentVersion
                 WHERE ContentDocumentId IN :lstConDocs AND FileType != 'SNOTE'
                 ORDER BY Date__c DESC
+                LIMIT 10
             ];
         } else {
             return new List<ContentVersion>();
