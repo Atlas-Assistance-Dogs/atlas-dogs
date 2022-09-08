@@ -99,7 +99,12 @@ public inherited sharing class FileController {
     }
 
     @AuraEnabled(cacheable=true)
-    public static List<ContentVersion> getRelatedFiles(Id recordId) {
+    public static RelatedObjects getRelatedFiles(Id recordId) {
+        return getRelatedFiles(recordId, 6);
+    }
+
+    @AuraEnabled(cacheable=true)
+    public static RelatedObjects getRelatedFiles(Id recordId, Integer max) {
         if (recordId == null) {
             throw new AuraHandledException('recordId must not be null');
         }
@@ -113,8 +118,13 @@ public inherited sharing class FileController {
             lstConDocs.add(cntLink.ContentDocumentId);
         }
 
+        RelatedObjects objects = new RelatedObjects();
+
         if (!lstConDocs.isEmpty()) {
-            return [
+            objects.total = [SELECT COUNT() FROM ContentVersion
+                WHERE ContentDocumentId IN :lstConDocs AND FileType != 'SNOTE'
+            ];
+            objects.items = [
                 SELECT
                     Title,
                     ContentDocumentId,
@@ -124,10 +134,12 @@ public inherited sharing class FileController {
                 FROM ContentVersion
                 WHERE ContentDocumentId IN :lstConDocs AND FileType != 'SNOTE'
                 ORDER BY Date__c DESC
-                LIMIT 10
+                LIMIT :max
             ];
+            return objects;
         } else {
-            return new List<ContentVersion>();
+            objects.items = new List<ContentVersion>();
+            return objects;
         }
     }
 

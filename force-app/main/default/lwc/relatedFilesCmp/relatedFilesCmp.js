@@ -33,17 +33,19 @@ const COLS = [
             iconPosition: "left"
         }
     },
-    { label: "Category", fieldName: 'category' },
-    { label: "Document Type", fieldName: 'type' },
-    { label: "Document Date", fieldName: DATE_FIELD.fieldApiName, type: "date-local" },
+    { label: "Category", fieldName: 'category', sortable: true },
+    { label: "Document Type", fieldName: 'type', sortable: true },
+    { label: "Document Date", fieldName: DATE_FIELD.fieldApiName, type: "date-local", sortable: true },
     { type: "action", typeAttributes: { rowActions: actions } }
 ];
 
 export default class RelatedFiles extends NavigationMixin(LightningElement) {
     @api objectApiName;
     @api recordId;
+    @api max = 6;
     columns = COLS;
-    @track fileUploadList;
+    @track files;
+    total = 0;
 
     openModal() {
         this.template.querySelector("c-file-upload-cmp").openModal();
@@ -77,14 +79,27 @@ export default class RelatedFiles extends NavigationMixin(LightningElement) {
         }
     }
 
-    @wire(getRelatedFiles, { recordId: "$recordId" }) filesLst(result) {
+    @wire(getRelatedFiles, { recordId: "$recordId", max: "$max" }) filesLst(result) {
         this.wiredFilesList = result;
-        this.fileUploadList = null;
-        if (result.data && result.data.length > 0) {
-            this.fileUploadList = result.data.map(x => {
+        this.files = null;
+        let relatedObjects = result.data;
+        if (relatedObjects && relatedObjects.total > 0) {
+            if (this.max < 10) {
+                this.total = relatedObjects.total;
+            }
+
+            this.files = relatedObjects.items.map(x => {
                 let info = Object.assign({}, x);
-                info['type'] = this.types[x[TYPE_FIELD.fieldApiName]];
-                info['category'] = this.categories[x[CATEGORY_FIELD.fieldApiName]];
+                info['type'] = x[TYPE_FIELD.fieldApiName];
+                info['category'] = x[CATEGORY_FIELD.fieldApiName];
+
+                if (this.types) {
+                    info.type = this.types[info.type];
+                }
+                if (this.categories) {
+                    info.category = this.categories[info.category];
+                }
+                
                 return info;
             });
         } else if (result.error) {
@@ -104,6 +119,37 @@ export default class RelatedFiles extends NavigationMixin(LightningElement) {
 
     @wire(MessageContext)
     messageContext;
+
+    defaultSortDirection = "asc";
+    sortDirection = "asc";
+    sortedBy;
+
+    // Used to sort the columns
+    sortBy(field, reverse, primer) {
+        const key = primer
+            ? function (x) {
+                  return primer(x[field]);
+              }
+            : function (x) {
+                  return x[field];
+              };
+
+        return function (a, b) {
+            a = key(a);
+            b = key(b);
+            return reverse * ((a > b) - (b > a));
+        };
+    }
+
+    handleSort(event) {
+        const { fieldName: sortedBy, sortDirection } = event.detail;
+        const cloneData = [...this.files];
+
+        cloneData.sort(this.sortBy(sortedBy, sortDirection === "asc" ? 1 : -1));
+        this.files = cloneData;
+        this.sortDirection = sortDirection;
+        this.sortedBy = sortedBy;
+    }
 
     handleRowAction(event) {
         const actionName = event.detail.action.name;
@@ -162,5 +208,9 @@ export default class RelatedFiles extends NavigationMixin(LightningElement) {
                     })
                 );
             });
+    }
+
+    handleViewAll(){
+
     }
 }
