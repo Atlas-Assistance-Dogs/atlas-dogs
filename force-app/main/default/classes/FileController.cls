@@ -99,6 +99,11 @@ public inherited sharing class FileController {
     }
 
     @AuraEnabled(cacheable=true)
+    public static String getRelatedFilesPage() {
+        return System.Page.RelatedFiles.getUrl();
+    }
+
+    @AuraEnabled(cacheable=true)
     public static RelatedObjects getRelatedFiles(Id recordId) {
         return getRelatedFiles(recordId, 6);
     }

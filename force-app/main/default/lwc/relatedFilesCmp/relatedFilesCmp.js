@@ -211,6 +211,15 @@ export default class RelatedFiles extends NavigationMixin(LightningElement) {
     }
 
     handleViewAll(){
-
+        // Navigate to a specific CustomTab.
+        this[NavigationMixin.Navigate]({
+            type: 'standard__component',
+            attributes: {
+                componentName: 'c__FilesCmp'
+            },
+            state: {
+                c__id: this.recordId
+            }
+        });
     }
 }
