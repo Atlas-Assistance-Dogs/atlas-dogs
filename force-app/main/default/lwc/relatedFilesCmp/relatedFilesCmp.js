@@ -1,7 +1,7 @@
 import { LightningElement, api, wire, track } from "lwc";
 import { getObjectInfo } from 'lightning/uiObjectInfoApi';
 import { getPicklistValues } from 'lightning/uiObjectInfoApi';
-import getRelatedFiles from "@salesforce/apex/FileController.getRelatedFiles";
+import getRelatedFiles from "@salesforce/apex/FileController.getRelated";
 import deleteRecord from "@salesforce/apex/FileController.deleteRecord";
 import { refreshApex } from "@salesforce/apex";
 import { NavigationMixin } from "lightning/navigation";

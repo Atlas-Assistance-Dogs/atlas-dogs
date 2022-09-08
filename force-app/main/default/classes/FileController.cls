@@ -99,12 +99,16 @@ public inherited sharing class FileController {
     }
 
     @AuraEnabled(cacheable=true)
-    public static RelatedObjects getRelatedFiles(Id recordId) {
-        return getRelatedFiles(recordId, 6);
+    public static List<ContentVersion> getRelatedFiles(Id recordId) {
+        List<ContentVersion> files = new List<ContentVersion>();
+        for (SObject item : getRelated(recordId, 10000).items) {
+            files.add((ContentVersion)item);
+        }
+        return files;
     }
 
     @AuraEnabled(cacheable=true)
-    public static RelatedObjects getRelatedFiles(Id recordId, Integer max) {
+    public static RelatedObjects getRelated(Id recordId, Integer max) {
         if (recordId == null) {
             throw new AuraHandledException('recordId must not be null');
         }
