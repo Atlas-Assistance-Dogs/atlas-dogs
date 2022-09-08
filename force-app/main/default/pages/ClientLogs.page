@@ -1,3 +1,0 @@
-<apex:page standardController="Log__c">
-    <apex:relatedList list="Client__r" />
-</apex:page>

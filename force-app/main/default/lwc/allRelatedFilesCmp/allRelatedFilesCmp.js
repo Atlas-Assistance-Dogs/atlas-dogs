@@ -8,8 +8,6 @@ const fields = [
     NAME_FIELD
 ];
 
-import recordSelected from '@salesforce/messageChannel/RelatedFiles__c';
-
 export default class AllRelatedFilesCmp extends NavigationMixin(LightningElement) {
     @api recordId = '00319000010uTqDAAU';
  
