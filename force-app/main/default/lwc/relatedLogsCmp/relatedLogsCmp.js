@@ -103,7 +103,7 @@ export default class RelatedLogsCmp extends LightningElement {
         const row = event.detail.row;
         switch (actionName) {
             case "delete":
-                this.deleteLog(row.id);
+                this.deleteLog(row.Id);
                 break;
             case "edit":
                 const payload = {
