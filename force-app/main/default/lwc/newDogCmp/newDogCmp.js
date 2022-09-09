@@ -27,7 +27,7 @@ export default class NewDogCmp extends NavigationMixin(LightningElement) {
         breed: BREED_FIELD,
         gender: GENDER_FIELD,
         spayed: SPAYED_NEUTERED_FIELD,
-        birthDate: BIRTHDATE_FIELD,
+        birthdate: BIRTHDATE_FIELD,
         status: STATUS_FIELD,
         microchip: MICROCHIP_FIELD,
         health: HEALTH_FIELD,
