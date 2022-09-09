@@ -494,7 +494,7 @@
         <customLabel>true</customLabel>
         <detailHeading>true</detailHeading>
         <editHeading>true</editHeading>
-        <label>Staff Specific Details</label>
+        <label>Staff/Contractor Specific Details</label>
         <layoutColumns/>
         <layoutColumns>
             <layoutItems>
@@ -520,6 +520,10 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>StaffI9Received__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>StaffW9Received__c</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsLeftToRight</style>

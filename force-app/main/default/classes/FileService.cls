@@ -246,6 +246,7 @@ public with sharing class FileService{
         if (cv.Type__c == 'Contract' && isLater(contact.PuppyContractReceived__c, cv.Date__c)){
             contact.PuppyContractReceived__c = cv.Date__c;
         }
+                if (cv.Type__c == 'W4' && isLater(contact.StaffW4Received__c, docDate)){
 
         if (cv.Type__c == 'InfrNotice' && isLater(contact.PuppyInfrNoticeReceived__c, cv.Date__c)){
             contact.PuppyInfrNoticeReceived__c = cv.Date__c;
