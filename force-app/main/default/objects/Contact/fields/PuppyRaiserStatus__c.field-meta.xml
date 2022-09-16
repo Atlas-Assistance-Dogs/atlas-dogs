@@ -21,21 +21,6 @@
                 <label>Inactive</label>
             </value>
             <value>
-                <fullName>Initial Inquiry</fullName>
-                <default>false</default>
-                <label>Initial Inquiry</label>
-            </value>
-            <value>
-                <fullName>Onboarding</fullName>
-                <default>false</default>
-                <label>Onboarding</label>
-            </value>
-            <value>
-                <fullName>In Training</fullName>
-                <default>false</default>
-                <label>In Training</label>
-            </value>
-            <value>
                 <fullName>None</fullName>
                 <default>true</default>
                 <label>None</label>
@@ -44,6 +29,22 @@
                 <fullName>Active</fullName>
                 <default>false</default>
                 <label>Active</label>
+            </value>
+            <value>
+                <fullName>Initial Inquiry</fullName>
+                <default>false</default>
+                <label>Initial Inquiry</label>
+            </value>
+            <value>
+                <fullName>In Training</fullName>
+                <default>false</default>
+                <label>In Training</label>
+            </value>
+                <default>false</default>
+            <value>
+                <fullName>Onboarding</fullName>
+                <default>false</default>
+                <label>Onboarding</label>
             </value>
             <value>
                 <fullName>Suspended</fullName>
