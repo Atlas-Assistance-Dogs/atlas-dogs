@@ -1,7 +1,7 @@
 <template>
     <c-related-object-cmp
         title="Puppy Raiser Logs"
-        icon-name="standard:password"
+        icon-name="standard:logging"
         total={total}
     >
         <div slot="actions">
@@ -28,6 +28,9 @@
                 >
                 </lightning-datatable>
             </template>
+        </div>
+        <div slot="footer">
+        <lightning-button variant="base" label="View All" title="View all Puppy Raiser Logs" onclick={handleViewAll}></lightning-button>
         </div>
     </c-related-object-cmp>
 </template>

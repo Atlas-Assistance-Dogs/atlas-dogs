@@ -158,4 +158,14 @@ export default class RelatedPuppyLogsCmp extends NavigationMixin(
     handleChange() {
         refreshApex(this.wiredLogs);
     }
+
+    handleViewAll() {
+        this.dispatchEvent(
+            new ShowToastEvent({
+                title: "So you want to see them all",
+                message: "I'm working on it"
+            })
+        );
+
+    }
 }

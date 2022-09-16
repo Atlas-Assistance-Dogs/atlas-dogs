@@ -75,6 +75,26 @@
             <componentInstance>
                 <componentName>relatedCeusCmp</componentName>
                 <identifier>relatedCeusCmp</identifier>
+                <visibilityRule>
+                    <criteria>
+                        <leftValue>{!Record.TrainerStatus__c}</leftValue>
+                        <operator>NE</operator>
+                        <rightValue>None</rightValue>
+                    </criteria>
+                </visibilityRule>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentName>relatedPuppyLogsCmp</componentName>
+                <identifier>c_relatedPuppyLogsCmp</identifier>
+                <visibilityRule>
+                    <criteria>
+                        <leftValue>{!Record.PuppyRaiserStatus__c}</leftValue>
+                        <operator>NE</operator>
+                        <rightValue>None</rightValue>
+                    </criteria>
+                </visibilityRule>
             </componentInstance>
         </itemInstances>
         <itemInstances>

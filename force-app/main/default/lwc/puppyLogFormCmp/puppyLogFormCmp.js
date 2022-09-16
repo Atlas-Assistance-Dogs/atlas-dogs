@@ -97,7 +97,6 @@ export default class PuppyLogFormCmp extends NavigationMixin(LightningElement) {
     handleLogChanged(event) {
         this.dispatchEvent(new CustomEvent("changed", { detail: event.detail.id }));
         relateFile({documentId: this.documentId, recordId: event.detail.id});
-        window.history.back();
     }
 
 }

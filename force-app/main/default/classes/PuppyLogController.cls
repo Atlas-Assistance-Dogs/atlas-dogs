@@ -36,6 +36,7 @@ public with sharing class PuppyLogController {
                 plog.dogName = log.Dog__r.Name;
                 plog.raiserId = log.Raiser__c;
                 plog.raiserName = log.Raiser__r.Name;
+                plog.support = log.RequestSupportFromAtlas__c;
                 plog.additional = log.AdditionalInformation__c;
 
                 List<ContentVersion> files = FileController.getRelatedFiles(log.Id);
