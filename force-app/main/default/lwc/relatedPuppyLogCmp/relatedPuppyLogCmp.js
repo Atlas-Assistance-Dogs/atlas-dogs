@@ -60,7 +60,6 @@ export default class RelatedPuppyLogCmp extends NavigationMixin(
         unsubscribe(this.subscription);
         this.subscription = null;
     }
-    
     // Handler for message received by component
     handleMessage(message) {
         this.recordId = message.recordId;
