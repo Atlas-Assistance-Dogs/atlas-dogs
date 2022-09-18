@@ -46,6 +46,11 @@
                 <label>Onboarding</label>
             </value>
             <value>
+                <fullName>Active</fullName>
+                <default>false</default>
+                <label>Active</label>
+            </value>
+            <value>
                 <fullName>Suspended</fullName>
                 <default>false</default>
                 <label>Suspended</label>
