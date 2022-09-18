@@ -101,7 +101,7 @@ public inherited sharing class FileController {
     @AuraEnabled(cacheable=true)
     public static List<ContentVersion> getRelatedFiles(Id recordId) {
         List<ContentVersion> files = new List<ContentVersion>();
-        for (SObject item : getRelated(recordId, 10000).items) {
+        for (Object item : getRelated(recordId, 10000).items) {
             files.add((ContentVersion)item);
         }
         return files;
@@ -128,7 +128,7 @@ public inherited sharing class FileController {
             objects.total = [SELECT COUNT() FROM ContentVersion
                 WHERE ContentDocumentId IN :lstConDocs AND FileType != 'SNOTE'
             ];
-            objects.items = [
+            List<SObject> sobjects = [
                 SELECT
                     Title,
                     ContentDocumentId,
@@ -140,9 +140,11 @@ public inherited sharing class FileController {
                 ORDER BY Date__c DESC
                 LIMIT :max
             ];
+            for (SObject file : sobjects) {
+                objects.items.add(file);
+            }
             return objects;
         } else {
-            objects.items = new List<ContentVersion>();
             return objects;
         }
     }

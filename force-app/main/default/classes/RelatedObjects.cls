@@ -5,5 +5,9 @@ public with sharing class RelatedObjects {
     
     // Records of the object
     @AuraEnabled
-    public List<SObject> items { get; set; }
+    public List<Object> items { get; set; }
+
+    public RelatedObjects() {
+        items = new List<Object>();
+    }
 }
