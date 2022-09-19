@@ -160,12 +160,15 @@ export default class RelatedPuppyLogsCmp extends NavigationMixin(
     }
 
     handleViewAll() {
-        this.dispatchEvent(
-            new ShowToastEvent({
-                title: "So you want to see them all",
-                message: "I'm working on it"
-            })
-        );
-
+        // Navigate to a specific component.
+        this[NavigationMixin.Navigate]({
+            type: 'standard__component',
+            attributes: {
+                componentName: 'c__PuppyLogsCmp'
+            },
+            state: {
+                c__id: this.recordId
+            }
+        });
     }
 }
