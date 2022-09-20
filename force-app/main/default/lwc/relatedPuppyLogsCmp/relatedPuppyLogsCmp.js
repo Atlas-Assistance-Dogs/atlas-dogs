@@ -23,7 +23,7 @@ const COLS = [
     },
     { label: "Raiser", fieldName: 'raiserName', sortable: true },
     { label: "Dog", fieldName: 'dogName', sortable: true },
-    { label: "Support?", fieldName: 'support', sortable: true },
+    { label: "Support?", fieldName: 'support', sortable: true, type: "boolean" },
     {
         label: "File",
         type: "button",
@@ -140,8 +140,13 @@ export default class RelatedPuppyLogsCmp extends NavigationMixin(
     }
 
     deleteLog(recordId) {
-        deleteRecord({ recordId: recordId })
+        deleteRecord(recordId)
             .then(() => {
+                this.dispatchEvent(
+                    new ShowToastEvent({
+                        title: "Record Deleted"
+                    })
+                );
                 this.handleChange();
             })
             .catch((error) => {
