@@ -8,9 +8,7 @@ import GENDER_FIELD from "@salesforce/schema/Dog__c.Gender__c";
 import SPAYED_NEUTERED_FIELD from "@salesforce/schema/Dog__c.SpayedNeutered__c";
 import BIRTHDATE_FIELD from "@salesforce/schema/Dog__c.Birthdate__c";
 import STATUS_FIELD from "@salesforce/schema/Dog__c.Status__c";
-import ACTIVATION_DATE_FIELD from "@salesforce/schema/Dog__c.ActivationDate__c";
 import MICROCHIP_FIELD from "@salesforce/schema/Dog__c.MicrochipNumber__c";
-import VET_CLINIC_FIELD from "@salesforce/schema/Dog__c.VetClinic__c";
 import HEALTH_FIELD from "@salesforce/schema/Dog__c.LatestPhysicalExamOutcome__c";
 import EXAM_DUE_FIELD from "@salesforce/schema/Dog__c.PhysicalExamDue__c";
 import HEPATITIS_DUE_FIELD from "@salesforce/schema/Dog__c.VaccineDueHepatitis__c";
@@ -29,11 +27,9 @@ export default class NewDogCmp extends NavigationMixin(LightningElement) {
         breed: BREED_FIELD,
         gender: GENDER_FIELD,
         spayed: SPAYED_NEUTERED_FIELD,
-        birthDate: BIRTHDATE_FIELD,
+        birthdate: BIRTHDATE_FIELD,
         status: STATUS_FIELD,
-        activation: ACTIVATION_DATE_FIELD,
         microchip: MICROCHIP_FIELD,
-        vet: VET_CLINIC_FIELD,
         health: HEALTH_FIELD,
         examDue: EXAM_DUE_FIELD,
         hepDue: HEPATITIS_DUE_FIELD,

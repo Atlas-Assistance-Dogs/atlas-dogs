@@ -163,6 +163,13 @@ export default class RelatedLogsCmp extends LightningElement {
     deleteLog(recordId) {
         deleteRelatedLog({ recordId: recordId })
             .then(() => {
+                this.dispatchEvent(
+                    new ShowToastEvent({
+                        title: "Success",
+                        message: 'Log Deleted',
+                        variant: "success"
+                    })
+                );
                 this.handleChange();
             })
             .catch((error) => {
