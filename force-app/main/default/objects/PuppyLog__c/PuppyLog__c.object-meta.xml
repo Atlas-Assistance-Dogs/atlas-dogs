@@ -160,8 +160,13 @@
         <label>Puppy Log Name</label>
         <type>AutoNumber</type>
     </nameField>
-    <pluralLabel>Puppy Logs</pluralLabel>
-    <searchLayouts/>
+    <pluralLabel>Puppy Raiser Logs</pluralLabel>
+    <searchLayouts>
+        <searchResultsAdditionalFields>Date__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Raiser__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Dog__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>RequestSupportFromAtlas__c</searchResultsAdditionalFields>
+    </searchLayouts>
     <sharingModel>ReadWrite</sharingModel>
     <visibility>Public</visibility>
 </CustomObject>

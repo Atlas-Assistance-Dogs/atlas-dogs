@@ -1,7 +1,7 @@
 import { LightningElement, api, wire } from "lwc";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
 import { NavigationMixin } from "lightning/navigation";
-import getLatestRelatedLogs from "@salesforce/apex/PuppyLogController.getLatestRelatedLogs";
+import getRelatedLogs from "@salesforce/apex/PuppyLogController.getRelatedLogs";
 import { deleteRecord } from 'lightning/uiRecordApi';
 import { refreshApex } from "@salesforce/apex";
 
@@ -43,10 +43,12 @@ export default class RelatedPuppyLogsCmp extends NavigationMixin(
     LightningElement
 ) {
     @api recordId;
+    @api objectApiName;
     columns = COLS;
     data = [];
     total = 0;
     wiredLogs;
+    @api max = 6;
 
     @wire(MessageContext)
     messageContext;
@@ -112,7 +114,7 @@ export default class RelatedPuppyLogsCmp extends NavigationMixin(
         });
     }
 
-    @wire(getLatestRelatedLogs, { recordId: "$recordId" })
+    @wire(getRelatedLogs, { recordId: "$recordId", max: "$max" })
     getLogs(result) {
         this.wiredLogs = result;
         this.data = null;
@@ -122,7 +124,9 @@ export default class RelatedPuppyLogsCmp extends NavigationMixin(
                 this.data = null;
                 this.total = 0;
             }
-            this.total = result.data.total;
+            if (this.max < 15) {
+                this.total = result.data.total;
+            }
         } else if (result.error) {
             this.dispatchEvent(
                 new ShowToastEvent({
@@ -136,6 +140,12 @@ export default class RelatedPuppyLogsCmp extends NavigationMixin(
 
     createLog(event) {
         const payload = { mode: "create" };
+        if (this.objectApiName == 'Contact') {
+            payload['contactId'] = this.recordId;
+        }
+        else {
+            payload['dogId'] = this.recordId;
+        }
         publish(this.messageContext, puppyLogForm, payload);
     }
 

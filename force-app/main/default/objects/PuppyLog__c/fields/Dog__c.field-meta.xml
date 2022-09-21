@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Dog__c</fullName>
-    <deleteConstraint>SetNull</deleteConstraint>
+    <deleteConstraint>Restrict</deleteConstraint>
     <externalId>false</externalId>
     <label>Dog</label>
     <referenceTo>Dog__c</referenceTo>
     <relationshipLabel>Puppy Raiser Logs</relationshipLabel>
     <relationshipName>PuppyLogs</relationshipName>
-    <required>false</required>
+    <required>true</required>
     <trackTrending>false</trackTrending>
     <type>Lookup</type>
 </CustomField>

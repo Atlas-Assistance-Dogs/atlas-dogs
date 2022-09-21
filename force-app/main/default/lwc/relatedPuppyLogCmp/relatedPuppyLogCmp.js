@@ -60,10 +60,15 @@ export default class RelatedPuppyLogCmp extends NavigationMixin(
         unsubscribe(this.subscription);
         this.subscription = null;
     }
-
+    
     // Handler for message received by component
     handleMessage(message) {
         this.recordId = message.recordId;
+        // Set defaults if this is a new record
+        if (!message.recordId) {
+            this.contactId = message.contactId;
+            this.dogId = message.dogId;
+        }
         refreshApex();
         this.openModal();
     }

@@ -7,8 +7,12 @@
         <fieldName>recordId</fieldName>
     </lightningMessageFields>
     <lightningMessageFields>
-        <description>Roles the contact has for the record.</description>
-        <fieldName>roles</fieldName>
+        <description>Contact ID the record is accessed from.</description>
+        <fieldName>contactId</fieldName>
+    </lightningMessageFields>
+    <lightningMessageFields>
+        <description>Dog ID the record is accessed from.</description>
+        <fieldName>dogId</fieldName>
     </lightningMessageFields>
     <masterLabel>Puppy Log Form</masterLabel>
 </LightningMessageChannel>

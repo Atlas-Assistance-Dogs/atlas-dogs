@@ -14,9 +14,14 @@ import SUPPORT_FIELD from "@salesforce/schema/PuppyLog__c.RequestSupportFromAtla
 export default class PuppyLogFormCmp extends NavigationMixin(LightningElement) {
     @api recordId;
     @api contactId;
+    @api dogId;
     currentCv;
     wiredCv;
     message;
+
+    get today() {
+        return new Date().toISOString();
+    }
 
     objectName = RAISER_FIELD.objectApiName;
 
@@ -31,6 +36,15 @@ export default class PuppyLogFormCmp extends NavigationMixin(LightningElement) {
     get acceptedFormats() {
         return [
             ".pdf",
+            ".png",
+            ".jpg",
+            ".jpeg",
+            ".doc",
+            ".docx",
+            ".txt",
+            ".xlsx",
+            ".xls",
+            ".csv"
         ];
     }
 

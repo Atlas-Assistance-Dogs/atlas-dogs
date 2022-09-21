@@ -4,7 +4,7 @@
     <description>Log date</description>
     <externalId>false</externalId>
     <label>Date</label>
-    <required>false</required>
+    <required>true</required>
     <trackTrending>false</trackTrending>
     <type>Date</type>
 </CustomField>
