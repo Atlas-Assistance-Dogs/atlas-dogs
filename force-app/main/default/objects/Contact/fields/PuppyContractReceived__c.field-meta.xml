@@ -3,7 +3,7 @@
     <fullName>PuppyContractReceived__c</fullName>
     <description>The date the most recent version of Puppy Raiser Contract was uploaded</description>
     <externalId>false</externalId>
-    <label>Last Puppy Raiser Cert Agreement</label>
+    <label>Last Puppy Raiser Contract</label>
     <required>false</required>
     <trackFeedHistory>false</trackFeedHistory>
     <type>Date</type>
