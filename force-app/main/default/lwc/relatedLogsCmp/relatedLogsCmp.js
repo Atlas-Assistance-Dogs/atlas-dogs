@@ -103,7 +103,7 @@ export default class RelatedLogsCmp extends LightningElement {
         const row = event.detail.row;
         switch (actionName) {
             case "delete":
-                this.deleteLog(row.id);
+                this.deleteLog(row.Id);
                 break;
             case "edit":
                 const payload = {
@@ -163,6 +163,13 @@ export default class RelatedLogsCmp extends LightningElement {
     deleteLog(recordId) {
         deleteRelatedLog({ recordId: recordId })
             .then(() => {
+                this.dispatchEvent(
+                    new ShowToastEvent({
+                        title: "Success",
+                        message: 'Log Deleted',
+                        variant: "success"
+                    })
+                );
                 this.handleChange();
             })
             .catch((error) => {
