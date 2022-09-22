@@ -10,12 +10,13 @@ public class TestBackgroundCheckController {
         insert contact;
 
         Test.startTest();
-        List<BackgroundCheck> checks = BackgroundCheckController.getRelatedChecks(
-            contact.Id
+        RelatedObjects checks = BackgroundCheckController.getRelatedChecks(
+            contact.Id, 6
         );
         Test.stopTest();
 
-        System.assertEquals(0, checks.size());
+        System.assertEquals(0, checks.items.size());
+        System.assertEquals(0, checks.total);
     }
 
     private static Contact jack;
@@ -55,12 +56,13 @@ public class TestBackgroundCheckController {
         insert bgCheck;
 
         Test.startTest();
-        List<BackgroundCheck> checks = BackgroundCheckController.getRelatedChecks(
-            jack.Id
+        RelatedObjects checks = BackgroundCheckController.getRelatedChecks(
+            jack.Id, 6
         );
         Test.stopTest();
 
-        System.assertEquals(0, checks.size());
+        System.assertEquals(0, checks.items.size());
+        System.assertEquals(0, checks.total);
     }
 
     @isTest
@@ -75,12 +77,13 @@ public class TestBackgroundCheckController {
         insert bgCheck;
 
         Test.startTest();
-        List<BackgroundCheck> checks = BackgroundCheckController.getRelatedChecks(
-            jill.Id
+        RelatedObjects checks = BackgroundCheckController.getRelatedChecks(
+            jill.Id, 6
         );
         Test.stopTest();
 
-        System.assertEquals(1, checks.size());
+        System.assertEquals(1, checks.items.size());
+        System.assertEquals(1, checks.total);
     }
 
     @isTest
@@ -111,13 +114,14 @@ public class TestBackgroundCheckController {
         FileController.relateFile(contentDocumentId, bgCheck.Id, Date.today());
 
         Test.startTest();
-        List<BackgroundCheck> checks = BackgroundCheckController.getRelatedChecks(
-            jill.Id
+        RelatedObjects checks = BackgroundCheckController.getRelatedChecks(
+            jill.Id, 6
         );
         Test.stopTest();
 
-        System.assertEquals(1, checks.size());
-        BackgroundCheck check = checks[0];
+        System.assertEquals(1, checks.items.size());
+        System.assertEquals(1, checks.total);
+        BackgroundCheck check = (BackgroundCheck)checks.items[0];
         System.assertEquals(contentDocumentId, check.documentId);
         System.assertEquals('Pass', check.status);
         System.assertEquals(Date.today(), check.completedDate);
@@ -213,12 +217,13 @@ public class TestBackgroundCheckController {
         Test.stopTest();
 
         BackgroundCheck__c check = [SELECT Id FROM BackgroundCheck__c LIMIT 1];
-        List<ContentVersion> contentVersion = FileController.getRelatedFiles(
-            check.Id
+        RelatedObjects related = FileController.getRelatedFiles(
+            check.Id, 6
         );
+        ContentVersion cv = (ContentVersion)related.items[0];
         System.assertEquals(
             contentDocumentId,
-            contentVersion[0].ContentDocumentId
+            cv.ContentDocumentId
         );
     }
 

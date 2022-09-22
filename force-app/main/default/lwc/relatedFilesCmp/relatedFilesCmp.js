@@ -44,7 +44,7 @@ export default class RelatedFiles extends NavigationMixin(LightningElement) {
     @api recordId;
     @api max = 6;
     columns = COLS;
-    @track files;
+    @track data;
     total = 0;
 
     openModal() {
@@ -53,55 +53,18 @@ export default class RelatedFiles extends NavigationMixin(LightningElement) {
     @wire(getObjectInfo, { objectApiName: CV_OBJECT })
     objectInfo;
 
-    get recordTypeId() {
-        // Returns a map of record type Ids 
-        const rtis = this.objectInfo.data.recordTypeInfos;
-        return Object.keys(rtis).find(rti => rtis[rti].name === 'Special Account');
-    }
-
-    types;
-
-    @wire(getPicklistValues, { recordTypeId: "$objectInfo.data.defaultRecordTypeId", fieldApiName: TYPE_FIELD })
-    getTypeValues(result) {
-        if (result.data && result.data.values && result.data.values.length > 0)
-        {
-            this.types = Object.assign({}, ...result.data.values.map((x) => ({[x.value]: x.label})));
-        }
-    }
-
-    categories;
-
-    @wire(getPicklistValues, { recordTypeId: "$objectInfo.data.defaultRecordTypeId", fieldApiName: CATEGORY_FIELD })
-    getCategoryValues(result) {
-        if (result.data && result.data.values && result.data.values.length > 0)
-        {
-            this.categories = Object.assign({}, ...result.data.values.map((x) => ({[x.value]: x.label})));
-        }
-    }
-
     @wire(getRelatedFiles, { recordId: "$recordId", max: "$max" }) filesLst(result) {
         this.wiredFilesList = result;
-        this.files = null;
-        let relatedObjects = result.data;
-        if (relatedObjects && relatedObjects.total > 0) {
-            if (this.max < 10) {
-                this.total = relatedObjects.total;
+        this.data = null;
+        if (result.data) {
+            this.data = result.data.items;
+            if (this.data.length === 0) {
+                this.data = null;
+                this.total = 0;
             }
-
-            this.files = relatedObjects.items.map(x => {
-                let info = Object.assign({}, x);
-                info['type'] = x[TYPE_FIELD.fieldApiName];
-                info['category'] = x[CATEGORY_FIELD.fieldApiName];
-
-                if (this.types) {
-                    info.type = this.types[info.type];
-                }
-                if (this.categories) {
-                    info.category = this.categories[info.category];
-                }
-                
-                return info;
-            });
+            if (this.max < 15) {
+                this.total = result.data.total;
+            }
         } else if (result.error) {
             this.dispatchEvent(
                 new ShowToastEvent({
@@ -210,8 +173,21 @@ export default class RelatedFiles extends NavigationMixin(LightningElement) {
             });
     }
 
-    handleViewAll(){
-        // Navigate to a specific CustomTab.
+    handleViewAll() {
+        // Navigate to a specific component.
+        this[NavigationMixin.Navigate]({
+            type: 'standard__component',
+            attributes: {
+                componentName: 'c__FilesCmp'
+            },
+            state: {
+                c__id: this.recordId
+            }
+        });
+    }
+
+    handleViewAll() {
+        // Navigate to a specific component.
         this[NavigationMixin.Navigate]({
             type: 'standard__component',
             attributes: {

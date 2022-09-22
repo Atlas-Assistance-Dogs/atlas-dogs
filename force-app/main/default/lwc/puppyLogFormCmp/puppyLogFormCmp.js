@@ -52,12 +52,12 @@ export default class PuppyLogFormCmp extends NavigationMixin(LightningElement) {
         return this.currentCv;
     }
 
-    @wire(getRelatedFiles, { recordId: "$recordId" })
+    @wire(getRelatedFiles, { recordId: "$recordId", max: 1 })
     getFiles(result) {
         this.wiredCv = result;
         this.currentCv = null;
-        if (result.data) {
-            this.currentCv = result.data[0];
+        if (result.data?.items) {
+            this.currentCv = result.data.items[0];
         } else if (result.error) {
             this.dispatchEvent(
                 new ShowToastEvent({

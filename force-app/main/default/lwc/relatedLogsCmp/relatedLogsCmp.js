@@ -63,6 +63,7 @@ const COLS = [
 
 export default class RelatedLogsCmp extends NavigationMixin(LightningElement) {
     @api recordId;
+    @api max = 6;
     columns = COLS;
     data = [];
 
@@ -119,7 +120,7 @@ export default class RelatedLogsCmp extends NavigationMixin(LightningElement) {
         }
     }
 
-    @wire(getRelatedLogs, { contactId: "$recordId" })
+    @wire(getRelatedLogs, { contactId: "$recordId", max: "$max" })
     getLogs(result) {
         this.wiredLogs = result;
         this.data = null;
@@ -129,9 +130,12 @@ export default class RelatedLogsCmp extends NavigationMixin(LightningElement) {
                 newLog["roles"] = this.getRoles(log);
                 return newLog;
             });
-            this.total = result.data.total;
             if (this.data.length === 0) {
                 this.data = null;
+                this.total = 0;
+            }
+            if (this.max < 15) {
+                this.total = result.data.total;
             }
         } else if (result.error) {
             this.dispatchEvent(
@@ -190,54 +194,15 @@ export default class RelatedLogsCmp extends NavigationMixin(LightningElement) {
         refreshApex(this.wiredLogs);
     }
 
-    navigateRelatedClientView() {
+    handleViewAll() {
+        // Navigate to a specific component.
         this[NavigationMixin.Navigate]({
-            type: 'standard__recordRelationshipPage',
+            type: 'standard__component',
             attributes: {
-                recordId: this.recordId,
-                objectApiName: CLIENT_FIELD.objectApiName,
-                relationshipApiName: CLIENT_FIELD.relationshipApiName,
-                actionName: 'view'
-            },
-        });
-    }
-
-    handleFacilitatorClick() {
-        this[NavigationMixin.Navigate]({
-            type: 'standard__recordRelationshipPage',
-            attributes: {
-                recordId: this.recordId,
-                objectApiName: FACILITATOR_FIELD.objectApiName,
-                relationshipApiName: FACILITATOR_FIELD.relationshipApiName,
-                actionName: 'view'
-            },
-        });
-    }
-
-    handleSubmitterClick() {
-        this[NavigationMixin.Navigate]({
-            type: 'standard__recordRelationshipPage',
-            attributes: {
-                recordId: this.recordId,
-                objectApiName: SUBMITTER_FIELD.objectApiName,
-                relationshipApiName: SUBMITTER_FIELD.relationshipApiName,
-                actionName: 'view'
-            },
-        });
-    }
-
-    handleClientClick() {
-        this[NavigationMixin.Navigate]({
-            type: 'standard__objectPage',
-            attributes: {
-                objectApiName: 'Log__c',
-                actionName: 'list'
+                componentName: 'c__LogsCmp'
             },
             state: {
-                // 'filterName' is a property on the page 'state'
-                // and identifies the target list view.
-                // It may also be an 18 character list view id.
-                filterName: 'Client' // or by 18 char '00BT0000002TONQMA4'
+                c__id: this.recordId
             }
         });
     }

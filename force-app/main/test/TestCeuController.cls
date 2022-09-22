@@ -129,12 +129,13 @@ public with sharing class TestCeuController {
         }
         ContinuingEducationUnit__c newCeu = ContinuingEducationUnitController.createCeu(ceu, documentIds);
 
-        List<ContentVersion> relatedCvs = FileController.getRelatedFiles(newCeu.Id);
-        System.assertEquals(cvs.size(), relatedCvs.size());
+        RelatedObjects relatedCvs = FileController.getRelatedFiles(newCeu.Id, 6);
+        System.assertEquals(cvs.size(), relatedCvs.items.size());
+        System.assertEquals(cvs.size(), relatedCvs.total);
 
         for (Integer idx = 0; idx < cvs.size(); idx++) {
             ContentVersion expected = cvs[idx];
-            ContentVersion actual = relatedCvs[idx];
+            ContentVersion actual = (ContentVersion)relatedCvs.items[idx];
             //system.assertEquals(expected.ContentDocumentId, actual.ContentDocumentId);
         }
     }
