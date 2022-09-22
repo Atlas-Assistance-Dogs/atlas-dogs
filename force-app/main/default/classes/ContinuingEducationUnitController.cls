@@ -1,10 +1,14 @@
 public with sharing class ContinuingEducationUnitController {
     // This method is used by the related list component, and needs more than just the background check
     @AuraEnabled(Cacheable=true)
-    public static List<ContinuingEducationUnit__c> getRelatedCeus(
-        Id contactId
+    public static RelatedObjects getRelatedCeus(
+        Id contactId, Integer max
     ) {
+        if (max == null) {
+            max = 6;
+        }
         try {
+            RelatedObjects related = new RelatedObjects();
             List<ContinuingEducationUnit__c> ceus = [
                 SELECT
                     Authority__c,
@@ -21,8 +25,13 @@ public with sharing class ContinuingEducationUnitController {
                     Trainer__c
                 FROM ContinuingEducationUnit__c
                 WHERE Trainer__c = :contactId
+                LIMIT :max
             ];
-            return ceus;
+            for (ContinuingEducationUnit__c ceu : ceus) {
+                related.items.add(ceu);
+            }
+            related.total = [SELECT Count() FROM ContinuingEducationUnit__c WHERE Trainer__c = :contactId];
+            return related;
         } catch (Exception e) {
             throw new AuraHandledException(e.getMessage());
         }
