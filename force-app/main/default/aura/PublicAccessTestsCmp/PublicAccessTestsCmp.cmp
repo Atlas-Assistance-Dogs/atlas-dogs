@@ -1,7 +1,8 @@
+<aura:component implements="lightning:isUrlAddressable" description="c:Public Access Tests component">
     <aura:attribute name="id" type="String" />
     <!-- Add an "init" handler to handle the first "v.pageReference" value -->
     <aura:handler name="init" value="{!this}" action="{!c.onPageReferenceChange}"/>
     <!-- Add a "change" handler to handle all changes to the "v.pageReference" value -->
     <aura:handler name="change" value="{!v.pageReference}" action="{!c.onPageReferenceChange}"/>
-    <c:allFilesCmp recordId="{!v.id}" objectApiName="{!v.object}"></c:allFilesCmp>
+    <c:allPatsCmp recordId="{!v.id}"></c:allPatsCmp>
 </aura:component>	

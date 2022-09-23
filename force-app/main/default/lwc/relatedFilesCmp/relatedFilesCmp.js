@@ -194,7 +194,8 @@ export default class RelatedFiles extends NavigationMixin(LightningElement) {
                 componentName: 'c__FilesCmp'
             },
             state: {
-                c__id: this.recordId
+                c__id: this.recordId,
+                c__object: this.objectApiName
             }
         });
     }

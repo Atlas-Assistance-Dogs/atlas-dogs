@@ -2,6 +2,7 @@
     <c-related-object-cmp
         title="Public Access Tests"
         icon-name="standard:visits"
+        total={total}
     >
         <div slot="actions">
             <!-- lightning button for open modal window -->
@@ -32,6 +33,9 @@
                 >
                 </lightning-datatable>
             </template>
+        </div>
+        <div slot="footer">
+            <lightning-button class="slds-m-horizontal_x-small" variant="base" label="View all" title="Submitter Logs" onclick={handleViewAll}></lightning-button>
         </div>
     </c-related-object-cmp>
 </template>
