@@ -88,7 +88,6 @@ public inherited sharing class FileController {
             cv.Category__c = category;
             cv.Date__c = docDate;
             update cv;
-            FileService.updateDate(cv, docDate);
         } catch (NullPointerException ex) {
             throw new AuraHandledException(ex.getMessage());
         } catch (QueryException ex) {
@@ -170,7 +169,6 @@ public inherited sharing class FileController {
                 WHERE ContentDocumentId = :link.ContentDocumentId
                 LIMIT 1
             ];
-            FileService.updateDate(cv, recordId, docDate);
             return cv;
         } catch (NullPointerException ex) {
             throw new AuraHandledException(ex.getMessage());

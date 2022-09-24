@@ -7,6 +7,6 @@ trigger ContentDocumentLinkTrigger on ContentDocumentLink (after insert) {
             WHERE ContentDocumentId = :cdl.ContentDocumentId
             LIMIT 1
         ];
-        FileService.updateDate(cv, cv.Date__c);
+        FileService.updateDate(cv);
     }
 }

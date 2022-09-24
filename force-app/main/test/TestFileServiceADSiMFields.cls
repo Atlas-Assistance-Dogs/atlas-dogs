@@ -7,7 +7,7 @@ public with sharing class TestFileServiceADSiMFields {
         Contact record = new Contact(FirstName = 'Test', LastName = 'Contact', Email = 'abc@abc.com');
         insert record;
         ContentVersion cv = TestFileServiceFields.createLink('ADSiM', 'Application', Date.today(), record.Id);
-        FileService.updateDate(cv, record.Id, Date.today());
+        FileService.updateDate(cv, record.Id);
 
         record = [
             SELECT ADSiMApplicationReceived__c
@@ -27,7 +27,7 @@ public with sharing class TestFileServiceADSiMFields {
         Contact record = new Contact(FirstName = 'Test', LastName = 'Contact', Email = 'abc@abc.com', ADSiMApplicationReceived__c = Date.today().addDays(-1));
         insert record;
         ContentVersion cv = TestFileServiceFields.createLink('ADSiM', 'Application', Date.today(), record.Id);
-        FileService.updateDate(cv, record.Id, Date.today());
+        FileService.updateDate(cv, record.Id);
 
         record = [
             SELECT ADSiMApplicationReceived__c
@@ -46,8 +46,8 @@ public with sharing class TestFileServiceADSiMFields {
     public static void updateDate_ADSiMApplication_LeavesDateWhenOlder() {
         Contact record = new Contact(FirstName = 'Test', LastName = 'Contact', Email = 'abc@abc.com', ADSiMApplicationReceived__c = Date.today());
         insert record;
-        ContentVersion cv = TestFileServiceFields.createLink('ADSiM', 'Application', Date.today(), record.Id);
-        FileService.updateDate(cv, record.Id, Date.today().addDays(-1));
+        ContentVersion cv = TestFileServiceFields.createLink('ADSiM', 'Application', Date.today().addDays(-1), record.Id);
+        FileService.updateDate(cv, record.Id);
 
         record = [
             SELECT ADSiMApplicationReceived__c
@@ -67,7 +67,7 @@ public with sharing class TestFileServiceADSiMFields {
         Contact record = new Contact(FirstName = 'Test', LastName = 'Contact', Email = 'abc@abc.com');
         insert record;
         ContentVersion cv = TestFileServiceFields.createLink('ADSiM', 'ContactForm', Date.today(), record.Id);
-        FileService.updateDate(cv, record.Id, Date.today());
+        FileService.updateDate(cv, record.Id);
 
         record = [
             SELECT ContactFormReceived__c
@@ -87,7 +87,7 @@ public with sharing class TestFileServiceADSiMFields {
         Contact record = new Contact(FirstName = 'Test', LastName = 'Contact', Email = 'abc@abc.com', ContactFormReceived__c = Date.today().addDays(-1));
         insert record;
         ContentVersion cv = TestFileServiceFields.createLink('ADSiM', 'ContactForm', Date.today(), record.Id);
-        FileService.updateDate(cv, record.Id, Date.today());
+        FileService.updateDate(cv, record.Id);
 
         record = [
             SELECT ContactFormReceived__c
@@ -106,8 +106,8 @@ public with sharing class TestFileServiceADSiMFields {
     public static void updateDate_ADSiMContactForm_LeavesDateWhenOlder() {
         Contact record = new Contact(FirstName = 'Test', LastName = 'Contact', Email = 'abc@abc.com', ContactFormReceived__c = Date.today());
         insert record;
-        ContentVersion cv = TestFileServiceFields.createLink('ADSiM', 'ContactForm', Date.today(), record.Id);
-        FileService.updateDate(cv, record.Id, Date.today().addDays(-1));
+        ContentVersion cv = TestFileServiceFields.createLink('ADSiM', 'ContactForm', Date.today().addDays(-1), record.Id);
+        FileService.updateDate(cv, record.Id);
 
         record = [
             SELECT ContactFormReceived__c
@@ -127,7 +127,7 @@ public with sharing class TestFileServiceADSiMFields {
         Contact record = new Contact(FirstName = 'Test', LastName = 'Contact', Email = 'abc@abc.com');
         insert record;
         ContentVersion cv = TestFileServiceFields.createLink('ADSiM', 'PreApplication', Date.today(), record.Id);
-        FileService.updateDate(cv, record.Id, Date.today());
+        FileService.updateDate(cv, record.Id);
 
         record = [
             SELECT ADSiMPreApplicationReceived__c
@@ -147,7 +147,7 @@ public with sharing class TestFileServiceADSiMFields {
         Contact record = new Contact(FirstName = 'Test', LastName = 'Contact', Email = 'abc@abc.com', ADSiMPreApplicationReceived__c = Date.today().addDays(-1));
         insert record;
         ContentVersion cv = TestFileServiceFields.createLink('ADSiM', 'PreApplication', Date.today(), record.Id);
-        FileService.updateDate(cv, record.Id, Date.today());
+        FileService.updateDate(cv, record.Id);
 
         record = [
             SELECT ADSiMPreApplicationReceived__c
@@ -166,8 +166,8 @@ public with sharing class TestFileServiceADSiMFields {
     public static void updateDate_ADSiMPreApplication_LeavesDateWhenOlder() {
         Contact record = new Contact(FirstName = 'Test', LastName = 'Contact', Email = 'abc@abc.com', ADSiMPreApplicationReceived__c = Date.today());
         insert record;
-        ContentVersion cv = TestFileServiceFields.createLink('ADSiM', 'PreApplication', Date.today(), record.Id);
-        FileService.updateDate(cv, record.Id, Date.today().addDays(-1));
+        ContentVersion cv = TestFileServiceFields.createLink('ADSiM', 'PreApplication', Date.today().addDays(-1), record.Id);
+        FileService.updateDate(cv, record.Id);
 
         record = [
             SELECT ADSiMPreApplicationReceived__c
@@ -187,7 +187,7 @@ public with sharing class TestFileServiceADSiMFields {
         Contact record = new Contact(FirstName = 'Test', LastName = 'Contact', Email = 'abc@abc.com');
         insert record;
         ContentVersion cv = TestFileServiceFields.createLink('ADSiM', 'ProgAgreement', Date.today(), record.Id);
-        FileService.updateDate(cv, record.Id, Date.today());
+        FileService.updateDate(cv, record.Id);
 
         record = [
             SELECT ADSiMProgAgreementReceived__c
@@ -207,7 +207,7 @@ public with sharing class TestFileServiceADSiMFields {
         Contact record = new Contact(FirstName = 'Test', LastName = 'Contact', Email = 'abc@abc.com', ADSiMProgAgreementReceived__c = Date.today().addDays(-1));
         insert record;
         ContentVersion cv = TestFileServiceFields.createLink('ADSiM', 'ProgAgreement', Date.today(), record.Id);
-        FileService.updateDate(cv, record.Id, Date.today());
+        FileService.updateDate(cv, record.Id);
 
         record = [
             SELECT ADSiMProgAgreementReceived__c
@@ -226,8 +226,8 @@ public with sharing class TestFileServiceADSiMFields {
     public static void updateDate_ADSiMProgAgreement_LeavesDateWhenOlder() {
         Contact record = new Contact(FirstName = 'Test', LastName = 'Contact', Email = 'abc@abc.com', ADSiMProgAgreementReceived__c = Date.today());
         insert record;
-        ContentVersion cv = TestFileServiceFields.createLink('ADSiM', 'ProgAgreement', Date.today(), record.Id);
-        FileService.updateDate(cv, record.Id, Date.today().addDays(-1));
+        ContentVersion cv = TestFileServiceFields.createLink('ADSiM', 'ProgAgreement', Date.today().addDays(-1), record.Id);
+        FileService.updateDate(cv, record.Id);
 
         record = [
             SELECT ADSiMProgAgreementReceived__c

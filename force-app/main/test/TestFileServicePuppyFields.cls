@@ -7,7 +7,7 @@ public with sharing class TestFileServicePuppyFields {
         Contact record = new Contact(FirstName = 'Test', LastName = 'Contact', Email = 'abc@abc.com');
         insert record;
         ContentVersion cv = TestFileServiceFields.createLink('Puppy', 'Application', Date.today(), record.Id);
-        FileService.updateDate(cv, record.Id, Date.today());
+        FileService.updateDate(cv, record.Id);
 
         record = [
             SELECT PuppyApplicationReceived__c
@@ -27,7 +27,7 @@ public with sharing class TestFileServicePuppyFields {
         Contact record = new Contact(FirstName = 'Test', LastName = 'Contact', Email = 'abc@abc.com', PuppyApplicationReceived__c = Date.today().addDays(-1));
         insert record;
         ContentVersion cv = TestFileServiceFields.createLink('Puppy', 'Application', Date.today(), record.Id);
-        FileService.updateDate(cv, record.Id, Date.today());
+        FileService.updateDate(cv, record.Id);
 
         record = [
             SELECT PuppyApplicationReceived__c
@@ -46,8 +46,8 @@ public with sharing class TestFileServicePuppyFields {
     public static void updateDate_PuppyApplication_LeavesDateWhenOlder() {
         Contact record = new Contact(FirstName = 'Test', LastName = 'Contact', Email = 'abc@abc.com', PuppyApplicationReceived__c = Date.today());
         insert record;
-        ContentVersion cv = TestFileServiceFields.createLink('Puppy', 'Application', Date.today(), record.Id);
-        FileService.updateDate(cv, record.Id, Date.today().addDays(-1));
+        ContentVersion cv = TestFileServiceFields.createLink('Puppy', 'Application', Date.today().addDays(-1), record.Id);
+        FileService.updateDate(cv, record.Id);
 
         record = [
             SELECT PuppyApplicationReceived__c
@@ -63,131 +63,11 @@ public with sharing class TestFileServicePuppyFields {
     }
 
     @isTest
-    public static void updateDate_PuppyContactForm_SetsDateWhenNull() {
-        Contact record = new Contact(FirstName = 'Test', LastName = 'Contact', Email = 'abc@abc.com');
-        insert record;
-        ContentVersion cv = TestFileServiceFields.createLink('Puppy', 'ContactForm', Date.today(), record.Id);
-        FileService.updateDate(cv, record.Id, Date.today());
-
-        record = [
-            SELECT ContactFormReceived__c
-            FROM Contact
-            WHERE Id = :record.Id
-            LIMIT 1
-        ];
-        system.assertEquals(
-            Date.today(),
-            record.ContactFormReceived__c,
-            'ContactFormReceived__c not set'
-        );
-    }
-
-    @isTest
-    public static void updateDate_PuppyContactForm_SetsDateWhenNewer() {
-        Contact record = new Contact(FirstName = 'Test', LastName = 'Contact', Email = 'abc@abc.com', ContactFormReceived__c = Date.today().addDays(-1));
-        insert record;
-        ContentVersion cv = TestFileServiceFields.createLink('Puppy', 'ContactForm', Date.today(), record.Id);
-        FileService.updateDate(cv, record.Id, Date.today());
-
-        record = [
-            SELECT ContactFormReceived__c
-            FROM Contact
-            WHERE Id = :record.Id
-            LIMIT 1
-        ];
-        system.assertEquals(
-            Date.today(),
-            record.ContactFormReceived__c,
-            'ContactFormReceived__c not set'
-        );
-    }
-
-    @isTest
-    public static void updateDate_PuppyContactForm_LeavesDateWhenOlder() {
-        Contact record = new Contact(FirstName = 'Test', LastName = 'Contact', Email = 'abc@abc.com', ContactFormReceived__c = Date.today());
-        insert record;
-        ContentVersion cv = TestFileServiceFields.createLink('Puppy', 'ContactForm', Date.today(), record.Id);
-        FileService.updateDate(cv, record.Id, Date.today().addDays(-1));
-
-        record = [
-            SELECT ContactFormReceived__c
-            FROM Contact
-            WHERE Id = :record.Id
-            LIMIT 1
-        ];
-        system.assertEquals(
-            Date.today(),
-            record.ContactFormReceived__c,
-            'ContactFormReceived__c set to an older date'
-        );
-    }
-
-    @isTest
-    public static void updateDate_PuppyProgAgreement_SetsDateWhenNull() {
-        Contact record = new Contact(FirstName = 'Test', LastName = 'Contact', Email = 'abc@abc.com');
-        insert record;
-        ContentVersion cv = TestFileServiceFields.createLink('Puppy', 'ProgAgreement', Date.today(), record.Id);
-        FileService.updateDate(cv, record.Id, Date.today());
-
-        record = [
-            SELECT PuppyProgAgreementReceived__c
-            FROM Contact
-            WHERE Id = :record.Id
-            LIMIT 1
-        ];
-        system.assertEquals(
-            Date.today(),
-            record.PuppyProgAgreementReceived__c,
-            'PuppyProgAgreementReceived__c not set'
-        );
-    }
-
-    @isTest
-    public static void updateDate_PuppyProgAgreement_SetsDateWhenNewer() {
-        Contact record = new Contact(FirstName = 'Test', LastName = 'Contact', Email = 'abc@abc.com', PuppyProgAgreementReceived__c = Date.today().addDays(-1));
-        insert record;
-        ContentVersion cv = TestFileServiceFields.createLink('Puppy', 'ProgAgreement', Date.today(), record.Id);
-        FileService.updateDate(cv, record.Id, Date.today());
-
-        record = [
-            SELECT PuppyProgAgreementReceived__c
-            FROM Contact
-            WHERE Id = :record.Id
-            LIMIT 1
-        ];
-        system.assertEquals(
-            Date.today(),
-            record.PuppyProgAgreementReceived__c,
-            'PuppyProgAgreementReceived__c not set'
-        );
-    }
-
-    @isTest
-    public static void updateDate_PuppyProgAgreement_LeavesDateWhenOlder() {
-        Contact record = new Contact(FirstName = 'Test', LastName = 'Contact', Email = 'abc@abc.com', PuppyProgAgreementReceived__c = Date.today());
-        insert record;
-        ContentVersion cv = TestFileServiceFields.createLink('Puppy', 'ProgAgreement', Date.today(), record.Id);
-        FileService.updateDate(cv, record.Id, Date.today().addDays(-1));
-
-        record = [
-            SELECT PuppyProgAgreementReceived__c
-            FROM Contact
-            WHERE Id = :record.Id
-            LIMIT 1
-        ];
-        system.assertEquals(
-            Date.today(),
-            record.PuppyProgAgreementReceived__c,
-            'PuppyProgAgreementReceived__c set to an older date'
-        );
-    }
-
-    @isTest
     public static void updateDate_PuppyCertAgreement_SetsDateWhenNull() {
         Contact record = new Contact(FirstName = 'Test', LastName = 'Contact', Email = 'abc@abc.com');
         insert record;
         ContentVersion cv = TestFileServiceFields.createLink('Puppy', 'CertAgreement', Date.today(), record.Id);
-        FileService.updateDate(cv, record.Id, Date.today());
+        FileService.updateDate(cv, record.Id);
 
         record = [
             SELECT PuppyCertAgreementReceived__c
@@ -207,7 +87,7 @@ public with sharing class TestFileServicePuppyFields {
         Contact record = new Contact(FirstName = 'Test', LastName = 'Contact', Email = 'abc@abc.com', PuppyCertAgreementReceived__c = Date.today().addDays(-1));
         insert record;
         ContentVersion cv = TestFileServiceFields.createLink('Puppy', 'CertAgreement', Date.today(), record.Id);
-        FileService.updateDate(cv, record.Id, Date.today());
+        FileService.updateDate(cv, record.Id);
 
         record = [
             SELECT PuppyCertAgreementReceived__c
@@ -226,8 +106,8 @@ public with sharing class TestFileServicePuppyFields {
     public static void updateDate_PuppyCertAgreement_LeavesDateWhenOlder() {
         Contact record = new Contact(FirstName = 'Test', LastName = 'Contact', Email = 'abc@abc.com', PuppyCertAgreementReceived__c = Date.today());
         insert record;
-        ContentVersion cv = TestFileServiceFields.createLink('Puppy', 'CertAgreement', Date.today(), record.Id);
-        FileService.updateDate(cv, record.Id, Date.today().addDays(-1));
+        ContentVersion cv = TestFileServiceFields.createLink('Puppy', 'CertAgreement', Date.today().addDays(-1), record.Id);
+        FileService.updateDate(cv, record.Id);
 
         record = [
             SELECT PuppyCertAgreementReceived__c
@@ -243,11 +123,71 @@ public with sharing class TestFileServicePuppyFields {
     }
 
     @isTest
+    public static void updateDate_PuppyContactForm_SetsDateWhenNull() {
+        Contact record = new Contact(FirstName = 'Test', LastName = 'Contact', Email = 'abc@abc.com');
+        insert record;
+        ContentVersion cv = TestFileServiceFields.createLink('Puppy', 'ContactForm', Date.today(), record.Id);
+        FileService.updateDate(cv, record.Id);
+
+        record = [
+            SELECT ContactFormReceived__c
+            FROM Contact
+            WHERE Id = :record.Id
+            LIMIT 1
+        ];
+        system.assertEquals(
+            Date.today(),
+            record.ContactFormReceived__c,
+            'ContactFormReceived__c not set'
+        );
+    }
+
+    @isTest
+    public static void updateDate_PuppyContactForm_SetsDateWhenNewer() {
+        Contact record = new Contact(FirstName = 'Test', LastName = 'Contact', Email = 'abc@abc.com', ContactFormReceived__c = Date.today().addDays(-1));
+        insert record;
+        ContentVersion cv = TestFileServiceFields.createLink('Puppy', 'ContactForm', Date.today(), record.Id);
+        FileService.updateDate(cv, record.Id);
+
+        record = [
+            SELECT ContactFormReceived__c
+            FROM Contact
+            WHERE Id = :record.Id
+            LIMIT 1
+        ];
+        system.assertEquals(
+            Date.today(),
+            record.ContactFormReceived__c,
+            'ContactFormReceived__c not set'
+        );
+    }
+
+    @isTest
+    public static void updateDate_PuppyContactForm_LeavesDateWhenOlder() {
+        Contact record = new Contact(FirstName = 'Test', LastName = 'Contact', Email = 'abc@abc.com', ContactFormReceived__c = Date.today());
+        insert record;
+        ContentVersion cv = TestFileServiceFields.createLink('Puppy', 'ContactForm', Date.today().addDays(-1), record.Id);
+        FileService.updateDate(cv, record.Id);
+
+        record = [
+            SELECT ContactFormReceived__c
+            FROM Contact
+            WHERE Id = :record.Id
+            LIMIT 1
+        ];
+        system.assertEquals(
+            Date.today(),
+            record.ContactFormReceived__c,
+            'ContactFormReceived__c set to an older date'
+        );
+    }
+
+    @isTest
     public static void updateDate_PuppyContract_SetsDateWhenNull() {
         Contact record = new Contact(FirstName = 'Test', LastName = 'Contact', Email = 'abc@abc.com');
         insert record;
         ContentVersion cv = TestFileServiceFields.createLink('Puppy', 'Contract', Date.today(), record.Id);
-        FileService.updateDate(cv, record.Id, Date.today());
+        FileService.updateDate(cv, record.Id);
 
         record = [
             SELECT PuppyContractReceived__c
@@ -267,7 +207,7 @@ public with sharing class TestFileServicePuppyFields {
         Contact record = new Contact(FirstName = 'Test', LastName = 'Contact', Email = 'abc@abc.com', PuppyContractReceived__c = Date.today().addDays(-1));
         insert record;
         ContentVersion cv = TestFileServiceFields.createLink('Puppy', 'Contract', Date.today(), record.Id);
-        FileService.updateDate(cv, record.Id, Date.today());
+        FileService.updateDate(cv, record.Id);
 
         record = [
             SELECT PuppyContractReceived__c
@@ -286,8 +226,8 @@ public with sharing class TestFileServicePuppyFields {
     public static void updateDate_PuppyContract_LeavesDateWhenOlder() {
         Contact record = new Contact(FirstName = 'Test', LastName = 'Contact', Email = 'abc@abc.com', PuppyContractReceived__c = Date.today());
         insert record;
-        ContentVersion cv = TestFileServiceFields.createLink('Puppy', 'Contract', Date.today(), record.Id);
-        FileService.updateDate(cv, record.Id, Date.today().addDays(-1));
+        ContentVersion cv = TestFileServiceFields.createLink('Puppy', 'Contract', Date.today().addDays(-1), record.Id);
+        FileService.updateDate(cv, record.Id);
 
         record = [
             SELECT PuppyContractReceived__c
@@ -303,71 +243,11 @@ public with sharing class TestFileServicePuppyFields {
     }
 
     @isTest
-    public static void updateDate_PuppyReference_SetsDateWhenNull() {
-        Contact record = new Contact(FirstName = 'Test', LastName = 'Contact', Email = 'abc@abc.com');
-        insert record;
-        ContentVersion cv = TestFileServiceFields.createLink('Puppy', 'Reference', Date.today(), record.Id);
-        FileService.updateDate(cv, record.Id, Date.today());
-
-        record = [
-            SELECT PuppyReferenceReceived__c
-            FROM Contact
-            WHERE Id = :record.Id
-            LIMIT 1
-        ];
-        system.assertEquals(
-            Date.today(),
-            record.PuppyReferenceReceived__c,
-            'PuppyReferenceReceived__c not set'
-        );
-    }
-
-    @isTest
-    public static void updateDate_PuppyReference_SetsDateWhenNewer() {
-        Contact record = new Contact(FirstName = 'Test', LastName = 'Contact', Email = 'abc@abc.com', PuppyReferenceReceived__c = Date.today().addDays(-1));
-        insert record;
-        ContentVersion cv = TestFileServiceFields.createLink('Puppy', 'Reference', Date.today(), record.Id);
-        FileService.updateDate(cv, record.Id, Date.today());
-
-        record = [
-            SELECT PuppyReferenceReceived__c
-            FROM Contact
-            WHERE Id = :record.Id
-            LIMIT 1
-        ];
-        system.assertEquals(
-            Date.today(),
-            record.PuppyReferenceReceived__c,
-            'PuppyReferenceReceived__c not set'
-        );
-    }
-
-    @isTest
-    public static void updateDate_PuppyReference_LeavesDateWhenOlder() {
-        Contact record = new Contact(FirstName = 'Test', LastName = 'Contact', Email = 'abc@abc.com', PuppyReferenceReceived__c = Date.today());
-        insert record;
-        ContentVersion cv = TestFileServiceFields.createLink('Puppy', 'Reference', Date.today(), record.Id);
-        FileService.updateDate(cv, record.Id, Date.today().addDays(-1));
-
-        record = [
-            SELECT PuppyReferenceReceived__c
-            FROM Contact
-            WHERE Id = :record.Id
-            LIMIT 1
-        ];
-        system.assertEquals(
-            Date.today(),
-            record.PuppyReferenceReceived__c,
-            'PuppyReferenceReceived__c set to an older date'
-        );
-    }
-
-    @isTest
     public static void updateDate_PuppyInfrNotice_SetsDateWhenNull() {
         Contact record = new Contact(FirstName = 'Test', LastName = 'Contact', Email = 'abc@abc.com');
         insert record;
         ContentVersion cv = TestFileServiceFields.createLink('Puppy', 'InfrNotice', Date.today(), record.Id);
-        FileService.updateDate(cv, record.Id, Date.today());
+        FileService.updateDate(cv, record.Id);
 
         record = [
             SELECT PuppyInfrNoticeReceived__c
@@ -387,7 +267,7 @@ public with sharing class TestFileServicePuppyFields {
         Contact record = new Contact(FirstName = 'Test', LastName = 'Contact', Email = 'abc@abc.com', PuppyInfrNoticeReceived__c = Date.today().addDays(-1));
         insert record;
         ContentVersion cv = TestFileServiceFields.createLink('Puppy', 'InfrNotice', Date.today(), record.Id);
-        FileService.updateDate(cv, record.Id, Date.today());
+        FileService.updateDate(cv, record.Id);
 
         record = [
             SELECT PuppyInfrNoticeReceived__c
@@ -406,8 +286,8 @@ public with sharing class TestFileServicePuppyFields {
     public static void updateDate_PuppyInfrNotice_LeavesDateWhenOlder() {
         Contact record = new Contact(FirstName = 'Test', LastName = 'Contact', Email = 'abc@abc.com', PuppyInfrNoticeReceived__c = Date.today());
         insert record;
-        ContentVersion cv = TestFileServiceFields.createLink('Puppy', 'InfrNotice', Date.today(), record.Id);
-        FileService.updateDate(cv, record.Id, Date.today().addDays(-1));
+        ContentVersion cv = TestFileServiceFields.createLink('Puppy', 'InfrNotice', Date.today().addDays(-1), record.Id);
+        FileService.updateDate(cv, record.Id);
 
         record = [
             SELECT PuppyInfrNoticeReceived__c
@@ -419,6 +299,126 @@ public with sharing class TestFileServicePuppyFields {
             Date.today(),
             record.PuppyInfrNoticeReceived__c,
             'PuppyInfrNoticeReceived__c set to an older date'
+        );
+    }
+
+    @isTest
+    public static void updateDate_PuppyProgAgreement_SetsDateWhenNull() {
+        Contact record = new Contact(FirstName = 'Test', LastName = 'Contact', Email = 'abc@abc.com');
+        insert record;
+        ContentVersion cv = TestFileServiceFields.createLink('Puppy', 'ProgAgreement', Date.today(), record.Id);
+        FileService.updateDate(cv, record.Id);
+
+        record = [
+            SELECT PuppyProgAgreementReceived__c
+            FROM Contact
+            WHERE Id = :record.Id
+            LIMIT 1
+        ];
+        system.assertEquals(
+            Date.today(),
+            record.PuppyProgAgreementReceived__c,
+            'PuppyProgAgreementReceived__c not set'
+        );
+    }
+
+    @isTest
+    public static void updateDate_PuppyProgAgreement_SetsDateWhenNewer() {
+        Contact record = new Contact(FirstName = 'Test', LastName = 'Contact', Email = 'abc@abc.com', PuppyProgAgreementReceived__c = Date.today().addDays(-1));
+        insert record;
+        ContentVersion cv = TestFileServiceFields.createLink('Puppy', 'ProgAgreement', Date.today(), record.Id);
+        FileService.updateDate(cv, record.Id);
+
+        record = [
+            SELECT PuppyProgAgreementReceived__c
+            FROM Contact
+            WHERE Id = :record.Id
+            LIMIT 1
+        ];
+        system.assertEquals(
+            Date.today(),
+            record.PuppyProgAgreementReceived__c,
+            'PuppyProgAgreementReceived__c not set'
+        );
+    }
+
+    @isTest
+    public static void updateDate_PuppyProgAgreement_LeavesDateWhenOlder() {
+        Contact record = new Contact(FirstName = 'Test', LastName = 'Contact', Email = 'abc@abc.com', PuppyProgAgreementReceived__c = Date.today());
+        insert record;
+        ContentVersion cv = TestFileServiceFields.createLink('Puppy', 'ProgAgreement', Date.today().addDays(-1), record.Id);
+        FileService.updateDate(cv, record.Id);
+
+        record = [
+            SELECT PuppyProgAgreementReceived__c
+            FROM Contact
+            WHERE Id = :record.Id
+            LIMIT 1
+        ];
+        system.assertEquals(
+            Date.today(),
+            record.PuppyProgAgreementReceived__c,
+            'PuppyProgAgreementReceived__c set to an older date'
+        );
+    }
+
+    @isTest
+    public static void updateDate_PuppyReference_SetsDateWhenNull() {
+        Contact record = new Contact(FirstName = 'Test', LastName = 'Contact', Email = 'abc@abc.com');
+        insert record;
+        ContentVersion cv = TestFileServiceFields.createLink('Puppy', 'Reference', Date.today(), record.Id);
+        FileService.updateDate(cv, record.Id);
+
+        record = [
+            SELECT PuppyReferenceReceived__c
+            FROM Contact
+            WHERE Id = :record.Id
+            LIMIT 1
+        ];
+        system.assertEquals(
+            Date.today(),
+            record.PuppyReferenceReceived__c,
+            'PuppyReferenceReceived__c not set'
+        );
+    }
+
+    @isTest
+    public static void updateDate_PuppyReference_SetsDateWhenNewer() {
+        Contact record = new Contact(FirstName = 'Test', LastName = 'Contact', Email = 'abc@abc.com', PuppyReferenceReceived__c = Date.today().addDays(-1));
+        insert record;
+        ContentVersion cv = TestFileServiceFields.createLink('Puppy', 'Reference', Date.today(), record.Id);
+        FileService.updateDate(cv, record.Id);
+
+        record = [
+            SELECT PuppyReferenceReceived__c
+            FROM Contact
+            WHERE Id = :record.Id
+            LIMIT 1
+        ];
+        system.assertEquals(
+            Date.today(),
+            record.PuppyReferenceReceived__c,
+            'PuppyReferenceReceived__c not set'
+        );
+    }
+
+    @isTest
+    public static void updateDate_PuppyReference_LeavesDateWhenOlder() {
+        Contact record = new Contact(FirstName = 'Test', LastName = 'Contact', Email = 'abc@abc.com', PuppyReferenceReceived__c = Date.today());
+        insert record;
+        ContentVersion cv = TestFileServiceFields.createLink('Puppy', 'Reference', Date.today().addDays(-1), record.Id);
+        FileService.updateDate(cv, record.Id);
+
+        record = [
+            SELECT PuppyReferenceReceived__c
+            FROM Contact
+            WHERE Id = :record.Id
+            LIMIT 1
+        ];
+        system.assertEquals(
+            Date.today(),
+            record.PuppyReferenceReceived__c,
+            'PuppyReferenceReceived__c set to an older date'
         );
     }
 }
