@@ -1,59 +1,20 @@
-
-
-contact_fields = {
-        'Dog': ['HealthFormReceived__c', 'VacExamsReceived__c', 'XrayReceived__c'],
-    'ADSiM': ['ADSiMApplicationReceived__c',
-            'ADSiMPreApplicationReceived__c',
-            'ADSiMProgAgreementReceived__c',
-            'ContactFormReceived__c'],
-    'Board': ['BoardAgreementReceived__c',
-            'BoardApplicationReceived__c',
-            'BoardCoIReceived__c',
-            'BoardResumeReceived__c',
-            'BoardToNReceived__c',
-            'ContactFormReceived__c'],
-    'Client': ['ClientApplicationReceived__c',
-            'ClientCertAgreementReceived__c',
-            'ClientLOMIReceived__c',
-            'ClientPreApplicationReceived__c',
-            'ClientProgAgreementReceived__c',
-            'ClientSurveyReceived__c',
-            'ClientVAPWReceived__c',
-            'ContactFormReceived__c'],
-    'Facilitator': ['FacilitatorApplicationReceived__c',
-            'FacilitatorCertAgreementReceived__c',
-            'FacilitatorInfrNoticeReceived__c',
-            'FacilitatorPracticumReceived__c',
-            'FacilitatorProfGrowthPlanReceived__c',
-            'FacilitatorProgAgreementReceived__c',
-            'FacilitatorReferenceReceived__c',
-            'ContactFormReceived__c'],
-    'Puppy': ['PuppyApplicationReceived__c',
-            'PuppyCertAgreementReceived__c',
-            'PuppyInfrNoticeReceived__c',
-            'PuppyProgAgreementReceived__c',
-            'PuppyReferenceReceived__c',
-            'ContactFormReceived__c'],
-    'Staff': ['StaffAgreementReceived__c',
-            'StaffApplicationReceived__c',
-            'StaffI9Received__c',
-            'StaffOfferReceived__c',
-            'StaffResumeReceived__c',
-            'StaffW4Received__c',
-            'ContactFormReceived__c'],
-    'TSiM': ['TSiMApplicationReceived__c',
-            'TSiMProgAgreementReceived__c',
-            'ContactFormReceived__c'],
-    'Trainer': ['TrainerApplicationReceived__c',
-            'TrainerCertAgreementReceived__c',
-            'TrainerInfrNoticeReceived__c',
-            'TrainerProgAgreementReceived__c',
-            'TrainerReferenceReceived__c',
-            'ContactFormReceived__c'],
-    'Volunteer': ['VolunteerAgreementReceived__c',
-            'VolunteerApplicationReceived__c',
-            'VolunteerResumeReceived__c',
-            'ContactFormReceived__c']}
+## Script to update test files for the FileService class.  This needs to be run in the root directory of the project.
+import shutil
+from xml.dom import minidom
+  
+doc = minidom.parse("force-app/main/default/objects/ContentVersion/fields/Type__c.field-meta.xml")
+  
+setting_elements = doc.getElementsByTagName("valueSettings")
+settings = {}
+for setting in setting_elements:
+    name = setting.getElementsByTagName("valueName")[0].firstChild.data
+    categories = setting.getElementsByTagName("controllingFieldValue")
+    for category_element in categories:
+        category = category_element.firstChild.data
+        if category in settings:
+            settings[category].append(name)
+        else:
+            settings[category] = [name]
 
 new_dog = "Name = 'Fido'"
 
@@ -64,7 +25,7 @@ template = '''
     public static void updateDate_{category}{type}_SetsDateWhenNull() {{
         {object} record = new {object}({object_fields});
         insert record;
-        ContentVersion cv = createLink('{category}', '{type}', Date.today(), record.Id);
+        ContentVersion cv = TestFileServiceFields.createLink('{category}', '{type}', Date.today(), record.Id);
         FileService.updateDate(cv, record.Id, Date.today());
 
         record = [
@@ -84,7 +45,7 @@ template = '''
     public static void updateDate_{category}{type}_SetsDateWhenNewer() {{
         {object} record = new {object}({object_fields}, {field} = Date.today().addDays(-1));
         insert record;
-        ContentVersion cv = createLink('{category}', '{type}', Date.today(), record.Id);
+        ContentVersion cv = TestFileServiceFields.createLink('{category}', '{type}', Date.today(), record.Id);
         FileService.updateDate(cv, record.Id, Date.today());
 
         record = [
@@ -104,7 +65,7 @@ template = '''
     public static void updateDate_{category}{type}_LeavesDateWhenOlder() {{
         {object} record = new {object}({object_fields}, {field} = Date.today());
         insert record;
-        ContentVersion cv = createLink('{category}', '{type}', Date.today(), record.Id);
+        ContentVersion cv = TestFileServiceFields.createLink('{category}', '{type}', Date.today(), record.Id);
         FileService.updateDate(cv, record.Id, Date.today().addDays(-1));
 
         record = [
@@ -121,56 +82,41 @@ template = '''
     }}
 '''
 
-test_file = open('TestFileServiceFields.cls', 'w')
+base_file = 'force-app/main/test/TestFileService[]Fields.cls'
 
-test_file.write('''@isTest
-public with sharing class TestFileServiceFields {
-    private static ContentVersion createLink(
-        string category,
-        string type,
-        Date docDate,
-        Id recordId
-    ) {
-        ContentVersion cv = new ContentVersion(
-            Title = 'Test Category Type',
-            PathOnClient = 'TestDocument3.jpg',
-            Origin = 'H',
-            VersionData = Blob.valueOf('Document Body 3'),
-            Category__c = category,
-            Type__c = type,
-            Date__c = docDate
-        );
-        insert cv;
+test_file_start = '''@isTest
+public with sharing class TestFileService[]Fields {
 
-        ContentVersion temp = [
-            SELECT Id, ContentDocumentId
-            FROM ContentVersion
-            WHERE Id = :cv.Id
-            LIMIT 1
-        ];
+'''
+meta_path = 'force-app/main/test/TestFileServiceFields.cls-meta.xml'
 
-        ContentDocumentLink link = new ContentDocumentLink(
-            ContentDocumentId = temp.ContentDocumentId,
-            LinkedEntityId = recordId
-        );
-        insert link;
+for category, types in settings.items():
+    if category == 'Standalone':
+        continue
 
-        return cv;
-    }
+    test_file = open(base_file.replace('[]', category), 'w')
+    test_file.write(test_file_start.replace('[]', category))
 
-''')
-
-for category, fields in contact_fields.items():
-    for field in fields:
-        doc_type = field.replace(category, '').replace('Received__c', '')
+    for doc_type in types:
         if category == 'Dog':
-                object_fields = new_dog
-                name = 'Dog__c'
+            field = doc_type + 'Received__c'
+            object_fields = new_dog
+            name = 'Dog__c'
+        elif doc_type == 'ContactForm':
+            field = doc_type + 'Received__c'
+            object_fields = new_contact
+            name = 'Contact'
         else:
-                object_fields = new_contact
-                name = 'Contact'
+            field = category + doc_type + 'Received__c'
+            object_fields = new_contact
+            name = 'Contact'
 
         test_file.write(template.format(category = category, type = doc_type, field = field, object_fields = object_fields, object = name))
 
-test_file.write('}')
-test_file.close()
+    test_file.write('}')
+    test_file.close()
+
+    ## make sure there is a meta file for the test class
+
+    shutil.copy(meta_path, meta_path.replace('Fields', category + 'Fields')) #copy the file to destination dir
+
