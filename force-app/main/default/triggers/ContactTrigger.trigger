@@ -1,4 +1,4 @@
-trigger ContactTrigger on Contact (before insert, before update) {
+trigger ContactTrigger on Contact (before insert, after update) {
     for (Contact newContact : Trigger.new) {
         string oldEmail = null;
         if (Trigger.isUpdate) {
