@@ -810,11 +810,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>PuppyLog__c.Date__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>PuppyLog__c.Dog__c</field>
         <readable>true</readable>
     </fieldPermissions>
