@@ -1,0 +1,53 @@
+<template>
+    <c-modal-cmp title="Team" onclose={handleCancel} onsubmit={handleSubmit}>
+        <lightning-record-edit-form 
+            object-api-name={object}
+            record-id={recordId}
+            onsuccess={handleSuccess}
+            onsubmit={handleSubmit}
+            onerror={handleError}
+            slot="body"
+        >
+            <div class="slds-grid slds-wrap">
+                <lightning-messages></lightning-messages>
+                <div
+                    class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2 slds-p-horizontal_small"
+                >
+                    <div class="name">
+                        <lightning-helptext class="name-help" content="Use format: [ClientFirst][ClientLast]_[HandlerFirst][HandlerLast]_[Dog]"></lightning-helptext>
+                        <lightning-input-field
+                            field-name={fields.name}
+                            required
+                        >
+                        </lightning-input-field>
+                    </div>
+                    <lightning-input-field
+                        field-name={fields.client}
+                        required
+                    ></lightning-input-field>
+                    <lightning-input-field
+                        field-name={fields.handler}
+                        required
+                    ></lightning-input-field>
+                    <lightning-input-field
+                        field-name={fields.dog}
+                    ></lightning-input-field>
+                    <lightning-input-field
+                        field-name={fields.validUntil}
+                    ></lightning-input-field>
+                </div>
+                <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2 slds-p-horizontal_small">
+                    <lightning-input-field
+                        field-name={fields.certification}
+                    ></lightning-input-field>
+                    <lightning-input-field
+                        field-name={fields.secondary}
+                    ></lightning-input-field>
+                    <lightning-input-field
+                        field-name={fields.patCount}
+                    ></lightning-input-field>
+                </div>
+            </div>
+        </lightning-record-edit-form>
+    </c-modal-cmp>
+</template>

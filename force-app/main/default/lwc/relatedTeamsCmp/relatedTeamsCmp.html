@@ -1,0 +1,30 @@
+<template>
+    <c-related-object-cmp title="Teams" icon-name="custom:custom103">
+        <div slot="actions">
+            <!-- lightning button for new team modal -->
+            <lightning-button
+                label="New"
+                title="New"
+                onclick={openModal}
+                slot="actions"
+            >
+            </lightning-button>
+            <c-team-form-cmp
+                record-id={recordId}
+                onchanged={handleUpdate}
+            ></c-team-form-cmp>
+        </div>
+        <div slot="list">
+            <template if:true={teamsList}>
+                <lightning-datatable
+                    data={teamsList}
+                    columns={columns}
+                    hide-checkbox-column
+                    key-field="recordId"
+                    onrowaction={handleRowAction}
+                >
+                </lightning-datatable>
+            </template>
+        </div>
+    </c-related-object-cmp>
+</template>
