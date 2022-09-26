@@ -88,7 +88,6 @@ public inherited sharing class FileController {
             cv.Category__c = category;
             cv.Date__c = docDate;
             update cv;
-            FileService.updateDate(cv, docDate);
         } catch (NullPointerException ex) {
             throw new AuraHandledException(ex.getMessage());
         } catch (QueryException ex) {
@@ -100,6 +99,15 @@ public inherited sharing class FileController {
 
     @AuraEnabled(cacheable=true)
     public static List<ContentVersion> getRelatedFiles(Id recordId) {
+        List<ContentVersion> files = new List<ContentVersion>();
+        for (Object item : getRelated(recordId, 10000).items) {
+            files.add((ContentVersion)item);
+        }
+        return files;
+    }
+
+    @AuraEnabled(cacheable=true)
+    public static RelatedObjects getRelated(Id recordId, Integer max) {
         if (recordId == null) {
             throw new AuraHandledException('recordId must not be null');
         }
@@ -113,8 +121,13 @@ public inherited sharing class FileController {
             lstConDocs.add(cntLink.ContentDocumentId);
         }
 
+        RelatedObjects objects = new RelatedObjects();
+
         if (!lstConDocs.isEmpty()) {
-            return [
+            objects.total = [SELECT COUNT() FROM ContentVersion
+                WHERE ContentDocumentId IN :lstConDocs AND FileType != 'SNOTE'
+            ];
+            List<SObject> sobjects = [
                 SELECT
                     Title,
                     ContentDocumentId,
@@ -124,9 +137,14 @@ public inherited sharing class FileController {
                 FROM ContentVersion
                 WHERE ContentDocumentId IN :lstConDocs AND FileType != 'SNOTE'
                 ORDER BY Date__c DESC
+                LIMIT :max
             ];
+            for (SObject file : sobjects) {
+                objects.items.add(file);
+            }
+            return objects;
         } else {
-            return new List<ContentVersion>();
+            return objects;
         }
     }
 
@@ -151,7 +169,6 @@ public inherited sharing class FileController {
                 WHERE ContentDocumentId = :link.ContentDocumentId
                 LIMIT 1
             ];
-            FileService.updateDate(cv, recordId, docDate);
             return cv;
         } catch (NullPointerException ex) {
             throw new AuraHandledException(ex.getMessage());

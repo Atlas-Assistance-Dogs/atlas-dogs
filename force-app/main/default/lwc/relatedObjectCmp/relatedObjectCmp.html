@@ -16,7 +16,7 @@
                                     <h1
                                         class="slds-page-header__title slds-truncate"
                                     >
-                                        {title}
+                                        {title}{count}
                                     </h1>
                                 </div>
                             </div>
@@ -33,5 +33,8 @@
             </div>
         </div>
         <slot name="list"></slot>
+        <div if:true={any} class="slds-card__footer slds-m-top_none">
+            <slot name="footer"></slot>
+        </div>
     </article>
 </template>

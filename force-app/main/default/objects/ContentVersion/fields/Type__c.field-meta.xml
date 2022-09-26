@@ -32,6 +32,11 @@
                 <label>Agreement</label>
             </value>
             <value>
+                <fullName>Contract</fullName>
+                <default>false</default>
+                <label>Contract</label>
+            </value>
+            <value>
                 <fullName>CoI</fullName>
                 <default>false</default>
                 <label>Conflict of Interest</label>
@@ -198,6 +203,10 @@
             <controllingFieldValue>Puppy</controllingFieldValue>
             <controllingFieldValue>Trainer</controllingFieldValue>
             <valueName>CertAgreement</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Puppy</controllingFieldValue>
+            <valueName>Contract</valueName>
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Facilitator</controllingFieldValue>

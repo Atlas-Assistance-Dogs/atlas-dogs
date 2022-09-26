@@ -51,7 +51,7 @@ public with sharing class TestFileService {
 
         ContentVersion cv = createLink(null, null, Date.today().addDays(-1), bgCheck.Id);
 
-        FileService.updateDate(cv, bgCheck.Id, Date.today());
+        FileService.updateDate(cv, bgCheck.Id);
         // no assert here.  Test passes if no exception
     }
 
@@ -62,7 +62,7 @@ public with sharing class TestFileService {
         ContentVersion cv = createLink('Dog', 'HealthForm', Date.today(), dog.Id);
 
         // Act
-        FileService.updateDate(cv, Date.today());
+        FileService.updateDate(cv);
 
         // Assert
         dog = [
@@ -89,7 +89,7 @@ public with sharing class TestFileService {
         ContentVersion cv = createLink('Client', 'Application', Date.today(), contact.Id);
 
         // Act
-        FileService.updateDate(cv, Date.today());
+        FileService.updateDate(cv);
 
         // Assert
         contact = [
