@@ -35,13 +35,13 @@ public with sharing class TestFileService {
 
     @isTest
     public static void updateDates_Ignores_WhenNullList() {
-        FileService.updateDates(null, Date.today());
+        FileService.updateDates(null);
         // no assert here.  Test passes if no exception
     }
     
     @isTest
     public static void updateDates_Ignores_WhenEmptyList() {
-        FileService.updateDates(new List<ContentVersion>(), Date.today());
+        FileService.updateDates(new List<ContentVersion>());
         // no assert here.  Test passes if no exception
     }
 
@@ -125,7 +125,7 @@ public with sharing class TestFileService {
         cvs.add(createLink('Dog', 'HealthForm', Date.today(), record.Id));
         cvs.add(createLink('Dog', 'VacExams', Date.today().addDays(-1), record.Id));
         cvs.add(createLink('Dog', 'Xray', Date.today().addDays(-2), record.Id));
-        FileService.updateDates(cvs, Date.today());
+        FileService.updateDates(cvs);
         record = [
             SELECT HealthFormReceived__c, VacExamsReceived__c, XrayReceived__c
             FROM Dog__c
@@ -138,12 +138,12 @@ public with sharing class TestFileService {
             'HealthFormReceived__c not set'
         );
         system.assertEquals(
-            Date.today(),
+            Date.today().addDays(-1),
             record.VacExamsReceived__c,
             'VacExamsReceived__c not set'
         );
         system.assertEquals(
-            Date.today(),
+            Date.today().addDays(-2),
             record.XrayReceived__c,
             'XrayReceived__c not set'
         );
@@ -162,7 +162,7 @@ public with sharing class TestFileService {
         cvs.add(createLink('Board', 'CoI', Date.today(), record.Id));
         cvs.add(createLink('Client', 'Application', Date.today().addDays(-1), record.Id));
         cvs.add(createLink('Facilitator', 'ProfGrowthPlan', Date.today().addDays(-2), record.Id));
-        FileService.updateDates(cvs, Date.today());
+        FileService.updateDates(cvs);
         record = [
             SELECT BoardCoIReceived__c, ClientApplicationReceived__c, FacilitatorProfGrowthPlanReceived__c
             FROM Contact
@@ -175,12 +175,12 @@ public with sharing class TestFileService {
             'BoardCoIReceived__c not set'
         );
         system.assertEquals(
-            Date.today(),
+            Date.today().addDays(-1),
             record.ClientApplicationReceived__c,
             'ClientApplicationReceived__c not set'
         );
         system.assertEquals(
-            Date.today(),
+            Date.today().addDays(-2),
             record.FacilitatorProfGrowthPlanReceived__c,
             'FacilitatorProfGrowthPlanReceived__c not set'
         );
