@@ -143,7 +143,7 @@
     <allowInChatterGroups>false</allowInChatterGroups>
     <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
     <deploymentStatus>Deployed</deploymentStatus>
-    <description>Logs made by Client or Team Facilitator</description>
+    <description>Log records from Puppy Raisers</description>
     <enableActivities>false</enableActivities>
     <enableBulkApi>true</enableBulkApi>
     <enableFeeds>false</enableFeeds>
@@ -154,23 +154,18 @@
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
     <externalSharingModel>Private</externalSharingModel>
-    <label>Log</label>
+    <label>Puppy Log</label>
     <nameField>
-        <displayFormat>L-{00000}</displayFormat>
-        <label>Log Name</label>
+        <displayFormat>PL-{00000}</displayFormat>
+        <label>Puppy Log Name</label>
         <type>AutoNumber</type>
     </nameField>
-    <pluralLabel>Logs</pluralLabel>
+    <pluralLabel>Puppy Raiser Logs</pluralLabel>
     <searchLayouts>
-        <searchResultsAdditionalFields>RECORDTYPE</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>Date__c</searchResultsAdditionalFields>
-        <searchResultsAdditionalFields>Submitter__c</searchResultsAdditionalFields>
-        <searchResultsAdditionalFields>Client__c</searchResultsAdditionalFields>
-        <searchResultsAdditionalFields>Handler__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Raiser__c</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>Dog__c</searchResultsAdditionalFields>
-        <searchResultsAdditionalFields>Facilitator__c</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>RequestSupportFromAtlas__c</searchResultsAdditionalFields>
-        <searchResultsAdditionalFields>RequestSupportFromTeam__c</searchResultsAdditionalFields>
     </searchLayouts>
     <sharingModel>ReadWrite</sharingModel>
     <visibility>Public</visibility>

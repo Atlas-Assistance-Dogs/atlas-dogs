@@ -1,0 +1,36 @@
+<template>
+    <c-related-object-cmp
+        title="Puppy Raiser Logs"
+        icon-name="standard:logging"
+        total={total}
+    >
+        <div slot="actions">
+            <!-- lightning button for open modal window -->
+            <lightning-button label="New" title="New" onclick={createLog}>
+            </lightning-button>
+            <c-related-puppy-log-cmp
+                contact-id={recordId}
+                onchanged={handleChange}
+            ></c-related-puppy-log-cmp>
+        </div>
+        <div slot="list">
+            <template if:true={data}>
+                <lightning-datatable
+                    key-field="recordId"
+                    columns={columns}
+                    data={data}
+                    hide-checkbox-column
+                    default-sort-direction={defaultSortDirection}
+                    sorted-direction={sortDirection}
+                    sorted-by={sortedBy}
+                    onsort={handleSort}
+                    onrowaction={handleRowAction}
+                >
+                </lightning-datatable>
+            </template>
+        </div>
+        <div slot="footer">
+        <lightning-button variant="base" label="View All" title="View all Puppy Raiser Logs" onclick={handleViewAll}></lightning-button>
+        </div>
+    </c-related-object-cmp>
+</template>
