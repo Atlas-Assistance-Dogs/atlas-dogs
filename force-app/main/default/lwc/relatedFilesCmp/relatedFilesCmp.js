@@ -1,7 +1,7 @@
 import { LightningElement, api, wire, track } from "lwc";
 import { getObjectInfo } from 'lightning/uiObjectInfoApi';
 import { getPicklistValues } from 'lightning/uiObjectInfoApi';
-import getRelatedFiles from "@salesforce/apex/FileController.getRelated";
+import getRelatedFiles from "@salesforce/apex/FileController.getRelatedFiles";
 import deleteRecord from "@salesforce/apex/FileController.deleteRecord";
 import { refreshApex } from "@salesforce/apex";
 import { NavigationMixin } from "lightning/navigation";
@@ -33,8 +33,8 @@ const COLS = [
             iconPosition: "left"
         }
     },
-    { label: "Category", fieldName: 'category', sortable: true },
-    { label: "Document Type", fieldName: 'type', sortable: true },
+    { label: "Category", fieldName: CATEGORY_FIELD.fieldApiName, sortable: true },
+    { label: "Document Type", fieldName: TYPE_FIELD.fieldApiName, sortable: true },
     { label: "Document Date", fieldName: DATE_FIELD.fieldApiName, type: "date-local", sortable: true },
     { type: "action", typeAttributes: { rowActions: actions } }
 ];

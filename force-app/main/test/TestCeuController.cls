@@ -91,7 +91,7 @@ public with sharing class TestCeuController {
         RelatedObjects ceus = ContinuingEducationUnitController.getRelatedCeus(cookie.Id, 5);
 
         System.assertEquals(2, ceus.items.size(), 'Wrong number of CEUs');
-        System.assertEquals(1, ceus.total);
+        System.assertEquals(2, ceus.total);
         ceusMatch(cookieCeu1, (ContinuingEducationUnit__c)ceus.items[0]);
         ceusMatch(cookieCeu2, (ContinuingEducationUnit__c)ceus.items[1]);
     }

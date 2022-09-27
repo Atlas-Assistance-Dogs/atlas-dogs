@@ -1,3 +1,4 @@
+<aura:component implements="lightning:isUrlAddressable" description="c:All Related Files component">
     <aura:attribute name="id" type="String" />
     <!-- Add an "init" handler to handle the first "v.pageReference" value -->
     <aura:handler name="init" value="{!this}" action="{!c.onPageReferenceChange}"/>
