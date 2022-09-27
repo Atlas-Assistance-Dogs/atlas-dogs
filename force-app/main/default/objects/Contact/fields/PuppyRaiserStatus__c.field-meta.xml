@@ -21,14 +21,14 @@
                 <label>Inactive</label>
             </value>
             <value>
+                <fullName>None</fullName>
+                <default>true</default>
+                <label>None</label>
+            </value>
+            <value>
                 <fullName>Initial Inquiry</fullName>
                 <default>false</default>
                 <label>Initial Inquiry</label>
-            </value>
-            <value>
-                <fullName>Onboarding</fullName>
-                <default>false</default>
-                <label>Onboarding</label>
             </value>
             <value>
                 <fullName>In Training</fullName>
@@ -36,9 +36,9 @@
                 <label>In Training</label>
             </value>
             <value>
-                <fullName>None</fullName>
-                <default>true</default>
-                <label>None</label>
+                <fullName>Onboarding</fullName>
+                <default>false</default>
+                <label>Onboarding</label>
             </value>
             <value>
                 <fullName>Active</fullName>

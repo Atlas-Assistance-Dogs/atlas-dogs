@@ -20,9 +20,9 @@
             ></c-file-update-cmp>
         </div>
         <div slot="list">
-            <template if:true={files}>
+            <template if:true={data}>
                 <lightning-datatable
-                    data={files}
+                    data={data}
                     columns={columns}
                     hide-checkbox-column
                     key-field="recordId"
@@ -36,7 +36,7 @@
             </template>
         </div>
         <div slot="footer">
-            <lightning-button variant="base" label="View All" title="View All" onclick={handleViewAll}></lightning-button>
+            <lightning-button class="slds-m-horizontal_x-small" variant="base" label="View all" title="Submitter Logs" onclick={handleViewAll}></lightning-button>
         </div>
     </c-related-object-cmp>
 </template>

@@ -98,16 +98,10 @@ public inherited sharing class FileController {
     }
 
     @AuraEnabled(cacheable=true)
-    public static List<ContentVersion> getRelatedFiles(Id recordId) {
-        List<ContentVersion> files = new List<ContentVersion>();
-        for (Object item : getRelated(recordId, 10000).items) {
-            files.add((ContentVersion)item);
+    public static RelatedObjects getRelatedFiles(Id recordId, Integer max) {
+        if (max == null) {
+            max = 6;
         }
-        return files;
-    }
-
-    @AuraEnabled(cacheable=true)
-    public static RelatedObjects getRelated(Id recordId, Integer max) {
         if (recordId == null) {
             throw new AuraHandledException('recordId must not be null');
         }
@@ -124,10 +118,8 @@ public inherited sharing class FileController {
         RelatedObjects objects = new RelatedObjects();
 
         if (!lstConDocs.isEmpty()) {
-            objects.total = [SELECT COUNT() FROM ContentVersion
-                WHERE ContentDocumentId IN :lstConDocs AND FileType != 'SNOTE'
-            ];
-            List<SObject> sobjects = [
+            RelatedObjects related = new RelatedObjects();
+            List<ContentVersion> files = [
                 SELECT
                     Title,
                     ContentDocumentId,
@@ -139,12 +131,13 @@ public inherited sharing class FileController {
                 ORDER BY Date__c DESC
                 LIMIT :max
             ];
-            for (SObject file : sobjects) {
-                objects.items.add(file);
+            for (ContentVersion cv : files) {
+                related.items.add(cv);
             }
-            return objects;
+            related.total = [SELECT Count() FROM ContentVersion WHERE ContentDocumentId IN :lstConDocs AND FileType != 'SNOTE'];
+            return related;
         } else {
-            return objects;
+            return new RelatedObjects();
         }
     }
 

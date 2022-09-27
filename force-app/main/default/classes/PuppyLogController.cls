@@ -39,10 +39,11 @@ public with sharing class PuppyLogController {
                 plog.support = log.RequestSupportFromAtlas__c;
                 plog.additional = log.AdditionalInformation__c;
 
-                List<ContentVersion> files = FileController.getRelatedFiles(log.Id);
-                if (files != null && !files.isEmpty()) {
-                    plog.documentId = files[0].ContentDocumentId;
-                    plog.fileName = files[0].Title;
+                RelatedObjects files = FileController.getRelatedFiles(log.Id, 1);
+                if (files != null && !files.items.isEmpty()) {
+                    ContentVersion cv = (ContentVersion)files.items[0];
+                    plog.documentId = cv.ContentDocumentId;
+                    plog.fileName = cv.Title;
                     plog.noFile = false;
                 }
                 else {

@@ -44,11 +44,11 @@ export default class RelatedPuppyLogsCmp extends NavigationMixin(
 ) {
     @api recordId;
     @api objectApiName;
+    @api max = 6;
     columns = COLS;
     data = [];
     total = 0;
     wiredLogs;
-    @api max = 6;
 
     @wire(MessageContext)
     messageContext;

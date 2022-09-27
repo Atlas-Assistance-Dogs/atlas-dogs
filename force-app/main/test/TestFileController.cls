@@ -441,7 +441,7 @@ public with sharing class TestFileController {
 
         Test.startTest();
         try {
-            FileController.getRelatedFiles(null);
+            FileController.getRelatedFiles(null, null);
         } catch (AuraHandledException e) {
             thrown = true;
         }
@@ -457,11 +457,12 @@ public with sharing class TestFileController {
         insert ace;
 
         Test.startTest();
-        List<ContentVersion> related = FileController.getRelatedFiles(ace.Id);
+        RelatedObjects related = FileController.getRelatedFiles(ace.Id, 6);
 
         Test.stopTest();
 
-        System.assert(related.isEmpty());
+        System.assert(related.items.isEmpty());
+        System.assertEquals(0, related.total);
     }
 
     @isTest
@@ -480,11 +481,12 @@ public with sharing class TestFileController {
         FileController.relateFiles(ids, ace.Id);
 
         Test.startTest();
-        List<ContentVersion> related = FileController.getRelatedFiles(ace.Id);
+        RelatedObjects related = FileController.getRelatedFiles(ace.Id, 6);
 
         Test.stopTest();
 
-        System.assertEquals(documents.size(), related.size());
+        System.assertEquals(documents.size(), related.items.size());
+        System.assertEquals(documents.size(), related.total);
     }
 
     @isTest

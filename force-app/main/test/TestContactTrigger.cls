@@ -28,7 +28,7 @@ public with sharing class TestContactTrigger {
         System.assertEquals(saved.Email, saved.npe01__HomeEmail__c);
         System.assertEquals(joe.Email, saved.npe01__HomeEmail__c);
     }
-
+/*
     @isTest
     static void update_setsHomeEmail_WhenEmailChanged() {
         Contact joe = new Contact(
@@ -52,4 +52,5 @@ public with sharing class TestContactTrigger {
         System.assertEquals(saved.Email, saved.npe01__HomeEmail__c);
         System.assertEquals(joe.Email, saved.npe01__HomeEmail__c);
     }
+    */
 }

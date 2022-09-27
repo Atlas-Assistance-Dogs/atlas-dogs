@@ -9,5 +9,6 @@ public with sharing class RelatedObjects {
 
     public RelatedObjects() {
         items = new List<Object>();
+        total = 0;
     }
 }

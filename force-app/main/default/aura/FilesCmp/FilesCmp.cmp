@@ -1,8 +1,8 @@
-<aura:component implements="lightning:isUrlAddressable" description="c:Files component">
+<aura:component implements="lightning:isUrlAddressable" description="c:All Related Files component">
     <aura:attribute name="id" type="String" />
     <!-- Add an "init" handler to handle the first "v.pageReference" value -->
     <aura:handler name="init" value="{!this}" action="{!c.onPageReferenceChange}"/>
     <!-- Add a "change" handler to handle all changes to the "v.pageReference" value -->
     <aura:handler name="change" value="{!v.pageReference}" action="{!c.onPageReferenceChange}"/>
-    <c:allRelatedFilesCmp recordId="{!v.id}"></c:allRelatedFilesCmp>
+    <c:allFilesCmp recordId="{!v.id}" objectApiName="{!v.object}"></c:allFilesCmp>
 </aura:component>	

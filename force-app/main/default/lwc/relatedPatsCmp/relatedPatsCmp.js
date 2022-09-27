@@ -40,8 +40,10 @@ const COLS = [
 
 export default class RelatedPatsCmp extends NavigationMixin(LightningElement) {
     @api recordId;
+    @api max = 6;
     columns = COLS;
     data = [];
+    total = 0;
 
     @wire(MessageContext)
     messageContext;
@@ -104,19 +106,23 @@ export default class RelatedPatsCmp extends NavigationMixin(LightningElement) {
         }
     }
 
-    @wire(getRelatedPats, { recordId: "$recordId" })
+    @wire(getRelatedPats, { recordId: "$recordId", max: "$max" })
     getPats(result) {
         this.wiredPats = result;
+        this.data = null;
         if (result.data) {
-            this.data = result.data.map((pat) => {
+            this.data = result.data.items.map((pat) => {
                 var xpat = Object.assign({}, pat);
                 return xpat;
             });
-            if (this.data.length == 0) {
+            if (this.data.length === 0) {
                 this.data = null;
+                this.total = 0;
+            }
+            if (this.max < 15) {
+                this.total = result.data.total;
             }
         } else if (result.error) {
-            this.logs = [];
             this.dispatchEvent(
                 new ShowToastEvent({
                     title: "Error!!",
@@ -150,5 +156,18 @@ export default class RelatedPatsCmp extends NavigationMixin(LightningElement) {
 
     handleChange() {
         refreshApex(this.wiredPats);
+    }
+
+    handleViewAll() {
+        // Navigate to a specific component.
+        this[NavigationMixin.Navigate]({
+            type: 'standard__component',
+            attributes: {
+                componentName: 'c__PublicAccessTestsCmp'
+            },
+            state: {
+                c__id: this.recordId
+            }
+        });
     }
 }

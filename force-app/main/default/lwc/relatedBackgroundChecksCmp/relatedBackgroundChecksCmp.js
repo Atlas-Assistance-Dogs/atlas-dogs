@@ -41,9 +41,11 @@ export default class RelatedBackgroundChecksCmp extends NavigationMixin(
     LightningElement
 ) {
     @api recordId;
+    @api max = 6;
     columns = COLS;
     data = [];
     wiredChecks;
+    total = 0;
 
     @wire(MessageContext)
     messageContext;
@@ -109,14 +111,18 @@ export default class RelatedBackgroundChecksCmp extends NavigationMixin(
         });
     }
 
-    @wire(getRelatedChecks, { contactId: "$recordId" })
+    @wire(getRelatedChecks, { contactId: "$recordId", max: "$max" })
     getChecks(result) {
         this.wiredChecks = result;
         this.data = null;
         if (result.data) {
-            this.data = result.data;
+            this.data = result.data.items;
             if (this.data.length === 0) {
                 this.data = null;
+                this.total = 0;
+            }
+            if (this.max < 15) {
+                this.total = result.data.total;
             }
         } else if (result.error) {
             this.dispatchEvent(
@@ -152,5 +158,18 @@ export default class RelatedBackgroundChecksCmp extends NavigationMixin(
 
     handleChange() {
         refreshApex(this.wiredChecks);
+    }
+
+    handleViewAll() {
+        // Navigate to a specific component.
+        this[NavigationMixin.Navigate]({
+            type: 'standard__component',
+            attributes: {
+                componentName: 'c__BackgroundChecksCmp'
+            },
+            state: {
+                c__id: this.recordId
+            }
+        });
     }
 }
