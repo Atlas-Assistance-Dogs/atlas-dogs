@@ -59,6 +59,10 @@ flows:
             3.1:
                 task: dx_push
                 when: project_config.project__source_format == "sfdx" and org_config.scratch
+                options:
+                    command: force:source:legacy:push
+            5:
+                task: None
 
     # Flow to deploy current source to a sandbox for dev or verification
     sandbox:
@@ -84,6 +88,11 @@ flows:
                     version_base: latest_github_release
                     version_type: minor
                     force_upload: True
+
+    dev_org:
+        steps:
+            4:
+                task: None
 
 orgs:
     scratch:
