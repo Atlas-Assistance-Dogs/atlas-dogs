@@ -9,6 +9,6 @@ jobs:
         name: "Feature Test"
         # Replace this URL with your forked repo.
         # Use the feature test workflow that matches your project needs.
-        uses: cumulus-actions/standard-workflows/.github/workflows/feature-namespaced.yml@main
+        uses: cumulus-actions/standard-workflows/.github/workflows/feature.yml@main
         secrets:
             dev-hub-auth-url: "${{ secrets.DEV_HUB_AUTH_URL }}"
