@@ -13,7 +13,7 @@
     <filters>
         <field>RECORDTYPE</field>
         <operation>equals</operation>
-        <value>Log__c.Client</value>
+        <value>Log__c.Clients</value>
     </filters>
     <label>Client</label>
 </ListView>

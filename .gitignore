@@ -29,3 +29,5 @@ node_modules
 test_results.json
 
 test_results.xml
+
+.sf/
