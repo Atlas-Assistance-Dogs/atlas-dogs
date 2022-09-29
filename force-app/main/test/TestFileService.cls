@@ -34,6 +34,18 @@ public with sharing class TestFileService {
     }
 
     @isTest
+    public static void updateDates_Ignores_WhenNullList() {
+        FileService.updateDates(null);
+        // no assert here.  Test passes if no exception
+    }
+    
+    @isTest
+    public static void updateDates_Ignores_WhenEmptyList() {
+        FileService.updateDates(new List<ContentVersion>());
+        // no assert here.  Test passes if no exception
+    }
+
+    @isTest
     public static void updateDate_Ignores_WhenNoCatType() {
         Contact contact = new Contact(
             FirstName = 'Test',
@@ -51,7 +63,7 @@ public with sharing class TestFileService {
 
         ContentVersion cv = createLink(null, null, Date.today().addDays(-1), bgCheck.Id);
 
-        FileService.updateDate(cv, bgCheck.Id, Date.today());
+        FileService.updateDate(cv, bgCheck.Id);
         // no assert here.  Test passes if no exception
     }
 
@@ -62,7 +74,7 @@ public with sharing class TestFileService {
         ContentVersion cv = createLink('Dog', 'HealthForm', Date.today(), dog.Id);
 
         // Act
-        FileService.updateDate(cv, Date.today());
+        FileService.updateDate(cv);
 
         // Assert
         dog = [
@@ -89,7 +101,7 @@ public with sharing class TestFileService {
         ContentVersion cv = createLink('Client', 'Application', Date.today(), contact.Id);
 
         // Act
-        FileService.updateDate(cv, Date.today());
+        FileService.updateDate(cv);
 
         // Assert
         contact = [
@@ -102,6 +114,75 @@ public with sharing class TestFileService {
             Date.today(),
             contact.ClientApplicationReceived__c,
             'ClientApplicationReceived not set'
+        );
+    }
+
+    @isTest
+    public static void updateDates_UpdatesAllDates_WhenDog() {
+        Dog__c record = new Dog__c(Name = 'Fido');
+        insert record;
+        List<ContentVersion> cvs = new List<ContentVersion>();
+        cvs.add(createLink('Dog', 'HealthForm', Date.today(), record.Id));
+        cvs.add(createLink('Dog', 'VacExams', Date.today().addDays(-1), record.Id));
+        cvs.add(createLink('Dog', 'Xray', Date.today().addDays(-2), record.Id));
+        FileService.updateDates(cvs);
+        record = [
+            SELECT HealthFormReceived__c, VacExamsReceived__c, XrayReceived__c
+            FROM Dog__c
+            WHERE Id = :record.Id
+            LIMIT 1
+        ];
+        system.assertEquals(
+            Date.today(),
+            record.HealthFormReceived__c,
+            'HealthFormReceived__c not set'
+        );
+        system.assertEquals(
+            Date.today().addDays(-1),
+            record.VacExamsReceived__c,
+            'VacExamsReceived__c not set'
+        );
+        system.assertEquals(
+            Date.today().addDays(-2),
+            record.XrayReceived__c,
+            'XrayReceived__c not set'
+        );
+    }
+
+
+    @isTest
+    public static void updateDates_UpdatesAllDates_WhenContact() {
+        Contact record = new Contact(
+            FirstName = 'Test',
+            LastName = 'Contact',
+            Email = 'abc@abc.com'
+        );
+        insert record;
+        List<ContentVersion> cvs = new List<ContentVersion>();
+        cvs.add(createLink('Board', 'CoI', Date.today(), record.Id));
+        cvs.add(createLink('Client', 'Application', Date.today().addDays(-1), record.Id));
+        cvs.add(createLink('Facilitator', 'ProfGrowthPlan', Date.today().addDays(-2), record.Id));
+        FileService.updateDates(cvs);
+        record = [
+            SELECT BoardCoIReceived__c, ClientApplicationReceived__c, FacilitatorProfGrowthPlanReceived__c
+            FROM Contact
+            WHERE Id = :record.Id
+            LIMIT 1
+        ];
+        system.assertEquals(
+            Date.today(),
+            record.BoardCoIReceived__c,
+            'BoardCoIReceived__c not set'
+        );
+        system.assertEquals(
+            Date.today().addDays(-1),
+            record.ClientApplicationReceived__c,
+            'ClientApplicationReceived__c not set'
+        );
+        system.assertEquals(
+            Date.today().addDays(-2),
+            record.FacilitatorProfGrowthPlanReceived__c,
+            'FacilitatorProfGrowthPlanReceived__c not set'
         );
     }
 }

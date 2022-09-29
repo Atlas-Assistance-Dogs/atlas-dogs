@@ -45,12 +45,13 @@ public class TestPublicAccessTestController {
     @isTest
     public static void getRelatedPats_ReturnsEmpty_WhenNoId() {
         Test.startTest();
-        List<PublicAccessTest__c> result = PublicAccessTestController.getRelatedPats(
-            null
+        RelatedObjects result = PublicAccessTestController.getRelatedPats(
+            null, 5
         );
         Test.stopTest();
 
-        System.assert(result.isEmpty());
+        System.assert(result.items.isEmpty());
+        System.assertEquals(0, result.total);
     }
 
     @isTest
@@ -58,12 +59,13 @@ public class TestPublicAccessTestController {
         insertContacts();
 
         Test.startTest();
-        List<PublicAccessTest__c> result = PublicAccessTestController.getRelatedPats(
-            jill.Id
+        RelatedObjects result = PublicAccessTestController.getRelatedPats(
+            jill.Id, 5
         );
         Test.stopTest();
 
-        System.assert(result.isEmpty());
+        System.assert(result.items.isEmpty());
+        System.assertEquals(0, result.total);
     }
 
     @isTest
@@ -109,12 +111,13 @@ public class TestPublicAccessTestController {
         insert pats;
 
         Test.startTest();
-        List<PublicAccessTest__c> result = PublicAccessTestController.getRelatedPats(
-            jack.Id
+        RelatedObjects result = PublicAccessTestController.getRelatedPats(
+            jack.Id, 5
         );
         Test.stopTest();
 
-        System.assert(result.isEmpty());
+        System.assert(result.items.isEmpty());
+        System.assertEquals(0, result.total);
     }
 
     @isTest
@@ -160,14 +163,15 @@ public class TestPublicAccessTestController {
         insert pats;
 
         Test.startTest();
-        List<PublicAccessTest__c> result = PublicAccessTestController.getRelatedPats(
-            team.Id
+        RelatedObjects result = PublicAccessTestController.getRelatedPats(
+            team.Id, 5
         );
         Test.stopTest();
 
-        System.assertEquals(3, result.size());
+        System.assertEquals(3, result.items.size());
+        System.assertEquals(3, result.total);
         for (Integer idx = 0; idx < pats.size(); idx++) {
-            PublicAccessTest__c actual = result[idx];
+            PublicAccessTest__c actual = (PublicAccessTest__c)result.items[idx];
             PublicAccessTest__c expected = pats[idx];
             System.assertEquals(expected.Id, actual.Id);
             System.assertEquals(expected.Assessor__c, actual.Assessor__c);
@@ -317,12 +321,12 @@ public class TestPublicAccessTestController {
             LIMIT 1
         ];
 
-        List<ContentVersion> contentVersion = FileController.getRelatedFiles(
-            actual.Id
+        RelatedObjects related = FileController.getRelatedFiles(
+            actual.Id, 5
         );
         System.assertEquals(
             contentDocumentId,
-            contentVersion[0].ContentDocumentId
+            ((ContentVersion)related.items[0]).ContentDocumentId
         );
     }
 

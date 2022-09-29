@@ -50,7 +50,3 @@ jobs:
             - name: Deploy source to devint sandbox
               run: |
                   cci flow run sandbox --org devint
-            - name: Deploy source to staging sandbox
-              if: endsWith(github.ref, '/staging')
-              run: |
-                  cci flow run sandbox --org staging

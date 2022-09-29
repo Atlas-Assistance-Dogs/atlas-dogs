@@ -77,21 +77,23 @@ public with sharing class TestCeuController {
     @isTest
     public static void getRelatedCeus_ReturnsRelated() {
         setup();
-        List<ContinuingEducationUnit__c> ceus = ContinuingEducationUnitController.getRelatedCeus(ace.Id);
+        RelatedObjects ceus = ContinuingEducationUnitController.getRelatedCeus(ace.Id, 10);
 
-        System.assertEquals(1, ceus.size(), 'Wrong number of CEUs');
-        ContinuingEducationUnit__c ceu = ceus[0];
+        System.assertEquals(1, ceus.items.size(), 'Wrong number of CEUs');
+        System.assertEquals(1, ceus.total);
+        ContinuingEducationUnit__c ceu = (ContinuingEducationUnit__c)ceus.items[0];
         ceusMatch(aceCeu, ceu);
     }
     
     @isTest
     public static void getRelatedCeus_ReturnsRelatedList() {
         setup();
-        List<ContinuingEducationUnit__c> ceus = ContinuingEducationUnitController.getRelatedCeus(cookie.Id);
+        RelatedObjects ceus = ContinuingEducationUnitController.getRelatedCeus(cookie.Id, 5);
 
-        System.assertEquals(2, ceus.size(), 'Wrong number of CEUs');
-        ceusMatch(cookieCeu1, ceus[0]);
-        ceusMatch(cookieCeu2, ceus[1]);
+        System.assertEquals(2, ceus.items.size(), 'Wrong number of CEUs');
+        System.assertEquals(2, ceus.total);
+        ceusMatch(cookieCeu1, (ContinuingEducationUnit__c)ceus.items[0]);
+        ceusMatch(cookieCeu2, (ContinuingEducationUnit__c)ceus.items[1]);
     }
 
     @isTest
@@ -129,12 +131,13 @@ public with sharing class TestCeuController {
         }
         ContinuingEducationUnit__c newCeu = ContinuingEducationUnitController.createCeu(ceu, documentIds);
 
-        List<ContentVersion> relatedCvs = FileController.getRelatedFiles(newCeu.Id);
-        System.assertEquals(cvs.size(), relatedCvs.size());
+        RelatedObjects relatedCvs = FileController.getRelatedFiles(newCeu.Id, 6);
+        System.assertEquals(cvs.size(), relatedCvs.items.size());
+        System.assertEquals(cvs.size(), relatedCvs.total);
 
         for (Integer idx = 0; idx < cvs.size(); idx++) {
             ContentVersion expected = cvs[idx];
-            ContentVersion actual = relatedCvs[idx];
+            ContentVersion actual = (ContentVersion)relatedCvs.items[idx];
             //system.assertEquals(expected.ContentDocumentId, actual.ContentDocumentId);
         }
     }

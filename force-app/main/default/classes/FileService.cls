@@ -1,10 +1,10 @@
 public with sharing class FileService{
     // Update the docDate for the record tied to these files.
     // Must all be linked to the same entity
-    public static void updateDates(List<ContentVersion> cvs, Date docDate){
+    public static void updateDates(List<ContentVersion> cvs){
         if (cvs == null || cvs.size() == 0)
             return;
-        ContentVersion cv = [SELECT Id, ContentDocumentId, Category__c, Type__c
+        ContentVersion cv = [SELECT Id, ContentDocumentId, Category__c, Type__c, Date__c
                              FROM ContentVersion
                              WHERE Id = :cvs[0].Id
                              LIMIT 1];
@@ -18,20 +18,20 @@ public with sharing class FileService{
             }
             // note there is a limit of one cv above, so we can update all of them here
             if (cv.Category__c == 'Dog'){
-                updateDogDate(cvs, cntLink.LinkedEntityId, docDate);
+                updateDogDate(cvs, cntLink.LinkedEntityId);
             } else{
                 // this is related to a contact
-                updateContactDate(cvs, cntLink.LinkedEntityId, docDate);
+                updateContactDate(cvs, cntLink.LinkedEntityId);
             }
         }
     }
 
     // Update the date for the record tied to a file
-    public static void updateDate(ContentVersion cv, Date docDate){
+    public static void updateDate(ContentVersion cv){
         if (String.isBlank(cv.Category__c) || String.isBlank(cv.Type__c))
             return;
         // nothing to do here
-        cv = [SELECT Id, ContentDocumentId, Category__c, Type__c
+        cv = [SELECT Id, ContentDocumentId, Category__c, Type__c, Date__c
               FROM ContentVersion
               WHERE Id = :cv.Id
               LIMIT 1];
@@ -39,19 +39,19 @@ public with sharing class FileService{
         for (ContentDocumentLink cntLink : [SELECT Id, LinkedEntityId
                                             FROM ContentDocumentLink
                                             WHERE ContentDocumentId = :cv.ContentDocumentId]){
-            updateDate(cv, cntLink.LinkedEntityId, docDate);
+            updateDate(cv, cntLink.LinkedEntityId);
         }
     }
 
     // Update the last docDate for a file
-    public static void updateDate(ContentVersion cv, Id recordId, Date docDate){
+    public static void updateDate(ContentVersion cv, Id recordId){
         if (String.isBlank(cv.Category__c) || String.isBlank(cv.Type__c))
             return;
         if (cv.Category__c == 'Dog'){
-            updateDogDate(new List<ContentVersion>{ cv }, recordId, docDate);
+            updateDogDate(new List<ContentVersion>{ cv }, recordId);
         } else{
             // this is related to a contact
-            updateContactDate(new List<ContentVersion>{ cv }, recordId, docDate);
+            updateContactDate(new List<ContentVersion>{ cv }, recordId);
         }
     }
 
@@ -61,8 +61,10 @@ public with sharing class FileService{
         return current == null || current < proposed;
     }
 
+    //#region Generated Contact
+
     // Update the last received docDate for the contact for the document category and type
-    private static void updateContactDate(List<ContentVersion> cvs, Id recordId, Date docDate){
+    private static void updateContactDate(List<ContentVersion> cvs, Id recordId){
         Set<string> fields = new Set<string>();
         List<Id> ids = new List<Id>();
         for (ContentVersion cv : cvs){
@@ -86,196 +88,252 @@ public with sharing class FileService{
                WHERE Id IN:ids
                ORDER BY Date__c];
 
-        for (ContentVersion cv : cvs){
+        for (ContentVersion cv : cvs){        
             if (cv.Category__c == 'ADSiM'){
-                if (cv.Type__c == 'Application' && isLater(contact.ADSiMApplicationReceived__c, docDate)){
-                    contact.ADSiMApplicationReceived__c = docDate;
-                }
-
-                if (cv.Type__c == 'PreApplication' && isLater(contact.ADSiMPreApplicationReceived__c, docDate)){
-                    contact.ADSiMPreApplicationReceived__c = docDate;
-                }
-
-                if (cv.Type__c == 'ProgAgreement' && isLater(contact.ADSiMProgAgreementReceived__c, docDate)){
-                    contact.ADSiMProgAgreementReceived__c = docDate;
-                }
+                updateADSiMDate(cv, contact);
             }
-
+        
             if (cv.Category__c == 'Board'){
-                if (cv.Type__c == 'Agreement' && isLater(contact.BoardAgreementReceived__c, docDate)){
-                    contact.BoardAgreementReceived__c = docDate;
-                }
-
-                if (cv.Type__c == 'Application' && isLater(contact.BoardApplicationReceived__c, docDate)){
-                    contact.BoardApplicationReceived__c = docDate;
-                }
-
-                if (cv.Type__c == 'CoI' && isLater(contact.BoardCoIReceived__c, docDate)){
-                    contact.BoardCoIReceived__c = docDate;
-                }
-
-                if (cv.Type__c == 'Resume' && isLater(contact.BoardResumeReceived__c, docDate)){
-                    contact.BoardResumeReceived__c = docDate;
-                }
-
-                if (cv.Type__c == 'ToN' && isLater(contact.BoardToNReceived__c, docDate)){
-                    contact.BoardToNReceived__c = docDate;
-                }
+                updateBoardDate(cv, contact);
             }
-
+        
             if (cv.Category__c == 'Client'){
-                if (cv.Type__c == 'Application' && isLater(contact.ClientApplicationReceived__c, docDate)){
-                    contact.ClientApplicationReceived__c = docDate;
-                }
-
-                if (cv.Type__c == 'CertAgreement' && isLater(contact.ClientCertAgreementReceived__c, docDate)){
-                    contact.ClientCertAgreementReceived__c = docDate;
-                }
-
-                if (cv.Type__c == 'LOMI' && isLater(contact.ClientLOMIReceived__c, docDate)){
-                    contact.ClientLOMIReceived__c = docDate;
-                }
-
-                if (cv.Type__c == 'PreApplication' && isLater(contact.ClientPreApplicationReceived__c, docDate)){
-                    contact.ClientPreApplicationReceived__c = docDate;
-                }
-
-                if (cv.Type__c == 'ProgAgreement' && isLater(contact.ClientProgAgreementReceived__c, docDate)){
-                    contact.ClientProgAgreementReceived__c = docDate;
-                }
-
-                if (cv.Type__c == 'Survey' && isLater(contact.ClientSurveyReceived__c, docDate)){
-                    contact.ClientSurveyReceived__c = docDate;
-                }
-
-                if (cv.Type__c == 'VAPW' && isLater(contact.ClientVAPWReceived__c, docDate)){
-                    contact.ClientVAPWReceived__c = docDate;
-                }
+                updateClientDate(cv, contact);
             }
-
+        
             if (cv.Category__c == 'Facilitator'){
-                if (cv.Type__c == 'Application' && isLater(contact.FacilitatorApplicationReceived__c, docDate)){
-                    contact.FacilitatorApplicationReceived__c = docDate;
-                }
-
-                if (cv.Type__c == 'CertAgreement' && isLater(contact.FacilitatorCertAgreementReceived__c, docDate)){
-                    contact.FacilitatorCertAgreementReceived__c = docDate;
-                }
-
-                if (cv.Type__c == 'InfrNotice' && isLater(contact.FacilitatorInfrNoticeReceived__c, docDate)){
-                    contact.FacilitatorInfrNoticeReceived__c = docDate;
-                }
-
-                if (cv.Type__c == 'Practicum' && isLater(contact.FacilitatorPracticumReceived__c, docDate)){
-                    contact.FacilitatorPracticumReceived__c = docDate;
-                }
-
-                if (cv.Type__c == 'ProfGrowthPlan' && isLater(contact.FacilitatorProfGrowthPlanReceived__c, docDate)){
-                    contact.FacilitatorProfGrowthPlanReceived__c = docDate;
-                }
-
-                if (cv.Type__c == 'ProgAgreement' && isLater(contact.FacilitatorProgAgreementReceived__c, docDate)){
-                    contact.FacilitatorProgAgreementReceived__c = docDate;
-                }
-
-                if (cv.Type__c == 'Reference' && isLater(contact.FacilitatorReferenceReceived__c, docDate)){
-                    contact.FacilitatorReferenceReceived__c = docDate;
-                }
+                updateFacilitatorDate(cv, contact);
             }
-
+        
             if (cv.Category__c == 'Puppy'){
-                if (cv.Type__c == 'Application' && isLater(contact.PuppyApplicationReceived__c, docDate)){
-                    contact.PuppyApplicationReceived__c = docDate;
-                }
-
-                if (cv.Type__c == 'CertAgreement' && isLater(contact.PuppyCertAgreementReceived__c, docDate)){
-                    contact.PuppyCertAgreementReceived__c = docDate;
-                }
-
-                if (cv.Type__c == 'InfrNotice' && isLater(contact.PuppyInfrNoticeReceived__c, docDate)){
-                    contact.PuppyInfrNoticeReceived__c = docDate;
-                }
-
-                if (cv.Type__c == 'ProgAgreement' && isLater(contact.PuppyProgAgreementReceived__c, docDate)){
-                    contact.PuppyProgAgreementReceived__c = docDate;
-                }
-
-                if (cv.Type__c == 'Reference' && isLater(contact.PuppyReferenceReceived__c, docDate)){
-                    contact.PuppyReferenceReceived__c = docDate;
-                }
+                updatePuppyDate(cv, contact);
             }
-
+        
             if (cv.Category__c == 'Staff'){
-                if (cv.Type__c == 'Agreement' && isLater(contact.StaffAgreementReceived__c, docDate)){
-                    contact.StaffAgreementReceived__c = docDate;
-                }
-
-                if (cv.Type__c == 'Application' && isLater(contact.StaffApplicationReceived__c, docDate)){
-                    contact.StaffApplicationReceived__c = docDate;
-                }
-
-                if (cv.Type__c == 'I9' && isLater(contact.StaffI9Received__c, docDate)){
-                    contact.StaffI9Received__c = docDate;
-                }
-
-                if (cv.Type__c == 'Offer' && isLater(contact.StaffOfferReceived__c, docDate)){
-                    contact.StaffOfferReceived__c = docDate;
-                }
-
-                if (cv.Type__c == 'Resume' && isLater(contact.StaffResumeReceived__c, docDate)){
-                    contact.StaffResumeReceived__c = docDate;
-                }
-
-                if (cv.Type__c == 'W4' && isLater(contact.StaffW4Received__c, docDate)){
-                    contact.StaffW4Received__c = docDate;
-                }
+                updateStaffDate(cv, contact);
             }
-
+        
             if (cv.Category__c == 'Trainer'){
-                if (cv.Type__c == 'Application' && isLater(contact.TrainerApplicationReceived__c, docDate)){
-                    contact.TrainerApplicationReceived__c = docDate;
-                }
-
-                if (cv.Type__c == 'CertAgreement' && isLater(contact.TrainerCertAgreementReceived__c, docDate)){
-                    contact.TrainerCertAgreementReceived__c = docDate;
-                }
-
-                if (cv.Type__c == 'InfrNotice' && isLater(contact.TrainerInfrNoticeReceived__c, docDate)){
-                    contact.TrainerInfrNoticeReceived__c = docDate;
-                }
-
-                if (cv.Type__c == 'ProgAgreement' && isLater(contact.TrainerProgAgreementReceived__c, docDate)){
-                    contact.TrainerProgAgreementReceived__c = docDate;
-                }
-
-                if (cv.Type__c == 'Reference' && isLater(contact.TrainerReferenceReceived__c, docDate)){
-                    contact.TrainerReferenceReceived__c = docDate;
-                }
+                updateTrainerDate(cv, contact);
             }
-
+        
             if (cv.Category__c == 'Volunteer'){
-                if (cv.Type__c == 'Agreement' && isLater(contact.VolunteerAgreementReceived__c, docDate)){
-                    contact.VolunteerAgreementReceived__c = docDate;
-                }
-
-                if (cv.Type__c == 'Application' && isLater(contact.VolunteerApplicationReceived__c, docDate)){
-                    contact.VolunteerApplicationReceived__c = docDate;
-                }
-
-                if (cv.Type__c == 'Resume' && isLater(contact.VolunteerResumeReceived__c, docDate)){
-                    contact.VolunteerResumeReceived__c = docDate;
-                }
+                updateVolunteerDate(cv, contact);
             }
 
-            if (cv.Type__c == 'ContactForm' && isLater(contact.ContactFormReceived__c, docDate)){
-                contact.ContactFormReceived__c = docDate;
+            if (cv.Type__c == 'ContactForm' && isLater(contact.ContactFormReceived__c, cv.Date__c)){
+                contact.ContactFormReceived__c = cv.Date__c;
             }
         }
         update contact;
     }
 
-    // Update the last received docDate for the contact for the document type
-    private static void updateDogDate(List<ContentVersion> cvs, Id recordId, Date docDate){
+    // Update the last date when the category is ADSiM
+    private static void updateADSiMDate(ContentVersion cv, Contact contact) {
+
+        if (cv.Type__c == 'Application' && isLater(contact.ADSiMApplicationReceived__c, cv.Date__c)){
+            contact.ADSiMApplicationReceived__c = cv.Date__c;
+        }
+
+        if (cv.Type__c == 'PreApplication' && isLater(contact.ADSiMPreApplicationReceived__c, cv.Date__c)){
+            contact.ADSiMPreApplicationReceived__c = cv.Date__c;
+        }
+
+        if (cv.Type__c == 'ProgAgreement' && isLater(contact.ADSiMProgAgreementReceived__c, cv.Date__c)){
+            contact.ADSiMProgAgreementReceived__c = cv.Date__c;
+        }
+    }
+
+    // Update the last date when the category is Board
+    private static void updateBoardDate(ContentVersion cv, Contact contact) {
+
+        if (cv.Type__c == 'Agreement' && isLater(contact.BoardAgreementReceived__c, cv.Date__c)){
+            contact.BoardAgreementReceived__c = cv.Date__c;
+        }
+
+        if (cv.Type__c == 'Application' && isLater(contact.BoardApplicationReceived__c, cv.Date__c)){
+            contact.BoardApplicationReceived__c = cv.Date__c;
+        }
+
+        if (cv.Type__c == 'CoI' && isLater(contact.BoardCoIReceived__c, cv.Date__c)){
+            contact.BoardCoIReceived__c = cv.Date__c;
+        }
+
+        if (cv.Type__c == 'Resume' && isLater(contact.BoardResumeReceived__c, cv.Date__c)){
+            contact.BoardResumeReceived__c = cv.Date__c;
+        }
+
+        if (cv.Type__c == 'ToN' && isLater(contact.BoardToNReceived__c, cv.Date__c)){
+            contact.BoardToNReceived__c = cv.Date__c;
+        }
+    }
+
+    // Update the last date when the category is Client
+    private static void updateClientDate(ContentVersion cv, Contact contact) {
+
+        if (cv.Type__c == 'Application' && isLater(contact.ClientApplicationReceived__c, cv.Date__c)){
+            contact.ClientApplicationReceived__c = cv.Date__c;
+        }
+
+        if (cv.Type__c == 'CertAgreement' && isLater(contact.ClientCertAgreementReceived__c, cv.Date__c)){
+            contact.ClientCertAgreementReceived__c = cv.Date__c;
+        }
+
+        if (cv.Type__c == 'LOMI' && isLater(contact.ClientLOMIReceived__c, cv.Date__c)){
+            contact.ClientLOMIReceived__c = cv.Date__c;
+        }
+
+        if (cv.Type__c == 'PreApplication' && isLater(contact.ClientPreApplicationReceived__c, cv.Date__c)){
+            contact.ClientPreApplicationReceived__c = cv.Date__c;
+        }
+
+        if (cv.Type__c == 'ProgAgreement' && isLater(contact.ClientProgAgreementReceived__c, cv.Date__c)){
+            contact.ClientProgAgreementReceived__c = cv.Date__c;
+        }
+
+        if (cv.Type__c == 'Survey' && isLater(contact.ClientSurveyReceived__c, cv.Date__c)){
+            contact.ClientSurveyReceived__c = cv.Date__c;
+        }
+
+        if (cv.Type__c == 'VAPW' && isLater(contact.ClientVAPWReceived__c, cv.Date__c)){
+            contact.ClientVAPWReceived__c = cv.Date__c;
+        }
+    }
+
+    // Update the last date when the category is Facilitator
+    private static void updateFacilitatorDate(ContentVersion cv, Contact contact) {
+
+        if (cv.Type__c == 'Application' && isLater(contact.FacilitatorApplicationReceived__c, cv.Date__c)){
+            contact.FacilitatorApplicationReceived__c = cv.Date__c;
+        }
+
+        if (cv.Type__c == 'CertAgreement' && isLater(contact.FacilitatorCertAgreementReceived__c, cv.Date__c)){
+            contact.FacilitatorCertAgreementReceived__c = cv.Date__c;
+        }
+
+        if (cv.Type__c == 'InfrNotice' && isLater(contact.FacilitatorInfrNoticeReceived__c, cv.Date__c)){
+            contact.FacilitatorInfrNoticeReceived__c = cv.Date__c;
+        }
+
+        if (cv.Type__c == 'Practicum' && isLater(contact.FacilitatorPracticumReceived__c, cv.Date__c)){
+            contact.FacilitatorPracticumReceived__c = cv.Date__c;
+        }
+
+        if (cv.Type__c == 'ProfGrowthPlan' && isLater(contact.FacilitatorProfGrowthPlanReceived__c, cv.Date__c)){
+            contact.FacilitatorProfGrowthPlanReceived__c = cv.Date__c;
+        }
+
+        if (cv.Type__c == 'ProgAgreement' && isLater(contact.FacilitatorProgAgreementReceived__c, cv.Date__c)){
+            contact.FacilitatorProgAgreementReceived__c = cv.Date__c;
+        }
+
+        if (cv.Type__c == 'Reference' && isLater(contact.FacilitatorReferenceReceived__c, cv.Date__c)){
+            contact.FacilitatorReferenceReceived__c = cv.Date__c;
+        }
+    }
+
+    // Update the last date when the category is Puppy
+    private static void updatePuppyDate(ContentVersion cv, Contact contact) {
+
+        if (cv.Type__c == 'Application' && isLater(contact.PuppyApplicationReceived__c, cv.Date__c)){
+            contact.PuppyApplicationReceived__c = cv.Date__c;
+        }
+
+        if (cv.Type__c == 'CertAgreement' && isLater(contact.PuppyCertAgreementReceived__c, cv.Date__c)){
+            contact.PuppyCertAgreementReceived__c = cv.Date__c;
+        }
+
+        if (cv.Type__c == 'Contract' && isLater(contact.PuppyContractReceived__c, cv.Date__c)){
+            contact.PuppyContractReceived__c = cv.Date__c;
+        }
+
+        if (cv.Type__c == 'InfrNotice' && isLater(contact.PuppyInfrNoticeReceived__c, cv.Date__c)){
+            contact.PuppyInfrNoticeReceived__c = cv.Date__c;
+        }
+
+        if (cv.Type__c == 'ProgAgreement' && isLater(contact.PuppyProgAgreementReceived__c, cv.Date__c)){
+            contact.PuppyProgAgreementReceived__c = cv.Date__c;
+        }
+
+        if (cv.Type__c == 'Reference' && isLater(contact.PuppyReferenceReceived__c, cv.Date__c)){
+            contact.PuppyReferenceReceived__c = cv.Date__c;
+        }
+    }
+
+    // Update the last date when the category is Staff
+    private static void updateStaffDate(ContentVersion cv, Contact contact) {
+
+        if (cv.Type__c == 'Agreement' && isLater(contact.StaffAgreementReceived__c, cv.Date__c)){
+            contact.StaffAgreementReceived__c = cv.Date__c;
+        }
+
+        if (cv.Type__c == 'Application' && isLater(contact.StaffApplicationReceived__c, cv.Date__c)){
+            contact.StaffApplicationReceived__c = cv.Date__c;
+        }
+
+        if (cv.Type__c == 'I9' && isLater(contact.StaffI9Received__c, cv.Date__c)){
+            contact.StaffI9Received__c = cv.Date__c;
+        }
+
+        if (cv.Type__c == 'Offer' && isLater(contact.StaffOfferReceived__c, cv.Date__c)){
+            contact.StaffOfferReceived__c = cv.Date__c;
+        }
+
+        if (cv.Type__c == 'Resume' && isLater(contact.StaffResumeReceived__c, cv.Date__c)){
+            contact.StaffResumeReceived__c = cv.Date__c;
+        }
+
+        if (cv.Type__c == 'W4' && isLater(contact.StaffW4Received__c, cv.Date__c)){
+            contact.StaffW4Received__c = cv.Date__c;
+        }
+
+        if (cv.Type__c == 'W9' && isLater(contact.StaffW9Received__c, cv.Date__c)){
+            contact.StaffW9Received__c = cv.Date__c;
+        }
+    }
+
+    // Update the last date when the category is Trainer
+    private static void updateTrainerDate(ContentVersion cv, Contact contact) {
+
+        if (cv.Type__c == 'Application' && isLater(contact.TrainerApplicationReceived__c, cv.Date__c)){
+            contact.TrainerApplicationReceived__c = cv.Date__c;
+        }
+
+        if (cv.Type__c == 'CertAgreement' && isLater(contact.TrainerCertAgreementReceived__c, cv.Date__c)){
+            contact.TrainerCertAgreementReceived__c = cv.Date__c;
+        }
+
+        if (cv.Type__c == 'InfrNotice' && isLater(contact.TrainerInfrNoticeReceived__c, cv.Date__c)){
+            contact.TrainerInfrNoticeReceived__c = cv.Date__c;
+        }
+
+        if (cv.Type__c == 'ProgAgreement' && isLater(contact.TrainerProgAgreementReceived__c, cv.Date__c)){
+            contact.TrainerProgAgreementReceived__c = cv.Date__c;
+        }
+
+        if (cv.Type__c == 'Reference' && isLater(contact.TrainerReferenceReceived__c, cv.Date__c)){
+            contact.TrainerReferenceReceived__c = cv.Date__c;
+        }
+    }
+
+    // Update the last date when the category is Volunteer
+    private static void updateVolunteerDate(ContentVersion cv, Contact contact) {
+
+        if (cv.Type__c == 'Agreement' && isLater(contact.VolunteerAgreementReceived__c, cv.Date__c)){
+            contact.VolunteerAgreementReceived__c = cv.Date__c;
+        }
+
+        if (cv.Type__c == 'Application' && isLater(contact.VolunteerApplicationReceived__c, cv.Date__c)){
+            contact.VolunteerApplicationReceived__c = cv.Date__c;
+        }
+
+        if (cv.Type__c == 'Resume' && isLater(contact.VolunteerResumeReceived__c, cv.Date__c)){
+            contact.VolunteerResumeReceived__c = cv.Date__c;
+        }
+    }
+
+    // Update the last received docDate for the dog for the document type
+    private static void updateDogDate(List<ContentVersion> cvs, Id recordId){
         // this is related to a dog
         Set<string> fields = new Set<string>();
         List<Id> ids = new List<Id>();
@@ -298,20 +356,22 @@ public with sharing class FileService{
                WHERE Id IN:ids
                ORDER BY Date__c];
 
+        //#region Generated dog
         for (ContentVersion cv : cvs){
-            if (cv.Type__c == 'HealthForm' && isLater(dog.HealthFormReceived__c, docDate)){
-                dog.HealthFormReceived__c = docDate;
-            }
 
-            if (cv.Type__c == 'Xray' && isLater(dog.XrayReceived__c, docDate)){
-                dog.XrayReceived__c = docDate;
-            }
+        if (cv.Type__c == 'HealthForm' && isLater(dog.HealthFormReceived__c, cv.Date__c)){
+            dog.HealthFormReceived__c = cv.Date__c;
+        }
 
-            if (cv.Type__c == 'VacExams' && isLater(dog.VacExamsReceived__c, docDate)){
-                dog.VacExamsReceived__c = docDate;
-            }
+        if (cv.Type__c == 'VacExams' && isLater(dog.VacExamsReceived__c, cv.Date__c)){
+            dog.VacExamsReceived__c = cv.Date__c;
+        }
+
+        if (cv.Type__c == 'Xray' && isLater(dog.XrayReceived__c, cv.Date__c)){
+            dog.XrayReceived__c = cv.Date__c;
+        }
         }
         update dog;
     }
-
+    //#endregion Generated code
 }

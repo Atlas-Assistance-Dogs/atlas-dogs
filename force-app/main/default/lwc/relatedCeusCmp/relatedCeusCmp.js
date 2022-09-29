@@ -46,9 +46,11 @@ const COLS = [
 
 export default class RelatedCeusCmp extends NavigationMixin(LightningElement) {
     @api recordId;
+    @api max = 6;
     columns = COLS;
     data = [];
     wiredCeus;
+    total = 0;
 
     @wire(MessageContext)
     messageContext;
@@ -117,12 +119,12 @@ export default class RelatedCeusCmp extends NavigationMixin(LightningElement) {
         });
     }
 
-    @wire(getRelatedCeus, { contactId: "$recordId" })
+    @wire(getRelatedCeus, { contactId: "$recordId", max: "$max" })
     getCeus(result) {
         this.wiredCeus = result;
         this.data = null;
         if (result.data) {
-            this.data = result.data.map((ceu) => {
+            this.data = result.data.items.map((ceu) => {
                 var newCeu = Object.assign({}, ceu);
                 newCeu["authority"] = ceu[AUTHORITY_FIELD.fieldApiName];
                 if (newCeu.authority === "Other") {
@@ -132,6 +134,10 @@ export default class RelatedCeusCmp extends NavigationMixin(LightningElement) {
             });
             if (this.data.length === 0) {
                 this.data = null;
+                this.total = 0;
+            }
+            if (this.max < 15) {
+                this.total = result.data.total;
             }
         } else if (result.error) {
             this.dispatchEvent(
@@ -167,5 +173,18 @@ export default class RelatedCeusCmp extends NavigationMixin(LightningElement) {
 
     handleChange() {
         refreshApex(this.wiredCeus);
+    }
+
+    handleViewAll() {
+        // Navigate to a specific component.
+        this[NavigationMixin.Navigate]({
+            type: 'standard__component',
+            attributes: {
+                componentName: 'c__ContinuingEducationUnitsCmp'
+            },
+            state: {
+                c__id: this.recordId
+            }
+        });
     }
 }

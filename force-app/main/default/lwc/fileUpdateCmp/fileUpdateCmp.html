@@ -1,43 +1,23 @@
 <template>
-    <c-modal-cmp
-        title="Update File Attributes"
-        submitlabel="Submit"
-        onsubmit={handleSubmit}
-    >
-        <lightning-record-edit-form
-            slot="body"
-            object-api-name="ContentVersion"
-            class="slds-scrollable"
-            record-id={recordId}
-        >
-            <lightning-messages></lightning-messages>
-            <lightning-input-field
-                field-name={fields.category}
-                class="category slds-p-bottom_medium"
-            ></lightning-input-field>
-            <lightning-input-field
-                field-name={fields.type}
-                class="type slds-p-top_medium"
-            ></lightning-input-field>
-            <lightning-input-field
-                field-name={fields.date}
-                class="date slds-p-top_medium"
-            ></lightning-input-field>
-            <lightning-button
-                label={currentCv.Title}
-                variant="base"
-                name="view"
-                icon-name="utility:file"
-                icon-position="left"
-                onclick={handleView}
-            >
-            </lightning-button>
-            <template if:true={isErrorMessage}>
-                <span class="slds-text-color_error">{message}</span>
-            </template>
-            <template if:false={isErrorMessage}>
-                <span class="slds-text-color_success">{message}</span>
-            </template>
-        </lightning-record-edit-form>
+    <c-modal-cmp title="Update File Attributes" submitlabel="Submit" onsubmit={handleSubmit}>
+        <div slot="body" class="form">
+            <lightning-record-edit-form slot="body" object-api-name="ContentVersion" class="slds-scrollable"
+                record-id={recordId}>
+                <lightning-messages></lightning-messages>
+                <lightning-input-field field-name={fields.category} class="category slds-p-bottom_medium">
+                </lightning-input-field>
+                <lightning-input-field field-name={fields.type} class="type slds-p-top_medium"></lightning-input-field>
+                <lightning-input-field field-name={fields.date} class="date slds-p-top_medium"></lightning-input-field>
+                <lightning-button label={currentCv.Title} variant="base" name="view" icon-name="utility:file"
+                    icon-position="left" onclick={handleView}>
+                </lightning-button>
+                <template if:true={isErrorMessage}>
+                    <span class="slds-text-color_error">{message}</span>
+                </template>
+                <template if:false={isErrorMessage}>
+                    <span class="slds-text-color_success">{message}</span>
+                </template>
+            </lightning-record-edit-form>
+        </div>
     </c-modal-cmp>
 </template>

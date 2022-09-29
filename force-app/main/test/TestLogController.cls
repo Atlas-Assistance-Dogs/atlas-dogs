@@ -111,10 +111,9 @@ public with sharing class TestLogController {
             WHERE FirstName = :CLIENT_NAME
             LIMIT 1
         ];
-        List<Log__c> related = LogController.getRelatedLogs(contact.Id);
-
+        RelatedObjects relatedObjects = LogController.getRelatedLogs(contact.Id, 6);
         Test.stopTest();
-        System.assertEquals(0, related.size());
+        System.assertEquals(0, relatedObjects.items.size());
     }
 
     @isTest
@@ -123,7 +122,7 @@ public with sharing class TestLogController {
 
         Boolean exceptionThrown = false;
         try {
-            List<Log__c> related = LogController.getRelatedLogs('dog.Id');
+            RelatedObjects related = LogController.getRelatedLogs('dog.Id', 6);
         } catch (Exception exc) {
             exceptionThrown = true;
         }
@@ -183,13 +182,13 @@ public with sharing class TestLogController {
 
         Test.startTest();
 
-        List<Log__c> related = LogController.getRelatedLogs(client.Id);
+        RelatedObjects related = LogController.getRelatedLogs(client.Id, 6);
 
         Test.stopTest();
-        System.assertEquals(1, related.size());
-        for (Integer idx = 0; idx < related.size(); idx++) {
+        System.assertEquals(1, related.items.size());
+        for (Integer idx = 0; idx < related.items.size(); idx++) {
             Log__c expectedLog = logs[0];
-            Log__c actual = related[idx];
+            Log__c actual = (Log__c)related.items[idx];
             logsMatch(expectedLog, actual);
         }
     }

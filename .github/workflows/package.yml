@@ -6,51 +6,12 @@ on:
             - staging
             - main
 
-env:
-    CUMULUSCI_KEYCHAIN_CLASS: cumulusci.core.keychain.EnvironmentProjectKeychain
-    CUMULUSCI_SERVICE_github: ${{ secrets.CUMULUSCI_SERVICE_github }}
-    CUMULUSCI_ORG_packaging: '{"username": "package@atlasdog.org", "instance_url": "https://atlasassistancedogs-dev-ed.my.salesforce.com/"}'
-    SFDX_CLIENT_ID: ${{ secrets.PACKAGING_CLIENT_ID }}
-    SFDX_HUB_KEY: ${{ secrets.SSH_KEY }}
-    SFDX_AUDIENCE_URL: "https://atlasassistancedogs-dev-ed.my.salesforce.com/"
-
 jobs:
-    package:
-        name: "Create package"
-        runs-on: ubuntu-latest
-        steps:
-            - name: Set env to staging
-              if: endsWith(github.ref, '/staging')
-              run: |
-                  echo "name=staging" >> $GITHUB_ENV
-            - name: Set env to production
-              if: endsWith(github.ref, '/main')
-              run: |
-                  echo "name=production" >> $GITHUB_ENV
-            - uses: actions/checkout@v2
-            - name: Install sfdx
-              run: |
-                  mkdir sfdx
-                  wget -qO- https://developer.salesforce.com/media/salesforce-cli/sfdx-linux-amd64.tar.xz | tar xJ -C sfdx --strip-components 1
-                  ./sfdx/install
-                  echo ${{ secrets.SFDX_AUTH_URL }} > sfdx_auth
-                  sfdx auth:sfdxurl:store -f sfdx_auth -d
-            - name: Set up Python
-              uses: actions/setup-python@v1
-              with:
-                  python-version: "3.8"
-            - name: Install CumulusCI
-              run: |
-                  python -m pip install -U pip
-                  pip install cumulusci
-            - name: Deploy source to packaging org
-              run: |
-                  cci flow run ci_master --org packaging
-            - name: Uploads a new beta version of the managed package and create tag and notes
-              if: endsWith(github.ref, '/staging')
-              run: |
-                  cci flow run release_beta --org packaging
-            - name: Uploads a new production version of the managed package and create tag and notes
-              if: endsWith(github.ref, '/main')
-              run: |
-                  cci flow run release_production --org packaging
+    upload-beta:
+        # Replace this URL with your forked repo.
+        # Use the `beta-2gp` workflow if this is a 2GP project.
+        uses: SFDO-Community/standard-workflows/.github/workflows/beta-1gp.yml@main
+        secrets:
+            # If this is a 2GP project, omit the packaging org auth URL.
+            packaging-org-auth-url: "${{ secrets.PACKAGING_ORG_AUTH_URL }}"
+            dev-hub-auth-url: "${{ secrets.DEV_HUB_AUTH_URL }}"

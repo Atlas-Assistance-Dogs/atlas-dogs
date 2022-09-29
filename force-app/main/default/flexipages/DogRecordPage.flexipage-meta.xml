@@ -68,12 +68,6 @@
                 <identifier>RecordSpayedNeutered__cField</identifier>
             </fieldInstance>
         </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldItem>Record.Expired__c</fieldItem>
-                <identifier>RecordExpired__cField</identifier>
-            </fieldInstance>
-        </itemInstances>
         <name>Facet-398b8047-9fe2-47f4-b78d-0c041d9c99f2</name>
         <type>Facet</type>
     </flexiPageRegions>
@@ -100,12 +94,6 @@
             <fieldInstance>
                 <fieldItem>Record.Eligible_byDOB__c</fieldItem>
                 <identifier>RecordEligible_byDOB__cField</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldItem>Record.ActivationDate__c</fieldItem>
-                <identifier>RecordActivationDate__cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
@@ -329,6 +317,12 @@
             <componentInstance>
                 <componentName>relatedFilesCmp</componentName>
                 <identifier>relatedFilesCmp2</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentName>relatedPuppyLogsCmp</componentName>
+                <identifier>c_relatedPuppyLogsCmp</identifier>
             </componentInstance>
         </itemInstances>
         <itemInstances>

@@ -1,0 +1,42 @@
+<template>
+    <lightning-record-edit-form
+        object-api-name={objectName}
+        layout-type="full"
+        record-id={recordId}
+        onsuccess={handleLogChanged}>
+        <div class="slds-grid slds-wrap">
+            <lightning-messages></lightning-messages>
+            <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2 slds-p-horizontal_small">
+                <lightning-input-field field-name={fields.date} value={today}></lightning-input-field>
+            </div>
+            <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2 slds-p-horizontal_small">
+                <lightning-input-field field-name={fields.raiser} value={contactId}></lightning-input-field>
+            </div>
+            <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2 slds-p-horizontal_small">
+                <lightning-input-field field-name={fields.dog} value={dogId}></lightning-input-field>
+            </div>
+            <div class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2 slds-p-horizontal_small">
+                <lightning-input-field field-name={fields.support}></lightning-input-field>
+            </div>
+            <div class="slds-col slds-small-size_1-of-1 slds-medium-size_2-of-2 slds-large-size_2-of-2 slds-p-horizontal_small">
+                <lightning-input-field field-name={fields.information}></lightning-input-field>
+            </div>
+        </div>
+        <div
+            if:false={hasFile}
+            class="fileUpload slds-p-vertical_medium slds-p-horizontal_x-small"
+        >
+            <lightning-file-upload
+                label="Add File"
+                name="fileUploader"
+                accept={acceptedFormats}
+                record-id={recordId}
+                onuploadfinished={handleUploadFinished}
+                slot="actions"
+            ></lightning-file-upload>
+        </div>
+        <div if:true={hasFile} class="slds-p-vertical_medium">
+            <c-file-view-cmp file={currentCv}></c-file-view-cmp>
+        </div>
+    </lightning-record-edit-form>
+</template>

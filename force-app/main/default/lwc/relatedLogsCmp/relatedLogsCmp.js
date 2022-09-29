@@ -1,5 +1,6 @@
 import { LightningElement, api, wire } from "lwc";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
+import { NavigationMixin } from "lightning/navigation";
 import getRelatedLogs from "@salesforce/apex/LogController.getRelatedLogs";
 import deleteRelatedLog from "@salesforce/apex/LogController.deleteLog";
 import { refreshApex } from "@salesforce/apex";
@@ -7,6 +8,7 @@ import { refreshApex } from "@salesforce/apex";
 import ATLAS_SUPPORT_FIELD from "@salesforce/schema/Log__c.RequestSupportFromAtlas__c";
 import STRESS_FIELD from "@salesforce/schema/Log__c.Stress__c";
 import CLIENT_FIELD from "@salesforce/schema/Log__c.Client__c";
+import CLIENT_REFERENCE from "@salesforce/schema/Log__c.Client__r.Name";
 import SUBMITTER_FIELD from "@salesforce/schema/Log__c.Submitter__c";
 import FACILITATOR_FIELD from "@salesforce/schema/Log__c.Facilitator__c";
 import DATE_FIELD from "@salesforce/schema/Log__c.Date__c";
@@ -28,7 +30,7 @@ const COLS = [
     {
         label: "Date",
         fieldName: DATE_FIELD.fieldApiName,
-        type: "date",
+        type: "date-local",
         sortable: true
     },
     { label: "Role", fieldName: "roles", sortable: true, initialWidth: 140 },
@@ -59,8 +61,9 @@ const COLS = [
     { type: "action", typeAttributes: { rowActions: actions } }
 ];
 
-export default class RelatedLogsCmp extends LightningElement {
+export default class RelatedLogsCmp extends NavigationMixin(LightningElement) {
     @api recordId;
+    @api max = 6;
     columns = COLS;
     data = [];
 
@@ -103,7 +106,7 @@ export default class RelatedLogsCmp extends LightningElement {
         const row = event.detail.row;
         switch (actionName) {
             case "delete":
-                this.deleteLog(row.id);
+                this.deleteLog(row.Id);
                 break;
             case "edit":
                 const payload = {
@@ -117,18 +120,22 @@ export default class RelatedLogsCmp extends LightningElement {
         }
     }
 
-    @wire(getRelatedLogs, { contactId: "$recordId" })
+    @wire(getRelatedLogs, { contactId: "$recordId", max: "$max" })
     getLogs(result) {
         this.wiredLogs = result;
         this.data = null;
-        if (result.data) {
-            this.data = result.data.map((log) => {
+        if (result.data && result.data.items) {
+            this.data = result.data.items.map((log) => {
                 var newLog = Object.assign({}, log);
                 newLog["roles"] = this.getRoles(log);
                 return newLog;
             });
             if (this.data.length === 0) {
                 this.data = null;
+                this.total = 0;
+            }
+            if (this.max < 15) {
+                this.total = result.data.total;
             }
         } else if (result.error) {
             this.dispatchEvent(
@@ -163,6 +170,13 @@ export default class RelatedLogsCmp extends LightningElement {
     deleteLog(recordId) {
         deleteRelatedLog({ recordId: recordId })
             .then(() => {
+                this.dispatchEvent(
+                    new ShowToastEvent({
+                        title: "Success",
+                        message: 'Log Deleted',
+                        variant: "success"
+                    })
+                );
                 this.handleChange();
             })
             .catch((error) => {
@@ -178,5 +192,18 @@ export default class RelatedLogsCmp extends LightningElement {
 
     handleChange() {
         refreshApex(this.wiredLogs);
+    }
+
+    handleViewAll() {
+        // Navigate to a specific component.
+        this[NavigationMixin.Navigate]({
+            type: 'standard__component',
+            attributes: {
+                componentName: 'c__LogsCmp'
+            },
+            state: {
+                c__id: this.recordId
+            }
+        });
     }
 }

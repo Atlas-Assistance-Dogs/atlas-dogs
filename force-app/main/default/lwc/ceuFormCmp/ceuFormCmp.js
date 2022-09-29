@@ -216,11 +216,11 @@ export default class CeuFormCmp extends NavigationMixin(LightningElement) {
         return this.relatedFiles !== null && this.relatedFiles.length > 0;
     }
 
-    @wire(getRelatedFiles, { recordId: "$recordId" }) filesLst(result) {
+    @wire(getRelatedFiles, { recordId: "$recordId", max: 100 }) filesLst(result) {
         this.wiredFilesList = result;
         this.relatedFiles = null;
-        if (result.data) {
-            this.relatedFiles = result.data.map((data) => {
+        if (result.data?.items) {
+            this.relatedFiles = result.data.items.map((data) => {
                 return {
                     name: data.Title,
                     documentId: data.ContentDocumentId

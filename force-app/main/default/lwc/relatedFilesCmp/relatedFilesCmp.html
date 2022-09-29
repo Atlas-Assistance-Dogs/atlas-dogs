@@ -1,5 +1,5 @@
 <template>
-    <c-related-object-cmp title="Files" icon-name="standard:folder">
+    <c-related-object-cmp title="Files" icon-name="standard:folder" total={total}>
         <div slot="actions">
             <!-- lightning button for upload files modal -->
             <lightning-button
@@ -20,16 +20,23 @@
             ></c-file-update-cmp>
         </div>
         <div slot="list">
-            <template if:true={fileUploadList}>
+            <template if:true={data}>
                 <lightning-datatable
-                    data={fileUploadList}
+                    data={data}
                     columns={columns}
                     hide-checkbox-column
                     key-field="recordId"
+                    default-sort-direction={defaultSortDirection}
+                    sorted-direction={sortDirection}
+                    sorted-by={sortedBy}
+                    onsort={handleSort}
                     onrowaction={handleRowAction}
                 >
                 </lightning-datatable>
             </template>
+        </div>
+        <div slot="footer">
+            <lightning-button class="slds-m-horizontal_x-small" variant="base" label="View all" title="Submitter Logs" onclick={handleViewAll}></lightning-button>
         </div>
     </c-related-object-cmp>
 </template>
