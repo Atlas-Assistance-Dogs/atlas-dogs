@@ -126,6 +126,11 @@
                 <default>false</default>
                 <label>I9</label>
             </value>
+            <value>
+                <fullName>W9</fullName>
+                <default>false</default>
+                <label>Contractor W9</label>
+            </value>
         </valueSetDefinition>
         <valueSettings>
             <controllingFieldValue>Volunteer</controllingFieldValue>
@@ -239,6 +244,10 @@
         <valueSettings>
             <controllingFieldValue>Staff</controllingFieldValue>
             <valueName>I9</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Staff</controllingFieldValue>
+            <valueName>W9</valueName>
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Dog</controllingFieldValue>

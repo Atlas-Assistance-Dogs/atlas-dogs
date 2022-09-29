@@ -286,6 +286,10 @@ public with sharing class FileService{
         if (cv.Type__c == 'W4' && isLater(contact.StaffW4Received__c, cv.Date__c)){
             contact.StaffW4Received__c = cv.Date__c;
         }
+
+        if (cv.Type__c == 'W9' && isLater(contact.StaffW9Received__c, cv.Date__c)){
+            contact.StaffW9Received__c = cv.Date__c;
+        }
     }
 
     // Update the last date when the category is Trainer

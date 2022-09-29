@@ -168,6 +168,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Contact.Birthdate</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Contact.BoardAgreementReceived__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -469,6 +474,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Contact.StaffResumeReceived__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Contact.StaffStatus__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

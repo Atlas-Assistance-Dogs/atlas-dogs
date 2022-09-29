@@ -421,4 +421,64 @@ public with sharing class TestFileServiceStaffFields {
             'StaffW4Received__c set to an older date'
         );
     }
+
+    @isTest
+    public static void updateDate_StaffW9_SetsDateWhenNull() {
+        Contact record = new Contact(FirstName = 'Test', LastName = 'Contact', Email = 'abc@abc.com');
+        insert record;
+        ContentVersion cv = TestFileServiceFields.createLink('Staff', 'W9', Date.today(), record.Id);
+        FileService.updateDate(cv, record.Id);
+
+        record = [
+            SELECT StaffW9Received__c
+            FROM Contact
+            WHERE Id = :record.Id
+            LIMIT 1
+        ];
+        system.assertEquals(
+            Date.today(),
+            record.StaffW9Received__c,
+            'StaffW9Received__c not set'
+        );
+    }
+
+    @isTest
+    public static void updateDate_StaffW9_SetsDateWhenNewer() {
+        Contact record = new Contact(FirstName = 'Test', LastName = 'Contact', Email = 'abc@abc.com', StaffW9Received__c = Date.today().addDays(-1));
+        insert record;
+        ContentVersion cv = TestFileServiceFields.createLink('Staff', 'W9', Date.today(), record.Id);
+        FileService.updateDate(cv, record.Id);
+
+        record = [
+            SELECT StaffW9Received__c
+            FROM Contact
+            WHERE Id = :record.Id
+            LIMIT 1
+        ];
+        system.assertEquals(
+            Date.today(),
+            record.StaffW9Received__c,
+            'StaffW9Received__c not set'
+        );
+    }
+
+    @isTest
+    public static void updateDate_StaffW9_LeavesDateWhenOlder() {
+        Contact record = new Contact(FirstName = 'Test', LastName = 'Contact', Email = 'abc@abc.com', StaffW9Received__c = Date.today());
+        insert record;
+        ContentVersion cv = TestFileServiceFields.createLink('Staff', 'W9', Date.today().addDays(-1), record.Id);
+        FileService.updateDate(cv, record.Id);
+
+        record = [
+            SELECT StaffW9Received__c
+            FROM Contact
+            WHERE Id = :record.Id
+            LIMIT 1
+        ];
+        system.assertEquals(
+            Date.today(),
+            record.StaffW9Received__c,
+            'StaffW9Received__c set to an older date'
+        );
+    }
 }
