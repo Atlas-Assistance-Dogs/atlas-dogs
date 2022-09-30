@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <ListView xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Client</fullName>
+    <fullName>Clients</fullName>
     <columns>Date__c</columns>
     <columns>Submitter__c</columns>
     <columns>Client__c</columns>
@@ -15,5 +15,5 @@
         <operation>equals</operation>
         <value>Log__c.Client</value>
     </filters>
-    <label>Client</label>
+    <label>Clients</label>
 </ListView>
