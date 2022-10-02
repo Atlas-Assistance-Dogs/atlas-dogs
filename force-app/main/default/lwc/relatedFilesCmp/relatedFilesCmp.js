@@ -1,13 +1,13 @@
 import { LightningElement, api, wire, track } from "lwc";
-import { getObjectInfo } from 'lightning/uiObjectInfoApi';
-import { getPicklistValues } from 'lightning/uiObjectInfoApi';
+import { getObjectInfo } from "lightning/uiObjectInfoApi";
+import { getPicklistValues } from "lightning/uiObjectInfoApi";
 import getRelatedFiles from "@salesforce/apex/FileController.getRelatedFiles";
 import deleteRecord from "@salesforce/apex/FileController.deleteRecord";
 import { refreshApex } from "@salesforce/apex";
 import { NavigationMixin } from "lightning/navigation";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
 
-import CV_OBJECT from '@salesforce/schema/ContentVersion';
+import CV_OBJECT from "@salesforce/schema/ContentVersion";
 import CATEGORY_FIELD from "@salesforce/schema/ContentVersion.Category__c";
 import TYPE_FIELD from "@salesforce/schema/ContentVersion.Type__c";
 import DATE_FIELD from "@salesforce/schema/ContentVersion.Date__c";
@@ -33,9 +33,22 @@ const COLS = [
             iconPosition: "left"
         }
     },
-    { label: "Category", fieldName: CATEGORY_FIELD.fieldApiName, sortable: true },
-    { label: "Document Type", fieldName: TYPE_FIELD.fieldApiName, sortable: true },
-    { label: "Document Date", fieldName: DATE_FIELD.fieldApiName, type: "date-local", sortable: true },
+    {
+        label: "Category",
+        fieldName: CATEGORY_FIELD.fieldApiName,
+        sortable: true
+    },
+    {
+        label: "Document Type",
+        fieldName: TYPE_FIELD.fieldApiName,
+        sortable: true
+    },
+    {
+        label: "Document Date",
+        fieldName: DATE_FIELD.fieldApiName,
+        type: "date-local",
+        sortable: true
+    },
     { type: "action", typeAttributes: { rowActions: actions } }
 ];
 
@@ -43,6 +56,7 @@ export default class RelatedFiles extends NavigationMixin(LightningElement) {
     @api objectApiName;
     @api recordId;
     @api max = 6;
+    @api viewAll;
     columns = COLS;
     @track data;
     total = 0;
@@ -53,7 +67,13 @@ export default class RelatedFiles extends NavigationMixin(LightningElement) {
     @wire(getObjectInfo, { objectApiName: CV_OBJECT })
     objectInfo;
 
-    @wire(getRelatedFiles, { recordId: "$recordId", max: "$max" }) filesLst(result) {
+    get max() {
+        return this.viewAll ? 10000 : 6;
+    }
+
+    @wire(getRelatedFiles, { recordId: "$recordId", max: "$max" }) filesLst(
+        result
+    ) {
         this.wiredFilesList = result;
         this.data = null;
         if (result.data) {
@@ -171,32 +191,5 @@ export default class RelatedFiles extends NavigationMixin(LightningElement) {
                     })
                 );
             });
-    }
-
-    handleViewAll() {
-        // Navigate to a specific component.
-        this[NavigationMixin.Navigate]({
-            type: 'standard__component',
-            attributes: {
-                componentName: 'c__FilesCmp'
-            },
-            state: {
-                c__id: this.recordId
-            }
-        });
-    }
-
-    handleViewAll() {
-        // Navigate to a specific component.
-        this[NavigationMixin.Navigate]({
-            type: 'standard__component',
-            attributes: {
-                componentName: 'c__FilesCmp'
-            },
-            state: {
-                c__id: this.recordId,
-                c__object: this.objectApiName
-            }
-        });
     }
 }

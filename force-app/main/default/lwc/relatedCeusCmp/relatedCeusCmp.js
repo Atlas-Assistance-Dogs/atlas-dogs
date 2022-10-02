@@ -46,7 +46,8 @@ const COLS = [
 
 export default class RelatedCeusCmp extends NavigationMixin(LightningElement) {
     @api recordId;
-    @api max = 6;
+    @api objectApiName;
+    @api viewAll;
     columns = COLS;
     data = [];
     wiredCeus;
@@ -118,6 +119,10 @@ export default class RelatedCeusCmp extends NavigationMixin(LightningElement) {
                 selectedRecordId: currentRecordID
             }
         });
+    }
+
+    get max() {
+        return this.viewAll ? 10000 : 6;
     }
 
     @wire(getRelatedCeus, { contactId: "$recordId", max: "$max" })

@@ -5,7 +5,6 @@ import getRelatedChecks from "@salesforce/apex/BackgroundCheckController.getRela
 import deleteCheck from "@salesforce/apex/BackgroundCheckController.deleteCheck";
 import { refreshApex } from "@salesforce/apex";
 
-import STATUS_FIELD from "@salesforce/schema/BackgroundCheck__c.Status__c";
 // Import message service features required for publishing and the message channel
 import { publish, MessageContext } from "lightning/messageService";
 import backgroundCheckForm from "@salesforce/messageChannel/backgroundCheckForm__c";
@@ -42,12 +41,12 @@ export default class RelatedBackgroundChecksCmp extends NavigationMixin(
     LightningElement
 ) {
     @api recordId;
-    @api max = 6;
+    @api objectApiName;
+    @api viewAll;
     columns = COLS;
     data = [];
     wiredChecks;
     total = 0;
-    fieldName = STATUS_FIELD.fieldApiName;
 
     @wire(MessageContext)
     messageContext;
@@ -113,6 +112,10 @@ export default class RelatedBackgroundChecksCmp extends NavigationMixin(
         });
     }
 
+    get max() {
+        return this.viewAll ? 10000 : 6;
+    }
+
     @wire(getRelatedChecks, { contactId: "$recordId", max: "$max" })
     getChecks(result) {
         this.wiredChecks = result;
@@ -160,18 +163,5 @@ export default class RelatedBackgroundChecksCmp extends NavigationMixin(
 
     handleChange() {
         refreshApex(this.wiredChecks);
-    }
-
-    handleViewAll() {
-        // Navigate to a specific component.
-        this[NavigationMixin.Navigate]({
-            type: "standard__component",
-            attributes: {
-                componentName: "c__BackgroundChecksCmp"
-            },
-            state: {
-                c__id: this.recordId
-            }
-        });
     }
 }

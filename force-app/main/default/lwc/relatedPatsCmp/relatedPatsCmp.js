@@ -40,7 +40,8 @@ const COLS = [
 
 export default class RelatedPatsCmp extends NavigationMixin(LightningElement) {
     @api recordId;
-    @api max = 6;
+    @api objectApiName;
+    @api viewAll;
     columns = COLS;
     data = [];
     total = 0;
@@ -105,6 +106,10 @@ export default class RelatedPatsCmp extends NavigationMixin(LightningElement) {
                 });
                 break;
         }
+    }
+
+    get max() {
+        return this.viewAll ? 10000 : 6;
     }
 
     @wire(getRelatedPats, { recordId: "$recordId", max: "$max" })
