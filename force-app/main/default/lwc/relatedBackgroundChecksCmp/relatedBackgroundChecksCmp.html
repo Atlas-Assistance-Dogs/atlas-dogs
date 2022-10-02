@@ -3,6 +3,9 @@
         title="Background Checks"
         icon-name="standard:password"
         total={total}
+        record-id={recordId}
+        field-name={fieldName}
+        aura-comp-name="BackgroundChecksCmp"
     >
         <div slot="actions">
             <!-- lightning button for open modal window -->
@@ -30,7 +33,13 @@
             </template>
         </div>
         <div slot="footer">
-            <lightning-button class="slds-m-horizontal_x-small" variant="base" label="View all" title="Submitter Logs" onclick={handleViewAll}></lightning-button>
+            <lightning-button
+                class="slds-m-horizontal_x-small"
+                variant="base"
+                label="View all"
+                title="Submitter Logs"
+                onclick={handleViewAll}
+            ></lightning-button>
         </div>
     </c-related-object-cmp>
 </template>

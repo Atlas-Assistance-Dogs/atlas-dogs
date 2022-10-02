@@ -13,7 +13,9 @@
                         <div class="slds-media__body">
                             <div class="slds-page-header__name">
                                 <div class="slds-page-header__name-title">
-                                    <h1 class="slds-page-header__title slds-truncate">
+                                    <h1
+                                        class="slds-page-header__title slds-truncate"
+                                    >
                                         {title}{count}
                                     </h1>
                                 </div>
@@ -32,7 +34,13 @@
         </div>
         <slot name="list"></slot>
         <div if:true={any} class="slds-card__footer slds-m-top_none">
-            <slot name="footer"></slot>
+            <lightning-button
+                class="slds-m-horizontal_x-small"
+                variant="base"
+                label="View all"
+                title="View all"
+                onclick={handleViewAll}
+            ></lightning-button>
         </div>
     </article>
 </template>

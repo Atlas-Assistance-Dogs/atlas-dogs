@@ -64,6 +64,7 @@ const COLS = [
 export default class RelatedLogsCmp extends NavigationMixin(LightningElement) {
     @api recordId;
     @api max = 6;
+    @api objectApiName;
     columns = COLS;
     data = [];
 
@@ -173,7 +174,7 @@ export default class RelatedLogsCmp extends NavigationMixin(LightningElement) {
                 this.dispatchEvent(
                     new ShowToastEvent({
                         title: "Success",
-                        message: 'Log Deleted',
+                        message: "Log Deleted",
                         variant: "success"
                     })
                 );
@@ -197,9 +198,9 @@ export default class RelatedLogsCmp extends NavigationMixin(LightningElement) {
     handleViewAll() {
         // Navigate to a specific component.
         this[NavigationMixin.Navigate]({
-            type: 'standard__component',
+            type: "standard__component",
             attributes: {
-                componentName: 'c__LogsCmp'
+                componentName: "c__LogsCmp"
             },
             state: {
                 c__id: this.recordId

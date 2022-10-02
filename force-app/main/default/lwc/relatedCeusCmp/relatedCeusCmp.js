@@ -51,6 +51,7 @@ export default class RelatedCeusCmp extends NavigationMixin(LightningElement) {
     data = [];
     wiredCeus;
     total = 0;
+    fieldName = STATUS_FIELD.fieldApiName;
 
     @wire(MessageContext)
     messageContext;
@@ -173,18 +174,5 @@ export default class RelatedCeusCmp extends NavigationMixin(LightningElement) {
 
     handleChange() {
         refreshApex(this.wiredCeus);
-    }
-
-    handleViewAll() {
-        // Navigate to a specific component.
-        this[NavigationMixin.Navigate]({
-            type: 'standard__component',
-            attributes: {
-                componentName: 'c__ContinuingEducationUnitsCmp'
-            },
-            state: {
-                c__id: this.recordId
-            }
-        });
     }
 }

@@ -44,6 +44,7 @@ export default class RelatedPatsCmp extends NavigationMixin(LightningElement) {
     columns = COLS;
     data = [];
     total = 0;
+    fieldName = STATUS_FIELD.fieldApiName;
 
     @wire(MessageContext)
     messageContext;
@@ -156,18 +157,5 @@ export default class RelatedPatsCmp extends NavigationMixin(LightningElement) {
 
     handleChange() {
         refreshApex(this.wiredPats);
-    }
-
-    handleViewAll() {
-        // Navigate to a specific component.
-        this[NavigationMixin.Navigate]({
-            type: 'standard__component',
-            attributes: {
-                componentName: 'c__PublicAccessTestsCmp'
-            },
-            state: {
-                c__id: this.recordId
-            }
-        });
     }
 }
