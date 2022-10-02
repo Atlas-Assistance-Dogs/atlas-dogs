@@ -55,7 +55,6 @@ const COLS = [
 export default class RelatedFiles extends NavigationMixin(LightningElement) {
     @api objectApiName;
     @api recordId;
-    @api max = 6;
     @api viewAll;
     columns = COLS;
     @track data;
