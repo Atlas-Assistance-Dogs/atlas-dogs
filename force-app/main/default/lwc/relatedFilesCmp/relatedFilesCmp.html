@@ -1,5 +1,13 @@
 <template>
-    <c-related-object-cmp title="Files" icon-name="standard:folder" total={total}>
+    <c-related-object-cmp
+        title="Files"
+        icon-name="standard:folder"
+        total={total}
+        record-id={recordId}
+        field-name={objectApiName}
+        aura-comp-name="FilesCmp"
+        view-all={viewAll}
+    >
         <div slot="actions">
             <!-- lightning button for upload files modal -->
             <lightning-button
@@ -34,9 +42,6 @@
                 >
                 </lightning-datatable>
             </template>
-        </div>
-        <div slot="footer">
-            <lightning-button class="slds-m-horizontal_x-small" variant="base" label="View all" title="Submitter Logs" onclick={handleViewAll}></lightning-button>
         </div>
     </c-related-object-cmp>
 </template>

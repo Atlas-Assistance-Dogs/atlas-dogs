@@ -40,10 +40,12 @@ const COLS = [
 
 export default class RelatedPatsCmp extends NavigationMixin(LightningElement) {
     @api recordId;
-    @api max = 6;
+    @api objectApiName;
+    @api viewAll;
     columns = COLS;
     data = [];
     total = 0;
+    fieldName = STATUS_FIELD.fieldApiName;
 
     @wire(MessageContext)
     messageContext;
@@ -106,6 +108,10 @@ export default class RelatedPatsCmp extends NavigationMixin(LightningElement) {
         }
     }
 
+    get max() {
+        return this.viewAll ? 10000 : 6;
+    }
+
     @wire(getRelatedPats, { recordId: "$recordId", max: "$max" })
     getPats(result) {
         this.wiredPats = result;
@@ -156,18 +162,5 @@ export default class RelatedPatsCmp extends NavigationMixin(LightningElement) {
 
     handleChange() {
         refreshApex(this.wiredPats);
-    }
-
-    handleViewAll() {
-        // Navigate to a specific component.
-        this[NavigationMixin.Navigate]({
-            type: 'standard__component',
-            attributes: {
-                componentName: 'c__PublicAccessTestsCmp'
-            },
-            state: {
-                c__id: this.recordId
-            }
-        });
     }
 }
