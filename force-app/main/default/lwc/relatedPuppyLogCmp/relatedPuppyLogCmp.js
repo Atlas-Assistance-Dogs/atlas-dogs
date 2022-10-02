@@ -16,6 +16,8 @@ export default class RelatedPuppyLogCmp extends NavigationMixin(
 ) {
     @api recordId;
     @api contactId = "";
+    @api objectApiName;
+    @api viewAll;
     message;
     contentType = "Puppy Log";
     title = "Puppy Raiser Log";
@@ -31,9 +33,7 @@ export default class RelatedPuppyLogCmp extends NavigationMixin(
 
     handleSubmit(event) {
         event.preventDefault();
-        this.template
-            .querySelector("c-puppy-log-form-cmp")
-            .handleSubmit(event);
+        this.template.querySelector("c-puppy-log-form-cmp").handleSubmit(event);
     }
 
     onChanged(event) {

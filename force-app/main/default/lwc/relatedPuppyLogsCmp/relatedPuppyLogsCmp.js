@@ -2,7 +2,7 @@ import { LightningElement, api, wire } from "lwc";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
 import { NavigationMixin } from "lightning/navigation";
 import getRelatedLogs from "@salesforce/apex/PuppyLogController.getRelatedLogs";
-import { deleteRecord } from 'lightning/uiRecordApi';
+import { deleteRecord } from "lightning/uiRecordApi";
 import { refreshApex } from "@salesforce/apex";
 
 // Import message service features required for publishing and the message channel
@@ -17,13 +17,18 @@ const actions = [
 const COLS = [
     {
         label: "Date",
-        fieldName: 'logDate',
+        fieldName: "logDate",
         type: "date-local",
         sortable: true
     },
-    { label: "Raiser", fieldName: 'raiserName', sortable: true },
-    { label: "Dog", fieldName: 'dogName', sortable: true },
-    { label: "Support?", fieldName: 'support', sortable: true, type: "boolean" },
+    { label: "Raiser", fieldName: "raiserName", sortable: true },
+    { label: "Dog", fieldName: "dogName", sortable: true },
+    {
+        label: "Support?",
+        fieldName: "support",
+        sortable: true,
+        type: "boolean"
+    },
     {
         label: "File",
         type: "button",
@@ -44,7 +49,7 @@ export default class RelatedPuppyLogsCmp extends NavigationMixin(
 ) {
     @api recordId;
     @api objectApiName;
-    @api max = 6;
+    @api viewAll;
     columns = COLS;
     data = [];
     total = 0;
@@ -114,6 +119,10 @@ export default class RelatedPuppyLogsCmp extends NavigationMixin(
         });
     }
 
+    get max() {
+        return this.viewAll ? 10000 : 6;
+    }
+
     @wire(getRelatedLogs, { recordId: "$recordId", max: "$max" })
     getLogs(result) {
         this.wiredLogs = result;
@@ -140,11 +149,10 @@ export default class RelatedPuppyLogsCmp extends NavigationMixin(
 
     createLog(event) {
         const payload = { mode: "create" };
-        if (this.objectApiName == 'Contact') {
-            payload['contactId'] = this.recordId;
-        }
-        else {
-            payload['dogId'] = this.recordId;
+        if (this.objectApiName == "Contact") {
+            payload["contactId"] = this.recordId;
+        } else {
+            payload["dogId"] = this.recordId;
         }
         publish(this.messageContext, puppyLogForm, payload);
     }
@@ -172,18 +180,5 @@ export default class RelatedPuppyLogsCmp extends NavigationMixin(
 
     handleChange() {
         refreshApex(this.wiredLogs);
-    }
-
-    handleViewAll() {
-        // Navigate to a specific component.
-        this[NavigationMixin.Navigate]({
-            type: 'standard__component',
-            attributes: {
-                componentName: 'c__PuppyLogsCmp'
-            },
-            state: {
-                c__id: this.recordId
-            }
-        });
     }
 }

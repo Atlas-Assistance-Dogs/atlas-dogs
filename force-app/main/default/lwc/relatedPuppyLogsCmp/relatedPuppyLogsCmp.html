@@ -3,6 +3,10 @@
         title="Puppy Raiser Logs"
         icon-name="standard:logging"
         total={total}
+        record-id={recordId}
+        field-name={objectApiName}
+        aura-comp-name="PuppyLogsCmp"
+        view-all={viewAll}
     >
         <div slot="actions">
             <!-- lightning button for open modal window -->
@@ -28,9 +32,6 @@
                 >
                 </lightning-datatable>
             </template>
-        </div>
-        <div slot="footer">
-        <lightning-button variant="base" label="View All" title="View all Puppy Raiser Logs" onclick={handleViewAll}></lightning-button>
         </div>
     </c-related-object-cmp>
 </template>

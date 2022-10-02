@@ -46,11 +46,13 @@ const COLS = [
 
 export default class RelatedCeusCmp extends NavigationMixin(LightningElement) {
     @api recordId;
-    @api max = 6;
+    @api objectApiName;
+    @api viewAll;
     columns = COLS;
     data = [];
     wiredCeus;
     total = 0;
+    fieldName = STATUS_FIELD.fieldApiName;
 
     @wire(MessageContext)
     messageContext;
@@ -119,6 +121,10 @@ export default class RelatedCeusCmp extends NavigationMixin(LightningElement) {
         });
     }
 
+    get max() {
+        return this.viewAll ? 10000 : 6;
+    }
+
     @wire(getRelatedCeus, { contactId: "$recordId", max: "$max" })
     getCeus(result) {
         this.wiredCeus = result;
@@ -173,18 +179,5 @@ export default class RelatedCeusCmp extends NavigationMixin(LightningElement) {
 
     handleChange() {
         refreshApex(this.wiredCeus);
-    }
-
-    handleViewAll() {
-        // Navigate to a specific component.
-        this[NavigationMixin.Navigate]({
-            type: 'standard__component',
-            attributes: {
-                componentName: 'c__ContinuingEducationUnitsCmp'
-            },
-            state: {
-                c__id: this.recordId
-            }
-        });
     }
 }
