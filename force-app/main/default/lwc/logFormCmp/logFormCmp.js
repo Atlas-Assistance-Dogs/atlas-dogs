@@ -2,8 +2,6 @@ import { LightningElement, api, wire } from "lwc";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
 import { getObjectInfo } from "lightning/uiObjectInfoApi";
 import LOG_OBJECT from "@salesforce/schema/Log__c";
-import createLog from "@salesforce/apex/LogController.createLog";
-import updateLog from "@salesforce/apex/LogController.updateLog";
 
 import ATLAS_SUPPORT_FIELD from "@salesforce/schema/Log__c.RequestSupportFromAtlas__c";
 import CLIENT_FIELD from "@salesforce/schema/Log__c.Client__c";
@@ -15,6 +13,7 @@ import DOG_FIELD from "@salesforce/schema/Log__c.Dog__c";
 import HANDLER_FIELD from "@salesforce/schema/Log__c.Handler__c";
 import OTHER_HOURS_FIELD from "@salesforce/schema/Log__c.OtherHours__c";
 import PAH_FIELD from "@salesforce/schema/Log__c.PublicAccessHours__c";
+import RECORD_TYPE_FIELD from "@salesforce/schema/Log__c.RecordTypeId";
 import SATISFACTION_FIELD from "@salesforce/schema/Log__c.Satisfaction__c";
 import STRESS_FIELD from "@salesforce/schema/Log__c.Stress__c";
 import SUBMITTER_FIELD from "@salesforce/schema/Log__c.Submitter__c";
@@ -33,15 +32,18 @@ import {
 import logForm from "@salesforce/messageChannel/logForm__c";
 
 export default class LogFormCmp extends LightningElement {
-    @api contactId;
-    recordId;
-    isSubmitter = false;
-    title = "Create Log";
+    @api recordId;
+
+    get title() {
+        const mode = this.recordId ? "Edit" : "Create";
+        return `${mode} ${this.recordTypeName} Log`;
+    }
+
     fields = {
-        role: "roles",
         client: CLIENT_FIELD,
         submitter: SUBMITTER_FIELD,
         facilitator: TEAM_FACILITATOR_FIELD,
+        recordType: RECORD_TYPE_FIELD,
         date: DATE_FIELD,
         dog: DOG_FIELD,
         clientHours: CLIENT_HOURS_FIELD,
@@ -61,28 +63,27 @@ export default class LogFormCmp extends LightningElement {
     wantSupport = false;
 
     @wire(getObjectInfo, { objectApiName: LOG_OBJECT })
-    objectInfo;
+    objectInfo({ error, data }) {
+        if (data) {
+            const rtis = data.recordTypeInfos;
+            this.recordTypes = rtis;
+            // Returns a map of record type names to their ids
+            this.recordTypeNames = {};
+            Object.keys(rtis).forEach((id) => {
+                this.recordTypeNames[rtis[id].name] = id;
+            });
+        }
+    }
 
     recordTypes;
+    recordTypeNames;
+    recordTypeName;
 
-    get options() {
-        if (!this.objectInfo || !this.objectInfo.data) return;
-        // Returns a map of record type Ids
-        const rtis = this.objectInfo.data.recordTypeInfos;
-        this.recordTypes = rtis;
-        return Object.keys(rtis)
-            .map((id) => {
-                if (rtis[id].name !== "Master") {
-                    return { label: rtis[id].name, value: id };
-                }
-            })
-            .filter((x) => x);
-    }
     recordTypeId;
 
     get isClient() {
         try {
-            this.recordTypes[this.recordTypeId].name === "Client";
+            this.recordTypeName === "Client";
         } catch {
             return false;
         }
@@ -91,7 +92,7 @@ export default class LogFormCmp extends LightningElement {
     get isFacilitator() {
         try {
             return (
-                this.recordTypes[this.recordTypeId].name === "Team Facilitator"
+                this.recordTypeName === "Team Facilitator"
             );
         } catch {
             return false;
@@ -111,15 +112,13 @@ export default class LogFormCmp extends LightningElement {
         this.isSubmitter = event.target.checked;
     }
 
-    handleTypeChange(event) {
-        this.recordTypeId = event.detail.value;
-    }
-
     handleTeamSupportChange(event) {
         this.wantSupport = event.target.value;
     }
 
-    handleClose() {}
+    handleClose() {
+        this.closeModal();
+    }
 
     handleSubmit(event) {
         event.preventDefault();
@@ -141,60 +140,16 @@ export default class LogFormCmp extends LightningElement {
             return;
         }
         record.RecordTypeId = this.recordTypeId;
-        if (this.isSubmitter) {
-            record[SUBMITTER_FIELD.fieldApiName] = this.contactId;
-        }
+        this.template.querySelector("lightning-record-edit-form").submit(record);
+    }
 
-        if (this.mode === "create") {
-            this.newLog(record);
-        } else {
-            this.editLog(record);
-        }
+    handleSuccess() {
+        this.dispatchEvent(new CustomEvent("changed"));
+        this.closeModal();
     }
 
     @wire(MessageContext)
     messageContext;
-
-    // Create a new log
-    newLog(record) {
-        createLog({
-            log: record
-        })
-            .then(() => {
-                this.dispatchEvent(new CustomEvent("changed"));
-                this.closeModal();
-            })
-            .catch((error) => {
-                this.dispatchEvent(
-                    new ShowToastEvent({
-                        title: "Error!!",
-                        message: error.body.message,
-                        variant: "error"
-                    })
-                );
-            });
-    }
-
-    // Update an existing log and ContactLog
-    editLog(record) {
-        record["Id"] = this.recordId;
-        updateLog({
-            log: record
-        })
-            .then(() => {
-                this.dispatchEvent(new CustomEvent("changed"));
-                this.closeModal();
-            })
-            .catch((error) => {
-                this.dispatchEvent(
-                    new ShowToastEvent({
-                        title: "Error!!",
-                        message: error.body.message,
-                        variant: "error"
-                    })
-                );
-            });
-    }
 
     // Encapsulate logic for Lightning message service subscribe and unsubsubscribe
     subscribeToMessageChannel() {
@@ -216,10 +171,10 @@ export default class LogFormCmp extends LightningElement {
     // Handler for message received by component
     handleMessage(message) {
         this.recordId = message.recordId;
-        this.mode = message.mode;
-        this.title = this.mode[0].toUpperCase() + this.mode.slice(1) + " Log";
-        this.recordTypeId = message.recordTypeId;
-        this.isSubmitter = message.roles?.includes("Submitter");
+        if (message.recordType) {
+            this.recordTypeId = this.recordTypeNames[message.recordType];
+            this.recordTypeName = message.recordType;
+        }        
         this.openModal();
     }
 

@@ -16,7 +16,6 @@ import OTHER_HOURS_FIELD from "@salesforce/schema/Log__c.OtherHours__c";
 import PAH_FIELD from "@salesforce/schema/Log__c.PublicAccessHours__c";
 import SATISFACTION_FIELD from "@salesforce/schema/Log__c.Satisfaction__c";
 import STRESS_FIELD from "@salesforce/schema/Log__c.Stress__c";
-import SUBMITTER_FIELD from "@salesforce/schema/Log__c.Submitter__c";
 import TEAM_SUPPORT_FIELD from "@salesforce/schema/Log__c.RequestSupportFromTeam__c";
 
 // Import message service features required for publishing and the message channel
@@ -53,6 +52,17 @@ const COLS = {
         typeAttributes: {
             name: "client",
             label: { fieldName: "clientName" },
+            variant: "base"
+        },
+        sortable: true
+    },
+    facilitator: {
+        label: "Facilitator",
+        fieldName: FACILITATOR_FIELD.fieldApiName,
+        type: "button",
+        typeAttributes: {
+            name: "facilitator",
+            label: { fieldName: "facilitatorName" },
             variant: "base"
         },
         sortable: true
@@ -108,6 +118,7 @@ export default class RelatedLogsCmp extends NavigationMixin(LightningElement) {
                 COLS.name,
                 COLS.date,
                 COLS.client,
+                COLS.facilitator,
                 COLS.hours,
                 COLS.otherHours,
                 COLS.team,
@@ -122,6 +133,7 @@ export default class RelatedLogsCmp extends NavigationMixin(LightningElement) {
             COLS.name,
             COLS.date,
             COLS.client,
+            COLS.facilitator,
             COLS.hours,
             COLS.otherHours,
             COLS.team,
@@ -190,7 +202,6 @@ export default class RelatedLogsCmp extends NavigationMixin(LightningElement) {
                 const payload = {
                     mode: "edit",
                     recordId: row.Id,
-                    roles: row.roles,
                     recordTypeId: row.RecordTypeId
                 };
                 publish(this.messageContext, logForm, payload);
@@ -199,7 +210,10 @@ export default class RelatedLogsCmp extends NavigationMixin(LightningElement) {
                 this.navigateToRecord(row.Id, this.objectApiName);
                 break;
             case "client":
-                this.navigateToRecord(row.Client__c, 'Contact');
+                this.navigateToRecord(row.Client__c, "Contact");
+                break;
+            case "facilitator":
+                this.navigateToRecord(row.Facilitator__c, "Contact");
                 break;
         }
     }
@@ -209,7 +223,7 @@ export default class RelatedLogsCmp extends NavigationMixin(LightningElement) {
     }
 
     @wire(getRelatedLogs, {
-        contactId: "$recordId",
+        recordId: "$recordId",
         recordType: "$recordType",
         max: "$max"
     })
@@ -220,6 +234,7 @@ export default class RelatedLogsCmp extends NavigationMixin(LightningElement) {
             this.data = result.data.items.map((info) => {
                 var log = Object.assign({}, info.log);
                 log.clientName = info.clientName;
+                log.facilitatorName = info.facilitatorName;
                 return log;
             });
             if (this.data.length === 0) {
@@ -241,7 +256,8 @@ export default class RelatedLogsCmp extends NavigationMixin(LightningElement) {
     }
 
     createLog(event) {
-        const payload = { mode: "create" };
+        const typeName = this.recordType === 'Client' ? 'Client' : 'Team Facilitator';
+        const payload = { mode: "create", recordType: typeName };
         publish(this.messageContext, logForm, payload);
     }
 
