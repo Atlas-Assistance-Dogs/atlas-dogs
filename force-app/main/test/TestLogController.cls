@@ -111,7 +111,7 @@ public with sharing class TestLogController {
             WHERE FirstName = :CLIENT_NAME
             LIMIT 1
         ];
-        RelatedObjects relatedObjects = LogController.getRelatedLogs(contact.Id, 6);
+        RelatedObjects relatedObjects = LogController.getRelatedLogs(contact.Id, 'Client', 6);
         Test.stopTest();
         System.assertEquals(0, relatedObjects.items.size());
     }
@@ -122,7 +122,7 @@ public with sharing class TestLogController {
 
         Boolean exceptionThrown = false;
         try {
-            RelatedObjects related = LogController.getRelatedLogs('dog.Id', 6);
+            RelatedObjects related = LogController.getRelatedLogs('dog.Id', 'Client', 6);
         } catch (Exception exc) {
             exceptionThrown = true;
         }
@@ -154,7 +154,7 @@ public with sharing class TestLogController {
                 Stress__c = 'Not at all',
                 Submitter__c = submitter.Id,
                 SupportDetails__c = 'Support details',
-                Facilitator__c = facilitator.Id
+                Facilitator__c = facilitator.Id 
             )
         );
         logs.add(
@@ -182,7 +182,7 @@ public with sharing class TestLogController {
 
         Test.startTest();
 
-        RelatedObjects related = LogController.getRelatedLogs(client.Id, 6);
+        RelatedObjects related = LogController.getRelatedLogs(client.Id, 'Client', 6);
 
         Test.stopTest();
         System.assertEquals(1, related.items.size());

@@ -6,68 +6,144 @@ import { deleteRecord } from "lightning/uiRecordApi";
 import { refreshApex } from "@salesforce/apex";
 
 import ATLAS_SUPPORT_FIELD from "@salesforce/schema/Log__c.RequestSupportFromAtlas__c";
-import STRESS_FIELD from "@salesforce/schema/Log__c.Stress__c";
 import CLIENT_FIELD from "@salesforce/schema/Log__c.Client__c";
-import SUBMITTER_FIELD from "@salesforce/schema/Log__c.Submitter__c";
-import FACILITATOR_FIELD from "@salesforce/schema/Log__c.Facilitator__c";
+import CLIENT_STRESS_FIELD from "@salesforce/schema/Log__c.ClientStress__c";
 import DATE_FIELD from "@salesforce/schema/Log__c.Date__c";
+import DETAILS_FIELD from "@salesforce/schema/Log__c.Details__c";
+import FACILITATOR_FIELD from "@salesforce/schema/Log__c.Facilitator__c";
+import NAME_FIELD from "@salesforce/schema/Log__c.Name";
 import OTHER_HOURS_FIELD from "@salesforce/schema/Log__c.OtherHours__c";
 import PAH_FIELD from "@salesforce/schema/Log__c.PublicAccessHours__c";
 import SATISFACTION_FIELD from "@salesforce/schema/Log__c.Satisfaction__c";
+import STRESS_FIELD from "@salesforce/schema/Log__c.Stress__c";
+import SUBMITTER_FIELD from "@salesforce/schema/Log__c.Submitter__c";
 import TEAM_SUPPORT_FIELD from "@salesforce/schema/Log__c.RequestSupportFromTeam__c";
 
 // Import message service features required for publishing and the message channel
 import { publish, MessageContext } from "lightning/messageService";
 import logForm from "@salesforce/messageChannel/logForm__c";
-import StayInTouchSignature from "@salesforce/schema/User.StayInTouchSignature";
 
 const actions = [
     { label: "Edit", name: "edit" },
     { label: "Delete", name: "delete" }
 ];
 
-const COLS = [
-    {
+const COLS = {
+    name: {
+        label: "Name",
+        fieldName: NAME_FIELD.fieldApiName,
+        type: "button",
+        typeAttributes: {
+            name: "view",
+            label: { fieldName: NAME_FIELD.fieldApiName },
+            variant: "base"
+        },
+        sortable: true
+    },
+    date: {
         label: "Date",
         fieldName: DATE_FIELD.fieldApiName,
         type: "date-local",
         sortable: true
     },
-    { label: "Role", fieldName: "roles", sortable: true, initialWidth: 140 },
-    {
+    client: {
+        label: "Client",
+        fieldName: CLIENT_FIELD.fieldApiName,
+        type: "button",
+        typeAttributes: {
+            name: "client",
+            label: { fieldName: "clientName" },
+            variant: "base"
+        },
+        sortable: true
+    },
+    hours: {
         label: "PA Hours",
         fieldName: PAH_FIELD.fieldApiName,
         type: "number",
         editable: "true"
     },
-    {
+    otherHours: {
         label: "Other Hours",
         fieldName: OTHER_HOURS_FIELD.fieldApiName,
         type: "number",
         editable: "true"
     },
-    {
+    team: {
         label: "Team Support?",
         fieldName: TEAM_SUPPORT_FIELD.fieldApiName,
         type: "boolean"
     },
-    { label: "Stress", fieldName: STRESS_FIELD.fieldApiName },
-    { label: "Satisfaction", fieldName: SATISFACTION_FIELD.fieldApiName },
-    {
+    stress: { label: "Stress", fieldName: STRESS_FIELD.fieldApiName },
+    clientStress: {
+        label: "Client Stress",
+        fieldName: CLIENT_STRESS_FIELD.fieldApiName
+    },
+    satisfaction: {
+        label: "Satisfaction",
+        fieldName: SATISFACTION_FIELD.fieldApiName
+    },
+    atlas: {
         label: "Atlas Support?",
         fieldName: ATLAS_SUPPORT_FIELD.fieldApiName,
         type: "boolean"
     },
-    { type: "action", typeAttributes: { rowActions: actions } }
-];
+    details: {
+        label: "Details",
+        fieldName: DETAILS_FIELD.fieldApiName
+    },
+    action: { type: "action", typeAttributes: { rowActions: actions } }
+};
 
 export default class RelatedLogsCmp extends NavigationMixin(LightningElement) {
     @api recordId;
     @api objectApiName;
     @api viewAll;
     @api max; // needed for previous version
-    columns = COLS;
     data = [];
+
+    get columns() {
+        if (this.recordType === "Client") {
+            return [
+                COLS.name,
+                COLS.date,
+                COLS.client,
+                COLS.hours,
+                COLS.otherHours,
+                COLS.team,
+                COLS.stress,
+                COLS.satisfaction,
+                COLS.atlas,
+                COLS.details,
+                COLS.action
+            ];
+        }
+        return [
+            COLS.name,
+            COLS.date,
+            COLS.client,
+            COLS.hours,
+            COLS.otherHours,
+            COLS.team,
+            COLS.clientStress,
+            COLS.satisfaction,
+            COLS.atlas,
+            COLS.details,
+            COLS.action
+        ];
+    }
+
+    get title() {
+        return this.recordType === "Client"
+            ? "Client Logs"
+            : "Team Facilitator Logs";
+    }
+
+    get auraCmpName() {
+        return this.recordType === "Client"
+            ? "AllClientLogsCmp"
+            : "AllFacilitatorLogsCmp";
+    }
 
     @wire(MessageContext)
     messageContext;
@@ -119,6 +195,12 @@ export default class RelatedLogsCmp extends NavigationMixin(LightningElement) {
                 };
                 publish(this.messageContext, logForm, payload);
                 break;
+            case "view":
+                this.navigateToRecord(row.Id, this.objectApiName);
+                break;
+            case "client":
+                this.navigateToRecord(row.Client__c, 'Contact');
+                break;
         }
     }
 
@@ -126,15 +208,19 @@ export default class RelatedLogsCmp extends NavigationMixin(LightningElement) {
         return this.viewAll ? 10000 : 6;
     }
 
-    @wire(getRelatedLogs, { contactId: "$recordId", max: "$max" })
+    @wire(getRelatedLogs, {
+        contactId: "$recordId",
+        recordType: "$recordType",
+        max: "$max"
+    })
     getLogs(result) {
         this.wiredData = result;
         this.data = null;
         if (result.data && result.data.items) {
-            this.data = result.data.items.map((log) => {
-                var newLog = Object.assign({}, log);
-                newLog["roles"] = this.getRoles(log);
-                return newLog;
+            this.data = result.data.items.map((info) => {
+                var log = Object.assign({}, info.log);
+                log.clientName = info.clientName;
+                return log;
             });
             if (this.data.length === 0) {
                 this.data = null;
@@ -152,20 +238,6 @@ export default class RelatedLogsCmp extends NavigationMixin(LightningElement) {
                 })
             );
         }
-    }
-
-    getRoles(log) {
-        var roles = [];
-        if (log[CLIENT_FIELD.fieldApiName] === this.recordId) {
-            roles.push("Client");
-        }
-        if (log[SUBMITTER_FIELD.fieldApiName] === this.recordId) {
-            roles.push("Submitter");
-        }
-        if (log[FACILITATOR_FIELD.fieldApiName] === this.recordId) {
-            roles.push("Team Facilitator");
-        }
-        return roles.join(";");
     }
 
     createLog(event) {
@@ -198,5 +270,16 @@ export default class RelatedLogsCmp extends NavigationMixin(LightningElement) {
 
     handleChange() {
         refreshApex(this.wiredData);
+    }
+
+    navigateToRecord(recordId, objectName) {
+        this[NavigationMixin.Navigate]({
+            type: "standard__recordPage",
+            attributes: {
+                recordId: recordId,
+                objectApiName: objectName,
+                actionName: "view"
+            }
+        });
     }
 }

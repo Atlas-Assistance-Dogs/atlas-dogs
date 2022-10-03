@@ -15,5 +15,5 @@
         value="{!v.pageReference}"
         action="{!c.onPageReferenceChange}"
     />
-    <c:relatedLogsCmp viewAll="true" recordId="{!v.id}"></c:relatedLogsCmp>
+    <c:relatedLogsCmp viewAll="true" recordId="{!v.id}" recordType="Client"></c:relatedLogsCmp>
 </aura:component>

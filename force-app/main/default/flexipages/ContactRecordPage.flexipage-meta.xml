@@ -55,8 +55,42 @@
         </itemInstances>
         <itemInstances>
             <componentInstance>
+                <componentInstanceProperties>
+                    <name>recordType</name>
+                    <value>Client</value>
+                </componentInstanceProperties>
                 <componentName>relatedLogsCmp</componentName>
                 <identifier>relatedLogsCmp</identifier>
+                <visibilityRule>
+                    <criteria>
+                        <leftValue>{!Record.ClientStatus__c}</leftValue>
+                        <operator>NE</operator>
+                        <rightValue>None</rightValue>
+                    </criteria>
+                </visibilityRule>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>recordType</name>
+                    <value>TeamFacilitator</value>
+                </componentInstanceProperties>
+                <componentName>relatedLogsCmp</componentName>
+                <identifier>c_relatedLogsCmp</identifier>
+                <visibilityRule>
+                    <booleanFilter>1 OR 2</booleanFilter>
+                    <criteria>
+                        <leftValue>{!Record.FacilitatorStatus__c}</leftValue>
+                        <operator>NE</operator>
+                        <rightValue>None</rightValue>
+                    </criteria>
+                    <criteria>
+                        <leftValue>{!Record.ClientStatus__c}</leftValue>
+                        <operator>NE</operator>
+                        <rightValue>None</rightValue>
+                    </criteria>
+                </visibilityRule>
             </componentInstance>
         </itemInstances>
         <itemInstances>
