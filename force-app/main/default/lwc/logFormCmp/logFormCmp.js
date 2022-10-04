@@ -22,15 +22,6 @@ import TEAM_FACILITATOR_FIELD from "@salesforce/schema/Log__c.Facilitator__c";
 import TEAM_SUPPORT_FIELD from "@salesforce/schema/Log__c.RequestSupportFromTeam__c";
 import SESSION_TYPE_FIELD from "@salesforce/schema/Log__c.SessionType__c";
 
-// Import message service features required for subscribing and the message channel
-import {
-    subscribe,
-    unsubscribe,
-    APPLICATION_SCOPE,
-    MessageContext
-} from "lightning/messageService";
-import logForm from "@salesforce/messageChannel/logForm__c";
-
 export default class LogFormCmp extends LightningElement {
     @api recordId;
 
@@ -91,16 +82,19 @@ export default class LogFormCmp extends LightningElement {
 
     get isFacilitator() {
         try {
-            return (
-                this.recordTypeName === "Team Facilitator"
-            );
+            return this.recordTypeName === "Team Facilitator";
         } catch {
             return false;
         }
     }
 
     @api
-    openModal() {
+    openModal(message) {
+        this.recordId = message.recordId;
+        if (message.recordType) {
+            this.recordTypeId = this.recordTypeNames[message.recordType];
+            this.recordTypeName = message.recordType;
+        }
         this.template.querySelector("c-modal-cmp").openModal();
     }
 
@@ -140,50 +134,13 @@ export default class LogFormCmp extends LightningElement {
             return;
         }
         record.RecordTypeId = this.recordTypeId;
-        this.template.querySelector("lightning-record-edit-form").submit(record);
+        this.template
+            .querySelector("lightning-record-edit-form")
+            .submit(record);
     }
 
     handleSuccess() {
         this.dispatchEvent(new CustomEvent("changed"));
         this.closeModal();
-    }
-
-    @wire(MessageContext)
-    messageContext;
-
-    // Encapsulate logic for Lightning message service subscribe and unsubsubscribe
-    subscribeToMessageChannel() {
-        if (!this.subscription) {
-            this.subscription = subscribe(
-                this.messageContext,
-                logForm,
-                (message) => this.handleMessage(message),
-                { scope: APPLICATION_SCOPE }
-            );
-        }
-    }
-
-    unsubscribeToMessageChannel() {
-        unsubscribe(this.subscription);
-        this.subscription = null;
-    }
-
-    // Handler for message received by component
-    handleMessage(message) {
-        this.recordId = message.recordId;
-        if (message.recordType) {
-            this.recordTypeId = this.recordTypeNames[message.recordType];
-            this.recordTypeName = message.recordType;
-        }        
-        this.openModal();
-    }
-
-    // Standard lifecycle hooks used to subscribe and unsubsubscribe to the message channel
-    connectedCallback() {
-        this.subscribeToMessageChannel();
-    }
-
-    disconnectedCallback() {
-        this.unsubscribeToMessageChannel();
     }
 }

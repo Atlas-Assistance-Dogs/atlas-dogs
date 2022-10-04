@@ -18,10 +18,6 @@ import SATISFACTION_FIELD from "@salesforce/schema/Log__c.Satisfaction__c";
 import STRESS_FIELD from "@salesforce/schema/Log__c.Stress__c";
 import TEAM_SUPPORT_FIELD from "@salesforce/schema/Log__c.RequestSupportFromTeam__c";
 
-// Import message service features required for publishing and the message channel
-import { publish, MessageContext } from "lightning/messageService";
-import logForm from "@salesforce/messageChannel/logForm__c";
-
 const actions = [
     { label: "Edit", name: "edit" },
     { label: "Delete", name: "delete" }
@@ -157,9 +153,6 @@ export default class RelatedLogsCmp extends NavigationMixin(LightningElement) {
             : "AllFacilitatorLogsCmp";
     }
 
-    @wire(MessageContext)
-    messageContext;
-
     defaultSortDirection = "asc";
     sortDirection = "asc";
     sortedBy;
@@ -204,7 +197,9 @@ export default class RelatedLogsCmp extends NavigationMixin(LightningElement) {
                     recordId: row.Id,
                     recordTypeId: row.RecordTypeId
                 };
-                publish(this.messageContext, logForm, payload);
+                this.template
+                    .querySelector("c-log-form-cmp")
+                    .openModal(payload);
                 break;
             case "view":
                 this.navigateToRecord(row.Id, this.objectApiName);
@@ -255,10 +250,11 @@ export default class RelatedLogsCmp extends NavigationMixin(LightningElement) {
         }
     }
 
-    createLog(event) {
-        const typeName = this.recordType === 'Client' ? 'Client' : 'Team Facilitator';
+    createLog() {
+        const typeName =
+            this.recordType === "Client" ? "Client" : "Team Facilitator";
         const payload = { mode: "create", recordType: typeName };
-        publish(this.messageContext, logForm, payload);
+        this.template.querySelector("c-log-form-cmp").openModal(payload);
     }
 
     deleteLog(recordId) {
