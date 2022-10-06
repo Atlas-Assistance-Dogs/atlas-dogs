@@ -40,7 +40,10 @@ export default class BackgroundCheckFormCmp extends NavigationMixin(
             ".txt",
             ".xlsx",
             ".xls",
-            ".csv"
+            ".csv",
+            ".mov",
+            ".mp4",
+            ".zip"
         ];
     }
 

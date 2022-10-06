@@ -80,6 +80,8 @@ export default class PatFormCmp extends NavigationMixin(LightningElement) {
             ".txt",
             ".xlsx",
             ".xls",
+            ".mov",
+            ".mp4",
             ".zip"
         ];
     }
@@ -217,7 +219,9 @@ export default class PatFormCmp extends NavigationMixin(LightningElement) {
         this.unsubscribeToMessageChannel();
     }
 
-    @wire(getRelatedFiles, { recordId: "$recordId", max: 100 }) filesLst(result) {
+    @wire(getRelatedFiles, { recordId: "$recordId", max: 100 }) filesLst(
+        result
+    ) {
         this.wiredFilesList = result;
         this.relatedFiles = null;
         if (result.data?.items) {

@@ -35,7 +35,10 @@ export default class DocumentUploadCmp extends NavigationMixin(
             ".txt",
             ".xlsx",
             ".xls",
-            ".csv"
+            ".csv",
+            ".mov",
+            ".mp4",
+            ".zip"
         ];
     }
 

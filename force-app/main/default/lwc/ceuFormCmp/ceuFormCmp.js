@@ -78,6 +78,8 @@ export default class CeuFormCmp extends NavigationMixin(LightningElement) {
             ".txt",
             ".xlsx",
             ".xls",
+            ".mov",
+            ".mp4",
             ".zip"
         ];
     }
@@ -216,7 +218,9 @@ export default class CeuFormCmp extends NavigationMixin(LightningElement) {
         return this.relatedFiles !== null && this.relatedFiles.length > 0;
     }
 
-    @wire(getRelatedFiles, { recordId: "$recordId", max: 100 }) filesLst(result) {
+    @wire(getRelatedFiles, { recordId: "$recordId", max: 100 }) filesLst(
+        result
+    ) {
         this.wiredFilesList = result;
         this.relatedFiles = null;
         if (result.data?.items) {

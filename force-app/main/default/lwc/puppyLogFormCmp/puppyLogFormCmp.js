@@ -31,7 +31,7 @@ export default class PuppyLogFormCmp extends NavigationMixin(LightningElement) {
         dog: DOG_FIELD,
         raiser: RAISER_FIELD,
         support: SUPPORT_FIELD
-    }
+    };
 
     get acceptedFormats() {
         return [
@@ -44,7 +44,10 @@ export default class PuppyLogFormCmp extends NavigationMixin(LightningElement) {
             ".txt",
             ".xlsx",
             ".xls",
-            ".csv"
+            ".csv",
+            ".mov",
+            ".mp4",
+            ".zip"
         ];
     }
 
@@ -109,19 +112,23 @@ export default class PuppyLogFormCmp extends NavigationMixin(LightningElement) {
     }
 
     handleLogChanged(event) {
-        relateFile({documentId: this.currentCv.ContentDocumentId, recordId: event.detail.id})
-        .then(() => {
-            this.dispatchEvent(new CustomEvent("changed", { detail: event.detail.id }));
+        relateFile({
+            documentId: this.currentCv.ContentDocumentId,
+            recordId: event.detail.id
         })
-        .catch((error) => {
-            this.dispatchEvent(
-                new ShowToastEvent({
-                    title: "Error assigning file to log!!",
-                    message: error.message,
-                    variant: "error"
-                })
-            );
-        });
+            .then(() => {
+                this.dispatchEvent(
+                    new CustomEvent("changed", { detail: event.detail.id })
+                );
+            })
+            .catch((error) => {
+                this.dispatchEvent(
+                    new ShowToastEvent({
+                        title: "Error assigning file to log!!",
+                        message: error.message,
+                        variant: "error"
+                    })
+                );
+            });
     }
-
 }
