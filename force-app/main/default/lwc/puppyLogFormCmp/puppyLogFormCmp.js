@@ -97,38 +97,35 @@ export default class PuppyLogFormCmp extends NavigationMixin(LightningElement) {
         if (this.uploadedFile) {
             documentId = this.uploadedFile.documentId;
         }
-        if (!documentId && !this.currentCv) {
-            this.dispatchEvent(
-                new ShowToastEvent({
-                    title: "Error!!",
-                    message: "A document must be assigned to the log.",
-                    variant: "error"
-                })
-            );
-            return;
-        }
         const form = this.template.querySelector("lightning-record-edit-form");
         form.submit();
     }
 
     handleLogChanged(event) {
+        // if we are creating a new log and adding the CV
+        if (this.currentCv && !this.recordId) {
         relateFile({
             documentId: this.currentCv.ContentDocumentId,
             recordId: event.detail.id
         })
-            .then(() => {
+        .then(() => {
                 this.dispatchEvent(
                     new CustomEvent("changed", { detail: event.detail.id })
                 );
-            })
-            .catch((error) => {
-                this.dispatchEvent(
-                    new ShowToastEvent({
-                        title: "Error assigning file to log!!",
-                        message: error.message,
-                        variant: "error"
-                    })
-                );
-            });
+        })
+        .catch((error) => {
+            this.dispatchEvent(
+                new ShowToastEvent({
+                    title: "Error assigning file to log!!",
+                    message: error.message,
+                    variant: "error"
+                })
+            );
+        });
+        } else {
+            this.dispatchEvent(
+                new CustomEvent("changed", { detail: event.detail.id })
+            );
+        }
     }
 }

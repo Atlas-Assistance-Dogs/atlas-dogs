@@ -5,10 +5,6 @@ import getRelatedLogs from "@salesforce/apex/PuppyLogController.getRelatedLogs";
 import { deleteRecord } from "lightning/uiRecordApi";
 import { refreshApex } from "@salesforce/apex";
 
-// Import message service features required for publishing and the message channel
-import { publish, MessageContext } from "lightning/messageService";
-import puppyLogForm from "@salesforce/messageChannel/puppyLogForm__c";
-
 const actions = [
     { label: "Edit", name: "edit" },
     { label: "Delete", name: "delete" }
@@ -55,9 +51,6 @@ export default class RelatedPuppyLogsCmp extends NavigationMixin(
     total = 0;
     wiredLogs;
 
-    @wire(MessageContext)
-    messageContext;
-
     defaultSortDirection = "asc";
     sortDirection = "asc";
     sortedBy;
@@ -98,7 +91,9 @@ export default class RelatedPuppyLogsCmp extends NavigationMixin(
                 break;
             case "edit":
                 const payload = { mode: "edit", recordId: row.recordId };
-                publish(this.messageContext, puppyLogForm, payload);
+                this.template
+                    .querySelector("c-related-puppy-log-cmp")
+                    .openModal(payload);
                 break;
             case "view":
                 this.navigateToFiles(row);
@@ -150,11 +145,13 @@ export default class RelatedPuppyLogsCmp extends NavigationMixin(
     createLog(event) {
         const payload = { mode: "create" };
         if (this.objectApiName == "Contact") {
-            payload["contactId"] = this.recordId;
+            payload.contactId = this.recordId;
         } else {
-            payload["dogId"] = this.recordId;
+            payload.dogId = this.recordId;
         }
-        publish(this.messageContext, puppyLogForm, payload);
+        this.template
+            .querySelector("c-related-puppy-log-cmp")
+            .openModal(payload);
     }
 
     deleteLog(recordId) {
