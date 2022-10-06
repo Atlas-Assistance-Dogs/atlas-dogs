@@ -2,7 +2,7 @@ import { LightningElement, api, wire } from "lwc";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
 import { NavigationMixin } from "lightning/navigation";
 import getRelatedCeus from "@salesforce/apex/ContinuingEducationUnitController.getRelatedCeus";
-import deleteCeu from "@salesforce/apex/ContinuingEducationUnitController.deleteCeu";
+import deleteRecord from "lightning/uiRecordApi";
 import { refreshApex } from "@salesforce/apex";
 
 import AUTHORITY_FIELD from "@salesforce/schema/ContinuingEducationUnit__c.Authority__c";
@@ -12,10 +12,6 @@ import PROGRAM_DATE_FIELD from "@salesforce/schema/ContinuingEducationUnit__c.Pr
 import PROGRAM_HOURS_FIELD from "@salesforce/schema/ContinuingEducationUnit__c.ProgramHours__c";
 import ROLE_FIELD from "@salesforce/schema/ContinuingEducationUnit__c.Role__c";
 import STATUS_FIELD from "@salesforce/schema/ContinuingEducationUnit__c.Status__c";
-
-// Import message service features required for publishing and the message channel
-import { publish, MessageContext } from "lightning/messageService";
-import ceuForm from "@salesforce/messageChannel/ceuForm__c";
 
 const actions = [
     { label: "Edit", name: "edit" },
@@ -27,12 +23,12 @@ const COLS = [
     {
         label: "Program Date",
         fieldName: PROGRAM_DATE_FIELD.fieldApiName,
-        type: "date"
+        type: "date-local"
     },
     {
         label: "Date Completed",
         fieldName: DATE_COMPLETED_FIELD.fieldApiName,
-        type: "date"
+        type: "date-local"
     },
     {
         label: "Program Hours",
@@ -53,9 +49,6 @@ export default class RelatedCeusCmp extends NavigationMixin(LightningElement) {
     wiredCeus;
     total = 0;
     fieldName = STATUS_FIELD.fieldApiName;
-
-    @wire(MessageContext)
-    messageContext;
 
     defaultSortDirection = "asc";
     sortDirection = "asc";
@@ -100,7 +93,9 @@ export default class RelatedCeusCmp extends NavigationMixin(LightningElement) {
                     authority: row.Authority__c,
                     recordId: row.Id
                 };
-                publish(this.messageContext, ceuForm, payload);
+                this.template
+                    .querySelector("c-ceu-form-cmp")
+                    .openModal(payload);
                 break;
             case "view":
                 this.navigateToFiles(row);
@@ -158,11 +153,13 @@ export default class RelatedCeusCmp extends NavigationMixin(LightningElement) {
 
     createCeu(event) {
         const payload = { mode: "create" };
-        publish(this.messageContext, ceuForm, payload);
+        this.template
+            .querySelector("c-ceu-form-cmp")
+            .openModal(payload);
     }
 
     deleteCeu(recordId) {
-        deleteCeu({ recordId: recordId })
+        deleteRecord(recordId)
             .then(() => {
                 this.handleChange();
             })

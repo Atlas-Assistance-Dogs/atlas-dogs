@@ -36,46 +36,4 @@ public with sharing class ContinuingEducationUnitController {
             throw new AuraHandledException(e.getMessage());
         }
     }
-
-    @AuraEnabled
-    public static ContinuingEducationUnit__c createCeu(
-        ContinuingEducationUnit__c record,
-        List<Id> documentIds
-    ) {
-        try {
-            insert record;
-            if (documentIds != null) {
-                FileController.relateFiles(documentIds, record.Id);
-            }
-            return record;
-        } catch (Exception e) {
-            throw new AuraHandledException(e.getMessage());
-        }
-    }
-
-    @AuraEnabled
-    public static ContinuingEducationUnit__c updateCeu(
-        ContinuingEducationUnit__c record
-    ) {
-        try {
-            update record;
-            return record;
-        } catch (Exception e) {
-            throw new AuraHandledException(e.getMessage());
-        }
-    }
-
-    @AuraEnabled
-    public static void deleteCeu(Id recordId) {
-        try {
-            ContinuingEducationUnit__c ceu = [
-                SELECT Id
-                FROM ContinuingEducationUnit__c
-                WHERE Id = :recordId
-            ];
-            delete ceu;
-        } catch (Exception e) {
-            throw new AuraHandledException(e.getMessage());
-        }
-    }
 }

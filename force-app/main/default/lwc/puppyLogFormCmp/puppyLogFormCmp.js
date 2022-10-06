@@ -112,16 +112,16 @@ export default class PuppyLogFormCmp extends NavigationMixin(LightningElement) {
                 this.dispatchEvent(
                     new CustomEvent("changed", { detail: event.detail.id })
                 );
-        })
-        .catch((error) => {
-            this.dispatchEvent(
-                new ShowToastEvent({
-                    title: "Error assigning file to log!!",
-                    message: error.message,
-                    variant: "error"
-                })
-            );
-        });
+            })
+            .catch((error) => {
+                this.dispatchEvent(
+                    new ShowToastEvent({
+                        title: "Error assigning file to log!!",
+                        message: error.message,
+                        variant: "error"
+                    })
+                );
+            });
         } else {
             this.dispatchEvent(
                 new CustomEvent("changed", { detail: event.detail.id })

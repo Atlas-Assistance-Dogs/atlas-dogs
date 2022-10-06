@@ -2,12 +2,8 @@ import { LightningElement, api, wire } from "lwc";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
 import { NavigationMixin } from "lightning/navigation";
 import getRelatedChecks from "@salesforce/apex/BackgroundCheckController.getRelatedChecks";
-import deleteCheck from "@salesforce/apex/BackgroundCheckController.deleteCheck";
+import deleteRecord from "lightning/uiRecordApi";
 import { refreshApex } from "@salesforce/apex";
-
-// Import message service features required for publishing and the message channel
-import { publish, MessageContext } from "lightning/messageService";
-import backgroundCheckForm from "@salesforce/messageChannel/backgroundCheckForm__c";
 
 const actions = [
     { label: "Edit", name: "edit" },
@@ -47,9 +43,6 @@ export default class RelatedBackgroundChecksCmp extends NavigationMixin(
     data = [];
     wiredChecks;
     total = 0;
-
-    @wire(MessageContext)
-    messageContext;
 
     defaultSortDirection = "asc";
     sortDirection = "asc";
@@ -91,7 +84,7 @@ export default class RelatedBackgroundChecksCmp extends NavigationMixin(
                 break;
             case "edit":
                 const payload = { mode: "edit", recordId: row.recordId };
-                publish(this.messageContext, backgroundCheckForm, payload);
+                this.template.querySelector("c-related-background-check-cmp").openModal(payload);
                 break;
             case "view":
                 this.navigateToFiles(row);
@@ -142,11 +135,13 @@ export default class RelatedBackgroundChecksCmp extends NavigationMixin(
 
     createCheck(event) {
         const payload = { mode: "create" };
-        publish(this.messageContext, backgroundCheckForm, payload);
+        this.template
+            .querySelector("c-related-background-check-cmp")
+            .openModal(payload);
     }
 
     deleteCheck(recordId) {
-        deleteCheck({ recordId: recordId })
+        deleteRecord(recordId)
             .then(() => {
                 this.handleChange();
             })

@@ -8,15 +8,6 @@ import CATEGORY_FIELD from "@salesforce/schema/ContentVersion.Category__c";
 import TYPE_FIELD from "@salesforce/schema/ContentVersion.Type__c";
 import DATE_FIELD from "@salesforce/schema/ContentVersion.Date__c";
 
-// Import message service features required for subscribing and the message channel
-import {
-    subscribe,
-    unsubscribe,
-    APPLICATION_SCOPE,
-    MessageContext
-} from "lightning/messageService";
-import updateFile from "@salesforce/messageChannel/UpdateFile__c";
-
 export default class DocumentUploadCmp extends NavigationMixin(
     LightningElement
 ) {
@@ -31,8 +22,10 @@ export default class DocumentUploadCmp extends NavigationMixin(
     };
     
     @api
-    openModal() {
+    openModal(message) {
         this.message = "";
+        this.recordId = message?.recordId;
+        this.getFileInfo()
         this.template.querySelector("c-modal-cmp").openModal();
     }
     closeModal() {
@@ -90,29 +83,8 @@ export default class DocumentUploadCmp extends NavigationMixin(
             });
     }
 
-    @wire(MessageContext)
-    messageContext;
-
-    // Encapsulate logic for Lightning message service subscribe and unsubsubscribe
-    subscribeToMessageChannel() {
-        if (!this.subscription) {
-            this.subscription = subscribe(
-                this.messageContext,
-                updateFile,
-                (message) => this.handleMessage(message),
-                { scope: APPLICATION_SCOPE }
-            );
-        }
-    }
-
-    unsubscribeToMessageChannel() {
-        unsubscribe(this.subscription);
-        this.subscription = null;
-    }
-
-    // Handler for message received by component
-    handleMessage(message) {
-        this.recordId = message.recordId;
+    // Get the file name and document id
+    getFileInfo() {
         getContentVersion({ recordId: this.recordId })
             .then((data) => {
                 this.currentCv = data;
@@ -126,15 +98,5 @@ export default class DocumentUploadCmp extends NavigationMixin(
                     })
                 );
             });
-        this.openModal();
-    }
-
-    // Standard lifecycle hooks used to subscribe and unsubsubscribe to the message channel
-    connectedCallback() {
-        this.subscribeToMessageChannel();
-    }
-
-    disconnectedCallback() {
-        this.unsubscribeToMessageChannel();
     }
 }

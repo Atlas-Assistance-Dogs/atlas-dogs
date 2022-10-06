@@ -37,38 +37,4 @@ public with sharing class BackgroundCheckController {
             throw new AuraHandledException(e.getMessage());
         }
     }
-
-    @AuraEnabled
-    public static void deleteCheck(Id recordId) {
-        try {
-            delete [SELECT Id FROM BackgroundCheck__c WHERE Id = :recordId];
-        } catch (Exception e) {
-            throw new AuraHandledException(e.getMessage());
-        }
-    }
-
-    @AuraEnabled
-    public static Id addBackgroundCheck(
-        BackgroundCheck__c check,
-        Id documentId
-    ) {
-        try {
-            insert check;
-            if (documentId != null) {
-                FileController.relateFile(documentId, check.Id, Date.today());
-            }
-            return check.Id;
-        } catch (Exception e) {
-            throw new AuraHandledException(e.getMessage());
-        }
-    }
-
-    @AuraEnabled
-    public static void updateBackgroundCheck(BackgroundCheck__c check) {
-        try {
-            update check;
-        } catch (Exception e) {
-            throw new AuraHandledException(e.getMessage());
-        }
-    }
 }

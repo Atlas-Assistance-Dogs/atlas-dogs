@@ -21,9 +21,11 @@ export default class RelatedBackgroundCheckCmp extends NavigationMixin(
     title = "Background Check";
 
     @api
-    openModal() {
+    openModal(message) {
         this.message = "";
-        this.template.querySelector("c-modal-cmp").openModal();
+        this.recordId = message.recordId;
+        refreshApex();
+        this.template.querySelector("c-modal-cmp").openModal(message);
     }
     closeModal() {
         this.template.querySelector("c-modal-cmp").closeModal();
@@ -39,41 +41,5 @@ export default class RelatedBackgroundCheckCmp extends NavigationMixin(
     onChanged(event) {
         this.dispatchEvent(new CustomEvent("changed"));
         this.closeModal();
-    }
-
-    @wire(MessageContext)
-    messageContext;
-
-    // Encapsulate logic for Lightning message service subscribe and unsubsubscribe
-    subscribeToMessageChannel() {
-        if (!this.subscription) {
-            this.subscription = subscribe(
-                this.messageContext,
-                backgroundCheckForm,
-                (message) => this.handleMessage(message),
-                { scope: APPLICATION_SCOPE }
-            );
-        }
-    }
-
-    unsubscribeToMessageChannel() {
-        unsubscribe(this.subscription);
-        this.subscription = null;
-    }
-
-    // Handler for message received by component
-    handleMessage(message) {
-        this.recordId = message.recordId;
-        refreshApex();
-        this.openModal();
-    }
-
-    // Standard lifecycle hooks used to subscribe and unsubsubscribe to the message channel
-    connectedCallback() {
-        this.subscribeToMessageChannel();
-    }
-
-    disconnectedCallback() {
-        this.unsubscribeToMessageChannel();
     }
 }
