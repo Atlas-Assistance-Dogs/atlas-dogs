@@ -2,8 +2,7 @@ import { LightningElement, api, wire } from "lwc";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
 import { NavigationMixin } from "lightning/navigation";
 import getRelatedFiles from "@salesforce/apex/FileController.getRelatedFiles";
-import createPat from "@salesforce/apex/PublicAccessTestController.createPat";
-import updatePat from "@salesforce/apex/PublicAccessTestController.updatePat";
+import relateFiles from "@salesforce/apex/FileController.relateFiles";
 import { refreshApex } from "@salesforce/apex";
 
 import ASSESSOR_FIELD from "@salesforce/schema/PublicAccessTest__c.Assessor__c";
@@ -19,15 +18,6 @@ import VALID_UNTIL_FIELD from "@salesforce/schema/PublicAccessTest__c.ValidUntil
 
 import PAT_DUE_FIELD from "@salesforce/schema/Team__c.PatValidUntil__c";
 import PAT_COUNT_FIELD from "@salesforce/schema/Team__c.PatCount__c";
-
-// Import message service features required for subscribing and the message channel
-import {
-    subscribe,
-    unsubscribe,
-    APPLICATION_SCOPE,
-    MessageContext
-} from "lightning/messageService";
-import patForm from "@salesforce/messageChannel/patForm__c";
 
 const COLS = [
     {
@@ -85,7 +75,17 @@ export default class PatFormCmp extends NavigationMixin(LightningElement) {
     }
 
     @api
-    openModal() {
+    openModal(message) {
+        this.recordId = message?.recordId;
+        if (this.recordId) {
+            refreshApex(this.wiredFilesList);
+        } else {
+            this.relatedFiles = null;
+        }
+        this.mode = message?.recordId ? "edit" : "create";
+        this.passed =
+            message?.status === "Passed" ||
+            message?.status === "Provisionally Passed";
         this.template.querySelector("c-modal-cmp").openModal();
     }
 
@@ -98,10 +98,6 @@ export default class PatFormCmp extends NavigationMixin(LightningElement) {
             event.detail.value === "Passed" ||
             event.detail.value === "Provisionally Passed";
     }
-
-    updateDueDate(event) {}
-
-    handleClose() {}
 
     handleSubmit(event) {
         event.preventDefault();
@@ -127,97 +123,37 @@ export default class PatFormCmp extends NavigationMixin(LightningElement) {
             record[TEAM_FIELD.fieldApiName] = this.teamId;
         }
         record.Id = this.recordId;
-        if (this.mode === "create") {
-            this.createNewPat(record, documents);
-        } else {
-            this.editPat(record);
-        }
+        this.template.querySelector("lightning-record-edit-form").submit(record);
     }
-
-    @wire(MessageContext)
-    messageContext;
 
     // Create a new log
-    createNewPat(record, documents) {
-        createPat({
-            record: record,
-            documentIds: documents
-        })
-            .then(() => {
-                this.dispatchEvent(new CustomEvent("changed"));
-                this.closeModal();
-            })
-            .catch((error) => {
-                this.dispatchEvent(
-                    new ShowToastEvent({
-                        title: "Error!!",
-                        message: error.body.message,
-                        variant: "error"
-                    })
-                );
-            });
-    }
-
-    // Update an existing PAT
-    editPat(record) {
-        updatePat({ record: record })
-            .then(() => {
-                this.dispatchEvent(new CustomEvent("changed"));
-                this.closeModal();
-            })
-            .catch((error) => {
-                this.dispatchEvent(
-                    new ShowToastEvent({
-                        title: "Error!!",
-                        message: error.body.message,
-                        variant: "error"
-                    })
-                );
-            });
-    }
-
-    // Encapsulate logic for Lightning message service subscribe and unsubsubscribe
-    subscribeToMessageChannel() {
-        if (!this.subscription) {
-            this.subscription = subscribe(
-                this.messageContext,
-                patForm,
-                (message) => this.handleMessage(message),
-                { scope: APPLICATION_SCOPE }
-            );
+    handleSuccess(event) {
+        // If we just created a record, we need to attach files
+        if (!this.recordId) {
+            const documents = this.relatedFiles?.map((file) => file.documentId);
+            relateFiles({ documentIds: documents, recordId: event.detail.id })
+                .then(() => {
+                    this.dispatchEvent(new CustomEvent("changed"));
+                    this.closeModal();
+                })
+                .catch((error) => {
+                    this.dispatchEvent(
+                        new ShowToastEvent({
+                            title: "Error!!",
+                            message: error.body.message,
+                            variant: "error"
+                        })
+                    );
+                });
+        }
+        else {
+            this.dispatchEvent(new CustomEvent("changed"));
+            this.closeModal();
         }
     }
 
-    unsubscribeToMessageChannel() {
-        unsubscribe(this.subscription);
-        this.subscription = null;
-    }
-
-    // Handler for message received by component
-    handleMessage(message) {
-        this.recordId = message.recordId;
-        if (this.recordId) {
-            refreshApex(this.wiredFilesList);
-        } else {
-            this.relatedFiles = null;
-        }
-        this.mode = message.recordId ? "edit" : "create";
-        this.passed =
-            message.status === "Passed" ||
-            message.status === "Provisionally Passed";
-        this.openModal();
-    }
-
-    // Standard lifecycle hooks used to subscribe and unsubsubscribe to the message channel
-    connectedCallback() {
-        this.subscribeToMessageChannel();
-    }
-
-    disconnectedCallback() {
-        this.unsubscribeToMessageChannel();
-    }
-
-    @wire(getRelatedFiles, { recordId: "$recordId", max: 100 }) filesLst(result) {
+    @wire(getRelatedFiles, { recordId: "$recordId", max: 100 })
+    filesLst(result) {
         this.wiredFilesList = result;
         this.relatedFiles = null;
         if (result.data?.items) {
