@@ -120,7 +120,7 @@ export default class CeuFormCmp extends NavigationMixin(LightningElement) {
             const docIds = this.relatedFiles?.map((file) => file.documentId);
             relateFiles({documentIds: docIds, recordId: event.detail.id})
                 .then((id) => {
-                    this.dispatchEvent(new CustomEvent("changed", { detail: id }));
+                    this.dispatchEvent(new CustomEvent("changed"));
                     this.closeModal();
                 })
                 .catch((error) => {
@@ -135,7 +135,7 @@ export default class CeuFormCmp extends NavigationMixin(LightningElement) {
         }
         else {
             this.dispatchEvent(
-                new CustomEvent("changed", { detail: id })
+                new CustomEvent("changed")
             );
             this.closeModal();
         }

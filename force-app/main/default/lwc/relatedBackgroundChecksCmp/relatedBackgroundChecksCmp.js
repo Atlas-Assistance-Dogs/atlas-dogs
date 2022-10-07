@@ -14,7 +14,7 @@ const COLS = [
     {
         label: "Completed Date",
         fieldName: "completedDate",
-        type: "date",
+        type: "date-local",
         sortable: true
     },
     { label: "Status", fieldName: "status", sortable: true },

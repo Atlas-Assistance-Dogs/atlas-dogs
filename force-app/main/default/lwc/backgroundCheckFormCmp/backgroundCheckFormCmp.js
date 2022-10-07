@@ -137,7 +137,7 @@ export default class BackgroundCheckFormCmp extends NavigationMixin(
         }
         else {
             this.dispatchEvent(
-                new CustomEvent("changed", { detail: id })
+                new CustomEvent("changed")
             );
         }
     }
