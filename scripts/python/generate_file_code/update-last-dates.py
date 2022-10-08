@@ -2,8 +2,9 @@
 import shutil
 from xml.dom import minidom
 
-from generate_file_service_code import Contact, Dog
-from generate_last_file_code import Category
+from contact import Contact
+from dog import Dog
+from category import Category
   
 doc = minidom.parse("force-app/main/default/objects/ContentVersion/fields/Type__c.field-meta.xml")
   
@@ -38,7 +39,7 @@ for category, types in settings.items():
     shutil.copy(meta_path, meta_path.replace('Fields', category.category + 'Fields')) #copy the file to destination dir
 
 
-# Copy the FileService.cls file
+# Read the FileService.cls file
 service_path = 'force-app/main/default/classes/FileService.cls'
 with open(service_path) as file:
     service_lines = file.readlines()
@@ -56,6 +57,28 @@ with open(service_path, 'w') as service_copy:
 
     dog = Dog(service_copy, settings['Dog'])
     dog.code()
+
+    service_copy.write('''    //#endregion Generated code
+}''')
+
+# Read the ClearDateService.cls file
+service_path = 'force-app/main/default/classes/ClearDateService.cls'
+with open(service_path) as file:
+    service_lines = file.readlines()
+
+with open(service_path, 'w') as service_copy:
+
+    # Copy the FileService class up to the first #region.  This in the Generated Contact 
+    for line in service_lines:
+        service_copy.write(line)
+        if '#region' in line:
+            break
+
+    contact = Contact(service_copy, settings)
+    contact.clear_code(service_copy)
+
+    dog = Dog(service_copy, settings['Dog'])
+    dog.clear_code(service_copy)
 
     service_copy.write('''    //#endregion Generated code
 }''')
