@@ -15,9 +15,9 @@ public with sharing class TestClearDateServiceFacilitatorFields {
             LIMIT 1
         ];
         system.assertEquals(
-            Date.today(),
+            null,
             record.FacilitatorApplicationReceived__c,
-            'FacilitatorApplicationReceived__c not set'
+            'FacilitatorApplicationReceived__c not cleared'
         );
     }
 
@@ -35,9 +35,9 @@ public with sharing class TestClearDateServiceFacilitatorFields {
             LIMIT 1
         ];
         system.assertEquals(
-            Date.today(),
+            null,
             record.FacilitatorCertAgreementReceived__c,
-            'FacilitatorCertAgreementReceived__c not set'
+            'FacilitatorCertAgreementReceived__c not cleared'
         );
     }
 
@@ -55,9 +55,9 @@ public with sharing class TestClearDateServiceFacilitatorFields {
             LIMIT 1
         ];
         system.assertEquals(
-            Date.today(),
+            null,
             record.ContactFormReceived__c,
-            'ContactFormReceived__c not set'
+            'ContactFormReceived__c not cleared'
         );
     }
 
@@ -75,9 +75,9 @@ public with sharing class TestClearDateServiceFacilitatorFields {
             LIMIT 1
         ];
         system.assertEquals(
-            Date.today(),
+            null,
             record.FacilitatorInfrNoticeReceived__c,
-            'FacilitatorInfrNoticeReceived__c not set'
+            'FacilitatorInfrNoticeReceived__c not cleared'
         );
     }
 
@@ -95,9 +95,9 @@ public with sharing class TestClearDateServiceFacilitatorFields {
             LIMIT 1
         ];
         system.assertEquals(
-            Date.today(),
+            null,
             record.FacilitatorPracticumReceived__c,
-            'FacilitatorPracticumReceived__c not set'
+            'FacilitatorPracticumReceived__c not cleared'
         );
     }
 
@@ -115,9 +115,9 @@ public with sharing class TestClearDateServiceFacilitatorFields {
             LIMIT 1
         ];
         system.assertEquals(
-            Date.today(),
+            null,
             record.FacilitatorProfGrowthPlanReceived__c,
-            'FacilitatorProfGrowthPlanReceived__c not set'
+            'FacilitatorProfGrowthPlanReceived__c not cleared'
         );
     }
 
@@ -135,9 +135,9 @@ public with sharing class TestClearDateServiceFacilitatorFields {
             LIMIT 1
         ];
         system.assertEquals(
-            Date.today(),
+            null,
             record.FacilitatorProgAgreementReceived__c,
-            'FacilitatorProgAgreementReceived__c not set'
+            'FacilitatorProgAgreementReceived__c not cleared'
         );
     }
 
@@ -155,9 +155,9 @@ public with sharing class TestClearDateServiceFacilitatorFields {
             LIMIT 1
         ];
         system.assertEquals(
-            Date.today(),
+            null,
             record.FacilitatorReferenceReceived__c,
-            'FacilitatorReferenceReceived__c not set'
+            'FacilitatorReferenceReceived__c not cleared'
         );
     }
 }

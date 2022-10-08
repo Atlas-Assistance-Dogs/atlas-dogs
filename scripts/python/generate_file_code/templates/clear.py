@@ -60,9 +60,9 @@ test_template = '''
             LIMIT 1
         ];
         system.assertEquals(
-            Date.today(),
+            null,
             record.{field},
-            '{field} not set'
+            '{field} not cleared'
         );
     }}
 '''

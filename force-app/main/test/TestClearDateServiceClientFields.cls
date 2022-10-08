@@ -15,9 +15,9 @@ public with sharing class TestClearDateServiceClientFields {
             LIMIT 1
         ];
         system.assertEquals(
-            Date.today(),
+            null,
             record.ClientApplicationReceived__c,
-            'ClientApplicationReceived__c not set'
+            'ClientApplicationReceived__c not cleared'
         );
     }
 
@@ -35,9 +35,9 @@ public with sharing class TestClearDateServiceClientFields {
             LIMIT 1
         ];
         system.assertEquals(
-            Date.today(),
+            null,
             record.ClientCertAgreementReceived__c,
-            'ClientCertAgreementReceived__c not set'
+            'ClientCertAgreementReceived__c not cleared'
         );
     }
 
@@ -55,9 +55,9 @@ public with sharing class TestClearDateServiceClientFields {
             LIMIT 1
         ];
         system.assertEquals(
-            Date.today(),
+            null,
             record.ContactFormReceived__c,
-            'ContactFormReceived__c not set'
+            'ContactFormReceived__c not cleared'
         );
     }
 
@@ -75,9 +75,9 @@ public with sharing class TestClearDateServiceClientFields {
             LIMIT 1
         ];
         system.assertEquals(
-            Date.today(),
+            null,
             record.ClientLOMIReceived__c,
-            'ClientLOMIReceived__c not set'
+            'ClientLOMIReceived__c not cleared'
         );
     }
 
@@ -95,9 +95,9 @@ public with sharing class TestClearDateServiceClientFields {
             LIMIT 1
         ];
         system.assertEquals(
-            Date.today(),
+            null,
             record.ClientPreApplicationReceived__c,
-            'ClientPreApplicationReceived__c not set'
+            'ClientPreApplicationReceived__c not cleared'
         );
     }
 
@@ -115,9 +115,9 @@ public with sharing class TestClearDateServiceClientFields {
             LIMIT 1
         ];
         system.assertEquals(
-            Date.today(),
+            null,
             record.ClientProgAgreementReceived__c,
-            'ClientProgAgreementReceived__c not set'
+            'ClientProgAgreementReceived__c not cleared'
         );
     }
 
@@ -135,9 +135,9 @@ public with sharing class TestClearDateServiceClientFields {
             LIMIT 1
         ];
         system.assertEquals(
-            Date.today(),
+            null,
             record.ClientSurveyReceived__c,
-            'ClientSurveyReceived__c not set'
+            'ClientSurveyReceived__c not cleared'
         );
     }
 
@@ -155,9 +155,9 @@ public with sharing class TestClearDateServiceClientFields {
             LIMIT 1
         ];
         system.assertEquals(
-            Date.today(),
+            null,
             record.ClientVAPWReceived__c,
-            'ClientVAPWReceived__c not set'
+            'ClientVAPWReceived__c not cleared'
         );
     }
 }

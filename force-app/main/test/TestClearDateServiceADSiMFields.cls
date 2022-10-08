@@ -15,9 +15,9 @@ public with sharing class TestClearDateServiceADSiMFields {
             LIMIT 1
         ];
         system.assertEquals(
-            Date.today(),
+            null,
             record.ADSiMApplicationReceived__c,
-            'ADSiMApplicationReceived__c not set'
+            'ADSiMApplicationReceived__c not cleared'
         );
     }
 
@@ -35,9 +35,9 @@ public with sharing class TestClearDateServiceADSiMFields {
             LIMIT 1
         ];
         system.assertEquals(
-            Date.today(),
+            null,
             record.ContactFormReceived__c,
-            'ContactFormReceived__c not set'
+            'ContactFormReceived__c not cleared'
         );
     }
 
@@ -55,9 +55,9 @@ public with sharing class TestClearDateServiceADSiMFields {
             LIMIT 1
         ];
         system.assertEquals(
-            Date.today(),
+            null,
             record.ADSiMPreApplicationReceived__c,
-            'ADSiMPreApplicationReceived__c not set'
+            'ADSiMPreApplicationReceived__c not cleared'
         );
     }
 
@@ -75,9 +75,9 @@ public with sharing class TestClearDateServiceADSiMFields {
             LIMIT 1
         ];
         system.assertEquals(
-            Date.today(),
+            null,
             record.ADSiMProgAgreementReceived__c,
-            'ADSiMProgAgreementReceived__c not set'
+            'ADSiMProgAgreementReceived__c not cleared'
         );
     }
 }

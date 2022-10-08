@@ -15,9 +15,9 @@ public with sharing class TestClearDateServicePuppyFields {
             LIMIT 1
         ];
         system.assertEquals(
-            Date.today(),
+            null,
             record.PuppyApplicationReceived__c,
-            'PuppyApplicationReceived__c not set'
+            'PuppyApplicationReceived__c not cleared'
         );
     }
 
@@ -35,9 +35,9 @@ public with sharing class TestClearDateServicePuppyFields {
             LIMIT 1
         ];
         system.assertEquals(
-            Date.today(),
+            null,
             record.PuppyCertAgreementReceived__c,
-            'PuppyCertAgreementReceived__c not set'
+            'PuppyCertAgreementReceived__c not cleared'
         );
     }
 
@@ -55,9 +55,9 @@ public with sharing class TestClearDateServicePuppyFields {
             LIMIT 1
         ];
         system.assertEquals(
-            Date.today(),
+            null,
             record.ContactFormReceived__c,
-            'ContactFormReceived__c not set'
+            'ContactFormReceived__c not cleared'
         );
     }
 
@@ -75,9 +75,9 @@ public with sharing class TestClearDateServicePuppyFields {
             LIMIT 1
         ];
         system.assertEquals(
-            Date.today(),
+            null,
             record.PuppyContractReceived__c,
-            'PuppyContractReceived__c not set'
+            'PuppyContractReceived__c not cleared'
         );
     }
 
@@ -95,9 +95,9 @@ public with sharing class TestClearDateServicePuppyFields {
             LIMIT 1
         ];
         system.assertEquals(
-            Date.today(),
+            null,
             record.PuppyInfrNoticeReceived__c,
-            'PuppyInfrNoticeReceived__c not set'
+            'PuppyInfrNoticeReceived__c not cleared'
         );
     }
 
@@ -115,9 +115,9 @@ public with sharing class TestClearDateServicePuppyFields {
             LIMIT 1
         ];
         system.assertEquals(
-            Date.today(),
+            null,
             record.PuppyProgAgreementReceived__c,
-            'PuppyProgAgreementReceived__c not set'
+            'PuppyProgAgreementReceived__c not cleared'
         );
     }
 
@@ -135,9 +135,9 @@ public with sharing class TestClearDateServicePuppyFields {
             LIMIT 1
         ];
         system.assertEquals(
-            Date.today(),
+            null,
             record.PuppyReferenceReceived__c,
-            'PuppyReferenceReceived__c not set'
+            'PuppyReferenceReceived__c not cleared'
         );
     }
 }

@@ -15,9 +15,9 @@ public with sharing class TestClearDateServiceBoardFields {
             LIMIT 1
         ];
         system.assertEquals(
-            Date.today(),
+            null,
             record.BoardAgreementReceived__c,
-            'BoardAgreementReceived__c not set'
+            'BoardAgreementReceived__c not cleared'
         );
     }
 
@@ -35,9 +35,9 @@ public with sharing class TestClearDateServiceBoardFields {
             LIMIT 1
         ];
         system.assertEquals(
-            Date.today(),
+            null,
             record.BoardApplicationReceived__c,
-            'BoardApplicationReceived__c not set'
+            'BoardApplicationReceived__c not cleared'
         );
     }
 
@@ -55,9 +55,9 @@ public with sharing class TestClearDateServiceBoardFields {
             LIMIT 1
         ];
         system.assertEquals(
-            Date.today(),
+            null,
             record.BoardCoIReceived__c,
-            'BoardCoIReceived__c not set'
+            'BoardCoIReceived__c not cleared'
         );
     }
 
@@ -75,9 +75,9 @@ public with sharing class TestClearDateServiceBoardFields {
             LIMIT 1
         ];
         system.assertEquals(
-            Date.today(),
+            null,
             record.ContactFormReceived__c,
-            'ContactFormReceived__c not set'
+            'ContactFormReceived__c not cleared'
         );
     }
 
@@ -95,9 +95,9 @@ public with sharing class TestClearDateServiceBoardFields {
             LIMIT 1
         ];
         system.assertEquals(
-            Date.today(),
+            null,
             record.BoardResumeReceived__c,
-            'BoardResumeReceived__c not set'
+            'BoardResumeReceived__c not cleared'
         );
     }
 
@@ -115,9 +115,9 @@ public with sharing class TestClearDateServiceBoardFields {
             LIMIT 1
         ];
         system.assertEquals(
-            Date.today(),
+            null,
             record.BoardToNReceived__c,
-            'BoardToNReceived__c not set'
+            'BoardToNReceived__c not cleared'
         );
     }
 }

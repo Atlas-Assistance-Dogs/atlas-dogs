@@ -15,9 +15,9 @@ public with sharing class TestClearDateServiceTrainerFields {
             LIMIT 1
         ];
         system.assertEquals(
-            Date.today(),
+            null,
             record.TrainerApplicationReceived__c,
-            'TrainerApplicationReceived__c not set'
+            'TrainerApplicationReceived__c not cleared'
         );
     }
 
@@ -35,9 +35,9 @@ public with sharing class TestClearDateServiceTrainerFields {
             LIMIT 1
         ];
         system.assertEquals(
-            Date.today(),
+            null,
             record.TrainerCertAgreementReceived__c,
-            'TrainerCertAgreementReceived__c not set'
+            'TrainerCertAgreementReceived__c not cleared'
         );
     }
 
@@ -55,9 +55,9 @@ public with sharing class TestClearDateServiceTrainerFields {
             LIMIT 1
         ];
         system.assertEquals(
-            Date.today(),
+            null,
             record.ContactFormReceived__c,
-            'ContactFormReceived__c not set'
+            'ContactFormReceived__c not cleared'
         );
     }
 
@@ -75,9 +75,9 @@ public with sharing class TestClearDateServiceTrainerFields {
             LIMIT 1
         ];
         system.assertEquals(
-            Date.today(),
+            null,
             record.TrainerInfrNoticeReceived__c,
-            'TrainerInfrNoticeReceived__c not set'
+            'TrainerInfrNoticeReceived__c not cleared'
         );
     }
 
@@ -95,9 +95,9 @@ public with sharing class TestClearDateServiceTrainerFields {
             LIMIT 1
         ];
         system.assertEquals(
-            Date.today(),
+            null,
             record.TrainerProgAgreementReceived__c,
-            'TrainerProgAgreementReceived__c not set'
+            'TrainerProgAgreementReceived__c not cleared'
         );
     }
 
@@ -115,9 +115,9 @@ public with sharing class TestClearDateServiceTrainerFields {
             LIMIT 1
         ];
         system.assertEquals(
-            Date.today(),
+            null,
             record.TrainerReferenceReceived__c,
-            'TrainerReferenceReceived__c not set'
+            'TrainerReferenceReceived__c not cleared'
         );
     }
 }

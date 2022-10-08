@@ -15,9 +15,9 @@ public with sharing class TestClearDateServiceDogFields {
             LIMIT 1
         ];
         system.assertEquals(
-            Date.today(),
+            null,
             record.HealthFormReceived__c,
-            'HealthFormReceived__c not set'
+            'HealthFormReceived__c not cleared'
         );
     }
 
@@ -35,9 +35,9 @@ public with sharing class TestClearDateServiceDogFields {
             LIMIT 1
         ];
         system.assertEquals(
-            Date.today(),
+            null,
             record.VacExamsReceived__c,
-            'VacExamsReceived__c not set'
+            'VacExamsReceived__c not cleared'
         );
     }
 
@@ -55,9 +55,9 @@ public with sharing class TestClearDateServiceDogFields {
             LIMIT 1
         ];
         system.assertEquals(
-            Date.today(),
+            null,
             record.XrayReceived__c,
-            'XrayReceived__c not set'
+            'XrayReceived__c not cleared'
         );
     }
 }

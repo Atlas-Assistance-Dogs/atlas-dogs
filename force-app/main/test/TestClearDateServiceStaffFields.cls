@@ -15,9 +15,9 @@ public with sharing class TestClearDateServiceStaffFields {
             LIMIT 1
         ];
         system.assertEquals(
-            Date.today(),
+            null,
             record.StaffAgreementReceived__c,
-            'StaffAgreementReceived__c not set'
+            'StaffAgreementReceived__c not cleared'
         );
     }
 
@@ -35,9 +35,9 @@ public with sharing class TestClearDateServiceStaffFields {
             LIMIT 1
         ];
         system.assertEquals(
-            Date.today(),
+            null,
             record.StaffApplicationReceived__c,
-            'StaffApplicationReceived__c not set'
+            'StaffApplicationReceived__c not cleared'
         );
     }
 
@@ -55,9 +55,9 @@ public with sharing class TestClearDateServiceStaffFields {
             LIMIT 1
         ];
         system.assertEquals(
-            Date.today(),
+            null,
             record.ContactFormReceived__c,
-            'ContactFormReceived__c not set'
+            'ContactFormReceived__c not cleared'
         );
     }
 
@@ -75,9 +75,9 @@ public with sharing class TestClearDateServiceStaffFields {
             LIMIT 1
         ];
         system.assertEquals(
-            Date.today(),
+            null,
             record.StaffI9Received__c,
-            'StaffI9Received__c not set'
+            'StaffI9Received__c not cleared'
         );
     }
 
@@ -95,9 +95,9 @@ public with sharing class TestClearDateServiceStaffFields {
             LIMIT 1
         ];
         system.assertEquals(
-            Date.today(),
+            null,
             record.StaffOfferReceived__c,
-            'StaffOfferReceived__c not set'
+            'StaffOfferReceived__c not cleared'
         );
     }
 
@@ -115,9 +115,9 @@ public with sharing class TestClearDateServiceStaffFields {
             LIMIT 1
         ];
         system.assertEquals(
-            Date.today(),
+            null,
             record.StaffResumeReceived__c,
-            'StaffResumeReceived__c not set'
+            'StaffResumeReceived__c not cleared'
         );
     }
 
@@ -135,9 +135,9 @@ public with sharing class TestClearDateServiceStaffFields {
             LIMIT 1
         ];
         system.assertEquals(
-            Date.today(),
+            null,
             record.StaffW4Received__c,
-            'StaffW4Received__c not set'
+            'StaffW4Received__c not cleared'
         );
     }
 
@@ -155,9 +155,9 @@ public with sharing class TestClearDateServiceStaffFields {
             LIMIT 1
         ];
         system.assertEquals(
-            Date.today(),
+            null,
             record.StaffW9Received__c,
-            'StaffW9Received__c not set'
+            'StaffW9Received__c not cleared'
         );
     }
 }

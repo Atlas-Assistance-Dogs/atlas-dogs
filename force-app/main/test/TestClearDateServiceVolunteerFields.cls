@@ -15,9 +15,9 @@ public with sharing class TestClearDateServiceVolunteerFields {
             LIMIT 1
         ];
         system.assertEquals(
-            Date.today(),
+            null,
             record.VolunteerAgreementReceived__c,
-            'VolunteerAgreementReceived__c not set'
+            'VolunteerAgreementReceived__c not cleared'
         );
     }
 
@@ -35,9 +35,9 @@ public with sharing class TestClearDateServiceVolunteerFields {
             LIMIT 1
         ];
         system.assertEquals(
-            Date.today(),
+            null,
             record.VolunteerApplicationReceived__c,
-            'VolunteerApplicationReceived__c not set'
+            'VolunteerApplicationReceived__c not cleared'
         );
     }
 
@@ -55,9 +55,9 @@ public with sharing class TestClearDateServiceVolunteerFields {
             LIMIT 1
         ];
         system.assertEquals(
-            Date.today(),
+            null,
             record.ContactFormReceived__c,
-            'ContactFormReceived__c not set'
+            'ContactFormReceived__c not cleared'
         );
     }
 
@@ -75,9 +75,9 @@ public with sharing class TestClearDateServiceVolunteerFields {
             LIMIT 1
         ];
         system.assertEquals(
-            Date.today(),
+            null,
             record.VolunteerResumeReceived__c,
-            'VolunteerResumeReceived__c not set'
+            'VolunteerResumeReceived__c not cleared'
         );
     }
 }
