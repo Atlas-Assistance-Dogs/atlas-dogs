@@ -23,6 +23,7 @@ for setting in setting_elements:
 
 
 base_file = 'force-app/main/test/TestFileService{category}Fields.cls'
+base_clear_file = 'force-app/main/test/TestClearDateService{category}Fields.cls'
 meta_path = 'force-app/main/test/TestFileServiceFields.cls-meta.xml'
 
 
@@ -37,6 +38,12 @@ for category, types in settings.items():
 
     ## make sure there is a meta file for the test class
     shutil.copy(meta_path, meta_path.replace('Fields', category.category + 'Fields')) #copy the file to destination dir
+
+    with open(base_clear_file.format(category = category.category), 'w') as test_file:
+        category.test_clear(test_file)
+
+    ## make sure there is a meta file for the test class
+    shutil.copy(meta_path, meta_path.replace('TestFileService', 'TestClearDateService{category}'.format(category = category.category))) #copy the file to destination dir
 
 
 # Read the FileService.cls file

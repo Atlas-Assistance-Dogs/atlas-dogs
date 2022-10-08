@@ -6,16 +6,16 @@ public with sharing class ClearDateService {
             return;
         // note there is a limit of one cv above, so we can update all of them here
         if (cv.Category__c == 'Dog'){
-            clearDogDate(cvs, cntLink.LinkedEntityId);
+            clearDogDate(cv, recordId);
         } else{
             // this is related to a contact
-            clearContactDate(cvs, cntLink.LinkedEntityId);
+            clearContactDate(cv, recordId);
         }
     }
 
     //#region Generated
 
-    private static clearContactDate(ContentVersion cv, Id recordId) {
+    private static void clearContactDate(ContentVersion cv, Id recordId) {
         if (cv.Category__c == 'Standalone') return;
  
         string field;
@@ -266,7 +266,7 @@ public with sharing class ClearDateService {
         }
     }
 
-    private static clearDogDate(ContentVersion cv, Id recordId) {
+    private static void clearDogDate(ContentVersion cv, Id recordId) {
         string  field = string.format('{0}Received__c', new List<Object>{ cv.Type__c.replace(' ', '') });
         string query = string.format('SELECT Id, {0} FROM Dog__c WHERE Id = :recordId', new List<Object>{ field });
         List<Dog__c> dogs = Database.query(query);

@@ -16,13 +16,17 @@ trigger ContentDocumentLinkTrigger on ContentDocumentLink (after insert, after d
                 FROM ContentDocumentLink
                 WHERE LinkedEntityId = :cdl.LinkedEntityId
             ];
+            List<Id> documentIds = new List<Id>();
+            for (ContentDocumentLink link : cdls) {
+                documentIds.add(link.ContentDocumentId);
+            }
             // See if there is another with this category/type.
             // There is the special case of 'ContactForm' which is valid for any category, so ignore
             // Category if Type is that
             cv = [
                 SELECT Category__c, Type__c, Date__c
                 FROM ContentVersion
-                WHERE ContentDocumentId IN :cdls AND ((Type__c = 'ContactForm' AND Type__c = :cv.Type__c) OR
+                WHERE ContentDocumentId IN :documentIds AND ((Type__c = 'ContactForm' AND Type__c = :cv.Type__c) OR
                 (Category__c = :cv.Category__c AND Type__c = :cv.Type__c))
                 ORDER BY Date__c DESC
                 LIMIT :1

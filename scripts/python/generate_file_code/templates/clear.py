@@ -1,7 +1,7 @@
 # Templates for generating code to clear Last* dates
 
 contact_code_start = '''
-    private static clearContactDate(ContentVersion cv, Id recordId) {
+    private static void clearContactDate(ContentVersion cv, Id recordId) {
         if (cv.Category__c == 'Standalone') return;
  
         string field;
@@ -29,7 +29,7 @@ contact_code_end = '''
 
 
 dog_code_start = '''
-    private static clearDogDate(ContentVersion cv, Id recordId) {
+    private static void clearDogDate(ContentVersion cv, Id recordId) {
         string  field = string.format('{0}Received__c', new List<Object>{ cv.Type__c.replace(' ', '') });
         string query = string.format('SELECT Id, {0} FROM Dog__c WHERE Id = :recordId', new List<Object>{ field });
         List<Dog__c> dogs = Database.query(query);
@@ -48,9 +48,10 @@ dog_code_end = '''
 test_template = '''
     @isTest
     public static void clearDate_{category}{type}_SetsDateToNull() {{
+        ContentVersion cv = new ContentVersion(Category__c = '{category}', Type__c = '{type}');
         {object} record = new {object}({object_fields});
         insert record;
-        ClearDateService.clearDate(cv, record.Id);
+        ClearDateService.clear(cv, record.Id);
 
         record = [
             SELECT {field}
@@ -68,5 +69,4 @@ test_template = '''
 
 test_file_start = '''@isTest
 public with sharing class TestClearDateService{category}Fields {{
-
 '''

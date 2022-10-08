@@ -61,5 +61,5 @@ class CategoryType:
         return update.test_template.format(category = self.category, type = self.doc_type, field = self.field, object_fields = self.fields, object = self.object)
 
 
-    def clear_test(self):
+    def test_clear(self):
         return clear.test_template.format(category = self.category, type = self.doc_type, field = self.field, object_fields = self.fields, object = self.object)
