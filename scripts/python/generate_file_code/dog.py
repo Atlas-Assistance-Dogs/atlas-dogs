@@ -22,6 +22,6 @@ class Dog:
     def clear_code(self, clear_file):
         clear_file.write(clear.dog_code_start)
         for typ in sorted(self.category.types, key = lambda typ : typ.doc_type):
-            clear_file.write(typ.code())
+            clear_file.write(typ.clear_code())
 
         clear_file.write(clear.dog_code_end)

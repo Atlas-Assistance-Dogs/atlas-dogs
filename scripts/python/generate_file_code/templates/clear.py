@@ -1,6 +1,6 @@
-from generate_last_file_code import Category
+# Templates for generating code to clear Last* dates
 
-clear_contact_code_start = '''
+contact_code_start = '''
     private static clearContactDate(ContentVersion cv, Id recordId) {
         if (cv.Category__c == 'Standalone') return;
  
@@ -19,7 +19,7 @@ clear_contact_code_start = '''
         Contact contact = contacts[0];
 '''
 
-clear_contact_code_end = '''
+contact_code_end = '''
         if (cv.Type__c == 'ContactForm'){
             contact.ContactFormReceived__c = null;
         }
@@ -28,7 +28,7 @@ clear_contact_code_end = '''
 '''
 
 
-clear_dog_code_start = '''
+dog_code_start = '''
     private static clearDogDate(ContentVersion cv, Id recordId) {
         string  field = string.format('{0}Received__c', new List<Object>{ cv.Type__c.replace(' ', '') });
         string query = string.format('SELECT Id, {0} FROM Dog__c WHERE Id = :recordId', new List<Object>{ field });
@@ -40,7 +40,7 @@ clear_dog_code_start = '''
 '''
 """Start of the dog ClearDateService code."""
 
-clear_dog_code_end = '''        }
+dog_code_end = '''
         update dog;
     }
 '''

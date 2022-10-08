@@ -31,37 +31,37 @@ public with sharing class ClearDateService {
         if (contacts.size() == 0)
             return;
         Contact contact = contacts[0];
-
+        
         if (cv.Category__c == 'ADSiM'){
-            updateADSiMDate(cv, contact);
+            clearADSiMDate(cv, contact);
         }
-    
+        
         if (cv.Category__c == 'Board'){
-            updateBoardDate(cv, contact);
+            clearBoardDate(cv, contact);
         }
-    
+        
         if (cv.Category__c == 'Client'){
-            updateClientDate(cv, contact);
+            clearClientDate(cv, contact);
         }
-    
+        
         if (cv.Category__c == 'Facilitator'){
-            updateFacilitatorDate(cv, contact);
+            clearFacilitatorDate(cv, contact);
         }
-    
+        
         if (cv.Category__c == 'Puppy'){
-            updatePuppyDate(cv, contact);
+            clearPuppyDate(cv, contact);
         }
-    
+        
         if (cv.Category__c == 'Staff'){
-            updateStaffDate(cv, contact);
+            clearStaffDate(cv, contact);
         }
-    
+        
         if (cv.Category__c == 'Trainer'){
-            updateTrainerDate(cv, contact);
+            clearTrainerDate(cv, contact);
         }
-    
+        
         if (cv.Category__c == 'Volunteer'){
-            updateVolunteerDate(cv, contact);
+            clearVolunteerDate(cv, contact);
         }
 
         if (cv.Type__c == 'ContactForm'){
@@ -70,7 +70,202 @@ public with sharing class ClearDateService {
         update contact;
     }
 
-        
+    // Clear the last date when the category is ADSiM
+    private static void clearADSiMDate(ContentVersion cv, Contact contact) {
+        if (cv.Type__c == 'Application'){
+            contact.ADSiMApplicationReceived__c = null;
+        }
+
+        if (cv.Type__c == 'PreApplication'){
+            contact.ADSiMPreApplicationReceived__c = null;
+        }
+
+        if (cv.Type__c == 'ProgAgreement'){
+            contact.ADSiMProgAgreementReceived__c = null;
+        }
+    }
+
+    // Clear the last date when the category is Board
+    private static void clearBoardDate(ContentVersion cv, Contact contact) {
+        if (cv.Type__c == 'Agreement'){
+            contact.BoardAgreementReceived__c = null;
+        }
+
+        if (cv.Type__c == 'Application'){
+            contact.BoardApplicationReceived__c = null;
+        }
+
+        if (cv.Type__c == 'CoI'){
+            contact.BoardCoIReceived__c = null;
+        }
+
+        if (cv.Type__c == 'Resume'){
+            contact.BoardResumeReceived__c = null;
+        }
+
+        if (cv.Type__c == 'ToN'){
+            contact.BoardToNReceived__c = null;
+        }
+    }
+
+    // Clear the last date when the category is Client
+    private static void clearClientDate(ContentVersion cv, Contact contact) {
+        if (cv.Type__c == 'Application'){
+            contact.ClientApplicationReceived__c = null;
+        }
+
+        if (cv.Type__c == 'CertAgreement'){
+            contact.ClientCertAgreementReceived__c = null;
+        }
+
+        if (cv.Type__c == 'LOMI'){
+            contact.ClientLOMIReceived__c = null;
+        }
+
+        if (cv.Type__c == 'PreApplication'){
+            contact.ClientPreApplicationReceived__c = null;
+        }
+
+        if (cv.Type__c == 'ProgAgreement'){
+            contact.ClientProgAgreementReceived__c = null;
+        }
+
+        if (cv.Type__c == 'Survey'){
+            contact.ClientSurveyReceived__c = null;
+        }
+
+        if (cv.Type__c == 'VAPW'){
+            contact.ClientVAPWReceived__c = null;
+        }
+    }
+
+    // Clear the last date when the category is Facilitator
+    private static void clearFacilitatorDate(ContentVersion cv, Contact contact) {
+        if (cv.Type__c == 'Application'){
+            contact.FacilitatorApplicationReceived__c = null;
+        }
+
+        if (cv.Type__c == 'CertAgreement'){
+            contact.FacilitatorCertAgreementReceived__c = null;
+        }
+
+        if (cv.Type__c == 'InfrNotice'){
+            contact.FacilitatorInfrNoticeReceived__c = null;
+        }
+
+        if (cv.Type__c == 'Practicum'){
+            contact.FacilitatorPracticumReceived__c = null;
+        }
+
+        if (cv.Type__c == 'ProfGrowthPlan'){
+            contact.FacilitatorProfGrowthPlanReceived__c = null;
+        }
+
+        if (cv.Type__c == 'ProgAgreement'){
+            contact.FacilitatorProgAgreementReceived__c = null;
+        }
+
+        if (cv.Type__c == 'Reference'){
+            contact.FacilitatorReferenceReceived__c = null;
+        }
+    }
+
+    // Clear the last date when the category is Puppy
+    private static void clearPuppyDate(ContentVersion cv, Contact contact) {
+        if (cv.Type__c == 'Application'){
+            contact.PuppyApplicationReceived__c = null;
+        }
+
+        if (cv.Type__c == 'CertAgreement'){
+            contact.PuppyCertAgreementReceived__c = null;
+        }
+
+        if (cv.Type__c == 'Contract'){
+            contact.PuppyContractReceived__c = null;
+        }
+
+        if (cv.Type__c == 'InfrNotice'){
+            contact.PuppyInfrNoticeReceived__c = null;
+        }
+
+        if (cv.Type__c == 'ProgAgreement'){
+            contact.PuppyProgAgreementReceived__c = null;
+        }
+
+        if (cv.Type__c == 'Reference'){
+            contact.PuppyReferenceReceived__c = null;
+        }
+    }
+
+    // Clear the last date when the category is Staff
+    private static void clearStaffDate(ContentVersion cv, Contact contact) {
+        if (cv.Type__c == 'Agreement'){
+            contact.StaffAgreementReceived__c = null;
+        }
+
+        if (cv.Type__c == 'Application'){
+            contact.StaffApplicationReceived__c = null;
+        }
+
+        if (cv.Type__c == 'I9'){
+            contact.StaffI9Received__c = null;
+        }
+
+        if (cv.Type__c == 'Offer'){
+            contact.StaffOfferReceived__c = null;
+        }
+
+        if (cv.Type__c == 'Resume'){
+            contact.StaffResumeReceived__c = null;
+        }
+
+        if (cv.Type__c == 'W4'){
+            contact.StaffW4Received__c = null;
+        }
+
+        if (cv.Type__c == 'W9'){
+            contact.StaffW9Received__c = null;
+        }
+    }
+
+    // Clear the last date when the category is Trainer
+    private static void clearTrainerDate(ContentVersion cv, Contact contact) {
+        if (cv.Type__c == 'Application'){
+            contact.TrainerApplicationReceived__c = null;
+        }
+
+        if (cv.Type__c == 'CertAgreement'){
+            contact.TrainerCertAgreementReceived__c = null;
+        }
+
+        if (cv.Type__c == 'InfrNotice'){
+            contact.TrainerInfrNoticeReceived__c = null;
+        }
+
+        if (cv.Type__c == 'ProgAgreement'){
+            contact.TrainerProgAgreementReceived__c = null;
+        }
+
+        if (cv.Type__c == 'Reference'){
+            contact.TrainerReferenceReceived__c = null;
+        }
+    }
+
+    // Clear the last date when the category is Volunteer
+    private static void clearVolunteerDate(ContentVersion cv, Contact contact) {
+        if (cv.Type__c == 'Agreement'){
+            contact.VolunteerAgreementReceived__c = null;
+        }
+
+        if (cv.Type__c == 'Application'){
+            contact.VolunteerApplicationReceived__c = null;
+        }
+
+        if (cv.Type__c == 'Resume'){
+            contact.VolunteerResumeReceived__c = null;
+        }
+    }
+
     private static clearDogDate(ContentVersion cv, Id recordId) {
         string  field = string.format('{0}Received__c', new List<Object>{ cv.Type__c.replace(' ', '') });
         string query = string.format('SELECT Id, {0} FROM Dog__c WHERE Id = :recordId', new List<Object>{ field });
@@ -80,10 +275,19 @@ public with sharing class ClearDateService {
             return;
         Dog__c dog = dogs[0];
 
-        if (cv.Type__c == 'ContactForm'){
-            contact.ContactFormReceived__c = null;
+        if (cv.Type__c == 'HealthForm'){
+            dog.HealthFormReceived__c = null;
         }
-        update contact;
-    }
 
+        if (cv.Type__c == 'VacExams'){
+            dog.VacExamsReceived__c = null;
+        }
+
+        if (cv.Type__c == 'Xray'){
+            dog.XrayReceived__c = null;
+        }
+
+        update dog;
+    }
+    //#endregion Generated code
 }

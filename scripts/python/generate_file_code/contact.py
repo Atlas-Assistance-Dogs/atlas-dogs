@@ -24,7 +24,7 @@ class Contact:
             self.file.write(category.method())
 
 
-    def clear(self, clear_file):
+    def clear_code(self, clear_file):
         clear_file.write(clear.contact_code_start)
         for category in self.sorted_categories:
             if (category.category == 'Standalone'):

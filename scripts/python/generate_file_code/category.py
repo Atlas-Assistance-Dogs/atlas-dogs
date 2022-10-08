@@ -1,5 +1,5 @@
-import template.clear as clear
-import template.update as update
+import templates.clear as clear
+import templates.update as update
 from type import CategoryType
 
 
@@ -41,12 +41,20 @@ class Category:
     def clear_method(self):
         template = '''
     // Clear the last date when the category is {category}
-    private static void update{category}Date(ContentVersion cv, {object} {name}) {{
-'''
+    private static void clear{category}Date(ContentVersion cv, {object} {name}) {{'''
         definition = template.format(category = self.category, object = self.object, name = self.name)
         types = [typ.clear_code() for typ in self.types if typ.doc_type != 'ContactForm']
         end = '    }\n'
         return definition + ''.join(types) + end
+
+
+    def clear_check(self):
+        template = '''        
+        if (cv.Category__c == '{category}'){{
+            clear{category}Date(cv, {name});
+        }}
+'''
+        return template.format(category = self.category, name = self.name)
 
 
     def test(self, test_file):
