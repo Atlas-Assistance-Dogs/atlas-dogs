@@ -19,6 +19,7 @@ public with sharing class PuppyLogController {
                     Date__c,
                     Dog__c,
                     Dog__r.Name,
+                    Name,
                     Raiser__c,
                     Raiser__r.Name,
                     RequestSupportFromAtlas__c
@@ -30,14 +31,9 @@ public with sharing class PuppyLogController {
             related.items = new List<Object>();
             for (PuppyLog__c log : logs) {
                 PuppyLog plog = new PuppyLog();
-                plog.recordId = log.Id;
-                plog.logDate = log.Date__c;
-                plog.dogId = log.Dog__c;
+                plog.log = log;
                 plog.dogName = log.Dog__r.Name;
-                plog.raiserId = log.Raiser__c;
                 plog.raiserName = log.Raiser__r.Name;
-                plog.support = log.RequestSupportFromAtlas__c;
-                plog.additional = log.AdditionalInformation__c;
 
                 RelatedObjects files = FileController.getRelatedFiles(log.Id, 1);
                 if (files != null && !files.items.isEmpty()) {
