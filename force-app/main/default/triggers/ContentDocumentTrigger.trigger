@@ -1,4 +1,4 @@
-trigger ContentDocumentTrigger on ContentDocument (before delete) {
+trigger ContentDocumentTrigger on ContentDocument (after delete) {
     System.debug(Trigger.old);
     for (ContentDocument cd : Trigger.old) {
         System.debug(cd);
@@ -32,7 +32,7 @@ trigger ContentDocumentTrigger on ContentDocument (before delete) {
         // See if there is another with this category/type.
         // There is the special case of 'ContactForm' which is valid for any category, so ignore
         // Category if Type is that
-        cv = [
+        List<ContentVersion> cvs = [
             SELECT Category__c, Type__c, Date__c
             FROM ContentVersion
             WHERE ContentDocumentId IN :documentIds AND ((Type__c = 'ContactForm' AND Type__c = :cv.Type__c) OR
@@ -40,5 +40,9 @@ trigger ContentDocumentTrigger on ContentDocument (before delete) {
             ORDER BY Date__c DESC
             LIMIT :1
         ];
+        if (cvs.size() == 0) {
+            return;
+        }
+        FileService.updateDate(cvs[0], cdl.LinkedEntityId);
     }
 }
