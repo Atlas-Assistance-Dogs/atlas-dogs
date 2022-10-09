@@ -1,5 +1,4 @@
-trigger ContentDocumentTrigger on ContentDocument (after delete) {
-    System.debug(Trigger.old);
+trigger ContentDocumentTrigger on ContentDocument (before delete) {
     for (ContentDocument cd : Trigger.old) {
         System.debug(cd);
         ContentDocumentLink cdl = [SELECT Id, LinkedEntityId FROM ContentDocumentLink WHERE ContentDocumentId = :cd.Id LIMIT 1];
@@ -23,11 +22,14 @@ trigger ContentDocumentTrigger on ContentDocument (after delete) {
         List<ContentDocumentLink> cdls = [
             SELECT Id, ContentDocumentId
             FROM ContentDocumentLink
-            WHERE LinkedEntityId = :cdl.LinkedEntityId
+            WHERE LinkedEntityId = :cdl.LinkedEntityId AND ContentDocumentId != :cd.Id
         ];
         List<Id> documentIds = new List<Id>();
         for (ContentDocumentLink link : cdls) {
             documentIds.add(link.ContentDocumentId);
+        }
+        if (documentIds.isEmpty()) {
+            return;
         }
         // See if there is another with this category/type.
         // There is the special case of 'ContactForm' which is valid for any category, so ignore
@@ -40,7 +42,7 @@ trigger ContentDocumentTrigger on ContentDocument (after delete) {
             ORDER BY Date__c DESC
             LIMIT :1
         ];
-        if (cvs.size() == 0) {
+        if (cvs.isEmpty()) {
             return;
         }
         FileService.updateDate(cvs[0], cdl.LinkedEntityId);
