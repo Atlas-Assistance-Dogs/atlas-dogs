@@ -18,7 +18,7 @@ public with sharing class TestFileService {
         insert cv;
 
         ContentVersion temp = [
-            SELECT Id, ContentDocumentId
+            SELECT Id, ContentDocumentId, Category__c, Type__c, Date__c
             FROM ContentVersion
             WHERE Id = :cv.Id
             LIMIT 1
@@ -30,7 +30,7 @@ public with sharing class TestFileService {
         );
         insert link;
 
-        return cv;
+        return temp;
     }
 
     @isTest
