@@ -133,7 +133,7 @@ export default class LogFormCmp extends LightningElement {
             );
             return;
         }
-        record.RecordTypeId = this.recordTypeId;
+        if (!record.recordTypeId) record.RecordTypeId = this.recordTypeId;
         this.template
             .querySelector("lightning-record-edit-form")
             .submit(record);
@@ -142,5 +142,15 @@ export default class LogFormCmp extends LightningElement {
     handleSuccess() {
         this.dispatchEvent(new CustomEvent("changed"));
         this.closeModal();
+    }
+
+    handleError(event) {
+        this.dispatchEvent(
+            new ShowToastEvent({
+                title: "Error!!",
+                message: event.data.message,
+                variant: "error"
+            })
+        );
     }
 }
