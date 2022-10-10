@@ -44,7 +44,7 @@ export default class EditBackgroundCheckCmp extends NavigationMixin(
             attributes: {
                 objectApiName: this.object,
                 actionName: "view",
-                recordId: event.detail
+                recordId: event.detail.id
             }
         });
     }

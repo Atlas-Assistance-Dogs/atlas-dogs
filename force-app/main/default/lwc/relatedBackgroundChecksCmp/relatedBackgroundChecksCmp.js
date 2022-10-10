@@ -2,7 +2,7 @@ import { LightningElement, api, wire } from "lwc";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
 import { NavigationMixin } from "lightning/navigation";
 import getRelatedChecks from "@salesforce/apex/BackgroundCheckController.getRelatedChecks";
-import deleteRecord from "lightning/uiRecordApi";
+import { deleteRecord } from "lightning/uiRecordApi";
 import { refreshApex } from "@salesforce/apex";
 
 const actions = [
