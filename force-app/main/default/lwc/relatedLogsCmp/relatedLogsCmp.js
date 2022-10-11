@@ -134,6 +134,7 @@ export default class RelatedLogsCmp extends NavigationMixin(LightningElement) {
             COLS.otherHours,
             COLS.team,
             COLS.clientStress,
+            COLS.stress,
             COLS.atlas,
             COLS.details,
             COLS.action
