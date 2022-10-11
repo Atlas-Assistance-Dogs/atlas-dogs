@@ -8,8 +8,9 @@ import { refreshApex } from "@salesforce/apex";
 import AUTHORITY_FIELD from "@salesforce/schema/ContinuingEducationUnit__c.Authority__c";
 import AUTHORITY_OTHER_FIELD from "@salesforce/schema/ContinuingEducationUnit__c.AuthorityOther__c";
 import DATE_COMPLETED_FIELD from "@salesforce/schema/ContinuingEducationUnit__c.DateCompleted__c";
+import NAME_FIELD from "@salesforce/schema/ContinuingEducationUnit__c.Name";
 import PROGRAM_DATE_FIELD from "@salesforce/schema/ContinuingEducationUnit__c.ProgramDate__c";
-import PROGRAM_HOURS_FIELD from "@salesforce/schema/ContinuingEducationUnit__c.ProgramHours__c";
+import REQUESTED_CEUS_FIELD from "@salesforce/schema/ContinuingEducationUnit__c.Quantity__c";
 import ROLE_FIELD from "@salesforce/schema/ContinuingEducationUnit__c.Role__c";
 import STATUS_FIELD from "@salesforce/schema/ContinuingEducationUnit__c.Status__c";
 
@@ -19,6 +20,15 @@ const actions = [
 ];
 
 const COLS = [
+    {
+        label: "Name",
+        type: "button",
+        typeAttributes: {
+            name: "goto",
+            label: { fieldName: NAME_FIELD.fieldApiName },
+            variant: "base"
+        }
+    },
     { label: "Authority", fieldName: "authority" },
     {
         label: "Program Date",
@@ -31,8 +41,8 @@ const COLS = [
         type: "date-local"
     },
     {
-        label: "Program Hours",
-        fieldName: PROGRAM_HOURS_FIELD.fieldApiName,
+        label: "Requested CEUs",
+        fieldName: REQUESTED_CEUS_FIELD.fieldApiName,
         type: "number"
     },
     { label: "Role", fieldName: ROLE_FIELD.fieldApiName },
@@ -100,6 +110,9 @@ export default class RelatedCeusCmp extends NavigationMixin(LightningElement) {
             case "view":
                 this.navigateToFiles(row);
                 break;
+            case "goto":
+                this.navigateToRecord(row.Id);
+                break;
         }
     }
 
@@ -116,6 +129,16 @@ export default class RelatedCeusCmp extends NavigationMixin(LightningElement) {
         });
     }
 
+    navigateToRecord(recordId) {
+        this[NavigationMixin.Navigate]({
+            type: "standard__recordPage",
+            attributes: {
+                recordId: recordId,
+                actionName: "view"
+            }
+        });
+    }
+
     get max() {
         return this.viewAll ? 10000 : 6;
     }
@@ -125,13 +148,13 @@ export default class RelatedCeusCmp extends NavigationMixin(LightningElement) {
         this.wiredCeus = result;
         this.data = null;
         if (result.data) {
-            this.data = result.data.items.map((ceu) => {
-                var newCeu = Object.assign({}, ceu);
-                newCeu["authority"] = ceu[AUTHORITY_FIELD.fieldApiName];
-                if (newCeu.authority === "Other") {
-                    newCeu.authority = ceu[AUTHORITY_OTHER_FIELD.fieldApiName];
+            this.data = result.data.items.map((info) => {
+                var ceu = Object.assign({}, info);
+                ceu.authority = ceu[AUTHORITY_FIELD.fieldApiName];
+                if (ceu.authority === "Other") {
+                    ceu.authority = ceu[AUTHORITY_OTHER_FIELD.fieldApiName];
                 }
-                return newCeu;
+                return ceu;
             });
             if (this.data.length === 0) {
                 this.data = null;
