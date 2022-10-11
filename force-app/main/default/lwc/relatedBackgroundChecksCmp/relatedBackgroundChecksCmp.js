@@ -39,6 +39,7 @@ export default class RelatedBackgroundChecksCmp extends NavigationMixin(
     @api recordId;
     @api objectApiName;
     @api viewAll;
+    @api max; // needed for previous version
     columns = COLS;
     data = [];
     wiredChecks;

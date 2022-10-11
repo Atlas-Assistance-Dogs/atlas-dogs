@@ -44,6 +44,7 @@ export default class RelatedCeusCmp extends NavigationMixin(LightningElement) {
     @api recordId;
     @api objectApiName;
     @api viewAll;
+    @api max; // needed for previous version
     columns = COLS;
     data = [];
     wiredCeus;
@@ -153,9 +154,7 @@ export default class RelatedCeusCmp extends NavigationMixin(LightningElement) {
 
     createCeu(event) {
         const payload = { mode: "create" };
-        this.template
-            .querySelector("c-ceu-form-cmp")
-            .openModal(payload);
+        this.template.querySelector("c-ceu-form-cmp").openModal(payload);
     }
 
     deleteCeu(recordId) {

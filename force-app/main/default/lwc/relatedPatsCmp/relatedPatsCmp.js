@@ -46,6 +46,7 @@ export default class RelatedPatsCmp extends NavigationMixin(LightningElement) {
     @api recordId;
     @api objectApiName;
     @api viewAll;
+    @api max; // needed for previous version
     columns = COLS;
     data = [];
     total = 0;
@@ -143,7 +144,7 @@ export default class RelatedPatsCmp extends NavigationMixin(LightningElement) {
     }
 
     createPat(event) {
-        this.template.querySelector('c-pat-form-cmp').openModal();
+        this.template.querySelector("c-pat-form-cmp").openModal();
     }
 
     deletePat(recordId) {
