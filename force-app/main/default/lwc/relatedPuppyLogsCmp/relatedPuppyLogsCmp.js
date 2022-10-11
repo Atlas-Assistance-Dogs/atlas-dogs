@@ -58,7 +58,7 @@ const COLS = [
     },
     {
         label: "Support?",
-        fieldName: "support",
+        fieldName: ATLAS_SUPPORT_FIELD.fieldApiName,
         sortable: true,
         type: "boolean"
     },
@@ -184,6 +184,8 @@ export default class RelatedPuppyLogsCmp extends NavigationMixin(LightningElemen
                 log.noFile = info.noFile;
                 log.raiserName = info.raiserName;
                 log.dogName = info.dogName;
+                log[ADDITIONAL_FIELD.fieldApiName] =
+                    log[ADDITIONAL_FIELD.fieldApiName].replace(/(<([^>]+)>)/gi, "");
                 return log;
             });
             if (this.data.length === 0) {
