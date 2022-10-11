@@ -1,5 +1,4 @@
-from generate_last_file_code import Category
-
+## Templates for updating the Last* file date and testing the code.
 
 contact_code_start = '''
     // Update the last received docDate for the contact for the document category and type
@@ -29,7 +28,7 @@ contact_code_start = '''
 
         for (ContentVersion cv : cvs){'''
 
-check_end = '''
+contact_code_end = '''
             if (cv.Type__c == 'ContactForm' && isLater(contact.ContactFormReceived__c, cv.Date__c)){
                 contact.ContactFormReceived__c = cv.Date__c;
             }
@@ -37,28 +36,6 @@ check_end = '''
         update contact;
     }
 '''
-
-class Contact:
-    '''Class to control writing out the generated FileService code for the contact objects'''
-
-    def __init__(self, file, categories):
-        self.file = file
-        self.sorted_categories = [Category(key, categories[key]) for key in sorted(categories.keys()) if key != 'Dog']
-
-    def code(self):
-        self.file.write(contact_code_start)
-        for category in self.sorted_categories:
-            if (category.category == 'Standalone'):
-                continue;
-            self.file.write(category.check())
-
-        self.file.write(check_end)
-
-        for category in self.sorted_categories:
-            if (category.category == 'Standalone'):
-                continue;
-            self.file.write(category.method())
-
 
 dog_code_start = '''
     // Update the last received docDate for the dog for the document type
@@ -95,16 +72,69 @@ dog_code_end = '''        }
     }
 '''
 
-class Dog:
-    '''Class to control writing out the generated FileService code for the dog objects'''
+test_template = '''
+    @isTest
+    public static void updateDate_{category}{type}_SetsDateWhenNull() {{
+        {object} record = new {object}({object_fields});
+        insert record;
+        ContentVersion cv = TestFileServiceFields.createLink('{category}', '{type}', Date.today(), record.Id);
+        FileService.updateDate(cv, record.Id);
 
-    def __init__(self, file, category):
-        self.file = file
-        self.category = Category('Dog', category)
+        record = [
+            SELECT {field}
+            FROM {object}
+            WHERE Id = :record.Id
+            LIMIT 1
+        ];
+        system.assertEquals(
+            Date.today(),
+            record.{field},
+            '{field} not set'
+        );
+    }}
 
-    def code(self):
-        self.file.write(dog_code_start)
-        for typ in sorted(self.category.types, key = lambda typ : typ.doc_type):
-            self.file.write(typ.code())
+    @isTest
+    public static void updateDate_{category}{type}_SetsDateWhenNewer() {{
+        {object} record = new {object}({object_fields}, {field} = Date.today().addDays(-1));
+        insert record;
+        ContentVersion cv = TestFileServiceFields.createLink('{category}', '{type}', Date.today(), record.Id);
+        FileService.updateDate(cv, record.Id);
 
-        self.file.write(dog_code_end)
+        record = [
+            SELECT {field}
+            FROM {object}
+            WHERE Id = :record.Id
+            LIMIT 1
+        ];
+        system.assertEquals(
+            Date.today(),
+            record.{field},
+            '{field} not set'
+        );
+    }}
+
+    @isTest
+    public static void updateDate_{category}{type}_LeavesDateWhenOlder() {{
+        {object} record = new {object}({object_fields}, {field} = Date.today());
+        insert record;
+        ContentVersion cv = TestFileServiceFields.createLink('{category}', '{type}', Date.today().addDays(-1), record.Id);
+        FileService.updateDate(cv, record.Id);
+
+        record = [
+            SELECT {field}
+            FROM {object}
+            WHERE Id = :record.Id
+            LIMIT 1
+        ];
+        system.assertEquals(
+            Date.today(),
+            record.{field},
+            '{field} set to an older date'
+        );
+    }}
+'''
+
+test_file_start = '''@isTest
+public with sharing class TestFileService{category}Fields {{
+
+'''

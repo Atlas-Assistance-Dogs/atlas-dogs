@@ -2,7 +2,6 @@ import { LightningElement, api, wire } from "lwc";
 import { NavigationMixin } from "lightning/navigation";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
 import getRelatedPats from "@salesforce/apex/PublicAccessTestController.getRelatedPats";
-import deletePat from "@salesforce/apex/PublicAccessTestController.deletePat";
 import { refreshApex } from "@salesforce/apex";
 
 import DATE_FIELD from "@salesforce/schema/PublicAccessTest__c.DateCompleted__c";
@@ -10,16 +9,21 @@ import LOCATION_FIELD from "@salesforce/schema/PublicAccessTest__c.Location__c";
 import STATUS_FIELD from "@salesforce/schema/PublicAccessTest__c.Status__c";
 import TYPE_FIELD from "@salesforce/schema/PublicAccessTest__c.Type__c";
 
-// Import message service features required for publishing and the message channel
-import { publish, MessageContext } from "lightning/messageService";
-import patForm from "@salesforce/messageChannel/patForm__c";
-
 const actions = [
     { label: "Edit", name: "edit" },
     { label: "Delete", name: "delete" }
 ];
 
 const COLS = [
+    {
+        label: "Name",
+        type: "button",
+        typeAttributes: {
+            name: "view",
+            label: { fieldName: "Name" },
+            variant: "base",
+        }
+    },
     {
         label: "Date Completed",
         fieldName: DATE_FIELD.fieldApiName,
@@ -46,9 +50,6 @@ export default class RelatedPatsCmp extends NavigationMixin(LightningElement) {
     data = [];
     total = 0;
     fieldName = STATUS_FIELD.fieldApiName;
-
-    @wire(MessageContext)
-    messageContext;
 
     defaultSortDirection = "asc";
     sortDirection = "asc";
@@ -94,13 +95,15 @@ export default class RelatedPatsCmp extends NavigationMixin(LightningElement) {
                     recordId: row.Id,
                     status: row.Status__c
                 };
-                publish(this.messageContext, patForm, payload);
+                this.template
+                    .querySelector("c-pat-form-cmp")
+                    .openModal(payload);
                 break;
-            case "dog":
+            case "view":
                 this[NavigationMixin.Navigate]({
                     type: "standard__recordPage",
                     attributes: {
-                        recordId: row.Dog__c,
+                        recordId: row.Id,
                         actionName: "view"
                     }
                 });
@@ -140,12 +143,11 @@ export default class RelatedPatsCmp extends NavigationMixin(LightningElement) {
     }
 
     createPat(event) {
-        const payload = {};
-        publish(this.messageContext, patForm, payload);
+        this.template.querySelector('c-pat-form-cmp').openModal();
     }
 
     deletePat(recordId) {
-        deletePat({ recordId: recordId })
+        deleteRecord(recordId)
             .then(() => {
                 this.handleChange();
             })

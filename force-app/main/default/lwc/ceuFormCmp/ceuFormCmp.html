@@ -3,12 +3,12 @@
         title={title}
         submitlabel="Save"
         onsubmit={handleSubmit}
-        onclose={handleClose}
     >
         <div slot="body">
             <lightning-record-edit-form
                 object-api-name={object}
                 record-id={recordId}
+                onsuccess={handleSuccess}
             >
                 <lightning-input-field
                     field-name={fields.authority}
@@ -55,12 +55,11 @@
                     field-name={fields.status}
                     class="category slds-p-bottom_medium"
                 ></lightning-input-field>
-                <div if:false={contactId}>
-                    <lightning-input-field
-                        field-name={fields.trainer}
-                        class="category slds-p-bottom_medium"
-                    ></lightning-input-field>
-                </div>
+                <lightning-input-field
+                    field-name={fields.trainer}
+                    class="category slds-p-bottom_medium"
+                    value={contactId}
+                ></lightning-input-field>
                 <lightning-input-field
                     field-name={fields.comments}
                     class="category slds-p-bottom_medium"

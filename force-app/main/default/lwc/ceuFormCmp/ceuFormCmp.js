@@ -1,9 +1,8 @@
 import { LightningElement, api, wire } from "lwc";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
 import { NavigationMixin } from "lightning/navigation";
-import createCeu from "@salesforce/apex/ContinuingEducationUnitController.createCeu";
-import updateCeu from "@salesforce/apex/ContinuingEducationUnitController.updateCeu";
 import getRelatedFiles from "@salesforce/apex/FileController.getRelatedFiles";
+import relateFiles from "@salesforce/apex/FileController.relateFiles";
 import { refreshApex } from "@salesforce/apex";
 
 import AUTHORITY_FIELD from "@salesforce/schema/ContinuingEducationUnit__c.Authority__c";
@@ -18,15 +17,6 @@ import QUANTITY_FIELD from "@salesforce/schema/ContinuingEducationUnit__c.Quanti
 import ROLE_FIELD from "@salesforce/schema/ContinuingEducationUnit__c.Role__c";
 import STATUS_FIELD from "@salesforce/schema/ContinuingEducationUnit__c.Status__c";
 import TRAINER_FIELD from "@salesforce/schema/ContinuingEducationUnit__c.Trainer__c";
-
-// Import message service features required for subscribing and the message channel
-import {
-    subscribe,
-    unsubscribe,
-    APPLICATION_SCOPE,
-    MessageContext
-} from "lightning/messageService";
-import ceuForm from "@salesforce/messageChannel/ceuForm__c";
 
 const COLS = [
     {
@@ -78,20 +68,28 @@ export default class CeuFormCmp extends NavigationMixin(LightningElement) {
             ".txt",
             ".xlsx",
             ".xls",
+            ".mov",
+            ".mp4",
             ".zip"
         ];
     }
 
     @api
-    openModal() {
+    openModal(message) {
+        this.recordId = message?.recordId;
+        if (this.recordId) {
+            refreshApex(this.wiredFilesList);
+        } else {
+            this.relatedFiles = null;
+        }
+        this.mode = this.recordId ? "edit" : "create";
+        this.authority = message?.authority;
         this.template.querySelector("c-modal-cmp").openModal();
     }
 
     closeModal() {
         this.template.querySelector("c-modal-cmp").closeModal();
     }
-
-    handleClose() {}
 
     get isAuthorityOther() {
         return this.authority === "Other";
@@ -103,8 +101,7 @@ export default class CeuFormCmp extends NavigationMixin(LightningElement) {
 
     handleSubmit(event) {
         event.preventDefault();
-        const docIds = this.relatedFiles?.map((file) => file.documentId);
-        if (!docIds || docIds.length === 0) {
+        if (!this.hasFiles) {
             this.dispatchEvent(
                 new ShowToastEvent({
                     title: "Error!!",
@@ -114,109 +111,43 @@ export default class CeuFormCmp extends NavigationMixin(LightningElement) {
             );
             return;
         }
-
-        let fields = [
-            ...this.template.querySelectorAll("lightning-input-field")
-        ];
-        var record = fields.reduce(
-            (a, x) => ({ ...a, [x.fieldName]: x.value }),
-            {}
-        );
-        record.Id = this.recordId;
-        record[TRAINER_FIELD.fieldApiName] = this.contactId;
-        if (this.mode === "create") {
-            this.createNewCeu(record, docIds);
-        } else {
-            this.editCeu(record);
-        }
+        this.template.querySelector("lightning-record-edit-form").submit();
     }
-
-    @wire(MessageContext)
-    messageContext;
 
     // Create a new log
-    createNewCeu(record, docIds) {
-        createCeu({
-            record: record,
-            documentIds: docIds
-        })
-            .then(() => {
-                this.dispatchEvent(new CustomEvent("changed"));
-                this.closeModal();
-            })
-            .catch((error) => {
-                this.dispatchEvent(
-                    new ShowToastEvent({
-                        title: "Error!!",
-                        message: error.body.message,
-                        variant: "error"
-                    })
-                );
-            });
-    }
-
-    // Update an existing PAT
-    editCeu(record) {
-        updateCeu({ record: record })
-            .then(() => {
-                this.dispatchEvent(new CustomEvent("changed"));
-                this.closeModal();
-            })
-            .catch((error) => {
-                this.dispatchEvent(
-                    new ShowToastEvent({
-                        title: "Error!!",
-                        message: error.body.message,
-                        variant: "error"
-                    })
-                );
-            });
-    }
-
-    // Encapsulate logic for Lightning message service subscribe and unsubsubscribe
-    subscribeToMessageChannel() {
-        if (!this.subscription) {
-            this.subscription = subscribe(
-                this.messageContext,
-                ceuForm,
-                (message) => this.handleMessage(message),
-                { scope: APPLICATION_SCOPE }
+    handleSuccess(event) {
+        if (!this.recordId) { // new CEU
+            const docIds = this.relatedFiles?.map((file) => file.documentId);
+            relateFiles({documentIds: docIds, recordId: event.detail.id})
+                .then((id) => {
+                    this.dispatchEvent(new CustomEvent("changed"));
+                    this.closeModal();
+                })
+                .catch((error) => {
+                    this.dispatchEvent(
+                        new ShowToastEvent({
+                            title: "Error!!",
+                            message: error.body.message,
+                            variant: "error"
+                        })
+                    );
+                });
+        }
+        else {
+            this.dispatchEvent(
+                new CustomEvent("changed")
             );
+            this.closeModal();
         }
-    }
-
-    unsubscribeToMessageChannel() {
-        unsubscribe(this.subscription);
-        this.subscription = null;
-    }
-
-    // Handler for message received by component
-    handleMessage(message) {
-        this.recordId = message.recordId;
-        if (this.recordId) {
-            refreshApex(this.wiredFilesList);
-        } else {
-            this.relatedFiles = null;
-        }
-        this.mode = message.recordId ? "edit" : "create";
-        this.authority = message.authority;
-        this.openModal();
-    }
-
-    // Standard lifecycle hooks used to subscribe and unsubsubscribe to the message channel
-    connectedCallback() {
-        this.subscribeToMessageChannel();
-    }
-
-    disconnectedCallback() {
-        this.unsubscribeToMessageChannel();
     }
 
     get hasFiles() {
         return this.relatedFiles !== null && this.relatedFiles.length > 0;
     }
 
-    @wire(getRelatedFiles, { recordId: "$recordId", max: 100 }) filesLst(result) {
+    @wire(getRelatedFiles, { recordId: "$recordId", max: 100 }) filesLst(
+        result
+    ) {
         this.wiredFilesList = result;
         this.relatedFiles = null;
         if (result.data?.items) {
@@ -242,6 +173,7 @@ export default class CeuFormCmp extends NavigationMixin(LightningElement) {
         refreshApex(this.wiredFilesList);
     }
 
+    // called after files are uploaded
     handleUploadFinished(event) {
         if (this.relatedFiles) {
             this.relatedFiles = this.relatedFiles.concat(event.detail.files);

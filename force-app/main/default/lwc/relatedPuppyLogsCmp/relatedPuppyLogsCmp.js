@@ -5,9 +5,12 @@ import getRelatedLogs from "@salesforce/apex/PuppyLogController.getRelatedLogs";
 import { deleteRecord } from "lightning/uiRecordApi";
 import { refreshApex } from "@salesforce/apex";
 
-// Import message service features required for publishing and the message channel
-import { publish, MessageContext } from "lightning/messageService";
-import puppyLogForm from "@salesforce/messageChannel/puppyLogForm__c";
+import ADDITIONAL_FIELD from "@salesforce/schema/PuppyLog__c.AdditionalInformation__c";
+import DATE_FIELD from "@salesforce/schema/PuppyLog__c.Date__c";
+import DOG_FIELD from "@salesforce/schema/PuppyLog__c.Dog__c";
+import NAME_FIELD from "@salesforce/schema/PuppyLog__c.Name";
+import RAISER_FIELD from "@salesforce/schema/PuppyLog__c.Raiser__c";
+import ATLAS_SUPPORT_FIELD from "@salesforce/schema/PuppyLog__c.RequestSupportFromAtlas__c";
 
 const actions = [
     { label: "Edit", name: "edit" },
@@ -16,16 +19,46 @@ const actions = [
 
 const COLS = [
     {
+        label: "Name",
+        type: "button",
+        typeAttributes: {
+            name: "goto",
+            label: { fieldName: NAME_FIELD.fieldApiName },
+            variant: "base"
+        }
+    },
+    {
         label: "Date",
-        fieldName: "logDate",
+        fieldName: DATE_FIELD.fieldApiName,
         type: "date-local",
         sortable: true
     },
-    { label: "Raiser", fieldName: "raiserName", sortable: true },
-    { label: "Dog", fieldName: "dogName", sortable: true },
+    {
+        label: "Raiser",
+        type: "button",
+        typeAttributes: {
+            name: "raiser",
+            label: { fieldName: "raiserName" },
+            variant: "base"
+        }
+    },
+    {
+        label: "Dog",
+        type: "button",
+        typeAttributes: {
+            name: "dog",
+            label: { fieldName: "dogName" },
+            variant: "base"
+        }
+    },
+    {
+        label: "Comment",
+        fieldName: ADDITIONAL_FIELD.fieldApiName,
+        sortable: true
+    },
     {
         label: "Support?",
-        fieldName: "support",
+        fieldName: ATLAS_SUPPORT_FIELD.fieldApiName,
         sortable: true,
         type: "boolean"
     },
@@ -44,9 +77,7 @@ const COLS = [
     { type: "action", typeAttributes: { rowActions: actions } }
 ];
 
-export default class RelatedPuppyLogsCmp extends NavigationMixin(
-    LightningElement
-) {
+export default class RelatedPuppyLogsCmp extends NavigationMixin(LightningElement) {
     @api recordId;
     @api objectApiName;
     @api viewAll;
@@ -54,9 +85,6 @@ export default class RelatedPuppyLogsCmp extends NavigationMixin(
     data = [];
     total = 0;
     wiredLogs;
-
-    @wire(MessageContext)
-    messageContext;
 
     defaultSortDirection = "asc";
     sortDirection = "asc";
@@ -94,16 +122,37 @@ export default class RelatedPuppyLogsCmp extends NavigationMixin(
         const row = event.detail.row;
         switch (actionName) {
             case "delete":
-                this.deleteLog(row.recordId);
+                this.deleteLog(row.Id);
                 break;
             case "edit":
-                const payload = { mode: "edit", recordId: row.recordId };
-                publish(this.messageContext, puppyLogForm, payload);
+                const payload = { mode: "edit", recordId: row.Id };
+                this.template
+                    .querySelector("c-related-puppy-log-cmp")
+                    .openModal(payload);
+                break;
+            case "goto":
+                this.navigateToRecord(row.Id, this.objectApiName);
+                break;
+            case "raiser":
+                this.navigateToRecord(row[RAISER_FIELD.fieldApiName], RAISER_FIELD.objectApiName);
+                break;
+            case "dog":
+                this.navigateToRecord(row[DOG_FIELD.fieldApiName], DOG_FIELD.objectApiName);
                 break;
             case "view":
                 this.navigateToFiles(row);
                 break;
         }
+    }
+
+    navigateToRecord(recordId, objectName) {
+        this[NavigationMixin.Navigate]({
+            type: "standard__recordPage",
+            attributes: {
+                recordId: recordId,
+                actionName: "view"
+            }
+        });
     }
 
     navigateToFiles(currentRow) {
@@ -128,7 +177,17 @@ export default class RelatedPuppyLogsCmp extends NavigationMixin(
         this.wiredLogs = result;
         this.data = null;
         if (result.data) {
-            this.data = result.data.items;
+            this.data = result.data.items.map(info => {
+                var log = Object.assign({}, info.log);
+                log.fileName = info.fileName;
+                log.documentId = info.documentId;
+                log.noFile = info.noFile;
+                log.raiserName = info.raiserName;
+                log.dogName = info.dogName;
+                log[ADDITIONAL_FIELD.fieldApiName] =
+                    log[ADDITIONAL_FIELD.fieldApiName].replace(/(<([^>]+)>)/gi, "");
+                return log;
+            });
             if (this.data.length === 0) {
                 this.data = null;
                 this.total = 0;
@@ -150,11 +209,13 @@ export default class RelatedPuppyLogsCmp extends NavigationMixin(
     createLog(event) {
         const payload = { mode: "create" };
         if (this.objectApiName == "Contact") {
-            payload["contactId"] = this.recordId;
+            payload.contactId = this.recordId;
         } else {
-            payload["dogId"] = this.recordId;
+            payload.dogId = this.recordId;
         }
-        publish(this.messageContext, puppyLogForm, payload);
+        this.template
+            .querySelector("c-related-puppy-log-cmp")
+            .openModal(payload);
     }
 
     deleteLog(recordId) {

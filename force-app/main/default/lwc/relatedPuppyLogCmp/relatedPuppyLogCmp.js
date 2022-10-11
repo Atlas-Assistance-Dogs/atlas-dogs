@@ -23,8 +23,15 @@ export default class RelatedPuppyLogCmp extends NavigationMixin(
     title = "Puppy Raiser Log";
 
     @api
-    openModal() {
+    openModal(message) {
         this.message = "";
+        this.recordId = message.recordId;
+        // Set defaults if this is a new record
+        if (!message.recordId) {
+            this.contactId = message.contactId;
+            this.dogId = message.dogId;
+        }
+        refreshApex();
         this.template.querySelector("c-modal-cmp").openModal();
     }
     closeModal() {
@@ -39,45 +46,5 @@ export default class RelatedPuppyLogCmp extends NavigationMixin(
     onChanged(event) {
         this.dispatchEvent(new CustomEvent("changed"));
         this.closeModal();
-    }
-
-    @wire(MessageContext)
-    messageContext;
-
-    // Encapsulate logic for Lightning message service subscribe and unsubsubscribe
-    subscribeToMessageChannel() {
-        if (!this.subscription) {
-            this.subscription = subscribe(
-                this.messageContext,
-                puppyLogForm,
-                (message) => this.handleMessage(message),
-                { scope: APPLICATION_SCOPE }
-            );
-        }
-    }
-
-    unsubscribeToMessageChannel() {
-        unsubscribe(this.subscription);
-        this.subscription = null;
-    }
-    // Handler for message received by component
-    handleMessage(message) {
-        this.recordId = message.recordId;
-        // Set defaults if this is a new record
-        if (!message.recordId) {
-            this.contactId = message.contactId;
-            this.dogId = message.dogId;
-        }
-        refreshApex();
-        this.openModal();
-    }
-
-    // Standard lifecycle hooks used to subscribe and unsubsubscribe to the message channel
-    connectedCallback() {
-        this.subscribeToMessageChannel();
-    }
-
-    disconnectedCallback() {
-        this.unsubscribeToMessageChannel();
     }
 }

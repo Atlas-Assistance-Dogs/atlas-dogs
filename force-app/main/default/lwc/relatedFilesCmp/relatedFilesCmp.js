@@ -1,6 +1,5 @@
 import { LightningElement, api, wire, track } from "lwc";
 import { getObjectInfo } from "lightning/uiObjectInfoApi";
-import { getPicklistValues } from "lightning/uiObjectInfoApi";
 import getRelatedFiles from "@salesforce/apex/FileController.getRelatedFiles";
 import deleteRecord from "@salesforce/apex/FileController.deleteRecord";
 import { refreshApex } from "@salesforce/apex";
@@ -11,10 +10,6 @@ import CV_OBJECT from "@salesforce/schema/ContentVersion";
 import CATEGORY_FIELD from "@salesforce/schema/ContentVersion.Category__c";
 import TYPE_FIELD from "@salesforce/schema/ContentVersion.Type__c";
 import DATE_FIELD from "@salesforce/schema/ContentVersion.Date__c";
-
-// Import message service features required for publishing and the message channel
-import { publish, MessageContext } from "lightning/messageService";
-import updateFile from "@salesforce/messageChannel/updateFile__c";
 
 const actions = [
     { label: "Edit", name: "edit" },
@@ -99,9 +94,6 @@ export default class RelatedFiles extends NavigationMixin(LightningElement) {
         refreshApex(this.wiredFilesList);
     }
 
-    @wire(MessageContext)
-    messageContext;
-
     defaultSortDirection = "asc";
     sortDirection = "asc";
     sortedBy;
@@ -142,7 +134,9 @@ export default class RelatedFiles extends NavigationMixin(LightningElement) {
                 break;
             case "edit":
                 const payload = { recordId: row.Id, fileName: row.Title };
-                publish(this.messageContext, updateFile, payload);
+                this.template
+                    .querySelector("c-file-update-cmp")
+                    .openModal(payload);
                 break;
             case "view":
                 this.navigateToFiles(row);

@@ -31,7 +31,7 @@ export default class PuppyLogFormCmp extends NavigationMixin(LightningElement) {
         dog: DOG_FIELD,
         raiser: RAISER_FIELD,
         support: SUPPORT_FIELD
-    }
+    };
 
     get acceptedFormats() {
         return [
@@ -44,7 +44,10 @@ export default class PuppyLogFormCmp extends NavigationMixin(LightningElement) {
             ".txt",
             ".xlsx",
             ".xls",
-            ".csv"
+            ".csv",
+            ".mov",
+            ".mp4",
+            ".zip"
         ];
     }
 
@@ -94,34 +97,35 @@ export default class PuppyLogFormCmp extends NavigationMixin(LightningElement) {
         if (this.uploadedFile) {
             documentId = this.uploadedFile.documentId;
         }
-        if (!documentId && !this.currentCv) {
-            this.dispatchEvent(
-                new ShowToastEvent({
-                    title: "Error!!",
-                    message: "A document must be assigned to the log.",
-                    variant: "error"
-                })
-            );
-            return;
-        }
         const form = this.template.querySelector("lightning-record-edit-form");
         form.submit();
     }
 
     handleLogChanged(event) {
-        relateFile({documentId: this.currentCv.ContentDocumentId, recordId: event.detail.id})
-        .then(() => {
-            this.dispatchEvent(new CustomEvent("changed", { detail: event.detail.id }));
+        // if we are creating a new log and adding the CV
+        if (this.currentCv && !this.recordId) {
+        relateFile({
+            documentId: this.currentCv.ContentDocumentId,
+            recordId: event.detail.id
         })
-        .catch((error) => {
+        .then(() => {
+                this.dispatchEvent(
+                    new CustomEvent("changed", { detail: event.detail.id })
+                );
+            })
+            .catch((error) => {
+                this.dispatchEvent(
+                    new ShowToastEvent({
+                        title: "Error assigning file to log!!",
+                        message: error.message,
+                        variant: "error"
+                    })
+                );
+            });
+        } else {
             this.dispatchEvent(
-                new ShowToastEvent({
-                    title: "Error assigning file to log!!",
-                    message: error.message,
-                    variant: "error"
-                })
+                new CustomEvent("changed", { detail: event.detail.id })
             );
-        });
+        }
     }
-
 }
