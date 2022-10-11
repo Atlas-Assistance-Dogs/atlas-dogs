@@ -1,5 +1,5 @@
 trigger ContentDocumentLinkTrigger on ContentDocumentLink (after insert) {
-   for (ContentDocumentLink cdl : Trigger.new) {
+    for (ContentDocumentLink cdl : Trigger.new) {
         //Get Related document
         ContentVersion cv = [
             SELECT Id, Category__c, Type__c, Date__c, ContentDocumentId
