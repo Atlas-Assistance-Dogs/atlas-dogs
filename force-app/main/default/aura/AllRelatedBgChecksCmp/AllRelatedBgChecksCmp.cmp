@@ -1,6 +1,6 @@
 <aura:component
     implements="lightning:isUrlAddressable"
-    description="c:PuppyLogs component"
+    description="c:All related Background Checks component"
 >
     <aura:attribute name="id" type="String" />
     <!-- Add an "init" handler to handle the first "v.pageReference" value -->
