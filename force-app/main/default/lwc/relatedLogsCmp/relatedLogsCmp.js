@@ -107,7 +107,6 @@ export default class RelatedLogsCmp extends NavigationMixin(LightningElement) {
     @api viewAll;
     @api recordType;
     @api max; // needed for previous version
-    @api recordType;
     data = [];
 
     get columns() {
