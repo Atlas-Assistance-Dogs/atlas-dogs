@@ -2,15 +2,6 @@ import { LightningElement, api, wire, track } from "lwc";
 import { NavigationMixin } from "lightning/navigation";
 import { refreshApex } from "@salesforce/apex";
 
-// Import message service features required for subscribing and the message channel
-import {
-    subscribe,
-    unsubscribe,
-    APPLICATION_SCOPE,
-    MessageContext
-} from "lightning/messageService";
-import backgroundCheckForm from "@salesforce/messageChannel/backgroundCheckForm__c";
-
 export default class RelatedBackgroundCheckCmp extends NavigationMixin(
     LightningElement
 ) {
