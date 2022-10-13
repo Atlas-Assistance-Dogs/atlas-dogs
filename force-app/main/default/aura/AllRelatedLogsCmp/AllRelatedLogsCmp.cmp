@@ -1,6 +1,6 @@
 <aura:component
     implements="lightning:isUrlAddressable"
-    description="c:PuppyLogs component"
+    description="c:All Related Logs component"
 >
     <aura:attribute name="id" type="String" />
     <!-- Add an "init" handler to handle the first "v.pageReference" value -->
@@ -15,8 +15,5 @@
         value="{!v.pageReference}"
         action="{!c.onPageReferenceChange}"
     />
-    <c:relatedBackgroundChecksCmp
-        viewAll="true"
-        recordId="{!v.id}"
-    ></c:relatedBackgroundChecksCmp>
+    <c:relatedLogsCmp viewAll="true" recordId="{!v.id}"></c:relatedLogsCmp>
 </aura:component>

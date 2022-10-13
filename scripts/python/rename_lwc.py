@@ -2,13 +2,13 @@
 
 import os, sys
 
-oldname = 'vaccinationItem'
-newname = 'vaccinationItemCmp'
+oldname = 'PuppyLogsCmp'
+newname = 'AllRelatedPuppyLogsCmp'
 
 pwd = os.curdir
-print(os.listdir(pwd))
-os.chdir('force-app/main/default/lwc')
-print(os.curdir)
+#print(os.listdir(pwd))
+os.chdir('force-app/main/default/aura')
+#print(os.curdir)
 os.rename(oldname,newname)
 
 os.chdir(newname)
