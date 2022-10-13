@@ -7,6 +7,7 @@ export default class ContactStatusIndicatorCmp extends LightningElement {
     get image() {
         switch (this.status) {
             case "Initial Inquiry":
+            case "Prospective":
                 return "standard:question_feed";
             case "Onboarding":
                 return "standard:flow";
@@ -14,8 +15,7 @@ export default class ContactStatusIndicatorCmp extends LightningElement {
             case "In Training":
             case "In Progress":
                 return "standard:education";
-            case "Prospective":
-                return "/img/icon/livechatvisitor32.png";
+            case "Certified-Active":
             case "Certified":
             case "Active":
             case "Completed":
@@ -25,7 +25,8 @@ export default class ContactStatusIndicatorCmp extends LightningElement {
             case "Action Needed":
                 return "standard:actions_and_buttons";
             case "Inactive":
-            case "On Hold":
+            case "On Hold": // retained to allow production transition
+            case "Suspended":
             case "Discontinued":
                 return "standard:waits";
             default:

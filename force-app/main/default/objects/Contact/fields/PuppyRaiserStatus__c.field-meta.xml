@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>PuppyRaiserStatus__c</fullName>
+    <defaultValue>&quot;None&quot;</defaultValue>
     <externalId>false</externalId>
     <label>Puppy Raiser Status</label>
     <required>false</required>
@@ -9,11 +10,11 @@
     <valueSet>
         <restricted>true</restricted>
         <valueSetDefinition>
-            <sorted>true</sorted>
+            <sorted>false</sorted>
             <value>
-                <fullName>Certified</fullName>
+                <fullName>Certified-Active</fullName>
                 <default>false</default>
-                <label>Certified</label>
+                <label>Certified-Active</label>
             </value>
             <value>
                 <fullName>Inactive</fullName>
@@ -49,6 +50,11 @@
                 <fullName>Suspended</fullName>
                 <default>false</default>
                 <label>Suspended</label>
+            </value>
+            <value>
+                <fullName>Discontinued</fullName>
+                <default>false</default>
+                <label>Discontinued</label>
             </value>
         </valueSetDefinition>
     </valueSet>
