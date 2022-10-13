@@ -1,6 +1,7 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>ClientStatus__c</fullName>
+    <defaultValue>&quot;None&quot;</defaultValue>
     <externalId>false</externalId>
     <label>Client Status</label>
     <required>false</required>
@@ -41,14 +42,9 @@
                 <label>Decertified</label>
             </value>
             <value>
-                <fullName>On Hold</fullName>
+                <fullName>Discontinued</fullName>
                 <default>false</default>
-                <label>On Hold</label>
-            </value>
-            <value>
-                <fullName>Inactive</fullName>
-                <default>false</default>
-                <label>Inactive</label>
+                <label>Discontinued</label>
             </value>
             <value>
                 <fullName>None</fullName>

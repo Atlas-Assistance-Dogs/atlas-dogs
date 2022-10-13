@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
     <actionOverrides>
         <actionName>Accept</actionName>
@@ -156,23 +156,19 @@
     <externalSharingModel>Private</externalSharingModel>
     <label>CEU</label>
     <nameField>
+        <displayFormat>CEU-{0000}</displayFormat>
         <label>CEU Name</label>
-        <type>Text</type>
+        <type>AutoNumber</type>
     </nameField>
     <pluralLabel>CEUs</pluralLabel>
     <searchLayouts>
-        <searchResultsAdditionalFields
-        >ProgramTitle__c</searchResultsAdditionalFields>
-        <searchResultsAdditionalFields
-        >DateCompleted__c</searchResultsAdditionalFields>
-        <searchResultsAdditionalFields
-        >Quantity__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>ProgramTitle__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>DateCompleted__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Quantity__c</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>Status__c</searchResultsAdditionalFields>
-        <searchResultsAdditionalFields
-        >Trainer__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Trainer__c</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>Role__c</searchResultsAdditionalFields>
-        <searchResultsAdditionalFields
-        >Comments__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Comments__c</searchResultsAdditionalFields>
     </searchLayouts>
     <sharingModel>ReadWrite</sharingModel>
     <visibility>Public</visibility>

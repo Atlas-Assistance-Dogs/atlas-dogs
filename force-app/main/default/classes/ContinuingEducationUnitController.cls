@@ -1,5 +1,5 @@
 public with sharing class ContinuingEducationUnitController {
-    // This method is used by the related list component, and needs more than just the background check
+    // This method is used by the related list component
     @AuraEnabled(Cacheable=true)
     public static RelatedObjects getRelatedCeus(
         Id contactId, Integer max
@@ -16,6 +16,7 @@ public with sharing class ContinuingEducationUnitController {
                     Comments__c,
                     DateCompleted__c,
                     DateSubmitted__c,
+                    Name,
                     ProgramDate__c,
                     ProgramHours__c,
                     ProgramTitle__c,
