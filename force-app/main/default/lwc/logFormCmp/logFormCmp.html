@@ -12,37 +12,17 @@
                 style="height: 25rem"
                 layout-type="full"
                 record-id={recordId}
+                onsuccess={handleSuccess}
+                onerror={handleError}
             >
                 <div class="slds-grid slds-wrap">
-                    <div class="slds-col slds-size_1-of-2">
-                        <lightning-input
-                            type="checkbox"
-                            label="Submitter"
-                            onchange={handleSubmitterChange}
-                            checked={isSubmitter}
-                        ></lightning-input>
-                    </div>
-                    <div class="slds-col slds-size_1-of-2">
-                        <lightning-radio-group
-                            name="recordtype"
-                            label="Record Type"
-                            options={options}
-                            value={recordTypeId}
-                            onchange={handleTypeChange}
-                            required
-                        >
-                        </lightning-radio-group>
-                    </div>
                     <div class="slds-col slds-size_1-of-2">
                         <lightning-input-field
                             field-name={fields.date}
                             class="category slds-p-bottom_medium"
                         ></lightning-input-field>
                     </div>
-                    <div
-                        if:false={isSubmitter}
-                        class="slds-col slds-size_1-of-2"
-                    >
+                    <div class="slds-col slds-size_1-of-2">
                         <lightning-input-field
                             field-name={fields.submitter}
                             class="category slds-p-bottom_medium"
