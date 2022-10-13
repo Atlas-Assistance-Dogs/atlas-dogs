@@ -241,7 +241,8 @@
           random_choice:
               English: 1%
               Spanish: 5%
-              Chinese: 1%
+              Mandarin: 1%
+              Cantonese: 1%
               Tagalog: 1%
               Vietnamese: 1%
               Arabic: 1%
@@ -327,9 +328,10 @@
                             - In Training
                             - Certified
                             - Decertified
-                            - On Hold
-                            - Inactive
-                            - None
+                            - Discontinued
+                            - In ADSim
+              - choice:
+                    pick: None
       CriminalConviction__c:
           fake: boolean
       DateStarted__c:
@@ -345,10 +347,12 @@
                             - Initial Inquiry
                             - Onboarding
                             - In Training
-                            - Certified
+                            - Certified-Active
                             - Inactive
                             - Suspended
-                            - None
+                            - Discontinued
+              - choice:
+                    pick: None
       LeadFacilitatorStatus__c:
           if:
               - choice:
@@ -357,7 +361,8 @@
                         random_choice:
                             - Active
                             - Inactive
-                            - None
+              - choice:
+                    pick: None
       LeadInterest__c:
           random_choice:
               - Volunteering
@@ -392,10 +397,12 @@
                             - Initial Inquiry
                             - Onboarding
                             - In Training
-                            - Certified
+                            - Certified-Active
                             - Inactive
                             - Suspended
-                            - None
+                            - Discontinued
+              - choice:
+                    pick: None
       TrainerBoardTrain__c:
           if:
               - choice:
@@ -429,10 +436,12 @@
                             - Initial Inquiry
                             - Onboarding
                             - In Training
-                            - Certified
+                            - Certified-Active
                             - Inactive
                             - Suspended
-                            - None
+                            - Discontinued
+              - choice:
+                    pick: None
       VolunteerAccess__c:
           random_choice:
               - Operations- Master Docs - READ ONLY
