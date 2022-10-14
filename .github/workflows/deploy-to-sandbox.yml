@@ -41,4 +41,4 @@ jobs:
                   pip install cumulusci
             - name: Deploy source to devint sandbox
               run: |
-                  cci flow run sandbox --org devint
+                  cci flow run ci_master --org devint
