@@ -156,9 +156,8 @@
     <externalSharingModel>Private</externalSharingModel>
     <label>CEU</label>
     <nameField>
-        <displayFormat>CEU-{0000}</displayFormat>
         <label>CEU Name</label>
-        <type>AutoNumber</type>
+        <type>Text</type>
     </nameField>
     <pluralLabel>CEUs</pluralLabel>
     <searchLayouts>

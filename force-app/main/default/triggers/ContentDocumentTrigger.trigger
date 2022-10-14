@@ -1,6 +1,5 @@
 trigger ContentDocumentTrigger on ContentDocument (before delete) {
     for (ContentDocument cd : Trigger.old) {
-        System.debug(cd);
         ContentDocumentLink cdl = [SELECT Id, LinkedEntityId FROM ContentDocumentLink WHERE ContentDocumentId = :cd.Id LIMIT 1];
 
         //Get Related content version
