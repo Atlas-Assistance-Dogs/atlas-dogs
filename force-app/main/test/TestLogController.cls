@@ -188,8 +188,8 @@ public with sharing class TestLogController {
         System.assertEquals(1, related.items.size());
         for (Integer idx = 0; idx < related.items.size(); idx++) {
             Log__c expectedLog = logs[0];
-            Log__c actual = (Log__c)related.items[idx];
-            logsMatch(expectedLog, actual);
+            LogInfo actual = (LogInfo)related.items[idx];
+            logsMatch(expectedLog, actual.log);
         }
     }
 }
