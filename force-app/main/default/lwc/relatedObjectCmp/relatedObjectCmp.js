@@ -32,9 +32,9 @@ export default class RelatedObjectCmp extends NavigationMixin(
         return "";
     }
 
-    namespace() {
+    namespace(name) {
         const regx = /([^_]+)__([^_]+__c)/;
-        const match = this.objectApiName.match(regx);
+        const match = name.match(regx);
         return match ? match[1] : "c";
     }
 
