@@ -1,6 +1,6 @@
 <aura:documentation>
 	<aura:description>Form for creating a new contact</aura:description>
-	<aura:example name="ExampleName" ref="exampleComponentName" label="Label">
+	<aura:example name="Contact form to override buttons" ref="Contact Form Component" label="Label">
 		Aura component to enable using button
 	</aura:example>
 </aura:documentation>
