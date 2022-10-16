@@ -1,4 +1,4 @@
-trigger ContactTrigger on Contact (before insert, after update) {
+trigger ContactTrigger on Contact (before insert, before update) {
     for (Contact newContact : Trigger.new) {
         string oldEmail = null;
         if (Trigger.isUpdate) {
@@ -8,7 +8,7 @@ trigger ContactTrigger on Contact (before insert, after update) {
         }
         
         // Check if value is updated
-        if (oldEmail != newContact.Email) {
+        if (String.isBlank(newContact.npe01__HomeEmail__c)) {
             newContact.npe01__HomeEmail__c = newContact.Email;
         }
 
