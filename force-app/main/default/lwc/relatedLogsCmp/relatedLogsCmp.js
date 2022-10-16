@@ -231,7 +231,7 @@ export default class RelatedLogsCmp extends NavigationMixin(LightningElement) {
                 var log = Object.assign({}, info.log);
                 log.clientName = info.clientName;
                 log.facilitatorName = info.facilitatorName;
-                log[DETAILS_FIELD.fieldApiName] = log[DETAILS_FIELD.fieldApiName].replace(/(<([^>]+)>)/gi, "");
+                log[DETAILS_FIELD.fieldApiName] = log[DETAILS_FIELD.fieldApiName]?.replace(/(<([^>]+)>)/gi, "");
                 return log;
             });
             if (this.data.length === 0) {

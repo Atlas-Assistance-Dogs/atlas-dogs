@@ -1,6 +1,7 @@
 import { LightningElement, wire, api } from "lwc";
 import { NavigationMixin } from "lightning/navigation";
 import { getRecord } from "lightning/uiRecordApi";
+import DOG_OBJECT from "@salesforce/schema/Dog__c";
 
 const MAX_DISPLAY = 6;
 export default class RelatedObjectCmp extends NavigationMixin(
@@ -38,7 +39,7 @@ export default class RelatedObjectCmp extends NavigationMixin(
     }
 
     handleViewAll() {
-        const nsp = this.namespace(this.objectApiName);
+        const nsp = this.namespace(DOG_OBJECT.objectApiName);
         const component = `${nsp}__${this.auraCompName}`;
         // Navigate to the component.
         this[NavigationMixin.Navigate]({
