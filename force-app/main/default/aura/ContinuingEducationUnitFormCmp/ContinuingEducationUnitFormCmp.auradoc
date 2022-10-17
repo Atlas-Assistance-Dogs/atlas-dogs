@@ -1,0 +1,6 @@
+<aura:documentation>
+	<aura:description>Documentation</aura:description>
+	<aura:example name="Form for creating a new CEU" ref="ceuFormCmp" label="Label">
+		Aura component to enable overriding the new CEU button
+	</aura:example>
+</aura:documentation>
