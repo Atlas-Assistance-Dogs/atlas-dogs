@@ -205,6 +205,6 @@ export default class RelatedTeams extends NavigationMixin(LightningElement) {
     }
 
     handleChange() {
-        refreshApex(this.wiredLogs);
+        refreshApex(this.wiredTeamsList);
     }
 }

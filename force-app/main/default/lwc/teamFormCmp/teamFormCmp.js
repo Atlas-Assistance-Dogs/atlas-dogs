@@ -32,10 +32,8 @@ export default class TeamFormCmp extends NavigationMixin(LightningElement) {
 
     @api
     openModal(data) {
-        this.dogId = null;
-        if (data?.dogId) {
-            this.dogId = data.dogId;
-        }
+        this.recordId = data?.recordId;
+        this.dogId = data?.dogId;
         this.template.querySelector("c-modal-cmp").openModal();
     }
 
