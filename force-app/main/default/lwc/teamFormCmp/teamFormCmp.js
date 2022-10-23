@@ -11,19 +11,12 @@ import SECONDARY_FIELD from "@salesforce/schema/Team__c.SecondaryCertification__
 import COUNT_FIELD from "@salesforce/schema/Team__c.PatCount__c";
 import VALID_UNTIL_FIELD from "@salesforce/schema/Team__c.PatValidUntil__c";
 
-// Import message service features required for subscribing and the message channel
-import {
-    subscribe,
-    unsubscribe,
-    APPLICATION_SCOPE,
-    MessageContext
-} from "lightning/messageService";
-import teamForm from "@salesforce/messageChannel/teamForm__c";
 
 export default class TeamFormCmp extends NavigationMixin(LightningElement) {
     showSourceOther = false;
     showPnounOther = false;
     recordId;
+    dogId;
 
     object = NAME_FIELD.objectApiName;
     fields = {
@@ -38,48 +31,16 @@ export default class TeamFormCmp extends NavigationMixin(LightningElement) {
     };
 
     @api
-    openModal() {
+    openModal(data) {
+        this.dogId = null;
+        if (data?.dogId) {
+            this.dogId = data.dogId;
+        }
         this.template.querySelector("c-modal-cmp").openModal();
     }
 
     closeModal() {
         this.template.querySelector("c-modal-cmp").closeModal();
-    }
-
-    @wire(MessageContext)
-    messageContext;
-
-    // Encapsulate logic for Lightning message service subscribe and unsubsubscribe
-    subscribeToMessageChannel() {
-        if (!this.subscription) {
-            this.subscription = subscribe(
-                this.messageContext,
-                teamForm,
-                (message) => this.handleMessage(message),
-                { scope: APPLICATION_SCOPE }
-            );
-        }
-    }
-
-    unsubscribeToMessageChannel() {
-        unsubscribe(this.subscription);
-        this.subscription = null;
-    }
-
-    // Handler for message received by component
-    handleMessage(message) {
-        this.recordId = message.recordId;
-        this.mode = message.recordId ? "edit" : "create";
-        this.openModal();
-    }
-
-    // Standard lifecycle hooks used to subscribe and unsubsubscribe to the message channel
-    connectedCallback() {
-        this.subscribeToMessageChannel();
-    }
-
-    disconnectedCallback() {
-        this.unsubscribeToMessageChannel();
     }
 
     validateFields() {

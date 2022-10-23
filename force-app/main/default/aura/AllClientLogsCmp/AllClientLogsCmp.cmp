@@ -1,6 +1,6 @@
 <aura:component
     implements="lightning:isUrlAddressable"
-    description="c:All Related Logs component"
+    description="All Related Client Logs component"
 >
     <aura:attribute name="id" type="String" />
     <!-- Add an "init" handler to handle the first "v.pageReference" value -->

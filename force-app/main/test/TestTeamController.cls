@@ -29,7 +29,8 @@ public with sharing class TestTeamController {
         insert team;
     }
 
-    private static void teamsMatch(Team__c expected, Team__c actual) {
+    private static void teamsMatch(Team__c expected, Object actualObject) {
+        Team__c actual = ((TeamRow)actualObject).team;
         System.assertEquals(expected.Id, actual.Id);
         System.assertEquals(expected.Client__c, actual.Client__c);
         System.assertEquals(expected.Dog__c, actual.Dog__c);
@@ -44,32 +45,35 @@ public with sharing class TestTeamController {
     @isTest
     public static void getRelatedTeams_ReturnsRelatedToDog() {
         setup();
-        List<Team__c> teams = TeamController.getRelatedTeams(ace.Id);
-        System.assertEquals(1, teams.size());
-        teamsMatch(team, teams[0]);
+        RelatedObjects teams = TeamController.getRelatedTeams(ace.Id, 6);
+        System.assertEquals(1, teams.items.size());
+        System.assertEquals(1, teams.total);
+        teamsMatch(team, teams.items[0]);
     }
 
     @isTest
     public static void getRelatedTeams_ReturnsRelatedToClient() {
         setup();
-        List<Team__c> teams = TeamController.getRelatedTeams(ken.Id);
-        System.assertEquals(1, teams.size());
-        teamsMatch(team, teams[0]);
+        RelatedObjects teams = TeamController.getRelatedTeams(ken.Id, 6);
+        System.assertEquals(1, teams.items.size());
+        System.assertEquals(1, teams.total);
+        teamsMatch(team, teams.items[0]);
     }
 
     @isTest
     public static void getRelatedTeams_ReturnsRelatedToHandler() {
         setup();
-        List<Team__c> teams = TeamController.getRelatedTeams(debbie.Id);
-        System.assertEquals(1, teams.size());
-        teamsMatch(team, teams[0]);
+        RelatedObjects teams = TeamController.getRelatedTeams(debbie.Id, 6);
+        System.assertEquals(1, teams.items.size());
+        System.assertEquals(1, teams.total);
+        teamsMatch(team, teams.items[0]);
     }
 
     @isTest
     public static void getRelatedTeams_ReturnsError() {
         Boolean hasError = false;
         try {
-            List<Team__c> teams = TeamController.getRelatedTeams('debbie.Id');
+            RelatedObjects teams = TeamController.getRelatedTeams('debbie.Id', 6);
         }
         catch (Exception exc) {
             hasError = true;

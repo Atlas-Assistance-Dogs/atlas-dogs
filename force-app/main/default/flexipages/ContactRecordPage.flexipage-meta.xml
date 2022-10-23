@@ -133,6 +133,12 @@
         </itemInstances>
         <itemInstances>
             <componentInstance>
+                <componentName>relatedTeamsCmp</componentName>
+                <identifier>c_relatedTeamsCmp</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
                 <componentInstanceProperties>
                     <name>relatedListComponentOverride</name>
                     <value>ADVGRID</value>

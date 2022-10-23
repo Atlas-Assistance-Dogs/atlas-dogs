@@ -1,26 +1,37 @@
 <template>
-    <c-related-object-cmp title="Teams" icon-name="custom:custom103">
+    <c-related-object-cmp
+        title="Teams"
+        icon-name="custom:custom15"
+        total={total}
+        record-id={recordId}
+        object-api-name={objectApiName}
+        aura-comp-name="AllRelatedTeamsCmp"
+        view-all={viewAll}
+    >
         <div slot="actions">
             <!-- lightning button for new team modal -->
             <lightning-button
                 label="New"
                 title="New"
-                onclick={openModal}
+                onclick={createTeam}
                 slot="actions"
             >
             </lightning-button>
             <c-team-form-cmp
-                record-id={recordId}
-                onchanged={handleUpdate}
+                onchanged={handleChange}
             ></c-team-form-cmp>
         </div>
         <div slot="list">
-            <template if:true={teamsList}>
+            <template if:true={data}>
                 <lightning-datatable
-                    data={teamsList}
+                    key-field="Id"
                     columns={columns}
+                    data={data}
                     hide-checkbox-column
-                    key-field="recordId"
+                    default-sort-direction={defaultSortDirection}
+                    sorted-direction={sortDirection}
+                    sorted-by={sortedBy}
+                    onsort={handleSort}
                     onrowaction={handleRowAction}
                 >
                 </lightning-datatable>

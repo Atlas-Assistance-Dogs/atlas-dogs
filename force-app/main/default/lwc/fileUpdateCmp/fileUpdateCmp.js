@@ -12,6 +12,7 @@ export default class DocumentUploadCmp extends NavigationMixin(
     LightningElement
 ) {
     @api recordId;
+    @api versionId;
     @api currentCv = { ContentDocumentId: "", Title: "blank" };
     contentType = "Emergency Contact";
 
