@@ -1,0 +1,6 @@
+<aura:documentation>
+	<aura:description>Form for creating a new Public Access Test</aura:description>
+	<aura:example name="ExampleName" ref="exampleComponentName" label="Label">
+		Aura component to create a new Public Access Test (PAT)
+	</aura:example>
+</aura:documentation>

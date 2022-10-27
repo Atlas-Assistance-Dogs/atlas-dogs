@@ -103,29 +103,8 @@ export default class PatFormCmp extends NavigationMixin(LightningElement) {
 
     handleSubmit(event) {
         event.preventDefault();
-        const documents = this.relatedFiles?.map((file) => file.documentId);
-        if (!documents) {
-            this.dispatchEvent(
-                new ShowToastEvent({
-                    title: "Error!!",
-                    message: "At least one file is required for a PAT.",
-                    variant: "error"
-                })
-            );
-            return;
-        }
-        let fields = [
-            ...this.template.querySelectorAll("lightning-input-field")
-        ];
-        var record = fields.reduce(
-            (a, x) => ({ ...a, [x.fieldName]: x.value }),
-            {}
-        );
-        if (this.teamId) {
-            record[TEAM_FIELD.fieldApiName] = this.teamId;
-        }
-        record.Id = this.recordId;
-        this.template.querySelector("lightning-record-edit-form").submit(record);
+        console.log('Submitting form');
+        this.template.querySelector("lightning-record-edit-form").submit();
     }
 
     // Create a new log
@@ -153,6 +132,7 @@ export default class PatFormCmp extends NavigationMixin(LightningElement) {
             this.closeModal();
         }
     }
+
     @wire(getRelatedFiles, { recordId: "$recordId", max: 100 }) filesLst(
         result
     ) {
