@@ -114,7 +114,7 @@ export default class PatFormCmp extends NavigationMixin(LightningElement) {
             const documents = this.relatedFiles?.map((file) => file.documentId);
             relateFiles({ documentIds: documents, recordId: event.detail.id })
                 .then(() => {
-                    this.dispatchEvent(new CustomEvent("changed"));
+                    this.dispatchEvent(new CustomEvent("changed", { detail: event.detail.id }));
                     this.closeModal();
                 })
                 .catch((error) => {
@@ -133,9 +133,8 @@ export default class PatFormCmp extends NavigationMixin(LightningElement) {
         }
     }
 
-    @wire(getRelatedFiles, { recordId: "$recordId", max: 100 }) filesLst(
-        result
-    ) {
+    @wire(getRelatedFiles, { recordId: "$recordId", max: 100 })
+    filesLst(result) {
 
         this.wiredFilesList = result;
         this.relatedFiles = null;
@@ -193,5 +192,10 @@ export default class PatFormCmp extends NavigationMixin(LightningElement) {
                 selectedRecordId: currentRecordID
             }
         });
+    }
+
+    handleCancel() {
+        console.log('Pat form cancel');
+        this.dispatchEvent(new CustomEvent("cancel"));
     }
 }

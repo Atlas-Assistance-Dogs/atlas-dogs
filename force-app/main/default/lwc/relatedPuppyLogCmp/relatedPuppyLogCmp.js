@@ -35,7 +35,13 @@ export default class RelatedPuppyLogCmp extends NavigationMixin(
     }
 
     handleChanged(event) {
-        this.dispatchEvent(new CustomEvent("changed"));
+        this.dispatchEvent(new CustomEvent("changed", { detail: event.detail }));
         this.template.querySelector("c-modal-cmp").closeModal();
+    }
+
+    handleCancel() {
+        this.dispatchEvent(
+            new CustomEvent("cancel")
+        );
     }
 }

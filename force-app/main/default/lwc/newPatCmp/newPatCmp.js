@@ -1,8 +1,8 @@
 import { LightningElement, api } from "lwc";
 import { NavigationMixin } from "lightning/navigation";
+import PAT_OBJECT from "@salesforce/schema/PublicAccessTest__c";
 
 export default class NewPatCmp extends NavigationMixin(LightningElement) {
-    @api objectApiName;
     @api recordId;
 
     @api
@@ -19,22 +19,20 @@ export default class NewPatCmp extends NavigationMixin(LightningElement) {
     }
 
     handleChanged(event) {
-        this.closeModal();
-        console.log('Navigating to ' + event.detail.id);
         this[NavigationMixin.Navigate]({
             type: "standard__recordPage",
             attributes: {
-                recordId: event.detail.id,
+                recordId: event.detail,
                 actionName: "view"
             }
         });
     }
 
-    handleClose() {
+    handleCancel() {
         this[NavigationMixin.Navigate]({
             type: "standard__objectPage",
             attributes: {
-                objectApiName: this.objectApiName,
+                objectApiName: PAT_OBJECT.objectApiName,
                 actionName: "home"
             }
         });
