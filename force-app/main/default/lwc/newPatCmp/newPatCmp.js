@@ -1,23 +1,16 @@
 import { LightningElement, api } from "lwc";
 import { NavigationMixin } from "lightning/navigation";
-import PUPPY_LOG_OBJECT from "@salesforce/schema/PuppyLog__c";
+import PAT_OBJECT from "@salesforce/schema/PublicAccessTest__c";
 
-export default class NewPuppyLogCmp extends NavigationMixin(LightningElement) {
+export default class NewPatCmp extends NavigationMixin(LightningElement) {
     @api recordId;
 
     @api
     openModal() {
-        this.template.querySelector("c-related-puppy-log-cmp").openModal();
+        this.template.querySelector("c-pat-form-cmp").openModal();
     }
     closeModal() {
-        this.template.querySelector("c-related-puppy-log-cmp").closeModal();
-    }
-
-    handleSubmit(event) {
-        event.preventDefault();
-        this.template
-            .querySelector("c-related-puppy-log-form-cmp")
-            .handleSubmit(event);
+        this.template.querySelector("c-pat-form-cmp").closeModal();
     }
 
     // Standard lifecycle hooks used run when loaded
@@ -39,7 +32,7 @@ export default class NewPuppyLogCmp extends NavigationMixin(LightningElement) {
         this[NavigationMixin.Navigate]({
             type: "standard__objectPage",
             attributes: {
-                objectApiName: PUPPY_LOG_OBJECT.objectApiName,
+                objectApiName: PAT_OBJECT.objectApiName,
                 actionName: "home"
             }
         });

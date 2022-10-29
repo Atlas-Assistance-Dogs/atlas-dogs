@@ -2,15 +2,6 @@ import { LightningElement, api, wire } from "lwc";
 import { NavigationMixin } from "lightning/navigation";
 import { refreshApex } from "@salesforce/apex";
 
-// Import message service features required for subscribing and the message channel
-import {
-    subscribe,
-    unsubscribe,
-    APPLICATION_SCOPE,
-    MessageContext
-} from "lightning/messageService";
-import puppyLogForm from "@salesforce/messageChannel/puppyLogForm__c";
-
 export default class RelatedPuppyLogCmp extends NavigationMixin(
     LightningElement
 ) {
@@ -25,9 +16,9 @@ export default class RelatedPuppyLogCmp extends NavigationMixin(
     @api
     openModal(message) {
         this.message = "";
-        this.recordId = message.recordId;
+        this.recordId = message?.recordId;
         // Set defaults if this is a new record
-        if (!message.recordId) {
+        if (message && !message.recordId) {
             this.contactId = message.contactId;
             this.dogId = message.dogId;
         }
@@ -43,8 +34,14 @@ export default class RelatedPuppyLogCmp extends NavigationMixin(
         this.template.querySelector("c-puppy-log-form-cmp").handleSubmit(event);
     }
 
-    onChanged(event) {
-        this.dispatchEvent(new CustomEvent("changed"));
-        this.closeModal();
+    handleChanged(event) {
+        this.dispatchEvent(new CustomEvent("changed", { detail: event.detail }));
+        this.template.querySelector("c-modal-cmp").closeModal();
+    }
+
+    handleCancel() {
+        this.dispatchEvent(
+            new CustomEvent("cancel")
+        );
     }
 }

@@ -185,7 +185,7 @@ export default class RelatedPuppyLogsCmp extends NavigationMixin(LightningElemen
                 log.raiserName = info.raiserName;
                 log.dogName = info.dogName;
                 log[ADDITIONAL_FIELD.fieldApiName] =
-                    log[ADDITIONAL_FIELD.fieldApiName].replace(/(<([^>]+)>)/gi, "");
+                    log[ADDITIONAL_FIELD.fieldApiName]?.replace(/(<([^>]+)>)/gi, "");
                 return log;
             });
             if (this.data.length === 0) {
