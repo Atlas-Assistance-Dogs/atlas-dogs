@@ -3,13 +3,14 @@
         title="Position(s) with Status"
         icon-name="standard:user_role"
     >
-        <div class="slds-m-around_medium slds-grid">
+        <div class="slds-m-around_medium slds-grid slds-wrap">
             <template if:true={contact}>
                 <template for:each={roles} for:item="role">
                     <c-contact-status-indicator-cmp
                         position={role.position}
                         status={role.status}
                         key={role.position}
+                        class="slds-m-around_small"
                     >
                     </c-contact-status-indicator-cmp>
                 </template>
