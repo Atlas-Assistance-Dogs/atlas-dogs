@@ -27,7 +27,7 @@ const COLS = [
     {
         label: "Date Completed",
         fieldName: DATE_FIELD.fieldApiName,
-        type: "date",
+        type: "date-local",
         sortable: true
     },
     {
