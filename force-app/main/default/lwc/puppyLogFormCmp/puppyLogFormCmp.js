@@ -93,10 +93,6 @@ export default class PuppyLogFormCmp extends NavigationMixin(LightningElement) {
 
     @api
     handleSubmit(event) {
-        var documentId = null;
-        if (this.uploadedFile) {
-            documentId = this.uploadedFile.documentId;
-        }
         const form = this.template.querySelector("lightning-record-edit-form");
         form.submit();
     }
@@ -104,11 +100,11 @@ export default class PuppyLogFormCmp extends NavigationMixin(LightningElement) {
     handleLogChanged(event) {
         // if we are creating a new log and adding the CV
         if (this.currentCv && !this.recordId) {
-        relateFile({
-            documentId: this.currentCv.ContentDocumentId,
-            recordId: event.detail.id
-        })
-        .then(() => {
+            relateFile({
+                documentId: this.currentCv.ContentDocumentId,
+                recordId: event.detail.id
+            })
+            .then(() => {
                 this.dispatchEvent(
                     new CustomEvent("changed", { detail: event.detail.id })
                 );

@@ -134,6 +134,9 @@ public with sharing class TestLogController {
     @isTest
     public static void getRelatedLogs_ReturnsExpectedLogs() {
         getContacts();
+        Map<String, Schema.RecordTypeInfo> recordTypes = Schema.SObjectType.Log__c.getRecordTypeInfosByName();
+        CLIENT_ID = recordTypes.get('Client').getRecordTypeId();
+        FACILITATOR_ID = recordTypes.get('Team Facilitator').getRecordTypeId();
 
         List<Log__c> logs = new List<Log__c>();
         logs.add(
@@ -154,7 +157,8 @@ public with sharing class TestLogController {
                 Stress__c = 'Not at all',
                 Submitter__c = submitter.Id,
                 SupportDetails__c = 'Support details',
-                Facilitator__c = facilitator.Id 
+                Facilitator__c = facilitator.Id,
+                RecordTypeId = CLIENT_ID
             )
         );
         logs.add(
