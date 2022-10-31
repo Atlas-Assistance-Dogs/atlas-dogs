@@ -4,7 +4,7 @@
         icon-name="standard:folder"
         total={total}
         record-id={recordId}
-        field-name={objectApiName}
+        object-api-name={objectApiName}
         aura-comp-name="AllRelatedFilesCmp"
         view-all={viewAll}
     >
@@ -22,8 +22,7 @@
                 onupdate={handleUpdate}
             ></c-file-upload-cmp>
             <c-file-update-cmp
-                version-id={versionId}
-                file-name={currentFileName}
+                record-id={versionId}
                 onupdate={handleUpdate}
             ></c-file-update-cmp>
         </div>
