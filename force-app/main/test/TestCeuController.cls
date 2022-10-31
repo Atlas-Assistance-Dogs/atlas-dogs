@@ -77,111 +77,22 @@ public with sharing class TestCeuController {
     @isTest
     public static void getRelatedCeus_ReturnsRelated() {
         setup();
-        List<ContinuingEducationUnit__c> ceus = ContinuingEducationUnitController.getRelatedCeus(ace.Id);
+        RelatedObjects ceus = ContinuingEducationUnitController.getRelatedCeus(ace.Id, 10);
 
-        System.assertEquals(1, ceus.size(), 'Wrong number of CEUs');
-        ContinuingEducationUnit__c ceu = ceus[0];
+        System.assertEquals(1, ceus.items.size(), 'Wrong number of CEUs');
+        System.assertEquals(1, ceus.total);
+        ContinuingEducationUnit__c ceu = (ContinuingEducationUnit__c)ceus.items[0];
         ceusMatch(aceCeu, ceu);
     }
     
     @isTest
     public static void getRelatedCeus_ReturnsRelatedList() {
         setup();
-        List<ContinuingEducationUnit__c> ceus = ContinuingEducationUnitController.getRelatedCeus(cookie.Id);
+        RelatedObjects ceus = ContinuingEducationUnitController.getRelatedCeus(cookie.Id, 5);
 
-        System.assertEquals(2, ceus.size(), 'Wrong number of CEUs');
-        ceusMatch(cookieCeu1, ceus[0]);
-        ceusMatch(cookieCeu2, ceus[1]);
-    }
-
-    @isTest
-    public static void createCeu_ReturnsError() {
-        ContinuingEducationUnit__c ceu = new ContinuingEducationUnit__c();
-        Boolean hasError = false;
-        try {
-            ContinuingEducationUnit__c newCeu = ContinuingEducationUnitController.createCeu(ceu, null);
-        } catch (Exception exc) {
-            hasError = true;
-        }
-        System.assert(hasError);
-    }
-    
-    @isTest
-    public static void createCeu_LinksDocument() {
-        setup();
-        List<ContentVersion> cvs = TestFileController.insertRecords();
-        ContinuingEducationUnit__c ceu = new ContinuingEducationUnit__c(
-            Authority__c = 'IAABC',
-            Comments__c = 'Comments4',
-            DateCompleted__c = Date.today().addMonths(-4),
-            DateSubmitted__c = Date.today().addMonths(-4),
-            ProgramDate__c = Date.today().addDays(-44),
-            ProgramHours__c = 4,
-            ProgramTitle__c = 'A Day in the Life of a Cookie4',
-            Quantity__c = 4,
-            Role__c = 'Attendee',
-            Status__c = 'Approved',
-            Trainer__c = ace.Id
-        );
-        List<Id> documentIds = new List<Id>();
-        for (ContentVersion cv: cvs) {
-            documentIds.add(cv.ContentDocumentId);
-        }
-        ContinuingEducationUnit__c newCeu = ContinuingEducationUnitController.createCeu(ceu, documentIds);
-
-        List<ContentVersion> relatedCvs = FileController.getRelatedFiles(newCeu.Id);
-        System.assertEquals(cvs.size(), relatedCvs.size());
-
-        for (Integer idx = 0; idx < cvs.size(); idx++) {
-            ContentVersion expected = cvs[idx];
-            ContentVersion actual = relatedCvs[idx];
-            //system.assertEquals(expected.ContentDocumentId, actual.ContentDocumentId);
-        }
-    }
-
-    @isTest
-    public static void updateCeu_Updates() {
-        setup();
-        string COMMENT = 'constant comment';
-        aceCeu.Comments__c = COMMENT;
-
-        ContinuingEducationUnit__c ceu = ContinuingEducationUnitController.updateCeu(aceCeu);
-
-        ceusMatch(aceCeu, ceu);
-    }
-
-    @isTest
-    public static void updateCeu_ReturnsError() {
-        setup();
-        aceCeu.Status__c = 'Wrong';
-        Boolean hasError = false;
-        try {
-            ContinuingEducationUnit__c ceu = ContinuingEducationUnitController.updateCeu(aceCeu);
-        }
-        catch (Exception exc) {
-            hasError = true;
-        }
-        System.assert(hasError);
-    }
-
-    @isTest
-    public static void deleteCeu_Deletes() {
-        setup();
-        ContinuingEducationUnitController.deleteCeu(aceCeu.Id);
-        List<ContinuingEducationUnit__c> remaining = [SELECT Id FROM ContinuingEducationUnit__c WHERE Id = :aceCeu.Id];
-        System.assertEquals(0, remaining.size());
-    }
-
-    @isTest
-    public static void deleteCeu_ReturnsError() {
-        setup();
-        Boolean hasError = false;
-        try {
-            ContinuingEducationUnitController.deleteCeu('InvalidId');
-        }
-        catch (Exception exc) {
-            hasError = true;
-        }
-        System.assert(hasError);
+        System.assertEquals(2, ceus.items.size(), 'Wrong number of CEUs');
+        System.assertEquals(2, ceus.total);
+        ceusMatch(cookieCeu1, (ContinuingEducationUnit__c)ceus.items[0]);
+        ceusMatch(cookieCeu2, (ContinuingEducationUnit__c)ceus.items[1]);
     }
 }

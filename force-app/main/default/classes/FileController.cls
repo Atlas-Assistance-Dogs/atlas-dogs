@@ -88,7 +88,6 @@ public inherited sharing class FileController {
             cv.Category__c = category;
             cv.Date__c = docDate;
             update cv;
-            FileService.updateDate(cv, docDate);
         } catch (NullPointerException ex) {
             throw new AuraHandledException(ex.getMessage());
         } catch (QueryException ex) {
@@ -99,7 +98,10 @@ public inherited sharing class FileController {
     }
 
     @AuraEnabled(cacheable=true)
-    public static List<ContentVersion> getRelatedFiles(Id recordId) {
+    public static RelatedObjects getRelatedFiles(Id recordId, Integer max) {
+        if (max == null) {
+            max = 6;
+        }
         if (recordId == null) {
             throw new AuraHandledException('recordId must not be null');
         }
@@ -113,8 +115,11 @@ public inherited sharing class FileController {
             lstConDocs.add(cntLink.ContentDocumentId);
         }
 
+        RelatedObjects objects = new RelatedObjects();
+
         if (!lstConDocs.isEmpty()) {
-            return [
+            RelatedObjects related = new RelatedObjects();
+            List<ContentVersion> files = [
                 SELECT
                     Title,
                     ContentDocumentId,
@@ -124,9 +129,15 @@ public inherited sharing class FileController {
                 FROM ContentVersion
                 WHERE ContentDocumentId IN :lstConDocs AND FileType != 'SNOTE'
                 ORDER BY Date__c DESC
+                LIMIT :max
             ];
+            for (ContentVersion cv : files) {
+                related.items.add(cv);
+            }
+            related.total = [SELECT Count() FROM ContentVersion WHERE ContentDocumentId IN :lstConDocs AND FileType != 'SNOTE'];
+            return related;
         } else {
-            return new List<ContentVersion>();
+            return new RelatedObjects();
         }
     }
 
@@ -151,7 +162,6 @@ public inherited sharing class FileController {
                 WHERE ContentDocumentId = :link.ContentDocumentId
                 LIMIT 1
             ];
-            FileService.updateDate(cv, recordId, docDate);
             return cv;
         } catch (NullPointerException ex) {
             throw new AuraHandledException(ex.getMessage());

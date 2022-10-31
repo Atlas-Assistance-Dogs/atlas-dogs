@@ -10,7 +10,7 @@
             "value": "Fri Apr 29 2021"
         },
         "ClientStatus__c": {
-            "value": "In ADSiM"
+            "value": "Certified-Active"
         },
         "FacilitatorCertAgreementReceived__c": {
             "value": "2022-04-30T03:14:13.702Z"
@@ -19,7 +19,7 @@
             "value": "Onboarding"
         },
         "LeadFacilitatorStatus__c": {
-            "value": "Active"
+            "value": "Discontinued"
         },
         "TrainerCertAgreementReceived__c": {
             "value": "Fri Apr 29 2022"

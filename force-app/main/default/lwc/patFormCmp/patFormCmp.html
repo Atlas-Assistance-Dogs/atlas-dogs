@@ -3,13 +3,19 @@
         title={title}
         submitlabel="Save"
         onsubmit={handleSubmit}
-        onclose={handleClose}
+        oncancel={handleCancel}
     >
         <div slot="body">
             <lightning-record-edit-form
                 object-api-name={object}
                 record-id={recordId}
+                onsuccess={handleSuccess}
             >
+                <lightning-input-field
+                    field-name={fields.team}
+                    class="category slds-p-bottom_medium"
+                    value={teamId}
+                ></lightning-input-field>
                 <lightning-input-field
                     field-name={fields.date}
                     class="category slds-p-bottom_medium"

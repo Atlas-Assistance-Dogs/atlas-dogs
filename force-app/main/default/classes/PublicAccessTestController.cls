@@ -1,58 +1,32 @@
 public with sharing class PublicAccessTestController {
     @AuraEnabled(Cacheable=true)
-    public static List<PublicAccessTest__c> getRelatedPats(id recordId) {
+    public static RelatedObjects getRelatedPats(Id recordId, Integer max) {
+        if (max == null) {
+            max = 6;
+        }
         try {
-            return [
+            RelatedObjects related = new RelatedObjects();
+            List<PublicAccessTest__c> pats = [
                 SELECT
                     Assessor__c,
                     AssessorComments__c,
                     DateCompleted__c,
                     Location__c,
+                    Name,
                     ReviewComments__c,
                     Status__c,
                     Team__c,
                     Type__c
                 FROM PublicAccessTest__c
                 WHERE Assessor__c = :recordId OR Team__c = :recordId
+                ORDER BY DateCompleted__c DESC NULLS LAST
+                LIMIT :max
             ];
-        } catch (Exception e) {
-            throw new AuraHandledException(e.getMessage());
-        }
-    }
-
-    @AuraEnabled
-    public static void createPat(
-        PublicAccessTest__c record,
-        List<Id> documentIds
-    ) {
-        try {
-            insert record;
-            if (documentIds != null) {
-                FileController.relateFiles(documentIds, record.Id);
+            for (PublicAccessTest__c pat : pats) {
+                related.items.add(pat);
             }
-        } catch (Exception e) {
-            throw new AuraHandledException(e.getMessage());
-        }
-    }
-
-    @AuraEnabled
-    public static void updatePat(PublicAccessTest__c record) {
-        try {
-            update record;
-        } catch (Exception e) {
-            throw new AuraHandledException(e.getMessage());
-        }
-    }
-
-    @AuraEnabled
-    public static void deletePat(Id recordId) {
-        try {
-            PublicAccessTest__c pat = [
-                SELECT Id
-                FROM PublicAccessTest__c
-                WHERE Id = :recordId
-            ];
-            delete pat;
+            related.total = [SELECT COUNT() FROM PublicAccessTest__c WHERE Assessor__c = :recordId OR Team__c = :recordId];
+            return related;
         } catch (Exception e) {
             throw new AuraHandledException(e.getMessage());
         }

@@ -1,17 +1,15 @@
 import { LightningElement, api, wire, track } from "lwc";
+import { getObjectInfo } from "lightning/uiObjectInfoApi";
 import getRelatedFiles from "@salesforce/apex/FileController.getRelatedFiles";
 import deleteRecord from "@salesforce/apex/FileController.deleteRecord";
 import { refreshApex } from "@salesforce/apex";
 import { NavigationMixin } from "lightning/navigation";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
 
+import CV_OBJECT from "@salesforce/schema/ContentVersion";
 import CATEGORY_FIELD from "@salesforce/schema/ContentVersion.Category__c";
 import TYPE_FIELD from "@salesforce/schema/ContentVersion.Type__c";
 import DATE_FIELD from "@salesforce/schema/ContentVersion.Date__c";
-
-// Import message service features required for publishing and the message channel
-import { publish, MessageContext } from "lightning/messageService";
-import updateFile from "@salesforce/messageChannel/updateFile__c";
 
 const actions = [
     { label: "Edit", name: "edit" },
@@ -30,27 +28,58 @@ const COLS = [
             iconPosition: "left"
         }
     },
-    { label: "Category", fieldName: CATEGORY_FIELD.fieldApiName },
-    { label: "Document Type", fieldName: TYPE_FIELD.fieldApiName },
-    { label: "Document Date", fieldName: DATE_FIELD.fieldApiName, type: "date-local" },
+    {
+        label: "Category",
+        fieldName: CATEGORY_FIELD.fieldApiName,
+        sortable: true
+    },
+    {
+        label: "Document Type",
+        fieldName: TYPE_FIELD.fieldApiName,
+        sortable: true
+    },
+    {
+        label: "Document Date",
+        fieldName: DATE_FIELD.fieldApiName,
+        type: "date-local",
+        sortable: true
+    },
     { type: "action", typeAttributes: { rowActions: actions } }
 ];
 
 export default class RelatedFiles extends NavigationMixin(LightningElement) {
     @api objectApiName;
     @api recordId;
+    @api viewAll;
     columns = COLS;
-    @track fileUploadList;
+    @track data;
+    total = 0;
 
     openModal() {
         this.template.querySelector("c-file-upload-cmp").openModal();
     }
+    @wire(getObjectInfo, { objectApiName: CV_OBJECT })
+    objectInfo;
 
-    @wire(getRelatedFiles, { recordId: "$recordId" }) filesLst(result) {
+    @api
+    get max() {
+        return this.viewAll ? 10000 : 6;
+    }
+
+    @wire(getRelatedFiles, { recordId: "$recordId", max: "$max" }) filesLst(
+        result
+    ) {
         this.wiredFilesList = result;
-        this.fileUploadList = null;
-        if (result.data && result.data.length > 0) {
-            this.fileUploadList = result.data;
+        this.data = null;
+        if (result.data) {
+            this.data = result.data.items;
+            if (this.data.length === 0) {
+                this.data = null;
+                this.total = 0;
+            }
+            if (this.max < 15) {
+                this.total = result.data.total;
+            }
         } else if (result.error) {
             this.dispatchEvent(
                 new ShowToastEvent({
@@ -66,8 +95,36 @@ export default class RelatedFiles extends NavigationMixin(LightningElement) {
         refreshApex(this.wiredFilesList);
     }
 
-    @wire(MessageContext)
-    messageContext;
+    defaultSortDirection = "asc";
+    sortDirection = "asc";
+    sortedBy;
+
+    // Used to sort the columns
+    sortBy(field, reverse, primer) {
+        const key = primer
+            ? function (x) {
+                  return primer(x[field]);
+              }
+            : function (x) {
+                  return x[field];
+              };
+
+        return function (a, b) {
+            a = key(a);
+            b = key(b);
+            return reverse * ((a > b) - (b > a));
+        };
+    }
+
+    handleSort(event) {
+        const { fieldName: sortedBy, sortDirection } = event.detail;
+        const cloneData = [...this.files];
+
+        cloneData.sort(this.sortBy(sortedBy, sortDirection === "asc" ? 1 : -1));
+        this.files = cloneData;
+        this.sortDirection = sortDirection;
+        this.sortedBy = sortedBy;
+    }
 
     handleRowAction(event) {
         const actionName = event.detail.action.name;
@@ -78,7 +135,9 @@ export default class RelatedFiles extends NavigationMixin(LightningElement) {
                 break;
             case "edit":
                 const payload = { recordId: row.Id, fileName: row.Title };
-                publish(this.messageContext, updateFile, payload);
+                this.template
+                    .querySelector("c-file-update-cmp")
+                    .openModal(payload);
                 break;
             case "view":
                 this.navigateToFiles(row);

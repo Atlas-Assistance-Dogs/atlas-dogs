@@ -1,71 +1,157 @@
 import { LightningElement, api, wire } from "lwc";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
+import { NavigationMixin } from "lightning/navigation";
 import getRelatedLogs from "@salesforce/apex/LogController.getRelatedLogs";
-import deleteRelatedLog from "@salesforce/apex/LogController.deleteLog";
+import { deleteRecord } from "lightning/uiRecordApi";
 import { refreshApex } from "@salesforce/apex";
 
 import ATLAS_SUPPORT_FIELD from "@salesforce/schema/Log__c.RequestSupportFromAtlas__c";
-import STRESS_FIELD from "@salesforce/schema/Log__c.Stress__c";
 import CLIENT_FIELD from "@salesforce/schema/Log__c.Client__c";
-import SUBMITTER_FIELD from "@salesforce/schema/Log__c.Submitter__c";
-import FACILITATOR_FIELD from "@salesforce/schema/Log__c.Facilitator__c";
+import CLIENT_STRESS_FIELD from "@salesforce/schema/Log__c.ClientStress__c";
 import DATE_FIELD from "@salesforce/schema/Log__c.Date__c";
+import DETAILS_FIELD from "@salesforce/schema/Log__c.Details__c";
+import FACILITATOR_FIELD from "@salesforce/schema/Log__c.Facilitator__c";
+import NAME_FIELD from "@salesforce/schema/Log__c.Name";
 import OTHER_HOURS_FIELD from "@salesforce/schema/Log__c.OtherHours__c";
 import PAH_FIELD from "@salesforce/schema/Log__c.PublicAccessHours__c";
 import SATISFACTION_FIELD from "@salesforce/schema/Log__c.Satisfaction__c";
+import STRESS_FIELD from "@salesforce/schema/Log__c.Stress__c";
 import TEAM_SUPPORT_FIELD from "@salesforce/schema/Log__c.RequestSupportFromTeam__c";
-
-// Import message service features required for publishing and the message channel
-import { publish, MessageContext } from "lightning/messageService";
-import logForm from "@salesforce/messageChannel/logForm__c";
 
 const actions = [
     { label: "Edit", name: "edit" },
     { label: "Delete", name: "delete" }
 ];
 
-const COLS = [
-    {
-        label: "Date",
-        fieldName: DATE_FIELD.fieldApiName,
-        type: "date",
+const COLS = {
+    name: {
+        label: "Name",
+        fieldName: NAME_FIELD.fieldApiName,
+        type: "button",
+        typeAttributes: {
+            name: "view",
+            label: { fieldName: NAME_FIELD.fieldApiName },
+            variant: "base"
+        },
         sortable: true
     },
-    { label: "Role", fieldName: "roles", sortable: true, initialWidth: 140 },
-    {
+    date: {
+        label: "Date",
+        fieldName: DATE_FIELD.fieldApiName,
+        type: "date-local",
+        sortable: true
+    },
+    client: {
+        label: "Client",
+        fieldName: CLIENT_FIELD.fieldApiName,
+        type: "button",
+        typeAttributes: {
+            name: "client",
+            label: { fieldName: "clientName" },
+            variant: "base"
+        },
+        sortable: true
+    },
+    facilitator: {
+        label: "Facilitator",
+        fieldName: FACILITATOR_FIELD.fieldApiName,
+        type: "button",
+        typeAttributes: {
+            name: "facilitator",
+            label: { fieldName: "facilitatorName" },
+            variant: "base"
+        },
+        sortable: true
+    },
+    hours: {
         label: "PA Hours",
         fieldName: PAH_FIELD.fieldApiName,
         type: "number",
         editable: "true"
     },
-    {
+    otherHours: {
         label: "Other Hours",
         fieldName: OTHER_HOURS_FIELD.fieldApiName,
         type: "number",
         editable: "true"
     },
-    {
+    team: {
         label: "Team Support?",
         fieldName: TEAM_SUPPORT_FIELD.fieldApiName,
         type: "boolean"
     },
-    { label: "Stress", fieldName: STRESS_FIELD.fieldApiName },
-    { label: "Satisfaction", fieldName: SATISFACTION_FIELD.fieldApiName },
-    {
+    stress: { label: "Stress", fieldName: STRESS_FIELD.fieldApiName },
+    clientStress: {
+        label: "Client Stress",
+        fieldName: CLIENT_STRESS_FIELD.fieldApiName
+    },
+    satisfaction: {
+        label: "Satisfaction",
+        fieldName: SATISFACTION_FIELD.fieldApiName
+    },
+    atlas: {
         label: "Atlas Support?",
         fieldName: ATLAS_SUPPORT_FIELD.fieldApiName,
         type: "boolean"
     },
-    { type: "action", typeAttributes: { rowActions: actions } }
-];
+    details: {
+        label: "Details",
+        fieldName: DETAILS_FIELD.fieldApiName
+    },
+    action: { type: "action", typeAttributes: { rowActions: actions } }
+};
 
-export default class RelatedLogsCmp extends LightningElement {
+export default class RelatedLogsCmp extends NavigationMixin(LightningElement) {
     @api recordId;
-    columns = COLS;
+    @api objectApiName;
+    @api viewAll;
+    @api recordType;
     data = [];
 
-    @wire(MessageContext)
-    messageContext;
+    get columns() {
+        if (this.recordType === "Client") {
+            return [
+                COLS.name,
+                COLS.date,
+                COLS.client,
+                COLS.facilitator,
+                COLS.hours,
+                COLS.otherHours,
+                COLS.team,
+                COLS.stress,
+                COLS.satisfaction,
+                COLS.atlas,
+                COLS.details,
+                COLS.action
+            ];
+        }
+        return [
+            COLS.name,
+            COLS.date,
+            COLS.client,
+            COLS.facilitator,
+            COLS.hours,
+            COLS.otherHours,
+            COLS.team,
+            COLS.clientStress,
+            COLS.stress,
+            COLS.atlas,
+            COLS.details,
+            COLS.action
+        ];
+    }
+
+    get title() {
+        return this.recordType === "Client"
+            ? "Client Logs"
+            : "Team Facilitator Logs";
+    }
+
+    get auraCmpName() {
+        return this.recordType === "Client"
+            ? "AllClientLogsCmp"
+            : "AllFacilitatorLogsCmp";
+    }
 
     defaultSortDirection = "asc";
     sortDirection = "asc";
@@ -103,32 +189,57 @@ export default class RelatedLogsCmp extends LightningElement {
         const row = event.detail.row;
         switch (actionName) {
             case "delete":
-                this.deleteLog(row.id);
+                this.deleteLog(row.Id);
                 break;
             case "edit":
                 const payload = {
                     mode: "edit",
                     recordId: row.Id,
-                    roles: row.roles,
-                    recordTypeId: row.RecordTypeId
+                    recordType: this.recordType === "Client" ? "Client" : "Team Facilitator"
                 };
-                publish(this.messageContext, logForm, payload);
+                this.template
+                    .querySelector("c-log-form-cmp")
+                    .openModal(payload);
+                break;
+            case "view":
+                this.navigateToRecord(row.Id, this.objectApiName);
+                break;
+            case "client":
+                this.navigateToRecord(row.Client__c, "Contact");
+                break;
+            case "facilitator":
+                this.navigateToRecord(row.Facilitator__c, "Contact");
                 break;
         }
     }
 
-    @wire(getRelatedLogs, { contactId: "$recordId" })
+    @api
+    get max() {
+        return this.viewAll ? 10000 : 6;
+    }
+
+    @wire(getRelatedLogs, {
+        recordId: "$recordId",
+        recordType: "$recordType",
+        max: "$max"
+    })
     getLogs(result) {
-        this.wiredLogs = result;
+        this.wiredData = result;
         this.data = null;
-        if (result.data) {
-            this.data = result.data.map((log) => {
-                var newLog = Object.assign({}, log);
-                newLog["roles"] = this.getRoles(log);
-                return newLog;
+        if (result.data && result.data.items) {
+            this.data = result.data.items.map((info) => {
+                var log = Object.assign({}, info.log);
+                log.clientName = info.clientName;
+                log.facilitatorName = info.facilitatorName;
+                log[DETAILS_FIELD.fieldApiName] = log[DETAILS_FIELD.fieldApiName]?.replace(/(<([^>]+)>)/gi, "");
+                return log;
             });
             if (this.data.length === 0) {
                 this.data = null;
+                this.total = 0;
+            }
+            if (this.max < 15) {
+                this.total = result.data.total;
             }
         } else if (result.error) {
             this.dispatchEvent(
@@ -141,28 +252,23 @@ export default class RelatedLogsCmp extends LightningElement {
         }
     }
 
-    getRoles(log) {
-        var roles = [];
-        if (log[CLIENT_FIELD.fieldApiName] === this.recordId) {
-            roles.push("Client");
-        }
-        if (log[SUBMITTER_FIELD.fieldApiName] === this.recordId) {
-            roles.push("Submitter");
-        }
-        if (log[FACILITATOR_FIELD.fieldApiName] === this.recordId) {
-            roles.push("Team Facilitator");
-        }
-        return roles.join(";");
-    }
-
-    createLog(event) {
-        const payload = { mode: "create" };
-        publish(this.messageContext, logForm, payload);
+    createLog() {
+        const typeName =
+            this.recordType === "Client" ? "Client" : "Team Facilitator";
+        const payload = { mode: "create", recordType: typeName };
+        this.template.querySelector("c-log-form-cmp").openModal(payload);
     }
 
     deleteLog(recordId) {
-        deleteRelatedLog({ recordId: recordId })
+        deleteRecord(recordId)
             .then(() => {
+                this.dispatchEvent(
+                    new ShowToastEvent({
+                        title: "Success",
+                        message: "Log Deleted",
+                        variant: "success"
+                    })
+                );
                 this.handleChange();
             })
             .catch((error) => {
@@ -177,6 +283,17 @@ export default class RelatedLogsCmp extends LightningElement {
     }
 
     handleChange() {
-        refreshApex(this.wiredLogs);
+        refreshApex(this.wiredData);
+    }
+
+    navigateToRecord(recordId, objectName) {
+        this[NavigationMixin.Navigate]({
+            type: "standard__recordPage",
+            attributes: {
+                recordId: recordId,
+                objectApiName: objectName,
+                actionName: "view"
+            }
+        });
     }
 }

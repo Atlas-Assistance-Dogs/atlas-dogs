@@ -41,7 +41,7 @@
         ]
     },
     "dependencies": {
-        "sfdx-cli": "^7.97.1",
+        "sfdx-cli": "^7.143.0",
         "yarn": "^1.22.18"
     }
 }

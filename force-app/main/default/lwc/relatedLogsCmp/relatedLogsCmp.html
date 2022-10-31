@@ -1,11 +1,18 @@
 <template>
-    <c-related-object-cmp title="Logs" icon-name="standard:logging">
+    <c-related-object-cmp
+        title={title}
+        icon-name="standard:logging"
+        total={total}
+        record-id={recordId}
+        object-api-name={objectApiName}
+        aura-comp-name={auraCmpName}
+        view-all={viewAll}
+    >
         <div slot="actions">
             <!-- lightning button for open modal window -->
             <lightning-button label="New" title="New" onclick={createLog}>
             </lightning-button>
             <c-log-form-cmp
-                contact-id={recordId}
                 onchanged={handleChange}
             ></c-log-form-cmp>
         </div>

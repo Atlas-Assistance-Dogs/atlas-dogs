@@ -1,8 +1,7 @@
 import { LightningElement, api, wire } from "lwc";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
 import getRelatedFiles from "@salesforce/apex/FileController.getRelatedFiles";
-import addBackgroundCheck from "@salesforce/apex/BackgroundCheckController.addBackgroundCheck";
-import updateBackgroundCheck from "@salesforce/apex/BackgroundCheckController.updateBackgroundCheck";
+import relateFile from "@salesforce/apex/FileController.relateFile";
 import { NavigationMixin } from "lightning/navigation";
 import { refreshApex } from "@salesforce/apex";
 
@@ -40,7 +39,10 @@ export default class BackgroundCheckFormCmp extends NavigationMixin(
             ".txt",
             ".xlsx",
             ".xls",
-            ".csv"
+            ".csv",
+            ".mov",
+            ".mp4",
+            ".zip"
         ];
     }
 
@@ -48,12 +50,12 @@ export default class BackgroundCheckFormCmp extends NavigationMixin(
         return this.currentCv;
     }
 
-    @wire(getRelatedFiles, { recordId: "$recordId" })
+    @wire(getRelatedFiles, { recordId: "$recordId", max: 100 })
     getFiles(result) {
         this.wiredCv = result;
         this.currentCv = null;
-        if (result.data) {
-            this.currentCv = result.data[0];
+        if (result.data?.items) {
+            this.currentCv = result.data.items[0];
         } else if (result.error) {
             this.dispatchEvent(
                 new ShowToastEvent({
@@ -112,50 +114,31 @@ export default class BackgroundCheckFormCmp extends NavigationMixin(
             );
             return;
         }
-        if (!this.recordId) {
-            this.createBC(record, documentId);
-        } else {
-            record.Id = this.recordId;
-            this.updateBC(record);
+        this.template
+            .querySelector("lightning-record-edit-form")
+            .submit(record);
+    }
+
+    handleSuccess(event) {
+        if (!this.recordId) { // new background check
+            relateFile({documentId: this.currentCv.ContentDocumentId, recordId: event.detail.id})
+                .then((id) => {
+                    this.dispatchEvent(new CustomEvent("changed", { detail: id }));
+                })
+                .catch((error) => {
+                    this.dispatchEvent(
+                        new ShowToastEvent({
+                            title: "Error!!",
+                            message: error.body.message,
+                            variant: "error"
+                        })
+                    );
+                });
         }
-    }
-
-    createBC(record, documentId) {
-        addBackgroundCheck({
-            check: record,
-            documentId: documentId
-        })
-            .then((id) => {
-                this.dispatchEvent(new CustomEvent("changed", { detail: id }));
-            })
-            .catch((error) => {
-                this.dispatchEvent(
-                    new ShowToastEvent({
-                        title: "Error!!",
-                        message: error.body.message,
-                        variant: "error"
-                    })
-                );
-            });
-    }
-
-    updateBC(record) {
-        updateBackgroundCheck({
-            check: record
-        })
-            .then(() => {
-                this.dispatchEvent(
-                    new CustomEvent("changed", { detail: this.recordId })
-                );
-            })
-            .catch((error) => {
-                this.dispatchEvent(
-                    new ShowToastEvent({
-                        title: "Error!!",
-                        message: error.body.message,
-                        variant: "error"
-                    })
-                );
-            });
+        else {
+            this.dispatchEvent(
+                new CustomEvent("changed")
+            );
+        }
     }
 }

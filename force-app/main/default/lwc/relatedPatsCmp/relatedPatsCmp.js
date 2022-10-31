@@ -2,17 +2,12 @@ import { LightningElement, api, wire } from "lwc";
 import { NavigationMixin } from "lightning/navigation";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
 import getRelatedPats from "@salesforce/apex/PublicAccessTestController.getRelatedPats";
-import deletePat from "@salesforce/apex/PublicAccessTestController.deletePat";
 import { refreshApex } from "@salesforce/apex";
 
 import DATE_FIELD from "@salesforce/schema/PublicAccessTest__c.DateCompleted__c";
 import LOCATION_FIELD from "@salesforce/schema/PublicAccessTest__c.Location__c";
 import STATUS_FIELD from "@salesforce/schema/PublicAccessTest__c.Status__c";
 import TYPE_FIELD from "@salesforce/schema/PublicAccessTest__c.Type__c";
-
-// Import message service features required for publishing and the message channel
-import { publish, MessageContext } from "lightning/messageService";
-import patForm from "@salesforce/messageChannel/patForm__c";
 
 const actions = [
     { label: "Edit", name: "edit" },
@@ -21,9 +16,18 @@ const actions = [
 
 const COLS = [
     {
+        label: "Name",
+        type: "button",
+        typeAttributes: {
+            name: "view",
+            label: { fieldName: "Name" },
+            variant: "base",
+        }
+    },
+    {
         label: "Date Completed",
         fieldName: DATE_FIELD.fieldApiName,
-        type: "date",
+        type: "date-local",
         sortable: true
     },
     {
@@ -40,11 +44,13 @@ const COLS = [
 
 export default class RelatedPatsCmp extends NavigationMixin(LightningElement) {
     @api recordId;
+    @api objectApiName;
+    @api viewAll;
+    @api max; // needed for previous version
     columns = COLS;
     data = [];
-
-    @wire(MessageContext)
-    messageContext;
+    total = 0;
+    fieldName = STATUS_FIELD.fieldApiName;
 
     defaultSortDirection = "asc";
     sortDirection = "asc";
@@ -90,13 +96,15 @@ export default class RelatedPatsCmp extends NavigationMixin(LightningElement) {
                     recordId: row.Id,
                     status: row.Status__c
                 };
-                publish(this.messageContext, patForm, payload);
+                this.template
+                    .querySelector("c-pat-form-cmp")
+                    .openModal(payload);
                 break;
-            case "dog":
+            case "view":
                 this[NavigationMixin.Navigate]({
                     type: "standard__recordPage",
                     attributes: {
-                        recordId: row.Dog__c,
+                        recordId: row.Id,
                         actionName: "view"
                     }
                 });
@@ -104,19 +112,27 @@ export default class RelatedPatsCmp extends NavigationMixin(LightningElement) {
         }
     }
 
-    @wire(getRelatedPats, { recordId: "$recordId" })
+    get max() {
+        return this.viewAll ? 10000 : 6;
+    }
+
+    @wire(getRelatedPats, { recordId: "$recordId", max: "$max" })
     getPats(result) {
         this.wiredPats = result;
+        this.data = null;
         if (result.data) {
-            this.data = result.data.map((pat) => {
+            this.data = result.data.items.map((pat) => {
                 var xpat = Object.assign({}, pat);
                 return xpat;
             });
-            if (this.data.length == 0) {
+            if (this.data.length === 0) {
                 this.data = null;
+                this.total = 0;
+            }
+            if (this.max < 15) {
+                this.total = result.data.total;
             }
         } else if (result.error) {
-            this.logs = [];
             this.dispatchEvent(
                 new ShowToastEvent({
                     title: "Error!!",
@@ -128,12 +144,11 @@ export default class RelatedPatsCmp extends NavigationMixin(LightningElement) {
     }
 
     createPat(event) {
-        const payload = {};
-        publish(this.messageContext, patForm, payload);
+        this.template.querySelector("c-pat-form-cmp").openModal();
     }
 
     deletePat(recordId) {
-        deletePat({ recordId: recordId })
+        deleteRecord(recordId)
             .then(() => {
                 this.handleChange();
             })

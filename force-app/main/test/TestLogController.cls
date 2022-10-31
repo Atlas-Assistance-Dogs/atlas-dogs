@@ -111,10 +111,9 @@ public with sharing class TestLogController {
             WHERE FirstName = :CLIENT_NAME
             LIMIT 1
         ];
-        List<Log__c> related = LogController.getRelatedLogs(contact.Id);
-
+        RelatedObjects relatedObjects = LogController.getRelatedLogs(contact.Id, 'Client', 6);
         Test.stopTest();
-        System.assertEquals(0, related.size());
+        System.assertEquals(0, relatedObjects.items.size());
     }
 
     @isTest
@@ -123,7 +122,7 @@ public with sharing class TestLogController {
 
         Boolean exceptionThrown = false;
         try {
-            List<Log__c> related = LogController.getRelatedLogs('dog.Id');
+            RelatedObjects related = LogController.getRelatedLogs('dog.Id', 'Client', 6);
         } catch (Exception exc) {
             exceptionThrown = true;
         }
@@ -135,6 +134,9 @@ public with sharing class TestLogController {
     @isTest
     public static void getRelatedLogs_ReturnsExpectedLogs() {
         getContacts();
+        Map<String, Schema.RecordTypeInfo> recordTypes = Schema.SObjectType.Log__c.getRecordTypeInfosByName();
+        CLIENT_ID = recordTypes.get('Client').getRecordTypeId();
+        FACILITATOR_ID = recordTypes.get('Team Facilitator').getRecordTypeId();
 
         List<Log__c> logs = new List<Log__c>();
         logs.add(
@@ -155,7 +157,8 @@ public with sharing class TestLogController {
                 Stress__c = 'Not at all',
                 Submitter__c = submitter.Id,
                 SupportDetails__c = 'Support details',
-                Facilitator__c = facilitator.Id
+                Facilitator__c = facilitator.Id,
+                RecordTypeId = CLIENT_ID
             )
         );
         logs.add(
@@ -183,215 +186,14 @@ public with sharing class TestLogController {
 
         Test.startTest();
 
-        List<Log__c> related = LogController.getRelatedLogs(client.Id);
+        RelatedObjects related = LogController.getRelatedLogs(client.Id, 'Client', 6);
 
         Test.stopTest();
-        System.assertEquals(1, related.size());
-        for (Integer idx = 0; idx < related.size(); idx++) {
+        System.assertEquals(1, related.items.size());
+        for (Integer idx = 0; idx < related.items.size(); idx++) {
             Log__c expectedLog = logs[0];
-            Log__c actual = related[idx];
-            logsMatch(expectedLog, actual);
+            LogInfo actual = (LogInfo)related.items[idx];
+            logsMatch(expectedLog, actual.log);
         }
-    }
-
-    @isTest
-    public static void createLog_AddsLog() {
-        getContacts();
-        Date yesterday = Date.today().addDays(-1);
-        Log__c log = new Log__c(
-            Client__c = client.Id,
-            ClientHours__c = 22,
-            ClientStress__c = 'Only a little',
-            Date__c = yesterday,
-            Details__c = 'My details',
-            Dog__c = dog.Id,
-            Handler__c = 'Ken',
-            OtherHours__c = 5,
-            PublicAccessHours__c = 10,
-            RequestSupportFromAtlas__c = false,
-            RequestSupportFromTeam__c = true,
-            Satisfaction__c = 'No enjoyment',
-            SessionType__c = 'In Person',
-            Stress__c = 'Not at all',
-            Submitter__c = submitter.Id,
-            SupportDetails__c = 'Support details',
-            Facilitator__c = other.Id
-        );
-
-        Test.startTest();
-
-        LogController.createLog(log);
-
-        Test.stopTest();
-
-        Log__c actual = [
-            SELECT
-                Client__c,
-                ClientHours__c,
-                ClientStress__c,
-                Date__c,
-                Details__c,
-                Dog__c,
-                Handler__c,
-                OtherHours__c,
-                PublicAccessHours__c,
-                RequestSupportFromAtlas__c,
-                RequestSupportFromTeam__c,
-                Satisfaction__c,
-                SessionType__c,
-                Stress__c,
-                Submitter__c,
-                SupportDetails__c,
-                Facilitator__c,
-                RecordTypeId
-            FROM Log__c
-            WHERE Date__c = :yesterday
-            LIMIT 1
-        ];
-
-        logsMatch(log, actual);
-    }
-
-    @isTest
-    public static void createLog_ThrowsException_WhenMissingDate() {
-        getContacts();
-        Log__c log = new Log__c();
-
-        Test.startTest();
-
-        Boolean exceptionThrown = false;
-        try {
-            LogController.createLog(log);
-        } catch (AuraHandledException exc) {
-            exceptionThrown = true;
-        }
-
-        Test.stopTest();
-
-        System.assert(exceptionThrown);
-    }
-
-    @isTest
-    public static void deleteLog_DeletesLog() {
-        getContacts();
-        List<Log__c> logs = new List<Log__c>();
-        logs.add(
-            new Log__c(
-                Date__c = Date.today().addDays(-2),
-                Client__c = client.Id,
-                Dog__c = dog.Id,
-                OtherHours__c = 0,
-                PublicAccessHours__c = 0,
-                Submitter__c = submitter.Id
-            )
-        );
-        logs.add(
-            new Log__c(
-                Date__c = Date.today().addDays(-1),
-                Client__c = client.Id,
-                Dog__c = dog.Id,
-                OtherHours__c = 0,
-                PublicAccessHours__c = 0,
-                Submitter__c = submitter.Id
-            )
-        );
-        logs.add(
-            new Log__c(
-                Date__c = Date.today(),
-                Client__c = client.Id,
-                Dog__c = dog.Id,
-                OtherHours__c = 0,
-                PublicAccessHours__c = 0,
-                Submitter__c = submitter.Id
-            )
-        );
-        insert logs;
-
-        Test.startTest();
-
-        LogController.deleteLog(logs[0].Id);
-
-        Test.stopTest();
-
-        List<Log__c> actual = [SELECT Id FROM Log__c];
-        System.assertEquals(logs.size() - 1, actual.size());
-        for (Log__c remaining : actual) {
-            System.assertNotEquals(logs[0].Id, remaining.Id);
-        }
-    }
-
-    @isTest
-    public static void updateLog_UpdatesLog() {
-        getContacts();
-        List<Log__c> logs = new List<Log__c>();
-        logs.add(
-            new Log__c(
-                Date__c = Date.today().addDays(-2),
-                Client__c = client.Id,
-                Dog__c = dog.Id,
-                OtherHours__c = 0,
-                PublicAccessHours__c = 0,
-                Submitter__c = submitter.Id
-            )
-        );
-        logs.add(
-            new Log__c(
-                Date__c = Date.today().addDays(-1),
-                Client__c = client.Id,
-                Dog__c = dog.Id,
-                OtherHours__c = 0,
-                PublicAccessHours__c = 0,
-                Submitter__c = submitter.Id
-            )
-        );
-        logs.add(
-            new Log__c(
-                Date__c = Date.today(),
-                Client__c = client.Id,
-                Dog__c = dog.Id,
-                OtherHours__c = 0,
-                PublicAccessHours__c = 0,
-                Submitter__c = submitter.Id
-            )
-        );
-        insert logs;
-
-        Test.startTest();
-
-        Log__c change = logs[0];
-        change.Date__c = Date.today().addDays(-4);
-        LogController.updateLog(change);
-
-        Test.stopTest();
-
-        Log__c actual = [SELECT Id, Date__c FROM Log__c WHERE Id = :change.Id];
-        System.assertEquals(change.Date__c, actual.Date__c);
-    }
-
-    @isTest
-    public static void updateLog_ThrowsException_WhenMissingDate() {
-        getContacts();
-        Log__c log = new Log__c(
-            Date__c = Date.today().addDays(-2),
-            Client__c = client.Id,
-            Dog__c = dog.Id,
-            OtherHours__c = 0,
-            PublicAccessHours__c = 0,
-            Submitter__c = submitter.Id
-        );
-        insert log;
-
-        Test.startTest();
-        log.Date__c = null;
-        Boolean exceptionThrown = false;
-        try {
-            LogController.updateLog(log);
-        } catch (AuraHandledException exc) {
-            exceptionThrown = true;
-        }
-
-        Test.stopTest();
-
-        System.assert(exceptionThrown);
     }
 }

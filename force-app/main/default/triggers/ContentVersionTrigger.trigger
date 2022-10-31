@@ -5,8 +5,6 @@ trigger ContentVersionTrigger on ContentVersion (after update) {
         Date oldDate = oldCv.Date__c;
         
         // Check if value is updated
-        if (oldDate != newCv.Date__c) {
-            FileService.updateDate(newCv, newCv.Date__c);
-        }
+        FileService.updateDate(newCv);
     }
 }

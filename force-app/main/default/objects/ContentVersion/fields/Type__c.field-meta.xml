@@ -32,6 +32,11 @@
                 <label>Agreement</label>
             </value>
             <value>
+                <fullName>Contract</fullName>
+                <default>false</default>
+                <label>Contract</label>
+            </value>
+            <value>
                 <fullName>CoI</fullName>
                 <default>false</default>
                 <label>Conflict of Interest</label>
@@ -121,6 +126,11 @@
                 <default>false</default>
                 <label>I9</label>
             </value>
+            <value>
+                <fullName>W9</fullName>
+                <default>false</default>
+                <label>Contractor W9</label>
+            </value>
         </valueSetDefinition>
         <valueSettings>
             <controllingFieldValue>Volunteer</controllingFieldValue>
@@ -200,6 +210,10 @@
             <valueName>CertAgreement</valueName>
         </valueSettings>
         <valueSettings>
+            <controllingFieldValue>Puppy</controllingFieldValue>
+            <valueName>Contract</valueName>
+        </valueSettings>
+        <valueSettings>
             <controllingFieldValue>Facilitator</controllingFieldValue>
             <controllingFieldValue>Puppy</controllingFieldValue>
             <controllingFieldValue>Trainer</controllingFieldValue>
@@ -230,6 +244,10 @@
         <valueSettings>
             <controllingFieldValue>Staff</controllingFieldValue>
             <valueName>I9</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Staff</controllingFieldValue>
+            <valueName>W9</valueName>
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Dog</controllingFieldValue>

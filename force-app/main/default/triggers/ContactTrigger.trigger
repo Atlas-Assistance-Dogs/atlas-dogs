@@ -8,7 +8,7 @@ trigger ContactTrigger on Contact (before insert, before update) {
         }
         
         // Check if value is updated
-        if (oldEmail != newContact.Email) {
+        if (String.isBlank(newContact.npe01__HomeEmail__c)) {
             newContact.npe01__HomeEmail__c = newContact.Email;
         }
 

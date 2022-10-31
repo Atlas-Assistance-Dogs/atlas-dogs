@@ -2,6 +2,11 @@
     <c-related-object-cmp
         title="Background Checks"
         icon-name="standard:password"
+        total={total}
+        record-id={recordId}
+        object-api-name={objectApiName}
+        aura-comp-name="AllRelatedBgChecksCmp"
+        view-all={viewAll}
     >
         <div slot="actions">
             <!-- lightning button for open modal window -->
@@ -27,6 +32,15 @@
                 >
                 </lightning-datatable>
             </template>
+        </div>
+        <div slot="footer">
+            <lightning-button
+                class="slds-m-horizontal_x-small"
+                variant="base"
+                label="View all"
+                title="Submitter Logs"
+                onclick={handleViewAll}
+            ></lightning-button>
         </div>
     </c-related-object-cmp>
 </template>
