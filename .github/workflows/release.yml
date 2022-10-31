@@ -1,6 +1,8 @@
 name: Upload Production Release
 on:
-    workflow_dispatch:
+    push:
+        branches:
+            - main
 jobs:
     upload-production-release:
         name: "Upload Production Release"
