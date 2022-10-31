@@ -145,10 +145,11 @@ export default class LogFormCmp extends LightningElement {
     }
 
     handleError(event) {
+        console.log(event);
         this.dispatchEvent(
             new ShowToastEvent({
                 title: "Error!!",
-                message: event.data.message,
+                message: event.detail?.message ?? 'Error updating Log',
                 variant: "error"
             })
         );

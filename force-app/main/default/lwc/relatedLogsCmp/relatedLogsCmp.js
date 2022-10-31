@@ -106,7 +106,6 @@ export default class RelatedLogsCmp extends NavigationMixin(LightningElement) {
     @api objectApiName;
     @api viewAll;
     @api recordType;
-    @api max; // needed for previous version
     data = [];
 
     get columns() {
@@ -214,6 +213,7 @@ export default class RelatedLogsCmp extends NavigationMixin(LightningElement) {
         }
     }
 
+    @api
     get max() {
         return this.viewAll ? 10000 : 6;
     }
