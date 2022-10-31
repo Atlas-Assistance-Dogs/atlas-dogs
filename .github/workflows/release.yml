@@ -4,7 +4,6 @@ on:
 jobs:
     upload-production-release:
         name: "Upload Production Release"
-        environment: packaging
         # Replace this URL with your forked repo.
         # Use the `beta-2gp` workflow if this is a 2GP project.
         uses: SFDO-Community/standard-workflows/.github/workflows/production-1gp.yml@main
@@ -12,3 +11,5 @@ jobs:
             # If this is a 2GP project, omit the packaging org auth URL.
             packaging-org-auth-url: "${{ secrets.PACKAGING_ORG_AUTH_URL }}"
             dev-hub-auth-url: "${{ secrets.DEV_HUB_AUTH_URL }}"
+ 
+ 
