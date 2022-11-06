@@ -64,20 +64,24 @@ public with sharing class FileService{
     //#region Generated Contact
 
     // Update the last received docDate for the contact for the document category and type
-    private static void updateContactDate(List<ContentVersion> cvs, Id recordId){
-        Set<string> fields = new Set<string>();
+    private static void updateContactDate(List<ContentVersion> cvs, Id recordId) {
         List<Id> ids = new List<Id>();
-        for (ContentVersion cv : cvs){
-            string category = (cv.Type__c == 'ContactForm') ? '' : cv.Category__c;
-            if (category == 'Standalone') continue;
-            string field = string.format('{0}{1}Received__c', new List<Object>{ category, cv.Type__c.replace(' ', '') });
-            fields.add(field);
+        for (ContentVersion cv : cvs) {
             ids.add(cv.Id);
         }
-        if (fields.size() == 0) return;
-        string fieldList = string.join(new List<string>(fields), ',');
-        string query = string.format('SELECT Id, {0} FROM Contact WHERE Id = :recordId', new List<Object>{ fieldList });
-        List<Contact> contacts = Database.query(query);
+        List<Contact> contacts = [
+            SELECT Id,
+                ADSiMApplicationReceived__c, ADSiMPreApplicationReceived__c, ADSiMProgAgreementReceived__c,
+				BoardAgreementReceived__c, BoardApplicationReceived__c, BoardCoIReceived__c, BoardResumeReceived__c, BoardToNReceived__c,
+				ClientApplicationReceived__c, ClientCertAgreementReceived__c, ClientLOMIReceived__c, ClientPreApplicationReceived__c, ClientProgAgreementReceived__c, ClientSurveyReceived__c, ClientVAPWReceived__c,
+				FacilitatorApplicationReceived__c, FacilitatorCertAgreementReceived__c, FacilitatorInfrNoticeReceived__c, FacilitatorPracticumReceived__c, FacilitatorProfGrowthPlanReceived__c, FacilitatorProgAgreementReceived__c, FacilitatorReferenceReceived__c,
+				PuppyApplicationReceived__c, PuppyCertAgreementReceived__c, PuppyContractReceived__c, PuppyInfrNoticeReceived__c, PuppyProgAgreementReceived__c, PuppyReferenceReceived__c,
+				StaffAgreementReceived__c, StaffApplicationReceived__c, StaffI9Received__c, StaffOfferReceived__c, StaffResumeReceived__c, StaffW4Received__c, StaffW9Received__c,
+				TrainerApplicationReceived__c, TrainerCertAgreementReceived__c, TrainerInfrNoticeReceived__c, TrainerProgAgreementReceived__c, TrainerReferenceReceived__c,
+				VolunteerAgreementReceived__c, VolunteerApplicationReceived__c, VolunteerResumeReceived__c,
+				ContactFormReceived__c
+            FROM Contact
+            WHERE Id = :recordId];
 
         if (contacts.size() == 0)
             return;
@@ -88,7 +92,7 @@ public with sharing class FileService{
                WHERE Id IN:ids
                ORDER BY Date__c];
 
-        for (ContentVersion cv : cvs){        
+        for (ContentVersion cv : cvs) {        
             if (cv.Category__c == 'ADSiM'){
                 updateADSiMDate(cv, contact);
             }
@@ -333,18 +337,16 @@ public with sharing class FileService{
     }
 
     // Update the last received docDate for the dog for the document type
-    private static void updateDogDate(List<ContentVersion> cvs, Id recordId){
+    private static void updateDogDate(List<ContentVersion> cvs, Id recordId) {
         // this is related to a dog
-        Set<string> fields = new Set<string>();
         List<Id> ids = new List<Id>();
-        for (ContentVersion cv : cvs){
-            string field = string.format('{0}Received__c', new List<Object>{ cv.Type__c.replace(' ', '') });
-            fields.add(field);
+        for (ContentVersion cv : cvs) {
             ids.add(cv.Id);
         }
-        string fieldList = string.join(new List<string>(fields), ',');
-        string query = string.format('SELECT Id, {0} FROM Dog__c WHERE Id = :recordId', new List<Object>{ fieldList });
-        List<Dog__c> dogs = Database.query(query);
+        List<Dog__c> dogs = [
+            SELECT Id, HealthFormReceived__c, VacExamsReceived__c, XrayReceived__c
+            FROM Dog__c
+            WHERE Id = :recordId];
 
         if (dogs.size() == 0)
             return;
@@ -357,7 +359,7 @@ public with sharing class FileService{
                ORDER BY Date__c];
 
         //#region Generated dog
-        for (ContentVersion cv : cvs){
+        for (ContentVersion cv : cvs) {
 
         if (cv.Type__c == 'HealthForm' && isLater(dog.HealthFormReceived__c, cv.Date__c)){
             dog.HealthFormReceived__c = cv.Date__c;
