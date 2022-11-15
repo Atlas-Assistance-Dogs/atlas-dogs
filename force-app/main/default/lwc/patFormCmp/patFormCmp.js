@@ -103,7 +103,6 @@ export default class PatFormCmp extends NavigationMixin(LightningElement) {
 
     handleSubmit(event) {
         event.preventDefault();
-        console.log('Submitting form');
         this.template.querySelector("lightning-record-edit-form").submit();
     }
 
