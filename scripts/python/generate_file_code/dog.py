@@ -11,8 +11,13 @@ class Dog:
         self.category = Category('Dog', category)
 
 
+    def fields(self):
+        '''List the fields'''
+        return ', '.join(self.category.fields())
+
+
     def code(self):
-        self.file.write(update.dog_code_start)
+        self.file.write(update.dog_code_start.format(fields = self.fields()))
         for typ in sorted(self.category.types, key = lambda typ : typ.doc_type):
             self.file.write(typ.code())
 

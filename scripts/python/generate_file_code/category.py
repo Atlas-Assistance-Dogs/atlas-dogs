@@ -57,6 +57,11 @@ class Category:
         return template.format(category = self.category, name = self.name)
 
 
+    def fields(self):
+        '''Return the list of fields for this category'''
+        return [typ.field for typ in self.types if typ.doc_type != 'ContactForm']
+
+
     def test(self, test_file):
         test_file.write(update.test_file_start.format(category = self.category))
         for typ in self.types:

@@ -9,8 +9,16 @@ class Contact:
         self.file = file
         self.sorted_categories = [Category(key, categories[key]) for key in sorted(categories.keys()) if key != 'Dog']
 
+
+    def fields(self):
+        '''List the fields'''
+        fields = [', '.join(category.fields()) for category in self.sorted_categories if category.category != 'Standalone']
+        fields.append('ContactFormReceived__c')
+        return ',\n\t\t\t\t'.join(fields)
+
+
     def code(self):
-        self.file.write(update.contact_code_start)
+        self.file.write(update.contact_code_start.format(fields = self.fields()))
         for category in self.sorted_categories:
             if (category.category == 'Standalone'):
                 continue;

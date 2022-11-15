@@ -2,20 +2,16 @@
 
 contact_code_start = '''
     // Update the last received docDate for the contact for the document category and type
-    private static void updateContactDate(List<ContentVersion> cvs, Id recordId){
-        Set<string> fields = new Set<string>();
+    private static void updateContactDate(List<ContentVersion> cvs, Id recordId) {{
         List<Id> ids = new List<Id>();
-        for (ContentVersion cv : cvs){
-            string category = (cv.Type__c == 'ContactForm') ? '' : cv.Category__c;
-            if (category == 'Standalone') continue;
-            string field = string.format('{0}{1}Received__c', new List<Object>{ category, cv.Type__c.replace(' ', '') });
-            fields.add(field);
+        for (ContentVersion cv : cvs) {{
             ids.add(cv.Id);
-        }
-        if (fields.size() == 0) return;
-        string fieldList = string.join(new List<string>(fields), ',');
-        string query = string.format('SELECT Id, {0} FROM Contact WHERE Id = :recordId', new List<Object>{ fieldList });
-        List<Contact> contacts = Database.query(query);
+        }}
+        List<Contact> contacts = [
+            SELECT Id,
+                {fields}
+            FROM Contact
+            WHERE Id = :recordId];
 
         if (contacts.size() == 0)
             return;
@@ -26,7 +22,7 @@ contact_code_start = '''
                WHERE Id IN:ids
                ORDER BY Date__c];
 
-        for (ContentVersion cv : cvs){'''
+        for (ContentVersion cv : cvs) {{'''
 
 contact_code_end = '''
             if (cv.Type__c == 'ContactForm' && isLater(contact.ContactFormReceived__c, cv.Date__c)){
@@ -39,18 +35,16 @@ contact_code_end = '''
 
 dog_code_start = '''
     // Update the last received docDate for the dog for the document type
-    private static void updateDogDate(List<ContentVersion> cvs, Id recordId){
+    private static void updateDogDate(List<ContentVersion> cvs, Id recordId) {{
         // this is related to a dog
-        Set<string> fields = new Set<string>();
         List<Id> ids = new List<Id>();
-        for (ContentVersion cv : cvs){
-            string field = string.format('{0}Received__c', new List<Object>{ cv.Type__c.replace(' ', '') });
-            fields.add(field);
+        for (ContentVersion cv : cvs) {{
             ids.add(cv.Id);
-        }
-        string fieldList = string.join(new List<string>(fields), ',');
-        string query = string.format('SELECT Id, {0} FROM Dog__c WHERE Id = :recordId', new List<Object>{ fieldList });
-        List<Dog__c> dogs = Database.query(query);
+        }}
+        List<Dog__c> dogs = [
+            SELECT Id, {fields}
+            FROM Dog__c
+            WHERE Id = :recordId];
 
         if (dogs.size() == 0)
             return;
@@ -63,7 +57,7 @@ dog_code_start = '''
                ORDER BY Date__c];
 
         //#region Generated dog
-        for (ContentVersion cv : cvs){
+        for (ContentVersion cv : cvs) {{
 '''
 """Start of the dog FileService code."""
 
