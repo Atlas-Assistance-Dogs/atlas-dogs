@@ -1,0 +1,7 @@
+.name {
+    position: relative;
+}
+.name-help {
+    position: absolute;
+    right: 0;
+}

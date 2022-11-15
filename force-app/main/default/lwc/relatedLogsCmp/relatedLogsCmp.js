@@ -238,7 +238,7 @@ export default class RelatedLogsCmp extends NavigationMixin(LightningElement) {
                 this.data = null;
                 this.total = 0;
             }
-            if (this.max < 15) {
+            if (!this.viewAll) {
                 this.total = result.data.total;
             }
         } else if (result.error) {

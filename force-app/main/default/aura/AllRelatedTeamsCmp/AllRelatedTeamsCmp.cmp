@@ -1,6 +1,6 @@
 <aura:component
     implements="lightning:isUrlAddressable"
-    description="All Related Files component"
+    description="c:All Related Teams component"
 >
     <aura:attribute name="id" type="String" />
     <!-- Add an "init" handler to handle the first "v.pageReference" value -->
@@ -15,9 +15,5 @@
         value="{!v.pageReference}"
         action="{!c.onPageReferenceChange}"
     />
-    <c:relatedFilesCmp
-        viewAll="true"
-        recordId="{!v.id}"
-        objectApiName="{!v.object}"
-    ></c:relatedFilesCmp>
+    <c:relatedTeamsCmp viewAll="true" recordId="{!v.id}"></c:relatedTeamsCmp>
 </aura:component>

@@ -46,7 +46,6 @@ export default class RelatedPatsCmp extends NavigationMixin(LightningElement) {
     @api recordId;
     @api objectApiName;
     @api viewAll;
-    @api max; // needed for previous version
     columns = COLS;
     data = [];
     total = 0;
@@ -112,6 +111,7 @@ export default class RelatedPatsCmp extends NavigationMixin(LightningElement) {
         }
     }
 
+    @api
     get max() {
         return this.viewAll ? 10000 : 6;
     }
