@@ -118,10 +118,10 @@ export default class RelatedFiles extends NavigationMixin(LightningElement) {
 
     handleSort(event) {
         const { fieldName: sortedBy, sortDirection } = event.detail;
-        const cloneData = [...this.files];
+        const cloneData = [...this.data];
 
         cloneData.sort(this.sortBy(sortedBy, sortDirection === "asc" ? 1 : -1));
-        this.files = cloneData;
+        this.data = cloneData;
         this.sortDirection = sortDirection;
         this.sortedBy = sortedBy;
     }
