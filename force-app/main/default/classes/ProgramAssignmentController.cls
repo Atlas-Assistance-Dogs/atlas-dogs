@@ -30,7 +30,7 @@ public inherited sharing class ProgramAssignmentController {
                 Contact__c, Status__c, AssignedDate__c,
                 Contact__r.FirstName, Contact__r.LastName, Contact__r.PreferredName__c, Contact__r.Pronoun__c, Contact__r.PronounOther__c, Contact__r.Email
             FROM ProgramAssignment__c
-            WHERE Program__c = :name AND Status__c IN ('In progress', 'Observer', 'Pending')
+            WHERE Program__r.Name = :name AND Status__c IN ('In Progress', 'Pending')
         ];
 
         RelatedObjects related = new RelatedObjects();
@@ -43,7 +43,7 @@ public inherited sharing class ProgramAssignmentController {
             try {
                 DogRelationShip__c relatedDog = [
                     SELECT
-                        Dog__c, Dog__r.Name, Dog__r.Age__c, Dog__r.Breed__c, Dog__r.Gender__c
+                        Dog__c, Dog__r.Name, Dog__r.AgeYears__c, Dog__r.Breed__c, Dog__r.Gender__c
                     FROM DogRelationShip__c
                     WHERE Contact__c = :pa.Contact__c AND Type__c IN ('Owner', 'Client', 'Handler')
                     LIMIT 1
@@ -51,7 +51,7 @@ public inherited sharing class ProgramAssignmentController {
                 row.dog = relatedDog.Dog__r;
                 related.items.add(row);
             }
-            finally { }
+            catch (Exception exc) { }
         }
         return related;
     }
