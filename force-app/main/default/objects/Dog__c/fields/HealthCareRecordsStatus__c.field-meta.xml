@@ -2,7 +2,7 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>HealthCareRecordsStatus__c</fullName>
     <externalId>false</externalId>
-    <formula>IF (ISPICKVAL(Status__c, &quot;None&quot;), IMAGE(&quot;/img/icon/custom51_100/chalkboard16.png&quot;, &apos;*&apos;) &amp; &quot; N/A&quot;,
+    <formula>IF (ISPICKVAL(Status__c, &quot;None&quot;) || ISBLANK(TEXT(Status__c)), IMAGE(&quot;/img/icon/custom51_100/chalkboard16.png&quot;, &apos;*&apos;) &amp; &quot; N/A&quot;,
  IF(TODAY() &lt; VaccineDueDistemper__c, IF(TODAY() + 60 &lt; VaccineDueDistemper__c, IMAGE(&quot;/img/msg_icons/confirm16.gif&quot;, &apos;*&apos;), IMAGE(&quot;/img/msg_icons/warning16.gif&quot;, &apos;*&apos;)) &amp; &quot; Distemper Vaccination is good until &quot; &amp; TEXT(VaccineDueDistemper__c),
  IMAGE(&quot;/img/msg_icons/error16.gif&quot;, &apos;*&apos;) &amp; &quot; Distemper Vaccination is expired&quot;) &amp; BR()
 &amp; 
