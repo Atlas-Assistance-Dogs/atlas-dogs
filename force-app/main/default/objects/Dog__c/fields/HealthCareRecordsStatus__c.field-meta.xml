@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>HealthCareRecordsStatus__c</fullName>
     <externalId>false</externalId>
-    <formula
-    >IF(TODAY() &lt; VaccineDueDistemper__c, IF(TODAY() + 60 &lt; VaccineDueDistemper__c, IMAGE(&quot;/img/msg_icons/confirm16.gif&quot;, &apos;*&apos;), IMAGE(&quot;/img/msg_icons/warning16.gif&quot;, &apos;*&apos;)) &amp; &quot; Distemper Vaccination is good until &quot; &amp; TEXT(VaccineDueDistemper__c),
+    <formula>IF (ISPICKVAL(Status__c, &quot;None&quot;) || ISBLANK(TEXT(Status__c)), IMAGE(&quot;/img/icon/custom51_100/chalkboard16.png&quot;, &apos;*&apos;) &amp; &quot; N/A&quot;,
+ IF(TODAY() &lt; VaccineDueDistemper__c, IF(TODAY() + 60 &lt; VaccineDueDistemper__c, IMAGE(&quot;/img/msg_icons/confirm16.gif&quot;, &apos;*&apos;), IMAGE(&quot;/img/msg_icons/warning16.gif&quot;, &apos;*&apos;)) &amp; &quot; Distemper Vaccination is good until &quot; &amp; TEXT(VaccineDueDistemper__c),
  IMAGE(&quot;/img/msg_icons/error16.gif&quot;, &apos;*&apos;) &amp; &quot; Distemper Vaccination is expired&quot;) &amp; BR()
 &amp; 
 IF(TODAY() &lt; VaccineDueHepatitis__c, IF(TODAY() + 60 &lt; VaccineDueHepatitis__c, IMAGE(&quot;/img/msg_icons/confirm16.gif&quot;, &apos;*&apos;), IMAGE(&quot;/img/msg_icons/warning16.gif&quot;, &apos;*&apos;)) &amp; &quot; Hepatitis Vaccination is good until &quot; &amp; TEXT(VaccineDueHepatitis__c),
@@ -20,7 +20,8 @@ IF(TODAY() &lt; VaccineDueRabies__c, IF(TODAY() + 60 &lt; VaccineDueRabies__c, I
 &amp; 
 
 IF(TODAY() &lt; PhysicalExamDue__c, IF(TODAY() + 60 &lt; PhysicalExamDue__c, IMAGE(&quot;/img/msg_icons/confirm16.gif&quot;, &apos;*&apos;), IMAGE(&quot;/img/msg_icons/warning16.gif&quot;, &apos;*&apos;)) &amp; &quot; Physical Exam is good until &quot; &amp; TEXT(PhysicalExamDue__c),
- IMAGE(&quot;/img/msg_icons/error16.gif&quot;, &apos;*&apos;) &amp; &quot; Physical Exam is not up to date&quot;)</formula>
+ IMAGE(&quot;/img/msg_icons/error16.gif&quot;, &apos;*&apos;) &amp; &quot; Physical Exam is not up to date&quot;)
+)</formula>
     <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
     <label>Health Care Records Status</label>
     <required>false</required>
