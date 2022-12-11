@@ -7,6 +7,7 @@ import { refreshApex } from "@salesforce/apex";
 import ASSIGNED_DATE_FIELD from "@salesforce/schema/ProgramAssignment__c.AssignedDate__c";
 import CONTACT_FIELD from "@salesforce/schema/ProgramAssignment__c.Contact__c";
 import PRONOUN_FIELD from "@salesforce/schema/Contact.Pronoun__c";
+import PRONOUN_OTHER_FIELD from "@salesforce/schema/Contact.PronounOther__c";
 import PREFERRED_NAME_FIELD from "@salesforce/schema/Contact.PreferredName__c";
 import EMAIL_FIELD from "@salesforce/schema/Contact.Email";
 import ADDRESS_FIELD from "@salesforce/schema/Contact.MailingAddress";
@@ -41,6 +42,10 @@ const COLS = [
     {
         label: "Pronoun",
         fieldName: PRONOUN_FIELD.fieldApiName
+    },
+    {
+        label: "Specified Pronoun",
+        fieldName: PRONOUN_OTHER_FIELD.fieldApiName
     },
     { label: "Email", fieldName: EMAIL_FIELD.fieldApiName },
     { label: "Address", fieldName: "address" },
@@ -172,6 +177,7 @@ export default class ProgramReportCmp extends NavigationMixin(
         refreshApex(this.wiredCeus);
     }
 
+    // Create a CSV of the data using the cols
     createCsv(cols, data) {
         const header = cols.map(c => c.label).join(',');
         const rows = data.map(x => {
@@ -193,6 +199,7 @@ export default class ProgramReportCmp extends NavigationMixin(
         return [header].concat(rows).join('\n');
     }
 
+    // Download a CSV of the data in the report
     download() {
         const filename = `${this.program}.csv`;
         const content = this.createCsv(this.columns, this.data);
