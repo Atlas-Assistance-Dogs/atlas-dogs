@@ -2,6 +2,7 @@ import { LightningElement, api, wire } from "lwc";
 import { NavigationMixin } from "lightning/navigation";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
 import getRelatedPats from "@salesforce/apex/PublicAccessTestController.getRelatedPats";
+import { deleteRecord } from "lightning/uiRecordApi";
 import { refreshApex } from "@salesforce/apex";
 
 import DATE_FIELD from "@salesforce/schema/PublicAccessTest__c.DateCompleted__c";
