@@ -11,6 +11,7 @@ import CLIENT_STRESS_FIELD from "@salesforce/schema/Log__c.ClientStress__c";
 import DATE_FIELD from "@salesforce/schema/Log__c.Date__c";
 import DETAILS_FIELD from "@salesforce/schema/Log__c.Details__c";
 import FACILITATOR_FIELD from "@salesforce/schema/Log__c.Facilitator__c";
+import SUBMITTER_FIELD from "@salesforce/schema/Log__c.Submitter__c";
 import NAME_FIELD from "@salesforce/schema/Log__c.Name";
 import OTHER_HOURS_FIELD from "@salesforce/schema/Log__c.OtherHours__c";
 import PAH_FIELD from "@salesforce/schema/Log__c.PublicAccessHours__c";
@@ -51,7 +52,7 @@ const COLS = {
             variant: "base"
         },
         sortable: true,
-        actions: [{ label: 'Hide', name: 'hide' }]
+        actions: [{ label: "Hide", name: "hide" }]
     },
     facilitator: {
         label: "Facilitator",
@@ -63,7 +64,19 @@ const COLS = {
             variant: "base"
         },
         sortable: true,
-        actions: [{ label: 'Hide', name: 'hide' }]
+        actions: [{ label: "Hide", name: "hide" }]
+    },
+    submitter: {
+        label: "Submitter",
+        fieldName: SUBMITTER_FIELD.fieldApiName,
+        type: "button",
+        typeAttributes: {
+            name: "submitter",
+            label: { fieldName: "submitterName" },
+            variant: "base"
+        },
+        sortable: true,
+        actions: [{ label: "Hide", name: "hide" }]
     },
     hours: {
         label: "PA Hours",
@@ -108,6 +121,7 @@ const CLIENT_COLS = [
     COLS.date,
     COLS.client,
     COLS.facilitator,
+    COLS.submitter,
     COLS.hours,
     COLS.otherHours,
     COLS.team,
@@ -123,6 +137,7 @@ const FAC_COLS = [
     COLS.date,
     COLS.client,
     COLS.facilitator,
+    COLS.submitter,
     COLS.hours,
     COLS.otherHours,
     COLS.team,
@@ -235,10 +250,13 @@ export default class RelatedLogsCmp extends NavigationMixin(LightningElement) {
                 this.navigateToRecord(row.Id, this.objectApiName);
                 break;
             case "client":
-                this.navigateToRecord(row.Client__c, "Contact");
+                this.navigateToRecord(row[CLIENT_FIELD.fieldApiName], "Contact");
                 break;
             case "facilitator":
-                this.navigateToRecord(row.Facilitator__c, "Contact");
+                this.navigateToRecord(row[FACILITATOR_FIELD.fieldApiName], "Contact");
+                break;
+            case "submitter":
+                this.navigateToRecord(row[SUBMITTER_FIELD.fieldApiName], "Contact");
                 break;
         }
     }
@@ -283,6 +301,7 @@ export default class RelatedLogsCmp extends NavigationMixin(LightningElement) {
                 var log = Object.assign({}, info.log);
                 log.clientName = info.clientName;
                 log.facilitatorName = info.facilitatorName;
+                log.submitterName = info.submitterName;
                 log[DETAILS_FIELD.fieldApiName] = log[DETAILS_FIELD.fieldApiName]?.replace(/(<([^>]+)>)/gi, "");
                 return log;
             });

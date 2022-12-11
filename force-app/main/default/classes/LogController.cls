@@ -27,6 +27,7 @@ public with sharing class LogController {
                     SessionType__c,
                     Stress__c,
                     Submitter__c,
+                    Submitter__r.Name,
                     SupportDetails__c,
                     RecordTypeId
                 FROM Log__c
@@ -44,6 +45,7 @@ public with sharing class LogController {
                 item.log = log;
                 item.clientName = log.Client__r.Name;
                 item.facilitatorName = log.Facilitator__r.Name;
+                item.submitterName = log.Submitter__r.Name;
                 related.items.add(item);
             }
             related.total = [
