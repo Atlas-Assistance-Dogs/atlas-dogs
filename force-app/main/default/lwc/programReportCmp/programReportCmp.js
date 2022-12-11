@@ -176,10 +176,17 @@ export default class ProgramReportCmp extends NavigationMixin(
         const header = cols.map(c => c.label).join(',');
         const rows = data.map(x => {
             const rowData = cols.map(c => {
+                let text = '';
                 if (c.fieldName) {
-                    return x[c.fieldName];
+                    text = x[c.fieldName];
                 }
-                return x[c.typeAttributes.fieldName];
+                else {
+                    text = x[c.typeAttributes.fieldName];
+                }
+                if (typeof text === 'string' && text.includes(',')) {
+                    return `"${text}"`;
+                }
+                return text;
             });
             return rowData.join(',');
         });
