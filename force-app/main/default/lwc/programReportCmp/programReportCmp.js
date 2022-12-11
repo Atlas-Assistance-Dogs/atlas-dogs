@@ -26,10 +26,11 @@ const COLS = [
     },
     {
         label: "Contact Name",
+        fieldName: "contactName",
         type: "button",
         typeAttributes: {
             name: "contact",
-            label: { fieldName: 'contactName' },
+            label: { fieldName: "contactName" },
             variant: "base"
         }
     },
@@ -42,7 +43,7 @@ const COLS = [
         fieldName: PRONOUN_FIELD.fieldApiName
     },
     { label: "Email", fieldName: EMAIL_FIELD.fieldApiName },
-    { label: "Address", fieldName: 'address' },
+    { label: "Address", fieldName: "address" },
     { label: "Ability Status", fieldName: ABILITY_STATUS_FIELD.fieldApiName },
     {
         label: "Specified Ability Status",
@@ -50,11 +51,11 @@ const COLS = [
     },
     {
         label: "Dog Name",
-        fieldName: 'dogName',
-        type: 'button',
+        fieldName: "dogName",
+        type: "button",
         typeAttributes: {
             name: "dog",
-            label: { fieldName: 'dogName' },
+            label: { fieldName: "dogName" },
             variant: "base"
         }
     },
@@ -72,7 +73,9 @@ const COLS = [
     }
 ];
 
-export default class ProgramReportCmp extends NavigationMixin(LightningElement) {
+export default class ProgramReportCmp extends NavigationMixin(
+    LightningElement
+) {
     @api program;
     @api viewAll;
     columns = COLS;
@@ -154,7 +157,7 @@ export default class ProgramReportCmp extends NavigationMixin(LightningElement) 
                 this.data = null;
                 this.total = 0;
             }
-         } else if (result.error) {
+        } else if (result.error) {
             this.dispatchEvent(
                 new ShowToastEvent({
                     title: "Error!!",
@@ -169,12 +172,35 @@ export default class ProgramReportCmp extends NavigationMixin(LightningElement) 
         refreshApex(this.wiredCeus);
     }
 
+    createCsv(cols, data) {
+        const header = cols.map(c => c.label).join(',');
+        const rows = data.map(x => {
+            const rowData = cols.map(c => {
+                if (c.fieldName) {
+                    return x[c.fieldName];
+                }
+                return x[c.typeAttributes.fieldName];
+            });
+            return rowData.join(',');
+        });
+        return [header].concat(rows).join('\n');
+    }
+
     download() {
-        this.dispatchEvent(
-            new ShowToastEvent({
-                title: "Information",
-                message: "This is where we would download the file",
-            })
+        const filename = `${this.program}.csv`;
+        const content = this.createCsv(this.columns, this.data);
+        var element = document.createElement("a");
+        element.setAttribute(
+            "href",
+            "data:text/plain;charset=utf-8," + encodeURIComponent(content)
         );
+        element.setAttribute("download", filename);
+
+        element.style.display = "none";
+        document.body.appendChild(element);
+
+        element.click();
+
+        document.body.removeChild(element);
     }
 }
