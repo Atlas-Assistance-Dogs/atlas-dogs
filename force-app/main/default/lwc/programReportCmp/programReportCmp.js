@@ -168,4 +168,13 @@ export default class ProgramReportCmp extends NavigationMixin(LightningElement) 
     handleChange() {
         refreshApex(this.wiredCeus);
     }
+
+    download() {
+        this.dispatchEvent(
+            new ShowToastEvent({
+                title: "Information",
+                message: "This is where we would download the file",
+            })
+        );
+    }
 }

@@ -10,12 +10,8 @@
     >
         <div slot="actions">
             <!-- lightning button for open modal window -->
-            <lightning-button label="New" title="New" onclick={createCeu}>
+            <lightning-button label="Download" title="Download" onclick={download}>
             </lightning-button>
-            <c-ceu-form-cmp
-                contact-id={recordId}
-                onchanged={handleChange}
-            ></c-ceu-form-cmp>
         </div>
         <div slot="list">
             <template if:true={data}>
