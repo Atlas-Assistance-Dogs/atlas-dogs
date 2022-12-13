@@ -9,6 +9,9 @@
         view-all={viewAll}
     >
         <div slot="actions">
+            <!-- lightning button to show all columns -->
+            <lightning-button if:true={showResetColBtn} label="Show All Columns" title="Show All Columns" onclick={showAllColumns}>
+            </lightning-button>
             <!-- lightning button for open modal window -->
             <lightning-button label="New" title="New" onclick={createLog}>
             </lightning-button>
@@ -28,6 +31,7 @@
                     sorted-by={sortedBy}
                     onsort={handleSort}
                     onrowaction={handleRowAction}
+                    onheaderaction={handleHeaderAction}
                 >
                 </lightning-datatable>
             </template>

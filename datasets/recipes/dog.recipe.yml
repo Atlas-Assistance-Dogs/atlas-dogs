@@ -383,7 +383,7 @@
           random_reference: Contact
       Handler__c:
           random_reference: Contact
-      Name: ${{ Client__c.FirstName }}-${{ Dog__c.Name }}
+      Name: ${{ Client__c.FirstName }}${{ Client__c.LastName }}_${{ Dog__c.Name }}
       PatValidUntil__c:
           date_between:
               start_date: today
