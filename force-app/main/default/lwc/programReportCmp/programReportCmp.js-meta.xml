@@ -12,8 +12,7 @@
     </targets>
     <targetConfigs>
         <targetConfig targets="lightning__AppPage,lightning__HomePage">
-            <property name="program" label="Program" type="String" description="Program to report on" required="true"/>
-            <property name="viewAll" label="View All" type="Boolean" description="View all results" default="true"/>
+            <property name="program" label="Program" type="String" datasource="apex://ProgramPickList" description="Program to report on" required="true"/>
         </targetConfig>
     </targetConfigs>
 </LightningComponentBundle>

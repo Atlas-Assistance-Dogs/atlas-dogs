@@ -68,9 +68,9 @@ public inherited sharing class ProgramAssignmentController {
                     LIMIT 1
                 ];
                 row.dog = relatedDog.Dog__r;
-                related.items.add(row);
             } catch (Exception exc) {
             }
+            related.items.add(row);
         }
         return related;
     }

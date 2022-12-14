@@ -1032,6 +1032,10 @@
         <visibility>Visible</visibility>
     </tabSettings>
     <tabSettings>
+        <tab>ProgramReports</tab>
+        <visibility>Visible</visibility>
+    </tabSettings>
+    <tabSettings>
         <tab>Program__c</tab>
         <visibility>Visible</visibility>
     </tabSettings>

@@ -19,11 +19,12 @@ import DOG_GENDER_FIELD from "@salesforce/schema/Dog__c.Gender__c";
 import STATUS_FIELD from "@salesforce/schema/ProgramAssignment__c.Status__c";
 
 const COLS = [
-    { label: "Status", fieldName: STATUS_FIELD.fieldApiName },
+    { label: "Status", fieldName: STATUS_FIELD.fieldApiName, sortable: true },
     {
         label: "Assigned Date",
         fieldName: ASSIGNED_DATE_FIELD.fieldApiName,
-        type: "date-local"
+        type: "date-local",
+        sortable: true
     },
     {
         label: "Contact Name",
@@ -33,7 +34,8 @@ const COLS = [
             name: "contact",
             label: { fieldName: "contactName" },
             variant: "base"
-        }
+        },
+        sortable: true
     },
     {
         label: "Preferred Name",
@@ -48,8 +50,8 @@ const COLS = [
         fieldName: PRONOUN_OTHER_FIELD.fieldApiName
     },
     { label: "Email", fieldName: EMAIL_FIELD.fieldApiName },
-    { label: "Address", fieldName: "address" },
-    { label: "Ability Status", fieldName: ABILITY_STATUS_FIELD.fieldApiName },
+    { label: "Location", fieldName: "address", sortable: true },
+    { label: "Ability Status", fieldName: ABILITY_STATUS_FIELD.fieldApiName, sortable: true },
     {
         label: "Specified Ability Status",
         fieldName: SPECIFIED_ABILITY_STATUS_FIELD.fieldApiName
@@ -70,7 +72,8 @@ const COLS = [
     },
     {
         label: "Breed",
-        fieldName: DOG_BREED_FIELD.fieldApiName
+        fieldName: DOG_BREED_FIELD.fieldApiName,
+        sortable: true
     },
     {
         label: "Gender",
@@ -82,7 +85,6 @@ export default class ProgramReportCmp extends NavigationMixin(
     LightningElement
 ) {
     @api program;
-    @api viewAll;
     columns = COLS;
     data = [];
     wiredReport;
@@ -151,9 +153,11 @@ export default class ProgramReportCmp extends NavigationMixin(
                 var row = Object.assign({}, info.pa, info.contact, info.dog);
                 row.contactName = info.contact.Name;
                 const address = info.contact[ADDRESS_FIELD.fieldApiName];
-                row.address = `${address.city}, ${address.state}`;
-                row.dogName = info.dog.Name;
-                row.dogId = info.dog.Id;
+                if (address) {
+                    row.address = `${address.city}, ${address.state}`;
+                }
+                row.dogName = info.dog?.Name;
+                row.dogId = info.dog?.Id;
                 row.Name = info.pa.Name;
                 row.Id = info.pa.Id;
                 return row;
