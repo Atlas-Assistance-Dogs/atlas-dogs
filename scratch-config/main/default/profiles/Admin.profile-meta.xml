@@ -1199,10 +1199,6 @@
         <visibility>DefaultOn</visibility>
     </tabVisibilities>
     <tabVisibilities>
-        <tab>Program_Reports</tab>
-        <visibility>DefaultOn</visibility>
-    </tabVisibilities>
-    <tabVisibilities>
         <tab>Program__c</tab>
         <visibility>DefaultOn</visibility>
     </tabVisibilities>

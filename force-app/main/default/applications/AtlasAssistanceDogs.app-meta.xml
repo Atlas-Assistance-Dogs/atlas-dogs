@@ -148,7 +148,6 @@
     <tabs>BackgroundCheck__c</tabs>
     <tabs>ProgramAssignment__c</tabs>
     <tabs>Program__c</tabs>
-    <tabs>ProgramReports</tabs>
     <uiType>Lightning</uiType>
     <utilityBar>AtlasDogUtilityBar</utilityBar>
 </CustomApplication>
