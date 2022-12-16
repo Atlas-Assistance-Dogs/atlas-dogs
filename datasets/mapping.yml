@@ -174,10 +174,7 @@ Insert Dog__c:
         - SpayedNeutered__c
         - Status__c
         - VacExamsReceived__c
-        - VaccineDueDistemper__c
-        - VaccineDueHepatitis__c
-        - VaccineDueParainfluenza__c
-        - VaccineDueParvovirus__c
+        - VaccineDueDA2PP__c
         - VaccineDueRabies__c
         - XrayReceived__c
     lookups:

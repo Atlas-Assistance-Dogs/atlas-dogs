@@ -283,16 +283,6 @@
                 <identifier>RecordLatestPhysicalExamOutcome__cField</identifier>
             </fieldInstance>
         </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
-                    <value>none</value>
-                </fieldInstanceProperties>
-                <fieldItem>Record.PhysicalExamDue__c</fieldItem>
-                <identifier>RecordPhysicalExamDue__cField</identifier>
-            </fieldInstance>
-        </itemInstances>
         <name>Facet-3c2a6dd4-420e-4eea-af95-0672fea236cd</name>
         <type>Facet</type>
     </flexiPageRegions>
@@ -303,38 +293,8 @@
                     <name>uiBehavior</name>
                     <value>none</value>
                 </fieldInstanceProperties>
-                <fieldItem>Record.VaccineDueHepatitis__c</fieldItem>
-                <identifier>RecordVaccineDueHepatitis__cField</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
-                    <value>none</value>
-                </fieldInstanceProperties>
-                <fieldItem>Record.VaccineDueParvovirus__c</fieldItem>
-                <identifier>RecordVaccineDueParvovirus__cField</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
-                    <value>none</value>
-                </fieldInstanceProperties>
-                <fieldItem>Record.VaccineDueDistemper__c</fieldItem>
-                <identifier>RecordVaccineDueDistemper__cField</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
-                    <value>none</value>
-                </fieldInstanceProperties>
-                <fieldItem>Record.VaccineDueParainfluenza__c</fieldItem>
-                <identifier>RecordVaccineDueParainfluenza__cField</identifier>
+                <fieldItem>Record.VaccineDueDA2PP__c</fieldItem>
+                <identifier>RecordVaccineDueDA2PP_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
@@ -345,6 +305,16 @@
                 </fieldInstanceProperties>
                 <fieldItem>Record.VaccineDueRabies__c</fieldItem>
                 <identifier>RecordVaccineDueRabies__cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.PhysicalExamDue__c</fieldItem>
+                <identifier>RecordPhysicalExamDue__cField</identifier>
             </fieldInstance>
         </itemInstances>
         <name>Facet-b408a70d-5a1f-4b07-8170-e90152c65427</name>

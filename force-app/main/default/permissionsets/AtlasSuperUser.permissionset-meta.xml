@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
     <applicationVisibilities>
         <application>AtlasAssistanceDogs</application>
@@ -233,8 +233,7 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field
-        >Contact.GW_Volunteers__Volunteer_Auto_Reminder_Email_Opt_Out__c</field>
+        <field>Contact.GW_Volunteers__Volunteer_Auto_Reminder_Email_Opt_Out__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -675,6 +674,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Dog__c.VacExamsReceived__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Dog__c.VaccineDueDA2PP__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
