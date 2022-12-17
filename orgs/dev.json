@@ -14,7 +14,8 @@
         "securitySettings": {
             "enableAdminLoginAsAnyUser": true,
             "sessionSettings": {
-                "forceRelogin": false
+                "forceRelogin": false,
+                "lockerServiceNext": false
             }
         },
         "enhancedNotesSettings": {

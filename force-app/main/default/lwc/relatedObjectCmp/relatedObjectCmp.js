@@ -16,6 +16,10 @@ export default class RelatedObjectCmp extends NavigationMixin(
     @api auraCompName;
     @api objectApiName;
 
+    get showBreadCrumbs() {
+        this.viewAll && this.recordId && this.recordId.trim();
+    }
+
     get any() {
         return !this.viewAll && this.total > 0;
     }
