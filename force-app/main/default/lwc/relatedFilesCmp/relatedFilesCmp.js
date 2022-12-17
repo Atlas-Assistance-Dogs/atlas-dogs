@@ -51,6 +51,7 @@ export default class RelatedFiles extends NavigationMixin(LightningElement) {
     @api objectApiName;
     @api recordId;
     @api viewAll;
+    @api title = "Files";
     columns = COLS;
     @track data;
     total = 0;
