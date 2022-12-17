@@ -11,10 +11,7 @@ import STATUS_FIELD from "@salesforce/schema/Dog__c.Status__c";
 import MICROCHIP_FIELD from "@salesforce/schema/Dog__c.MicrochipNumber__c";
 import HEALTH_FIELD from "@salesforce/schema/Dog__c.LatestPhysicalExamOutcome__c";
 import EXAM_DUE_FIELD from "@salesforce/schema/Dog__c.PhysicalExamDue__c";
-import HEPATITIS_DUE_FIELD from "@salesforce/schema/Dog__c.VaccineDueHepatitis__c";
-import DISTEMPER_DUE_FIELD from "@salesforce/schema/Dog__c.VaccineDueDistemper__c";
-import PARAINFLUENZA_DUE_FIELD from "@salesforce/schema/Dog__c.VaccineDueParainfluenza__c";
-import PARVOVIRUS_DUE_FIELD from "@salesforce/schema/Dog__c.VaccineDueParvovirus__c";
+import DA2PP_DUE_FIELD from "@salesforce/schema/Dog__c.VaccineDueDA2PP__c";
 import RABIES_DUE_FIELD from "@salesforce/schema/Dog__c.VaccineDueRabies__c";
 
 export default class NewDogCmp extends NavigationMixin(LightningElement) {
@@ -32,10 +29,7 @@ export default class NewDogCmp extends NavigationMixin(LightningElement) {
         microchip: MICROCHIP_FIELD,
         health: HEALTH_FIELD,
         examDue: EXAM_DUE_FIELD,
-        hepDue: HEPATITIS_DUE_FIELD,
-        distemperDue: DISTEMPER_DUE_FIELD,
-        parainfluenzaDue: PARAINFLUENZA_DUE_FIELD,
-        parvovirusDue: PARVOVIRUS_DUE_FIELD,
+        da2ppDue: DA2PP_DUE_FIELD,
         rabiesDue: RABIES_DUE_FIELD
     };
 

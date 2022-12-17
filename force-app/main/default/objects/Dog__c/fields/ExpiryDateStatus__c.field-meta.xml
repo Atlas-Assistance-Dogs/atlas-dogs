@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>ExpiryDateStatus__c</fullName>
     <description>When the dog may need to have some shot.  Shown in header.</description>
@@ -8,19 +8,13 @@ IMAGE(&quot;/img/icon/custom51_100/chalkboard16.png&quot;, &apos;*&apos;) &amp; 
         IF(
 AND(
 TODAY() + 60 &lt; (PhysicalExamDue__c ),
-TODAY() + 60 &lt; (VaccineDueDistemper__c ),
-TODAY() + 60 &lt; (VaccineDueHepatitis__c ),
-TODAY() + 60 &lt; (VaccineDueParainfluenza__c),
-TODAY() + 60 &lt; (VaccineDueParvovirus__c ),
+TODAY() + 60 &lt; (VaccineDueDA2PP__c ),
 TODAY() + 60 &lt; (VaccineDueRabies__c )
 ),
 IMAGE(&apos;/img/msg_icons/confirm16.png&apos;, &apos;*&apos;) &amp; &apos; Good&apos;,
 IF(AND(
 TODAY() &lt; (PhysicalExamDue__c ),
-TODAY() &lt; (VaccineDueDistemper__c ),
-TODAY() &lt; (VaccineDueHepatitis__c ),
-TODAY() &lt; (VaccineDueParainfluenza__c),
-TODAY() &lt; (VaccineDueParvovirus__c ),
+TODAY() &lt; (VaccineDueDA2PP__c ),
 TODAY() &lt; (VaccineDueRabies__c )
 ),
 IMAGE(&apos;/img/msg_icons/warning16.png&apos;, &apos;*&apos;) &amp; &apos; Due Soon&apos;,

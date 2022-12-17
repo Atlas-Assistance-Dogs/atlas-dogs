@@ -4,11 +4,8 @@
     <externalId>false</externalId>
     <formula>AND
 ( 
- (VaccineDueDistemper__c  &lt;  TODAY()),
- (VaccineDueHepatitis__c  &lt;  TODAY()) ,
- (VaccineDueParainfluenza__c &lt;  TODAY()),
+ (VaccineDueDA2PP__c  &lt;  TODAY()),
  (VaccineDueRabies__c &lt;  TODAY()),
- (VaccineDueParvovirus__c &lt;  TODAY()), 
  (PhysicalExamDue__c &lt; TODAY())
 )</formula>
     <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
