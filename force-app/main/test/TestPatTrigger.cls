@@ -1,7 +1,8 @@
 @IsTest
-public with sharing class TestTeamTrigger {
+public with sharing class TestPatTrigger {
 
     private static Team__c team;
+    private static PublicAccessTest__c pat;
 
     private static void setup(Date expiration) {
         List<Contact> contacts = new List<Contact>();
@@ -15,14 +16,25 @@ public with sharing class TestTeamTrigger {
         insert ace;
 
         team = new Team__c(
-            Client__c = ken.Id,
+            Client__c = contacts[1].Id,
             Dog__c = ace.Id,
-            Handler__c = debbie.Id,
+            Handler__c = contacts[0].Id,
             Name = 'Camelot',
-            PatValidUntil__c = expiration,
+            PatValidUntil__c = expiration.addMonths(5),
             PatCount__c = 21,
             PrimaryCertification__c = 'Allergen Alert',
             SecondaryCertification__c = 'Autism'
+        );
+        insert team;
+
+        pat = new PublicAccessTest__c(
+            Assessor__c = ken.Id,
+            DateCompleted__c = Date.today(),
+            Location__c = 'In Person',
+            Status__c = 'Passed',
+            Team__c = team.Id,
+            Type__c = 'Initial',
+            ValidUntil__c = expiration
         );
     }
 
@@ -36,37 +48,40 @@ public with sharing class TestTeamTrigger {
 
     @isTest
     static void insert_setsValidUntil_whenPatValidSet() {
-        setup(Date.today().addMonths(12));
+        Date expiration = Date.today().addMonths(12);
+        setup(expiration);
 
         // Act
         Test.startTest();
-        Database.SaveResult result = Database.insert(team, false);
+        Database.SaveResult result = Database.insert(pat, false);
         Test.stopTest();
 
         // Assert
         System.assert(result.isSuccess());
         System.assert(result.getErrors().size() == 0);
-        Team__c team = getTeam(result.getId());
+        Team__c team = getTeam(team.Id);
         Contact contact = getContact(team.Client__c);
-        System.assertEquals(contact.ClientCertificationValidUntil__c, team.PatValidUntil__c);
+        System.assertEquals(expiration, team.PatValidUntil__c);
+        System.assertEquals(expiration, contact.ClientCertificationValidUntil__c);
     }
 
     @isTest
-    static void insert_setsValidUntil_whenPatValidUpdated() {
-        setup(Date.today().addMonths(12));
-        insert team;
+    static void insert_doesNotUpdate_whenPatValidSetBackward() {
+        Date expiration = Date.today().addMonths(12);
+        setup(expiration);
+        insert pat;
 
-        team.PatValidUntil__c = Date.today().addDays(200);
+        pat.ValidUntil__c = Date.today().addDays(200);
 
         // Act
         Test.startTest();
-        Database.SaveResult result = Database.update(team, false);
+        Database.SaveResult result = Database.update(pat, false);
         Test.stopTest();
 
         // Assert
         System.assert(result.isSuccess());
         System.assert(result.getErrors().size() == 0);
-        Team__c team = getTeam(result.getId());
+        Team__c team = getTeam(team.Id);
         Contact contact = getContact(team.Client__c);
         System.assertEquals(contact.ClientCertificationValidUntil__c, team.PatValidUntil__c);
     }
