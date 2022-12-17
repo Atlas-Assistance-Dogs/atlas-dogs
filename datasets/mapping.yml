@@ -223,6 +223,7 @@ Insert Contact:
         - BoardMemberStatus__c
         - BoardResumeReceived__c
         - BoardToNReceived__c
+        - CanvasSisId__c
         - ClientApplicationReceived__c
         - ClientCertAgreementReceived__c
         - ClientLOMIReceived__c
