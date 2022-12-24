@@ -237,11 +237,6 @@
         <apexClass>TestTeamController</apexClass>
         <enabled>true</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>TestTeamTrigger</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <custom>false</custom>
     <fieldPermissions>
         <editable>true</editable>
         <field>Account.Email__c</field>

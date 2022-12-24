@@ -51,12 +51,6 @@
         </itemInstances>
         <itemInstances>
             <componentInstance>
-                <componentName>relatedFilesCmp</componentName>
-                <identifier>relatedFilesCmp</identifier>
-            </componentInstance>
-        </itemInstances>
-        <itemInstances>
-            <componentInstance>
                 <componentName>relatedTeamsFiles</componentName>
                 <identifier>c_relatedTeamsFiles</identifier>
             </componentInstance>
