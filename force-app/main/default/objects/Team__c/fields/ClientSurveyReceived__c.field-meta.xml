@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ClientSurveyReceived__c</fullName>
+    <description>The date the most recent version of Client Certification Survey was uploaded</description>
+    <externalId>false</externalId>
+    <label>Last Client Certification Survey</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Date</type>
+</CustomField>

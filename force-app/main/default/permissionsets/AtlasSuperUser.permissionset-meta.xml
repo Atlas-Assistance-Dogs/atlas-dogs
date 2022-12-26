@@ -140,22 +140,22 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Contact.ClientApplicationReceived__c</field>
+        <field>Team__c.ClientApplicationReceived__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Contact.ClientCertAgreementReceived__c</field>
+        <field>Team__c.ClientCertAgreementReceived__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Contact.ClientCertificationValidUntil__c</field>
+        <field>Team__c.CertificationValidUntil__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Contact.ClientLOMIReceived__c</field>
+        <field>Team__c.ClientLOMIReceived__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -165,12 +165,12 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Contact.ClientPreApplicationReceived__c</field>
+        <field>Team__c.ClientPreApplicationReceived__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Contact.ClientProgAgreementReceived__c</field>
+        <field>Team__c.ClientProgAgreementReceived__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -180,12 +180,12 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Contact.ClientSurveyReceived__c</field>
+        <field>Team__c.ClientSurveyReceived__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Contact.ClientVAPWReceived__c</field>
+        <field>Team__c.ClientVAPWReceived__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
