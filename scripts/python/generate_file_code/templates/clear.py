@@ -1,18 +1,14 @@
 # Templates for generating code to clear Last* dates
 
 contact_code_start = '''
-    private static void clearContactDate(ContentVersion cv, Id recordId) {
+    private static void clearContactDate(ContentVersion cv, Id recordId) {{
         if (cv.Category__c == 'Standalone') return;
  
-        string field;
-        if (cv.Type__c == 'ContactForm') {
-            field = 'ContactFormReceived__c';
-        }
-        else {
-            field = string.format('{0}{1}Received__c', new List<Object>{ cv.Category__c, cv.Type__c.replace(' ', '') });
-        }
-        string query = string.format('SELECT Id, {0} FROM Contact WHERE Id = :recordId', new List<Object>{ field });
-        List<Contact> contacts = Database.query(query);
+        List<Contact> contacts = [
+            SELECT Id,
+                {fields}
+            FROM Contact
+            WHERE Id = :recordId];
 
         if (contacts.size() == 0)
             return;
@@ -29,10 +25,11 @@ contact_code_end = '''
 
 
 dog_code_start = '''
-    private static void clearDogDate(ContentVersion cv, Id recordId) {
-        string  field = string.format('{0}Received__c', new List<Object>{ cv.Type__c.replace(' ', '') });
-        string query = string.format('SELECT Id, {0} FROM Dog__c WHERE Id = :recordId', new List<Object>{ field });
-        List<Dog__c> dogs = Database.query(query);
+    private static void clearDogDate(ContentVersion cv, Id recordId) {{
+        List<Dog__c> dogs = [
+            SELECT Id, {fields}
+            FROM Dog__c
+            WHERE Id = :recordId];
 
         if (dogs.size() == 0)
             return;
@@ -45,11 +42,31 @@ dog_code_end = '''
     }
 '''
 
+
+team_code_start = '''
+    private static void clearTeamDate(ContentVersion cv, Id recordId) {{
+        List<Team__c> teams = [
+            SELECT Id, Client__c, Dog__c,
+                   {fields}
+            FROM Team__c
+            WHERE Id = :recordId];
+
+        if (teams.size() == 0)
+            return;
+        Team__c team = teams[0];
+'''
+"""Start of the team ClearDateService code."""
+
+team_code_end = '''
+        update team;
+    }
+'''
+
 test_template = '''
     @isTest
     public static void clearDate_{category}{type}_SetsDateToNull() {{
         ContentVersion cv = new ContentVersion(Category__c = '{category}', Type__c = '{type}');
-        {object} record = new {object}({object_fields});
+        {setup}{object} record = new {object}({object_fields});
         insert record;
         ClearDateService.clear(cv, record.Id);
 

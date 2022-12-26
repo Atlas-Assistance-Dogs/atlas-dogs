@@ -7,7 +7,9 @@ public with sharing class ClearDateService {
         // note there is a limit of one cv above, so we can update all of them here
         if (cv.Category__c == 'Dog'){
             clearDogDate(cv, recordId);
-        } else{
+        } else if (cv.Category__c == 'Client') {
+            clearTeamDate(cv, recordId);
+        } else {
             // this is related to a contact
             clearContactDate(cv, recordId);
         }
@@ -18,49 +20,48 @@ public with sharing class ClearDateService {
     private static void clearContactDate(ContentVersion cv, Id recordId) {
         if (cv.Category__c == 'Standalone') return;
  
-        string field;
-        if (cv.Type__c == 'ContactForm') {
-            field = 'ContactFormReceived__c';
-        }
-        else {
-            field = string.format('{0}{1}Received__c', new List<Object>{ cv.Category__c, cv.Type__c.replace(' ', '') });
-        }
-        string query = string.format('SELECT Id, {0} FROM Contact WHERE Id = :recordId', new List<Object>{ field });
-        List<Contact> contacts = Database.query(query);
+        List<Contact> contacts = [
+            SELECT Id,
+                ADSiMApplicationReceived__c, ADSiMPreApplicationReceived__c, ADSiMProgAgreementReceived__c,
+				BoardAgreementReceived__c, BoardApplicationReceived__c, BoardCoIReceived__c, BoardResumeReceived__c, BoardToNReceived__c,
+				FacilitatorApplicationReceived__c, FacilitatorCertAgreementReceived__c, FacilitatorInfrNoticeReceived__c, FacilitatorPracticumReceived__c, FacilitatorProfGrowthPlanReceived__c, FacilitatorProgAgreementReceived__c, FacilitatorReferenceReceived__c,
+				PuppyApplicationReceived__c, PuppyCertAgreementReceived__c, PuppyContractReceived__c, PuppyInfrNoticeReceived__c, PuppyProgAgreementReceived__c, PuppyReferenceReceived__c,
+				StaffAgreementReceived__c, StaffApplicationReceived__c, StaffI9Received__c, StaffOfferReceived__c, StaffResumeReceived__c, StaffW4Received__c, StaffW9Received__c,
+				TrainerApplicationReceived__c, TrainerCertAgreementReceived__c, TrainerInfrNoticeReceived__c, TrainerProgAgreementReceived__c, TrainerReferenceReceived__c,
+				VolunteerAgreementReceived__c, VolunteerApplicationReceived__c, VolunteerResumeReceived__c,
+				ContactFormReceived__c
+            FROM Contact
+            WHERE Id = :recordId];
 
         if (contacts.size() == 0)
             return;
         Contact contact = contacts[0];
         
-        if (cv.Category__c == 'ADSiM'){
+        if (cv.Category__c == 'ADSiM') {
             clearADSiMDate(cv, contact);
         }
         
-        if (cv.Category__c == 'Board'){
+        if (cv.Category__c == 'Board') {
             clearBoardDate(cv, contact);
         }
         
-        if (cv.Category__c == 'Client'){
-            clearClientDate(cv, contact);
-        }
-        
-        if (cv.Category__c == 'Facilitator'){
+        if (cv.Category__c == 'Facilitator') {
             clearFacilitatorDate(cv, contact);
         }
         
-        if (cv.Category__c == 'Puppy'){
+        if (cv.Category__c == 'Puppy') {
             clearPuppyDate(cv, contact);
         }
         
-        if (cv.Category__c == 'Staff'){
+        if (cv.Category__c == 'Staff') {
             clearStaffDate(cv, contact);
         }
         
-        if (cv.Category__c == 'Trainer'){
+        if (cv.Category__c == 'Trainer') {
             clearTrainerDate(cv, contact);
         }
         
-        if (cv.Category__c == 'Volunteer'){
+        if (cv.Category__c == 'Volunteer') {
             clearVolunteerDate(cv, contact);
         }
 
@@ -105,37 +106,6 @@ public with sharing class ClearDateService {
 
         if (cv.Type__c == 'ToN'){
             contact.BoardToNReceived__c = null;
-        }
-    }
-
-    // Clear the last date when the category is Client
-    private static void clearClientDate(ContentVersion cv, Contact contact) {
-        if (cv.Type__c == 'Application'){
-            contact.ClientApplicationReceived__c = null;
-        }
-
-        if (cv.Type__c == 'CertAgreement'){
-            contact.ClientCertAgreementReceived__c = null;
-        }
-
-        if (cv.Type__c == 'LOMI'){
-            contact.ClientLOMIReceived__c = null;
-        }
-
-        if (cv.Type__c == 'PreApplication'){
-            contact.ClientPreApplicationReceived__c = null;
-        }
-
-        if (cv.Type__c == 'ProgAgreement'){
-            contact.ClientProgAgreementReceived__c = null;
-        }
-
-        if (cv.Type__c == 'Survey'){
-            contact.ClientSurveyReceived__c = null;
-        }
-
-        if (cv.Type__c == 'VAPW'){
-            contact.ClientVAPWReceived__c = null;
         }
     }
 
@@ -266,10 +236,53 @@ public with sharing class ClearDateService {
         }
     }
 
+    private static void clearTeamDate(ContentVersion cv, Id recordId) {
+        List<Team__c> teams = [
+            SELECT Id, Client__c, Dog__c,
+                   ClientApplicationReceived__c, ClientCertAgreementReceived__c, ClientLOMIReceived__c, ClientPreApplicationReceived__c, ClientProgAgreementReceived__c, ClientSurveyReceived__c, ClientVAPWReceived__c
+            FROM Team__c
+            WHERE Id = :recordId];
+
+        if (teams.size() == 0)
+            return;
+        Team__c team = teams[0];
+
+        if (cv.Type__c == 'Application'){
+            team.ClientApplicationReceived__c = null;
+        }
+
+        if (cv.Type__c == 'CertAgreement'){
+            team.ClientCertAgreementReceived__c = null;
+        }
+
+        if (cv.Type__c == 'LOMI'){
+            team.ClientLOMIReceived__c = null;
+        }
+
+        if (cv.Type__c == 'PreApplication'){
+            team.ClientPreApplicationReceived__c = null;
+        }
+
+        if (cv.Type__c == 'ProgAgreement'){
+            team.ClientProgAgreementReceived__c = null;
+        }
+
+        if (cv.Type__c == 'Survey'){
+            team.ClientSurveyReceived__c = null;
+        }
+
+        if (cv.Type__c == 'VAPW'){
+            team.ClientVAPWReceived__c = null;
+        }
+
+        update team;
+    }
+
     private static void clearDogDate(ContentVersion cv, Id recordId) {
-        string  field = string.format('{0}Received__c', new List<Object>{ cv.Type__c.replace(' ', '') });
-        string query = string.format('SELECT Id, {0} FROM Dog__c WHERE Id = :recordId', new List<Object>{ field });
-        List<Dog__c> dogs = Database.query(query);
+        List<Dog__c> dogs = [
+            SELECT Id, HealthFormReceived__c, VacExamsReceived__c, XrayReceived__c
+            FROM Dog__c
+            WHERE Id = :recordId];
 
         if (dogs.size() == 0)
             return;
