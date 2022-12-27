@@ -21,19 +21,49 @@ public with sharing class FileService {
                 continue;
             }
             // note there is a limit of one cv above, so we can update all of them here
+            string objName = recordId.getSObjectType().getDescribe().getName();
+            if (objName == Dog__c.class.getName()) {
+                updateDogDate(cvs, cntLink.LinkedEntityId);
+                }
+            if (objName == Team__c.class.getName()) {
+                updateTeamDate(cvs, cntLink.LinkedEntityId);
+            }
+            if (objName == Contact.class.getName()) {
+                updateContactDate(cvs, cntLink.LinkedEntityId);
+            }
+        }
+    }
 
-            switch on recordId.getSObjectType().getDescribe().getName() {
-                when 'Dog__c' {
-                    updateDogDate(cvs, cntLink.LinkedEntityId);
+    private static void linkDocumentsToTeamMember(List<ContentVersion> cvs, Id recordId) {
+        List<Team__c> teams = [SELECT Client__c, Dog__c FROM Team__c WHERE Id = :recordId];
+        if (teams.size() == 1) {
+            Team__c team = teams[0];
+            for (ContentVersion cv : cvs) {
+                System.debug(cv.Category__c);
+                if (cv.Category__c == 'Client') {
+                    createLink(cv.ContentDocumentId, team.Client__c);
                 }
-                when 'Team__c' {
-                    updateTeamDate(cvs, cntLink.LinkedEntityId);
-                }
-                when 'Contact' {
-                    updateContactDate(cvs, cntLink.LinkedEntityId);
+                if (cv.Category__c == 'Dog') {
+                    createLink(cv.ContentDocumentId, team.Dog__c);
                 }
             }
         }
+    }
+
+    private static void createLink(Id docId, Id entityId) {
+        List<ContentDocumentLink> cdls = [
+            SELECT Id FROM ContentDocumentLink
+            WHERE ContentDocumentId = :docId AND LinkedEntityId = :entityId
+        ];
+        if (cdls.size() > 0) {
+            return;
+        }
+        System.debug('creating link');
+        ContentDocumentLink link = new ContentDocumentLink(
+            ContentDocumentId = docId,
+            LinkedEntityId = entityId
+        );
+        insert link;
     }
 
     // Update the date for the record tied to a file
@@ -62,18 +92,19 @@ public with sharing class FileService {
         if (String.isBlank(cv.Category__c) || String.isBlank(cv.Type__c))
             return;
 
-        switch on recordId.getSObjectType().getDescribe().getName() {
-            when 'Dog__c' {
-                updateDogDate(new List<ContentVersion>{ cv }, recordId);
-            }
-            when 'Team__c' {
-                updateTeamDate(new List<ContentVersion>{ cv }, recordId);
-            }
-            when 'Contact' {
-                updateContactDate(new List<ContentVersion>{ cv }, recordId);
-            }
+        List<ContentVersion> cvs = new List<ContentVersion>{ cv };
+        string objName = recordId.getSObjectType().getDescribe().getName();
+        if (objName == Dog__c.class.getName()) {
+            updateDogDate(cvs, recordId);
         }
-    }
+        else if (objName == Team__c.class.getName()) {
+            updateTeamDate(cvs, recordId);
+            linkDocumentsToTeamMember(cvs, recordId);
+        }
+        else if (objName == Contact.class.getName()) {
+            updateContactDate(cvs, recordId);
+        }
+}
 
     // Determine if the proposed date is later than the current.
     // Never is considered before everything else.
