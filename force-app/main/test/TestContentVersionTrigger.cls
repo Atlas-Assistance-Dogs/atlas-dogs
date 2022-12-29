@@ -10,7 +10,7 @@ public with sharing class TestContentVersionTrigger {
         insert joe;
         System.debug(joe.Id);
 
-        ContentVersion cv = TestFileService.createLink('Client', 'Application', Date.today(), joe.Id);
+        ContentVersion cv = TestFileService.createLink('Volunteer', 'Application', Date.today(), joe.Id);
         // change the date
         cv.Date__c = Date.today().addDays(1);
         System.debug(cv);
@@ -22,8 +22,8 @@ public with sharing class TestContentVersionTrigger {
 
         // Assert
         System.assert(result.isSuccess());
-        Contact saved = [SELECT ClientApplicationReceived__c FROM Contact WHERE id=:joe.Id LIMIT 1];
+        Contact saved = [SELECT VolunteerApplicationReceived__c FROM Contact WHERE id=:joe.Id LIMIT 1];
         System.assert(result.getErrors().size() == 0);
-        System.assertEquals(cv.Date__c, saved.ClientApplicationReceived__c);
+        System.assertEquals(cv.Date__c, saved.VolunteerApplicationReceived__c);
     }
 }

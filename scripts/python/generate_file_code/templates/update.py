@@ -91,7 +91,7 @@ team_code_start = '''
         Team__c team = teams[0];
         // Make sure we have Date__c, and last of these is last in
         // the list so we update the field correctly
-        cvs = [SELECT Date__c, Type__c
+        cvs = [SELECT Date__c, Type__c, ContentDocumentId
                FROM ContentVersion
                WHERE Id IN :ids
                ORDER BY Date__c

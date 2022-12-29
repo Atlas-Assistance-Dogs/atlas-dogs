@@ -10,7 +10,6 @@ public with sharing class FileService {
             WHERE Id = :cvs[0].Id
             LIMIT 1
         ];
-        Id recordId;
         // find the record tied to these cvs
         for (ContentDocumentLink cntLink : [
             SELECT Id, LinkedEntityId
@@ -21,12 +20,13 @@ public with sharing class FileService {
                 continue;
             }
             // note there is a limit of one cv above, so we can update all of them here
-            string objName = recordId.getSObjectType().getDescribe().getName();
+            string objName = cntLink.LinkedEntityId.getSObjectType().getDescribe().getName();
             if (objName == Dog__c.class.getName()) {
                 updateDogDate(cvs, cntLink.LinkedEntityId);
-                }
+            }
             if (objName == Team__c.class.getName()) {
                 updateTeamDate(cvs, cntLink.LinkedEntityId);
+                linkDocumentsToTeamMember(cvs, cntLink.LinkedEntityId);
             }
             if (objName == Contact.class.getName()) {
                 updateContactDate(cvs, cntLink.LinkedEntityId);
@@ -372,7 +372,7 @@ public with sharing class FileService {
         Team__c team = teams[0];
         // Make sure we have Date__c, and last of these is last in
         // the list so we update the field correctly
-        cvs = [SELECT Date__c, Type__c
+        cvs = [SELECT Date__c, Type__c, ContentDocumentId
                FROM ContentVersion
                WHERE Id IN :ids
                ORDER BY Date__c

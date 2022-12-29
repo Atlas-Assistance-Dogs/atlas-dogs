@@ -15,7 +15,7 @@ public with sharing class TestContentDocumentLinkTrigger {
             PathOnClient = 'TestDocument3.jpg',
             Origin = 'H',
             VersionData = Blob.valueOf('Document Body 3'),
-            Category__c = 'Client',
+            Category__c = 'Volunteer',
             Type__c = 'Application',
             Date__c = Date.today()
         );
@@ -34,8 +34,8 @@ public with sharing class TestContentDocumentLinkTrigger {
 
         // Assert
         System.assert(result.isSuccess());
-        Contact saved = [SELECT ClientApplicationReceived__c FROM Contact WHERE id=:joe.Id LIMIT 1];
+        Contact saved = [SELECT VolunteerApplicationReceived__c FROM Contact WHERE id=:joe.Id LIMIT 1];
         System.assert(result.getErrors().size() == 0);
-        System.assertEquals(cv.Date__c, saved.ClientApplicationReceived__c);
+        System.assertEquals(cv.Date__c, saved.VolunteerApplicationReceived__c);
     }
 }

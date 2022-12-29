@@ -17,15 +17,16 @@ public with sharing class TestFileServiceFields {
         );
         insert cv;
 
-        ContentVersion temp = [
-            SELECT Id, ContentDocumentId
+        // retrieve the cv with ContentDocumentId
+        cv = [
+            SELECT Id, ContentDocumentId, Title, Category__c, Type__c, Date__c
             FROM ContentVersion
             WHERE Id = :cv.Id
             LIMIT 1
         ];
 
         ContentDocumentLink link = new ContentDocumentLink(
-            ContentDocumentId = temp.ContentDocumentId,
+            ContentDocumentId = cv.ContentDocumentId,
             LinkedEntityId = recordId
         );
         insert link;

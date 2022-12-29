@@ -98,22 +98,22 @@ public with sharing class TestFileService {
             Email = 'abc@abc.com'
         );
         insert contact;
-        ContentVersion cv = createLink('Client', 'Application', Date.today(), contact.Id);
+        ContentVersion cv = createLink('Volunteer', 'Application', Date.today(), contact.Id);
 
         // Act
         FileService.updateDate(cv);
 
         // Assert
         contact = [
-            SELECT ClientApplicationReceived__c
+            SELECT VolunteerApplicationReceived__c
             FROM Contact
             WHERE Id = :contact.Id
             LIMIT 1
         ];
         system.assertEquals(
             Date.today(),
-            contact.ClientApplicationReceived__c,
-            'ClientApplicationReceived not set'
+            contact.VolunteerApplicationReceived__c,
+            'VolunteerApplicationReceived not set'
         );
     }
 
@@ -160,11 +160,11 @@ public with sharing class TestFileService {
         insert record;
         List<ContentVersion> cvs = new List<ContentVersion>();
         cvs.add(createLink('Board', 'CoI', Date.today(), record.Id));
-        cvs.add(createLink('Client', 'Application', Date.today().addDays(-1), record.Id));
+        cvs.add(createLink('Volunteer', 'Application', Date.today().addDays(-1), record.Id));
         cvs.add(createLink('Facilitator', 'ProfGrowthPlan', Date.today().addDays(-2), record.Id));
         FileService.updateDates(cvs);
         record = [
-            SELECT BoardCoIReceived__c, ClientApplicationReceived__c, FacilitatorProfGrowthPlanReceived__c
+            SELECT BoardCoIReceived__c, VolunteerApplicationReceived__c, FacilitatorProfGrowthPlanReceived__c
             FROM Contact
             WHERE Id = :record.Id
             LIMIT 1
@@ -176,8 +176,8 @@ public with sharing class TestFileService {
         );
         system.assertEquals(
             Date.today().addDays(-1),
-            record.ClientApplicationReceived__c,
-            'ClientApplicationReceived__c not set'
+            record.VolunteerApplicationReceived__c,
+            'VolunteerApplicationReceived__c not set'
         );
         system.assertEquals(
             Date.today().addDays(-2),
