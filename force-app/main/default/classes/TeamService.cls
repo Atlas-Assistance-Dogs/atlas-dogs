@@ -47,6 +47,7 @@ public with sharing class TeamService {
             Contact client = clients[0];
             client.ClientCertificationValidUntil__c = team.CertificationValidUntil__c;
             client.ClientStatus__c = team.Status__c;
+            update client;
         }
     }
 }

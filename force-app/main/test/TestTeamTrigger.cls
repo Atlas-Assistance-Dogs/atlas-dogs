@@ -4,7 +4,11 @@ public with sharing class TestTeamTrigger {
     private static Dog__c boomer;
 
     private static void setup() {
-        joe = new Contact(FirstName = 'Joe', LastName = 'Blow');
+        joe = new Contact(
+            FirstName = 'Joe',
+            LastName = 'Blow',
+            ClientStatus__c = 'Onboarding',
+            ClientCertificationValidUntil__c = Date.today().addMonths(3));
         insert joe;
         boomer = new Dog__c(Name = 'Boomer');
         insert boomer;
@@ -145,5 +149,90 @@ public with sharing class TestTeamTrigger {
             WHERE Dog__c = :ace.Id AND Contact__c = :joe.Id
         ];
         System.assertEquals('Client', relationship.Type__c);
+    }
+
+    private static void testClientStatus(string status, Date cert, string expectedStatus, Date expectedCert) {
+        Team__c team = new Team__c(
+            Name = 'Joe_Boomer',
+            Client__c = joe.Id,
+            Dog__c = boomer.Id,
+            Status__c = status,
+            CertificationValidUntil__c = cert
+        );
+
+        // Act
+        Test.startTest();
+        Database.SaveResult result = Database.insert(team, false);
+        Test.stopTest();
+
+        // Assert
+        System.assert(result.isSuccess());
+        Contact client = [
+            SELECT ClientStatus__c, ClientCertificationValidUntil__c
+            FROM Contact
+            WHERE Id = :joe.Id
+        ];
+        System.assertEquals(expectedStatus, client.ClientStatus__c);
+        System.assertEquals(expectedCert, client.ClientCertificationValidUntil__c);
+    }
+    
+    @isTest
+    public static void trigger_DoesNotUpdateClientStatus_WhenDecertified() {
+        setup();
+        testClientStatus('Decertified', Date.today().addMonths(5), joe.ClientStatus__c, joe.ClientCertificationValidUntil__c);
+    }
+    
+    @isTest
+    public static void trigger_DoesNotUpdateClientStatus_WhenDiscontinued() {
+        setup();
+        testClientStatus('Discontinued', Date.today().addMonths(5), joe.ClientStatus__c, joe.ClientCertificationValidUntil__c);
+    }
+    
+    @isTest
+    public static void trigger_UpdatesClientStatus_WhenNone() {
+        setup();
+        string status = 'None';
+        Date expected = Date.today().addMonths(5);
+        testClientStatus(status, expected, status, expected);
+    }
+    
+    @isTest
+    public static void trigger_UpdatesClientStatus_WhenInitialInquiry() {
+        setup();
+        string status = 'Initial Inquiry';
+        Date expected = Date.today().addMonths(5);
+        testClientStatus(status, expected, status, expected);
+    }
+    
+    @isTest
+    public static void trigger_UpdatesClientStatus_WhenInADSiM() {
+        setup();
+        string status = 'In ADSiM';
+        Date expected = Date.today().addMonths(5);
+        testClientStatus(status, expected, status, expected);
+    }
+    
+    @isTest
+    public static void trigger_UpdatesClientStatus_WhenOnboarding() {
+        setup();
+        string status = 'Onboarding';
+        Date expected = Date.today().addMonths(5);
+        testClientStatus(status, expected, status, expected);
+    }
+    
+    @isTest
+    public static void trigger_UpdatesClientStatus_WhenInTraining() {
+        setup();
+        string status = 'In Training';
+        Date expected = Date.today().addMonths(5);
+        testClientStatus(status, expected, status, expected);
+    }
+    
+    @isTest
+    public static void trigger_UpdatesClientStatus_WhenCertified() {
+        setup();
+        string status = 'Certified';
+        Date expected = Date.today().addMonths(5);
+        testClientStatus(status, expected, status, expected);
     }
 }
