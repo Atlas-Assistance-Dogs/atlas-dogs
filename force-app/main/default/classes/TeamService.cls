@@ -1,4 +1,6 @@
 public with sharing class TeamService {
+    // Set the dog/client relationship.
+    // This is meant to be called from the team update trigger.
     public static void setClientDogRelationShip(Team__c newTeam) {
         // See if there is an existing relationship between the dog and client
         List<DogRelationShip__c> relationShips = [SELECT Id, Type__c FROM DogRelationShip__c
@@ -31,9 +33,20 @@ public with sharing class TeamService {
         }
     }
 
-    /*private static Map<String, Boolean> inactiveStatus = new Map<String, Boolean> { ''}
-    // Update client status
+    private static Set<string> inactiveStatus = new Set<string> {'Decertified', 'Discontinued'};
+    
+    // Update client status.  This is meant to be called from the team update trigger.
     public static void updateClientStatus(Team__c team) {
-        if (team.Status__c)
-    }*/
+        if (inactiveStatus.contains(team.Status__c)) {
+            return;
+        }
+
+        List<Contact> clients = [SELECT ClientStatus__c, ClientCertificationValidUntil__c FROM Contact WHERE Id = :team.Client__c];
+
+        if (!clients.isEmpty()) {
+            Contact client = clients[0];
+            client.ClientCertificationValidUntil__c = team.CertificationValidUntil__c;
+            client.ClientStatus__c = team.Status__c;
+        }
+    }
 }
