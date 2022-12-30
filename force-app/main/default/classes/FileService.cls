@@ -23,6 +23,7 @@ public with sharing class FileService {
             string objName = cntLink.LinkedEntityId.getSObjectType().getDescribe().getName();
             if (objName == Dog__c.class.getName()) {
                 updateDogDate(cvs, cntLink.LinkedEntityId);
+                linkDocumentsToTeams(cvs, cntLink.LinkedEntityId);
             }
             if (objName == Team__c.class.getName()) {
                 updateTeamDate(cvs, cntLink.LinkedEntityId);
@@ -34,6 +35,19 @@ public with sharing class FileService {
         }
     }
 
+    // Link any dog documents back to any teams they are on
+    private static void linkDocumentsToTeams(List<ContentVersion> cvs, Id recordId) {
+        List<Team__c> teams = [SELECT Client__c, Id FROM Team__c WHERE Dog__c = :recordId];
+        for (Team__c team : teams) {
+            for (ContentVersion cv : cvs) {
+                if (cv.Category__c == 'Dog') {
+                    createLink(cv.ContentDocumentId, team.Id);
+                }
+            }
+        }
+    }
+
+    // Link documents to the client and dog
     private static void linkDocumentsToTeamMember(List<ContentVersion> cvs, Id recordId) {
         List<Team__c> teams = [SELECT Client__c, Dog__c FROM Team__c WHERE Id = :recordId];
         if (teams.size() == 1) {
