@@ -1,19 +1,21 @@
 import { LightningElement, wire, api } from "lwc";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
-import getContentVersion from "@salesforce/apex/FileController.getContentVersion";
+import { getRecord } from "lightning/uiRecordApi";
 import updateContentVersion from "@salesforce/apex/FileController.updateContentVersion";
 import { NavigationMixin } from "lightning/navigation";
 
 import CATEGORY_FIELD from "@salesforce/schema/ContentVersion.Category__c";
 import TYPE_FIELD from "@salesforce/schema/ContentVersion.Type__c";
 import DATE_FIELD from "@salesforce/schema/ContentVersion.Date__c";
+import TITLE_FIELD from "@salesforce/schema/ContentVersion.Title";
+import DOCID_FIELD from "@salesforce/schema/ContentVersion.ContentDocumentId";
 
-export default class DocumentUploadCmp extends NavigationMixin(
-    LightningElement
-) {
+export default class DocumentUploadCmp extends NavigationMixin(LightningElement) {
     @api recordId;
     @api versionId;
     @api currentCv = { ContentDocumentId: "", Title: "blank" };
+    title = '';
+    contentDocumentId = '';
     contentType = "Emergency Contact";
 
     fields = {
@@ -21,12 +23,12 @@ export default class DocumentUploadCmp extends NavigationMixin(
         type: TYPE_FIELD,
         date: DATE_FIELD
     };
-    
+
     @api
     openModal(message) {
         this.message = "";
         this.recordId = message?.recordId;
-        this.getFileInfo()
+        this.getFileInfo();
         this.template.querySelector("c-modal-cmp").openModal();
     }
     closeModal() {
@@ -34,7 +36,7 @@ export default class DocumentUploadCmp extends NavigationMixin(
     }
 
     handleView(event) {
-        let currentRecordID = this.currentCv.ContentDocumentId;
+        let currentRecordID = this.contentDocumentId;
         this[NavigationMixin.Navigate]({
             type: "standard__namedPage",
             attributes: {
@@ -85,19 +87,20 @@ export default class DocumentUploadCmp extends NavigationMixin(
     }
 
     // Get the file name and document id
-    getFileInfo() {
-        getContentVersion({ recordId: this.recordId })
-            .then((data) => {
-                this.currentCv = data;
-            })
-            .catch((error) => {
-                this.dispatchEvent(
-                    new ShowToastEvent({
-                        title: "Error!!",
-                        message: error.body.message,
-                        variant: "error"
-                    })
-                );
-            });
+    @wire(getRecord, { recordId: '$recordId', fields: [DOCID_FIELD, TITLE_FIELD] })
+    getFileInfo(result) {
+        if (result?.data) {
+            this.title = result.data.fields.Title.value;
+            this.contentDocumentId = result.data.fields.ContentDocumentId.value;
+        }
+        else if (result?.error) {
+            this.dispatchEvent(
+                new ShowToastEvent({
+                    title: "Error!!",
+                    message: result.error.message,
+                    variant: "error"
+                })
+            );
+        }
     }
-}
+ }

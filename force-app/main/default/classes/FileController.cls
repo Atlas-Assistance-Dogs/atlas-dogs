@@ -45,6 +45,33 @@ public inherited sharing class FileController {
         }
     }
 
+    @AuraEnabled
+    public static void updateContentVersion(
+        String category,
+        String docType,
+        Date docDate,
+        Id recordId
+    ) {
+        try {
+            ContentVersion cv = [
+                SELECT Category__c, Type__c, Date__c
+                FROM ContentVersion
+                WHERE Id = :recordId
+                LIMIT 1
+            ];
+            cv.Type__c = docType;
+            cv.Category__c = category;
+            cv.Date__c = docDate;
+            update cv;
+        } catch (NullPointerException ex) {
+            throw new AuraHandledException(ex.getMessage());
+        } catch (QueryException ex) {
+            throw new AuraHandledException(ex.getMessage());
+        } catch (DmlException ex) {
+            throw new AuraHandledException(ex.getMessage());
+        }
+    }
+
     @AuraEnabled(cacheable=true)
     public static RelatedObjects getRelatedFiles(Id recordId, Integer max) {
         if (max == null) {
