@@ -158,6 +158,81 @@ public with sharing class TestFileController {
     }
 
     @isTest
+    public static void deleteLink_ThrowsException_WhenNull() {
+        Boolean thrown = false;
+        Test.startTest();
+        try {
+            FileController.deleteLink(null);
+        } catch (AuraHandledException e) {
+            thrown = true;
+        }
+        Test.stopTest();
+
+        System.assert(thrown);
+    }
+
+    @isTest
+    public static void deleteLink_ThrowsException_WhenInvalidType() {
+        Dog__c ace = new Dog__c(Name = 'Ace');
+        insert ace;
+
+        Boolean thrown = false;
+
+        Test.startTest();
+        try {
+            FileController.deleteLink(new ContentDocumentLink(Id = ace.Id));
+        } catch (AuraHandledException e) {
+            thrown = true;
+        }
+
+        Test.stopTest();
+
+        System.assert(thrown);
+    }
+
+    @isTest
+    public static void deleteLink_DeletesDocument_WhenOnlyOneLink() {
+        Dog__c ace = new Dog__c(Name = 'Ace');
+        insert ace;
+        ContentVersion cv = TestFileService.createLink('Volunteer', 'Application', Date.today(), ace.Id);
+        ContentDocumentLink link = [SELECT Id FROM ContentDocumentLink WHERE ContentDocumentId = :cv.ContentDocumentId];
+
+        Test.startTest();
+        FileController.deleteLink(link);
+
+        Test.stopTest();
+        
+        List<ContentDocument> cds = [SELECT Id FROM ContentDocument WHERE Id = :cv.ContentDocumentId];
+        System.assert(cds.isEmpty());
+    }
+
+    @isTest
+    public static void deleteLink_DeletesLink_WhenMoreThanOne() {
+        Dog__c ace = new Dog__c(Name = 'Ace');
+        insert ace;
+        ContentVersion cv = TestFileService.createLink('Volunteer', 'Application', Date.today(), ace.Id);
+        ContentDocumentLink link1 = [SELECT Id FROM ContentDocumentLink WHERE ContentDocumentId = :cv.ContentDocumentId];
+
+        ContentDocumentLink link = new ContentDocumentLink(
+            ContentDocumentId = cv.ContentDocumentId,
+            LinkedEntityId = ace.Id
+        );
+        insert link;
+
+        Test.startTest();
+        FileController.deleteLink(link);
+
+        Test.stopTest();
+        List<ContentDocument> cds = [SELECT Id FROM ContentDocument WHERE Id = :cv.ContentDocumentId];
+        System.assertEquals(1, cds.size());
+        System.assertEquals(link1.Id, cds[0].Id);
+        List<ContentDocumentLink> cdls = [SELECT Id FROM ContentDocumentLink WHERE ContentDocumentId = :cv.ContentDocumentId];
+        System.assertEquals(1, cdls.size());
+        // Just finishing this select is our assert, since an exception will be thrown if the cv doesn't exist
+        cv = [SELECT Id FROM ContentVersion WHERE Id = :cv.Id];
+    }
+
+    @isTest
     public static void updateContentVersion_ThrowsException_WhenNullId() {
         Boolean thrown = false;
         Test.startTest();
