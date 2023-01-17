@@ -105,6 +105,7 @@ public inherited sharing class FileController {
         if (recordId == null) {
             throw new AuraHandledException('recordId must not be null');
         }
+
         Id parentId = recordId;
         List<Id> lstConDocs = new List<Id>();
         for (ContentDocumentLink cntLink : [
@@ -119,6 +120,10 @@ public inherited sharing class FileController {
 
         if (!lstConDocs.isEmpty()) {
             RelatedObjects related = new RelatedObjects();
+
+            // get a map of the category and type labels
+            Map<string, string> categoryEntries = getEntryMap(ContentVersion.Category__c.getDescribe());
+            Map<string, string>typeEntries = getEntryMap(ContentVersion.Type__c.getDescribe());
             List<ContentVersion> files = [
                 SELECT
                     Title,
@@ -132,13 +137,26 @@ public inherited sharing class FileController {
                 LIMIT :max
             ];
             for (ContentVersion cv : files) {
-                related.items.add(cv);
+                FileInfo info = new FileInfo();
+                info.cv = cv;
+                info.category = categoryEntries.get(cv.Category__c);
+                info.type = typeEntries.get(cv.Type__c);
+                related.items.add(info);
             }
             related.total = [SELECT Count() FROM ContentVersion WHERE ContentDocumentId IN :lstConDocs AND FileType != 'SNOTE'];
             return related;
         } else {
             return new RelatedObjects();
         }
+    }
+
+    private static Map<string, string> getEntryMap(Schema.DescribeFieldResult field) {
+        List<Schema.PicklistEntry> entries = field.getPicklistValues();
+        Map<string, string> entryMap = new Map<string, string>();
+        for (Schema.PicklistEntry entry : entries) {
+            entryMap.put(entry.getValue(), entry.getLabel());
+        }
+        return entryMap;
     }
 
     @AuraEnabled

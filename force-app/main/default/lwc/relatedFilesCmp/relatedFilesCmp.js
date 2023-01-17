@@ -30,12 +30,12 @@ const COLS = [
     },
     {
         label: "Category",
-        fieldName: CATEGORY_FIELD.fieldApiName,
+        fieldName: 'category',
         sortable: true
     },
     {
         label: "Document Type",
-        fieldName: TYPE_FIELD.fieldApiName,
+        fieldName: 'type',
         sortable: true
     },
     {
@@ -54,6 +54,22 @@ export default class RelatedFiles extends NavigationMixin(LightningElement) {
     columns = COLS;
     @track data;
     total = 0;
+    @track filterItems = [
+        {
+            label: "Category",
+            name: "category",
+            placeholder: "Select category",
+            value: null,
+            options: []
+        },
+        {
+            label: "Type",
+            name: "type",
+            placeholder: "Select type",
+            value: null,
+            options: []
+        }
+    ];
 
     openModal() {
         this.template.querySelector("c-file-upload-cmp").openModal();
@@ -66,20 +82,50 @@ export default class RelatedFiles extends NavigationMixin(LightningElement) {
         return this.viewAll ? 10000 : 6;
     }
 
+    bareData;
     @wire(getRelatedFiles, { recordId: "$recordId", max: "$max" }) filesLst(
         result
     ) {
         this.wiredFilesList = result;
         this.data = null;
         if (result.data) {
-            this.data = result.data.items;
+            this.data = result.data.items.map((info) => {
+                let row = Object.assign({}, info.cv);
+                row.category = info.category;
+                row.type = info.type;
+                return row;
+            });
+            this.bareData = [...this.data]; // save a copy of the data
             if (this.data.length === 0) {
                 this.data = null;
                 this.total = 0;
             }
-            if (this.max < 15) {
+            if (!this.viewAll) {
                 this.total = result.data.total;
             }
+            // fill in category and type options
+            const categories = [
+                ...new Set(
+                    this.data.map((x) => {
+                        return {
+                            label: x.category,
+                            value: x[CATEGORY_FIELD.fieldApiName]
+                        };
+                    })
+                )
+            ];
+            this.filterItems[0].options = categories; //.map(x => {return {label: x, value: x};});
+            const types = [
+                ...new Set(
+                    this.data.map((x) => {
+                        return {
+                            label: x.type,
+                            value: x[TYPE_FIELD.fieldApiName]
+                        };
+                    })
+                )
+            ];
+            this.filterItems[1].options = types;
         } else if (result.error) {
             this.dispatchEvent(
                 new ShowToastEvent({
@@ -144,6 +190,23 @@ export default class RelatedFiles extends NavigationMixin(LightningElement) {
                 break;
             default:
         }
+    }
+
+    handleFilter() {
+        this.template.querySelector("c-select-option-cmp").open();
+    }
+
+    handleFilterSelect(event) {
+        const items = event.detail;
+        let cloneData = [...this.bareData];
+        items.foreach((item) => {
+            if (item.value) {
+                cloneData = cloneData.filter(
+                    (info) => info[item.name] == item.value
+                );
+            }
+        });
+        this.data = cloneData;
     }
 
     navigateToFiles(currentRow) {

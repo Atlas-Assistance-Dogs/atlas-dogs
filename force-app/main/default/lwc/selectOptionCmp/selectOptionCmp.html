@@ -1,0 +1,17 @@
+<template>
+    <c-modal-cmp title={title} onclose={handleCancel} onsubmit={handleSubmit}>
+        <div slot="body">
+            <template for:each={items} for:item="item">
+                <lightning-combobox
+                    key={item.name}
+                    name={item.name}
+                    label={item.label}
+                    value={item.value}
+                    placeholder={item.placeholder}
+                    options={item.options}
+                >
+                </lightning-combobox>
+            </template>
+        </div>
+    </c-modal-cmp>
+</template>
