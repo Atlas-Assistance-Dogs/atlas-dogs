@@ -199,7 +199,7 @@ export default class RelatedFiles extends NavigationMixin(LightningElement) {
     handleFilterSelect(event) {
         const items = event.detail;
         let cloneData = [...this.bareData];
-        items.foreach((item) => {
+        items.forEach((item) => {
             if (item.value) {
                 cloneData = cloneData.filter(
                     (info) => info[item.name] == item.value
