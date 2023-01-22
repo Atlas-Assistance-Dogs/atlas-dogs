@@ -88,7 +88,7 @@ export default class RelatedFiles extends NavigationMixin(LightningElement) {
     ) {
         this.wiredFilesList = result;
         this.data = null;
-        if (result.data) {
+        if (result.data?.items) {
             this.data = result.data.items.map((info) => {
                 let row = Object.assign({}, info.cv);
                 row.category = info.category;
@@ -106,26 +106,20 @@ export default class RelatedFiles extends NavigationMixin(LightningElement) {
             // fill in category and type options
             const categories = [
                 ...new Set(
-                    this.data.map((x) => {
-                        return {
-                            label: x.category,
-                            value: x[CATEGORY_FIELD.fieldApiName]
-                        };
-                    })
+                    this.data.map((x) => x.category)
                 )
             ];
-            this.filterItems[0].options = categories; //.map(x => {return {label: x, value: x};});
+            categories.sort();
+            this.filterItems[0].options = categories.map(x => {return {label: x, value: x};});
             const types = [
                 ...new Set(
-                    this.data.map((x) => {
-                        return {
-                            label: x.type,
-                            value: x[TYPE_FIELD.fieldApiName]
-                        };
-                    })
+                    this.data.map((x) => x.type)
                 )
             ];
-            this.filterItems[1].options = types;
+            types.sort();
+            this.filterItems[1].options = types.map((x) => {
+                return { label: x, value: x };
+            });
         } else if (result.error) {
             this.dispatchEvent(
                 new ShowToastEvent({
