@@ -1,6 +1,6 @@
 <template>
     <c-modal-cmp title={title} onclose={handleCancel} onsubmit={handleSubmit}>
-        <div slot="body">
+        <div slot="body" class="select">
             <template for:each={items} for:item="item">
                 <lightning-combobox
                     key={item.name}
