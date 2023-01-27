@@ -10,7 +10,7 @@ public with sharing class TestTeamTrigger {
             ClientStatus__c = 'Onboarding',
             ClientCertificationValidUntil__c = Date.today().addMonths(3));
         insert joe;
-        boomer = new Dog__c(Name = 'Boomer');
+        boomer = new Dog__c(Name = 'Boomer', Status__c = 'Onboarding');
         insert boomer;
     }
 
@@ -151,7 +151,7 @@ public with sharing class TestTeamTrigger {
         System.assertEquals('Client', relationship.Type__c);
     }
 
-    private static void testClientStatus(string status, Date cert, string expectedStatus, Date expectedCert) {
+    private static void testClientDogStatus(string status, Date cert, string expectedStatus, Date expectedCert) {
         Team__c team = new Team__c(
             Name = 'Joe_Boomer',
             Client__c = joe.Id,
@@ -174,65 +174,72 @@ public with sharing class TestTeamTrigger {
         ];
         System.assertEquals(expectedStatus, client.ClientStatus__c);
         System.assertEquals(expectedCert, client.ClientCertificationValidUntil__c);
+
+        Dog__c dog = [
+            SELECT Status__c
+            FROM Dog__c
+            WHERE Id = :boomer.Id
+        ];
+        System.assertEquals(expectedStatus, dog.Status__c);
     }
     
     @isTest
-    public static void trigger_DoesNotUpdateClientStatus_WhenDecertified() {
+    public static void trigger_DoesNotUpdateClientDogStatus_WhenDecertified() {
         setup();
-        testClientStatus('Decertified', Date.today().addMonths(5), joe.ClientStatus__c, joe.ClientCertificationValidUntil__c);
+        testClientDogStatus('Decertified', Date.today().addMonths(5), joe.ClientStatus__c, joe.ClientCertificationValidUntil__c);
     }
     
     @isTest
-    public static void trigger_DoesNotUpdateClientStatus_WhenDiscontinued() {
+    public static void trigger_DoesNotUpdateClientDogStatus_WhenDiscontinued() {
         setup();
-        testClientStatus('Discontinued', Date.today().addMonths(5), joe.ClientStatus__c, joe.ClientCertificationValidUntil__c);
+        testClientDogStatus('Discontinued', Date.today().addMonths(5), joe.ClientStatus__c, joe.ClientCertificationValidUntil__c);
     }
     
     @isTest
-    public static void trigger_UpdatesClientStatus_WhenNone() {
+    public static void trigger_UpdatesClientDogStatus_WhenNone() {
         setup();
         string status = 'None';
         Date expected = Date.today().addMonths(5);
-        testClientStatus(status, expected, status, expected);
+        testClientDogStatus(status, expected, status, expected);
     }
     
     @isTest
-    public static void trigger_UpdatesClientStatus_WhenInitialInquiry() {
+    public static void trigger_UpdatesClientDogStatus_WhenInitialInquiry() {
         setup();
         string status = 'Initial Inquiry';
         Date expected = Date.today().addMonths(5);
-        testClientStatus(status, expected, status, expected);
+        testClientDogStatus(status, expected, status, expected);
     }
     
     @isTest
-    public static void trigger_UpdatesClientStatus_WhenInADSiM() {
+    public static void trigger_UpdatesClientDogStatus_WhenInADSiM() {
         setup();
         string status = 'In ADSiM';
         Date expected = Date.today().addMonths(5);
-        testClientStatus(status, expected, status, expected);
+        testClientDogStatus(status, expected, status, expected);
     }
     
     @isTest
-    public static void trigger_UpdatesClientStatus_WhenOnboarding() {
+    public static void trigger_UpdatesClientDogStatus_WhenOnboarding() {
         setup();
         string status = 'Onboarding';
         Date expected = Date.today().addMonths(5);
-        testClientStatus(status, expected, status, expected);
+        testClientDogStatus(status, expected, status, expected);
     }
     
     @isTest
-    public static void trigger_UpdatesClientStatus_WhenInTraining() {
+    public static void trigger_UpdatesClientDogStatus_WhenInTraining() {
         setup();
         string status = 'In Training';
         Date expected = Date.today().addMonths(5);
-        testClientStatus(status, expected, status, expected);
+        testClientDogStatus(status, expected, status, expected);
     }
     
     @isTest
-    public static void trigger_UpdatesClientStatus_WhenCertified() {
+    public static void trigger_UpdatesClientDogStatus_WhenCertified() {
         setup();
         string status = 'Certified';
         Date expected = Date.today().addMonths(5);
-        testClientStatus(status, expected, status, expected);
+        testClientDogStatus(status, expected, status, expected);
     }
 }

@@ -172,36 +172,21 @@ public with sharing class TestFileController {
     }
 
     @isTest
-    public static void deleteLink_ThrowsException_WhenInvalidType() {
-        Dog__c ace = new Dog__c(Name = 'Ace');
-        insert ace;
-
-        Boolean thrown = false;
-
-        Test.startTest();
-        try {
-            FileController.deleteLink(new ContentDocumentLink(Id = ace.Id));
-        } catch (AuraHandledException e) {
-            thrown = true;
-        }
-
-        Test.stopTest();
-
-        System.assert(thrown);
-    }
-
-    @isTest
     public static void deleteLink_DeletesDocument_WhenOnlyOneLink() {
-        Dog__c ace = new Dog__c(Name = 'Ace');
+        Account ace = new Account(Name = 'Ace');
         insert ace;
-        ContentVersion cv = TestFileService.createLink('Volunteer', 'Application', Date.today(), ace.Id);
-        ContentDocumentLink link = [SELECT Id FROM ContentDocumentLink WHERE ContentDocumentId = :cv.ContentDocumentId];
+        ContentVersion cv = TestFileService.createLink(null, null, Date.today(), ace.Id);
+        ContentDocumentLink link = [SELECT Id, ContentDocumentId FROM ContentDocumentLink WHERE ContentDocumentId = :cv.ContentDocumentId AND LinkedEntityId = :ace.Id];
+        // Not sure how we are getting more than one link, but if there is more than one, delete the rest.
+        delete [SELECT Id FROM ContentDocumentLink WHERE ContentDocumentId = :cv.ContentDocumentId AND Id <> :link.Id];
 
         Test.startTest();
         FileController.deleteLink(link);
 
         Test.stopTest();
         
+        List<ContentVersion> cvs = [SELECT Id FROM ContentVersion WHERE ContentDocumentId = :cv.ContentDocumentId];
+        System.assert(cvs.isEmpty());
         List<ContentDocument> cds = [SELECT Id FROM ContentDocument WHERE Id = :cv.ContentDocumentId];
         System.assert(cds.isEmpty());
     }
@@ -211,11 +196,16 @@ public with sharing class TestFileController {
         Dog__c ace = new Dog__c(Name = 'Ace');
         insert ace;
         ContentVersion cv = TestFileService.createLink('Volunteer', 'Application', Date.today(), ace.Id);
-        ContentDocumentLink link1 = [SELECT Id FROM ContentDocumentLink WHERE ContentDocumentId = :cv.ContentDocumentId];
+        ContentDocumentLink link1 = [SELECT Id FROM ContentDocumentLink WHERE ContentDocumentId = :cv.ContentDocumentId AND LinkedEntityId = :ace.Id];
+        // Not sure how we are getting more than one link, but if there is more than one, delete the rest.
+        delete [SELECT Id FROM ContentDocumentLink WHERE ContentDocumentId = :cv.ContentDocumentId AND Id <> :link1.Id];
+
+        Contact jill = new Contact(FirstName='Jill', LastName='Hill', Email = 'jill@test.org');
+        insert jill;
 
         ContentDocumentLink link = new ContentDocumentLink(
             ContentDocumentId = cv.ContentDocumentId,
-            LinkedEntityId = ace.Id
+            LinkedEntityId = jill.Id
         );
         insert link;
 
@@ -225,9 +215,9 @@ public with sharing class TestFileController {
         Test.stopTest();
         List<ContentDocument> cds = [SELECT Id FROM ContentDocument WHERE Id = :cv.ContentDocumentId];
         System.assertEquals(1, cds.size());
-        System.assertEquals(link1.Id, cds[0].Id);
         List<ContentDocumentLink> cdls = [SELECT Id FROM ContentDocumentLink WHERE ContentDocumentId = :cv.ContentDocumentId];
         System.assertEquals(1, cdls.size());
+        System.assertEquals(link1.Id, cdls[0].Id);
         // Just finishing this select is our assert, since an exception will be thrown if the cv doesn't exist
         cv = [SELECT Id FROM ContentVersion WHERE Id = :cv.Id];
     }

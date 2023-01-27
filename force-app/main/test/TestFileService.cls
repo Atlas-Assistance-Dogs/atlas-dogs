@@ -17,7 +17,8 @@ public with sharing class TestFileService {
         );
         insert cv;
 
-        ContentVersion temp = [
+        // insert will fill in the Id, but not the ContentDecumentId
+        cv = [
             SELECT Id, ContentDocumentId, Category__c, Type__c, Date__c
             FROM ContentVersion
             WHERE Id = :cv.Id
@@ -25,12 +26,12 @@ public with sharing class TestFileService {
         ];
 
         ContentDocumentLink link = new ContentDocumentLink(
-            ContentDocumentId = temp.ContentDocumentId,
+            ContentDocumentId = cv.ContentDocumentId,
             LinkedEntityId = recordId
         );
         insert link;
 
-        return temp;
+        return cv;
     }
 
     @isTest

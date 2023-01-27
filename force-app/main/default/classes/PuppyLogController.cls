@@ -27,9 +27,9 @@ public with sharing class PuppyLogController {
 
                 RelatedObjects files = FileController.getRelatedFiles(log.Id, 1);
                 if (files != null && !files.items.isEmpty()) {
-                    ContentVersion cv = (ContentVersion)files.items[0];
-                    plog.documentId = cv.ContentDocumentId;
-                    plog.fileName = cv.Title;
+                    FileInfo info = (FileInfo)files.items[0];
+                    plog.documentId = info.cv.ContentDocumentId;
+                    plog.fileName = info.cv.Title;
                     plog.noFile = false;
                 }
                 else {

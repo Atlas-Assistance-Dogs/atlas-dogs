@@ -50,4 +50,19 @@ public with sharing class TeamService {
             update client;
         }
     }
+    
+    // Update client status.  This is meant to be called from the team update trigger.
+    public static void updateDogStatus(Team__c team) {
+        if (inactiveStatus.contains(team.Status__c)) {
+            return;
+        }
+
+        List<Dog__c> dogs = [SELECT Status__c FROM Dog__c WHERE Id = :team.Dog__c];
+
+        if (!dogs.isEmpty()) {
+            Dog__c dog = dogs[0];
+            dog.Status__c = team.Status__c;
+            update dog;
+        }
+    }
 }

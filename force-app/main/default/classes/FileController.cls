@@ -35,7 +35,7 @@ public inherited sharing class FileController {
         }
         try {
             Integer count = [SELECT COUNT() FROM ContentDocumentLink WHERE ContentDocumentId = :cdl.ContentDocumentId];
-            if (count > 0) {
+            if (count > 1) {
                 delete cdl;
                 return;
             }
