@@ -759,11 +759,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Dog__c.Expired__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>Dog__c.ExpiryDateStatus__c</field>
         <readable>true</readable>
     </fieldPermissions>
