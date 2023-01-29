@@ -99,6 +99,7 @@ export default class RelatedFiles extends NavigationMixin(LightningElement) {
             if (this.data.length === 0) {
                 this.data = null;
                 this.total = 0;
+                return;
             }
             if (!this.viewAll) {
                 this.total = result.data.total;
