@@ -7,8 +7,6 @@ import { NavigationMixin } from "lightning/navigation";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
 
 import CV_OBJECT from "@salesforce/schema/ContentVersion";
-import CATEGORY_FIELD from "@salesforce/schema/ContentVersion.Category__c";
-import TYPE_FIELD from "@salesforce/schema/ContentVersion.Type__c";
 import DATE_FIELD from "@salesforce/schema/ContentVersion.Date__c";
 
 const actions = [
@@ -112,6 +110,8 @@ export default class RelatedFiles extends NavigationMixin(LightningElement) {
             ];
             categories.sort();
             this.filterItems[0].options = categories.map(x => {return {label: x, value: x};});
+            this.filterItems[0].options.unshift({ label: "No filter", value: null });
+
             const types = [
                 ...new Set(
                     this.data.map((x) => x.type)
@@ -120,6 +120,10 @@ export default class RelatedFiles extends NavigationMixin(LightningElement) {
             types.sort();
             this.filterItems[1].options = types.map((x) => {
                 return { label: x, value: x };
+            });
+            this.filterItems[1].options.unshift({
+                label: "No filter",
+                value: null
             });
         } else if (result.error) {
             this.dispatchEvent(
@@ -194,11 +198,12 @@ export default class RelatedFiles extends NavigationMixin(LightningElement) {
     handleFilterSelect(event) {
         const items = event.detail;
         let cloneData = [...this.bareData];
-        items.forEach((item) => {
+        items.forEach((item, idx) => {
             if (item.value) {
                 cloneData = cloneData.filter(
                     (info) => info[item.name] == item.value
                 );
+                this.filterItems[idx].value = item.value;
             }
         });
         this.data = cloneData;
