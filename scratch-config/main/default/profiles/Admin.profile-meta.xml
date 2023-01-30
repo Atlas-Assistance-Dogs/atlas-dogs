@@ -608,16 +608,6 @@
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>false</editable>
-        <field>Contact.TSiMApplicationReceived__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Contact.TSiMProgAgreementReceived__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
         <editable>true</editable>
         <field>Contact.TrainerApplicationReceived__c</field>
         <readable>true</readable>
@@ -765,11 +755,6 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Dog__c.Eligible_byDOB__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Dog__c.Expired__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
