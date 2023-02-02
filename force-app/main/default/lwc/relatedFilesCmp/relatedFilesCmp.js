@@ -102,29 +102,7 @@ export default class RelatedFiles extends NavigationMixin(LightningElement) {
             if (!this.viewAll) {
                 this.total = result.data.total;
             }
-            // fill in category and type options
-            const categories = [
-                ...new Set(
-                    this.data.map((x) => x.category)
-                )
-            ];
-            categories.sort();
-            this.filterItems[0].options = categories.map(x => {return {label: x, value: x};});
-            this.filterItems[0].options.unshift({ label: "No filter", value: null });
-
-            const types = [
-                ...new Set(
-                    this.data.map((x) => x.type)
-                )
-            ];
-            types.sort();
-            this.filterItems[1].options = types.map((x) => {
-                return { label: x, value: x };
-            });
-            this.filterItems[1].options.unshift({
-                label: "No filter",
-                value: null
-            });
+            this.fillOptions();
         } else if (result.error) {
             this.dispatchEvent(
                 new ShowToastEvent({
@@ -134,6 +112,29 @@ export default class RelatedFiles extends NavigationMixin(LightningElement) {
                 })
             );
         }
+    }
+
+    // fill in category and type options
+    fillOptions() {
+        const categories = [
+            ...new Set(
+                this.data.map((x) => x.category)
+            )
+        ];
+        categories.sort();
+        this.filterItems[0].options = categories.map(x => { return { label: x, value: x }; });
+        this.filterItems[0].options.unshift({ label: "No filter", value: null });
+
+        const types = [
+            ...new Set(
+                this.data.map((x) => x.type)
+            )
+        ];
+        types.sort();
+        this.filterItems[1].options = types.map((x) => {
+            return { label: x, value: x };
+        });
+        this.filterItems[1].options.unshift({ label: "No filter", value: null });
     }
 
     handleUpdate() {
