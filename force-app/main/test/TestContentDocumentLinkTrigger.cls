@@ -57,6 +57,8 @@ public with sharing class TestContentDocumentLinkTrigger {
         );
         insert cv;
 		cv = [SELECT Id, ContentDocumentId, Date__c FROM ContentVersion WHERE id = :cv.Id LIMIT 1];
+        // see how many cdls there are
+        Integer count = [SELECT COUNT() FROM ContentDocumentLink WHERE ContentDocumentId = :cv.ContentDocumentId];
 
         ContentDocumentLink link = new ContentDocumentLink(
             ContentDocumentId = cv.ContentDocumentId,
@@ -71,7 +73,7 @@ public with sharing class TestContentDocumentLinkTrigger {
         // Assert
         System.assert(result.isSuccess());
         List<ContentDocumentLink> links = [SELECT Id FROM ContentDocumentLink WHERE ContentDocumentId = :cv.ContentDocumentId];
-        System.assertEquals(1, links.size());
+        System.assertEquals(count + 1, links.size());
     }
 
 }

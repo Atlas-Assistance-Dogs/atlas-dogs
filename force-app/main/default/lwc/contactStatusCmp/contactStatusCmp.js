@@ -3,7 +3,7 @@ import { getRecord } from "lightning/uiRecordApi";
 import getProgramAssignments from "@salesforce/apex/ProgramAssignmentController.getProgramAssignments";
 
 import BOARD_MEMBER_STATUS_FIELD from "@salesforce/schema/Contact.BoardMemberStatus__c";
-import CLIENT_CERT_AGREEMENT_RECEIVED from "@salesforce/schema/Contact.ClientCertAgreementReceived__c";
+import CLIENT_CERT_VALID_UNTIL from "@salesforce/schema/Contact.ClientCertificationValidUntil__c";
 import CLIENT_STATUS_FIELD from "@salesforce/schema/Contact.ClientStatus__c";
 import FACILITATOR_CERT_AGREEMENT_RECEIVED from "@salesforce/schema/Contact.FacilitatorCertAgreementReceived__c";
 import FACILITATOR_STATUS_FIELD from "@salesforce/schema/Contact.FacilitatorStatus__c";
@@ -177,7 +177,7 @@ export default class ContactStatus extends LightningElement {
                                 CLIENT_STATUS_FIELD.fieldApiName
                             ].value,
                             this.contact.fields[
-                                CLIENT_CERT_AGREEMENT_RECEIVED.fieldApiName
+                                CLIENT_CERT_VALID_UNTIL.fieldApiName
                             ].value
                         );
                         this.roles.push({

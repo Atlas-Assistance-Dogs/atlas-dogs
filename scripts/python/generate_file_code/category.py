@@ -16,6 +16,12 @@ class Category:
         if cat == 'Dog':
             self.name = 'dog'
             self.object = 'Dog__c'
+        elif cat == 'Client':
+            self.name = 'team'
+            self.object = 'Team__c'
+        else:
+            self.name = 'contact'
+            self.object = 'Contact'
 
 
     def check(self):

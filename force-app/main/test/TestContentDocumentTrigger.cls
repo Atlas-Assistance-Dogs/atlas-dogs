@@ -3,14 +3,14 @@ public with sharing class TestContentDocumentTrigger {
 
     @isTest
     static void delete_ClearsDate_WhenNoOthers() {
-        string category = 'Client';
+        string category = 'Trainer';
         string docType = 'Application';
 
         Contact joe = new Contact(
             Email = 'joe-blow@pump.com',
             FirstName = 'Joe',
             LastName = 'Blow',
-            ClientApplicationReceived__c = Date.today().addDays(-1)
+            TrainerApplicationReceived__c = Date.today().addDays(-1)
         );
         insert joe;
         Id joeId = joe.Id;
@@ -30,20 +30,20 @@ public with sharing class TestContentDocumentTrigger {
         // Assert
         System.assert(result.isSuccess());
         System.assert(result.getErrors().size() == 0);
-        Contact saved = [SELECT ClientApplicationReceived__c FROM Contact WHERE id=:joe.Id LIMIT 1];
-        //System.assertEquals(null, saved.ClientApplicationReceived__c);
+        Contact saved = [SELECT TrainerApplicationReceived__c FROM Contact WHERE id=:joe.Id LIMIT 1];
+        System.assertEquals(null, saved.TrainerApplicationReceived__c);
     }
 
     @isTest
     static void delete_SetNextDate_When2Others() {
-        string category = 'Client';
+        string category = 'Trainer';
         string docType = 'Application';
 
         Contact joe = new Contact(
             Email = 'joe-blow@pump.com',
             FirstName = 'Joe',
             LastName = 'Blow',
-            ClientApplicationReceived__c = Date.today().addDays(-1)
+            TrainerApplicationReceived__c = Date.today().addDays(-1)
         );
         insert joe;
         Id joeId = joe.Id;
@@ -62,7 +62,7 @@ public with sharing class TestContentDocumentTrigger {
         // Assert
         System.assert(result.isSuccess());
         System.assert(result.getErrors().size() == 0);
-        Contact saved = [SELECT ClientApplicationReceived__c FROM Contact WHERE id=:joe.Id LIMIT 1];
-        //System.assertEquals(Date.today().addDays(-2), saved.ClientApplicationReceived__c);
+        Contact saved = [SELECT TrainerApplicationReceived__c FROM Contact WHERE id=:joe.Id LIMIT 1];
+        System.assertEquals(Date.today().addDays(-2), saved.TrainerApplicationReceived__c);
     }
 }
