@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>TrainerProfReferenceReceived__c</fullName>
-    <description>The date the most recent version of Trainer Reference Letter was uploaded</description>
+    <description>The date the most recent version of Trainer Professional Reference Letter was uploaded</description>
     <externalId>false</externalId>
     <label>Last Trainer Prof Reference Letter</label>
     <required>false</required>
