@@ -141,6 +141,16 @@
                 <default>false</default>
                 <label>Contractor W9</label>
             </value>
+            <value>
+                <fullName>ApplicationVideo</fullName>
+                <default>false</default>
+                <label>Application Video</label>
+            </value>
+            <value>
+                <fullName>CGCForm</fullName>
+                <default>false</default>
+                <label>CGC Form</label>
+            </value>
         </valueSetDefinition>
         <valueSettings>
             <controllingFieldValue>Volunteer</controllingFieldValue>
@@ -220,21 +230,9 @@
             <valueName>CertAgreement</valueName>
         </valueSettings>
         <valueSettings>
-            <controllingFieldValue>Puppy</controllingFieldValue>
-            <valueName>Contract</valueName>
-        </valueSettings>
-        <valueSettings>
             <controllingFieldValue>Facilitator</controllingFieldValue>
             <controllingFieldValue>Puppy</controllingFieldValue>
             <valueName>Reference</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Trainer</controllingFieldValue>
-            <valueName>ClientReference</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Trainer</controllingFieldValue>
-            <valueName>ProfReference</valueName>
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Facilitator</controllingFieldValue>
@@ -249,6 +247,18 @@
             <controllingFieldValue>Puppy</controllingFieldValue>
             <controllingFieldValue>Trainer</controllingFieldValue>
             <valueName>InfrNotice</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Puppy</controllingFieldValue>
+            <valueName>Contract</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Trainer</controllingFieldValue>
+            <valueName>ClientReference</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Trainer</controllingFieldValue>
+            <valueName>ProfReference</valueName>
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Staff</controllingFieldValue>
