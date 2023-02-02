@@ -27,7 +27,7 @@ public with sharing class ClearDateService {
 				FacilitatorApplicationReceived__c, FacilitatorCertAgreementReceived__c, FacilitatorInfrNoticeReceived__c, FacilitatorPracticumReceived__c, FacilitatorProfGrowthPlanReceived__c, FacilitatorProgAgreementReceived__c, FacilitatorReferenceReceived__c,
 				PuppyApplicationReceived__c, PuppyCertAgreementReceived__c, PuppyContractReceived__c, PuppyInfrNoticeReceived__c, PuppyProgAgreementReceived__c, PuppyReferenceReceived__c,
 				StaffAgreementReceived__c, StaffApplicationReceived__c, StaffI9Received__c, StaffOfferReceived__c, StaffResumeReceived__c, StaffW4Received__c, StaffW9Received__c,
-				TrainerApplicationReceived__c, TrainerCertAgreementReceived__c, TrainerInfrNoticeReceived__c, TrainerProgAgreementReceived__c, TrainerReferenceReceived__c,
+				TrainerApplicationReceived__c, TrainerCertAgreementReceived__c, TrainerClientReferenceReceived__c, TrainerInfrNoticeReceived__c, TrainerProfReferenceReceived__c, TrainerProgAgreementReceived__c,
 				VolunteerAgreementReceived__c, VolunteerApplicationReceived__c, VolunteerResumeReceived__c,
 				ContactFormReceived__c
             FROM Contact
@@ -208,16 +208,20 @@ public with sharing class ClearDateService {
             contact.TrainerCertAgreementReceived__c = null;
         }
 
+        if (cv.Type__c == 'ClientReference'){
+            contact.TrainerClientReferenceReceived__c = null;
+        }
+
         if (cv.Type__c == 'InfrNotice'){
             contact.TrainerInfrNoticeReceived__c = null;
         }
 
-        if (cv.Type__c == 'ProgAgreement'){
-            contact.TrainerProgAgreementReceived__c = null;
+        if (cv.Type__c == 'ProfReference'){
+            contact.TrainerProfReferenceReceived__c = null;
         }
 
-        if (cv.Type__c == 'Reference'){
-            contact.TrainerReferenceReceived__c = null;
+        if (cv.Type__c == 'ProgAgreement'){
+            contact.TrainerProgAgreementReceived__c = null;
         }
     }
 

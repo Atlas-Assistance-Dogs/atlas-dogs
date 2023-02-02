@@ -42,6 +42,26 @@ public with sharing class TestClearDateServiceTrainerFields {
     }
 
     @isTest
+    public static void clearDate_TrainerClientReference_SetsDateToNull() {
+        ContentVersion cv = new ContentVersion(Category__c = 'Trainer', Type__c = 'ClientReference');
+        Contact record = new Contact(FirstName = 'Test', LastName = 'Contact', Email = 'abc@abc.com');
+        insert record;
+        ClearDateService.clear(cv, record.Id);
+
+        record = [
+            SELECT TrainerClientReferenceReceived__c
+            FROM Contact
+            WHERE Id = :record.Id
+            LIMIT 1
+        ];
+        system.assertEquals(
+            null,
+            record.TrainerClientReferenceReceived__c,
+            'TrainerClientReferenceReceived__c not cleared'
+        );
+    }
+
+    @isTest
     public static void clearDate_TrainerContactForm_SetsDateToNull() {
         ContentVersion cv = new ContentVersion(Category__c = 'Trainer', Type__c = 'ContactForm');
         Contact record = new Contact(FirstName = 'Test', LastName = 'Contact', Email = 'abc@abc.com');
@@ -82,6 +102,26 @@ public with sharing class TestClearDateServiceTrainerFields {
     }
 
     @isTest
+    public static void clearDate_TrainerProfReference_SetsDateToNull() {
+        ContentVersion cv = new ContentVersion(Category__c = 'Trainer', Type__c = 'ProfReference');
+        Contact record = new Contact(FirstName = 'Test', LastName = 'Contact', Email = 'abc@abc.com');
+        insert record;
+        ClearDateService.clear(cv, record.Id);
+
+        record = [
+            SELECT TrainerProfReferenceReceived__c
+            FROM Contact
+            WHERE Id = :record.Id
+            LIMIT 1
+        ];
+        system.assertEquals(
+            null,
+            record.TrainerProfReferenceReceived__c,
+            'TrainerProfReferenceReceived__c not cleared'
+        );
+    }
+
+    @isTest
     public static void clearDate_TrainerProgAgreement_SetsDateToNull() {
         ContentVersion cv = new ContentVersion(Category__c = 'Trainer', Type__c = 'ProgAgreement');
         Contact record = new Contact(FirstName = 'Test', LastName = 'Contact', Email = 'abc@abc.com');
@@ -98,26 +138,6 @@ public with sharing class TestClearDateServiceTrainerFields {
             null,
             record.TrainerProgAgreementReceived__c,
             'TrainerProgAgreementReceived__c not cleared'
-        );
-    }
-
-    @isTest
-    public static void clearDate_TrainerReference_SetsDateToNull() {
-        ContentVersion cv = new ContentVersion(Category__c = 'Trainer', Type__c = 'Reference');
-        Contact record = new Contact(FirstName = 'Test', LastName = 'Contact', Email = 'abc@abc.com');
-        insert record;
-        ClearDateService.clear(cv, record.Id);
-
-        record = [
-            SELECT TrainerReferenceReceived__c
-            FROM Contact
-            WHERE Id = :record.Id
-            LIMIT 1
-        ];
-        system.assertEquals(
-            null,
-            record.TrainerReferenceReceived__c,
-            'TrainerReferenceReceived__c not cleared'
         );
     }
 }

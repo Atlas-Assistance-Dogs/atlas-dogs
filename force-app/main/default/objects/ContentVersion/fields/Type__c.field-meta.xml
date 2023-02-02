@@ -67,6 +67,16 @@
                 <label>Reference Letter</label>
             </value>
             <value>
+                <fullName>ClientReference</fullName>
+                <default>false</default>
+                <label>Client Reference Letter</label>
+            </value>
+            <value>
+                <fullName>ProfReference</fullName>
+                <default>false</default>
+                <label>Professional Reference Letter</label>
+            </value>
+            <value>
                 <fullName>ProgAgreement</fullName>
                 <default>false</default>
                 <label>Program Agreement</label>
@@ -216,8 +226,15 @@
         <valueSettings>
             <controllingFieldValue>Facilitator</controllingFieldValue>
             <controllingFieldValue>Puppy</controllingFieldValue>
-            <controllingFieldValue>Trainer</controllingFieldValue>
             <valueName>Reference</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Trainer</controllingFieldValue>
+            <valueName>ClientReference</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Trainer</controllingFieldValue>
+            <valueName>ProfReference</valueName>
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Facilitator</controllingFieldValue>

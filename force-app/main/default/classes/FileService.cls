@@ -141,7 +141,7 @@ public with sharing class FileService {
 				FacilitatorApplicationReceived__c, FacilitatorCertAgreementReceived__c, FacilitatorInfrNoticeReceived__c, FacilitatorPracticumReceived__c, FacilitatorProfGrowthPlanReceived__c, FacilitatorProgAgreementReceived__c, FacilitatorReferenceReceived__c,
 				PuppyApplicationReceived__c, PuppyCertAgreementReceived__c, PuppyContractReceived__c, PuppyInfrNoticeReceived__c, PuppyProgAgreementReceived__c, PuppyReferenceReceived__c,
 				StaffAgreementReceived__c, StaffApplicationReceived__c, StaffI9Received__c, StaffOfferReceived__c, StaffResumeReceived__c, StaffW4Received__c, StaffW9Received__c,
-				TrainerApplicationReceived__c, TrainerCertAgreementReceived__c, TrainerInfrNoticeReceived__c, TrainerProgAgreementReceived__c, TrainerReferenceReceived__c,
+				TrainerApplicationReceived__c, TrainerCertAgreementReceived__c, TrainerClientReferenceReceived__c, TrainerInfrNoticeReceived__c, TrainerProfReferenceReceived__c, TrainerProgAgreementReceived__c,
 				VolunteerAgreementReceived__c, VolunteerApplicationReceived__c, VolunteerResumeReceived__c,
 				ContactFormReceived__c
             FROM Contact
@@ -338,16 +338,20 @@ public with sharing class FileService {
             contact.TrainerCertAgreementReceived__c = cv.Date__c;
         }
 
+        if (cv.Type__c == 'ClientReference' && isLater(contact.TrainerClientReferenceReceived__c, cv.Date__c)) {
+            contact.TrainerClientReferenceReceived__c = cv.Date__c;
+        }
+
         if (cv.Type__c == 'InfrNotice' && isLater(contact.TrainerInfrNoticeReceived__c, cv.Date__c)) {
             contact.TrainerInfrNoticeReceived__c = cv.Date__c;
         }
 
-        if (cv.Type__c == 'ProgAgreement' && isLater(contact.TrainerProgAgreementReceived__c, cv.Date__c)) {
-            contact.TrainerProgAgreementReceived__c = cv.Date__c;
+        if (cv.Type__c == 'ProfReference' && isLater(contact.TrainerProfReferenceReceived__c, cv.Date__c)) {
+            contact.TrainerProfReferenceReceived__c = cv.Date__c;
         }
 
-        if (cv.Type__c == 'Reference' && isLater(contact.TrainerReferenceReceived__c, cv.Date__c)) {
-            contact.TrainerReferenceReceived__c = cv.Date__c;
+        if (cv.Type__c == 'ProgAgreement' && isLater(contact.TrainerProgAgreementReceived__c, cv.Date__c)) {
+            contact.TrainerProgAgreementReceived__c = cv.Date__c;
         }
     }
 
