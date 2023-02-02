@@ -165,6 +165,14 @@
             <valueName>Application</valueName>
         </valueSettings>
         <valueSettings>
+            <controllingFieldValue>Client</controllingFieldValue>
+            <valueName>ApplicationVideo</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Client</controllingFieldValue>
+            <valueName>CGCForm</valueName>
+        </valueSettings>
+        <valueSettings>
             <controllingFieldValue>Volunteer</controllingFieldValue>
             <controllingFieldValue>Board</controllingFieldValue>
             <controllingFieldValue>Client</controllingFieldValue>
