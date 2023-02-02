@@ -450,17 +450,22 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Contact.TrainerClientReferenceReceived__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Contact.TrainerInfrNoticeReceived__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Contact.TrainerProgAgreementReceived__c</field>
+        <field>Contact.TrainerProfReferenceReceived__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Contact.TrainerReferenceReceived__c</field>
+        <field>Contact.TrainerProgAgreementReceived__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
