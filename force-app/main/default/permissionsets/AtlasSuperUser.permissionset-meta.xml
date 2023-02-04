@@ -855,7 +855,17 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Team__c.ClientApplicationVideoReceived__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Team__c.ClientCertAgreementReceived__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Team__c.ClientCGCFormReceived__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

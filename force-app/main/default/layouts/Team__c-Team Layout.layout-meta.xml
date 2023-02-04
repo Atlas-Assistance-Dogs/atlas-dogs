@@ -72,6 +72,10 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
+                <field>ClientApplicationVideoReceived__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
                 <field>ClientLOMIReceived__c</field>
             </layoutItems>
             <layoutItems>
@@ -91,6 +95,10 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>ClientSurveyReceived__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>ClientCGCFormReceived__c</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsLeftToRight</style>
