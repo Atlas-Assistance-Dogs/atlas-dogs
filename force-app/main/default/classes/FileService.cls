@@ -380,7 +380,7 @@ public with sharing class FileService {
         }
         List<Team__c> teams = [
             SELECT Id, Client__c, Dog__c,
-                   ClientApplicationReceived__c, ClientCertAgreementReceived__c, ClientLOMIReceived__c, ClientPreApplicationReceived__c, ClientProgAgreementReceived__c, ClientSurveyReceived__c, ClientVAPWReceived__c
+                   ClientApplicationReceived__c, ClientApplicationVideoReceived__c, ClientCGCFormReceived__c, ClientCertAgreementReceived__c, ClientLOMIReceived__c, ClientPreApplicationReceived__c, ClientProgAgreementReceived__c, ClientSurveyReceived__c, ClientVAPWReceived__c
             FROM Team__c
             WHERE Id = :recordId
         ];
@@ -401,6 +401,14 @@ public with sharing class FileService {
 
         if (cv.Type__c == 'Application' && isLater(team.ClientApplicationReceived__c, cv.Date__c)) {
             team.ClientApplicationReceived__c = cv.Date__c;
+        }
+
+        if (cv.Type__c == 'ApplicationVideo' && isLater(team.ClientApplicationVideoReceived__c, cv.Date__c)) {
+            team.ClientApplicationVideoReceived__c = cv.Date__c;
+        }
+
+        if (cv.Type__c == 'CGCForm' && isLater(team.ClientCGCFormReceived__c, cv.Date__c)) {
+            team.ClientCGCFormReceived__c = cv.Date__c;
         }
 
         if (cv.Type__c == 'CertAgreement' && isLater(team.ClientCertAgreementReceived__c, cv.Date__c)) {

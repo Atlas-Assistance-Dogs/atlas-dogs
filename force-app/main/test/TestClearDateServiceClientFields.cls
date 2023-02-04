@@ -33,6 +33,48 @@ public with sharing class TestClearDateServiceClientFields {
     }
 
     @isTest
+    public static void clearDate_ClientApplicationVideo_SetsDateToNull() {
+        ContentVersion cv = new ContentVersion(Category__c = 'Client', Type__c = 'ApplicationVideo');
+        createTeamMembers();
+        Team__c record = new Team__c(Name = 'Test', Client__c = client.Id, Dog__c = dog.Id);
+        insert record;
+        ClearDateService.clear(cv, record.Id);
+
+        record = [
+            SELECT ClientApplicationVideoReceived__c
+            FROM Team__c
+            WHERE Id = :record.Id
+            LIMIT 1
+        ];
+        system.assertEquals(
+            null,
+            record.ClientApplicationVideoReceived__c,
+            'ClientApplicationVideoReceived__c not cleared'
+        );
+    }
+
+    @isTest
+    public static void clearDate_ClientCGCForm_SetsDateToNull() {
+        ContentVersion cv = new ContentVersion(Category__c = 'Client', Type__c = 'CGCForm');
+        createTeamMembers();
+        Team__c record = new Team__c(Name = 'Test', Client__c = client.Id, Dog__c = dog.Id);
+        insert record;
+        ClearDateService.clear(cv, record.Id);
+
+        record = [
+            SELECT ClientCGCFormReceived__c
+            FROM Team__c
+            WHERE Id = :record.Id
+            LIMIT 1
+        ];
+        system.assertEquals(
+            null,
+            record.ClientCGCFormReceived__c,
+            'ClientCGCFormReceived__c not cleared'
+        );
+    }
+
+    @isTest
     public static void clearDate_ClientCertAgreement_SetsDateToNull() {
         ContentVersion cv = new ContentVersion(Category__c = 'Client', Type__c = 'CertAgreement');
         createTeamMembers();

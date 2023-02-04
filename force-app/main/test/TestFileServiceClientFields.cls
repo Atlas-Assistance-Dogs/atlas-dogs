@@ -76,6 +76,132 @@ public with sharing class TestFileServiceClientFields {
     }
 
     @isTest
+    public static void updateDate_ClientApplicationVideo_SetsDateWhenNull() {
+        createTeamMembers();
+        Team__c record = new Team__c(Name = 'Test', Client__c = client.Id, Dog__c = dog.Id);
+        insert record;
+        ContentVersion cv = TestFileServiceFields.createLink('Client', 'ApplicationVideo', Date.today(), record.Id);
+        FileService.updateDate(cv, record.Id);
+
+        record = [
+            SELECT ClientApplicationVideoReceived__c
+            FROM Team__c
+            WHERE Id = :record.Id
+            LIMIT 1
+        ];
+        system.assertEquals(
+            Date.today(),
+            record.ClientApplicationVideoReceived__c,
+            'ClientApplicationVideoReceived__c not set'
+        );
+    }
+
+    @isTest
+    public static void updateDate_ClientApplicationVideo_SetsDateWhenNewer() {
+        createTeamMembers();
+        Team__c record = new Team__c(Name = 'Test', Client__c = client.Id, Dog__c = dog.Id, ClientApplicationVideoReceived__c = Date.today().addDays(-1));
+        insert record;
+        ContentVersion cv = TestFileServiceFields.createLink('Client', 'ApplicationVideo', Date.today(), record.Id);
+        FileService.updateDate(cv, record.Id);
+
+        record = [
+            SELECT ClientApplicationVideoReceived__c
+            FROM Team__c
+            WHERE Id = :record.Id
+            LIMIT 1
+        ];
+        system.assertEquals(
+            Date.today(),
+            record.ClientApplicationVideoReceived__c,
+            'ClientApplicationVideoReceived__c not set'
+        );
+    }
+
+    @isTest
+    public static void updateDate_ClientApplicationVideo_LeavesDateWhenOlder() {
+        createTeamMembers();
+        Team__c record = new Team__c(Name = 'Test', Client__c = client.Id, Dog__c = dog.Id, ClientApplicationVideoReceived__c = Date.today());
+        insert record;
+        ContentVersion cv = TestFileServiceFields.createLink('Client', 'ApplicationVideo', Date.today().addDays(-1), record.Id);
+        FileService.updateDate(cv, record.Id);
+
+        record = [
+            SELECT ClientApplicationVideoReceived__c
+            FROM Team__c
+            WHERE Id = :record.Id
+            LIMIT 1
+        ];
+        system.assertEquals(
+            Date.today(),
+            record.ClientApplicationVideoReceived__c,
+            'ClientApplicationVideoReceived__c set to an older date'
+        );
+    }
+
+    @isTest
+    public static void updateDate_ClientCGCForm_SetsDateWhenNull() {
+        createTeamMembers();
+        Team__c record = new Team__c(Name = 'Test', Client__c = client.Id, Dog__c = dog.Id);
+        insert record;
+        ContentVersion cv = TestFileServiceFields.createLink('Client', 'CGCForm', Date.today(), record.Id);
+        FileService.updateDate(cv, record.Id);
+
+        record = [
+            SELECT ClientCGCFormReceived__c
+            FROM Team__c
+            WHERE Id = :record.Id
+            LIMIT 1
+        ];
+        system.assertEquals(
+            Date.today(),
+            record.ClientCGCFormReceived__c,
+            'ClientCGCFormReceived__c not set'
+        );
+    }
+
+    @isTest
+    public static void updateDate_ClientCGCForm_SetsDateWhenNewer() {
+        createTeamMembers();
+        Team__c record = new Team__c(Name = 'Test', Client__c = client.Id, Dog__c = dog.Id, ClientCGCFormReceived__c = Date.today().addDays(-1));
+        insert record;
+        ContentVersion cv = TestFileServiceFields.createLink('Client', 'CGCForm', Date.today(), record.Id);
+        FileService.updateDate(cv, record.Id);
+
+        record = [
+            SELECT ClientCGCFormReceived__c
+            FROM Team__c
+            WHERE Id = :record.Id
+            LIMIT 1
+        ];
+        system.assertEquals(
+            Date.today(),
+            record.ClientCGCFormReceived__c,
+            'ClientCGCFormReceived__c not set'
+        );
+    }
+
+    @isTest
+    public static void updateDate_ClientCGCForm_LeavesDateWhenOlder() {
+        createTeamMembers();
+        Team__c record = new Team__c(Name = 'Test', Client__c = client.Id, Dog__c = dog.Id, ClientCGCFormReceived__c = Date.today());
+        insert record;
+        ContentVersion cv = TestFileServiceFields.createLink('Client', 'CGCForm', Date.today().addDays(-1), record.Id);
+        FileService.updateDate(cv, record.Id);
+
+        record = [
+            SELECT ClientCGCFormReceived__c
+            FROM Team__c
+            WHERE Id = :record.Id
+            LIMIT 1
+        ];
+        system.assertEquals(
+            Date.today(),
+            record.ClientCGCFormReceived__c,
+            'ClientCGCFormReceived__c set to an older date'
+        );
+    }
+
+    @isTest
     public static void updateDate_ClientCertAgreement_SetsDateWhenNull() {
         createTeamMembers();
         Team__c record = new Team__c(Name = 'Test', Client__c = client.Id, Dog__c = dog.Id);

@@ -243,7 +243,7 @@ public with sharing class ClearDateService {
     private static void clearTeamDate(ContentVersion cv, Id recordId) {
         List<Team__c> teams = [
             SELECT Id, Client__c, Dog__c,
-                   ClientApplicationReceived__c, ClientCertAgreementReceived__c, ClientLOMIReceived__c, ClientPreApplicationReceived__c, ClientProgAgreementReceived__c, ClientSurveyReceived__c, ClientVAPWReceived__c
+                   ClientApplicationReceived__c, ClientApplicationVideoReceived__c, ClientCGCFormReceived__c, ClientCertAgreementReceived__c, ClientLOMIReceived__c, ClientPreApplicationReceived__c, ClientProgAgreementReceived__c, ClientSurveyReceived__c, ClientVAPWReceived__c
             FROM Team__c
             WHERE Id = :recordId];
 
@@ -253,6 +253,14 @@ public with sharing class ClearDateService {
 
         if (cv.Type__c == 'Application'){
             team.ClientApplicationReceived__c = null;
+        }
+
+        if (cv.Type__c == 'ApplicationVideo'){
+            team.ClientApplicationVideoReceived__c = null;
+        }
+
+        if (cv.Type__c == 'CGCForm'){
+            team.ClientCGCFormReceived__c = null;
         }
 
         if (cv.Type__c == 'CertAgreement'){
