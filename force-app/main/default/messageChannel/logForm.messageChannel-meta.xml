@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<LightningMessageChannel xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Lightning Message Channel to show Create/View/Update Log Form.</description>
+    <isExposed>true</isExposed>
+    <lightningMessageFields>
+        <description>This is the record Id to view or edit, can be empty for create.</description>
+        <fieldName>recordId</fieldName>
+    </lightningMessageFields>
+    <lightningMessageFields>
+        <description>Record Type Name.</description>
+        <fieldName>recordType</fieldName>
+    </lightningMessageFields>
+    <masterLabel>Log Form</masterLabel>
+</LightningMessageChannel>
