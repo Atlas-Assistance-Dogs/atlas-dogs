@@ -218,6 +218,10 @@
                 <field>ClientStatus__c</field>
             </layoutItems>
             <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>ClientCertificationValidUntil__c</field>
+            </layoutItems>
+            <layoutItems>
                 <behavior>Edit</behavior>
                 <field>ClientMedicalDevices__c</field>
             </layoutItems>

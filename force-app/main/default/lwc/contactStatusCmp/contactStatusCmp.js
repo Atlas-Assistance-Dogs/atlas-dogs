@@ -20,7 +20,7 @@ import PROGRAM_ASSIGNMENT_STATUS_FIELD from "@salesforce/schema/ProgramAssignmen
 
 const FIELDS = [
     BOARD_MEMBER_STATUS_FIELD,
-    CLIENT_CERT_AGREEMENT_RECEIVED,
+    CLIENT_CERT_VALID_UNTIL,
     CLIENT_STATUS_FIELD,
     FACILITATOR_CERT_AGREEMENT_RECEIVED,
     FACILITATOR_STATUS_FIELD,
@@ -41,14 +41,6 @@ const POSITIONS = [
     "Client",
     "Trainer",
     "Other Programs"
-];
-
-const STANDARD_PROGRAMS = [
-    "Volunteer",
-    "Team Facilitator",
-    "Trainer",
-    "Client",
-    "Staff"
 ];
 
 export default class ContactStatus extends LightningElement {
@@ -178,7 +170,7 @@ export default class ContactStatus extends LightningElement {
                             ].value,
                             this.contact.fields[
                                 CLIENT_CERT_VALID_UNTIL.fieldApiName
-                            ].value
+                            ].value?.addYears(-1)
                         );
                         this.roles.push({
                             position: role,
