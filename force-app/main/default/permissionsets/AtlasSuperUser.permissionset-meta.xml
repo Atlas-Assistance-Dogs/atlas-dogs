@@ -845,11 +845,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Team__c.CertificationValidUntil__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>Team__c.ClientApplicationReceived__c</field>
         <readable>true</readable>
     </fieldPermissions>

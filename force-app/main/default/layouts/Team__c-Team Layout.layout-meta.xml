@@ -49,10 +49,6 @@
                 <behavior>Required</behavior>
                 <field>Dog__c</field>
             </layoutItems>
-            <layoutItems>
-                <behavior>Readonly</behavior>
-                <field>CertificationValidUntil__c</field>
-            </layoutItems>
         </layoutColumns>
         <style>TwoColumnsTopToBottom</style>
     </layoutSections>
