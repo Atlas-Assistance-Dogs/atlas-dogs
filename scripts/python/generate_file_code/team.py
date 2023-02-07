@@ -17,7 +17,7 @@ class Team:
         '''List the fields'''
         client_fields = ', '.join(self.client_cat.fields())
         dog_fields = ', '.join([typ.field for typ in self.dog_cat.types if typ.doc_type != 'VacExams'])
-        return '\n\t\t\t\t\t'.join([client_fields, dog_fields])
+        return ',\n\t\t\t\t\t'.join([client_fields, dog_fields])
 
 
     def code(self):

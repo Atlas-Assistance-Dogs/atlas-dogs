@@ -1,6 +1,16 @@
 @isTest
 public with sharing class TestFileServiceDogFields {
 
+    private static Dog__c dog;
+    private static Contact client;
+
+    private static void createTeamMembers() {
+        dog = new Dog__c(Name = 'Fido');
+        insert dog;
+
+        client = new Contact(FirstName = 'Test', LastName = 'Contact', Email = 'abc@abc.com');
+        insert client;
+    }
 
     @isTest
     public static void updateDate_DogHealthForm_SetsDateWhenNull() {

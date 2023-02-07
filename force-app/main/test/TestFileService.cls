@@ -70,24 +70,24 @@ public with sharing class TestFileService {
 
     @isTest
     public static void updateDate_FindsLinkedDog() {
-        Dog__c dog = new Dog__c(Name = 'Fido', HealthFormReceived__c = null);
+        Dog__c dog = new Dog__c(Name = 'Fido', VacExamsReceived__c = null);
         insert dog;
-        ContentVersion cv = createLink('Dog', 'HealthForm', Date.today(), dog.Id);
+        ContentVersion cv = createLink('Dog', 'VacExams', Date.today(), dog.Id);
 
         // Act
         FileService.updateDate(cv);
 
         // Assert
         dog = [
-            SELECT HealthFormReceived__c
+            SELECT VacExamsReceived__c
             FROM Dog__c
             WHERE Id = :dog.Id
             LIMIT 1
         ];
         system.assertEquals(
             Date.today(),
-            dog.HealthFormReceived__c,
-            'HealthFormReceived not set'
+            dog.VacExamsReceived__c,
+            'VacExamsReceived not set'
         );
     }
 
@@ -123,30 +123,18 @@ public with sharing class TestFileService {
         Dog__c record = new Dog__c(Name = 'Fido');
         insert record;
         List<ContentVersion> cvs = new List<ContentVersion>();
-        cvs.add(createLink('Dog', 'HealthForm', Date.today(), record.Id));
         cvs.add(createLink('Dog', 'VacExams', Date.today().addDays(-1), record.Id));
-        cvs.add(createLink('Dog', 'Xray', Date.today().addDays(-2), record.Id));
         FileService.updateDates(cvs);
         record = [
-            SELECT HealthFormReceived__c, VacExamsReceived__c, XrayReceived__c
+            SELECT VacExamsReceived__c
             FROM Dog__c
             WHERE Id = :record.Id
             LIMIT 1
         ];
         system.assertEquals(
-            Date.today(),
-            record.HealthFormReceived__c,
-            'HealthFormReceived__c not set'
-        );
-        system.assertEquals(
             Date.today().addDays(-1),
             record.VacExamsReceived__c,
             'VacExamsReceived__c not set'
-        );
-        system.assertEquals(
-            Date.today().addDays(-2),
-            record.XrayReceived__c,
-            'XrayReceived__c not set'
         );
     }
 

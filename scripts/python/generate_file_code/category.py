@@ -70,7 +70,7 @@ class Category:
 
     def test(self, test_file):
         test_file.write(update.test_file_start.format(category = self.category))
-        if self.category == 'Client':
+        if self.category in ['Client', 'Dog']:
             test_file.write(update.test_team_setup_method)
 
         for typ in self.types:
@@ -80,7 +80,7 @@ class Category:
 
     def test_clear(self, test_file):
         test_file.write(clear.test_file_start.format(category = self.category))
-        if self.category == 'Client':
+        if self.category in ['Client', 'Dog']:
             test_file.write(update.test_team_setup_method)
             
         for typ in self.types:

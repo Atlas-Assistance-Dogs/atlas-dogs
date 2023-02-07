@@ -1,5 +1,15 @@
 @isTest
 public with sharing class TestClearDateServiceDogFields {
+    private static Dog__c dog;
+    private static Contact client;
+
+    private static void createTeamMembers() {
+        dog = new Dog__c(Name = 'Fido');
+        insert dog;
+
+        client = new Contact(FirstName = 'Test', LastName = 'Contact', Email = 'abc@abc.com');
+        insert client;
+    }
 
     @isTest
     public static void clearDate_DogHealthForm_SetsDateToNull() {
