@@ -1,6 +1,8 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>VaccineDueHepatitis__c</fullName>
+    <businessStatus>Hidden</businessStatus>
+    <deprecated>false</deprecated>
     <description>Date next Hepatitis/Adenovirus vaccination is due</description>
     <externalId>false</externalId>
     <label>Hepatitis/Adenovirus Vaccination Due</label>
