@@ -168,9 +168,9 @@ export default class ContactStatus extends LightningElement {
                             this.contact.fields[
                                 CLIENT_STATUS_FIELD.fieldApiName
                             ].value,
-                            this.contact.fields[
+                            this.clientCertDate(this.contact.fields[
                                 CLIENT_CERT_VALID_UNTIL.fieldApiName
-                            ].value?.addYears(-1)
+                            ].value)
                         );
                         this.roles.push({
                             position: role,
@@ -197,6 +197,13 @@ export default class ContactStatus extends LightningElement {
                     break;
             }
         });
+    }
+
+    clientCertDate(date) {
+        if (date) {
+            return this.addDays(date, -365);
+        }
+        return null;
     }
 
     addDays(date, days) {

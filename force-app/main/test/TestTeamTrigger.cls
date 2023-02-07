@@ -157,7 +157,7 @@ public with sharing class TestTeamTrigger {
             Client__c = joe.Id,
             Dog__c = boomer.Id,
             Status__c = status,
-            CertificationValidUntil__c = cert
+            PatValidUntil__c = cert
         );
 
         // Act

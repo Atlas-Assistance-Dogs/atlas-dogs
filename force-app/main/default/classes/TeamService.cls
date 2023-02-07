@@ -45,7 +45,7 @@ public with sharing class TeamService {
 
         if (!clients.isEmpty()) {
             Contact client = clients[0];
-            client.ClientCertificationValidUntil__c = team.CertificationValidUntil__c;
+            client.ClientCertificationValidUntil__c = team.PatValidUntil__c;
             client.ClientStatus__c = team.Status__c;
             update client;
         }
