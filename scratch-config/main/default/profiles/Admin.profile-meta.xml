@@ -995,11 +995,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Team__c.CertificationValidUntil__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
         <field>Team__c.ClientApplicationReceived__c</field>
         <readable>false</readable>
     </fieldPermissions>
