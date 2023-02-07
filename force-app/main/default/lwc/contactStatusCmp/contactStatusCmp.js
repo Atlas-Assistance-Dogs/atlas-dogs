@@ -3,7 +3,7 @@ import { getRecord } from "lightning/uiRecordApi";
 import getProgramAssignments from "@salesforce/apex/ProgramAssignmentController.getProgramAssignments";
 
 import BOARD_MEMBER_STATUS_FIELD from "@salesforce/schema/Contact.BoardMemberStatus__c";
-import CLIENT_CERT_AGREEMENT_RECEIVED from "@salesforce/schema/Contact.ClientCertAgreementReceived__c";
+import CLIENT_CERT_VALID_UNTIL from "@salesforce/schema/Contact.ClientCertificationValidUntil__c";
 import CLIENT_STATUS_FIELD from "@salesforce/schema/Contact.ClientStatus__c";
 import FACILITATOR_CERT_AGREEMENT_RECEIVED from "@salesforce/schema/Contact.FacilitatorCertAgreementReceived__c";
 import FACILITATOR_STATUS_FIELD from "@salesforce/schema/Contact.FacilitatorStatus__c";
@@ -20,7 +20,7 @@ import PROGRAM_ASSIGNMENT_STATUS_FIELD from "@salesforce/schema/ProgramAssignmen
 
 const FIELDS = [
     BOARD_MEMBER_STATUS_FIELD,
-    CLIENT_CERT_AGREEMENT_RECEIVED,
+    CLIENT_CERT_VALID_UNTIL,
     CLIENT_STATUS_FIELD,
     FACILITATOR_CERT_AGREEMENT_RECEIVED,
     FACILITATOR_STATUS_FIELD,
@@ -41,14 +41,6 @@ const POSITIONS = [
     "Client",
     "Trainer",
     "Other Programs"
-];
-
-const STANDARD_PROGRAMS = [
-    "Volunteer",
-    "Team Facilitator",
-    "Trainer",
-    "Client",
-    "Staff"
 ];
 
 export default class ContactStatus extends LightningElement {
@@ -176,9 +168,9 @@ export default class ContactStatus extends LightningElement {
                             this.contact.fields[
                                 CLIENT_STATUS_FIELD.fieldApiName
                             ].value,
-                            this.contact.fields[
-                                CLIENT_CERT_AGREEMENT_RECEIVED.fieldApiName
-                            ].value
+                            this.clientCertDate(this.contact.fields[
+                                CLIENT_CERT_VALID_UNTIL.fieldApiName
+                            ].value)
                         );
                         this.roles.push({
                             position: role,
@@ -205,6 +197,13 @@ export default class ContactStatus extends LightningElement {
                     break;
             }
         });
+    }
+
+    clientCertDate(date) {
+        if (date) {
+            return this.addDays(date, -365);
+        }
+        return null;
     }
 
     addDays(date, days) {

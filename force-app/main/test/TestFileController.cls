@@ -158,146 +158,68 @@ public with sharing class TestFileController {
     }
 
     @isTest
-    public static void deleteRecords_ThrowsException_WhenNullList() {
+    public static void deleteLink_ThrowsException_WhenNull() {
         Boolean thrown = false;
-
         Test.startTest();
         try {
-            FileController.deleteRecords(null);
+            FileController.deleteLink(null);
         } catch (AuraHandledException e) {
             thrown = true;
         }
-
         Test.stopTest();
 
         System.assert(thrown);
     }
 
     @isTest
-    public static void deleteRecords_HandlesEmptyList() {
-        List<ContentVersion> documents = insertRecords();
+    public static void deleteLink_DeletesDocument_WhenOnlyOneLink() {
+        Account ace = new Account(Name = 'Ace');
+        insert ace;
+        ContentVersion cv = TestFileService.createLink(null, null, Date.today(), ace.Id);
+        ContentDocumentLink link = [SELECT Id, ContentDocumentId FROM ContentDocumentLink WHERE ContentDocumentId = :cv.ContentDocumentId AND LinkedEntityId = :ace.Id];
+        // Not sure how we are getting more than one link, but if there is more than one, delete the rest.
+        delete [SELECT Id FROM ContentDocumentLink WHERE ContentDocumentId = :cv.ContentDocumentId AND Id <> :link.Id];
 
         Test.startTest();
-        FileController.deleteRecords(new List<Id>());
-        Test.stopTest();
+        FileController.deleteLink(link);
 
-        List<ContentVersion> remaining = [SELECT Id FROM ContentVersion];
-        System.assertEquals(documents.size(), remaining.size());
+        Test.stopTest();
+        
+        List<ContentVersion> cvs = [SELECT Id FROM ContentVersion WHERE ContentDocumentId = :cv.ContentDocumentId];
+        System.assert(cvs.isEmpty());
+        List<ContentDocument> cds = [SELECT Id FROM ContentDocument WHERE Id = :cv.ContentDocumentId];
+        System.assert(cds.isEmpty());
     }
 
     @isTest
-    public static void deleteRecords_DeletesExpectedRecords() {
-        List<ContentVersion> documents = insertRecords();
+    public static void deleteLink_DeletesLink_WhenMoreThanOne() {
+        Dog__c ace = new Dog__c(Name = 'Ace');
+        insert ace;
+        ContentVersion cv = TestFileService.createLink('Volunteer', 'Application', Date.today(), ace.Id);
+        ContentDocumentLink link1 = [SELECT Id FROM ContentDocumentLink WHERE ContentDocumentId = :cv.ContentDocumentId AND LinkedEntityId = :ace.Id];
+        // Not sure how we are getting more than one link, but if there is more than one, delete the rest.
+        delete [SELECT Id FROM ContentDocumentLink WHERE ContentDocumentId = :cv.ContentDocumentId AND Id <> :link1.Id];
 
-        // delete all but the first document
-        List<Id> ids = new List<Id>();
-        for (Integer idx = 1; idx < documents.size(); idx++) {
-            ids.add(documents[idx].ContentDocumentId);
-        }
-        Test.startTest();
-        FileController.deleteRecords(ids);
-        Test.stopTest();
+        Contact jill = new Contact(FirstName='Jill', LastName='Hill', Email = 'jill@test.org');
+        insert jill;
 
-        List<ContentVersion> remaining = [SELECT Id FROM ContentVersion];
-        System.assertEquals(1, remaining.size());
-        System.assertEquals(documents[0].Id, remaining[0].Id);
-    }
-
-    @isTest
-    public static void deleteRecord_ThrowsException_WhenNullId() {
-        Boolean thrown = false;
-
-        Test.startTest();
-        try {
-            FileController.deleteRecord(null);
-        } catch (AuraHandledException e) {
-            thrown = true;
-        }
-
-        Test.stopTest();
-
-        System.assert(thrown);
-    }
-
-    @isTest
-    public static void deleteRecord_HandlesBadId() {
-        List<ContentVersion> documents = insertRecords();
-
-        Test.startTest();
-        FileController.deleteRecord(documents[0].Id);
-        Test.stopTest();
-
-        List<ContentVersion> remaining = [SELECT Id FROM ContentVersion];
-        System.assertEquals(documents.size(), remaining.size());
-    }
-
-    @isTest
-    public static void deleteRecord_DeletesExpectedRecord() {
-        List<ContentVersion> documents = insertRecords();
-        Test.startTest();
-        FileController.deleteRecord(documents[0].ContentDocumentId);
-        Test.stopTest();
-
-        List<ContentVersion> remaining = [SELECT Id FROM ContentVersion];
-        System.assertEquals(documents.size() - 1, remaining.size());
-        for (ContentVersion actual : remaining) {
-            System.assertNotEquals(documents[0].Id, actual.Id);
-        }
-    }
-
-    @isTest
-    public static void getContentVersion_ThrowsException_WhenIdNull() {
-        Boolean thrown = false;
-
-        Test.startTest();
-        try {
-            FileController.getContentVersion(null);
-        } catch (AuraHandledException e) {
-            thrown = true;
-        }
-
-        Test.stopTest();
-
-        System.assert(thrown);
-    }
-
-    @isTest
-    public static void getContentVersion_ThrowsException_WhenNoRecord() {
-        List<ContentVersion> documents = insertRecords();
-        Boolean thrown = false;
-
-        Test.startTest();
-        try {
-            FileController.getContentVersion(documents[0].ContentDocumentId);
-        } catch (AuraHandledException e) {
-            thrown = true;
-        }
-
-        Test.stopTest();
-
-        System.assert(thrown);
-    }
-
-    @isTest
-    public static void getContentVersion_ReturnsRecordData() {
-        List<ContentVersion> documents = insertRecords();
-
-        Test.startTest();
-        ContentVersion actual = FileController.getContentVersion(
-            documents[0].Id
+        ContentDocumentLink link = new ContentDocumentLink(
+            ContentDocumentId = cv.ContentDocumentId,
+            LinkedEntityId = jill.Id
         );
-        Test.stopTest();
+        insert link;
 
-        ContentVersion expected = documents[0];
-        System.assertEquals(expected.Id, actual.Id);
-        System.assertEquals(expected.Title, actual.Title);
-        System.assertEquals(
-            expected.ContentDocumentId,
-            actual.ContentDocumentId
-        );
-        System.assertEquals(expected.Type__c, actual.Type__c);
-        System.assertEquals(expected.Category__c, actual.Category__c);
-        System.assertEquals(expected.Date__c, actual.Date__c);
+        Test.startTest();
+        FileController.deleteLink(link);
+
+        Test.stopTest();
+        List<ContentDocument> cds = [SELECT Id FROM ContentDocument WHERE Id = :cv.ContentDocumentId];
+        System.assertEquals(1, cds.size());
+        List<ContentDocumentLink> cdls = [SELECT Id FROM ContentDocumentLink WHERE ContentDocumentId = :cv.ContentDocumentId];
+        System.assertEquals(1, cdls.size());
+        System.assertEquals(link1.Id, cdls[0].Id);
+        // Just finishing this select is our assert, since an exception will be thrown if the cv doesn't exist
+        cv = [SELECT Id FROM ContentVersion WHERE Id = :cv.Id];
     }
 
     @isTest

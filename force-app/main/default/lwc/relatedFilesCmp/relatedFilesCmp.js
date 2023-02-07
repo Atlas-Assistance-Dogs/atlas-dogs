@@ -1,7 +1,7 @@
 import { LightningElement, api, wire, track } from "lwc";
 import { getObjectInfo } from "lightning/uiObjectInfoApi";
 import getRelatedFiles from "@salesforce/apex/FileController.getRelatedFiles";
-import deleteRecord from "@salesforce/apex/FileController.deleteRecord";
+import deleteLink from "@salesforce/apex/FileController.deleteLink";
 import { refreshApex } from "@salesforce/apex";
 import { NavigationMixin } from "lightning/navigation";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
@@ -89,6 +89,7 @@ export default class RelatedFiles extends NavigationMixin(LightningElement) {
         if (result.data?.items) {
             this.data = result.data.items.map((info) => {
                 let row = Object.assign({}, info.cv);
+                row.cdl = info.cdl;
                 row.category = info.category;
                 row.type = info.type;
                 return row;
@@ -223,9 +224,9 @@ export default class RelatedFiles extends NavigationMixin(LightningElement) {
         });
     }
 
-    deleteCons(currentRow) {
-        let currentRecordID = currentRow.ContentDocumentId;
-        deleteRecord({ docId: currentRecordID })
+    // TODO: Have Trigger delete ContentDocument when all Links to the document are deleted.
+    deleteCons(row) {
+        deleteLink({cdl: row.cdl})
             .then((result) => {
                 let res = result;
 
@@ -236,11 +237,9 @@ export default class RelatedFiles extends NavigationMixin(LightningElement) {
                         variant: "success"
                     })
                 );
-                this.isErrorMessage = false;
                 refreshApex(this.wiredFilesList);
             })
             .catch((error) => {
-                window.console.log("Error ====> " + error);
                 this.dispatchEvent(
                     new ShowToastEvent({
                         title: "Error!!",

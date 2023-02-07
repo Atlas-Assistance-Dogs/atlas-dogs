@@ -26,47 +26,22 @@ public inherited sharing class FileController {
         }
     }
 
+    // Delete the link if there is more than one CDL for the document,
+    // Otherwise, delete the document
     @AuraEnabled
-    public static String deleteRecords(List<Id> docIds) {
-        if (docIds == null) {
-            throw new AuraHandledException('docIds must be non-null');
+    public static void deleteLink(ContentDocumentLink cdl) {
+        if (cdl == null) {
+            throw new AuraHandledException('cdl must be non-null');
         }
         try {
-            delete [SELECT Id FROM ContentDocument WHERE Id = :docIds];
-            return 'SUCCESS';
+            Integer count = [SELECT COUNT() FROM ContentDocumentLink WHERE ContentDocumentId = :cdl.ContentDocumentId];
+            if (count > 1) {
+                delete cdl;
+                return;
+            }
+            delete [SELECT Id FROM ContentDocument WHERE Id = :cdl.ContentDocumentId];
         } catch (DmlException ex) {
             throw new AuraHandledException(ex.getMessage());
-        }
-    }
-
-    @AuraEnabled
-    public static String deleteRecord(ID docId) {
-        if (docId == null) {
-            throw new AuraHandledException('docId must be non-null');
-        }
-        try {
-            delete [SELECT Id FROM ContentDocument WHERE Id = :docId LIMIT 1];
-            return 'SUCCESS';
-        } catch (DmlException ex) {
-            throw new AuraHandledException(ex.getMessage());
-        }
-    }
-    @AuraEnabled
-    public static ContentVersion getContentVersion(Id recordId) {
-        try {
-            return [
-                SELECT
-                    Title,
-                    ContentDocumentId,
-                    Category__c,
-                    Type__c,
-                    Date__c
-                FROM ContentVersion
-                WHERE Id = :recordId
-                LIMIT 1
-            ];
-        } catch (Exception e) {
-            throw new AuraHandledException(e.getMessage());
         }
     }
 
@@ -108,12 +83,14 @@ public inherited sharing class FileController {
 
         Id parentId = recordId;
         List<Id> lstConDocs = new List<Id>();
+        Map<Id, ContentDocumentLink> links = new Map<Id, ContentDocumentLink>();
         for (ContentDocumentLink cntLink : [
             SELECT Id, ContentDocumentId
             FROM ContentDocumentLink
             WHERE LinkedEntityId = :parentId
         ]) {
             lstConDocs.add(cntLink.ContentDocumentId);
+            links.put(cntLink.ContentDocumentId, cntLink);
         }
 
         RelatedObjects objects = new RelatedObjects();
@@ -139,6 +116,7 @@ public inherited sharing class FileController {
             for (ContentVersion cv : files) {
                 FileInfo info = new FileInfo();
                 info.cv = cv;
+                info.cdl = links.get(cv.ContentDocumentId);
                 info.category = categoryEntries.get(cv.Category__c);
                 info.type = typeEntries.get(cv.Type__c);
                 related.items.add(info);
