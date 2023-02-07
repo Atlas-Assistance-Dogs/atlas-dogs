@@ -6,14 +6,14 @@ import templates.update as update
 class Dog:
     '''Class to control writing out the generated FileService code for the dog objects'''
 
-    def __init__(self, file, category):
+    def __init__(self, file, types):
         self.file = file
-        self.category = Category('Dog', category)
+        self.category = Category('Dog', ['VacExams'])
 
 
     def fields(self):
         '''List the fields'''
-        return ', '.join(self.category.fields())
+        return ', '.join([typ.field for typ in self.category.types])
 
 
     def code(self):

@@ -381,6 +381,7 @@ public with sharing class FileService {
         List<Team__c> teams = [
             SELECT Id, Client__c, Dog__c,
                    ClientApplicationReceived__c, ClientApplicationVideoReceived__c, ClientCGCFormReceived__c, ClientCertAgreementReceived__c, ClientLOMIReceived__c, ClientPreApplicationReceived__c, ClientProgAgreementReceived__c, ClientSurveyReceived__c, ClientVAPWReceived__c
+					HealthFormReceived__c, XrayReceived__c
             FROM Team__c
             WHERE Id = :recordId
         ];
@@ -434,6 +435,14 @@ public with sharing class FileService {
         if (cv.Type__c == 'VAPW' && isLater(team.ClientVAPWReceived__c, cv.Date__c)) {
             team.ClientVAPWReceived__c = cv.Date__c;
         }
+
+        if (cv.Type__c == 'HealthForm' && isLater(team.HealthFormReceived__c, cv.Date__c)) {
+            team.HealthFormReceived__c = cv.Date__c;
+        }
+
+        if (cv.Type__c == 'Xray' && isLater(team.XrayReceived__c, cv.Date__c)) {
+            team.XrayReceived__c = cv.Date__c;
+        }
         }
         update team;
     }
@@ -446,7 +455,7 @@ public with sharing class FileService {
             ids.add(cv.Id);
         }
         List<Dog__c> dogs = [
-            SELECT Id, HealthFormReceived__c, VacExamsReceived__c, XrayReceived__c
+            SELECT Id, VacExamsReceived__c
             FROM Dog__c
             WHERE Id = :recordId
         ];
@@ -465,16 +474,8 @@ public with sharing class FileService {
         //#region Generated dog
         for (ContentVersion cv : cvs) {
 
-        if (cv.Type__c == 'HealthForm' && isLater(dog.HealthFormReceived__c, cv.Date__c)) {
-            dog.HealthFormReceived__c = cv.Date__c;
-        }
-
         if (cv.Type__c == 'VacExams' && isLater(dog.VacExamsReceived__c, cv.Date__c)) {
             dog.VacExamsReceived__c = cv.Date__c;
-        }
-
-        if (cv.Type__c == 'Xray' && isLater(dog.XrayReceived__c, cv.Date__c)) {
-            dog.XrayReceived__c = cv.Date__c;
         }
         }
         update dog;

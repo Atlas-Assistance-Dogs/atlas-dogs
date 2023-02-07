@@ -88,7 +88,7 @@ with open(service_path, 'w') as service_copy:
     contact = Contact(service_copy, settings)
     contact.clear_code(service_copy)
 
-    team = Team(service_copy, settings['Client'])
+    team = Team(service_copy, settings['Client'], settings['Dog'])
     team.clear_code(service_copy)
 
     dog = Dog(service_copy, settings['Dog'])

@@ -15,8 +15,9 @@ class Team:
 
     def fields(self):
         '''List the fields'''
-        clientFields = [', '.join(this.client_cat.fields()) for category in self.sorted_categories if (category.category not in skip_categories)]
-        return ', '.join([item.fields() for sub_list in self.categories for item in sub_list])
+        client_fields = ', '.join(self.client_cat.fields())
+        dog_fields = ', '.join([typ.field for typ in self.dog_cat.types if typ.doc_type != 'VacExams'])
+        return '\n\t\t\t\t\t'.join([client_fields, dog_fields])
 
 
     def code(self):
@@ -25,7 +26,7 @@ class Team:
             for typ in sorted(cat.types, key = lambda typ : typ.doc_type):
                 if typ.doc_type == 'ContactForm':
                     continue
-                if type.doc_type == 'VacExams':
+                if typ.doc_type == 'VacExams':
                     continue
                 self.file.write(typ.code())
 
@@ -34,9 +35,12 @@ class Team:
 
     def clear_code(self, clear_file):
         clear_file.write(clear.team_code_start.format(fields = self.fields()))
-        for typ in sorted(self.category.types, key = lambda typ : typ.doc_type):
-            if typ.doc_type == 'ContactForm':
-                continue
-            clear_file.write(typ.clear_code())
+        for cat in self.categories:
+            for typ in sorted(cat.types, key = lambda typ : typ.doc_type):
+                if typ.doc_type == 'ContactForm':
+                    continue
+                if typ.doc_type == 'VacExams':
+                    continue
+                clear_file.write(typ.clear_code())
 
         clear_file.write(clear.team_code_end)

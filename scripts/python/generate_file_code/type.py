@@ -23,10 +23,16 @@ class CategoryType:
         self.fields = new_contact
 
         if cat == 'Dog':
-            self.name = 'dog'
             self.field = typ + 'Received__c'
-            self.object = 'Dog__c'
-            self.fields = new_dog
+            if typ == 'VacExams':
+                self.name = 'dog'
+                self.object = 'Dog__c'
+                self.fields = new_dog
+            else:
+                self.name = 'team'
+                self.object = 'Team__c'
+                self.fields = new_team
+                self.setup = update.test_team_setup
 
         elif typ == 'ContactForm':
             self.name = 'contact'
