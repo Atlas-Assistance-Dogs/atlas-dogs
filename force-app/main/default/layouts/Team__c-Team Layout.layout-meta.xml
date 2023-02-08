@@ -20,7 +20,7 @@
                 <field>SecondaryCertification__c</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Required</behavior>
+                <behavior>Edit</behavior>
                 <field>Client__c</field>
             </layoutItems>
             <layoutItems>
@@ -97,6 +97,24 @@
                 <field>ClientSurveyReceived__c</field>
             </layoutItems>
         </layoutColumns>
+        <style>TwoColumnsLeftToRight</style>
+    </layoutSections>
+    <layoutSections>
+        <customLabel>true</customLabel>
+        <detailHeading>true</detailHeading>
+        <editHeading>true</editHeading>
+        <label>Dog Documents Received</label>
+        <layoutColumns>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>HealthFormReceived__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>XrayReceived__c</field>
+            </layoutItems>
+        </layoutColumns>
+        <layoutColumns></layoutColumns>
         <style>TwoColumnsLeftToRight</style>
     </layoutSections>
     <layoutSections>

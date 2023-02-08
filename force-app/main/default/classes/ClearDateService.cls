@@ -243,7 +243,8 @@ public with sharing class ClearDateService {
     private static void clearTeamDate(ContentVersion cv, Id recordId) {
         List<Team__c> teams = [
             SELECT Id, Client__c, Dog__c,
-                   ClientApplicationReceived__c, ClientApplicationVideoReceived__c, ClientCGCFormReceived__c, ClientCertAgreementReceived__c, ClientLOMIReceived__c, ClientPreApplicationReceived__c, ClientProgAgreementReceived__c, ClientSurveyReceived__c, ClientVAPWReceived__c
+                   ClientApplicationReceived__c, ClientApplicationVideoReceived__c, ClientCGCFormReceived__c, ClientCertAgreementReceived__c, ClientLOMIReceived__c, ClientPreApplicationReceived__c, ClientProgAgreementReceived__c, ClientSurveyReceived__c, ClientVAPWReceived__c,
+					HealthFormReceived__c, XrayReceived__c
             FROM Team__c
             WHERE Id = :recordId];
 
@@ -287,12 +288,20 @@ public with sharing class ClearDateService {
             team.ClientVAPWReceived__c = null;
         }
 
+        if (cv.Type__c == 'HealthForm'){
+            team.HealthFormReceived__c = null;
+        }
+
+        if (cv.Type__c == 'Xray'){
+            team.XrayReceived__c = null;
+        }
+
         update team;
     }
 
     private static void clearDogDate(ContentVersion cv, Id recordId) {
         List<Dog__c> dogs = [
-            SELECT Id, HealthFormReceived__c, VacExamsReceived__c, XrayReceived__c
+            SELECT Id, VacExamsReceived__c
             FROM Dog__c
             WHERE Id = :recordId];
 
@@ -300,16 +309,8 @@ public with sharing class ClearDateService {
             return;
         Dog__c dog = dogs[0];
 
-        if (cv.Type__c == 'HealthForm'){
-            dog.HealthFormReceived__c = null;
-        }
-
         if (cv.Type__c == 'VacExams'){
             dog.VacExamsReceived__c = null;
-        }
-
-        if (cv.Type__c == 'Xray'){
-            dog.XrayReceived__c = null;
         }
 
         update dog;

@@ -197,26 +197,6 @@
                     <name>uiBehavior</name>
                     <value>none</value>
                 </fieldInstanceProperties>
-                <fieldItem>Record.HealthFormReceived__c</fieldItem>
-                <identifier>RecordHealthFormReceived_cField1</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
-                    <value>none</value>
-                </fieldInstanceProperties>
-                <fieldItem>Record.XrayReceived__c</fieldItem>
-                <identifier>RecordXrayReceived_cField1</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
-                    <value>none</value>
-                </fieldInstanceProperties>
                 <fieldItem>Record.VacExamsReceived__c</fieldItem>
                 <identifier>RecordVacExamsReceived_cField1</identifier>
             </fieldInstance>
