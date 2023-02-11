@@ -3,6 +3,7 @@
     <fullName>ClientApplicationVideoReceived__c</fullName>
     <description>The date the most recent version of a Client Application Video was uploaded</description>
     <externalId>false</externalId>
+    <inlineHelpText>Set at the time of file upload. Do not edit directly.</inlineHelpText>
     <label>Last Client Application Video</label>
     <required>false</required>
     <trackTrending>false</trackTrending>

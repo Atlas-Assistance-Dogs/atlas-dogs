@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>TrainerInfrNoticeReceived__c</fullName>
-    <description
-    >The date the most recent version of Trainer Infraction Notice was uploaded</description>
+    <description>The date the most recent version of Trainer Infraction Notice was uploaded</description>
     <externalId>false</externalId>
+    <inlineHelpText>Set at the time of file upload. Do not edit directly.</inlineHelpText>
     <label>Last Trainer Infraction Notice</label>
     <required>false</required>
     <trackFeedHistory>false</trackFeedHistory>

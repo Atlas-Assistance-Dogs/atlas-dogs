@@ -3,6 +3,7 @@
     <fullName>ClientStatus__c</fullName>
     <defaultValue>&quot;None&quot;</defaultValue>
     <externalId>false</externalId>
+    <inlineHelpText>Derived from Team. Do not edit directly.</inlineHelpText>
     <label>Client Status</label>
     <required>false</required>
     <trackFeedHistory>false</trackFeedHistory>
