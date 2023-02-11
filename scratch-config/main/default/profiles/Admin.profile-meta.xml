@@ -760,7 +760,7 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Dog__c.HealthFormReceived__c</field>
+        <field>Team__c.HealthFormReceived__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -845,7 +845,7 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Dog__c.XrayReceived__c</field>
+        <field>Team__c.XrayReceived__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
