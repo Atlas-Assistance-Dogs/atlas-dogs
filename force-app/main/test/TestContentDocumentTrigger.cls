@@ -16,7 +16,8 @@ public with sharing class TestContentDocumentTrigger {
         Id joeId = joe.Id;
 
         ContentVersion cv = TestFileService.createLink(category, docType, Date.today().addDays(-1), joeId);
-
+        delete [SELECT Id FROM ContentDocumentLink WHERE ContentDocumentId = :cv.ContentDocumentId
+        AND LinkedEntityId <> :joeId];
         ContentDocument doc = [
             SELECT Id
             FROM ContentDocument
