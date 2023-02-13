@@ -15,6 +15,6 @@
     ],
     "namespace": "atlas1",
     "sfdcLoginUrl": "https://login.salesforce.com",
-    "sourceApiVersion": "55.0",
+    "sourceApiVersion": "56.0",
     "pushPackageDirectoriesSequentially": true
 }
