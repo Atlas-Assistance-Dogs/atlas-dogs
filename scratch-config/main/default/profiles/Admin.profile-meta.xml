@@ -760,11 +760,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Dog__c.HealthFormReceived__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>Dog__c.LatestPhysicalExamOutcome__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -841,11 +836,6 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Dog__c.VetClinic__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Dog__c.XrayReceived__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
