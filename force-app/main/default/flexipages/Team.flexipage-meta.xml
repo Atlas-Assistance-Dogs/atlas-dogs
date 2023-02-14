@@ -172,6 +172,12 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
+                <componentName>dogHealthStatus</componentName>
+                <identifier>c_dogHealthStatus</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
                 <componentInstanceProperties>
                     <name>tabs</name>
                     <value>sidebartabs</value>
