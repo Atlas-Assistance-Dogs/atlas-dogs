@@ -3,6 +3,7 @@
     <fullName>ClientVAPWReceived__c</fullName>
     <description>The date the most recent version of Client Veteran Paperwork was uploaded</description>
     <externalId>false</externalId>
+    <inlineHelpText>Set at the time of file upload. Do not edit directly.</inlineHelpText>
     <label>Last Client Veteran Paperwork</label>
     <required>false</required>
     <trackTrending>false</trackTrending>

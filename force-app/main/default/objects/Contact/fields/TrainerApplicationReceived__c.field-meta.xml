@@ -3,6 +3,7 @@
     <fullName>TrainerApplicationReceived__c</fullName>
     <description>The date the most recent version of Trainer Application was uploaded</description>
     <externalId>false</externalId>
+    <inlineHelpText>Set at the time of file upload. Do not edit directly.</inlineHelpText>
     <label>Last Trainer Application</label>
     <required>false</required>
     <trackFeedHistory>false</trackFeedHistory>
