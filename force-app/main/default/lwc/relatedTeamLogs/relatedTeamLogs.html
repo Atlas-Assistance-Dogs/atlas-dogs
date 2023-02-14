@@ -1,4 +1,16 @@
 <template>
-    <c-related-logs-cmp record-id={clientId} object-api-name={clientObject} record-type="Client"></c-related-logs-cmp>
-    <c-related-logs-cmp record-id={clientId} object-api-name={clientObject} record-type="TeamFacilitator"></c-related-logs-cmp>
+    <div class="slds-m-bottom_small">
+        <c-related-logs-cmp
+            record-id={recordId}
+            object-api-name={clientObject}
+            record-type="Client"
+            is-team="true"
+        ></c-related-logs-cmp>
+    </div>
+    <c-related-logs-cmp
+        record-id={recordId}
+        object-api-name={clientObject}
+        record-type="TeamFacilitator"
+        is-team="true"
+    ></c-related-logs-cmp>
 </template>
