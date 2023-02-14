@@ -815,6 +815,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>ProgramAssignment__c.TeacherAssistantRequested__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Program__c.CEU__c</field>
         <readable>true</readable>
     </fieldPermissions>

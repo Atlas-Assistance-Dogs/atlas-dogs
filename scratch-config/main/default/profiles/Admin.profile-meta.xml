@@ -765,6 +765,7 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+
         <field>Dog__c.LatestPhysicalExamOutcome__c</field>
         <readable>true</readable>
     </fieldPermissions>
