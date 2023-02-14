@@ -163,7 +163,6 @@ Insert Dog__c:
         - Birthdate__c
         - Breed__c
         - Gender__c
-        - HealthFormReceived__c
         - LatestPhysicalExamOutcome__c
         - MicrochipNumber__c
         - Name
@@ -176,7 +175,6 @@ Insert Dog__c:
         - VacExamsReceived__c
         - VaccineDueDA2PP__c
         - VaccineDueRabies__c
-        - XrayReceived__c
     lookups:
         VetClinic__c:
             table: Account
