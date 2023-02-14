@@ -1,7 +1,6 @@
 {
     "orgName": "atlas-dog - Feature Test Org",
     "edition": "Developer",
-    "release": "preview",
     "settings": {
         "lightningExperienceSettings": {
             "enableS1DesktopEnabled": true
