@@ -8,6 +8,7 @@
     <columns>AssignedDate__c</columns>
     <columns>CompletionDate__c</columns>
     <columns>ExpectedCompletion__c</columns>
+    <columns>TeacherAssistantRequested__c</columns>
     <filterScope>Everything</filterScope>
     <label>All</label>
 </ListView>
