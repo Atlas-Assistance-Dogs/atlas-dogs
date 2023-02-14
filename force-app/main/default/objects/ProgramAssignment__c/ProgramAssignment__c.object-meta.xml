@@ -162,17 +162,13 @@
     </nameField>
     <pluralLabel>Program Assignments</pluralLabel>
     <searchLayouts>
-        <searchResultsAdditionalFields
-        >Contact__c</searchResultsAdditionalFields>
-        <searchResultsAdditionalFields
-        >Program__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Contact__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Program__c</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>Status__c</searchResultsAdditionalFields>
-        <searchResultsAdditionalFields
-        >AssignedDate__c</searchResultsAdditionalFields>
-        <searchResultsAdditionalFields
-        >CompletionDate__c</searchResultsAdditionalFields>
-        <searchResultsAdditionalFields
-        >ExpectedCompletion__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>AssignedDate__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CompletionDate__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>ExpectedCompletion__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>TeacherAssistantRequested__c</searchResultsAdditionalFields>
     </searchLayouts>
     <sharingModel>ReadWrite</sharingModel>
     <visibility>Public</visibility>
