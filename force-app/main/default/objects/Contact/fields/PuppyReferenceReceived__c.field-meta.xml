@@ -3,6 +3,7 @@
     <fullName>PuppyReferenceReceived__c</fullName>
     <description>The date the most recent version of Puppy Raiser Reference Letter was uploaded</description>
     <externalId>false</externalId>
+    <inlineHelpText>Set at the time of file upload. Do not edit directly.</inlineHelpText>
     <label>Last Puppy Raiser Reference Letter</label>
     <required>false</required>
     <trackFeedHistory>false</trackFeedHistory>

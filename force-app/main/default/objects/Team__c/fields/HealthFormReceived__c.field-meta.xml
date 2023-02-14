@@ -3,6 +3,7 @@
     <fullName>HealthFormReceived__c</fullName>
     <description>The date the most recent version of Vet Health Form was uploaded</description>
     <externalId>false</externalId>
+    <inlineHelpText>Set at the time of file upload. Do not edit directly.</inlineHelpText>
     <label>Last Vet Health Form</label>
     <required>false</required>
     <trackHistory>false</trackHistory>
