@@ -118,9 +118,10 @@ public with sharing class LogController {
             related.total = [
                 SELECT COUNT() FROM Log__c
                 WHERE
-                    (Client__c = :recordId
-                    OR Submitter__c = :recordId
-                    OR Facilitator__c = :recordId)
+                    (Client__c = :team.Client__c
+                    OR Submitter__c = :team.Client__c
+                    OR Facilitator__c = :team.Client__c)
+                    AND Dog__c = :team.Dog__c
                     AND RecordType.DeveloperName = :recordType
                 ];
             return related;
