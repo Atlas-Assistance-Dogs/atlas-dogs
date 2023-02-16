@@ -1,10 +1,11 @@
 public with sharing class LogController {
     @AuraEnabled(Cacheable=true)
-    public static RelatedObjects getRelatedLogs(Id recordId, String recordType, Integer max, Boolean team) {
+    public static RelatedObjects getRelatedLogs(Id recordId, String recordType, Integer max) {
         if (max == null) {
             max = 6;
         }
-        if (team) {
+        string objName = recordId.getSObjectType().getDescribe().getName();
+        if (objName == Team__c.class.getName()) {
             return getTeamLogs(recordId, recordType, max);
         }
         RelatedObjects related = new RelatedObjects();
@@ -99,11 +100,9 @@ public with sharing class LogController {
                     RecordTypeId
                 FROM Log__c
                 WHERE
-                    (Client__c = :team.Client__c
-                    OR Submitter__c = :team.Client__c
-                    OR Facilitator__c = :team.Client__c)
-                    AND Dog__c = :team.Dog__c
-                    AND RecordType.DeveloperName = :recordType
+                    Client__c = :team.Client__c AND
+                    Dog__c = :team.Dog__c AND
+                    RecordType.DeveloperName = :recordType
                 ORDER BY Date__c DESC NULLS LAST
                 LIMIT :max
             ];
@@ -118,11 +117,9 @@ public with sharing class LogController {
             related.total = [
                 SELECT COUNT() FROM Log__c
                 WHERE
-                    (Client__c = :team.Client__c
-                    OR Submitter__c = :team.Client__c
-                    OR Facilitator__c = :team.Client__c)
-                    AND Dog__c = :team.Dog__c
-                    AND RecordType.DeveloperName = :recordType
+                    Client__c = :team.Client__c AND
+                    Dog__c = :team.Dog__c AND
+                    RecordType.DeveloperName = :recordType
                 ];
             return related;
         } catch (Exception e) {
