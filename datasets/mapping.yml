@@ -414,10 +414,8 @@ Insert Log__c:
         - Stress__c
         - SupportDetails__c
     lookups:
-        Client__c:
-            table: Contact
-        Dog__c:
-            table: Dog__c
+        Team__c:
+            table: Team__c
         Facilitator__c:
             table: Contact
         Submitter__c:
