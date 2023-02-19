@@ -33,13 +33,14 @@ public with sharing class LogController {
                     Submitter__c,
                     Submitter__r.Name,
                     SupportDetails__c,
+                    Team__c,
                     RecordTypeId
                 FROM Log__c
                 WHERE
-                    (Client__c = :recordId
+                    (Team__r.Client__c = :recordId
                     OR Submitter__c = :recordId
                     OR Facilitator__c = :recordId
-                    OR Dog__c = :recordId)
+                    OR Team__r.Dog__c = :recordId)
                     AND RecordType.DeveloperName = :recordType
                 ORDER BY Date__c DESC NULLS LAST
                 LIMIT :max
@@ -55,9 +56,10 @@ public with sharing class LogController {
             related.total = [
                 SELECT COUNT() FROM Log__c
                 WHERE
-                    (Client__c = :recordId
+                    (Team__r.Client__c = :recordId
                     OR Submitter__c = :recordId
-                    OR Facilitator__c = :recordId)
+                    OR Facilitator__c = :recordId
+                    OR Team__r.Dog__c = :recordId)
                     AND RecordType.DeveloperName = :recordType
                 ];
             return related;
@@ -72,20 +74,14 @@ public with sharing class LogController {
         }
         RelatedObjects related = new RelatedObjects();
         try {
-            Team__c team = [SELECT Id, Client__c, Dog__c FROM Team__c WHERE Id = :recordId];
-
             List<Log__c> logs = [
                 SELECT
-                    Client__c,
-                    Client__r.Name,
                     ClientHours__c,
                     ClientStress__c,
                     Date__c,
                     Details__c,
-                    Dog__c,
                     Facilitator__c,
                     Facilitator__r.Name,
-                    Handler__c,
                     Name,
                     OtherHours__c,
                     PublicAccessHours__c,
@@ -97,11 +93,17 @@ public with sharing class LogController {
                     Submitter__c,
                     Submitter__r.Name,
                     SupportDetails__c,
+                    Team__c,
+                    Team__r.Client__c,
+                    Team__r.Client__r.Name,
+                    Team__r.Dog__c,
+                    Team__r.Dog__r.Name,
+                    Team__r.Handler__c,
+                    Team__r.Handler__r.Name,
                     RecordTypeId
                 FROM Log__c
                 WHERE
-                    Client__c = :team.Client__c AND
-                    Dog__c = :team.Dog__c AND
+                    Team__c = :recordId AND
                     RecordType.DeveloperName = :recordType
                 ORDER BY Date__c DESC NULLS LAST
                 LIMIT :max
@@ -117,8 +119,7 @@ public with sharing class LogController {
             related.total = [
                 SELECT COUNT() FROM Log__c
                 WHERE
-                    Client__c = :team.Client__c AND
-                    Dog__c = :team.Dog__c AND
+                    Team__c = :recordId AND
                     RecordType.DeveloperName = :recordType
                 ];
             return related;
