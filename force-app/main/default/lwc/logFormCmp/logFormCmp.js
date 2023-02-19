@@ -35,7 +35,6 @@ export default class LogFormCmp extends LightningElement {
         facilitator: TEAM_FACILITATOR_FIELD,
         recordType: RECORD_TYPE_FIELD,
         date: DATE_FIELD,
-        dog: DOG_FIELD,
         clientHours: CLIENT_HOURS_FIELD,
         publicAccessHours: PAH_FIELD,
         handler: HANDLER_FIELD,

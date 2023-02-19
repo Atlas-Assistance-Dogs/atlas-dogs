@@ -34,6 +34,13 @@ public with sharing class LogController {
                     Submitter__r.Name,
                     SupportDetails__c,
                     Team__c,
+                    Team__r.Client__c,
+                    Team__r.Client__r.Name,
+                    Team__r.Dog__c,
+                    Team__r.Dog__r.Name,
+                    Team__r.Handler__c,
+                    Team__r.Handler__r.Name,
+                    Team__r.Name,
                     RecordTypeId
                 FROM Log__c
                 WHERE
@@ -48,9 +55,10 @@ public with sharing class LogController {
             for (Log__c log : logs) {
                 LogInfo item = new LogInfo();
                 item.log = log;
-                item.clientName = log.Client__r.Name;
+                item.clientName = log.Team__r.Client__r.Name;
                 item.facilitatorName = log.Facilitator__r.Name;
                 item.submitterName = log.Submitter__r.Name;
+                item.teamName = log.Team__r.Name;
                 related.items.add(item);
             }
             related.total = [
@@ -100,6 +108,7 @@ public with sharing class LogController {
                     Team__r.Dog__r.Name,
                     Team__r.Handler__c,
                     Team__r.Handler__r.Name,
+                    Team__r.Name,
                     RecordTypeId
                 FROM Log__c
                 WHERE
@@ -111,9 +120,10 @@ public with sharing class LogController {
             for (Log__c log : logs) {
                 LogInfo item = new LogInfo();
                 item.log = log;
-                item.clientName = log.Client__r.Name;
+                item.clientName = log.Team__r.Client__r.Name;
                 item.facilitatorName = log.Facilitator__r.Name;
                 item.submitterName = log.Submitter__r.Name;
+                item.teamName = log.Team__r.Name;
                 related.items.add(item);
             }
             related.total = [
