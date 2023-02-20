@@ -30,6 +30,9 @@ global class PostInstall implements InstallHandler {
             }
             update dogs;
         }
+        if (context.previousVersion().compareTo(new Version(1, 4)) <= 0) {
+            linkTeamLogs();
+        }
     }
 
     private Date later(Date latest, Date vaccine) {
@@ -40,5 +43,20 @@ global class PostInstall implements InstallHandler {
             return vaccine;
         }
         return latest;
+    }
+
+    private void linkTeamLogs() {
+        // Get the list of teams
+        List<Team__c> teams = [SELECT Id, Client__c, Dog__c, Handler__c FROM Team__c];
+
+        for (Team__c team : teams) {
+            // get the logs that match
+            List<Log__c> logs = [SELECT Id, Team__c FROM Log__c WHERE Client__c = :team.Client__c AND Dog__c = :team.Dog__c];
+            for (Log__c log : logs) {
+                // set the team
+                log.Team__c = team.Id;
+            }
+            update logs;
+        }
     }
 }

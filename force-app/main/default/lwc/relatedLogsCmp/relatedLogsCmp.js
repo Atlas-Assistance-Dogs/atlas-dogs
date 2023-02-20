@@ -153,7 +153,6 @@ export default class RelatedLogsCmp extends NavigationMixin(LightningElement) {
     @api recordId;
     @api objectApiName;
     @api viewAll;
-    @api isTeam = false; // optional, use if restricting records by team, supply teamId as recordId
 
     _recordType;
     @track
@@ -293,7 +292,6 @@ export default class RelatedLogsCmp extends NavigationMixin(LightningElement) {
     @wire(getRelatedLogs, {
         recordId: "$recordId",
         recordType: "$recordType",
-        team: "$isTeam",
         max: "$max"
     })
     getLogs(result) {

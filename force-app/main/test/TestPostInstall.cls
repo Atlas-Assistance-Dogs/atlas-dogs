@@ -67,4 +67,75 @@ public with sharing class TestPostInstall {
             }
         }
     }
+
+    @isTest
+    public static void installScript_SetsTeamInLogs() {
+        Dog__c dog = new Dog__c(Name = 'Ace');
+        insert dog;
+        Contact client = new Contact(FirstName = 'Julie', LastName = 'Monroe');
+        insert client;
+        Contact other = new Contact(FirstName = 'Pete', LastName = 'Latimer');
+        insert other;
+        Team__c team = new Team__c(Client__c = client.Id, Dog__c = dog.Id, Name = 'JulieMonroe_Ace');
+        insert team;
+        Map<String, Schema.RecordTypeInfo> recordTypes = Schema.SObjectType.Log__c.getRecordTypeInfosByName();
+        Id CLIENT_ID = recordTypes.get('Client').getRecordTypeId();
+        Id FACILITATOR_ID = recordTypes.get('Team Facilitator').getRecordTypeId();
+        List<Log__c> logs = new List<Log__c>();
+        logs.add(
+            new Log__c(
+                Client__c = client.Id,
+                ClientHours__c = 22,
+                ClientStress__c = 'Only a little',
+                Date__c = Date.today(),
+                Details__c = 'My details',
+                Dog__c = dog.Id,
+                Handler__c = 'Ken',
+                OtherHours__c = 5,
+                PublicAccessHours__c = 10,
+                RequestSupportFromAtlas__c = false,
+                RequestSupportFromTeam__c = true,
+                Satisfaction__c = 'No enjoyment',
+                SessionType__c = 'In Person',
+                Stress__c = 'Not at all',
+                Submitter__c = other.Id,
+                SupportDetails__c = 'Support details',
+                Facilitator__c = other.Id,
+                RecordTypeId = CLIENT_ID
+            )
+        );
+        logs.add(
+            new Log__c(
+                Client__c = client.Id,
+                ClientHours__c = 22,
+                ClientStress__c = 'Only a little',
+                Date__c = Date.today(),
+                Details__c = 'My details',
+                Dog__c = dog.Id,
+                Handler__c = 'Ken',
+                OtherHours__c = 5,
+                PublicAccessHours__c = 10,
+                RequestSupportFromAtlas__c = false,
+                RequestSupportFromTeam__c = true,
+                Satisfaction__c = 'No enjoyment',
+                SessionType__c = 'In Person',
+                Stress__c = 'Not at all',
+                Submitter__c = other.Id,
+                SupportDetails__c = 'Support details',
+                Facilitator__c = other.Id,
+                RecordTypeId = FACILITATOR_ID
+            )
+        );
+        insert logs;
+        PostInstall postinstall = new PostInstall();
+
+        // Act
+        Test.testInstall(postinstall, new Version(1,3), true);
+        
+        // Assert
+        logs = [SELECT Id, Team__c FROM Log__c];
+        for (Log__c log : logs) {
+            System.assertEquals(team.Id, log.Team__c);
+        }
+    }
 }
