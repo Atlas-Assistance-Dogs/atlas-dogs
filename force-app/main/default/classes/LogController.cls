@@ -12,13 +12,10 @@ public with sharing class LogController {
         try {
             List<Log__c> logs = [
                 SELECT
-                    Client__c,
-                    Client__r.Name,
                     ClientHours__c,
                     ClientStress__c,
                     Date__c,
                     Details__c,
-                    Dog__c,
                     Facilitator__c,
                     Facilitator__r.Name,
                     Handler__c,
@@ -90,6 +87,7 @@ public with sharing class LogController {
                     Details__c,
                     Facilitator__c,
                     Facilitator__r.Name,
+                    Handler__c,
                     Name,
                     OtherHours__c,
                     PublicAccessHours__c,
