@@ -418,7 +418,6 @@ Insert Log__c:
         - ClientStress__c
         - Date__c
         - Details__c
-        - Handler__c
         - OtherHours__c
         - PublicAccessHours__c
         - RecordTypeId

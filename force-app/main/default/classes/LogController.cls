@@ -18,7 +18,6 @@ public with sharing class LogController {
                     Details__c,
                     Facilitator__c,
                     Facilitator__r.Name,
-                    Handler__c,
                     Name,
                     OtherHours__c,
                     PublicAccessHours__c,
@@ -54,6 +53,7 @@ public with sharing class LogController {
                 item.log = log;
                 item.clientName = log.Team__r.Client__r.Name;
                 item.facilitatorName = log.Facilitator__r.Name;
+                item.handlerName = log.Team__r.Handler__r.Name;
                 item.submitterName = log.Submitter__r.Name;
                 item.teamName = log.Team__r.Name;
                 related.items.add(item);
@@ -87,7 +87,6 @@ public with sharing class LogController {
                     Details__c,
                     Facilitator__c,
                     Facilitator__r.Name,
-                    Handler__c,
                     Name,
                     OtherHours__c,
                     PublicAccessHours__c,
@@ -120,6 +119,7 @@ public with sharing class LogController {
                 item.log = log;
                 item.clientName = log.Team__r.Client__r.Name;
                 item.facilitatorName = log.Facilitator__r.Name;
+                item.handlerName = log.Team__r.Handler__r.Name;
                 item.submitterName = log.Submitter__r.Name;
                 item.teamName = log.Team__r.Name;
                 related.items.add(item);

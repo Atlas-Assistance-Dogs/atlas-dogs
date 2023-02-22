@@ -765,11 +765,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Log__c.Handler__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>Log__c.RequestSupportFromAtlas__c</field>
         <readable>true</readable>
     </fieldPermissions>

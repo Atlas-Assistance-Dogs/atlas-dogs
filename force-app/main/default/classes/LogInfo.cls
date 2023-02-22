@@ -10,6 +10,9 @@ public with sharing class LogInfo {
     public String facilitatorName { get; set; }
 
     @AuraEnabled
+    public String handlerName { get; set; }
+
+    @AuraEnabled
     public String submitterName { get; set; }
 
     @AuraEnabled

@@ -75,7 +75,6 @@ public with sharing class TestLogController {
         System.assertEquals(expected.ClientStress__c, actual.ClientStress__c);
         System.assertEquals(expected.Date__c, actual.Date__c);
         System.assertEquals(expected.Details__c, actual.Details__c);
-        System.assertEquals(expected.Handler__c, actual.Handler__c);
         System.assertEquals(expected.OtherHours__c, actual.OtherHours__c);
         System.assertEquals(
             expected.PublicAccessHours__c,
@@ -148,7 +147,6 @@ public with sharing class TestLogController {
                 ClientStress__c = 'Only a little',
                 Date__c = Date.today(),
                 Details__c = 'My details',
-                Handler__c = 'Ken',
                 OtherHours__c = 5,
                 PublicAccessHours__c = 10,
                 RequestSupportFromAtlas__c = false,
@@ -169,7 +167,6 @@ public with sharing class TestLogController {
                 ClientStress__c = 'Only a little',
                 Date__c = Date.today(),
                 Details__c = 'My details',
-                Handler__c = 'Ken',
                 OtherHours__c = 5,
                 PublicAccessHours__c = 10,
                 RequestSupportFromAtlas__c = false,
@@ -217,7 +214,6 @@ public with sharing class TestLogController {
                 ClientStress__c = 'Only a little',
                 Date__c = Date.today(),
                 Details__c = 'My details',
-                Handler__c = 'Ken',
                 OtherHours__c = 5,
                 PublicAccessHours__c = 10,
                 RequestSupportFromAtlas__c = false,
@@ -238,7 +234,6 @@ public with sharing class TestLogController {
                 ClientStress__c = 'Only a little',
                 Date__c = Date.today(),
                 Details__c = 'My details',
-                Handler__c = 'Ken',
                 OtherHours__c = 5,
                 PublicAccessHours__c = 10,
                 RequestSupportFromAtlas__c = false,
@@ -286,7 +281,6 @@ public with sharing class TestLogController {
                 ClientStress__c = 'Only a little',
                 Date__c = Date.today(),
                 Details__c = 'My details',
-                Handler__c = 'Ken',
                 OtherHours__c = 5,
                 PublicAccessHours__c = 10,
                 RequestSupportFromAtlas__c = false,
@@ -307,7 +301,6 @@ public with sharing class TestLogController {
                 ClientStress__c = 'Only a little',
                 Date__c = Date.today(),
                 Details__c = 'My details',
-                Handler__c = 'Ken',
                 OtherHours__c = 5,
                 PublicAccessHours__c = 10,
                 RequestSupportFromAtlas__c = false,
