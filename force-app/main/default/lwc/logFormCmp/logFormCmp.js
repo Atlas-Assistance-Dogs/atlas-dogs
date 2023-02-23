@@ -22,6 +22,7 @@ import SESSION_TYPE_FIELD from "@salesforce/schema/Log__c.SessionType__c";
 
 export default class LogFormCmp extends LightningElement {
     @api recordId;
+    @api recordTypeId;
 
     get title() {
         const mode = this.recordId ? "Edit" : "Create";
@@ -59,14 +60,15 @@ export default class LogFormCmp extends LightningElement {
             Object.keys(rtis).forEach((id) => {
                 this.recordTypeNames[rtis[id].name] = id;
             });
+            if (this.recordTypeId) {
+                this.recordTypeName = rtis[this.recordTypeId].name;
+            }
         }
     }
 
     recordTypes;
     recordTypeNames;
     recordTypeName;
-
-    recordTypeId;
 
     get isClient() {
         try {
@@ -82,6 +84,20 @@ export default class LogFormCmp extends LightningElement {
         } catch {
             return false;
         }
+    }
+
+    // open knowing recordTypeId rather than recordTypeName
+    @api open(recordTypeId) {
+        this.recordTypeId = recordTypeId;
+        const modal = this.template.querySelector("c-modal-cmp");
+
+        if (this.recordTypes) {
+            this.recordTypeName = this.recordTypes[this.recordTypeId].name;
+        }
+        if (modal?.isModalOpen) {
+            return;
+        }
+        modal.openModal();
     }
 
     @api
@@ -145,7 +161,7 @@ export default class LogFormCmp extends LightningElement {
         this.dispatchEvent(
             new ShowToastEvent({
                 title: "Error!!",
-                message: event.detail?.message ?? 'Error updating Log',
+                message: event.detail?.message ?? "Error updating Log",
                 variant: "error"
             })
         );

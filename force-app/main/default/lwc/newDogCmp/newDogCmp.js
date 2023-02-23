@@ -33,7 +33,7 @@ export default class NewDogCmp extends NavigationMixin(LightningElement) {
         rabiesDue: RABIES_DUE_FIELD
     };
 
-    // Standard lifecycle hooks used run when loaded
+    // Standard lifecycle hooks runs when loaded
     renderedCallback() {
         this.template.querySelector("c-modal-cmp").openModal();
     }

@@ -1,5 +1,5 @@
 <aura:documentation>
-	<aura:description>Aura component for new Puppy log form</aura:description>
+	<aura:description>Aura component for new Log form</aura:description>
 	<aura:example name="ExampleName" ref="exampleComponentName" label="Label">
 		Example Description
 	</aura:example>
