@@ -123,7 +123,7 @@ export default class LogFormCmp extends LightningElement {
     }
 
     handleClose() {
-        this.closeModal();
+        this.dispatchEvent(new CustomEvent("close", { bubbles: true }));
     }
 
     handleSubmit(event) {

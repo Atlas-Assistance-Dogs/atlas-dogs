@@ -23,6 +23,7 @@ export default class ModalCmp extends LightningElement {
     closeModal() {
         // to close modal set isModalOpen value as false
         this.isModalOpen = false;
+        this.dispatchEvent(new CustomEvent("cancel", { bubbles: true }));
     }
 
     submit(event) {

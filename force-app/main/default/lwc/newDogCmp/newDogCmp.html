@@ -1,5 +1,5 @@
 <template>
-    <c-modal-cmp title="New Dog" onclose={handleCancel} onsubmit={handleSubmit}>
+    <c-modal-cmp title="New Dog" onclose={handleCancel} oncancel={handleCancel} onsubmit={handleSubmit}>
         <lightning-record-edit-form
             object-api-name={object}
             onsuccess={handleSuccess}
