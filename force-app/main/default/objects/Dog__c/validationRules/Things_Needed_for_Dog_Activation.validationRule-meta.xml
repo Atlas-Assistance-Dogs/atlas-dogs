@@ -6,15 +6,11 @@
     <errorConditionFormula>AND(
 OR( 
 TODAY() &lt;  ADDMONTHS(Birthdate__c, 14),
-VaccineDueDistemper__c &gt; TODAY(),
-VaccineDueHepatitis__c &gt; TODAY(),
-VaccineDueParainfluenza__c &gt; TODAY(),
-VaccineDueParvovirus__c  &gt; TODAY(),
+VaccineDueDA2PP__c &gt; TODAY(),
 VaccineDueRabies__c &gt; TODAY(),
 PhysicalExamDue__c &gt; TODAY()
 ), 
 AND(NOT(ISPICKVAL(PRIORVALUE(Status__c), 'Active')),
  ISPICKVAL(Status__c, 'Active')))</errorConditionFormula>
-    <errorMessage
-    >For Activation of the Dog, It needs to be at least 14 months, Vaccinations need to be current</errorMessage>
+    <errorMessage>For Activation of the Dog, It needs to be at least 14 months, Vaccinations need to be current</errorMessage>
 </ValidationRule>

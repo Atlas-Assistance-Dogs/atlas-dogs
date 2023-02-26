@@ -1,7 +1,7 @@
 <template>
     <article class="slds-card slds-card_boundary">
         <div class="slds-page-header header">
-            <lightning-breadcrumbs if:true={viewAll}>
+            <lightning-breadcrumbs if:true={showBreadCrumbs}>
                 <lightning-breadcrumb
                     label={list}
                     onclick={navigateToList}

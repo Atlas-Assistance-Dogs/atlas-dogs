@@ -4,13 +4,11 @@ import { getObjectInfo } from "lightning/uiObjectInfoApi";
 import LOG_OBJECT from "@salesforce/schema/Log__c";
 
 import ATLAS_SUPPORT_FIELD from "@salesforce/schema/Log__c.RequestSupportFromAtlas__c";
-import CLIENT_FIELD from "@salesforce/schema/Log__c.Client__c";
+import TEAM_FIELD from "@salesforce/schema/Log__c.Team__c";
 import CLIENT_HOURS_FIELD from "@salesforce/schema/Log__c.ClientHours__c";
 import CLIENT_STRESS_FIELD from "@salesforce/schema/Log__c.ClientStress__c";
 import DATE_FIELD from "@salesforce/schema/Log__c.Date__c";
 import DETAILS_FIELD from "@salesforce/schema/Log__c.Details__c";
-import DOG_FIELD from "@salesforce/schema/Log__c.Dog__c";
-import HANDLER_FIELD from "@salesforce/schema/Log__c.Handler__c";
 import OTHER_HOURS_FIELD from "@salesforce/schema/Log__c.OtherHours__c";
 import PAH_FIELD from "@salesforce/schema/Log__c.PublicAccessHours__c";
 import RECORD_TYPE_FIELD from "@salesforce/schema/Log__c.RecordTypeId";
@@ -31,15 +29,13 @@ export default class LogFormCmp extends LightningElement {
     }
 
     fields = {
-        client: CLIENT_FIELD,
+        team: TEAM_FIELD,
         submitter: SUBMITTER_FIELD,
         facilitator: TEAM_FACILITATOR_FIELD,
         recordType: RECORD_TYPE_FIELD,
         date: DATE_FIELD,
-        dog: DOG_FIELD,
         clientHours: CLIENT_HOURS_FIELD,
         publicAccessHours: PAH_FIELD,
-        handler: HANDLER_FIELD,
         lesson: SESSION_TYPE_FIELD,
         otherHours: OTHER_HOURS_FIELD,
         details: DETAILS_FIELD,

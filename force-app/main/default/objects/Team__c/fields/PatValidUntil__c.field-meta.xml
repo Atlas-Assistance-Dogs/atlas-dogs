@@ -3,6 +3,7 @@
     <fullName>PatValidUntil__c</fullName>
     <description>Date the Public Access Test expires</description>
     <externalId>false</externalId>
+    <inlineHelpText>Derived from most recent passed PAT. Do not edit directly.</inlineHelpText>
     <label>PAT Valid Until</label>
     <required>false</required>
     <trackTrending>false</trackTrending>

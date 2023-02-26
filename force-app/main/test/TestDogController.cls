@@ -6,10 +6,7 @@ public with sharing class TestDogController {
         Date exam = Date.newInstance(2021, 1, 10);
         Date due = exam.addYears(1);
         Dog__c saved = new Dog__c(
-            VaccineDueDistemper__c = due,
-            VaccineDueHepatitis__c = due,
-            VaccineDueParainfluenza__c = due,
-            VaccineDueParvovirus__c = due,
+            VaccineDueDA2PP__c = due,
             VaccineDueRabies__c = exam.addYears(2)
         );
         insert saved;
@@ -31,10 +28,7 @@ public with sharing class TestDogController {
         Dog__c dog = DogController.getVaccinations(saved.Id);
         Test.stopTest();
 
-        System.assertEquals(null, dog.VaccineDueDistemper__c);
-        System.assertEquals(null, dog.VaccineDueHepatitis__c);
-        System.assertEquals(null, dog.VaccineDueParainfluenza__c);
-        System.assertEquals(null, dog.VaccineDueParvovirus__c);
+        System.assertEquals(null, dog.VaccineDueDA2PP__c);
         System.assertEquals(null, dog.VaccineDueRabies__c);
         System.assertEquals(null, dog.PhysicalExamDue__c);
     }

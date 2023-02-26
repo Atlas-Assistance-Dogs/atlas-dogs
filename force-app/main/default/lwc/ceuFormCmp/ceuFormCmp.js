@@ -101,16 +101,6 @@ export default class CeuFormCmp extends NavigationMixin(LightningElement) {
 
     handleSubmit(event) {
         event.preventDefault();
-        if (!this.hasFiles) {
-            this.dispatchEvent(
-                new ShowToastEvent({
-                    title: "Error!!",
-                    message: "At least one file is required!",
-                    variant: "error"
-                })
-            );
-            return;
-        }
         this.template.querySelector("lightning-record-edit-form").submit();
     }
 

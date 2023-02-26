@@ -158,6 +158,7 @@
       Standalone__c: true
 
 - object: Program__c
+  nickname: TSiM
   fields:
       Name: "Teams Set in Motion Client"
       CEU__c: false
@@ -222,8 +223,12 @@
                     pick:
                         reference: staff_program
               - choice:
+                    when: ${{'Volunteer' in Contact__c.Positions__c}}
                     pick:
                         reference: volunteer_program
+              - choice:
+                    pick:
+                        reference: TSiM
       Status__c:
           random_choice:
               - In progress

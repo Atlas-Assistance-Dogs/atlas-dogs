@@ -25,9 +25,9 @@ public with sharing class BackgroundCheckController {
                     bgc.Id, 1
                 );
                 if (files != null && !files.items.isEmpty()) {
-                    ContentVersion cv = (ContentVersion)files.items[0];
-                    outCheck.documentId = cv.ContentDocumentId;
-                    outCheck.fileName = cv.Title;
+                    FileInfo info = (FileInfo)files.items[0];
+                    outCheck.documentId = info.cv.ContentDocumentId;
+                    outCheck.fileName = info.cv.Title;
                     outCheck.noFile = false;
                 }
                 related.items.add(outCheck);

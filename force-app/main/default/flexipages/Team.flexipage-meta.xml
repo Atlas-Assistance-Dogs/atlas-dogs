@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <FlexiPage xmlns="http://soap.sforce.com/2006/04/metadata">
     <flexiPageRegions>
         <itemInstances>
@@ -47,6 +47,26 @@
             <componentInstance>
                 <componentName>relatedPatsCmp</componentName>
                 <identifier>relatedPatsCmp</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>recordType</name>
+                    <value>Client</value>
+                </componentInstanceProperties>
+                <componentName>relatedLogsCmp</componentName>
+                <identifier>c_relatedLogsCmp</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>recordType</name>
+                    <value>TeamFacilitator</value>
+                </componentInstanceProperties>
+                <componentName>relatedLogsCmp</componentName>
+                <identifier>c_relatedLogsCmp2</identifier>
             </componentInstance>
         </itemInstances>
         <itemInstances>
@@ -132,8 +152,11 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
-                <componentName
-                >runtime_sales_activities:activityPanel</componentName>
+                <componentInstanceProperties>
+                    <name>showLegacyActivityComposer</name>
+                    <value>false</value>
+                </componentInstanceProperties>
+                <componentName>runtime_sales_activities:activityPanel</componentName>
                 <identifier>runtime_sales_activities_activityPanel</identifier>
             </componentInstance>
         </itemInstances>
@@ -165,6 +188,12 @@
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentName>dogHealthStatus</componentName>
+                <identifier>c_dogHealthStatus</identifier>
+            </componentInstance>
+        </itemInstances>
         <itemInstances>
             <componentInstance>
                 <componentInstanceProperties>

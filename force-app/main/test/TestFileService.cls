@@ -17,7 +17,8 @@ public with sharing class TestFileService {
         );
         insert cv;
 
-        ContentVersion temp = [
+        // insert will fill in the Id, but not the ContentDecumentId
+        cv = [
             SELECT Id, ContentDocumentId, Category__c, Type__c, Date__c
             FROM ContentVersion
             WHERE Id = :cv.Id
@@ -25,12 +26,12 @@ public with sharing class TestFileService {
         ];
 
         ContentDocumentLink link = new ContentDocumentLink(
-            ContentDocumentId = temp.ContentDocumentId,
+            ContentDocumentId = cv.ContentDocumentId,
             LinkedEntityId = recordId
         );
         insert link;
 
-        return temp;
+        return cv;
     }
 
     @isTest
@@ -69,24 +70,24 @@ public with sharing class TestFileService {
 
     @isTest
     public static void updateDate_FindsLinkedDog() {
-        Dog__c dog = new Dog__c(Name = 'Fido', HealthFormReceived__c = null);
+        Dog__c dog = new Dog__c(Name = 'Fido', VacExamsReceived__c = null);
         insert dog;
-        ContentVersion cv = createLink('Dog', 'HealthForm', Date.today(), dog.Id);
+        ContentVersion cv = createLink('Dog', 'VacExams', Date.today(), dog.Id);
 
         // Act
         FileService.updateDate(cv);
 
         // Assert
         dog = [
-            SELECT HealthFormReceived__c
+            SELECT VacExamsReceived__c
             FROM Dog__c
             WHERE Id = :dog.Id
             LIMIT 1
         ];
         system.assertEquals(
             Date.today(),
-            dog.HealthFormReceived__c,
-            'HealthFormReceived not set'
+            dog.VacExamsReceived__c,
+            'VacExamsReceived not set'
         );
     }
 
@@ -98,22 +99,22 @@ public with sharing class TestFileService {
             Email = 'abc@abc.com'
         );
         insert contact;
-        ContentVersion cv = createLink('Client', 'Application', Date.today(), contact.Id);
+        ContentVersion cv = createLink('Volunteer', 'Application', Date.today(), contact.Id);
 
         // Act
         FileService.updateDate(cv);
 
         // Assert
         contact = [
-            SELECT ClientApplicationReceived__c
+            SELECT VolunteerApplicationReceived__c
             FROM Contact
             WHERE Id = :contact.Id
             LIMIT 1
         ];
         system.assertEquals(
             Date.today(),
-            contact.ClientApplicationReceived__c,
-            'ClientApplicationReceived not set'
+            contact.VolunteerApplicationReceived__c,
+            'VolunteerApplicationReceived not set'
         );
     }
 
@@ -122,30 +123,18 @@ public with sharing class TestFileService {
         Dog__c record = new Dog__c(Name = 'Fido');
         insert record;
         List<ContentVersion> cvs = new List<ContentVersion>();
-        cvs.add(createLink('Dog', 'HealthForm', Date.today(), record.Id));
         cvs.add(createLink('Dog', 'VacExams', Date.today().addDays(-1), record.Id));
-        cvs.add(createLink('Dog', 'Xray', Date.today().addDays(-2), record.Id));
         FileService.updateDates(cvs);
         record = [
-            SELECT HealthFormReceived__c, VacExamsReceived__c, XrayReceived__c
+            SELECT VacExamsReceived__c
             FROM Dog__c
             WHERE Id = :record.Id
             LIMIT 1
         ];
         system.assertEquals(
-            Date.today(),
-            record.HealthFormReceived__c,
-            'HealthFormReceived__c not set'
-        );
-        system.assertEquals(
             Date.today().addDays(-1),
             record.VacExamsReceived__c,
             'VacExamsReceived__c not set'
-        );
-        system.assertEquals(
-            Date.today().addDays(-2),
-            record.XrayReceived__c,
-            'XrayReceived__c not set'
         );
     }
 
@@ -160,11 +149,11 @@ public with sharing class TestFileService {
         insert record;
         List<ContentVersion> cvs = new List<ContentVersion>();
         cvs.add(createLink('Board', 'CoI', Date.today(), record.Id));
-        cvs.add(createLink('Client', 'Application', Date.today().addDays(-1), record.Id));
+        cvs.add(createLink('Volunteer', 'Application', Date.today().addDays(-1), record.Id));
         cvs.add(createLink('Facilitator', 'ProfGrowthPlan', Date.today().addDays(-2), record.Id));
         FileService.updateDates(cvs);
         record = [
-            SELECT BoardCoIReceived__c, ClientApplicationReceived__c, FacilitatorProfGrowthPlanReceived__c
+            SELECT BoardCoIReceived__c, VolunteerApplicationReceived__c, FacilitatorProfGrowthPlanReceived__c
             FROM Contact
             WHERE Id = :record.Id
             LIMIT 1
@@ -176,8 +165,8 @@ public with sharing class TestFileService {
         );
         system.assertEquals(
             Date.today().addDays(-1),
-            record.ClientApplicationReceived__c,
-            'ClientApplicationReceived__c not set'
+            record.VolunteerApplicationReceived__c,
+            'VolunteerApplicationReceived__c not set'
         );
         system.assertEquals(
             Date.today().addDays(-2),

@@ -163,7 +163,6 @@ Insert Dog__c:
         - Birthdate__c
         - Breed__c
         - Gender__c
-        - HealthFormReceived__c
         - LatestPhysicalExamOutcome__c
         - MicrochipNumber__c
         - Name
@@ -174,12 +173,8 @@ Insert Dog__c:
         - SpayedNeutered__c
         - Status__c
         - VacExamsReceived__c
-        - VaccineDueDistemper__c
-        - VaccineDueHepatitis__c
-        - VaccineDueParainfluenza__c
-        - VaccineDueParvovirus__c
+        - VaccineDueDA2PP__c
         - VaccineDueRabies__c
-        - XrayReceived__c
     lookups:
         VetClinic__c:
             table: Account
@@ -226,15 +221,9 @@ Insert Contact:
         - BoardMemberStatus__c
         - BoardResumeReceived__c
         - BoardToNReceived__c
-        - ClientApplicationReceived__c
-        - ClientCertAgreementReceived__c
-        - ClientLOMIReceived__c
+        - CanvasSisId__c
         - ClientMedicalDevices__c
-        - ClientPreApplicationReceived__c
-        - ClientProgAgreementReceived__c
         - ClientStatus__c
-        - ClientSurveyReceived__c
-        - ClientVAPWReceived__c
         - CriminalConviction__c
         - DateStarted__c
         - Email
@@ -282,7 +271,6 @@ Insert Contact:
         - TrainerCertAgreementReceived__c
         - TrainerInfrNoticeReceived__c
         - TrainerProgAgreementReceived__c
-        - TrainerReferenceReceived__c
         - TrainerSpecialties__c
         - TrainerStatus__c
         - VolunteerAccess__c
@@ -408,6 +396,21 @@ Insert DogRelationship__c:
             table: Contact
         Dog__c:
             table: Dog__c
+Insert Team__c:
+    sf_object: Team__c
+    fields:
+        - Name
+        - PatCount__c
+        - PatValidUntil__c
+        - PrimaryCertification__c
+        - SecondaryCertification__c
+    lookups:
+        Client__c:
+            table: Contact
+        Dog__c:
+            table: Dog__c
+        Handler__c:
+            table: Contact
 Insert Log__c:
     sf_object: Log__c
     fields:
@@ -415,7 +418,6 @@ Insert Log__c:
         - ClientStress__c
         - Date__c
         - Details__c
-        - Handler__c
         - OtherHours__c
         - PublicAccessHours__c
         - RecordTypeId
@@ -425,11 +427,10 @@ Insert Log__c:
         - SessionType__c
         - Stress__c
         - SupportDetails__c
+        - Team__c
     lookups:
-        Client__c:
-            table: Contact
-        Dog__c:
-            table: Dog__c
+        Team__c:
+            table: Team__c
         Facilitator__c:
             table: Contact
         Submitter__c:
@@ -446,21 +447,6 @@ Insert ProgramAssignment__c:
             table: Contact
         Program__c:
             table: Program__c
-Insert Team__c:
-    sf_object: Team__c
-    fields:
-        - Name
-        - PatCount__c
-        - PatValidUntil__c
-        - PrimaryCertification__c
-        - SecondaryCertification__c
-    lookups:
-        Client__c:
-            table: Contact
-        Dog__c:
-            table: Dog__c
-        Handler__c:
-            table: Contact
 Insert PublicAccessTest__c:
     sf_object: PublicAccessTest__c
     fields:
@@ -476,6 +462,17 @@ Insert PublicAccessTest__c:
             table: Contact
         Team__c:
             table: Team__c
+Insert PuppyLog__c:
+    sf_object: PuppyLog__c
+    fields:
+        - AdditionalInformation__c
+        - Date__c
+        - RequestSupportFromAtlas__c
+    lookups:
+        Dog__c:
+            table: Dog__c
+        Raiser__c:
+            table: Contact
 Insert Campaign:
     sf_object: Campaign
     fields:

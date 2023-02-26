@@ -4,8 +4,6 @@
 - object: Log__c
   count: 20
   fields:
-      Client__c:
-          random_reference: Contact
       ClientHours__c:
           random_number:
               min: 0
@@ -23,8 +21,6 @@
               end_date: today
       Details__c:
           fake: paragraph
-      Dog__c:
-          random_reference: Dog__c
       Handler__c:
           fake: FirstName
       OtherHours__c:
@@ -61,9 +57,11 @@
           random_reference: Contact
       SupportDetails__c:
           fake: paragraph
+      Team__c:
+          random_reference: Team__c
       Facilitator__c:
           random_reference: Contact
       RecordType:
           random_choice:
               - Client
-              - Team Facilitator
+              - TeamFacilitator

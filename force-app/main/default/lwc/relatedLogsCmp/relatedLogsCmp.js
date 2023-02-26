@@ -1,4 +1,4 @@
-import { LightningElement, api, wire } from "lwc";
+import { LightningElement, api, wire, track } from "lwc";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
 import { NavigationMixin } from "lightning/navigation";
 import getRelatedLogs from "@salesforce/apex/LogController.getRelatedLogs";
@@ -6,16 +6,18 @@ import { deleteRecord } from "lightning/uiRecordApi";
 import { refreshApex } from "@salesforce/apex";
 
 import ATLAS_SUPPORT_FIELD from "@salesforce/schema/Log__c.RequestSupportFromAtlas__c";
-import CLIENT_FIELD from "@salesforce/schema/Log__c.Client__c";
+import TEAM_OBJECT from "@salesforce/schema/Team__c";
 import CLIENT_STRESS_FIELD from "@salesforce/schema/Log__c.ClientStress__c";
 import DATE_FIELD from "@salesforce/schema/Log__c.Date__c";
 import DETAILS_FIELD from "@salesforce/schema/Log__c.Details__c";
 import FACILITATOR_FIELD from "@salesforce/schema/Log__c.Facilitator__c";
+import SUBMITTER_FIELD from "@salesforce/schema/Log__c.Submitter__c";
 import NAME_FIELD from "@salesforce/schema/Log__c.Name";
 import OTHER_HOURS_FIELD from "@salesforce/schema/Log__c.OtherHours__c";
 import PAH_FIELD from "@salesforce/schema/Log__c.PublicAccessHours__c";
 import SATISFACTION_FIELD from "@salesforce/schema/Log__c.Satisfaction__c";
 import STRESS_FIELD from "@salesforce/schema/Log__c.Stress__c";
+import TEAM_FIELD from "@salesforce/schema/Log__c.Team__c";
 import TEAM_SUPPORT_FIELD from "@salesforce/schema/Log__c.RequestSupportFromTeam__c";
 
 const actions = [
@@ -41,16 +43,17 @@ const COLS = {
         type: "date-local",
         sortable: true
     },
-    client: {
-        label: "Client",
-        fieldName: CLIENT_FIELD.fieldApiName,
+    team: {
+        label: "Team",
+        fieldName: TEAM_FIELD.fieldApiName,
         type: "button",
         typeAttributes: {
-            name: "client",
-            label: { fieldName: "clientName" },
+            name: "team",
+            label: { fieldName: "teamName" },
             variant: "base"
         },
-        sortable: true
+        sortable: true,
+        actions: [{ label: "Hide", name: "hide" }]
     },
     facilitator: {
         label: "Facilitator",
@@ -61,7 +64,20 @@ const COLS = {
             label: { fieldName: "facilitatorName" },
             variant: "base"
         },
-        sortable: true
+        sortable: true,
+        actions: [{ label: "Hide", name: "hide" }]
+    },
+    submitter: {
+        label: "Submitter",
+        fieldName: SUBMITTER_FIELD.fieldApiName,
+        type: "button",
+        typeAttributes: {
+            name: "submitter",
+            label: { fieldName: "submitterName" },
+            variant: "base"
+        },
+        sortable: true,
+        actions: [{ label: "Hide", name: "hide" }]
     },
     hours: {
         label: "PA Hours",
@@ -75,7 +91,7 @@ const COLS = {
         type: "number",
         editable: "true"
     },
-    team: {
+    teamSupport: {
         label: "Team Support?",
         fieldName: TEAM_SUPPORT_FIELD.fieldApiName,
         type: "boolean"
@@ -101,54 +117,81 @@ const COLS = {
     action: { type: "action", typeAttributes: { rowActions: actions } }
 };
 
+const CLIENT_COLS = [
+    COLS.name,
+    COLS.date,
+    COLS.team,
+    COLS.facilitator,
+    COLS.submitter,
+    COLS.hours,
+    COLS.otherHours,
+    COLS.teamSupport,
+    COLS.stress,
+    COLS.satisfaction,
+    COLS.atlas,
+    COLS.details,
+    COLS.action
+];
+
+const FAC_COLS = [
+    COLS.name,
+    COLS.date,
+    COLS.team,
+    COLS.facilitator,
+    COLS.submitter,
+    COLS.hours,
+    COLS.otherHours,
+    COLS.teamSupport,
+    COLS.clientStress,
+    COLS.stress,
+    COLS.atlas,
+    COLS.details,
+    COLS.action
+];
+
 export default class RelatedLogsCmp extends NavigationMixin(LightningElement) {
     @api recordId;
     @api objectApiName;
     @api viewAll;
-    @api recordType;
-    data = [];
 
-    get columns() {
-        if (this.recordType === "Client") {
-            return [
-                COLS.name,
-                COLS.date,
-                COLS.client,
-                COLS.facilitator,
-                COLS.hours,
-                COLS.otherHours,
-                COLS.team,
-                COLS.stress,
-                COLS.satisfaction,
-                COLS.atlas,
-                COLS.details,
-                COLS.action
-            ];
+    _recordType;
+    @track
+    columns;
+    @api get recordType() {
+        return this._recordType;
+    }
+    set recordType(value) {
+        this._recordType = value;
+        this.setColumns();
+    }
+
+    setColumns() {
+        if (this._recordType === "Client") {
+            this.columns = CLIENT_COLS.filter(
+                (x) => !this.hiddenCols.has(x.fieldName)
+            );
+        } else {
+            this.columns = FAC_COLS.filter(
+                (x) => !this.hiddenCols.has(x.fieldName)
+            );
         }
-        return [
-            COLS.name,
-            COLS.date,
-            COLS.client,
-            COLS.facilitator,
-            COLS.hours,
-            COLS.otherHours,
-            COLS.team,
-            COLS.clientStress,
-            COLS.stress,
-            COLS.atlas,
-            COLS.details,
-            COLS.action
-        ];
+    }
+    data = [];
+    hiddenCols;
+
+    constructor() {
+        super();
+        this.hiddenCols = new Set();
     }
 
     get title() {
-        return this.recordType === "Client"
+        return this._recordType === "Client"
             ? "Client Logs"
             : "Team Facilitator Logs";
     }
 
     get auraCmpName() {
-        return this.recordType === "Client"
+        return this._recordType === "Client"
             ? "AllClientLogsCmp"
             : "AllFacilitatorLogsCmp";
     }
@@ -195,7 +238,10 @@ export default class RelatedLogsCmp extends NavigationMixin(LightningElement) {
                 const payload = {
                     mode: "edit",
                     recordId: row.Id,
-                    recordType: this.recordType === "Client" ? "Client" : "Team Facilitator"
+                    recordType:
+                        this._recordType === "Client"
+                            ? "Client"
+                            : "Team Facilitator"
                 };
                 this.template
                     .querySelector("c-log-form-cmp")
@@ -204,13 +250,38 @@ export default class RelatedLogsCmp extends NavigationMixin(LightningElement) {
             case "view":
                 this.navigateToRecord(row.Id, this.objectApiName);
                 break;
-            case "client":
-                this.navigateToRecord(row.Client__c, "Contact");
+            case "team":
+                this.navigateToRecord(row[TEAM_FIELD.fieldApiName], TEAM_OBJECT.objectApiName);
                 break;
             case "facilitator":
-                this.navigateToRecord(row.Facilitator__c, "Contact");
+                this.navigateToRecord(row[FACILITATOR_FIELD.fieldApiName], "Contact");
+                break;
+            case "submitter":
+                this.navigateToRecord(row[SUBMITTER_FIELD.fieldApiName], "Contact");
                 break;
         }
+    }
+
+    handleHeaderAction(event) {
+        // Retrieves the name of the selected filter
+        const actionName = event.detail.action.name;
+        // Retrieves the current column definition
+        // based on the selected filter
+        const colDef = event.detail.columnDefinition;
+        if (actionName.includes("hide")) {
+            this.hiddenCols.add(colDef.fieldName);
+            this.setColumns();
+        }
+    }
+
+    get showResetColBtn() {
+        return this.hiddenCols.size > 0;
+    }
+
+    // Set the columns back to the default for the record type
+    showAllColumns() {
+        this.hiddenCols.clear();
+        this.setColumns();
     }
 
     @api
@@ -229,8 +300,9 @@ export default class RelatedLogsCmp extends NavigationMixin(LightningElement) {
         if (result.data && result.data.items) {
             this.data = result.data.items.map((info) => {
                 var log = Object.assign({}, info.log);
-                log.clientName = info.clientName;
+                log.teamName = info.teamName;
                 log.facilitatorName = info.facilitatorName;
+                log.submitterName = info.submitterName;
                 log[DETAILS_FIELD.fieldApiName] = log[DETAILS_FIELD.fieldApiName]?.replace(/(<([^>]+)>)/gi, "");
                 return log;
             });
@@ -238,7 +310,7 @@ export default class RelatedLogsCmp extends NavigationMixin(LightningElement) {
                 this.data = null;
                 this.total = 0;
             }
-            if (this.max < 15) {
+            if (!this.viewAll) {
                 this.total = result.data.total;
             }
         } else if (result.error) {

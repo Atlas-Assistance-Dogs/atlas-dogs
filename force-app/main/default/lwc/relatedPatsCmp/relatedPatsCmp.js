@@ -2,6 +2,7 @@ import { LightningElement, api, wire } from "lwc";
 import { NavigationMixin } from "lightning/navigation";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
 import getRelatedPats from "@salesforce/apex/PublicAccessTestController.getRelatedPats";
+import { deleteRecord } from "lightning/uiRecordApi";
 import { refreshApex } from "@salesforce/apex";
 
 import DATE_FIELD from "@salesforce/schema/PublicAccessTest__c.DateCompleted__c";
@@ -46,7 +47,6 @@ export default class RelatedPatsCmp extends NavigationMixin(LightningElement) {
     @api recordId;
     @api objectApiName;
     @api viewAll;
-    @api max; // needed for previous version
     columns = COLS;
     data = [];
     total = 0;
@@ -112,6 +112,7 @@ export default class RelatedPatsCmp extends NavigationMixin(LightningElement) {
         }
     }
 
+    @api
     get max() {
         return this.viewAll ? 10000 : 6;
     }

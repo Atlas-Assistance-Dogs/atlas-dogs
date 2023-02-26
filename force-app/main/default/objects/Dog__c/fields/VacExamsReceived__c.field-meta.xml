@@ -4,6 +4,7 @@
     <description
     >The date the most recent version of Vaccinations and Exams was uploaded</description>
     <externalId>false</externalId>
+    <inlineHelpText>Set at the time of file upload. Do not edit directly.</inlineHelpText>
     <label>Last  Vaccinations and Exams</label>
     <required>false</required>
     <trackHistory>false</trackHistory>

@@ -9,6 +9,15 @@
         view-all={viewAll}
     >
         <div slot="actions">
+            <lightning-button
+                label="Filter"
+                title="Filter"
+                icon-name="standard:filter"
+                onclick={handleFilter}
+                slot="actions"
+                if:true={data}
+            >
+            </lightning-button>
             <!-- lightning button for upload files modal -->
             <lightning-button
                 label="Upload Files"
@@ -25,6 +34,7 @@
                 record-id={versionId}
                 onupdate={handleUpdate}
             ></c-file-update-cmp>
+            <c-select-option-cmp title="Filter Files" items={filterItems} onselected={handleFilterSelect}></c-select-option-cmp>
         </div>
         <div slot="list">
             <template if:true={data}>
@@ -38,6 +48,7 @@
                     sorted-by={sortedBy}
                     onsort={handleSort}
                     onrowaction={handleRowAction}
+                    onheaderaction={handleHeaderAction}
                 >
                 </lightning-datatable>
             </template>
