@@ -462,6 +462,17 @@ Insert PublicAccessTest__c:
             table: Contact
         Team__c:
             table: Team__c
+Insert PuppyLog__c:
+    sf_object: PuppyLog__c
+    fields:
+        - AdditionalInformation__c
+        - Date__c
+        - RequestSupportFromAtlas__c
+    lookups:
+        Dog__c:
+            table: Dog__c
+        Raiser__c:
+            table: Contact
 Insert Campaign:
     sf_object: Campaign
     fields:

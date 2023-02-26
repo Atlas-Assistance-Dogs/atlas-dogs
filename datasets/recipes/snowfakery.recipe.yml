@@ -13,3 +13,4 @@
 - include_file: dog.recipe.yml
 - include_file: log.recipe.yml
 - include_file: lead.recipe.yml
+- include_file: puppy-log.recipe.yml
