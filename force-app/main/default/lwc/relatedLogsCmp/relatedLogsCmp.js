@@ -6,7 +6,7 @@ import { deleteRecord } from "lightning/uiRecordApi";
 import { refreshApex } from "@salesforce/apex";
 
 import ATLAS_SUPPORT_FIELD from "@salesforce/schema/Log__c.RequestSupportFromAtlas__c";
-import CLIENT_FIELD from "@salesforce/schema/Log__c.Client__c";
+import TEAM_OBJECT from "@salesforce/schema/Team__c";
 import CLIENT_STRESS_FIELD from "@salesforce/schema/Log__c.ClientStress__c";
 import DATE_FIELD from "@salesforce/schema/Log__c.Date__c";
 import DETAILS_FIELD from "@salesforce/schema/Log__c.Details__c";
@@ -17,6 +17,7 @@ import OTHER_HOURS_FIELD from "@salesforce/schema/Log__c.OtherHours__c";
 import PAH_FIELD from "@salesforce/schema/Log__c.PublicAccessHours__c";
 import SATISFACTION_FIELD from "@salesforce/schema/Log__c.Satisfaction__c";
 import STRESS_FIELD from "@salesforce/schema/Log__c.Stress__c";
+import TEAM_FIELD from "@salesforce/schema/Log__c.Team__c";
 import TEAM_SUPPORT_FIELD from "@salesforce/schema/Log__c.RequestSupportFromTeam__c";
 
 const actions = [
@@ -42,13 +43,13 @@ const COLS = {
         type: "date-local",
         sortable: true
     },
-    client: {
-        label: "Client",
-        fieldName: CLIENT_FIELD.fieldApiName,
+    team: {
+        label: "Team",
+        fieldName: TEAM_FIELD.fieldApiName,
         type: "button",
         typeAttributes: {
-            name: "client",
-            label: { fieldName: "clientName" },
+            name: "team",
+            label: { fieldName: "teamName" },
             variant: "base"
         },
         sortable: true,
@@ -90,7 +91,7 @@ const COLS = {
         type: "number",
         editable: "true"
     },
-    team: {
+    teamSupport: {
         label: "Team Support?",
         fieldName: TEAM_SUPPORT_FIELD.fieldApiName,
         type: "boolean"
@@ -119,12 +120,12 @@ const COLS = {
 const CLIENT_COLS = [
     COLS.name,
     COLS.date,
-    COLS.client,
+    COLS.team,
     COLS.facilitator,
     COLS.submitter,
     COLS.hours,
     COLS.otherHours,
-    COLS.team,
+    COLS.teamSupport,
     COLS.stress,
     COLS.satisfaction,
     COLS.atlas,
@@ -135,12 +136,12 @@ const CLIENT_COLS = [
 const FAC_COLS = [
     COLS.name,
     COLS.date,
-    COLS.client,
+    COLS.team,
     COLS.facilitator,
     COLS.submitter,
     COLS.hours,
     COLS.otherHours,
-    COLS.team,
+    COLS.teamSupport,
     COLS.clientStress,
     COLS.stress,
     COLS.atlas,
@@ -249,8 +250,8 @@ export default class RelatedLogsCmp extends NavigationMixin(LightningElement) {
             case "view":
                 this.navigateToRecord(row.Id, this.objectApiName);
                 break;
-            case "client":
-                this.navigateToRecord(row[CLIENT_FIELD.fieldApiName], "Contact");
+            case "team":
+                this.navigateToRecord(row[TEAM_FIELD.fieldApiName], TEAM_OBJECT.objectApiName);
                 break;
             case "facilitator":
                 this.navigateToRecord(row[FACILITATOR_FIELD.fieldApiName], "Contact");
@@ -299,7 +300,7 @@ export default class RelatedLogsCmp extends NavigationMixin(LightningElement) {
         if (result.data && result.data.items) {
             this.data = result.data.items.map((info) => {
                 var log = Object.assign({}, info.log);
-                log.clientName = info.clientName;
+                log.teamName = info.teamName;
                 log.facilitatorName = info.facilitatorName;
                 log.submitterName = info.submitterName;
                 log[DETAILS_FIELD.fieldApiName] = log[DETAILS_FIELD.fieldApiName]?.replace(/(<([^>]+)>)/gi, "");

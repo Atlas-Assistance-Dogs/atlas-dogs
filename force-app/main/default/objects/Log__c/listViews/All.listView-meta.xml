@@ -4,9 +4,8 @@
     <columns>RECORDTYPE</columns>
     <columns>Date__c</columns>
     <columns>Submitter__c</columns>
-    <columns>Client__c</columns>
+    <columns>Team__c</columns>
     <columns>Handler__c</columns>
-    <columns>Dog__c</columns>
     <columns>Facilitator__c</columns>
     <columns>RequestSupportFromAtlas__c</columns>
     <columns>RequestSupportFromTeam__c</columns>

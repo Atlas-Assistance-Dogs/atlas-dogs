@@ -7,7 +7,7 @@ const MAX_DISPLAY = 6;
 export default class RelatedObjectCmp extends NavigationMixin(
     LightningElement
 ) {
-    @api viewAll = "";
+    @api viewAll = false;
     @api iconName = "standard:folder";
     @api title = "Related Objects";
     @api total = 0;
@@ -17,7 +17,7 @@ export default class RelatedObjectCmp extends NavigationMixin(
     @api objectApiName;
 
     get showBreadCrumbs() {
-        this.viewAll && this.recordId && this.recordId.trim();
+        return this.viewAll && this.recordId && this.recordId.trim();
     }
 
     get any() {

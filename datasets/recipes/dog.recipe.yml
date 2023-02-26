@@ -306,11 +306,13 @@
           fake: boolean
       Status__c:
           random_choice:
+              - Initial Inquiry
+              - In ADSiM
+              - Onboarding
               - In Training
               - Certified
               - Decertified
-              - On Hold
-              - Inactive
+              - Discontinued
               - None
       VetClinic__c:
           - object: Account

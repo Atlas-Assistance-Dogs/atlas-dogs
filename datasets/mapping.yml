@@ -396,6 +396,21 @@ Insert DogRelationship__c:
             table: Contact
         Dog__c:
             table: Dog__c
+Insert Team__c:
+    sf_object: Team__c
+    fields:
+        - Name
+        - PatCount__c
+        - PatValidUntil__c
+        - PrimaryCertification__c
+        - SecondaryCertification__c
+    lookups:
+        Client__c:
+            table: Contact
+        Dog__c:
+            table: Dog__c
+        Handler__c:
+            table: Contact
 Insert Log__c:
     sf_object: Log__c
     fields:
@@ -403,7 +418,6 @@ Insert Log__c:
         - ClientStress__c
         - Date__c
         - Details__c
-        - Handler__c
         - OtherHours__c
         - PublicAccessHours__c
         - RecordTypeId
@@ -413,11 +427,10 @@ Insert Log__c:
         - SessionType__c
         - Stress__c
         - SupportDetails__c
+        - Team__c
     lookups:
-        Client__c:
-            table: Contact
-        Dog__c:
-            table: Dog__c
+        Team__c:
+            table: Team__c
         Facilitator__c:
             table: Contact
         Submitter__c:
@@ -434,21 +447,6 @@ Insert ProgramAssignment__c:
             table: Contact
         Program__c:
             table: Program__c
-Insert Team__c:
-    sf_object: Team__c
-    fields:
-        - Name
-        - PatCount__c
-        - PatValidUntil__c
-        - PrimaryCertification__c
-        - SecondaryCertification__c
-    lookups:
-        Client__c:
-            table: Contact
-        Dog__c:
-            table: Dog__c
-        Handler__c:
-            table: Contact
 Insert PublicAccessTest__c:
     sf_object: PublicAccessTest__c
     fields:
