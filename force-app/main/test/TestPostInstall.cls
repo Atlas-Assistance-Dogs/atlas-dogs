@@ -146,4 +146,39 @@ public with sharing class TestPostInstall {
             System.assertEquals(peteTeam.Id, log.Team__c);
         }
     }
+
+    @isTest
+    public static void installScript_CopiesSystemAccess() {
+        // Arrange
+        List<Contact> contacts = new List<Contact>();
+        contacts.add(new Contact(
+            FirstName = 'Myka', LastName = 'Berring', VolunteerAccess__c = 'Operations- Master Docs - READ ONLY'
+        ));
+        contacts.add(new Contact(
+            FirstName = 'Pete', LastName = 'Latimer', VolunteerAccess__c = 'Operations- Financial'
+        ));
+        contacts.add(new Contact(
+            FirstName = 'Claudia', LastName = 'Donovan', VolunteerAccess__c = 'Operations- Client'
+        ));
+        contacts.add(new Contact(
+            FirstName = 'Abigail', LastName = 'Doctor'
+        ));
+        insert contacts;
+        Map<Id, Contact> contactMap = new Map<Id, Contact>();
+        for (Contact contact : contacts) {
+            contactMap.put(contact.Id, contact);
+        }
+        PostInstall postinstall = new PostInstall();
+
+        // Act
+        Test.testInstall(postinstall, new Version(1,3), true);
+        
+        // Assert
+        contacts = [SELECT Id, VolunteerAccess__c, SystemAccess__c FROM Contact];
+        for (Contact actual : contacts) {
+            Contact expected = contactMap.get(actual.Id);
+            System.assertEquals(expected.VolunteerAccess__c, actual.SystemAccess__c);
+            System.assertEquals(null, actual.VolunteerAccess__c);
+        }
+    }
 }

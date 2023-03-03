@@ -342,7 +342,7 @@ CREATE TABLE "Contact" (
 	"TrainerProgAgreementReceived__c" VARCHAR(255), 
 	"TrainerSpecialties__c" VARCHAR(255), 
 	"TrainerStatus__c" VARCHAR(255), 
-	"VolunteerAccess__c" VARCHAR(255), 
+	"SystemAccess__c" VARCHAR(255), 
 	"VolunteerAgreementReceived__c" VARCHAR(255), 
 	"VolunteerApplicationReceived__c" VARCHAR(255), 
 	"VolunteerFocus__c" VARCHAR(255), 
