@@ -295,16 +295,6 @@
               max_nb_chars: 100
       EmailBouncedDate: ${{fake.date}}T${{fake.time}}Z
       CanvasSisId__c: ${{unique_alpha_code}}
-      CleanStatus:
-          random_choice:
-              - Matched
-              - Different
-              - Acknowledged
-              - NotFound
-              - Inactive
-              - Pending
-              # - SelectMatch  # causes problems
-              - Skipped
       BoardMemberStatus__c:
           if:
               - choice:
@@ -443,7 +433,7 @@
                             - Discontinued
               - choice:
                     pick: None
-      VolunteerAccess__c:
+      SystemAccess__c:
           random_choice:
               - Operations- Master Docs - READ ONLY
               - Operations- Financial

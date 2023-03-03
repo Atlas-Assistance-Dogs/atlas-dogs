@@ -15,8 +15,6 @@
           fake: email
       Phone:
           fake: phone_number
-      MobilePhone:
-          fake: phone_number
       Street:
           fake: street_address
       City:

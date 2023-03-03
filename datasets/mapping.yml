@@ -266,6 +266,7 @@ Insert Contact:
         - StaffOfferReceived__c
         - StaffResumeReceived__c
         - StaffW4Received__c
+        - SystemAccess__c
         - TrainerApplicationReceived__c
         - TrainerBoardTrain__c
         - TrainerCertAgreementReceived__c
@@ -273,7 +274,6 @@ Insert Contact:
         - TrainerProgAgreementReceived__c
         - TrainerSpecialties__c
         - TrainerStatus__c
-        - VolunteerAccess__c
         - VolunteerAgreementReceived__c
         - VolunteerApplicationReceived__c
         - VolunteerFocus__c
