@@ -590,6 +590,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Contact.SystemAccess__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Contact.TrainerApplicationReceived__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -641,11 +646,6 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Contact.VeteranStatus__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Contact.VolunteerAccess__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

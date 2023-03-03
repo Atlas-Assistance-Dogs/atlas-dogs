@@ -22,11 +22,6 @@
             </quickActionLayoutItems>
             <quickActionLayoutItems>
                 <emptySpace>false</emptySpace>
-                <field>VolunteerAccess__c</field>
-                <uiBehavior>Edit</uiBehavior>
-            </quickActionLayoutItems>
-            <quickActionLayoutItems>
-                <emptySpace>false</emptySpace>
                 <field>GW_Volunteers__Volunteer_Manager_Notes__c</field>
                 <uiBehavior>Edit</uiBehavior>
             </quickActionLayoutItems>

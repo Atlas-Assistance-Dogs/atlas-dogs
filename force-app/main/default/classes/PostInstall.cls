@@ -32,6 +32,7 @@ global class PostInstall implements InstallHandler {
         }
         if (context.previousVersion().compareTo(new Version(1, 4)) <= 0) {
             linkTeamLogs();
+            moveSystemAccess();
         }
     }
 
@@ -58,5 +59,14 @@ global class PostInstall implements InstallHandler {
             }
             update logs;
         }
+    }
+
+    private void moveSystemAccess() {
+        List<Contact> contacts = [SELECT Id, SystemAccess__c, VolunteerAccess__c FROM Contact WHERE VolunteerAccess__c != null];
+        for (Contact contact : contacts) {
+            contact.SystemAccess__c = contact.VolunteerAccess__c;
+            contact.VolunteerAccess__c = null;
+        }
+        update contacts;
     }
 }
