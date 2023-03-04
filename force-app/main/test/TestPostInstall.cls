@@ -190,14 +190,14 @@ public with sharing class TestPostInstall {
         public Contact facilitator;
     }
     private static Team createTeam() {
-        Contact lydia = new Contact(FirstName = 'Lydia', LastName = 'Simpson');
+        Contact lydia = new Contact(FirstName = 'Lydia', LastName = 'Simpson', ClientCertificationValidUntil__c = Date.today().addDays(100));
         Contact ethan = new Contact(FirstName = 'Ethan', LastName = 'Parish');
         Contact cassidy = new Contact(FirstName = 'Cassidy', LastName = 'Rogers');
         List<Contact> contacts = new List<Contact> { lydia, ethan, cassidy };
         insert contacts;
         Dog__c zeus = new Dog__c(Name = 'Zeus');
         insert zeus;
-        Team__c team = new Team__c(Name = 'Lydia_Zeus', Client__c = lydia.Id, Handler__c = ethan.Id, Dog__c = zeus.Id);
+        Team__c team = new Team__c(Name = 'Lydia_Zeus', Client__c = lydia.Id, Handler__c = ethan.Id, Dog__c = zeus.Id, PatValidUntil__c = lydia.ClientCertificationValidUntil__c);
         insert team;
         
         Team myTeam = new Team();
@@ -229,6 +229,30 @@ public with sharing class TestPostInstall {
         System.assertNotEquals(0, cdls.size());
 
         cdls = [SELECT Id, ContentDocumentId, LinkedEntityId FROM ContentDocumentLink WHERE ContentDocumentId = :volunteerApp.ContentDocumentId AND LinkedEntityId = :team.Id];
+        System.assertEquals(0, cdls.size());
+    }
+
+    @isTest
+    public static void installScript_LinksClientFilesToCorrectTeam() {
+        // Arrange
+        Team teamInfo = createTeam();
+        Contact lydia = teamInfo.client;
+        Team__c oldTeam = new Team__c(Name = teamInfo.team.Name, Client__c = lydia.Id, Dog__c = teamInfo.dog.Id);
+        insert oldTeam;
+        ContentVersion clientApp = TestFileService.createLink('Client', 'Application', Date.today(), lydia.Id);
+        
+        // Act
+        PostInstall postinstall = new PostInstall();
+        Test.testInstall(postinstall, new Version(1,3), true);
+
+        // Assert
+        Team__c team = [SELECT Id, ClientApplicationReceived__c FROM Team__c WHERE Id = :teamInfo.team.Id];
+        System.assertEquals(clientApp.Date__c, team.ClientApplicationReceived__c);
+
+        List<ContentDocumentLink> cdls = [SELECT Id, ContentDocumentId, LinkedEntityId FROM ContentDocumentLink WHERE ContentDocumentId = :clientApp.ContentDocumentId AND LinkedEntityId = :team.Id];
+        System.assertNotEquals(0, cdls.size());
+
+        cdls = [SELECT Id, ContentDocumentId, LinkedEntityId FROM ContentDocumentLink WHERE ContentDocumentId = :clientApp.ContentDocumentId AND LinkedEntityId = :oldTeam.Id];
         System.assertEquals(0, cdls.size());
     }
 

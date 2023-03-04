@@ -127,7 +127,7 @@ global class PostInstall implements InstallHandler {
                     WHERE Id = :contactId
                 ];
                 for (Team__c tm : teams) {
-                    if (
+                    if (tm.PatValidUntil__c != null &&
                         tm.PatValidUntil__c ==
                         contact.ClientCertificationValidUntil__c
                     ) {
