@@ -181,4 +181,77 @@ public with sharing class TestPostInstall {
             System.assertEquals(null, actual.VolunteerAccess__c);
         }
     }
+
+    private class Team {
+        public Team__c team;
+        public Contact client;
+        public Dog__c dog;
+        public Contact handler;
+        public Contact facilitator;
+    }
+    private static Team createTeam() {
+        Contact lydia = new Contact(FirstName = 'Lydia', LastName = 'Simpson');
+        Contact ethan = new Contact(FirstName = 'Ethan', LastName = 'Parish');
+        Contact cassidy = new Contact(FirstName = 'Cassidy', LastName = 'Rogers');
+        List<Contact> contacts = new List<Contact> { lydia, ethan, cassidy };
+        insert contacts;
+        Dog__c zeus = new Dog__c(Name = 'Zeus');
+        insert zeus;
+        Team__c team = new Team__c(Name = 'Lydia_Zeus', Client__c = lydia.Id, Handler__c = ethan.Id, Dog__c = zeus.Id);
+        insert team;
+        
+        Team myTeam = new Team();
+        myTeam.team = team;
+        myTeam.client = lydia;
+        myTeam.dog = zeus;
+        myTeam.handler = ethan;
+        myTeam.facilitator = cassidy;
+        return myTeam;
+    }
+
+    @isTest
+    public static void installScript_LinksClientFilesToTeam() {
+        // Arrange
+        Team myTeam = createTeam();
+        Contact lydia = myTeam.client;
+        ContentVersion clientApp = TestFileService.createLink('Client', 'Application', Date.today(), lydia.Id);
+        ContentVersion volunteerApp = TestFileService.createLink('Volunteer', 'Application', Date.today(), lydia.Id);
+        
+        // Act
+        PostInstall postinstall = new PostInstall();
+        Test.testInstall(postinstall, new Version(1,3), true);
+
+        // Assert
+        Team__c team = [SELECT Id, ClientApplicationReceived__c FROM Team__c WHERE Name = 'Lydia_Zeus'];
+        System.assertEquals(clientApp.Date__c, team.ClientApplicationReceived__c);
+
+        List<ContentDocumentLink> cdls = [SELECT Id, ContentDocumentId, LinkedEntityId FROM ContentDocumentLink WHERE ContentDocumentId = :clientApp.ContentDocumentId AND LinkedEntityId = :team.Id];
+        System.assertNotEquals(0, cdls.size());
+
+        cdls = [SELECT Id, ContentDocumentId, LinkedEntityId FROM ContentDocumentLink WHERE ContentDocumentId = :volunteerApp.ContentDocumentId AND LinkedEntityId = :team.Id];
+        System.assertEquals(0, cdls.size());
+    }
+
+    @isTest
+    public static void installScript_LinksDogFilesToTeam() {
+        // Arrange
+        Team myTeam = createTeam();
+        Dog__c zeus = myTeam.dog;
+        ContentVersion annual = TestFileService.createLink('Dog', 'VacExams', Date.today(), zeus.Id);
+        ContentVersion initial = TestFileService.createLink('Dog', 'HealthForm', Date.today(), zeus.Id);
+        
+        // Act
+        PostInstall postinstall = new PostInstall();
+        Test.testInstall(postinstall, new Version(1,3), true);
+
+        // Assert
+        Team__c team = [SELECT Id, HealthFormReceived__c FROM Team__c WHERE Name = 'Lydia_Zeus'];
+        System.assertEquals(initial.Date__c, team.HealthFormReceived__c);
+
+        List<ContentDocumentLink> cdls = [SELECT Id, ContentDocumentId, LinkedEntityId FROM ContentDocumentLink WHERE ContentDocumentId = :initial.ContentDocumentId AND LinkedEntityId = :team.Id];
+        System.assertNotEquals(0, cdls.size());
+
+        cdls = [SELECT Id, ContentDocumentId, LinkedEntityId FROM ContentDocumentLink WHERE ContentDocumentId = :annual.ContentDocumentId AND LinkedEntityId = :team.Id];
+        System.assertEquals(0, cdls.size());
+    }
 }
