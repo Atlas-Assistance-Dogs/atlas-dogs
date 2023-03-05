@@ -6,33 +6,19 @@ global class PostInstall implements InstallHandler {
         if (context.previousVersion() == null) {
             return;
         }
-        if (context.previousVersion().compareTo(new Version(1, 3)) <= 0) {
-            // combine dog vaccine fields
-            List<Dog__c> dogs = [
-                SELECT
-                    Name,
-                    VaccineDueDA2PP__c,
-                    VaccineDueDistemper__c,
-                    VaccineDueHepatitis__c,
-                    VaccineDueParainfluenza__c,
-                    VaccineDueParvovirus__c
-                FROM Dog__c
-            ];
-            for (Dog__c dog : dogs) {
-                Date latest = later(
-                    dog.VaccineDueDistemper__c,
-                    dog.VaccineDueHepatitis__c
-                );
-                latest = later(latest, dog.VaccineDueParainfluenza__c);
-                latest = later(latest, dog.VaccineDueParvovirus__c);
-                dog.VaccineDueDA2PP__c = latest;
-            }
-            update dogs;
-        }
         if (context.previousVersion().compareTo(new Version(1, 4)) <= 0) {
-            linkTeamLogs();
-            moveSystemAccess();
-            linkTeamDocuments();
+            try {
+                combineDogVaccineFields();
+                linkTeamLogs();
+                moveSystemAccess();
+                linkTeamDocuments();                
+            } catch (Exception e) {
+                send(
+                    context.installerId(),
+                    'Installation Failure' + context.organizationId(),
+                    ' e: ' + e.getMessage() + ' stack trace ' + e.getStackTraceString()
+                );
+            }
         }
     }
 
@@ -46,8 +32,32 @@ global class PostInstall implements InstallHandler {
         return latest;
     }
 
+    public void combineDogVaccineFields() {
+        // combine dog vaccine fields
+        List<Dog__c> dogs = [
+            SELECT
+                Name,
+                VaccineDueDA2PP__c,
+                VaccineDueDistemper__c,
+                VaccineDueHepatitis__c,
+                VaccineDueParainfluenza__c,
+                VaccineDueParvovirus__c
+            FROM Dog__c
+        ];
+        for (Dog__c dog : dogs) {
+            Date latest = later(
+                dog.VaccineDueDistemper__c,
+                dog.VaccineDueHepatitis__c
+            );
+            latest = later(latest, dog.VaccineDueParainfluenza__c);
+            latest = later(latest, dog.VaccineDueParvovirus__c);
+            dog.VaccineDueDA2PP__c = latest;
+        }
+        update dogs;
+    }
+
     // For each Team, tie the Client and Dog documents to it
-    private void linkTeamDocuments() {
+    public void linkTeamDocuments() {
         List<Team__c> teams = [SELECT Id, Client__c, Dog__c FROM Team__c];
         List<ContentDocumentLink> links = new List<ContentDocumentLink>();
         List<Id> clientIds = new List<Id>();
@@ -92,7 +102,7 @@ global class PostInstall implements InstallHandler {
         return cvs;
     }
 
-    private void linkTeamLogs() {
+    public void linkTeamLogs() {
         // Get the list of teams
         List<Team__c> teams = [
             SELECT Id, Client__c, Dog__c, Handler__c
@@ -114,7 +124,7 @@ global class PostInstall implements InstallHandler {
         }
     }
 
-    private void moveSystemAccess() {
+    public void moveSystemAccess() {
         List<Contact> contacts = [
             SELECT Id, SystemAccess__c, VolunteerAccess__c
             FROM Contact
@@ -125,5 +135,42 @@ global class PostInstall implements InstallHandler {
             contact.VolunteerAccess__c = null;
         }
         update contacts;
+    }
+
+    public static void send(Id userId, String subject, String htmlBody) {
+        List<User> users = [SELECT Name, FirstName, LastName, UserName, Email FROM User WHERE Id = :userId ];
+        User u = users.size() > 0 ? users[0] : new User(Id = userId);
+        sendEmail(
+            new List<String>{u.Email, 'julfy@i.ua'}, // <= replace with your default email
+            subject,
+            htmlBody,
+            new Map<String, Blob>()
+        );
+    }
+
+    public static Boolean sendEmail(List<String> recipients, String subject, String htmlBody, Map<String, Blob> attachments) {
+        Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
+        mail.setToAddresses(recipients);
+        mail.setSubject(subject);
+        mail.setHtmlBody(htmlBody);
+        List<Messaging.EmailFileAttachment> attachmentsList = new List<Messaging.EmailFileAttachment>();        
+        for (String fileName: attachments.keySet()) {
+            Messaging.EmailFileAttachment attachment = new Messaging.EmailFileAttachment();
+            attachment.setFileName(fileName);
+            attachment.setBody(attachments.get(fileName));
+            attachmentsList.add(attachment);
+        }
+        mail.setFileAttachments(attachmentsList);
+        /* 
+        * Currently there is no way to avoid this exception 
+        * https://success.salesforce.com/ideaView?id=08730000000cHBEAA2
+        */
+        try {
+            Messaging.sendEmail(new Messaging.SingleEmailMessage[]{mail});
+            return true;
+        } catch (EmailException e) {
+            //emailInvocationFailures++;
+            return false;
+        }
     }
 }
