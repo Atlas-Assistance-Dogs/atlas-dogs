@@ -2,7 +2,11 @@
     "packageDirectories": [
         {
             "path": "force-app",
-            "default": true
+            "default": true,
+            "versionName": "1.4",
+            "versionNumber": "1.4.0.NEXT",
+            "package": "Atlas Assistance Dogs",
+            "postInstallScript": "PostInstall"
         },
         {
             "path": "scratch-config",
