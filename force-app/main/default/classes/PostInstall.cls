@@ -30,9 +30,9 @@ global class PostInstall implements InstallHandler {
             update dogs;
         }
         if (context.previousVersion().compareTo(new Version(1, 4)) <= 0) {
-            linkTeamDocuments();
             linkTeamLogs();
             moveSystemAccess();
+            linkTeamDocuments();
         }
     }
 
@@ -46,130 +46,50 @@ global class PostInstall implements InstallHandler {
         return latest;
     }
 
-    // Grab all the CV with Client category,
-    // and link them to a team if possible.
-    // The CDL trigger will fill in the fields
+    // For each Team, tie the Client and Dog documents to it
     private void linkTeamDocuments() {
-        List<String> cats = new List<String>{ 'Client', 'Dog' };
-        List<ContentVersion> cvs = [
-            SELECT Id, ContentDocumentId, Category__c, Type__c
-            FROM ContentVersion
-            WHERE Category__c IN :cats
+        List<Team__c> teams = [SELECT Id, Client__c, Dog__c FROM Team__c];
+        List<ContentDocumentLink> links = new List<ContentDocumentLink>();
+        List<Id> clientIds = new List<Id>();
+        List<Id> dogIds = new List<Id>();
+        for (Team__c team : teams) {
+            List<ContentVersion> clientDocs = getEntityDocs(team.Client__c, 'Client');
+            for (ContentVersion cv : clientDocs) {
+                links.add(new ContentDocumentLink(
+                    ContentDocumentId = cv.ContentDocumentId,
+                    LinkedEntityId = team.Id
+                ));
+            }
+
+            List<ContentVersion> dogDocs = getEntityDocs(team.Dog__c, 'Dog');
+            for (ContentVersion cv : dogDocs) {
+                if (cv.Type__c == 'VacExams') {
+                    continue;
+                }
+                links.add(new ContentDocumentLink(
+                    ContentDocumentId = cv.ContentDocumentId,
+                    LinkedEntityId = team.Id
+                ));
+            }
+        }
+
+        insert links;
+    }
+
+    private List<ContentVersion> getEntityDocs(Id id, String category) {
+        // find the documents linked to the clients
+        List<ContentDocumentLink> cdls = [
+            SELECT ID, ContentDocumentId, LinkedEntityId
+            FROM ContentDocumentLink
+            WHERE LinkedEntityId = :id
         ];
-
-        Map<Id, List<ContentDocumentLink>> clientLinks = new Map<Id, List<ContentDocumentLink>>();
-        Map<Id, List<ContentDocumentLink>> dogLinks = new Map<Id, List<ContentDocumentLink>>();
-        for (ContentVersion cv : cvs) {
-            if (cv.Type__c == 'VacExams') {
-                // these don't get linked to Teams
-                continue;
-            }
-
-            // I wanted to group by linkedEntityId, and get a dictionary of lists,
-            // but SOQL apparently doesn't do that
-            List<ContentDocumentLink> links = [
-                SELECT ID, ContentDocumentId, LinkedEntityId
-                FROM ContentDocumentLink
-                WHERE ContentDocumentId = :cv.ContentDocumentId
-                ORDER BY LinkedEntityId
-            ];
-
-            // let's create the map here so we don't need to add logic to track when the linked entity changes below
-            for (ContentDocumentLink link : links) {
-                // see if this entity is a Contact, if not, skip it
-                string objName = link.LinkedEntityId.getSObjectType()
-                    .getDescribe()
-                    .getName();
-                if (objName == Contact.class.getName()) {
-                    List<ContentDocumentLink> entityDocs = clientLinks.get(
-                        link.LinkedEntityId
-                    );
-                    if (entityDocs == null) {
-                        entityDocs = new List<ContentDocumentLink>();
-                        clientLinks.put(link.LinkedEntityId, entityDocs);
-                    }
-                    entityDocs.add(link);
-                } else if (objName == Dog__c.class.getName()) {
-                    List<ContentDocumentLink> entityDocs = dogLinks.get(
-                        link.LinkedEntityId
-                    );
-                    if (entityDocs == null) {
-                        entityDocs = new List<ContentDocumentLink>();
-                        dogLinks.put(link.LinkedEntityId, entityDocs);
-                    }
-                    entityDocs.add(link);
-                }
-            }
+        List<Id> docIds = new List<Id>();
+        for (ContentDocumentLink cdl: cdls) {
+            docIds.add(cdl.ContentDocumentId);
         }
+        List<ContentVersion> cvs = [SELECT Id, ContentDocumentId, Category__c, Type__c FROM ContentVersion WHERE ContentDocumentId IN :docIds AND Category__c = :category];
 
-        // Let's use one big list of CDLs for all the teams
-        List<ContentDocumentLink> teamLinks = new List<ContentDocumentLink>();
-
-        // Now, loop through the contacts, find associated teams (status is new to this version,
-        // so we'll use the Team with PatValidUntil that matches ClientCertificationValidUntil if there
-        // is more than one)
-        for (Id contactId : clientLinks.keySet()) {
-            List<Team__c> teams = [
-                SELECT Id, PatValidUntil__c
-                FROM Team__c
-                WHERE Client__c = :contactId
-            ];
-            if (teams.size() == 0) {
-                continue; // nothing more we can do
-            }
-            Team__c team = teams[0];
-            if (teams.size() > 1) {
-                // Get the ClientCertificationValidUntil value for this Contact.
-                // We know this is a contact from the check above, so this better be a safe query
-                Contact contact = [
-                    SELECT Id, ClientCertificationValidUntil__c
-                    FROM Contact
-                    WHERE Id = :contactId
-                ];
-                for (Team__c tm : teams) {
-                    if (tm.PatValidUntil__c != null &&
-                        tm.PatValidUntil__c ==
-                        contact.ClientCertificationValidUntil__c
-                    ) {
-                        team = tm;
-                        break;
-                    }
-                }
-            }
-            // Now we can link the documents to the team
-            for (ContentDocumentLink clientLink : clientLinks.get(contactId)) {
-                teamLinks.add(
-                    new ContentDocumentLink(
-                        ContentDocumentId = clientLink.ContentDocumentId,
-                        LinkedEntityId = team.Id
-                    )
-                );
-            }
-        }
-
-        // Now, loop through the dogs, find associated teams
-        for (Id dogId : dogLinks.keySet()) {
-            List<Team__c> teams = [
-                SELECT Id, PatValidUntil__c
-                FROM Team__c
-                WHERE Dog__c = :dogId
-            ];
-
-            // dogs can be on more than one team, so we will link their docs to all their teams
-            for (Team__c team : teams) {
-                // Now we can link the documents to the team
-                for (ContentDocumentLink dogLink : dogLinks.get(dogId)) {
-                    teamLinks.add(
-                        new ContentDocumentLink(
-                            ContentDocumentId = dogLink.ContentDocumentId,
-                            LinkedEntityId = team.Id
-                        )
-                    );
-                }
-            }
-        }
-
-        insert teamLinks;
+        return cvs;
     }
 
     private void linkTeamLogs() {

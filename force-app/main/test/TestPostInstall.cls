@@ -233,7 +233,7 @@ public with sharing class TestPostInstall {
     }
 
     @isTest
-    public static void installScript_LinksClientFilesToCorrectTeam() {
+    public static void installScript_LinksClientFilesToAllTeams() {
         // Arrange
         Team teamInfo = createTeam();
         Contact lydia = teamInfo.client;
@@ -253,7 +253,7 @@ public with sharing class TestPostInstall {
         System.assertNotEquals(0, cdls.size());
 
         cdls = [SELECT Id, ContentDocumentId, LinkedEntityId FROM ContentDocumentLink WHERE ContentDocumentId = :clientApp.ContentDocumentId AND LinkedEntityId = :oldTeam.Id];
-        System.assertEquals(0, cdls.size());
+        System.assertEquals(1, cdls.size());
     }
 
     @isTest
