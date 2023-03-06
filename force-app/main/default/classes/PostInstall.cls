@@ -57,7 +57,7 @@ global class PostInstall implements InstallHandler {
     }
 
     // For each Team, tie the Client and Dog documents to it
-    public static void linkTeamDocuments() {
+    global static void linkTeamDocuments() {
         List<Team__c> teams = [SELECT Id, Client__c, Dog__c FROM Team__c];
         List<ContentDocumentLink> links = new List<ContentDocumentLink>();
         List<Id> clientIds = new List<Id>();
