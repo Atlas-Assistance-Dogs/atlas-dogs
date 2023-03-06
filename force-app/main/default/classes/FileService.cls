@@ -121,7 +121,7 @@ public with sharing class FileService {
     }
 
     // Insert links that do not already exist
-    private static void insertLinks(List<ContentDocumentLink> links, List<Id> entities) {
+    public static void insertLinks(List<ContentDocumentLink> links, List<Id> entities) {
         List<ContentDocumentLink> currentLinks = [SELECT Id, ContentDocumentId, LinkedEntityId FROM ContentDocumentLink WHERE LinkedEntityId IN :entities];
         List<ContentDocumentLink> safeLinks = new List<ContentDocumentLink>();
         for (ContentDocumentLink newLink: links) {

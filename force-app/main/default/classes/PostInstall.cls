@@ -62,7 +62,9 @@ global class PostInstall implements InstallHandler {
         List<ContentDocumentLink> links = new List<ContentDocumentLink>();
         List<Id> clientIds = new List<Id>();
         List<Id> dogIds = new List<Id>();
+        List<Id> teamIds = new List<Id>();
         for (Team__c team : teams) {
+            teamIds.add(team.Id);
             List<ContentVersion> clientDocs = getEntityDocs(team.Client__c, 'Client');
             for (ContentVersion cv : clientDocs) {
                 links.add(new ContentDocumentLink(
@@ -83,7 +85,7 @@ global class PostInstall implements InstallHandler {
             }
         }
 
-        insert links;
+        FileService.insertLinks(links, teamIds) ;
     }
 
     public static List<ContentVersion> getEntityDocs(Id id, String category) {
