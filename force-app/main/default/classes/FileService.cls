@@ -80,14 +80,19 @@ public with sharing class FileService {
     private static void linkDocumentsToTeams(List<ContentVersion> cvs, Id recordId) {
         List<Team__c> teams = [SELECT Client__c, Id FROM Team__c WHERE Dog__c = :recordId];
         for (Team__c team : teams) {
+            List<ContentDocumentLink> links = new List<ContentDocumentLink>();
             for (ContentVersion cv : cvs) {
                 if (cv.Type__c == 'VacExams') {
                     continue;
                 }
                 if (cv.Category__c == 'Dog') {
-                    createLink(cv.ContentDocumentId, team.Id);
+                    links.add(new ContentDocumentLink(
+                        ContentDocumentId = cv.ContentDocumentId,
+                        LinkedEntityId = team.Id
+                    ));
                 }
             }
+            insertLinks(links, new List<Id> { team.Id }) ;
         }
     }
 
@@ -96,32 +101,42 @@ public with sharing class FileService {
         List<Team__c> teams = [SELECT Client__c, Dog__c FROM Team__c WHERE Id = :recordId];
         if (teams.size() == 1) {
             Team__c team = teams[0];
+            List<ContentDocumentLink> links = new List<ContentDocumentLink>();
             for (ContentVersion cv : cvs) {
-                System.debug(cv.Category__c);
                 if (cv.Category__c == 'Client') {
-                    createLink(cv.ContentDocumentId, team.Client__c);
+                    links.add(new ContentDocumentLink(
+                        ContentDocumentId = cv.ContentDocumentId,
+                        LinkedEntityId = team.Client__c
+                    ));
                 }
-                if (cv.Category__c == 'Dog') {
-                    createLink(cv.ContentDocumentId, team.Dog__c);
+                else if (cv.Category__c == 'Dog') {
+                    links.add(new ContentDocumentLink(
+                        ContentDocumentId = cv.ContentDocumentId,
+                        LinkedEntityId = team.Dog__c
+                    ));
                 }
             }
+            insertLinks(links, new List<Id> { team.Client__c, team.Dog__c });
         }
     }
 
-    private static void createLink(Id docId, Id entityId) {
-        List<ContentDocumentLink> cdls = [
-            SELECT Id FROM ContentDocumentLink
-            WHERE ContentDocumentId = :docId AND LinkedEntityId = :entityId
-        ];
-        if (cdls.size() > 0) {
-            return;
+    // Insert links that do not already exist
+    private static void insertLinks(List<ContentDocumentLink> links, List<Id> entities) {
+        List<ContentDocumentLink> currentLinks = [SELECT Id, ContentDocumentId, LinkedEntityId FROM ContentDocumentLink WHERE LinkedEntityId IN :entities];
+        List<ContentDocumentLink> safeLinks = new List<ContentDocumentLink>();
+        for (ContentDocumentLink newLink: links) {
+            Boolean safe = true;
+            for (ContentDocumentLink current: currentLinks) {
+                if (newLink.ContentDocumentId == current.ContentDocumentId &&
+                    newLink.LinkedEntityId == current.LinkedEntityId) {
+                        safe = false;
+                }
+            }
+            if (safe) {
+                safeLinks.add(newLink);
+            }
         }
-        System.debug('creating link');
-        ContentDocumentLink link = new ContentDocumentLink(
-            ContentDocumentId = docId,
-            LinkedEntityId = entityId
-        );
-        insert link;
+        insert safeLinks;
     }
 
     // Update the date for the record tied to a file
