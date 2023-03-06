@@ -36,7 +36,7 @@ public with sharing class TestFileService {
 
     @isTest
     public static void updateDates_Ignores_WhenNullList() {
-        FileService.updateDates(null);
+        FileService.updateDates((List<ContentVersion>)null);
         // no assert here.  Test passes if no exception
     }
     

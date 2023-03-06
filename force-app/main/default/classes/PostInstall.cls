@@ -57,12 +57,14 @@ global class PostInstall implements InstallHandler {
     }
 
     // For each Team, tie the Client and Dog documents to it
-    public void linkTeamDocuments() {
+    public static void linkTeamDocuments() {
         List<Team__c> teams = [SELECT Id, Client__c, Dog__c FROM Team__c];
         List<ContentDocumentLink> links = new List<ContentDocumentLink>();
         List<Id> clientIds = new List<Id>();
         List<Id> dogIds = new List<Id>();
+        List<Id> teamIds = new List<Id>();
         for (Team__c team : teams) {
+            teamIds.add(team.Id);
             List<ContentVersion> clientDocs = getEntityDocs(team.Client__c, 'Client');
             for (ContentVersion cv : clientDocs) {
                 links.add(new ContentDocumentLink(
@@ -83,10 +85,10 @@ global class PostInstall implements InstallHandler {
             }
         }
 
-        insert links;
+        FileService.insertLinks(links, teamIds) ;
     }
 
-    private List<ContentVersion> getEntityDocs(Id id, String category) {
+    public static List<ContentVersion> getEntityDocs(Id id, String category) {
         // find the documents linked to the clients
         List<ContentDocumentLink> cdls = [
             SELECT ID, ContentDocumentId, LinkedEntityId
