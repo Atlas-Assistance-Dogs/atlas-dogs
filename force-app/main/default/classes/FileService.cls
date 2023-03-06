@@ -81,6 +81,9 @@ public with sharing class FileService {
         List<Team__c> teams = [SELECT Client__c, Id FROM Team__c WHERE Dog__c = :recordId];
         for (Team__c team : teams) {
             for (ContentVersion cv : cvs) {
+                if (cv.Type__c == 'VacExams') {
+                    continue;
+                }
                 if (cv.Category__c == 'Dog') {
                     createLink(cv.ContentDocumentId, team.Id);
                 }
