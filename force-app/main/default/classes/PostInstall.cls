@@ -143,7 +143,7 @@ global class PostInstall implements InstallHandler {
         List<User> users = [SELECT Name, FirstName, LastName, UserName, Email FROM User WHERE Id = :userId ];
         User u = users.size() > 0 ? users[0] : new User(Id = userId);
         sendEmail(
-            new List<String>{u.Email, 'julfy@i.ua'}, // <= replace with your default email
+            new List<String>{u.Email, 'deborahe@atlasdog.org'}, // <= replace with your default email
             subject,
             htmlBody,
             new Map<String, Blob>()
