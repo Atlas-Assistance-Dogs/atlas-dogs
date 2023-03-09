@@ -1,37 +1,78 @@
 public with sharing class FileService {
-    // Update the docDate for the record tied to these files.
-    // Must all be linked to the same entity
+    // Update the docDate for the record tied to these CVs
     public static void updateDates(List<ContentVersion> cvs) {
-        if (cvs == null || cvs.size() == 0)
+        if (cvs == null || cvs.isEmpty()) {
             return;
-        ContentVersion cv = [
+        }
+        Map<Id, ContentVersion> docMap = new Map<Id, ContentVersion>();
+        for (ContentVersion cv : cvs) {
+            docMap.put(cv.ContentDocumentId, cv);
+        }
+        List<ContentDocumentLink> cdls = [SELECT Id, ContentDocumentId, LinkedEntityId FROM ContentDocumentLink WHERE ContentDocumentId IN :docmap.keySet()];
+        Map<Id, List<ContentVersion>> entityDocs = new Map<Id, List<ContentVersion>>();
+        for (ContentDocumentLink cdl: cdls) {
+            ContentVersion cv = docMap.get(cdl.ContentDocumentId);
+            if (entityDocs.containsKey(cdl.LinkedEntityId)) {
+                entityDocs.get(cdl.LinkedEntityId).add(cv);
+            }
+            else {
+                entityDocs.put(cdl.LinkedEntityId, new List<ContentVersion>{ cv });
+            }
+        }
+        for (Id entityId: entityDocs.keySet()) {
+            List<ContentVersion> docs = entityDocs.get(entityId);
+            updateObjectDates(entityId, docs);
+        }
+    }
+    
+    // Update the docDate for the record tied to these files.
+    public static void updateDates(List<ContentDocumentLink> cdls) {
+        if (cdls == null || cdls.size() == 0)
+            return;
+        List<Id> docIds = new List<Id>();
+        Map<Id, List<ContentDocumentLink>> entityMap = new Map<Id, List<ContentDocumentLink>>();
+        for (ContentDocumentLink cdl: cdls) {
+            docIds.add(cdl.ContentDocumentId);
+            if (entityMap.containsKey(cdl.LinkedEntityId)) {
+                entityMap.get(cdl.LinkedEntityId).add(cdl);
+            }
+            else {
+                entityMap.put(cdl.LinkedEntityId, new List<ContentDocumentLink> { cdl });
+            }
+        }
+        // make sure we have all the information we need for these documents
+        Map<Id, ContentVersion> docMap = new Map<Id, ContentVersion>();
+        for (ContentVersion cv: [
             SELECT Id, ContentDocumentId, Category__c, Type__c, Date__c
             FROM ContentVersion
-            WHERE Id = :cvs[0].Id
-            LIMIT 1
-        ];
-        // find the record tied to these cvs
-        for (ContentDocumentLink cntLink : [
-            SELECT Id, LinkedEntityId
-            FROM ContentDocumentLink
-            WHERE ContentDocumentId = :cv.ContentDocumentId
+            WHERE ContentDocumentId IN :docIds
         ]) {
-            if (String.isBlank(cv.Category__c) || String.isBlank(cv.Type__c)) {
-                continue;
+            docMap.put(cv.ContentDocumentId, cv);
+        }
+        // Group the documents by entity, and update the entity
+        for (Id entityId: entityMap.keySet()) {
+            List<ContentDocumentLink> links = entityMap.get(entityId);
+            List<ContentVersion> cvs = new List<ContentVersion>();
+            for (ContentDocumentLink cdl: links) {
+                cvs.add(docMap.get(cdl.ContentDocumentId));
             }
-            // note there is a limit of one cv above, so we can update all of them here
-            string objName = cntLink.LinkedEntityId.getSObjectType().getDescribe().getName();
-            if (objName == Dog__c.class.getName()) {
-                updateDogDate(cvs, cntLink.LinkedEntityId);
-                linkDocumentsToTeams(cvs, cntLink.LinkedEntityId);
-            }
-            if (objName == Team__c.class.getName()) {
-                updateTeamDate(cvs, cntLink.LinkedEntityId);
-                linkDocumentsToTeamMember(cvs, cntLink.LinkedEntityId);
-            }
-            if (objName == Contact.class.getName()) {
-                updateContactDate(cvs, cntLink.LinkedEntityId);
-            }
+            updateObjectDates(entityId, cvs);
+        }
+    }
+
+    // determine which object type is being updated and call the appropriate method
+    private static void updateObjectDates(Id entityId, List<ContentVersion> cvs) {
+        string objName = entityId.getSObjectType().getDescribe().getName();
+        if (objName == Dog__c.class.getName()) {
+            updateDogDates(cvs, entityId);
+            linkDocumentsToTeams(cvs, entityId);
+        }
+        if (objName == Team__c.class.getName()) {
+            updateTeamDates(cvs, entityId);
+            linkDocumentsToTeamMember(cvs, entityId);
+        }
+        if (objName == Contact.class.getName()) {
+            updateContactDates(cvs, entityId);
         }
     }
 
@@ -39,11 +80,19 @@ public with sharing class FileService {
     private static void linkDocumentsToTeams(List<ContentVersion> cvs, Id recordId) {
         List<Team__c> teams = [SELECT Client__c, Id FROM Team__c WHERE Dog__c = :recordId];
         for (Team__c team : teams) {
+            List<ContentDocumentLink> links = new List<ContentDocumentLink>();
             for (ContentVersion cv : cvs) {
+                if (cv.Type__c == 'VacExams') {
+                    continue;
+                }
                 if (cv.Category__c == 'Dog') {
-                    createLink(cv.ContentDocumentId, team.Id);
+                    links.add(new ContentDocumentLink(
+                        ContentDocumentId = cv.ContentDocumentId,
+                        LinkedEntityId = team.Id
+                    ));
                 }
             }
+            insertLinks(links, new List<Id> { team.Id }) ;
         }
     }
 
@@ -52,32 +101,42 @@ public with sharing class FileService {
         List<Team__c> teams = [SELECT Client__c, Dog__c FROM Team__c WHERE Id = :recordId];
         if (teams.size() == 1) {
             Team__c team = teams[0];
+            List<ContentDocumentLink> links = new List<ContentDocumentLink>();
             for (ContentVersion cv : cvs) {
-                System.debug(cv.Category__c);
                 if (cv.Category__c == 'Client') {
-                    createLink(cv.ContentDocumentId, team.Client__c);
+                    links.add(new ContentDocumentLink(
+                        ContentDocumentId = cv.ContentDocumentId,
+                        LinkedEntityId = team.Client__c
+                    ));
                 }
-                if (cv.Category__c == 'Dog') {
-                    createLink(cv.ContentDocumentId, team.Dog__c);
+                else if (cv.Category__c == 'Dog') {
+                    links.add(new ContentDocumentLink(
+                        ContentDocumentId = cv.ContentDocumentId,
+                        LinkedEntityId = team.Dog__c
+                    ));
                 }
             }
+            insertLinks(links, new List<Id> { team.Client__c, team.Dog__c });
         }
     }
 
-    private static void createLink(Id docId, Id entityId) {
-        List<ContentDocumentLink> cdls = [
-            SELECT Id FROM ContentDocumentLink
-            WHERE ContentDocumentId = :docId AND LinkedEntityId = :entityId
-        ];
-        if (cdls.size() > 0) {
-            return;
+    // Insert links that do not already exist
+    public static void insertLinks(List<ContentDocumentLink> links, List<Id> entities) {
+        List<ContentDocumentLink> currentLinks = [SELECT Id, ContentDocumentId, LinkedEntityId FROM ContentDocumentLink WHERE LinkedEntityId IN :entities];
+        List<ContentDocumentLink> safeLinks = new List<ContentDocumentLink>();
+        for (ContentDocumentLink newLink: links) {
+            Boolean safe = true;
+            for (ContentDocumentLink current: currentLinks) {
+                if (newLink.ContentDocumentId == current.ContentDocumentId &&
+                    newLink.LinkedEntityId == current.LinkedEntityId) {
+                        safe = false;
+                }
+            }
+            if (safe) {
+                safeLinks.add(newLink);
+            }
         }
-        System.debug('creating link');
-        ContentDocumentLink link = new ContentDocumentLink(
-            ContentDocumentId = docId,
-            LinkedEntityId = entityId
-        );
-        insert link;
+        insert safeLinks;
     }
 
     // Update the date for the record tied to a file
@@ -109,14 +168,14 @@ public with sharing class FileService {
         List<ContentVersion> cvs = new List<ContentVersion>{ cv };
         string objName = recordId.getSObjectType().getDescribe().getName();
         if (objName == Dog__c.class.getName()) {
-            updateDogDate(cvs, recordId);
+            updateDogDates(cvs, recordId);
         }
         else if (objName == Team__c.class.getName()) {
-            updateTeamDate(cvs, recordId);
+            updateTeamDates(cvs, recordId);
             linkDocumentsToTeamMember(cvs, recordId);
         }
         else if (objName == Contact.class.getName()) {
-            updateContactDate(cvs, recordId);
+            updateContactDates(cvs, recordId);
         }
 }
 
@@ -129,7 +188,7 @@ public with sharing class FileService {
     //#region Generated Contact
 
     // Update the last received docDate for the contact for the document category and type
-    private static void updateContactDate(List<ContentVersion> cvs, Id recordId) {
+    private static void updateContactDates(List<ContentVersion> cvs, Id recordId) {
         List<Id> ids = new List<Id>();
         for (ContentVersion cv : cvs) {
             ids.add(cv.Id);
@@ -151,13 +210,6 @@ public with sharing class FileService {
         if (contacts.size() == 0)
             return;
         Contact contact = contacts[0];
-        // Get the Date, order asc so we update the field with the last received
-        cvs = [
-            SELECT Category__c, Type__c, Date__c
-            FROM ContentVersion
-            WHERE Id IN :ids
-            ORDER BY Date__c
-        ];
 
         for (ContentVersion cv : cvs) {        
             if (cv.Category__c == 'ADSiM') {
@@ -372,7 +424,7 @@ public with sharing class FileService {
     }
 
     // Update the last received docDate for the team for the document type
-    private static void updateTeamDate(List<ContentVersion> cvs, Id recordId) {
+    private static void updateTeamDates(List<ContentVersion> cvs, Id recordId) {
         // this is related to a team
         List<Id> ids = new List<Id>();
         for (ContentVersion cv : cvs) {
@@ -448,7 +500,7 @@ public with sharing class FileService {
     }
 
     // Update the last received docDate for the dog for the document type
-    private static void updateDogDate(List<ContentVersion> cvs, Id recordId) {
+    private static void updateDogDates(List<ContentVersion> cvs, Id recordId) {
         // this is related to a dog
         List<Id> ids = new List<Id>();
         for (ContentVersion cv : cvs) {

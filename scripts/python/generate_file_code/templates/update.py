@@ -2,7 +2,7 @@
 
 contact_code_start = '''
     // Update the last received docDate for the contact for the document category and type
-    private static void updateContactDate(List<ContentVersion> cvs, Id recordId) {{
+    private static void updateContactDates(List<ContentVersion> cvs, Id recordId) {{
         List<Id> ids = new List<Id>();
         for (ContentVersion cv : cvs) {{
             ids.add(cv.Id);
@@ -38,7 +38,7 @@ contact_code_end = '''
 
 dog_code_start = '''
     // Update the last received docDate for the dog for the document type
-    private static void updateDogDate(List<ContentVersion> cvs, Id recordId) {{
+    private static void updateDogDates(List<ContentVersion> cvs, Id recordId) {{
         // this is related to a dog
         List<Id> ids = new List<Id>();
         for (ContentVersion cv : cvs) {{
@@ -73,7 +73,7 @@ dog_code_end = '''        }
 
 team_code_start = '''
     // Update the last received docDate for the team for the document type
-    private static void updateTeamDate(List<ContentVersion> cvs, Id recordId) {{
+    private static void updateTeamDates(List<ContentVersion> cvs, Id recordId) {{
         // this is related to a team
         List<Id> ids = new List<Id>();
         for (ContentVersion cv : cvs) {{

@@ -9,8 +9,8 @@ public with sharing class TestPostInstall {
     @isTest
     public static void installScript_HandlesOriginalVersion() {
         PostInstall postinstall = new PostInstall();
-        Test.testInstall(postinstall, new Version(1,0), true);
-        List<Dog__c> dogs = [Select id, VaccineDueDA2PP__c from Dog__c];
+        Test.testInstall(postinstall, new Version(1, 0), true);
+        List<Dog__c> dogs = [SELECT id, VaccineDueDA2PP__c FROM Dog__c];
         for (Dog__c dog : dogs) {
             System.assertNotEquals(null, dog.VaccineDueDA2PP__c);
         }
@@ -54,15 +54,14 @@ public with sharing class TestPostInstall {
         insert dogs;
 
         // Act
-        Test.testInstall(postinstall, new Version(1,2), true);
-        
+        Test.testInstall(postinstall, new Version(1, 2), true);
+
         // Assert
-        dogs = [Select id, Name, VaccineDueDA2PP__c from Dog__c];
+        dogs = [SELECT id, Name, VaccineDueDA2PP__c FROM Dog__c];
         for (Dog__c dog : dogs) {
             if (dog.Name == 'Skipper') {
                 System.assertEquals(null, dog.VaccineDueDA2PP__c);
-            }
-            else {
+            } else {
                 System.assertEquals(latest, dog.VaccineDueDA2PP__c);
             }
         }
@@ -134,8 +133,8 @@ public with sharing class TestPostInstall {
         PostInstall postinstall = new PostInstall();
 
         // Act
-        Test.testInstall(postinstall, new Version(1,3), true);
-        
+        Test.testInstall(postinstall, new Version(1, 3), true);
+
         // Assert
         logs = [SELECT Id, Team__c FROM Log__c WHERE Client__c = :myka.Id];
         for (Log__c log : logs) {
@@ -151,18 +150,28 @@ public with sharing class TestPostInstall {
     public static void installScript_CopiesSystemAccess() {
         // Arrange
         List<Contact> contacts = new List<Contact>();
-        contacts.add(new Contact(
-            FirstName = 'Myka', LastName = 'Berring', VolunteerAccess__c = 'Operations- Master Docs - READ ONLY'
-        ));
-        contacts.add(new Contact(
-            FirstName = 'Pete', LastName = 'Latimer', VolunteerAccess__c = 'Operations- Financial'
-        ));
-        contacts.add(new Contact(
-            FirstName = 'Claudia', LastName = 'Donovan', VolunteerAccess__c = 'Operations- Client'
-        ));
-        contacts.add(new Contact(
-            FirstName = 'Abigail', LastName = 'Doctor'
-        ));
+        contacts.add(
+            new Contact(
+                FirstName = 'Myka',
+                LastName = 'Berring',
+                VolunteerAccess__c = 'Operations- Master Docs - READ ONLY'
+            )
+        );
+        contacts.add(
+            new Contact(
+                FirstName = 'Pete',
+                LastName = 'Latimer',
+                VolunteerAccess__c = 'Operations- Financial'
+            )
+        );
+        contacts.add(
+            new Contact(
+                FirstName = 'Claudia',
+                LastName = 'Donovan',
+                VolunteerAccess__c = 'Operations- Client'
+            )
+        );
+        contacts.add(new Contact(FirstName = 'Abigail', LastName = 'Doctor'));
         insert contacts;
         Map<Id, Contact> contactMap = new Map<Id, Contact>();
         for (Contact contact : contacts) {
@@ -171,14 +180,268 @@ public with sharing class TestPostInstall {
         PostInstall postinstall = new PostInstall();
 
         // Act
-        Test.testInstall(postinstall, new Version(1,3), true);
-        
+        Test.testInstall(postinstall, new Version(1, 3), true);
+
         // Assert
-        contacts = [SELECT Id, VolunteerAccess__c, SystemAccess__c FROM Contact];
+        contacts = [
+            SELECT Id, VolunteerAccess__c, SystemAccess__c
+            FROM Contact
+        ];
         for (Contact actual : contacts) {
             Contact expected = contactMap.get(actual.Id);
-            System.assertEquals(expected.VolunteerAccess__c, actual.SystemAccess__c);
+            System.assertEquals(
+                expected.VolunteerAccess__c,
+                actual.SystemAccess__c
+            );
             System.assertEquals(null, actual.VolunteerAccess__c);
         }
+    }
+
+    private class Team {
+        public Team__c team;
+        public Contact client;
+        public Dog__c dog;
+        public Contact handler;
+        public Contact facilitator;
+    }
+    private static Team createTeam() {
+        Contact lydia = new Contact(
+            FirstName = 'Lydia',
+            LastName = 'Simpson',
+            ClientCertificationValidUntil__c = Date.today().addDays(100)
+        );
+        Contact ethan = new Contact(FirstName = 'Ethan', LastName = 'Parish');
+        Contact cassidy = new Contact(
+            FirstName = 'Cassidy',
+            LastName = 'Rogers'
+        );
+        List<Contact> contacts = new List<Contact>{ lydia, ethan, cassidy };
+        insert contacts;
+        Dog__c zeus = new Dog__c(Name = 'Zeus');
+        insert zeus;
+        Team__c team = new Team__c(
+            Name = 'Lydia_Zeus',
+            Client__c = lydia.Id,
+            Handler__c = ethan.Id,
+            Dog__c = zeus.Id,
+            PatValidUntil__c = lydia.ClientCertificationValidUntil__c
+        );
+        insert team;
+
+        Team info = new Team();
+        info.team = team;
+        info.client = lydia;
+        info.dog = zeus;
+        info.handler = ethan;
+        info.facilitator = cassidy;
+        return info;
+    }
+
+    private static List<ContentVersion> createClientDogDocs(Id clientId, Id dogId) {
+        List<String> types = new List<String>{
+            'Application',
+            'ApplicationVideo',
+            'CGCForm',
+            'CertAgreement',
+            'LOMI',
+            'PreApplication',
+            'ProgAgreement',
+            'Survey',
+            'VAPW'
+        };
+        List<ContentVersion> cvs = new List<ContentVersion>();
+        for (String type : types) {
+            cvs.add(
+                new ContentVersion(
+                    Title = 'Test Category Type',
+                    PathOnClient = 'TestDocument3.jpg',
+                    Origin = 'H',
+                    VersionData = Blob.valueOf('Document Body 3'),
+                    Category__c = 'Client',
+                    Type__c = type,
+                    Date__c = Date.today()
+                )
+            );
+        }
+        cvs.add(
+            new ContentVersion(
+                Title = 'Test Category Type',
+                PathOnClient = 'TestDocument3.jpg',
+                Origin = 'H',
+                VersionData = Blob.valueOf('Document Body 3'),
+                Category__c = 'Dog',
+                Type__c = 'HealthForm',
+                Date__c = Date.today()
+            )
+        );
+        cvs.add(
+            new ContentVersion(
+                Title = 'Test Category Type',
+                PathOnClient = 'TestDocument3.jpg',
+                Origin = 'H',
+                VersionData = Blob.valueOf('Document Body 3'),
+                Category__c = 'Dog',
+                Type__c = 'Xray',
+                Date__c = Date.today()
+            )
+        );
+        insert cvs;
+
+        List<Id> cvIds = new List<Id>();
+        for (ContentVersion cv: cvs) {
+            cvIds.add(cv.Id);
+        }
+
+        // insert will fill in the Id, but not the ContentDecumentId
+        cvs = [
+            SELECT Id, ContentDocumentId, Category__c, Type__c, Date__c
+            FROM ContentVersion
+            WHERE Id IN :cvIds
+        ];
+
+        List<ContentDocumentLink> cdls = new List<ContentDocumentLink>();
+        for (ContentVersion cv: cvs) {
+            Id entityId = clientId;
+            if (cv.Category__c == 'Dog') {
+                entityId = dogId;
+            }
+            cdls.add(new ContentDocumentLink(
+                ContentDocumentId = cv.ContentDocumentId,
+                LinkedEntityId = entityId
+            ));
+        }
+        insert cdls;
+
+        return cvs;
+    }
+
+    @isTest
+    public static void installScript_LinksAllFilesToTeam() {
+        // Arrange
+        Team teamInfo = createTeam();
+        Contact lydia = teamInfo.client;
+        List<ContentVersion> clientDocs = createClientDogDocs(lydia.Id, teamInfo.dog.Id);
+        ContentVersion volunteerApp = TestFileService.createLink(
+            'Volunteer',
+            'Application',
+            Date.today(),
+            lydia.Id
+        );
+
+        // Act
+        PostInstall postinstall = new PostInstall();
+        Test.testInstall(postinstall, new Version(1, 3), true);
+
+        // Assert
+        Team__c team = [
+            SELECT Id, Client__c, Dog__c,
+                ClientApplicationReceived__c, ClientApplicationVideoReceived__c, ClientCGCFormReceived__c, ClientCertAgreementReceived__c, ClientLOMIReceived__c,
+                ClientPreApplicationReceived__c, ClientProgAgreementReceived__c, ClientSurveyReceived__c, ClientVAPWReceived__c,
+                HealthFormReceived__c, XrayReceived__c
+            FROM Team__c
+            WHERE Id = :teamInfo.team.Id
+        ];
+        System.assertEquals(Date.today(), team.ClientApplicationReceived__c);
+        System.assertEquals(Date.today(), team.ClientApplicationVideoReceived__c);
+        System.assertEquals(Date.today(), team.ClientCGCFormReceived__c);
+        System.assertEquals(Date.today(), team.ClientCertAgreementReceived__c);
+        System.assertEquals(Date.today(), team.ClientLOMIReceived__c);
+        System.assertEquals(Date.today(), team.ClientPreApplicationReceived__c);
+        System.assertEquals(Date.today(), team.ClientProgAgreementReceived__c);
+        System.assertEquals(Date.today(), team.ClientSurveyReceived__c);
+        System.assertEquals(Date.today(), team.ClientVAPWReceived__c);
+        System.assertEquals(Date.today(), team.HealthFormReceived__c);
+        System.assertEquals(Date.today(), team.XrayReceived__c);
+
+        List<ContentDocumentLink> cdls = [
+            SELECT Id, ContentDocumentId, LinkedEntityId
+            FROM ContentDocumentLink
+            WHERE LinkedEntityId = :team.Id
+        ];
+        System.assertNotEquals(0, cdls.size());
+
+        cdls = [
+            SELECT Id, ContentDocumentId, LinkedEntityId
+            FROM ContentDocumentLink
+            WHERE
+                ContentDocumentId = :volunteerApp.ContentDocumentId
+                AND LinkedEntityId = :team.Id
+        ];
+        System.assertEquals(0, cdls.size());
+    }
+
+    @isTest
+    public static void installScript_LinksClientFilesToAllTeams() {
+        // Arrange
+        Team teamInfo = createTeam();
+        Contact lydia = teamInfo.client;
+        Team__c oldTeam = new Team__c(
+            Name = teamInfo.team.Name,
+            Client__c = lydia.Id,
+            Dog__c = teamInfo.dog.Id
+        );
+        insert oldTeam;
+        ContentVersion clientApp = TestFileService.createLink(
+            'Client',
+            'Application',
+            Date.today(),
+            lydia.Id
+        );
+
+        // Act
+        PostInstall postinstall = new PostInstall();
+        Test.testInstall(postinstall, new Version(1, 3), true);
+
+        // Assert
+        Team__c team = [
+            SELECT Id, ClientApplicationReceived__c
+            FROM Team__c
+            WHERE Id = :teamInfo.team.Id
+        ];
+        System.assertEquals(
+            clientApp.Date__c,
+            team.ClientApplicationReceived__c
+        );
+
+        List<ContentDocumentLink> cdls = [
+            SELECT Id, ContentDocumentId, LinkedEntityId
+            FROM ContentDocumentLink
+            WHERE
+                ContentDocumentId = :clientApp.ContentDocumentId
+                AND LinkedEntityId = :team.Id
+        ];
+        System.assertNotEquals(0, cdls.size());
+
+        cdls = [
+            SELECT Id, ContentDocumentId, LinkedEntityId
+            FROM ContentDocumentLink
+            WHERE
+                ContentDocumentId = :clientApp.ContentDocumentId
+                AND LinkedEntityId = :oldTeam.Id
+        ];
+        System.assertEquals(1, cdls.size());
+    }
+
+    @isTest
+    public static void installScript_LinksDogFilesToTeam() {
+        // Arrange
+        Team myTeam = createTeam();
+        Dog__c zeus = myTeam.dog;
+        ContentVersion annual = TestFileService.createLink('Dog', 'VacExams', Date.today(), zeus.Id);
+        ContentVersion initial = TestFileService.createLink('Dog', 'HealthForm', Date.today(), zeus.Id);
+        
+        // Act
+        PostInstall postinstall = new PostInstall();
+        Test.testInstall(postinstall, new Version(1, 3), true);
+
+        // Assert
+        Team__c team = [SELECT Id, HealthFormReceived__c FROM Team__c WHERE Name = 'Lydia_Zeus'];
+        System.assertEquals(initial.Date__c, team.HealthFormReceived__c);
+
+        List<ContentDocumentLink> cdls = [SELECT Id, ContentDocumentId, LinkedEntityId FROM ContentDocumentLink WHERE ContentDocumentId = :initial.ContentDocumentId AND LinkedEntityId = :team.Id];
+        System.assertNotEquals(0, cdls.size());
+
+        cdls = [SELECT Id, ContentDocumentId, LinkedEntityId FROM ContentDocumentLink WHERE ContentDocumentId = :annual.ContentDocumentId AND LinkedEntityId = :team.Id];
+        System.assertEquals(0, cdls.size());
     }
 }
