@@ -12,7 +12,7 @@ import DOCID_FIELD from "@salesforce/schema/ContentVersion.ContentDocumentId";
 
 export default class DocumentUploadCmp extends NavigationMixin(LightningElement) {
     @api recordId;
-    @api versionId;
+    @api versionId; // not used, but is in the released package
     @api currentCv = { ContentDocumentId: "", Title: "blank" };
     title = '';
     contentDocumentId = '';
