@@ -3,6 +3,7 @@ public with sharing class CategoryRuleController {
 
     }
 
+    @AuraEnabled(Cacheable=true)
     public static List<String> getCategoriesForObject(Id recordId) {
         string objLabel = recordId.getSObjectType().getDescribe().getLabel();
 

@@ -1,22 +1,24 @@
-import { LightningElement, track, api } from "lwc";
+import { LightningElement, track, api, wire } from "lwc";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
 import updateRecords from "@salesforce/apex/FileController.updateRecords";
+import getCategoriesForObject from "@salesforce/apex/CategoryRuleController.getCategoriesForObject";
 import { NavigationMixin } from "lightning/navigation";
 
 import CATEGORY_FIELD from "@salesforce/schema/ContentVersion.Category__c";
 import TYPE_FIELD from "@salesforce/schema/ContentVersion.Type__c";
 import DATE_FIELD from "@salesforce/schema/ContentVersion.Date__c";
 
-export default class DocumentUploadCmp extends NavigationMixin(
-    LightningElement
-) {
+export default class DocumentUploadCmp extends NavigationMixin(LightningElement) {
     @api recordId;
     @track fileUploadList = [];
     @track fileIDs = [];
     isErrorMessage = false;
     message = "";
     fileName;
-    contentType = "Emergency Contact";
+    category = "Client";
+    type = 'Contact Form';
+    categories = [];
+    types = [];
 
     fields = {
         category: CATEGORY_FIELD,
@@ -40,6 +42,36 @@ export default class DocumentUploadCmp extends NavigationMixin(
             ".mp4",
             ".zip"
         ];
+    }
+    categories = [];
+    category = null;
+
+    @wire(getCategoriesForObject, { recordId: "$recordId" })
+    getCategories({ error, result }) {
+        if (result) {
+            this.categories = result.data.map((x) => {
+                return { label: x, value: x };
+            });
+            if (this.categories.length == 1) {
+                this.category = this.categories[0];
+            }
+        } else if (error) {
+            this.dispatchEvent(
+                new ShowToastEvent({
+                    title: "Error!!",
+                    message: error.body.message,
+                    variant: "error"
+                })
+            );
+        }
+    }
+
+    handleCategoryChange(event) {
+        this.category = event.detail.value;
+    }
+
+    handleTypeChange(event) {
+        this.type = event.detail.value;
     }
 
     @api
