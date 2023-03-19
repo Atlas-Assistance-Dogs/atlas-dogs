@@ -70,13 +70,11 @@ public with sharing class TestLogController {
     }
 
     private static void logsMatch(Log__c expected, Log__c actual) {
-        System.assertEquals(expected.Client__c, actual.Client__c);
+        System.assertEquals(expected.Team__c, actual.Team__c);
         System.assertEquals(expected.ClientHours__c, actual.ClientHours__c);
         System.assertEquals(expected.ClientStress__c, actual.ClientStress__c);
         System.assertEquals(expected.Date__c, actual.Date__c);
         System.assertEquals(expected.Details__c, actual.Details__c);
-        System.assertEquals(expected.Dog__c, actual.Dog__c);
-        System.assertEquals(expected.Handler__c, actual.Handler__c);
         System.assertEquals(expected.OtherHours__c, actual.OtherHours__c);
         System.assertEquals(
             expected.PublicAccessHours__c,
@@ -132,22 +130,90 @@ public with sharing class TestLogController {
     }
 
     @isTest
-    public static void getRelatedLogs_ReturnsExpectedLogs() {
+    public static void getRelatedLogs_ForContact_ReturnsExpectedLogs() {
         getContacts();
         Map<String, Schema.RecordTypeInfo> recordTypes = Schema.SObjectType.Log__c.getRecordTypeInfosByName();
         CLIENT_ID = recordTypes.get('Client').getRecordTypeId();
         FACILITATOR_ID = recordTypes.get('Team Facilitator').getRecordTypeId();
+        Team__c team = new Team__c(Client__c = client.Id, Dog__c = dog.Id, Name = 'PeteLatimer_Ace');
+        insert team;
+        Team__c team2 = new Team__c(Client__c = submitter.Id, Dog__c = dog.Id, Name = 'MykaBerring_Ace');
+        insert team2;
 
         List<Log__c> logs = new List<Log__c>();
         logs.add(
             new Log__c(
-                Client__c = client.Id,
                 ClientHours__c = 22,
                 ClientStress__c = 'Only a little',
                 Date__c = Date.today(),
                 Details__c = 'My details',
-                Dog__c = dog.Id,
-                Handler__c = 'Ken',
+                OtherHours__c = 5,
+                PublicAccessHours__c = 10,
+                RequestSupportFromAtlas__c = false,
+                RequestSupportFromTeam__c = true,
+                Satisfaction__c = 'No enjoyment',
+                SessionType__c = 'In Person',
+                Stress__c = 'Not at all',
+                Submitter__c = client.Id,
+                SupportDetails__c = 'Support details',
+                Facilitator__c = facilitator.Id,
+                RecordTypeId = CLIENT_ID,
+                Team__c = team.Id
+            )
+        );
+        logs.add(
+            new Log__c(
+                ClientHours__c = 22,
+                ClientStress__c = 'Only a little',
+                Date__c = Date.today(),
+                Details__c = 'My details',
+                OtherHours__c = 5,
+                PublicAccessHours__c = 10,
+                RequestSupportFromAtlas__c = false,
+                RequestSupportFromTeam__c = true,
+                Satisfaction__c = 'No enjoyment',
+                SessionType__c = 'In Person',
+                Stress__c = 'Not at all',
+                Submitter__c = submitter.Id,
+                SupportDetails__c = 'Support details',
+                Facilitator__c = other.Id,
+                Team__c = team2.Id,
+                RecordTypeId = CLIENT_ID
+            )
+        );
+        insert logs;
+
+        Test.startTest();
+
+        RelatedObjects related = LogController.getRelatedLogs(client.Id, 'Client', 6);
+
+        Test.stopTest();
+        System.assertEquals(1, related.items.size());
+        for (Integer idx = 0; idx < related.items.size(); idx++) {
+            Log__c expectedLog = logs[0];
+            LogInfo actual = (LogInfo)related.items[idx];
+            logsMatch(expectedLog, actual.log);
+        }
+    }
+
+    @isTest
+    public static void getRelatedLogs_ForDog_ReturnsExpectedLogs() {
+        getContacts();
+        Map<String, Schema.RecordTypeInfo> recordTypes = Schema.SObjectType.Log__c.getRecordTypeInfosByName();
+        CLIENT_ID = recordTypes.get('Client').getRecordTypeId();
+        FACILITATOR_ID = recordTypes.get('Team Facilitator').getRecordTypeId();
+        Team__c team = new Team__c(Client__c = client.Id, Dog__c = dog.Id, Name = 'PeteLatimer_Ace');
+        insert team;
+        Team__c team2 = new Team__c(Client__c = submitter.Id, Dog__c = dog.Id, Name = 'MykaBerring_Ace');
+        insert team2;
+
+        List<Log__c> logs = new List<Log__c>();
+        logs.add(
+            new Log__c(
+                ClientHours__c = 22,
+                ClientStress__c = 'Only a little',
+                Date__c = Date.today(),
+                Details__c = 'My details',
                 OtherHours__c = 5,
                 PublicAccessHours__c = 10,
                 RequestSupportFromAtlas__c = false,
@@ -158,18 +224,16 @@ public with sharing class TestLogController {
                 Submitter__c = submitter.Id,
                 SupportDetails__c = 'Support details',
                 Facilitator__c = facilitator.Id,
-                RecordTypeId = CLIENT_ID
+                RecordTypeId = CLIENT_ID,
+                Team__c = team.Id
             )
         );
         logs.add(
             new Log__c(
-                Client__c = other.Id,
                 ClientHours__c = 22,
                 ClientStress__c = 'Only a little',
                 Date__c = Date.today(),
                 Details__c = 'My details',
-                Dog__c = dog.Id,
-                Handler__c = 'Ken',
                 OtherHours__c = 5,
                 PublicAccessHours__c = 10,
                 RequestSupportFromAtlas__c = false,
@@ -177,16 +241,84 @@ public with sharing class TestLogController {
                 Satisfaction__c = 'No enjoyment',
                 SessionType__c = 'In Person',
                 Stress__c = 'Not at all',
-                Submitter__c = other.Id,
+                Submitter__c = client.Id,
                 SupportDetails__c = 'Support details',
-                Facilitator__c = other.Id
+                Facilitator__c = other.Id,
+                RecordTypeId = CLIENT_ID,
+                Team__c = team2.Id
             )
         );
         insert logs;
 
         Test.startTest();
 
-        RelatedObjects related = LogController.getRelatedLogs(client.Id, 'Client', 6);
+        RelatedObjects related = LogController.getRelatedLogs(dog.Id, 'Client', 6);
+
+        Test.stopTest();
+        System.assertEquals(logs.size(), related.items.size());
+        for (Integer idx = 0; idx < related.items.size(); idx++) {
+            Log__c expectedLog = logs[idx];
+            LogInfo actual = (LogInfo)related.items[idx];
+            logsMatch(expectedLog, actual.log);
+        }
+    }
+
+    @isTest
+    public static void getRelatedLogs_ForTeam_ReturnsExpectedLogs() {
+        getContacts();
+        Map<String, Schema.RecordTypeInfo> recordTypes = Schema.SObjectType.Log__c.getRecordTypeInfosByName();
+        CLIENT_ID = recordTypes.get('Client').getRecordTypeId();
+        FACILITATOR_ID = recordTypes.get('Team Facilitator').getRecordTypeId();
+        Team__c team = new Team__c(Client__c = client.Id, Dog__c = dog.Id, Name = 'PeteLatimer_Ace');
+        insert team;
+        Team__c team2 = new Team__c(Client__c = submitter.Id, Dog__c = dog.Id, Name = 'MykaBerring_Ace');
+        insert team2;
+
+        List<Log__c> logs = new List<Log__c>();
+        logs.add(
+            new Log__c(
+                ClientHours__c = 22,
+                ClientStress__c = 'Only a little',
+                Date__c = Date.today(),
+                Details__c = 'My details',
+                OtherHours__c = 5,
+                PublicAccessHours__c = 10,
+                RequestSupportFromAtlas__c = false,
+                RequestSupportFromTeam__c = true,
+                Satisfaction__c = 'No enjoyment',
+                SessionType__c = 'In Person',
+                Stress__c = 'Not at all',
+                Submitter__c = submitter.Id,
+                SupportDetails__c = 'Support details',
+                Facilitator__c = facilitator.Id,
+                RecordTypeId = CLIENT_ID,
+                Team__c = team.Id
+            )
+        );
+        logs.add(
+            new Log__c(
+                ClientHours__c = 22,
+                ClientStress__c = 'Only a little',
+                Date__c = Date.today(),
+                Details__c = 'My details',
+                OtherHours__c = 5,
+                PublicAccessHours__c = 10,
+                RequestSupportFromAtlas__c = false,
+                RequestSupportFromTeam__c = true,
+                Satisfaction__c = 'No enjoyment',
+                SessionType__c = 'In Person',
+                Stress__c = 'Not at all',
+                Submitter__c = client.Id,
+                SupportDetails__c = 'Support details',
+                Facilitator__c = other.Id,
+                Team__c = team2.Id
+            )
+        );
+        insert logs;
+
+        Test.startTest();
+
+        RelatedObjects related = LogController.getRelatedLogs(team.Id, 'Client', 6);
 
         Test.stopTest();
         System.assertEquals(1, related.items.size());

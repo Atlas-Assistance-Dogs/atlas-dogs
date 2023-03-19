@@ -5,6 +5,7 @@ from xml.dom import minidom
 from contact import Contact
 from dog import Dog
 from category import Category
+from team import Team
   
 doc = minidom.parse("force-app/main/default/objects/ContentVersion/fields/Type__c.field-meta.xml")
   
@@ -62,6 +63,9 @@ with open(service_path, 'w') as service_copy:
     contact = Contact(service_copy, settings)
     contact.code()
 
+    team = Team(service_copy, settings['Client'], settings['Dog'])
+    team.code()
+
     dog = Dog(service_copy, settings['Dog'])
     dog.code()
 
@@ -83,6 +87,9 @@ with open(service_path, 'w') as service_copy:
 
     contact = Contact(service_copy, settings)
     contact.clear_code(service_copy)
+
+    team = Team(service_copy, settings['Client'], settings['Dog'])
+    team.clear_code(service_copy)
 
     dog = Dog(service_copy, settings['Dog'])
     dog.clear_code(service_copy)

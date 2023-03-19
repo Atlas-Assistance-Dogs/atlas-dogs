@@ -8,4 +8,13 @@ public with sharing class LogInfo {
 
     @AuraEnabled
     public String facilitatorName { get; set; }
+
+    @AuraEnabled
+    public String handlerName { get; set; }
+
+    @AuraEnabled
+    public String submitterName { get; set; }
+
+    @AuraEnabled
+    public String teamName { get; set; }
 }

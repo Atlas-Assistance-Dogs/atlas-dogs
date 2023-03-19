@@ -5,10 +5,7 @@ public inherited sharing class DogController {
             return [
                 SELECT
                     Id,
-                    VaccineDueDistemper__c,
-                    VaccineDueHepatitis__c,
-                    VaccineDueParainfluenza__c,
-                    VaccineDueParvovirus__c,
+                    VaccineDueDA2PP__c,
                     VaccineDueRabies__c,
                     PhysicalExamDue__c
                 FROM Dog__c

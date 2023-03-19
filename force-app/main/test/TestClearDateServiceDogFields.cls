@@ -1,16 +1,27 @@
 @isTest
 public with sharing class TestClearDateServiceDogFields {
+    private static Dog__c dog;
+    private static Contact client;
+
+    private static void createTeamMembers() {
+        dog = new Dog__c(Name = 'Fido');
+        insert dog;
+
+        client = new Contact(FirstName = 'Test', LastName = 'Contact', Email = 'abc@abc.com');
+        insert client;
+    }
 
     @isTest
     public static void clearDate_DogHealthForm_SetsDateToNull() {
         ContentVersion cv = new ContentVersion(Category__c = 'Dog', Type__c = 'HealthForm');
-        Dog__c record = new Dog__c(Name = 'Fido');
+        createTeamMembers();
+        Team__c record = new Team__c(Name = 'Test', Client__c = client.Id, Dog__c = dog.Id);
         insert record;
         ClearDateService.clear(cv, record.Id);
 
         record = [
             SELECT HealthFormReceived__c
-            FROM Dog__c
+            FROM Team__c
             WHERE Id = :record.Id
             LIMIT 1
         ];
@@ -44,13 +55,14 @@ public with sharing class TestClearDateServiceDogFields {
     @isTest
     public static void clearDate_DogXray_SetsDateToNull() {
         ContentVersion cv = new ContentVersion(Category__c = 'Dog', Type__c = 'Xray');
-        Dog__c record = new Dog__c(Name = 'Fido');
+        createTeamMembers();
+        Team__c record = new Team__c(Name = 'Test', Client__c = client.Id, Dog__c = dog.Id);
         insert record;
         ClearDateService.clear(cv, record.Id);
 
         record = [
             SELECT XrayReceived__c
-            FROM Dog__c
+            FROM Team__c
             WHERE Id = :record.Id
             LIMIT 1
         ];

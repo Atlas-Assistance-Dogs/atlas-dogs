@@ -15,8 +15,6 @@
           fake: email
       Phone:
           fake: phone_number
-      MobilePhone:
-          fake: phone_number
       Street:
           fake: street_address
       City:
@@ -62,7 +60,8 @@
               - He/Him
               - She/Her
               - They/Them
-              - Specify
+              - Prefer to self-describe
+              - Prefer not to answer
       Status:
           random_choice:
               - Open - Not Contacted

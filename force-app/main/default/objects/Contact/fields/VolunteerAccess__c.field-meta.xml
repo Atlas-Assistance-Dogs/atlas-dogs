@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>VolunteerAccess__c</fullName>
     <externalId>false</externalId>
-    <label>Volunteer Access</label>
+    <label>System Access</label>
     <required>false</required>
     <trackFeedHistory>false</trackFeedHistory>
     <type>MultiselectPicklist</type>
@@ -81,8 +81,7 @@
                 <label>Active Projects- Client Certification</label>
             </value>
             <value>
-                <fullName
-                >Active Projects- Community Outreach and Education</fullName>
+                <fullName>Active Projects- Community Outreach and Education</fullName>
                 <default>false</default>
                 <label>Active Projects- Community Outreach and Education</label>
             </value>
@@ -97,11 +96,9 @@
                 <label>Active Projects- Fund Development</label>
             </value>
             <value>
-                <fullName
-                >Active Projects- Governance, Compliance and Operations</fullName>
+                <fullName>Active Projects- Governance, Compliance and Operations</fullName>
                 <default>false</default>
-                <label
-                >Active Projects- Governance, Compliance and Operations</label>
+                <label>Active Projects- Governance, Compliance and Operations</label>
             </value>
             <value>
                 <fullName>Active Projects- Research and Development</fullName>
@@ -119,8 +116,7 @@
                 <label>Active Projects- State Registration</label>
             </value>
             <value>
-                <fullName
-                >Active Projects- Team Facilitator Certification</fullName>
+                <fullName>Active Projects- Team Facilitator Certification</fullName>
                 <default>false</default>
                 <label>Active Projects- Team Facilitator Certification</label>
             </value>
@@ -135,11 +131,9 @@
                 <label>Active Projects- Trainer Certification</label>
             </value>
             <value>
-                <fullName
-                >Active Projects- Volunteer Recruitment and Retention</fullName>
+                <fullName>Active Projects- Volunteer Recruitment and Retention</fullName>
                 <default>false</default>
-                <label
-                >Active Projects- Volunteer Recruitment and Retention</label>
+                <label>Active Projects- Volunteer Recruitment and Retention</label>
             </value>
         </valueSetDefinition>
     </valueSet>

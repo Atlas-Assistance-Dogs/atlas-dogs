@@ -89,38 +89,13 @@ export default class BackgroundCheckFormCmp extends NavigationMixin(
     @api
     handleSubmit(event) {
         event.preventDefault();
-        let fields = [
-            ...this.template.querySelectorAll("lightning-input-field")
-        ];
-        var record = fields.reduce(
-            (a, x) => ({ ...a, [x.fieldName]: x.value }),
-            {}
-        );
-        if (this.contactId) {
-            record[CONTACT_FIELD.fieldApiName] = this.contactId;
-        }
-        var documentId = null;
-        if (this.uploadedFile) {
-            documentId = this.uploadedFile.documentId;
-        }
-        if (!documentId && !this.currentCv) {
-            this.dispatchEvent(
-                new ShowToastEvent({
-                    title: "Error!!",
-                    message:
-                        "A document must be assigned to the background check.",
-                    variant: "error"
-                })
-            );
-            return;
-        }
         this.template
             .querySelector("lightning-record-edit-form")
-            .submit(record);
+            .submit();
     }
 
     handleSuccess(event) {
-        if (!this.recordId) { // new background check
+        if (!this.recordId && this.currentCv) { // new background check
             relateFile({documentId: this.currentCv.ContentDocumentId, recordId: event.detail.id})
                 .then((id) => {
                     this.dispatchEvent(new CustomEvent("changed", { detail: id }));

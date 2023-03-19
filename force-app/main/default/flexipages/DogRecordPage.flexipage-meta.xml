@@ -34,36 +34,60 @@
     <flexiPageRegions>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Name</fieldItem>
                 <identifier>RecordNameField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Breed__c</fieldItem>
                 <identifier>RecordBreed__cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.MicrochipNumber__c</fieldItem>
                 <identifier>RecordMicrochipNumber__cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Gender__c</fieldItem>
                 <identifier>RecordGender__cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Status__c</fieldItem>
                 <identifier>RecordStatus__cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.SpayedNeutered__c</fieldItem>
                 <identifier>RecordSpayedNeutered__cField</identifier>
             </fieldInstance>
@@ -74,30 +98,50 @@
     <flexiPageRegions>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.OwnerId</fieldItem>
                 <identifier>RecordOwnerIdField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Birthdate__c</fieldItem>
                 <identifier>RecordBirthdate__cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.AgeYears__c</fieldItem>
                 <identifier>RecordAge__cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Eligible_byDOB__c</fieldItem>
                 <identifier>RecordEligible_byDOB__cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.Picture__c</fieldItem>
                 <identifier>RecordPicture__cField</identifier>
             </fieldInstance>
@@ -149,18 +193,10 @@
     <flexiPageRegions>
         <itemInstances>
             <fieldInstance>
-                <fieldItem>Record.HealthFormReceived__c</fieldItem>
-                <identifier>RecordHealthFormReceived_cField1</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldItem>Record.XrayReceived__c</fieldItem>
-                <identifier>RecordXrayReceived_cField1</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.VacExamsReceived__c</fieldItem>
                 <identifier>RecordVacExamsReceived_cField1</identifier>
             </fieldInstance>
@@ -199,26 +235,32 @@
     <flexiPageRegions>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.VetClinic__c</fieldItem>
                 <identifier>RecordVetClinic__cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.HealthCareRecordsStatus__c</fieldItem>
                 <identifier>RecordHealthCareRecordsStatus__cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.LatestPhysicalExamOutcome__c</fieldItem>
                 <identifier>RecordLatestPhysicalExamOutcome__cField</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldItem>Record.PhysicalExamDue__c</fieldItem>
-                <identifier>RecordPhysicalExamDue__cField</identifier>
             </fieldInstance>
         </itemInstances>
         <name>Facet-3c2a6dd4-420e-4eea-af95-0672fea236cd</name>
@@ -227,32 +269,32 @@
     <flexiPageRegions>
         <itemInstances>
             <fieldInstance>
-                <fieldItem>Record.VaccineDueHepatitis__c</fieldItem>
-                <identifier>RecordVaccineDueHepatitis__cField</identifier>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.VaccineDueDA2PP__c</fieldItem>
+                <identifier>RecordVaccineDueDA2PP_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
             <fieldInstance>
-                <fieldItem>Record.VaccineDueParvovirus__c</fieldItem>
-                <identifier>RecordVaccineDueParvovirus__cField</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldItem>Record.VaccineDueDistemper__c</fieldItem>
-                <identifier>RecordVaccineDueDistemper__cField</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldItem>Record.VaccineDueParainfluenza__c</fieldItem>
-                <identifier>RecordVaccineDueParainfluenza__cField</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.VaccineDueRabies__c</fieldItem>
                 <identifier>RecordVaccineDueRabies__cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.PhysicalExamDue__c</fieldItem>
+                <identifier>RecordPhysicalExamDue__cField</identifier>
             </fieldInstance>
         </itemInstances>
         <name>Facet-b408a70d-5a1f-4b07-8170-e90152c65427</name>
@@ -323,6 +365,12 @@
             <componentInstance>
                 <componentName>relatedPuppyLogsCmp</componentName>
                 <identifier>c_relatedPuppyLogsCmp</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentName>relatedTeamsCmp</componentName>
+                <identifier>c_relatedTeamsCmp</identifier>
             </componentInstance>
         </itemInstances>
         <itemInstances>

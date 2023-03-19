@@ -5,6 +5,7 @@ new_dog = "Name = 'Fido'"
 
 new_contact = "FirstName = 'Test', LastName = 'Contact', Email = 'abc@abc.com'"
 
+new_team = "Name = 'Test', Client__c = client.Id, Dog__c = dog.Id"
 
 class CategoryType:
     """Create code to update or test a category/type"""
@@ -14,6 +15,7 @@ class CategoryType:
     field = ''
     object = 'Contact'
     fields = new_contact
+    setup = ''
 
     def __init__ (self, cat, typ):
         self.category = cat
@@ -21,15 +23,28 @@ class CategoryType:
         self.fields = new_contact
 
         if cat == 'Dog':
-            self.name = 'dog'
             self.field = typ + 'Received__c'
-            self.object = 'Dog__c'
-            self.fields = new_dog
+            if typ == 'VacExams':
+                self.name = 'dog'
+                self.object = 'Dog__c'
+                self.fields = new_dog
+            else:
+                self.name = 'team'
+                self.object = 'Team__c'
+                self.fields = new_team
+                self.setup = update.test_team_setup
 
         elif typ == 'ContactForm':
             self.name = 'contact'
             self.field = typ + 'Received__c'
             self.object = 'Contact'
+
+        elif cat == 'Client':
+            self.name = 'team'
+            self.object = 'Team__c'
+            self.field = cat + typ + 'Received__c'
+            self.fields = new_team
+            self.setup = update.test_team_setup
 
         else:
             self.name = 'contact'
@@ -40,7 +55,7 @@ class CategoryType:
     def code(self):
         '''Update the last date for this type'''
         template = '''
-        if (cv.Type__c == '{type}' && isLater({object}.{field}, cv.Date__c)){{
+        if (cv.Type__c == '{type}' && isLater({object}.{field}, cv.Date__c)) {{
             {object}.{field} = cv.Date__c;
         }}
 '''
@@ -58,8 +73,8 @@ class CategoryType:
 
 
     def test(self):
-        return update.test_template.format(category = self.category, type = self.doc_type, field = self.field, object_fields = self.fields, object = self.object)
+        return update.test_template.format(category = self.category, type = self.doc_type, field = self.field, object_fields = self.fields, object = self.object, setup = self.setup)
 
 
     def test_clear(self):
-        return clear.test_template.format(category = self.category, type = self.doc_type, field = self.field, object_fields = self.fields, object = self.object)
+        return clear.test_template.format(category = self.category, type = self.doc_type, field = self.field, object_fields = self.fields, object = self.object, setup = self.setup)

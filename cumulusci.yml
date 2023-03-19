@@ -4,7 +4,8 @@ project:
     package:
         name: AtlasDogs
         namespace: atlas1
-        api_version: "54.0"
+        api_version: "56.0"
+        install_class: "PostInstall"
     dependencies:
         - github: "https://github.com/SalesforceFoundation/NPSP"
         - github: "https://github.com/SalesforceFoundation/Volunteers-for-Salesforce"

@@ -1,14 +1,12 @@
 import { LightningElement, api, wire, track } from "lwc";
 import { getObjectInfo } from "lightning/uiObjectInfoApi";
 import getRelatedFiles from "@salesforce/apex/FileController.getRelatedFiles";
-import deleteRecord from "@salesforce/apex/FileController.deleteRecord";
+import deleteLink from "@salesforce/apex/FileController.deleteLink";
 import { refreshApex } from "@salesforce/apex";
 import { NavigationMixin } from "lightning/navigation";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
 
 import CV_OBJECT from "@salesforce/schema/ContentVersion";
-import CATEGORY_FIELD from "@salesforce/schema/ContentVersion.Category__c";
-import TYPE_FIELD from "@salesforce/schema/ContentVersion.Type__c";
 import DATE_FIELD from "@salesforce/schema/ContentVersion.Date__c";
 
 const actions = [
@@ -30,12 +28,12 @@ const COLS = [
     },
     {
         label: "Category",
-        fieldName: CATEGORY_FIELD.fieldApiName,
+        fieldName: 'category',
         sortable: true
     },
     {
         label: "Document Type",
-        fieldName: TYPE_FIELD.fieldApiName,
+        fieldName: 'type',
         sortable: true
     },
     {
@@ -54,6 +52,22 @@ export default class RelatedFiles extends NavigationMixin(LightningElement) {
     columns = COLS;
     @track data;
     total = 0;
+    @track filterItems = [
+        {
+            label: "Category",
+            name: "category",
+            placeholder: "Select category",
+            value: null,
+            options: []
+        },
+        {
+            label: "Type",
+            name: "type",
+            placeholder: "Select type",
+            value: null,
+            options: []
+        }
+    ];
 
     openModal() {
         this.template.querySelector("c-file-upload-cmp").openModal();
@@ -66,20 +80,30 @@ export default class RelatedFiles extends NavigationMixin(LightningElement) {
         return this.viewAll ? 10000 : 6;
     }
 
+    bareData;
     @wire(getRelatedFiles, { recordId: "$recordId", max: "$max" }) filesLst(
         result
     ) {
         this.wiredFilesList = result;
         this.data = null;
-        if (result.data) {
-            this.data = result.data.items;
+        if (result.data?.items) {
+            this.data = result.data.items.map((info) => {
+                let row = Object.assign({}, info.cv);
+                row.cdl = info.cdl;
+                row.category = info.category;
+                row.type = info.type;
+                return row;
+            });
+            this.bareData = [...this.data]; // save a copy of the data
             if (this.data.length === 0) {
                 this.data = null;
                 this.total = 0;
+                return;
             }
-            if (this.max < 15) {
+            if (!this.viewAll) {
                 this.total = result.data.total;
             }
+            this.fillOptions();
         } else if (result.error) {
             this.dispatchEvent(
                 new ShowToastEvent({
@@ -89,6 +113,29 @@ export default class RelatedFiles extends NavigationMixin(LightningElement) {
                 })
             );
         }
+    }
+
+    // fill in category and type options
+    fillOptions() {
+        const categories = [
+            ...new Set(
+                this.data.map((x) => x.category)
+            )
+        ];
+        categories.sort();
+        this.filterItems[0].options = categories.map(x => { return { label: x, value: x }; });
+        this.filterItems[0].options.unshift({ label: "No filter", value: null });
+
+        const types = [
+            ...new Set(
+                this.data.map((x) => x.type)
+            )
+        ];
+        types.sort();
+        this.filterItems[1].options = types.map((x) => {
+            return { label: x, value: x };
+        });
+        this.filterItems[1].options.unshift({ label: "No filter", value: null });
     }
 
     handleUpdate() {
@@ -118,10 +165,10 @@ export default class RelatedFiles extends NavigationMixin(LightningElement) {
 
     handleSort(event) {
         const { fieldName: sortedBy, sortDirection } = event.detail;
-        const cloneData = [...this.files];
+        const cloneData = [...this.data];
 
         cloneData.sort(this.sortBy(sortedBy, sortDirection === "asc" ? 1 : -1));
-        this.files = cloneData;
+        this.data = cloneData;
         this.sortDirection = sortDirection;
         this.sortedBy = sortedBy;
     }
@@ -146,6 +193,24 @@ export default class RelatedFiles extends NavigationMixin(LightningElement) {
         }
     }
 
+    handleFilter() {
+        this.template.querySelector("c-select-option-cmp").open();
+    }
+
+    handleFilterSelect(event) {
+        const items = event.detail;
+        let cloneData = [...this.bareData];
+        items.forEach((item, idx) => {
+            if (item.value) {
+                cloneData = cloneData.filter(
+                    (info) => info[item.name] == item.value
+                );
+                this.filterItems[idx].value = item.value;
+            }
+        });
+        this.data = cloneData;
+    }
+
     navigateToFiles(currentRow) {
         let currentRecordID = currentRow.ContentDocumentId;
         this[NavigationMixin.Navigate]({
@@ -159,9 +224,9 @@ export default class RelatedFiles extends NavigationMixin(LightningElement) {
         });
     }
 
-    deleteCons(currentRow) {
-        let currentRecordID = currentRow.ContentDocumentId;
-        deleteRecord({ docId: currentRecordID })
+    // TODO: Have Trigger delete ContentDocument when all Links to the document are deleted.
+    deleteCons(row) {
+        deleteLink({cdl: row.cdl})
             .then((result) => {
                 let res = result;
 
@@ -172,11 +237,9 @@ export default class RelatedFiles extends NavigationMixin(LightningElement) {
                         variant: "success"
                     })
                 );
-                this.isErrorMessage = false;
                 refreshApex(this.wiredFilesList);
             })
             .catch((error) => {
-                window.console.log("Error ====> " + error);
                 this.dispatchEvent(
                     new ShowToastEvent({
                         title: "Error!!",

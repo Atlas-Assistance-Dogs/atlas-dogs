@@ -1,5 +1,5 @@
 <template>
-    <c-modal-cmp title="New Contact" onclose={handleCancel} onsubmit={handleSubmit}>
+    <c-modal-cmp title="New Contact" oncancel={handleCancel} onsubmit={handleSubmit}>
         <lightning-record-edit-form object-api-name="Contact" onsuccess={handleSuccess} onsubmit={handleSubmit} onerror={handleError} slot="body">
             <div class="slds-grid slds-wrap">
                 <lightning-messages></lightning-messages>
