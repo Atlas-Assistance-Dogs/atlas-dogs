@@ -25,6 +25,7 @@ public with sharing class CategoryRuleController {
                 categories.addAll(rule.Category__c.split(';'));
             }
         }
+        System.debug(categories);
         return categories;
     }
 }
