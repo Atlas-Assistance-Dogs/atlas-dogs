@@ -1,28 +1,19 @@
-import { LightningElement, wire, api } from "lwc";
+import { wire, api } from "lwc";
+import FileInformationCmp from "c/fileInformationCmp";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
 import { getRecord } from "lightning/uiRecordApi";
 import updateContentVersion from "@salesforce/apex/FileController.updateContentVersion";
 import { NavigationMixin } from "lightning/navigation";
 
-import CATEGORY_FIELD from "@salesforce/schema/ContentVersion.Category__c";
-import TYPE_FIELD from "@salesforce/schema/ContentVersion.Type__c";
-import DATE_FIELD from "@salesforce/schema/ContentVersion.Date__c";
 import TITLE_FIELD from "@salesforce/schema/ContentVersion.Title";
 import DOCID_FIELD from "@salesforce/schema/ContentVersion.ContentDocumentId";
 
-export default class DocumentUploadCmp extends NavigationMixin(LightningElement) {
-    @api recordId;
+export default class DocumentUploadCmp extends FileInformationCmp {
     @api versionId; // not used, but is in the released package
     @api currentCv = { ContentDocumentId: "", Title: "blank" };
     title = '';
     contentDocumentId = '';
     contentType = "Emergency Contact";
-
-    fields = {
-        category: CATEGORY_FIELD,
-        type: TYPE_FIELD,
-        date: DATE_FIELD
-    };
 
     @api
     openModal(message) {

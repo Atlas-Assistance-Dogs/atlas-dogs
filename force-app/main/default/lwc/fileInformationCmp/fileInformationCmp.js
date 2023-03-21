@@ -90,13 +90,12 @@ export default class FileInformation extends NavigationMixin(LightningElement) {
 
     handleCategoryChange(event) {
         this.category = event.detail.value;
+        if (this.categoryTypes) {
+            this.types = this.categoryTypes[this.category];
+        }
     }
 
     handleTypeChange(event) {
         this.type = event.detail.value;
-    }
-
-    get types() {
-        return this.categoryTypes ? this.categoryTypes[this.category] : [];
     }
 }
