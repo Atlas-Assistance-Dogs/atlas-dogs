@@ -11,7 +11,7 @@ import CATEGORY_FIELD from "@salesforce/schema/ContentVersion.Category__c";
 import TYPE_FIELD from "@salesforce/schema/ContentVersion.Type__c";
 import DATE_FIELD from "@salesforce/schema/ContentVersion.Date__c";
 
-NavigationMixin(LightningElement) {
+export default class FileInformation extends NavigationMixin(LightningElement) {
     @api recordId;
     @track fileUploadList = [];
     @track fileIDs = [];
@@ -19,9 +19,9 @@ NavigationMixin(LightningElement) {
     message = "";
     recordTypeId;
     category = "Client";
-    type = "Contact Form";
-    categories = [];
-    types = [];
+    type = "ContactForm";
+    @track categories = [];
+    @track types = [{ label: 'Contact Form', value: 'ContactForm' }];
 
     fields = {
         category: CATEGORY_FIELD,
@@ -34,11 +34,9 @@ NavigationMixin(LightningElement) {
     @wire(getCategoriesForObject, { recordId: "$recordId" })
     getCategories(result) {
         if (result?.data) {
-            this.categories = result.data.map((x) => {
-                return { label: x, value: x };
-            });
+            this.categories = result.data;
             if (this.categories.length == 1) {
-                this.category = this.categories[0];
+                this.category = this.categories[0].value;
             }
         } else if (result?.error) {
             this.dispatchEvent(
@@ -61,52 +59,44 @@ NavigationMixin(LightningElement) {
         }
     }
 
+    categoryTypes = {};
+
     @wire(getPicklistValues, {
         recordTypeId: "$recordTypeId",
         fieldApiName: TYPE_FIELD
     })
-    picklistValues;
-
-    fetchPicklistValuesForGPTIForHowCanWeHelpYouField({ error, data }) {
+    getPicklistValuesForType({ error, data }) {
         if (error) {
             console.log("unable to fetch values");
-        } else if (data && data.picklistFieldValues) {
-            let optionsValue = {};
-            optionsValue["label"] = "--None--";
-            optionsValue["value"] = "--None--";
-            this.controllingPicklist.push(optionsValue);
-
-            data.picklistFieldValues["controllingFieldAPIName"].values.forEach(
+        } else if (data && data.values) {
+            const controlling = data.controllerValues;
+            let controlLookup = [];
+            data.values.forEach(
                 (optionData) => {
-                    this.controllingPicklist.push({
-                        label: "ABC",
-                        value: "ABC"
+                    optionData.validFor.forEach(idx => {
+                        if (!controlLookup[idx]) {
+                            controlLookup[idx] = [];
+                        }
+                        controlLookup[idx].push({ label: optionData.label, value: optionData.value });
                     });
                 }
             );
-            this.dependentPicklist = data.picklistFieldValues["Field2"];
-            //  this.showpicklist = true;
-
-            this.finalDependentVal = [];
-            //  this.showdependent = false;
-            const selectedVal = "ABC";
-            this.finalDependentVal.push({
-                label: "--None--",
-                value: "--None--"
-            });
-            let controllerValues = this.dependentPicklist.controllerValues;
-            this.dependentPicklist.values.forEach((depVal) => {
-                depVal.validFor.forEach((depKey) => {
-                    if (depKey === controllerValues[selectedVal]) {
-                        this.dependentDisabled = false;
-                        // this.showdependent = true;
-                        this.finalDependentVal.push({
-                            label: depVal.label,
-                            value: depVal.value
-                        });
-                    }
-                });
-            });
+            this.categoryTypes = {};
+            for (const cat in controlling) {
+                this.categoryTypes[cat] = controlLookup[controlling[cat]];
+            }
         }
+    }
+
+    handleCategoryChange(event) {
+        this.category = event.detail.value;
+    }
+
+    handleTypeChange(event) {
+        this.type = event.detail.value;
+    }
+
+    get types() {
+        return this.categoryTypes ? this.categoryTypes[this.category] : [];
     }
 }

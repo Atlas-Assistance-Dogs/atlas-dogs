@@ -26,14 +26,6 @@ export default class DocumentUploadCmp extends FileInformationCmp {
         ];
     }
 
-    handleCategoryChange(event) {
-        this.category = event.detail.value;
-    }
-
-    handleTypeChange(event) {
-        this.type = event.detail.value;
-    }
-
     @api
     openModal() {
         this.message = "";

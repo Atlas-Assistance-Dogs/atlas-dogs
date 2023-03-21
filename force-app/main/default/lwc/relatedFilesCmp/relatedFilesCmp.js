@@ -1,5 +1,4 @@
 import { LightningElement, api, wire, track } from "lwc";
-import { getObjectInfo } from "lightning/uiObjectInfoApi";
 import getRelatedFiles from "@salesforce/apex/FileController.getRelatedFiles";
 import deleteLink from "@salesforce/apex/FileController.deleteLink";
 import { refreshApex } from "@salesforce/apex";
@@ -72,9 +71,7 @@ export default class RelatedFiles extends NavigationMixin(LightningElement) {
     openModal() {
         this.template.querySelector("c-file-upload-cmp").openModal();
     }
-    @wire(getObjectInfo, { objectApiName: CV_OBJECT })
-    objectInfo;
-
+ 
     @api
     get max() {
         return this.viewAll ? 10000 : 6;
