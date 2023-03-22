@@ -3,9 +3,6 @@ import FileInformationCmp from "c/fileInformationCmp";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
 import updateRecords from "@salesforce/apex/FileController.updateRecords";
 
-import TYPE_FIELD from "@salesforce/schema/ContentVersion.Type__c";
-
-
 export default class DocumentUploadCmp extends FileInformationCmp {
 
     get acceptedFormats() {
@@ -40,9 +37,7 @@ export default class DocumentUploadCmp extends FileInformationCmp {
         this.message = "File Uploaded Successfully";
         const uploadedFiles = event.detail.files.map((doc) => doc.documentId);
         this.updateFiles(
-            this.template.querySelector(".category").value,
-            this.template.querySelector(".type").value,
-            this.template.querySelector(".date").value,
+            this.template.querySelector("c-file-information-cmp").getInformation(),
             uploadedFiles
         );
     }
@@ -52,11 +47,11 @@ export default class DocumentUploadCmp extends FileInformationCmp {
         this.closeModal();
     }
 
-    updateFiles(category, docType, date, files) {
+    updateFiles(info, files) {
         updateRecords({
-            category: category,
-            docType: docType,
-            docDate: date,
+            category: info.category,
+            docType: info.type,
+            docDate: info.date,
             docIds: files
         })
             .then((data) => {

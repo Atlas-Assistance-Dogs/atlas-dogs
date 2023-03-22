@@ -19,7 +19,9 @@ public with sharing class CategoryRuleController {
         List<String> positions = new List<String>();
         if (objLabel == Contact.class.getName()) {
             Contact person = [SELECT Id, Positions__c FROM Contact WHERE Id = :recordId];
-            positions = person.Positions__c.split(';');
+            if (person.Positions__c != null) {
+                positions = person.Positions__c.split(';');
+            }
 
             rules = [SELECT Category__c FROM CategoryRule__c WHERE Object__c = 'Contact' AND Position__c IN :positions];
             for (CategoryRule__c rule: rules) {

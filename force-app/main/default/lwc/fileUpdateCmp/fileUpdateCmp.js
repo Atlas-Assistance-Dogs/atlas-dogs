@@ -1,12 +1,8 @@
 import { wire, api } from "lwc";
 import FileInformationCmp from "c/fileInformationCmp";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
-import { getRecord } from "lightning/uiRecordApi";
 import updateContentVersion from "@salesforce/apex/FileController.updateContentVersion";
 import { NavigationMixin } from "lightning/navigation";
-
-import TITLE_FIELD from "@salesforce/schema/ContentVersion.Title";
-import DOCID_FIELD from "@salesforce/schema/ContentVersion.ContentDocumentId";
 
 export default class DocumentUploadCmp extends FileInformationCmp {
     @api versionId; // not used, but is in the released package
@@ -19,11 +15,15 @@ export default class DocumentUploadCmp extends FileInformationCmp {
     openModal(message) {
         this.message = "";
         this.recordId = message?.recordId;
-        this.getFileInfo();
         this.template.querySelector("c-modal-cmp").openModal();
     }
     closeModal() {
         this.template.querySelector("c-modal-cmp").closeModal();
+    }
+
+    handleInfo(event) {
+        this.title = event.detail.title;
+        this.contentDocumentId = event.detail.contentDocumentId;
     }
 
     handleView(event) {
@@ -42,18 +42,16 @@ export default class DocumentUploadCmp extends FileInformationCmp {
     handleSubmit(event) {
         event.preventDefault();
         this.updateFile(
-            this.template.querySelector(".category").value,
-            this.template.querySelector(".type").value,
-            this.template.querySelector(".date").value
+            this.template.querySelector("c-file-information-cmp").getInformation()
         );
         this.closeModal();
     }
 
-    updateFile(category, docType, docDate) {
+    updateFile(info) {
         updateContentVersion({
-            category: category,
-            docType: docType,
-            docDate: docDate,
+            category: info.category,
+            docType: info.type,
+            docDate: info.date,
             recordId: this.recordId
         })
             .then((data) => {
@@ -75,23 +73,5 @@ export default class DocumentUploadCmp extends FileInformationCmp {
                     })
                 );
             });
-    }
-
-    // Get the file name and document id
-    @wire(getRecord, { recordId: '$recordId', fields: [DOCID_FIELD, TITLE_FIELD] })
-    getFileInfo(result) {
-        if (result?.data) {
-            this.title = result.data.fields.Title.value;
-            this.contentDocumentId = result.data.fields.ContentDocumentId.value;
-        }
-        else if (result?.error) {
-            this.dispatchEvent(
-                new ShowToastEvent({
-                    title: "Error!!",
-                    message: result.error.message,
-                    variant: "error"
-                })
-            );
-        }
     }
  }

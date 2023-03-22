@@ -25,6 +25,12 @@
 - object: CategoryRule__c
   just_once: True
   fields:
+    Category__c: 'Standalone'
+    Object__c: 'Contact'
+
+- object: CategoryRule__c
+  just_once: True
+  fields:
     Category__c: 'Board'
     Object__c: 'Contact'
     Position__c: 'Board Member'

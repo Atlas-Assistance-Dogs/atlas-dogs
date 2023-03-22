@@ -300,6 +300,7 @@ INSERT INTO "CategoryRule__c" VALUES(1,'Dog','Dog','');
 INSERT INTO "CategoryRule__c" VALUES(2,'Client','Team','');
 INSERT INTO "CategoryRule__c" VALUES(3,'Dog','Team','');
 INSERT INTO "CategoryRule__c" VALUES(4,'ADSiM','Contact','');
+INSERT INTO "CategoryRule__c" VALUES(4,'Standalone','Contact','');
 INSERT INTO "CategoryRule__c" VALUES(5,'Board','Contact','Board Member');
 INSERT INTO "CategoryRule__c" VALUES(6,'Client','Contact','Client');
 INSERT INTO "CategoryRule__c" VALUES(7,'Facilitator','Contact','Team Facilitator');
