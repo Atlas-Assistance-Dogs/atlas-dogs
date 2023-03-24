@@ -81,7 +81,8 @@ public class TestPublicAccessTestController {
                 ReviewComments__c = 'ReviewComments__c',
                 Status__c = 'Passed',
                 Team__c = team.Id,
-                Type__c = 'Recertification'
+                Type__c = 'Recertification',
+                ValidUntil__c = Date.today().addDays(363)
             )
         );
 
@@ -93,7 +94,8 @@ public class TestPublicAccessTestController {
                 ReviewComments__c = 'ReviewComments__c',
                 Status__c = 'Passed',
                 Team__c = team.Id,
-                Type__c = 'Recertification'
+                Type__c = 'Recertification',
+                ValidUntil__c = Date.today().addDays(363)
             )
         );
 
@@ -105,7 +107,8 @@ public class TestPublicAccessTestController {
                 ReviewComments__c = 'ReviewComments__c',
                 Status__c = 'Passed',
                 Team__c = team.Id,
-                Type__c = 'Recertification'
+                Type__c = 'Recertification',
+                ValidUntil__c = Date.today().addDays(363)
             )
         );
         insert pats;
@@ -133,7 +136,8 @@ public class TestPublicAccessTestController {
                 ReviewComments__c = 'ReviewComments 1',
                 Status__c = 'Passed',
                 Team__c = team.Id,
-                Type__c = 'Initial'
+                Type__c = 'Initial',
+                ValidUntil__c = Date.today().addDays(365)
             )
         );
 
@@ -157,7 +161,8 @@ public class TestPublicAccessTestController {
                 ReviewComments__c = 'ReviewComments 3',
                 Status__c = 'Provisionally Passed',
                 Team__c = team.Id,
-                Type__c = 'Retest'
+                Type__c = 'Retest',
+                ValidUntil__c = Date.today().addDays(363)
             )
         );
         insert pats;
@@ -191,6 +196,7 @@ public class TestPublicAccessTestController {
             System.assertEquals(expected.Status__c, actual.Status__c);
             System.assertEquals(expected.Team__c, actual.Team__c);
             System.assertEquals(expected.Type__c, actual.Type__c);
+            System.assertEquals(expected.ValidUntil__c, actual.ValidUntil__c);
         }
     }
 }

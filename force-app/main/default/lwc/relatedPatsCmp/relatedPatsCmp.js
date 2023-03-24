@@ -8,6 +8,7 @@ import { refreshApex } from "@salesforce/apex";
 import DATE_FIELD from "@salesforce/schema/PublicAccessTest__c.DateCompleted__c";
 import LOCATION_FIELD from "@salesforce/schema/PublicAccessTest__c.Location__c";
 import STATUS_FIELD from "@salesforce/schema/PublicAccessTest__c.Status__c";
+import VALID_UNTIL_FIELD from "@salesforce/schema/PublicAccessTest__c.ValidUntil__c";
 import TYPE_FIELD from "@salesforce/schema/PublicAccessTest__c.Type__c";
 
 const actions = [
@@ -22,12 +23,18 @@ const COLS = [
         typeAttributes: {
             name: "view",
             label: { fieldName: "Name" },
-            variant: "base",
+            variant: "base"
         }
     },
     {
         label: "Date Completed",
         fieldName: DATE_FIELD.fieldApiName,
+        type: "date-local",
+        sortable: true
+    },
+    {
+        label: "Valid Until",
+        fieldName: VALID_UNTIL_FIELD.fieldApiName,
         type: "date-local",
         sortable: true
     },
