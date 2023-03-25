@@ -40,38 +40,41 @@ public with sharing class TestCategoryRuleController {
     @isTest
     public static void getCategoriesForObject_ReturnsDog_WhenDogObject() {
         setup();
-        List<string> categories = CategoryRuleController.getCategoriesForObject(ace.Id);
+        List<Map<String,String>> categories = CategoryRuleController.getCategoriesForObject(ace.Id);
         // Assert
         System.assertEquals(1, categories.size());
-        System.assertEquals('Dog', categories[0]);
+        System.assertEquals('Dog', categories[0].get('label'));
     }
 
     @isTest
     public static void getCategoriesForObject_ReturnsClientDog_WhenTeamObject() {
         setup();
-        List<string> categories = CategoryRuleController.getCategoriesForObject(team.Id);
+        List<map<String,String>> categories = CategoryRuleController.getCategoriesForObject(team.Id);
         // Assert
         System.assertEquals(2, categories.size());
-        System.assertEquals('Client', categories[0]);
-        System.assertEquals('Dog', categories[1]);
+        System.assertEquals('Client', categories[0].get('label'));
+        System.assertEquals('Dog', categories[1].get('label'));
     }
 
     @isTest
     public static void getCategoriesForObject_ReturnsClient_WhenClient() {
         setup();
-        List<string> categories = CategoryRuleController.getCategoriesForObject(ken.Id);
+        List<map<String,String>> categories = CategoryRuleController.getCategoriesForObject(ken.Id);
         // Assert
         System.assertEquals(1, categories.size());
-        System.assertEquals('Client', categories[0]);
+        System.assertEquals('Client', categories[0].get('label'));
+        System.assertEquals('Client', categories[0].get('value'));
     }
 
     @isTest
     public static void getCategoriesForObject_ReturnsClientVolunteer_WhenClientVolunteer() {
         setup();
-        List<string> categories = CategoryRuleController.getCategoriesForObject(debbie.Id);
+        List<map<String,String>> categories = CategoryRuleController.getCategoriesForObject(debbie.Id);
         // Assert
         System.assertEquals(2, categories.size());
-        System.assertEquals('Client', categories[0]);
-        System.assertEquals('Volunteer', categories[1]);
+        System.assertEquals('Client', categories[0].get('label'));
+        System.assertEquals('Volunteer', categories[1].get('label'));
+        System.assertEquals('Client', categories[0].get('value'));
+        System.assertEquals('Volunteer', categories[1].get('value'));
     }
 }
