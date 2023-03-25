@@ -17,7 +17,8 @@ public with sharing class TeamController {
                     PatValidUntil__c,
                     PatCount__c,
                     PrimaryCertification__c,
-                    SecondaryCertification__c
+                    SecondaryCertification__c,
+                    Status__c
                 FROM Team__c
                 WHERE
                     Client__c = :recordId

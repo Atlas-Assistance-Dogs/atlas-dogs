@@ -594,6 +594,11 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>DogRelationship__c.DogStatus__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>DogRelationship__c.Dog__c</field>
         <readable>true</readable>
@@ -791,16 +796,6 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Log__c.Stress__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Log__c.SupportDetails__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Log__c.SupportDetails__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

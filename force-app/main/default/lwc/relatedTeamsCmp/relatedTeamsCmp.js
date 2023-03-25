@@ -12,6 +12,7 @@ import NAME_FIELD from "@salesforce/schema/Team__c.Name";
 import PAT_COUNT_FIELD from "@salesforce/schema/Team__c.PatCount__c";
 import CLIENT_FIELD from "@salesforce/schema/Team__c.Client__c";
 import HANDLER_FIELD from "@salesforce/schema/Team__c.Handler__c";
+import STATUS_FIELD from "@salesforce/schema/Team__c.Status__c";
 
 const actions = [
     { label: "Edit", name: "edit" },
@@ -28,6 +29,7 @@ const COLS = [
             variant: "base"
         }
     },
+    { label: "Status", fieldName: STATUS_FIELD.fieldApiName },
     {
         label: "Dog",
         type: "button",
