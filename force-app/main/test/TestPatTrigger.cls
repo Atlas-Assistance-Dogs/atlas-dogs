@@ -3,11 +3,12 @@ public with sharing class TestPatTrigger {
 
     private static Team__c team;
     private static PublicAccessTest__c pat;
+    private static Contact ken;
 
     private static void setup(Date expiration) {
         List<Contact> contacts = new List<Contact>();
         Contact debbie = new Contact(FirstName = 'Debbie', LastName = 'Queen');
-        Contact ken = new Contact(FirstName = 'Ken', LastName = 'King');
+        ken = new Contact(FirstName = 'Ken', LastName = 'King');
         contacts.add(debbie);
         contacts.add(ken);
         insert contacts;
@@ -108,5 +109,67 @@ public with sharing class TestPatTrigger {
         System.assertEquals(null, team.PatValidUntil__c);
         System.assertEquals(null, contact.ClientCertificationValidUntil__c);
         System.assertEquals(0, team.PatCount__c);
+    }
+
+    @isTest
+    static void delete_updatesToLatest_whenPatDeleted() {
+        Date expiration = Date.today().addMonths(12);
+        setup(expiration);
+
+        // Insert more
+        List<PublicAccessTest__c> pats = new List<PublicAccessTest__c> {
+            pat,
+            new PublicAccessTest__c(
+                Assessor__c = ken.Id,
+                DateCompleted__c = Date.today().addMonths(-37),
+                Location__c = 'In Person',
+                Status__c = 'Failed',
+                Team__c = team.Id,
+                Type__c = 'Initial'
+            ),
+            new PublicAccessTest__c(
+                Assessor__c = ken.Id,
+                DateCompleted__c = Date.today().addMonths(-36),
+                Location__c = 'In Person',
+                Status__c = 'Passed',
+                Team__c = team.Id,
+                Type__c = 'Retest',
+                ValidUntil__c = Date.today().addMonths(-24)
+            ),
+            new PublicAccessTest__c(
+                Assessor__c = ken.Id,
+                DateCompleted__c = Date.today().addMonths(-24),
+                Location__c = 'In Person',
+                Status__c = 'Passed',
+                Team__c = team.Id,
+                Type__c = 'Recertification',
+                ValidUntil__c = Date.today().addMonths(-12)
+            ),
+            new PublicAccessTest__c(
+                Assessor__c = ken.Id,
+                DateCompleted__c = Date.today().addMonths(-12),
+                Location__c = 'In Person',
+                Status__c = 'Passed',
+                Team__c = team.Id,
+                Type__c = 'Recertification',
+                ValidUntil__c = Date.today()
+            )
+        };
+
+        // Act
+        Test.startTest();
+        List<Database.SaveResult> results = Database.insert(pats, false);
+        Test.stopTest();
+
+        // Assert
+        for (Database.SaveResult result : results) {
+            System.assert(result.isSuccess());
+            System.assert(result.getErrors().size() == 0);
+        }
+        Team__c team = getTeam(team.Id);
+        Contact contact = getContact(team.Client__c);
+        System.assertEquals(expiration, team.PatValidUntil__c);
+        System.assertEquals(expiration, contact.ClientCertificationValidUntil__c);
+        System.assertEquals(pats.size() - 1, team.PatCount__c);
     }
 }
