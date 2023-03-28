@@ -65,4 +65,25 @@ public with sharing class TeamService {
             update dog;
         }
     }
+
+    // Update PAT information
+    public static void updatePatInformation(Set<Id> teamIds) {
+        List<Team__c> teams = [SELECT Id, Client__c, PatValidUntil__c, PatCount__c FROM Team__c WHERE Id IN :teamIds];
+
+        for (Team__c team : teams) {
+            List<PublicAccessTest__c> passingPats = [
+                SELECT Id, ValidUntil__c
+                FROM PublicAccessTest__c
+                WHERE Status__c = 'Passed' AND Team__c = :team.Id
+                ORDER BY ValidUntil__c DESC];
+            if (passingPats.isEmpty()) {
+                team.PatValidUntil__c = null;
+            }
+            else if (team.PatValidUntil__c != passingPats[0].ValidUntil__c) {
+                team.PatValidUntil__c = passingPats[0].ValidUntil__c;
+            }
+            team.PatCount__c = passingPats.size();
+        }
+        upsert teams;
+    }
 }

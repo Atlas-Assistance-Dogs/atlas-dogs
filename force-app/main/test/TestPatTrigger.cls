@@ -43,7 +43,7 @@ public with sharing class TestPatTrigger {
     }
 
     private static Team__c getTeam(Id teamId) {
-        return [SELECT id, PatValidUntil__c, Client__c FROM Team__c where Id = :teamId LIMIT 1];
+        return [SELECT id, PatValidUntil__c, Client__c, PatCount__c FROM Team__c where Id = :teamId LIMIT 1];
     }
 
     @isTest
@@ -63,10 +63,11 @@ public with sharing class TestPatTrigger {
         Contact contact = getContact(team.Client__c);
         System.assertEquals(expiration, team.PatValidUntil__c);
         System.assertEquals(expiration, contact.ClientCertificationValidUntil__c);
+        System.assertEquals(1, team.PatCount__c);
     }
 
     @isTest
-    static void insert_doesNotUpdate_whenPatValidSetBackward() {
+    static void update_updates_whenPatValidSetBackward() {
         Date expiration = Date.today().addMonths(12);
         setup(expiration);
         insert pat;
@@ -83,6 +84,29 @@ public with sharing class TestPatTrigger {
         System.assert(result.getErrors().size() == 0);
         Team__c team = getTeam(team.Id);
         Contact contact = getContact(team.Client__c);
+        System.assertEquals(pat.ValidUntil__c, team.PatValidUntil__c);
         System.assertEquals(contact.ClientCertificationValidUntil__c, team.PatValidUntil__c);
+        System.assertEquals(1, team.PatCount__c);
+    }
+
+    @isTest
+    static void delete_clears_whenPatDeleted() {
+        Date expiration = Date.today().addMonths(12);
+        setup(expiration);
+        insert pat;
+
+        // Act
+        Test.startTest();
+        Database.DeleteResult result = Database.delete(pat, false);
+        Test.stopTest();
+
+        // Assert
+        System.assert(result.isSuccess());
+        System.assert(result.getErrors().size() == 0);
+        Team__c team = getTeam(team.Id);
+        Contact contact = getContact(team.Client__c);
+        System.assertEquals(null, team.PatValidUntil__c);
+        System.assertEquals(null, contact.ClientCertificationValidUntil__c);
+        System.assertEquals(0, team.PatCount__c);
     }
 }
