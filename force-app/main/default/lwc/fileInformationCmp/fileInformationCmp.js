@@ -51,6 +51,7 @@ export default class FileInformation extends NavigationMixin(LightningElement) {
             this.categories = result.data;
             if (this.categories.length == 1) {
                 this.category = this.categories[0].value;
+                this.types = this.categoryTypes[this.category];
             }
         } else if (result?.error) {
             this.dispatchEvent(
@@ -111,6 +112,10 @@ export default class FileInformation extends NavigationMixin(LightningElement) {
             this.categoryTypes = {};
             for (const cat in controlling) {
                 this.categoryTypes[cat] = controlLookup[controlling[cat]];
+            }
+            // Sometimes we get the category types after we assign a category
+            if (this.category) {
+                this.types = this.categoryTypes[this.category];
             }
         }
     }
