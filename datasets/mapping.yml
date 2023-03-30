@@ -7,6 +7,12 @@ Insert Program__c:
         - Name
         - Reminder__c
         - Standalone__c
+Insert CategoryRule__c:
+    sf_object: CategoryRule__c
+    fields:
+        - Category__c
+        - Object__c
+        - Position__c
 Insert npo02__Household__c:
     sf_object: npo02__Household__c
     fields:

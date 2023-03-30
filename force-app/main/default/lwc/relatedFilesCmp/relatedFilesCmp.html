@@ -27,11 +27,11 @@
             >
             </lightning-button>
             <c-file-upload-cmp
-                record-id={recordId}
+                object-id={recordId}
                 onupdate={handleUpdate}
             ></c-file-upload-cmp>
             <c-file-update-cmp
-                record-id={versionId}
+                object-id={recordId}
                 onupdate={handleUpdate}
             ></c-file-update-cmp>
             <c-select-option-cmp title="Filter Files" items={filterItems} onselected={handleFilterSelect}></c-select-option-cmp>

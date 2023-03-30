@@ -100,7 +100,7 @@ public inherited sharing class FileController {
 
             // get a map of the category and type labels
             Map<string, string> categoryEntries = getEntryMap(ContentVersion.Category__c.getDescribe());
-            Map<string, string>typeEntries = getEntryMap(ContentVersion.Type__c.getDescribe());
+            Map<string, string> typeEntries = getEntryMap(ContentVersion.Type__c.getDescribe());
             List<ContentVersion> files = [
                 SELECT
                     Title,
@@ -128,7 +128,7 @@ public inherited sharing class FileController {
         }
     }
 
-    private static Map<string, string> getEntryMap(Schema.DescribeFieldResult field) {
+    public static Map<string, string> getEntryMap(Schema.DescribeFieldResult field) {
         List<Schema.PicklistEntry> entries = field.getPicklistValues();
         Map<string, string> entryMap = new Map<string, string>();
         for (Schema.PicklistEntry entry : entries) {

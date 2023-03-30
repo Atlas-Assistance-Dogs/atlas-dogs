@@ -275,6 +275,16 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>CategoryRule__c.Category__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>CategoryRule__c.Position__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Contact.ADSiMApplicationReceived__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -1137,6 +1147,9 @@
         <layout>BackgroundCheck__c-Background Check Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
+        <layout>CategoryRule__c-Category Rule Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
         <layout>Contact-Atlas Contact Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
@@ -1184,6 +1197,15 @@
         <allowRead>true</allowRead>
         <modifyAllRecords>true</modifyAllRecords>
         <object>BackgroundCheck__c</object>
+        <viewAllRecords>true</viewAllRecords>
+    </objectPermissions>
+    <objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>true</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>true</modifyAllRecords>
+        <object>CategoryRule__c</object>
         <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
     <objectPermissions>
@@ -1284,6 +1306,10 @@
     </recordTypeVisibilities>
     <tabVisibilities>
         <tab>BackgroundCheck__c</tab>
+        <visibility>DefaultOn</visibility>
+    </tabVisibilities>
+    <tabVisibilities>
+        <tab>CategoryRule__c</tab>
         <visibility>DefaultOn</visibility>
     </tabVisibilities>
     <tabVisibilities>
