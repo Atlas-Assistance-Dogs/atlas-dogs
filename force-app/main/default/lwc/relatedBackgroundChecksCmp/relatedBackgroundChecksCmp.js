@@ -5,6 +5,11 @@ import getRelatedChecks from "@salesforce/apex/BackgroundCheckController.getRela
 import { deleteRecord } from "lightning/uiRecordApi";
 import { refreshApex } from "@salesforce/apex";
 
+import CONTACT_FIELD from "@salesforce/schema/BackgroundCheck__c.Contact__c";
+import DATE_FIELD from "@salesforce/schema/BackgroundCheck__c.Date__c";
+import STATUS_FIELD from "@salesforce/schema/BackgroundCheck__c.Status__c";
+import TYPE_FIELD from "@salesforce/schema/BackgroundCheck__c.Type__c";
+
 const actions = [
     { label: "Edit", name: "edit" },
     { label: "Delete", name: "delete" }
@@ -13,11 +18,12 @@ const actions = [
 const COLS = [
     {
         label: "Completed Date",
-        fieldName: "completedDate",
+        fieldName: DATE_FIELD.fieldApiName,
         type: "date-local",
         sortable: true
     },
-    { label: "Status", fieldName: "status", sortable: true },
+    { label: "Type", fieldName: TYPE_FIELD.fieldApiName, sortable: true },
+    { label: "Status", fieldName: STATUS_FIELD.fieldApiName, sortable: true },
     {
         label: "File",
         type: "button",
@@ -80,10 +86,10 @@ export default class RelatedBackgroundChecksCmp extends NavigationMixin(
         const row = event.detail.row;
         switch (actionName) {
             case "delete":
-                this.deleteCheck(row.recordId);
+                this.deleteCheck(row.Id);
                 break;
             case "edit":
-                const payload = { mode: "edit", recordId: row.recordId };
+                const payload = { mode: "edit", recordId: row.Id };
                 this.template.querySelector("c-related-background-check-cmp").openModal(payload);
                 break;
             case "view":
@@ -114,13 +120,17 @@ export default class RelatedBackgroundChecksCmp extends NavigationMixin(
     getChecks(result) {
         this.wiredChecks = result;
         this.data = null;
-        if (result.data) {
-            this.data = result.data.items;
+        if (result.data && result.data.items) {
+            this.data = result.data.items.map((info) => {
+                var bgc = Object.assign({}, info);
+                bgc = Object.assign(bgc, info.check);
+                return bgc;
+            });
             if (this.data.length === 0) {
                 this.data = null;
                 this.total = 0;
             }
-            if (this.max < 15) {
+            if (!this.viewAll) {
                 this.total = result.data.total;
             }
         } else if (result.error) {
