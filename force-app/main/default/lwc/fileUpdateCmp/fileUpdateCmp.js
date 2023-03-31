@@ -7,7 +7,7 @@ import { NavigationMixin } from "lightning/navigation";
 export default class DocumentUploadCmp extends FileInformationCmp {
     @api versionId; // not used, but is in the released package
     @api currentCv = { ContentDocumentId: "", Title: "blank" };
-    @api recordId; // also defined in FileInformationCmp
+    @api recordId; // also defined in FileInformationCmp, not used here
     title = '';
     contentDocumentId = '';
     contentType = "Emergency Contact";

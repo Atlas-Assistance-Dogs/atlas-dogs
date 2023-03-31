@@ -1,9 +1,10 @@
-import { track, api, wire } from "lwc";
+import { api } from "lwc";
 import FileInformationCmp from "c/fileInformationCmp";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
 import updateRecords from "@salesforce/apex/FileController.updateRecords";
 
 export default class DocumentUploadCmp extends FileInformationCmp {
+    @api recordId; // also defined in FileInformationCmp, not used here
 
     get acceptedFormats() {
         return [
@@ -37,7 +38,9 @@ export default class DocumentUploadCmp extends FileInformationCmp {
         this.message = "File Uploaded Successfully";
         const uploadedFiles = event.detail.files.map((doc) => doc.documentId);
         this.updateFiles(
-            this.template.querySelector("c-file-information-cmp").getInformation(),
+            this.template
+                .querySelector("c-file-information-cmp")
+                .getInformation(),
             uploadedFiles
         );
     }
