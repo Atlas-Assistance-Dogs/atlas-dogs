@@ -1,4 +1,4 @@
-import { wire, api } from "lwc";
+import { api } from "lwc";
 import FileInformationCmp from "c/fileInformationCmp";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
 import updateContentVersion from "@salesforce/apex/FileController.updateContentVersion";
@@ -7,6 +7,7 @@ import { NavigationMixin } from "lightning/navigation";
 export default class DocumentUploadCmp extends FileInformationCmp {
     @api versionId; // not used, but is in the released package
     @api currentCv = { ContentDocumentId: "", Title: "blank" };
+    @api recordId; // also defined in FileInformationCmp
     title = '';
     contentDocumentId = '';
     contentType = "Emergency Contact";
