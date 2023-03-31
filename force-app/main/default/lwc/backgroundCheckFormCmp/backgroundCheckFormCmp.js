@@ -56,7 +56,7 @@ export default class BackgroundCheckFormCmp extends NavigationMixin(
     getFiles(result) {
         this.wiredCv = result;
         this.currentCv = null;
-        if (result.data?.items) {
+        if (result.data?.items?.length ?? 0 > 0) {
             this.currentCv = result.data.items[0].cv;
         } else if (result.error) {
             this.dispatchEvent(
@@ -117,5 +117,9 @@ export default class BackgroundCheckFormCmp extends NavigationMixin(
                 new CustomEvent("changed")
             );
         }
+    }
+
+    handleCancel() {
+        this.dispatchEvent(new CustomEvent("cancel", { detail: id }));
     }
 }

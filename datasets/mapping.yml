@@ -363,6 +363,7 @@ Insert BackgroundCheck__c:
         - Date__c
         - Notes__c
         - Status__c
+        - Type__c
     lookups:
         Contact__c:
             table: Contact
