@@ -444,4 +444,38 @@ public with sharing class TestPostInstall {
         cdls = [SELECT Id, ContentDocumentId, LinkedEntityId FROM ContentDocumentLink WHERE ContentDocumentId = :annual.ContentDocumentId AND LinkedEntityId = :team.Id];
         System.assertEquals(0, cdls.size());
     }
+
+    @isTest
+    public static void installScript_SetsBackgroundCheckTypes() {
+        // Arrange
+        Contact lydia = new Contact(
+            FirstName = 'Lydia',
+            LastName = 'Simpson',
+            ClientCertificationValidUntil__c = Date.today().addDays(100)
+        );
+        Contact ethan = new Contact(FirstName = 'Ethan', LastName = 'Parish');
+        Contact cassidy = new Contact(
+            FirstName = 'Cassidy',
+            LastName = 'Rogers'
+        );
+        List<Contact> contacts = new List<Contact>{ lydia, ethan, cassidy };
+        insert contacts;
+
+        List<BackgroundCheck__c> checks = new List<BackgroundCheck__c>();
+        checks.add(new BackgroundCheck__c(Contact__c = lydia.Id, Date__c = Date.today().addMonths(-3), Type__c = null));
+        checks.add(new BackgroundCheck__c(Contact__c = ethan.Id, Date__c = Date.today().addMonths(-2), Type__c = null));
+        checks.add(new BackgroundCheck__c(Contact__c = cassidy.Id, Date__c = Date.today().addMonths(-1), Type__c = null));
+        checks.add(new BackgroundCheck__c(Contact__c = lydia.Id, Date__c = Date.today().addMonths(1), Type__c = null));
+        insert checks;
+
+        // Act
+        PostInstall postinstall = new PostInstall();
+        Test.testInstall(postinstall, new Version(1, 4), true);
+
+        // Assert
+        checks = [SELECT Id, Type__c FROM BackgroundCheck__c];
+        for (BackgroundCheck__c check : checks) {
+            System.assertEquals('Criminal', check.Type__c);
+        }
+    }
 }

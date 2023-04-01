@@ -20,6 +20,9 @@ global class PostInstall implements InstallHandler {
                 );
             }
         }
+        if (context.previousVersion().compareTo(new Version(1, 5)) <= 0) {
+            setBackgroundCheckTypes();
+        }
     }
 
     private Date later(Date latest, Date vaccine) {
@@ -174,5 +177,13 @@ global class PostInstall implements InstallHandler {
             //emailInvocationFailures++;
             return false;
         }
+    }
+
+    private void setBackgroundCheckTypes() {
+        List<BackgroundCheck__c> checks = [SELECT Id, Type__c FROM BackgroundCheck__c];
+        for (BackgroundCheck__c check : checks) {
+            check.Type__c = 'Criminal';
+        }
+        update checks;
     }
 }

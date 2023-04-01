@@ -8,7 +8,7 @@ public with sharing class BackgroundCheckController {
         try {
             RelatedObjects related = new RelatedObjects();
             List<BackgroundCheck__c> checks = [
-                SELECT Contact__c, Date__c, Notes__c, Status__c
+                SELECT Contact__c, Date__c, Notes__c, Status__c, Type__c
                 FROM BackgroundCheck__c
                 WHERE Contact__c = :contactId
                 LIMIT :max
@@ -17,9 +17,7 @@ public with sharing class BackgroundCheckController {
 
             for (BackgroundCheck__c bgc : checks) {
                 BackgroundCheck outCheck = new BackgroundCheck();
-                outCheck.recordId = bgc.Id;
-                outCheck.completedDate = bgc.Date__c;
-                outCheck.status = bgc.Status__c;
+                outCheck.check = bgc;
                 outCheck.noFile = true;
                 RelatedObjects files = FileController.getRelatedFiles(
                     bgc.Id, 1

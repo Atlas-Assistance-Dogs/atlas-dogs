@@ -1,7 +1,7 @@
 // This class allows getting the related document for a background check and it's file name
 public with sharing class BackgroundCheck {
     @AuraEnabled
-    public Id recordId { get; set; }
+    public BackgroundCheck__c check { get; set; }
 
     @AuraEnabled
     public Id documentId { get; set; }
@@ -11,10 +11,4 @@ public with sharing class BackgroundCheck {
 
     @AuraEnabled
     public Boolean noFile { get; set; }
-
-    @AuraEnabled
-    public String status { get; set; }
-
-    @AuraEnabled
-    public Date completedDate { get; set; }
 }

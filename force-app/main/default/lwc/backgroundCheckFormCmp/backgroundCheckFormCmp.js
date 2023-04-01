@@ -9,6 +9,7 @@ import CONTACT_FIELD from "@salesforce/schema/BackgroundCheck__c.Contact__c";
 import DATE_FIELD from "@salesforce/schema/BackgroundCheck__c.Date__c";
 import NOTES_FIELD from "@salesforce/schema/BackgroundCheck__c.Notes__c";
 import RESULT_FIELD from "@salesforce/schema/BackgroundCheck__c.Status__c";
+import TYPE_FIELD from "@salesforce/schema/BackgroundCheck__c.Type__c";
 
 export default class BackgroundCheckFormCmp extends NavigationMixin(
     LightningElement
@@ -25,7 +26,8 @@ export default class BackgroundCheckFormCmp extends NavigationMixin(
         contact: CONTACT_FIELD,
         date: DATE_FIELD,
         notes: NOTES_FIELD,
-        result: RESULT_FIELD
+        result: RESULT_FIELD,
+        type: TYPE_FIELD
     };
 
     get acceptedFormats() {
@@ -54,8 +56,8 @@ export default class BackgroundCheckFormCmp extends NavigationMixin(
     getFiles(result) {
         this.wiredCv = result;
         this.currentCv = null;
-        if (result.data?.items) {
-            this.currentCv = result.data.items[0];
+        if (result.data?.items?.length ?? 0 > 0) {
+            this.currentCv = result.data.items[0].cv;
         } else if (result.error) {
             this.dispatchEvent(
                 new ShowToastEvent({
@@ -115,5 +117,9 @@ export default class BackgroundCheckFormCmp extends NavigationMixin(
                 new CustomEvent("changed")
             );
         }
+    }
+
+    handleCancel() {
+        this.dispatchEvent(new CustomEvent("cancel", { detail: id }));
     }
 }
