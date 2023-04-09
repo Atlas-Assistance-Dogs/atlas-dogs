@@ -405,6 +405,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Contact.ShirtSize__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Contact.SpecifiedAbilityAccommodation__c</field>
         <readable>true</readable>
     </fieldPermissions>

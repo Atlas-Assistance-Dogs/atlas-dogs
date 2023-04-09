@@ -18,5 +18,5 @@
               - Fail
       Type__c:
           random_choice:
-              - Criminal: 80%
-              - Credit: 20%
+              Criminal: 80%
+              Credit: 20%
