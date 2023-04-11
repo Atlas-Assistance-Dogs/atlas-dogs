@@ -269,7 +269,7 @@ public with sharing class TestPostInstall {
                 PathOnClient = 'TestDocument3.jpg',
                 Origin = 'H',
                 VersionData = Blob.valueOf('Document Body 3'),
-                Category__c = 'Dog',
+                Category__c = 'TeamDog',
                 Type__c = 'HealthForm',
                 Date__c = Date.today()
             )
@@ -280,7 +280,7 @@ public with sharing class TestPostInstall {
                 PathOnClient = 'TestDocument3.jpg',
                 Origin = 'H',
                 VersionData = Blob.valueOf('Document Body 3'),
-                Category__c = 'Dog',
+                Category__c = 'TeamDog',
                 Type__c = 'Xray',
                 Date__c = Date.today()
             )
@@ -302,7 +302,7 @@ public with sharing class TestPostInstall {
         List<ContentDocumentLink> cdls = new List<ContentDocumentLink>();
         for (ContentVersion cv: cvs) {
             Id entityId = clientId;
-            if (cv.Category__c == 'Dog') {
+            if (cv.Category__c == 'TeamDog') {
                 entityId = dogId;
             }
             cdls.add(new ContentDocumentLink(
@@ -428,7 +428,7 @@ public with sharing class TestPostInstall {
         Team myTeam = createTeam();
         Dog__c zeus = myTeam.dog;
         ContentVersion annual = TestFileService.createLink('Dog', 'VacExams', Date.today(), zeus.Id);
-        ContentVersion initial = TestFileService.createLink('Dog', 'HealthForm', Date.today(), zeus.Id);
+        ContentVersion initial = TestFileService.createLink('TeamDog', 'HealthForm', Date.today(), zeus.Id);
         
         // Act
         PostInstall postinstall = new PostInstall();

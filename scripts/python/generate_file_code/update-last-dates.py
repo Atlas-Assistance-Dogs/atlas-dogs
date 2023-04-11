@@ -63,7 +63,7 @@ with open(service_path, 'w') as service_copy:
     contact = Contact(service_copy, settings)
     contact.code()
 
-    team = Team(service_copy, settings['Client'], settings['Dog'])
+    team = Team(service_copy, settings['Client'], settings['TeamDog'])
     team.code()
 
     dog = Dog(service_copy, settings['Dog'])
@@ -88,7 +88,7 @@ with open(service_path, 'w') as service_copy:
     contact = Contact(service_copy, settings)
     contact.clear_code(service_copy)
 
-    team = Team(service_copy, settings['Client'], settings['Dog'])
+    team = Team(service_copy, settings['Client'], settings['TeamDog'])
     team.clear_code(service_copy)
 
     dog = Dog(service_copy, settings['Dog'])

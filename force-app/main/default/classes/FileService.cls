@@ -85,7 +85,7 @@ public with sharing class FileService {
                 if (cv.Type__c == 'VacExams') {
                     continue;
                 }
-                if (cv.Category__c == 'Dog') {
+                if (cv.Category__c == 'TeamDog') {
                     links.add(new ContentDocumentLink(
                         ContentDocumentId = cv.ContentDocumentId,
                         LinkedEntityId = team.Id
@@ -109,7 +109,7 @@ public with sharing class FileService {
                         LinkedEntityId = team.Client__c
                     ));
                 }
-                else if (cv.Category__c == 'Dog') {
+                else if (cv.Category__c == 'TeamDog') {
                     links.add(new ContentDocumentLink(
                         ContentDocumentId = cv.ContentDocumentId,
                         LinkedEntityId = team.Dog__c
@@ -210,6 +210,13 @@ public with sharing class FileService {
         if (contacts.size() == 0)
             return;
         Contact contact = contacts[0];
+        // Get the Date, order asc so we update the field with the last received
+        cvs = [
+            SELECT Category__c, Type__c, Date__c
+            FROM ContentVersion
+            WHERE Id IN :ids
+            ORDER BY Date__c
+        ];
 
         for (ContentVersion cv : cvs) {        
             if (cv.Category__c == 'ADSiM') {
@@ -433,7 +440,7 @@ public with sharing class FileService {
         List<Team__c> teams = [
             SELECT Id, Client__c, Dog__c,
                    ClientApplicationReceived__c, ClientApplicationVideoReceived__c, ClientCGCFormReceived__c, ClientCertAgreementReceived__c, ClientLOMIReceived__c, ClientPreApplicationReceived__c, ClientProgAgreementReceived__c, ClientSurveyReceived__c, ClientVAPWReceived__c,
-					HealthFormReceived__c, XrayReceived__c
+				   HealthFormReceived__c, XrayReceived__c
             FROM Team__c
             WHERE Id = :recordId
         ];

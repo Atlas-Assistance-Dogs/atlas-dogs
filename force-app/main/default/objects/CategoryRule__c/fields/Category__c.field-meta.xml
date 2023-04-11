@@ -9,7 +9,7 @@
     <type>MultiselectPicklist</type>
     <valueSet>
         <restricted>true</restricted>
-        <valueSetName>Category</valueSetName>
+        <valueSetName>Categories</valueSetName>
     </valueSet>
     <visibleLines>4</visibleLines>
 </CustomField>

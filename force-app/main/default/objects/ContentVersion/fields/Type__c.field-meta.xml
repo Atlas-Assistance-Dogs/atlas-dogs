@@ -153,6 +153,10 @@
             </value>
         </valueSetDefinition>
         <valueSettings>
+            <controllingFieldValue>Na</controllingFieldValue>
+            <valueName>ContactForm</valueName>
+        </valueSettings>
+        <valueSettings>
             <controllingFieldValue>Volunteer</controllingFieldValue>
             <controllingFieldValue>Board</controllingFieldValue>
             <controllingFieldValue>Client</controllingFieldValue>
@@ -165,26 +169,6 @@
             <valueName>Application</valueName>
         </valueSettings>
         <valueSettings>
-            <controllingFieldValue>Client</controllingFieldValue>
-            <valueName>ApplicationVideo</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Client</controllingFieldValue>
-            <valueName>CGCForm</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Volunteer</controllingFieldValue>
-            <controllingFieldValue>Board</controllingFieldValue>
-            <controllingFieldValue>Client</controllingFieldValue>
-            <controllingFieldValue>Standalone</controllingFieldValue>
-            <controllingFieldValue>ADSiM</controllingFieldValue>
-            <controllingFieldValue>Facilitator</controllingFieldValue>
-            <controllingFieldValue>Puppy</controllingFieldValue>
-            <controllingFieldValue>Trainer</controllingFieldValue>
-            <controllingFieldValue>Staff</controllingFieldValue>
-            <valueName>ContactForm</valueName>
-        </valueSettings>
-        <valueSettings>
             <controllingFieldValue>Volunteer</controllingFieldValue>
             <controllingFieldValue>Board</controllingFieldValue>
             <controllingFieldValue>Staff</controllingFieldValue>
@@ -195,6 +179,14 @@
             <controllingFieldValue>Board</controllingFieldValue>
             <controllingFieldValue>Staff</controllingFieldValue>
             <valueName>Resume</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TeamDog</controllingFieldValue>
+            <valueName>HealthForm</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TeamDog</controllingFieldValue>
+            <valueName>Xray</valueName>
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Board</controllingFieldValue>
@@ -236,6 +228,14 @@
             <controllingFieldValue>Puppy</controllingFieldValue>
             <controllingFieldValue>Trainer</controllingFieldValue>
             <valueName>CertAgreement</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Client</controllingFieldValue>
+            <valueName>ApplicationVideo</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Client</controllingFieldValue>
+            <valueName>CGCForm</valueName>
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Facilitator</controllingFieldValue>
@@ -283,14 +283,6 @@
         <valueSettings>
             <controllingFieldValue>Staff</controllingFieldValue>
             <valueName>W9</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Dog</controllingFieldValue>
-            <valueName>HealthForm</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Dog</controllingFieldValue>
-            <valueName>Xray</valueName>
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Dog</controllingFieldValue>
