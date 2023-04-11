@@ -69,7 +69,10 @@ public with sharing class FileService {
         }
         if (objName == Team__c.class.getName()) {
             updateTeamDates(cvs, entityId);
-            linkDocumentsToTeamMember(cvs, entityId);
+            AtlasSettings__c settings = AtlasSettings__c.getOrgDefaults();
+            if (settings.LinkFilesToTeamMembers__c) {
+                linkDocumentsToTeamMember(cvs, entityId);
+            }
         }
         if (objName == Contact.class.getName()) {
             updateContactDates(cvs, entityId);

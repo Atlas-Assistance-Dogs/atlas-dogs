@@ -61,6 +61,10 @@ global class PostInstall implements InstallHandler {
 
     // For each Team, tie the Client and Dog documents to it
     global static void linkTeamDocuments() {
+        AtlasSettings__c settings = AtlasSettings__c.getOrgDefaults();
+        settings.LinkFilesToTeamMembers__c = false;
+        upsert settings;
+
         List<Team__c> teams = [SELECT Id, Client__c, Dog__c FROM Team__c];
         List<ContentDocumentLink> links = new List<ContentDocumentLink>();
         List<Id> clientIds = new List<Id>();
@@ -88,7 +92,9 @@ global class PostInstall implements InstallHandler {
             }
         }
 
-        FileService.insertLinks(links, teamIds) ;
+        FileService.insertLinks(links, teamIds);
+        settings.LinkFilesToTeamMembers__c = true;
+        upsert settings;
     }
 
     public static List<ContentVersion> getEntityDocs(Id id, String category) {
