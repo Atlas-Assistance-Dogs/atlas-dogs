@@ -53,7 +53,7 @@
             <value>
                 <fullName>Staff</fullName>
                 <default>false</default>
-                <label>Staff</label>
+                <label>Staff/Contractor</label>
             </value>
             <value>
                 <fullName>Dog</fullName>
