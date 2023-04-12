@@ -184,15 +184,19 @@ public with sharing class TestTeamTrigger {
     }
     
     @isTest
-    public static void trigger_DoesNotUpdateClientDogStatus_WhenDecertified() {
+    public static void trigger_UpdatesClientDogStatus_WhenDecertified() {
         setup();
-        testClientDogStatus('Decertified', Date.today().addMonths(5), joe.ClientStatus__c, joe.ClientCertificationValidUntil__c);
+        string status = 'Decertified';
+        Date expected = Date.today().addMonths(5);
+        testClientDogStatus(status, expected, status, expected);
     }
     
     @isTest
-    public static void trigger_DoesNotUpdateClientDogStatus_WhenDiscontinued() {
+    public static void trigger_UpdatesClientDogStatus_WhenDiscontinued() {
         setup();
-        testClientDogStatus('Discontinued', Date.today().addMonths(5), joe.ClientStatus__c, joe.ClientCertificationValidUntil__c);
+        string status = 'Discontinued';
+        Date expected = Date.today().addMonths(5);
+        testClientDogStatus(status, expected, status, expected);
     }
     
     @isTest

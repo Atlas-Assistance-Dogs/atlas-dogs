@@ -32,15 +32,9 @@ public with sharing class TeamService {
             update relationShip;
         }
     }
-
-    private static Set<string> inactiveStatus = new Set<string> {'Decertified', 'Discontinued'};
-    
+        
     // Update client status.  This is meant to be called from the team update trigger.
     public static void updateClientStatus(Team__c team) {
-        if (inactiveStatus.contains(team.Status__c)) {
-            return;
-        }
-
         List<Contact> clients = [SELECT ClientStatus__c, ClientCertificationValidUntil__c FROM Contact WHERE Id = :team.Client__c];
 
         if (!clients.isEmpty()) {
@@ -53,10 +47,6 @@ public with sharing class TeamService {
     
     // Update client status.  This is meant to be called from the team update trigger.
     public static void updateDogStatus(Team__c team) {
-        if (inactiveStatus.contains(team.Status__c)) {
-            return;
-        }
-
         List<Dog__c> dogs = [SELECT Status__c FROM Dog__c WHERE Id = :team.Dog__c];
 
         if (!dogs.isEmpty()) {
