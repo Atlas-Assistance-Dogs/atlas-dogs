@@ -87,11 +87,6 @@
                 <label>Certification Agreement</label>
             </value>
             <value>
-                <fullName>ProfGrowthPlan</fullName>
-                <default>false</default>
-                <label>Professional Growth Plan</label>
-            </value>
-            <value>
                 <fullName>Practicum</fullName>
                 <default>false</default>
                 <label>Practicum</label>
@@ -241,10 +236,6 @@
             <controllingFieldValue>Facilitator</controllingFieldValue>
             <controllingFieldValue>Puppy</controllingFieldValue>
             <valueName>Reference</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Facilitator</controllingFieldValue>
-            <valueName>ProfGrowthPlan</valueName>
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Facilitator</controllingFieldValue>

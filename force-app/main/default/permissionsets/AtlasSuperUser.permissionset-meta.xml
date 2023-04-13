@@ -195,11 +195,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Contact.FacilitatorProfGrowthPlanReceived__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>Contact.FacilitatorProgAgreementReceived__c</field>
         <readable>true</readable>
     </fieldPermissions>
