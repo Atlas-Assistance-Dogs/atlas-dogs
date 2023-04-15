@@ -28,7 +28,7 @@
             <value>
                 <fullName>Client</fullName>
                 <default>false</default>
-                <label>Client</label>
+                <label>Team Client</label>
             </value>
             <value>
                 <fullName>TeamDog</fullName>
