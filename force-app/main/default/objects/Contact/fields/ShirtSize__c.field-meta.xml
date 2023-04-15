@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ShirtSize__c</fullName>
+    <externalId>false</externalId>
+    <label>Shirt Size</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Child S</fullName>
+                <default>false</default>
+                <label>Child S</label>
+            </value>
+            <value>
+                <fullName>Child M</fullName>
+                <default>false</default>
+                <label>Child M</label>
+            </value>
+            <value>
+                <fullName>Child L</fullName>
+                <default>false</default>
+                <label>Child L</label>
+            </value>
+            <value>
+                <fullName>Women XS</fullName>
+                <default>false</default>
+                <label>Women XS</label>
+            </value>
+            <value>
+                <fullName>Women S</fullName>
+                <default>false</default>
+                <label>Women S</label>
+            </value>
+            <value>
+                <fullName>Women M</fullName>
+                <default>false</default>
+                <label>Women M</label>
+            </value>
+            <value>
+                <fullName>Women L</fullName>
+                <default>false</default>
+                <label>Women L</label>
+            </value>
+            <value>
+                <fullName>Women XL</fullName>
+                <default>false</default>
+                <label>Women XL</label>
+            </value>
+            <value>
+                <fullName>Women XXL</fullName>
+                <default>false</default>
+                <label>Women XXL</label>
+            </value>
+            <value>
+                <fullName>Men XS</fullName>
+                <default>false</default>
+                <label>Men XS</label>
+            </value>
+            <value>
+                <fullName>Men S</fullName>
+                <default>false</default>
+                <label>Men S</label>
+            </value>
+            <value>
+                <fullName>Men M</fullName>
+                <default>false</default>
+                <label>Men M</label>
+            </value>
+            <value>
+                <fullName>Men L</fullName>
+                <default>false</default>
+                <label>Men L</label>
+            </value>
+            <value>
+                <fullName>Men XL</fullName>
+                <default>false</default>
+                <label>Men XL</label>
+            </value>
+            <value>
+                <fullName>Men XXL</fullName>
+                <default>false</default>
+                <label>Men XXL</label>
+            </value>
+            <value>
+                <fullName>Unisex XS</fullName>
+                <default>false</default>
+                <label>Unisex XS</label>
+            </value>
+            <value>
+                <fullName>Unisex S</fullName>
+                <default>false</default>
+                <label>Unisex S</label>
+            </value>
+            <value>
+                <fullName>Unisex M</fullName>
+                <default>false</default>
+                <label>Unisex M</label>
+            </value>
+            <value>
+                <fullName>Unisex L</fullName>
+                <default>false</default>
+                <label>Unisex L</label>
+            </value>
+            <value>
+                <fullName>Unisex XL</fullName>
+                <default>false</default>
+                <label>Unisex XL</label>
+            </value>
+            <value>
+                <fullName>Unisex XXL</fullName>
+                <default>false</default>
+                <label>Unisex XXL</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

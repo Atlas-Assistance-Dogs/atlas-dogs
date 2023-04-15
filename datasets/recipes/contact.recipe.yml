@@ -294,7 +294,7 @@
           fake.text:
               max_nb_chars: 100
       EmailBouncedDate: ${{fake.date}}T${{fake.time}}Z
-      CanvasSisId__c: ${{unique_alpha_code}}
+      CanvasSisId__c: ${{fake.Swift}}
       BoardMemberStatus__c:
           if:
               - choice:
@@ -394,6 +394,29 @@
                             - Discontinued
               - choice:
                     pick: None
+      ShirtSize__c:
+          random_choice:
+              - Child S
+              - Child M
+              - Child L
+              - Women XS
+              - Women S
+              - Women M
+              - Women L
+              - Women XL
+              - Women XXL
+              - Men XS
+              - Men S
+              - Men M
+              - Men L
+              - Men XL
+              - Men XXL
+              - Unisex XS
+              - Unisex S
+              - Unisex M
+              - Unisex L
+              - Unisex XL
+              - Unisex XXL
       TrainerBoardTrain__c:
           if:
               - choice:

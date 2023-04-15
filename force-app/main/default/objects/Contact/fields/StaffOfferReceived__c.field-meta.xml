@@ -4,7 +4,7 @@
     <description>The date the most recent version of Staff Offer Letter was uploaded</description>
     <externalId>false</externalId>
     <inlineHelpText>Set at the time of file upload. Do not edit directly.</inlineHelpText>
-    <label>Last Staff Offer Letter</label>
+    <label>Offer Letter</label>
     <required>false</required>
     <trackFeedHistory>false</trackFeedHistory>
     <type>Date</type>
