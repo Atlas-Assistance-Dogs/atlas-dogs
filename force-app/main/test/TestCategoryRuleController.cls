@@ -52,7 +52,7 @@ public with sharing class TestCategoryRuleController {
         List<map<String,String>> categories = CategoryRuleController.getCategoriesForObject(team.Id);
         // Assert
         System.assertEquals(2, categories.size());
-        System.assertEquals('Client', categories[0].get('label'));
+        System.assertEquals('Team Client', categories[0].get('label'));
         System.assertEquals('Dog', categories[1].get('label'));
     }
 
@@ -62,7 +62,7 @@ public with sharing class TestCategoryRuleController {
         List<map<String,String>> categories = CategoryRuleController.getCategoriesForObject(ken.Id);
         // Assert
         System.assertEquals(1, categories.size());
-        System.assertEquals('Client', categories[0].get('label'));
+        System.assertEquals('Team Client', categories[0].get('label'));
         System.assertEquals('Client', categories[0].get('value'));
     }
 
@@ -72,7 +72,7 @@ public with sharing class TestCategoryRuleController {
         List<map<String,String>> categories = CategoryRuleController.getCategoriesForObject(debbie.Id);
         // Assert
         System.assertEquals(2, categories.size());
-        System.assertEquals('Client', categories[0].get('label'));
+        System.assertEquals('Team Client', categories[0].get('label'));
         System.assertEquals('Volunteer', categories[1].get('label'));
         System.assertEquals('Client', categories[0].get('value'));
         System.assertEquals('Volunteer', categories[1].get('value'));
