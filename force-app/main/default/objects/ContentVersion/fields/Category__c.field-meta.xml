@@ -36,11 +36,6 @@
                 <label>Team Dog</label>
             </value>
             <value>
-                <fullName>TeamDog</fullName>
-                <default>false</default>
-                <label>Team Dog</label>
-            </value>
-            <value>
                 <fullName>Standalone</fullName>
                 <default>false</default>
                 <label>Standalone Programs</label>
