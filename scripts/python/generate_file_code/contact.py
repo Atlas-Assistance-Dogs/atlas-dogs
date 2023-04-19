@@ -2,14 +2,14 @@ from category import Category
 import templates.clear as clear
 import templates.update as update
 
-skip_categories = {'Standalone', 'Client'}
+skip_categories = {'Standalone', 'Client', 'Na'}
 
 class Contact:
     '''Class to control writing out the generated FileService code for the contact objects'''
 
     def __init__(self, file, categories):
         self.file = file
-        self.sorted_categories = [Category(key, categories[key]) for key in sorted(categories.keys()) if key != 'Dog']
+        self.sorted_categories = [Category(key, categories[key]) for key in sorted(categories.keys()) if 'Dog' not in key]
 
 
     def fields(self):

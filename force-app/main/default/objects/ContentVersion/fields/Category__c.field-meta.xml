@@ -21,9 +21,19 @@
                 <label>Board</label>
             </value>
             <value>
+                <fullName>Na</fullName>
+                <default>false</default>
+                <label>N/A</label>
+            </value>
+            <value>
                 <fullName>Client</fullName>
                 <default>false</default>
-                <label>Client</label>
+                <label>Team Client</label>
+            </value>
+            <value>
+                <fullName>TeamDog</fullName>
+                <default>false</default>
+                <label>Team Dog</label>
             </value>
             <value>
                 <fullName>Standalone</fullName>

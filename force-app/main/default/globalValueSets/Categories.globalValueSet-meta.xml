@@ -11,9 +11,19 @@
         <label>Board</label>
     </customValue>
     <customValue>
+        <fullName>Na</fullName>
+        <default>false</default>
+        <label>N/A</label>
+    </customValue>
+    <customValue>
         <fullName>Client</fullName>
         <default>false</default>
-        <label>Client</label>
+        <label>Team Client</label>
+    </customValue>
+    <customValue>
+        <fullName>TeamDog</fullName>
+        <default>false</default>
+        <label>Team Dog</label>
     </customValue>
     <customValue>
         <fullName>Standalone</fullName>
@@ -50,7 +60,6 @@
         <default>false</default>
         <label>Dog</label>
     </customValue>
-    <description>file category</description>
-    <masterLabel>Category</masterLabel>
+    <masterLabel>Categories</masterLabel>
     <sorted>false</sorted>
 </GlobalValueSet>

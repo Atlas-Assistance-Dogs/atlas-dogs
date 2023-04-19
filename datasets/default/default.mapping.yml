@@ -325,7 +325,6 @@ Insert Contact:
   - PuppyReferenceReceived__c
   - RaceEthnicity__c
   - SexualOrientation__c
-  - ShirtSize__c
   - SpecifiedAbilityAccommodation__c
   - SpecifiedAbilityStatus__c
   - SpecifiedGenderIdentity__c

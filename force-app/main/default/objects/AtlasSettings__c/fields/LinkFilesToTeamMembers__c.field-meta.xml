@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LinkFilesToTeamMembers__c</fullName>
+    <defaultValue>true</defaultValue>
+    <description>Enable linking files on a Team to its Team members.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Turn off when you need to link the team member files to the team to prevent recursion.</inlineHelpText>
+    <label>LinkFilesToTeamMembers</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

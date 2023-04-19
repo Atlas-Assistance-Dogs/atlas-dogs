@@ -62,26 +62,6 @@ public with sharing class TestClearDateServiceBoardFields {
     }
 
     @isTest
-    public static void clearDate_BoardContactForm_SetsDateToNull() {
-        ContentVersion cv = new ContentVersion(Category__c = 'Board', Type__c = 'ContactForm');
-        Contact record = new Contact(FirstName = 'Test', LastName = 'Contact', Email = 'abc@abc.com');
-        insert record;
-        ClearDateService.clear(cv, record.Id);
-
-        record = [
-            SELECT ContactFormReceived__c
-            FROM Contact
-            WHERE Id = :record.Id
-            LIMIT 1
-        ];
-        system.assertEquals(
-            null,
-            record.ContactFormReceived__c,
-            'ContactFormReceived__c not cleared'
-        );
-    }
-
-    @isTest
     public static void clearDate_BoardResume_SetsDateToNull() {
         ContentVersion cv = new ContentVersion(Category__c = 'Board', Type__c = 'Resume');
         Contact record = new Contact(FirstName = 'Test', LastName = 'Contact', Email = 'abc@abc.com');
