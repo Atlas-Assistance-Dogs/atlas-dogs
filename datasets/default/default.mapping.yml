@@ -1,3 +1,10 @@
+# Editing this file is usually not recommended because it will
+# be overwritten the next time you re-capture this data.
+#
+# You can change this file's contents permanently by creating a
+# .load.yml file and re-capturing:
+#
+#  https://cumulusci.readthedocs.io/en/stable/data.html#extracting-and-loading-sample-datasets
 Insert Campaign:
   sf_object: Campaign
   table: Campaign
@@ -262,7 +269,6 @@ Insert Dog__c:
       table: Account
       key_field: VetClinic__c
 Insert Contact:
-<<<<<<< 454-filter-team:datasets/default/default.mapping.yml
   sf_object: Contact
   table: Contact
   fields:
@@ -294,7 +300,6 @@ Insert Contact:
   - FacilitatorCertAgreementReceived__c
   - FacilitatorInfrNoticeReceived__c
   - FacilitatorPracticumReceived__c
-  - FacilitatorProfGrowthPlanReceived__c
   - FacilitatorProgAgreementReceived__c
   - FacilitatorReferenceReceived__c
   - FacilitatorStatus__c
@@ -326,6 +331,7 @@ Insert Contact:
   - PuppyReferenceReceived__c
   - RaceEthnicity__c
   - SexualOrientation__c
+  - ShirtSize__c
   - SpecifiedAbilityAccommodation__c
   - SpecifiedAbilityStatus__c
   - SpecifiedGenderIdentity__c
@@ -453,149 +459,6 @@ Insert npe4__Relationship__c:
     npe4__RelatedContact__c:
       table: Contact
       key_field: npe4__RelatedContact__c
-=======
-    sf_object: Contact
-    fields:
-        - ADSiMApplicationReceived__c
-        - ADSiMPreApplicationReceived__c
-        - ADSiMProgAgreementReceived__c
-        - BoardAgreementReceived__c
-        - BoardApplicationReceived__c
-        - BoardCoIReceived__c
-        - BoardMemberAcceptedDate__c
-        - BoardMemberStatus__c
-        - BoardResumeReceived__c
-        - BoardToNReceived__c
-        - CanvasSisId__c
-        - ClientMedicalDevices__c
-        - ClientStatus__c
-        - CriminalConviction__c
-        - DateStarted__c
-        - Email
-        - FacilitatorApplicationReceived__c
-        - FacilitatorCertAgreementReceived__c
-        - FacilitatorInfrNoticeReceived__c
-        - FacilitatorPracticumReceived__c
-        - FacilitatorProgAgreementReceived__c
-        - FacilitatorReferenceReceived__c
-        - FacilitatorStatus__c
-        - FirstName
-        - GW_Volunteers__Volunteer_Auto_Reminder_Email_Opt_Out__c
-        - GW_Volunteers__Volunteer_Availability__c
-        - GW_Volunteers__Volunteer_Last_Web_Signup_Date__c
-        - GW_Volunteers__Volunteer_Manager_Notes__c
-        - GW_Volunteers__Volunteer_Notes__c
-        - GW_Volunteers__Volunteer_Organization__c
-        - GW_Volunteers__Volunteer_Skills__c
-        - GW_Volunteers__Volunteer_Status__c
-        - Language__c
-        - LastName
-        - LeadFacilitatorStatus__c
-        - LeadInterest__c
-        - LeadSourceOther__c
-        - OtherLanguages__c
-        - Phone
-        - Positions__c
-        - PronounOther__c
-        - Pronoun__c
-        - PuppyApplicationReceived__c
-        - PuppyCertAgreementReceived__c
-        - PuppyInfrNoticeReceived__c
-        - PuppyProgAgreementReceived__c
-        - PuppyRaiserStatus__c
-        - PuppyReferenceReceived__c
-        - StaffAgreementReceived__c
-        - StaffApplicationReceived__c
-        - StaffI9Received__c
-        - StaffOfferReceived__c
-        - StaffResumeReceived__c
-        - StaffW4Received__c
-        - SystemAccess__c
-        - TrainerApplicationReceived__c
-        - TrainerBoardTrain__c
-        - TrainerCertAgreementReceived__c
-        - TrainerInfrNoticeReceived__c
-        - TrainerProgAgreementReceived__c
-        - TrainerSpecialties__c
-        - TrainerStatus__c
-        - VolunteerAgreementReceived__c
-        - VolunteerApplicationReceived__c
-        - VolunteerFocus__c
-        - VolunteerResumeReceived__c
-        - npe01__AlternateEmail__c
-        - npe01__HomeEmail__c
-        - npe01__PreferredPhone__c
-        - npe01__Preferred_Email__c
-        - npe01__Primary_Address_Type__c
-        - npe01__Private__c
-        - npe01__Secondary_Address_Type__c
-        - npe01__WorkEmail__c
-        - npe01__WorkPhone__c
-        - npo02__AverageAmount__c
-        - npo02__Best_Gift_Year_Total__c
-        - npo02__Best_Gift_Year__c
-        - npo02__FirstCloseDate__c
-        - npo02__Household_Naming_Order__c
-        - npo02__LargestAmount__c
-        - npo02__LastCloseDate__c
-        - npo02__LastMembershipAmount__c
-        - npo02__LastMembershipDate__c
-        - npo02__LastMembershipLevel__c
-        - npo02__LastMembershipOrigin__c
-        - npo02__LastOppAmount__c
-        - npo02__MembershipEndDate__c
-        - npo02__MembershipJoinDate__c
-        - npo02__Naming_Exclusions__c
-        - npo02__NumberOfClosedOpps__c
-        - npo02__NumberOfMembershipOpps__c
-        - npo02__OppAmount2YearsAgo__c
-        - npo02__OppAmountLastNDays__c
-        - npo02__OppAmountLastYear__c
-        - npo02__OppAmountThisYear__c
-        - npo02__OppsClosed2YearsAgo__c
-        - npo02__OppsClosedLastNDays__c
-        - npo02__OppsClosedLastYear__c
-        - npo02__OppsClosedThisYear__c
-        - npo02__SmallestAmount__c
-        - npo02__Soft_Credit_Last_Year__c
-        - npo02__Soft_Credit_This_Year__c
-        - npo02__Soft_Credit_Total__c
-        - npo02__Soft_Credit_Two_Years_Ago__c
-        - npo02__TotalMembershipOppAmount__c
-        - npo02__TotalOppAmount__c
-        - npsp__Deceased__c
-        - npsp__Do_Not_Contact__c
-        - npsp__Exclude_from_Household_Formal_Greeting__c
-        - npsp__Exclude_from_Household_Informal_Greeting__c
-        - npsp__Exclude_from_Household_Name__c
-        - npsp__First_Soft_Credit_Amount__c
-        - npsp__First_Soft_Credit_Date__c
-        - npsp__Largest_Soft_Credit_Amount__c
-        - npsp__Largest_Soft_Credit_Date__c
-        - npsp__Last_Soft_Credit_Amount__c
-        - npsp__Last_Soft_Credit_Date__c
-        - npsp__Number_of_Soft_Credits_Last_N_Days__c
-        - npsp__Number_of_Soft_Credits_Last_Year__c
-        - npsp__Number_of_Soft_Credits_This_Year__c
-        - npsp__Number_of_Soft_Credits_Two_Years_Ago__c
-        - npsp__Number_of_Soft_Credits__c
-        - npsp__Soft_Credit_Last_N_Days__c
-        - npsp__is_Address_Override__c
-    lookups:
-        AccountId:
-            table: Account
-        ReportsToId:
-            table: Contact
-            after: Insert Contact
-        npo02__Household__c:
-            table: npo02__Household__c
-        npsp__Batch__c:
-            table: npsp__Batch__c
-        npsp__Current_Address__c:
-            table: npsp__Address__c
-        npsp__Primary_Affiliation__c:
-            table: Account
->>>>>>> Remove Facilitator Professional Growth Plan:datasets/mapping.yml
 Insert BackgroundCheck__c:
   sf_object: BackgroundCheck__c
   table: BackgroundCheck__c
