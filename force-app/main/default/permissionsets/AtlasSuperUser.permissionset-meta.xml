@@ -315,6 +315,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Contact.LastBoardTermStartDate__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Contact.LeadFacilitatorStatus__c</field>
         <readable>true</readable>
     </fieldPermissions>
