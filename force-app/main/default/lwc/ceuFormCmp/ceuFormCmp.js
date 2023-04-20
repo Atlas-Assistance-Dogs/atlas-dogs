@@ -131,6 +131,12 @@ export default class CeuFormCmp extends NavigationMixin(LightningElement) {
         }
     }
 
+    handleCancel() {
+        this.dispatchEvent(
+            new CustomEvent("cancel")
+        );
+    }
+
     get hasFiles() {
         return this.relatedFiles !== null && this.relatedFiles.length > 0;
     }
