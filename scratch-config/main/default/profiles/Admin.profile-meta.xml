@@ -138,11 +138,19 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>TestClearDateServiceNaFields</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>TestClearDateServicePuppyFields</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
         <apexClass>TestClearDateServiceStaffFields</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>TestClearDateServiceTeamDogFields</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -210,11 +218,19 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>TestFileServiceNaFields</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>TestFileServicePuppyFields</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
         <apexClass>TestFileServiceStaffFields</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>TestFileServiceTeamDogFields</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -324,6 +340,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Contact.Age__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Contact.AvailableAsTsimTA__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

@@ -12,6 +12,11 @@
             </quickActionLayoutItems>
             <quickActionLayoutItems>
                 <emptySpace>false</emptySpace>
+                <field>AvailableAsTsimTA__c</field>
+                <uiBehavior>Edit</uiBehavior>
+            </quickActionLayoutItems>
+            <quickActionLayoutItems>
+                <emptySpace>false</emptySpace>
                 <field>LeadFacilitatorStatus__c</field>
                 <uiBehavior>Edit</uiBehavior>
             </quickActionLayoutItems>

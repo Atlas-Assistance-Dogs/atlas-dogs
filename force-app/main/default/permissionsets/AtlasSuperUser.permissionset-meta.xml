@@ -105,6 +105,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Contact.AvailableAsTsimTA__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Contact.BoardAgreementReceived__c</field>
         <readable>true</readable>
     </fieldPermissions>
