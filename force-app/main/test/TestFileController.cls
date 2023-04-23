@@ -343,8 +343,8 @@ public with sharing class TestFileController {
 
         Test.startTest();
         FileController.updateContentVersion(
-            'Client',
-            'Survey',
+            'Dog',
+            'VacExams',
             yesterday,
             cv.Id
         );
@@ -352,8 +352,8 @@ public with sharing class TestFileController {
         Test.stopTest();
         cv = [SELECT Category__c, Type__c, Date__c FROM ContentVersion WHERE Id = :cv.Id LIMIT 1];
 
-        System.assertEquals('Client', cv.Category__c);
-        System.assertEquals('Survey', cv.Type__c);
+        System.assertEquals('Dog', cv.Category__c);
+        System.assertEquals('VacExams', cv.Type__c);
         System.assertEquals(yesterday, cv.Date__c);
     }
 
