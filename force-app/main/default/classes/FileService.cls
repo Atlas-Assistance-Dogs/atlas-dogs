@@ -70,6 +70,11 @@ public with sharing class FileService {
         if (objName == Team__c.class.getName()) {
             updateTeamDates(cvs, entityId);
             AtlasSettings__c settings = AtlasSettings__c.getOrgDefaults();
+            // check to see if settings are missing
+            if (settings.DogExamRenewalYears__c == 0) {
+                settings = new AtlasSettings__c();
+                insert settings;
+            }
             if (settings.LinkFilesToTeamMembers__c) {
                 linkDocumentsToTeamMember(cvs, entityId);
             }
