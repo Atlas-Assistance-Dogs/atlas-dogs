@@ -1,5 +1,5 @@
 <template>
-    <c-modal-cmp title={title} onclose={handleCancel} onsubmit={handleSubmit}>
+    <c-modal-cmp title={title} onclose={handleCancel} oncancel={handleCancel} onsubmit={handleSubmit}>
         <c-background-check-form-cmp
             slot="body"
             record-id={recordId}
