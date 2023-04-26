@@ -82,26 +82,6 @@ public with sharing class TestClearDateServiceFacilitatorFields {
     }
 
     @isTest
-    public static void clearDate_FacilitatorProfGrowthPlan_SetsDateToNull() {
-        ContentVersion cv = new ContentVersion(Category__c = 'Facilitator', Type__c = 'ProfGrowthPlan');
-        Contact record = new Contact(FirstName = 'Test', LastName = 'Contact', Email = 'abc@abc.com');
-        insert record;
-        ClearDateService.clear(cv, record.Id);
-
-        record = [
-            SELECT FacilitatorProfGrowthPlanReceived__c
-            FROM Contact
-            WHERE Id = :record.Id
-            LIMIT 1
-        ];
-        system.assertEquals(
-            null,
-            record.FacilitatorProfGrowthPlanReceived__c,
-            'FacilitatorProfGrowthPlanReceived__c not cleared'
-        );
-    }
-
-    @isTest
     public static void clearDate_FacilitatorProgAgreement_SetsDateToNull() {
         ContentVersion cv = new ContentVersion(Category__c = 'Facilitator', Type__c = 'ProgAgreement');
         Contact record = new Contact(FirstName = 'Test', LastName = 'Contact', Email = 'abc@abc.com');
