@@ -1,7 +1,8 @@
 - include_file: common.recipe.yml
-- include_file: contact.recipe.yml
+- include_file: trainer.recipe.yml
 
 - object: ContinuingEducationUnit__c
+  count: 10
   fields:
       Name:
           fake: catch_phrase
@@ -49,7 +50,7 @@
               Attendee: 80%
               Presenter: 20%
       Trainer__c:
-          reference: Contact
+          reference: Trainer
       Status__c:
           random_choice:
               Approved: 50%

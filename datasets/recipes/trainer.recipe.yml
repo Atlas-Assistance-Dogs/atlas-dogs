@@ -1,0 +1,391 @@
+## Trainer contact for use with CEU.recipe.yml
+
+# To run this code against a fresh scratch org called ("qa"):
+#
+# cci flow run npsp:install_prod --org qa
+# cci task run generate_and_load_from_yaml -o generator_yaml datasets/recipes/trainer.recipe.yml -o num_records 300 -o num_records_tablename Contact --org qa
+
+# Look at examples/salesforce/Contact.recipe.yml for more examples.
+#- include_file: standard_objs.recipe.yml
+- include_file: common.recipe.yml
+
+- object: Account
+  nickname: Household
+  fields:
+      name: The Household
+      RecordType: HH_Account
+
+- object: Contact
+  nickname: Trainer
+  include: positions
+  fields:
+      AccountId:
+          reference: Household
+      FirstName:
+          fake: first_name
+      LastName:
+          fake: last_name
+      npe01__AlternateEmail__c:
+          fake: email
+      npe01__Primary_Address_Type__c:
+          random_choice:
+              - Home
+              - Work
+              - Other
+      npe01__Secondary_Address_Type__c:
+          random_choice:
+              - Home
+              - Work
+              - Other
+      npe01__WorkEmail__c:
+          fake: email
+      npe01__WorkPhone__c:
+          fake: phone_number
+      Salutation:
+          random_choice:
+              - Mr.
+              - Ms.
+              - Mrs.
+              - Dr.
+              - Prof.
+      MailingStreet:
+          fake: street_address
+      MailingCity:
+          fake: city
+      MailingState:
+          fake: state
+      MailingPostalCode:
+          fake: postalcode
+      MailingCountry:
+          fake: country
+      MailingGeocodeAccuracy:
+          random_choice:
+              - Address
+              - NearAddress
+              - Block
+              - Street
+              - ExtendedZip
+              - Zip
+              - Neighborhood
+              - City
+              - County
+              - State
+              - Unknown
+      Phone:
+          fake: phone_number
+      Fax:
+          fake: phone_number
+      MobilePhone:
+          fake: phone_number
+      HomePhone:
+          fake: phone_number
+      OtherPhone:
+          fake: phone_number
+      AssistantPhone:
+          fake: phone_number
+      Email:
+          fake: email
+      npe01__HomeEmail__c: ${{ Email }}
+      Title:
+          fake: job
+      Department:
+          fake: catch_phrase
+      AssistantName:
+          fake: name
+      Language__c:
+          random_choice:
+              English: 83%
+              Spanish: 5%
+              Mandarin: 1%
+              Tagalog: 1%
+              Vietnamese: 1%
+              Arabic: 1%
+              French: 1%
+              Korean: 1%
+              Russian: 1%
+              German: 1%
+              Italian: 1%
+              Portuguese: 1%
+              Japanese: 1%
+              American Sign Language: 1%
+      OtherLanguages__c:
+          random_choice:
+              English: 1%
+              Spanish: 5%
+              Mandarin: 1%
+              Cantonese: 1%
+              Tagalog: 1%
+              Vietnamese: 1%
+              Arabic: 1%
+              French: 1%
+              Korean: 1%
+              Russian: 1%
+              German: 1%
+              Italian: 1%
+              Portuguese: 1%
+              Japanese: 1%
+              American Sign Language: 1%
+              Spanish;French: 1%
+      AbilityStatus__c:
+          random_choice:
+              - Blind/Low vision
+              - Deaf/Hard of hearing
+              - Learning disability/cognitive processing disability
+              - Chronic medical illness
+              - Mental health condition
+              - Mobility/ambulatory difficulty
+              - Sensory processing disorder
+              - Intellectual disability
+              - None/do not identify with a disability
+              - Prefer to self-describe
+              - Prefer not to answer
+      LeadSource:
+          random_choice:
+              - Website
+              - Search Engine
+              - Facebook
+              - Instagram
+              - Twitter
+              - Health Provider
+              - Other
+      LeadSourceOther__c:
+          if:
+              - choice:
+                    when: ${{LeadSource == 'Other'}}
+                    pick:
+                        fake: company
+      Birthdate:
+          date_between:
+              start_date: -60y
+              end_date: -21y
+      Description:
+          fake.text:
+              max_nb_chars: 100
+      CanvasSisId__c: ${{fake.Swift}}
+      DateStarted__c:
+          date_between:
+              start_date: 2000-01-01
+              end_date: today
+      PronounOther__c:
+          if:
+              - choice:
+                    when: ${{Pronoun__c == 'specify'}}
+                    pick:
+                        fake.text:
+                            max_nb_chars: 10
+      Pronoun__c:
+          random_choice:
+              - He/Him
+              - She/Her
+              - They/Them
+              - Prefer to self-describe
+              - Prefer not to answer
+      ShirtSize__c:
+          random_choice:
+              - Child S
+              - Child M
+              - Child L
+              - Women XS
+              - Women S
+              - Women M
+              - Women L
+              - Women XL
+              - Women XXL
+              - Men XS
+              - Men S
+              - Men M
+              - Men L
+              - Men XL
+              - Men XXL
+              - Unisex XS
+              - Unisex S
+              - Unisex M
+              - Unisex L
+              - Unisex XL
+              - Unisex XXL
+      TrainerBoardTrain__c:
+          random_choice:
+              - true
+              - false
+      TrainerSpecialties__c:
+          random_choice:
+              - Psychiatric
+              - Mobility
+              - Diabetes Alert
+              - Autism
+              - Seizure Response
+              - Medical Incident Assist
+              - Hearing Alert
+              - Narcolepsy Alert
+              - Mobility;Autism
+              - Autism;Psychiatric
+      TrainerStatus__c:
+          random_choice:
+              - Initial Inquiry
+              - Onboarding
+              - In Training
+              - Certified-Active
+              - Inactive
+              - Suspended
+              - Discontinued
+      SystemAccess__c:
+          random_choice:
+              - Operations- Master Docs - READ ONLY
+              - Operations- Financial
+              - Operations- Client
+              - Operations- Volunteer and Staff
+              - Operations- Trainer
+              - Board - READ ONLY
+              - Board
+              - Sensitive Info- Volunteer and Staff
+              - Sensitive Info- Trainer
+              - Sensitive Info- Board
+              - Active Projects- Academy
+              - Active Projects- ADI
+              - Active Projects- Academy
+              - Active Projects- Branding and Marketing
+              - Active Projects- Client Certification
+              - Active Projects- Community Outreach and Education
+              - Active Projects- Dog Availability
+              - Active Projects- Fund Development
+              - Active Projects- Governance, Compliance and Operations
+              - Active Projects- Research and Development
+              - Active Projects- Scholarships
+              - Active Projects- State Registration
+              - Active Projects- Team Facilitator Certification
+              - Active Projects- Technology Infrastructure
+              - Active Projects- Trainer Certification
+              - Active Projects- Volunteer Recruitment and Retention
+
+# Create Primary and secondary emergency contacts for Contact
+- object: npe4__Relationship__c
+  fields:
+      npe4__Contact__c:
+          reference: Trainer
+      npe4__Type__c: Primary Emergency Contact
+      npe4__RelatedContact__c:
+          - object: Contact
+            fields:
+                AccountId:
+                    reference: Household
+                FirstName:
+                    fake: last_name
+                LastName:
+                    fake: first_name
+                npe01__AlternateEmail__c:
+                    fake: email
+                npe01__HomeEmail__c:
+                    fake: email
+                npe01__Primary_Address_Type__c:
+                    random_choice:
+                        - Home
+                        - Work
+                        - Other
+                npe01__Secondary_Address_Type__c:
+                    random_choice:
+                        - Home
+                        - Work
+                        - Other
+                npe01__WorkEmail__c:
+                    fake: email
+                npe01__WorkPhone__c:
+                    fake: phone_number
+                Phone:
+                    fake: phone_number
+                Fax:
+                    fake: phone_number
+                MobilePhone:
+                    fake: phone_number
+                HomePhone:
+                    fake: phone_number
+                OtherPhone:
+                    fake: phone_number
+                AssistantPhone:
+                    fake: phone_number
+                Email: ${{ npe01__HomeEmail__c }}
+
+- object: npe4__Relationship__c
+  fields:
+      npe4__Contact__c:
+          reference: Trainer
+      npe4__Type__c: Secondary Emergency Contact
+      npe4__RelatedContact__c:
+          - object: Contact
+            fields:
+                AccountId:
+                    reference: Household
+                FirstName:
+                    fake: last_name
+                LastName:
+                    fake: first_name
+                npe01__AlternateEmail__c:
+                    fake: email
+                npe01__HomeEmail__c:
+                    fake: email
+                npe01__Primary_Address_Type__c:
+                    random_choice:
+                        - Home
+                        - Work
+                        - Other
+                npe01__Secondary_Address_Type__c:
+                    random_choice:
+                        - Home
+                        - Work
+                        - Other
+                npe01__WorkEmail__c:
+                    fake: email
+                npe01__WorkPhone__c:
+                    fake: phone_number
+                Phone:
+                    fake: phone_number
+                Fax:
+                    fake: phone_number
+                MobilePhone:
+                    fake: phone_number
+                HomePhone:
+                    fake: phone_number
+                OtherPhone:
+                    fake: phone_number
+                AssistantPhone:
+                    fake: phone_number
+                Email: ${{ npe01__HomeEmail__c }}
+
+- object: npe4__Relationship__c
+  fields:
+      npe4__Contact__c:
+          reference: Trainer
+      npe4__Type__c:
+          random_choice:
+              - Trainer
+              - Client
+              - Volunteer
+              - Team Facilitator
+              - Team Facilitator Lead
+              - Volunteer Lead
+              - Handler
+              - TSiM Referral
+              - Trainer Referral
+              - Friend
+              - Family
+              - Coworker
+              - Father
+              - Mother
+              - Parent
+              - Son
+              - Daughter
+              - Child
+              - Aunt
+              - Uncle
+              - Husband
+              - Wife
+              - Partner
+              - Cousin
+              - Grandmother
+              - Grandfather
+              - Grandparent
+              - Grandson
+              - Granddaughter
+              - Grandchild
+              - Employer
+      npe4__RelatedContact__c:
+          random_reference: Contact
