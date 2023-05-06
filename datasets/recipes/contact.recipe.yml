@@ -221,6 +221,11 @@
           fake: catch_phrase
       AssistantName:
           fake: name
+      npe4__Contact__c:
+          random_choice:
+             Home: 80%
+             Alternate: 10%
+             Guardian: 10%
       Language__c:
           random_choice:
               English: 83%
