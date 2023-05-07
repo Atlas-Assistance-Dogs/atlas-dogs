@@ -6,11 +6,6 @@ trigger ContactTrigger on Contact (before insert, before update) {
             Contact oldContact = trigger.oldMap.get(newContact.Id);
             oldEmail = oldContact.Email;
         }
-        
-        // Check if value is updated
-        if (String.isBlank(newContact.npe01__HomeEmail__c)) {
-            newContact.npe01__HomeEmail__c = newContact.Email;
-        }
 
         // Set PreferredName if not already set
         if (String.isBlank(newContact.PreferredName__c)) {
