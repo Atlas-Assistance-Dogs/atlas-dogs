@@ -23,9 +23,9 @@
                 <label>Guardian</label>
             </value>
             <value>
-                <fullName>Work</fullName>
+                <fullName>Alternate</fullName>
                 <default>false</default>
-                <label>Work</label>
+                <label>Alternate</label>
             </value>
         </valueSetDefinition>
     </valueSet>
