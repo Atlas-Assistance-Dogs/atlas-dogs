@@ -12,18 +12,25 @@ trigger ContactTrigger on Contact (before insert, before update) {
         // Check if Contact is set
         if (!String.isBlank(newContact.Contact__c)) {
             if (oldEmail != newContact.Email) {
-                newContact = ContactService.UpdateContactAtEmail(newContact);
+                newContact = ContactService.updateContactAtEmail(newContact);
             }
             else {
-                newContact = ContactService.UpdateEmail(newContact);
+                newContact = ContactService.updateEmail(newContact);
             }
 
             if (oldPhone != newContact.Phone) {
-                newContact = ContactService.UpdateContactAtPhone(newContact);
+                newContact = ContactService.updateContactAtPhone(newContact);
             }
             else {
-                newContact = ContactService.UpdatePhone(newContact);
+                newContact = ContactService.updatePhone(newContact);
             }
+        }
+
+        // if email changes, copy to appropriate related contacts
+        Boolean changedEmail = oldEmail != newContact.Email;
+        Boolean changedPhone = oldPhone != newContact.Phone;
+        if (changedEmail || changedPhone) {
+            ContactService.updateRelatedContactEmailPhone(newContact, changedEmail, changedPhone);
         }
 
         // Set PreferredName if not already set
