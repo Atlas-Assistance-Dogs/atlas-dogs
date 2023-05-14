@@ -1,48 +1,28 @@
 trigger ContactTrigger on Contact (before insert, before update) {
     for (Contact newContact : Trigger.new) {
-        string oldEmail = null;
+        string oldEmail = newContact.Email;
+        string oldPhone = newContact.Phone;
         if (Trigger.isUpdate) {
             //Get Old Value
             Contact oldContact = trigger.oldMap.get(newContact.Id);
             oldEmail = oldContact.Email;
+            oldPhone = oldContact.Phone;
         }
         
         // Check if Contact is set
         if (!String.isBlank(newContact.Contact__c)) {
-            string contact = newContact.Contact__c;
-            if (contact == 'Home') {
-                if (!string.isBlank(newContact.npe01__HomeEmail__c)) {
-                    newContact.Email = newContact.npe01__HomeEmail__c;
-                }
-                if (!string.isBlank(newContact.HomePhone)) {
-                    newContact.Phone = newContact.HomePhone;
-                }
-            }
-            else if (contact == 'Alternate') {
-                if (!string.isBlank(newContact.npe01__AlternateEmail__c)) {
-                    newContact.Email = newContact.npe01__AlternateEmail__c;
-                }
-                if (!string.isBlank(newContact.OtherPhone)) {
-                    newContact.Phone = newContact.OtherPhone;
-                }
+            if (oldEmail != newContact.Email) {
+                newContact = ContactService.UpdateContactAtEmail(newContact);
             }
             else {
-                // see if the type matches a relationship type
-                List<npe4__Relationship__c> related = [
-                    SELECT Id, npe4__RelatedContact__c, npe4__RelatedContact__r.Email, npe4__RelatedContact__r.Phone
-                    FROM npe4__Relationship__c
-                    WHERE npe4__Type__c = :contact AND npe4__Contact__c = :newContact.Id AND npe4__Status__c = 'Current'
-                ];
-                if (!related.isEmpty()) {
-                    // use the first Contact that matches
-                    Contact person = related[0].npe4__RelatedContact__r;
-                    if (!string.isBlank(person.Email)) {
-                        newContact.Email = person.Email;
-                    }
-                    if (!string.isBlank(person.Phone)) {
-                        newContact.Phone = person.Phone;
-                    }
-                }
+                newContact = ContactService.UpdateEmail(newContact);
+            }
+
+            if (oldPhone != newContact.Phone) {
+                newContact = ContactService.UpdateContactAtPhone(newContact);
+            }
+            else {
+                newContact = ContactService.UpdatePhone(newContact);
             }
         }
 

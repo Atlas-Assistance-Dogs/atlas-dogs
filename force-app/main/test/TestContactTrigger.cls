@@ -9,11 +9,13 @@ public with sharing class TestContactTrigger {
     }
 
     @isTest
-    static void insert_setsHomeEmail_WhenEmailSet() {
+    static void insert_setsEmail_WhenHomeEmailSetAndContactAtHome() {
         Contact joe = new Contact(
-            Email = 'joe-blow@pump.com',
+            Email = 'joe@pump.com',
             FirstName = 'Joe',
-            LastName = 'Blow'
+            LastName = 'Blow',
+            npe01__HomeEmail__c = 'joe-blow@pump.com',
+            Contact__c = 'Home'
         );
 
         // Act
@@ -25,8 +27,8 @@ public with sharing class TestContactTrigger {
         System.assert(result.isSuccess());
         Contact saved = getContact(result.getId());
         System.assert(result.getErrors().size() == 0);
-        System.assertEquals(saved.Email, saved.npe01__HomeEmail__c);
-        System.assertEquals(joe.Email, saved.npe01__HomeEmail__c);
+        System.assertEquals(joe.npe01__HomeEmail__c, saved.Email);
+        System.assertEquals(joe.npe01__HomeEmail__c, saved.npe01__HomeEmail__c);
     }
 
     @isTest
