@@ -50,7 +50,7 @@ public with sharing class TestContactAtHomeTrigger {
         // Assert
         System.assert(result.isSuccess());
         System.assert(result.getErrors().size() == 0);
-        assertHomeEmail(joe.npe01__HomeEmail__c, result.getId());
+        assertEmail(joe.npe01__HomeEmail__c, result.getId());
     }
 
     @isTest
@@ -67,7 +67,7 @@ public with sharing class TestContactAtHomeTrigger {
         // Assert
         System.assert(result.isSuccess());
         System.assert(result.getErrors().size() == 0);
-        assertHomeEmail(joe.npe01__HomeEmail__c, result.getId());
+        assertEmail(joe.npe01__HomeEmail__c, result.getId());
     }
 
     @isTest
