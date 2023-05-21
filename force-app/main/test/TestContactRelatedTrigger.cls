@@ -1,4 +1,3 @@
-
 @isTest
 public with sharing class TestContactRelatedTrigger {
     private static Contact joe;
@@ -24,6 +23,8 @@ public with sharing class TestContactRelatedTrigger {
         );
         List<Contact> contacts = new List<Contact> { joe, cathy };
         insert contacts;
+        System.debug(joe.Id);
+        System.debug(cathy.Id);
 
         npe4__Relationship__c relationship = new npe4__Relationship__c(
             npe4__Contact__c = joe.Id,
@@ -96,6 +97,7 @@ public with sharing class TestContactRelatedTrigger {
         System.assert(result.isSuccess());
         System.assert(result.getErrors().size() == 0);
         assertEmail(joe.Email, joe.Id);
+        assertEmail(cathy.Email, cathy.Id);
     }
 
     @isTest
@@ -197,8 +199,8 @@ public with sharing class TestContactRelatedTrigger {
         // Assert
         System.assert(result.isSuccess());
         System.assert(result.getErrors().size() == 0);
-        assertPhone(cathy.Phone, joe.Id);
         assertPhone(cathy.Phone, cathy.Id);
+        assertPhone(cathy.Phone, joe.Id);
     }
 
     @isTest
