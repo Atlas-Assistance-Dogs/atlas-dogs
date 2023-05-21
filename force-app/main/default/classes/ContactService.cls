@@ -87,6 +87,7 @@ public with sharing class ContactService {
 
     // Update the email of a related contact
     public static void updateRelatedContactEmailPhone(Contact current, Boolean changedEmail, Boolean changedPhone) {
+        System.debug(current.Id);
         List<npe4__Relationship__c> related = [
             SELECT Id, npe4__Contact__c, npe4__Type__c, npe4__RelatedContact__c, npe4__Contact__r.Email, npe4__RelatedContact__r.Phone, npe4__Contact__r.Contact__c
             FROM npe4__Relationship__c

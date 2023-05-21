@@ -24,7 +24,8 @@ public with sharing class TestContactRelatedTrigger {
         );
         List<Contact> contacts = new List<Contact> { joe, cathy };
         insert contacts;
-	    npe4__Relationship__c relationship = new npe4__Relationship__c(
+
+        npe4__Relationship__c relationship = new npe4__Relationship__c(
             npe4__Contact__c = joe.Id,
             npe4__RelatedContact__c = cathy.Id,
             npe4__Type__c = 'Guardian',
