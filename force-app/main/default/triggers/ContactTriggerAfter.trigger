@@ -10,8 +10,8 @@ trigger ContactTriggerAfter on Contact (after update) {
         }
 
         // if email changes, copy to appropriate related contacts
-        Boolean changedEmail = oldEmail != newContact.Email;
-        Boolean changedPhone = oldPhone != newContact.Phone;
+        Boolean changedEmail = !String.isBlank(newContact.Email) && oldEmail != newContact.Email;
+        Boolean changedPhone = !String.isBlank(newContact.Phone) && oldPhone != newContact.Phone;
         if (Trigger.isAfter && Trigger.isUpdate && (changedEmail || changedPhone)) {
             ContactService.updateRelatedContactEmailPhone(newContact, changedEmail, changedPhone);
         }

@@ -2,6 +2,7 @@
 public with sharing class TestContactRelatedTrigger {
     private static Contact joe;
     private static Contact cathy;
+    private static npe4__Relationship__c relationship;
 
     private static void createContacts() {
         joe = new Contact(
@@ -23,14 +24,12 @@ public with sharing class TestContactRelatedTrigger {
         );
         List<Contact> contacts = new List<Contact> { joe, cathy };
         insert contacts;
-        System.debug(joe.Id);
-        System.debug(cathy.Id);
 
-        npe4__Relationship__c relationship = new npe4__Relationship__c(
+        relationship = new npe4__Relationship__c(
             npe4__Contact__c = joe.Id,
             npe4__RelatedContact__c = cathy.Id,
             npe4__Type__c = 'Guardian',
-            npe4__Status__c = 'Active'
+            npe4__Status__c = 'Current'
         );
         insert relationship;
     }
@@ -86,6 +85,26 @@ public with sharing class TestContactRelatedTrigger {
     @isTest
     static void update_setsEmail_WhenGuardianEmailSetAndContactAtGuardian() {
         createContacts();
+        cathy.Email = 'cathy-blow@bikepump.com';
+
+        // Act
+        Test.startTest();
+        Database.SaveResult result = Database.update(cathy, false);
+        Test.stopTest();
+
+        // Assert
+        System.assert(result.isSuccess());
+        System.assert(result.getErrors().size() == 0);
+        assertEmail(cathy.Email, joe.Id);
+        assertEmail(cathy.Email, cathy.Id);
+    }
+
+    @isTest
+    static void update_leavesEmail_WhenFormerGuardianEmailSetAndContactAtGuardian() {
+        createContacts();
+        relationship.npe4__Status__c = 'Former';
+        update relationship;
+
         cathy.Email = 'cathy-blow@bikepump.com';
 
         // Act
