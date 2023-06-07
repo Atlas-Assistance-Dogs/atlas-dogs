@@ -49,7 +49,25 @@ extract:
     DogRelationship__c:
         fields: FIELDS(ALL)
     Log__c:
-        fields: FIELDS(ALL)
+        fields:
+            - ClientHours__c
+            - ClientStress__c
+            - Date__c
+            - Details__c
+            - Facilitator__c
+            - OtherHours__c
+            - PublicAccessHours__c
+            - OtherHours__c
+            - PublicAccessHours__c
+            - RequestSupportFromAtlas__c
+            - RequestSupportFromTeam__c
+            - Satisfaction__c
+            - SessionType__c
+            - Stress__c
+            - SupportDetails__c
+            - Submitter__c
+            - Team__c
+            - RecordTypeId
     Program__c:
         fields: FIELDS(ALL)
     ProgramAssignment__c:

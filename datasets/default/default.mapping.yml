@@ -295,6 +295,7 @@ Insert Contact:
   - ClientMedicalDevices__c
   - ClientStatus__c
   - ContactFormReceived__c
+  - Contact__c
   - CriminalConviction__c
   - DateStarted__c
   - FacilitatorApplicationReceived__c
@@ -574,7 +575,6 @@ Insert Log__c:
   - ClientStress__c
   - Date__c
   - Details__c
-  - Handler__c
   - OtherHours__c
   - PublicAccessHours__c
   - RequestSupportFromAtlas__c
@@ -585,12 +585,6 @@ Insert Log__c:
   - SupportDetails__c
   - RecordTypeId
   lookups:
-    Client__c:
-      table: Contact
-      key_field: Client__c
-    Dog__c:
-      table: Dog__c
-      key_field: Dog__c
     Facilitator__c:
       table: Contact
       key_field: Facilitator__c

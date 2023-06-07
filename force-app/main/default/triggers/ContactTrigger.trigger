@@ -1,10 +1,29 @@
 trigger ContactTrigger on Contact (before insert, before update) {
     for (Contact newContact : Trigger.new) {
-        string oldEmail = null;
+        string oldEmail = newContact.Email;
+        string oldPhone = newContact.Phone;
         if (Trigger.isUpdate) {
             //Get Old Value
             Contact oldContact = trigger.oldMap.get(newContact.Id);
             oldEmail = oldContact.Email;
+            oldPhone = oldContact.Phone;
+        }
+        
+        // Check if Contact is set
+        if (!String.isBlank(newContact.Contact__c)) {
+            if (oldEmail != newContact.Email) {
+                newContact = ContactService.updateContactAtEmail(newContact);
+            }
+            else {
+                newContact = ContactService.updateEmail(newContact);
+            }
+
+            if (oldPhone != newContact.Phone) {
+                newContact = ContactService.updateContactAtPhone(newContact);
+            }
+            else {
+                newContact = ContactService.updatePhone(newContact);
+            }
         }
 
         // Set PreferredName if not already set
