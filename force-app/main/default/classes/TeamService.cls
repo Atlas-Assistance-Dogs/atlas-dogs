@@ -18,7 +18,7 @@ public with sharing class TeamService {
             Boolean found = false;
             // add client to the type if not already there
             for (DogRelationShip__c relationShip : relationShips) {
-                if (relationShip.Type__c.contains('Client')) {
+                if (relationShip.Type__c != null && relationShip.Type__c.contains('Client')) {
                     found = true;
                     break;
                 }
@@ -28,11 +28,16 @@ public with sharing class TeamService {
             }
             // otherwise, add Client to the first relationship (should be the only one)
             DogRelationShip__c relationShip = relationShips[0];
-            relationShip.Type__c = relationShip.Type__c + ';Client';
+            if (String.isBlank(relationShip.Type__c)) {
+                relationShip.Type__c = 'Client';
+            }
+            else {
+                relationShip.Type__c = relationShip.Type__c + ';Client';
+            }
             update relationShip;
         }
     }
-        
+
     // Update client status.  This is meant to be called from the team update trigger.
     public static void updateClientStatus(Team__c team) {
         List<Contact> clients = [SELECT ClientStatus__c, ClientCertificationValidUntil__c FROM Contact WHERE Id = :team.Client__c];
