@@ -53,6 +53,13 @@ flows:
                 options:
                     api_names: AtlasSuperUser
 
+    config_managed:
+        steps:
+            3:
+                task: assign_permission_sets
+                options:
+                    api_names: AtlasSuperUser
+
     deploy_unmanaged:
         steps:
             3.1:
