@@ -55,7 +55,8 @@ flows:
 
     config_managed:
         steps:
-            3:
+        # overload load_sample_data for now
+            90:
                 task: assign_permission_sets
                 options:
                     api_names: AtlasSuperUser
