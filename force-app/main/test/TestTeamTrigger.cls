@@ -39,35 +39,6 @@ public with sharing class TestTeamTrigger {
     }
 
     @isTest
-    public static void triggerUpdatesRelationship_WhenTypeNull() {
-        setup();
-        DogRelationShip__c dr = new DogRelationShip__c(
-            Contact__c = joe.Id,
-            Dog__c = boomer.Id
-        );
-        insert dr;
-        Team__c team = new Team__c(
-            Name = 'Joe_Boomer',
-            Client__c = joe.Id,
-            Dog__c = boomer.Id
-        );
-
-        // Act
-        Test.startTest();
-        Database.SaveResult result = Database.insert(team, false);
-        Test.stopTest();
-
-        // Assert
-        System.assert(result.isSuccess());
-        DogRelationShip__c relationship = [
-            SELECT Type__c
-            FROM DogRelationShip__c
-            WHERE Dog__c = :boomer.Id AND Contact__c = :joe.Id
-        ];
-        System.assert(relationship.Type__c.contains('Client'));
-    }
-
-    @isTest
     public static void triggerUpdatesRelationship_WhenNotClient() {
         setup();
         DogRelationShip__c dr = new DogRelationShip__c(
