@@ -814,11 +814,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>DogRelationship__c.Type__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>Dog__c.ActivationDate__c</field>
         <readable>true</readable>
     </fieldPermissions>
