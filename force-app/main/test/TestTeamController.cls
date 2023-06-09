@@ -24,7 +24,8 @@ public with sharing class TestTeamController {
             PatValidUntil__c = Date.today().addMonths(12),
             PatCount__c = 21,
             PrimaryCertification__c = 'Allergen Alert',
-            SecondaryCertification__c = 'Autism'
+            SecondaryCertification__c = 'Autism',
+            Status__c = 'Certified'
         );
         insert team;
     }
@@ -40,6 +41,7 @@ public with sharing class TestTeamController {
         System.assertEquals(expected.PatCount__c, actual.PatCount__c);
         System.assertEquals(expected.PrimaryCertification__c, actual.PrimaryCertification__c);
         System.assertEquals(expected.SecondaryCertification__c, actual.SecondaryCertification__c);
+        System.assertEquals(expected.Status__c, actual.Status__c);
     }
 
     @isTest

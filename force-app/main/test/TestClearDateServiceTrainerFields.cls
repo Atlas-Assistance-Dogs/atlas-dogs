@@ -62,26 +62,6 @@ public with sharing class TestClearDateServiceTrainerFields {
     }
 
     @isTest
-    public static void clearDate_TrainerContactForm_SetsDateToNull() {
-        ContentVersion cv = new ContentVersion(Category__c = 'Trainer', Type__c = 'ContactForm');
-        Contact record = new Contact(FirstName = 'Test', LastName = 'Contact', Email = 'abc@abc.com');
-        insert record;
-        ClearDateService.clear(cv, record.Id);
-
-        record = [
-            SELECT ContactFormReceived__c
-            FROM Contact
-            WHERE Id = :record.Id
-            LIMIT 1
-        ];
-        system.assertEquals(
-            null,
-            record.ContactFormReceived__c,
-            'ContactFormReceived__c not cleared'
-        );
-    }
-
-    @isTest
     public static void clearDate_TrainerInfrNotice_SetsDateToNull() {
         ContentVersion cv = new ContentVersion(Category__c = 'Trainer', Type__c = 'InfrNotice');
         Contact record = new Contact(FirstName = 'Test', LastName = 'Contact', Email = 'abc@abc.com');

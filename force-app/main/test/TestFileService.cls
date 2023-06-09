@@ -150,10 +150,10 @@ public with sharing class TestFileService {
         List<ContentVersion> cvs = new List<ContentVersion>();
         cvs.add(createLink('Board', 'CoI', Date.today(), record.Id));
         cvs.add(createLink('Volunteer', 'Application', Date.today().addDays(-1), record.Id));
-        cvs.add(createLink('Facilitator', 'ProfGrowthPlan', Date.today().addDays(-2), record.Id));
+        cvs.add(createLink('Facilitator', 'Practicum', Date.today().addDays(-2), record.Id));
         FileService.updateDates(cvs);
         record = [
-            SELECT BoardCoIReceived__c, VolunteerApplicationReceived__c, FacilitatorProfGrowthPlanReceived__c
+            SELECT BoardCoIReceived__c, VolunteerApplicationReceived__c, FacilitatorPracticumReceived__c
             FROM Contact
             WHERE Id = :record.Id
             LIMIT 1
@@ -170,8 +170,8 @@ public with sharing class TestFileService {
         );
         system.assertEquals(
             Date.today().addDays(-2),
-            record.FacilitatorProfGrowthPlanReceived__c,
-            'FacilitatorProfGrowthPlanReceived__c not set'
+            record.FacilitatorPracticumReceived__c,
+            'FacilitatorPracticumReceived__c not set'
         );
     }
 }

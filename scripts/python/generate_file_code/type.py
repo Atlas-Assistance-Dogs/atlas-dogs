@@ -22,7 +22,7 @@ class CategoryType:
         self.doc_type = typ
         self.fields = new_contact
 
-        if cat == 'Dog':
+        if cat == 'Dog' or cat == 'TeamDog':
             self.field = typ + 'Received__c'
             if typ == 'VacExams':
                 self.name = 'dog'

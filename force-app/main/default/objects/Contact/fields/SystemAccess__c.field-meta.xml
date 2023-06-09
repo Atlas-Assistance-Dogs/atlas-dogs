@@ -135,6 +135,11 @@
                 <default>false</default>
                 <label>Active Projects- Volunteer Recruitment and Retention</label>
             </value>
+            <value>
+                <fullName>Credit Check Required</fullName>
+                <default>false</default>
+                <label>Credit Check Required</label>
+            </value>
         </valueSetDefinition>
     </valueSet>
     <visibleLines>6</visibleLines>

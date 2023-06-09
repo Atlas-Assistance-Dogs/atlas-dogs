@@ -9,6 +9,7 @@ import DOG_FIELD from "@salesforce/schema/Team__c.Dog__c";
 import CERTIFICATION_FIELD from "@salesforce/schema/Team__c.PrimaryCertification__c";
 import SECONDARY_FIELD from "@salesforce/schema/Team__c.SecondaryCertification__c";
 import COUNT_FIELD from "@salesforce/schema/Team__c.PatCount__c";
+import STATUS_FIELD from "@salesforce/schema/Team__c.Status__c";
 import VALID_UNTIL_FIELD from "@salesforce/schema/Team__c.PatValidUntil__c";
 
 
@@ -27,7 +28,8 @@ export default class TeamFormCmp extends NavigationMixin(LightningElement) {
         certification: CERTIFICATION_FIELD,
         secondary: SECONDARY_FIELD,
         validUntil: VALID_UNTIL_FIELD,
-        patCount: COUNT_FIELD
+        patCount: COUNT_FIELD,
+        status: STATUS_FIELD
     };
 
     @api

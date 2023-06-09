@@ -4,7 +4,7 @@
     <description>Relationship types between a dog and contact</description>
     <externalId>false</externalId>
     <label>Type</label>
-    <required>false</required>
+    <required>true</required>
     <trackTrending>false</trackTrending>
     <type>MultiselectPicklist</type>
     <valueSet>
