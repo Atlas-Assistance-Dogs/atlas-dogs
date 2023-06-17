@@ -21,8 +21,8 @@ export default class FileInformation extends NavigationMixin(LightningElement) {
     isErrorMessage = false;
     message = "";
     recordTypeId;
-    category = "Client";
-    type = "ContactForm";
+    category = null;
+    type = null;
     @track categories = [];
     @track types = [];
 

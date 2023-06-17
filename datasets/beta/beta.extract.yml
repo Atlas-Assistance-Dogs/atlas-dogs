@@ -1,0 +1,3 @@
+extract:
+  CategoryRule__c:
+    fields: FIELDS(ALL)
