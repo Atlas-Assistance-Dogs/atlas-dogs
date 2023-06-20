@@ -3,6 +3,7 @@
 
 - object: Program__c
   nickname: client_program
+  just_once: True
   fields:
       Name: "Client Certification"
       CEU__c: false
@@ -11,6 +12,7 @@
       Reminder__c: 30
 
 - object: Program__c
+  just_once: True
   fields:
       Name: "Fitness"
       CEU__c: false
@@ -19,6 +21,7 @@
       Standalone__c: true
 
 - object: Program__c
+  just_once: True
   fields:
       Name: "Fitness [CEU]"
       CEU__c: true
@@ -27,6 +30,7 @@
       Standalone__c: true
 
 - object: Program__c
+  just_once: True
   fields:
       Name: "Medical Disability"
       CEU__c: false
@@ -35,30 +39,25 @@
       Standalone__c: true
 
 - object: Program__c
+  just_once: True
   fields:
       Name: "Medical Disability [CEU]"
-      CEU__c: false
+      CEU__c: true
       Current__c: true
       Months__c: 1.5
       Standalone__c: true
 
 - object: Program__c
+  just_once: True
   fields:
-      Name: "Medical Disability"
+      Name: "OT Advanced Bundle"
       CEU__c: false
       Current__c: true
-      Months__c: 1
+      Months__c: 3
       Standalone__c: true
 
 - object: Program__c
-  fields:
-      Name: "Medical Disability [CEU]"
-      CEU__c: false
-      Current__c: true
-      Months__c: 1.5
-      Standalone__c: true
-
-- object: Program__c
+  just_once: True
   fields:
       Name: "OT Advanced Bundle [CEU]"
       CEU__c: true
@@ -67,6 +66,7 @@
       Standalone__c: true
 
 - object: Program__c
+  just_once: True
   fields:
       Name: "Psychiatric Disability"
       CEU__c: false
@@ -75,6 +75,7 @@
       Standalone__c: true
 
 - object: Program__c
+  just_once: True
   fields:
       Name: "Psychiatric Disability [CEU]"
       CEU__c: true
@@ -83,6 +84,7 @@
       Standalone__c: true
 
 - object: Program__c
+  just_once: True
   fields:
       Name: "Puppy Raiser"
       Current__c: true
@@ -90,6 +92,7 @@
       Reminder__c: 30
 
 - object: Program__c
+  just_once: True
   fields:
       Name: "Service Dog Selection"
       CEU__c: false
@@ -98,6 +101,7 @@
       Standalone__c: true
 
 - object: Program__c
+  just_once: True
   fields:
       Name: "Service Dog Selection [CEU]"
       CEU__c: true
@@ -106,6 +110,7 @@
       Standalone__c: true
 
 - object: Program__c
+  just_once: True
   fields:
       Name: "Service Dog Training Bundle"
       CEU__c: true
@@ -114,6 +119,7 @@
       Standalone__c: true
 
 - object: Program__c
+  just_once: True
   fields:
       Name: "Service Dogs Foundations"
       CEU__c: false
@@ -122,6 +128,7 @@
       Standalone__c: true
 
 - object: Program__c
+  just_once: True
   fields:
       Name: "Service Dogs Foundations [CEU]"
       CEU__c: false
@@ -130,6 +137,7 @@
       Standalone__c: true
 
 - object: Program__c
+  just_once: True
   nickname: staff_program
   fields:
       Name: "Staff"
@@ -139,6 +147,7 @@
       Reminder__c: 7
 
 - object: Program__c
+  just_once: True
   nickname: snoopers_program
   fields:
       Name: "Sweet Snoopers [CEU]"
@@ -148,6 +157,7 @@
       Standalone__c: true
 
 - object: Program__c
+  just_once: True
   nickname: facilitator_program
   fields:
       Name: "Team Facilitator"
@@ -158,6 +168,7 @@
       Standalone__c: true
 
 - object: Program__c
+  just_once: True
   nickname: TSiM
   fields:
       Name: "Teams Set in Motion Client"
@@ -167,6 +178,7 @@
       Standalone__c: true
 
 - object: Program__c
+  just_once: True
   nickname: trainer_program
   fields:
       Name: "Trainer Certification"
@@ -176,6 +188,7 @@
       Reminder__c: 30
 
 - object: Program__c
+  just_once: True
   nickname: volunteer_program
   fields:
       Name: "Volunteer"

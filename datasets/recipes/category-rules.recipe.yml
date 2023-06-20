@@ -1,0 +1,85 @@
+- object: CategoryRule__c
+  just_once: True
+  fields:
+    Category__c: 'Dog'
+    Object__c: 'Dog'
+
+- object: CategoryRule__c
+  just_once: True
+  fields:
+    Category__c: 'Client'
+    Object__c: 'Team'
+
+- object: CategoryRule__c
+  just_once: True
+  fields:
+    Category__c: 'Dog'
+    Object__c: 'Team'
+
+- object: CategoryRule__c
+  just_once: True
+  fields:
+    Category__c: 'ADSiM'
+    Object__c: 'Contact'
+
+- object: CategoryRule__c
+  just_once: True
+  fields:
+    Category__c: 'Standalone'
+    Object__c: 'Contact'
+
+- object: CategoryRule__c
+  just_once: True
+  fields:
+    Category__c: 'Board'
+    Object__c: 'Contact'
+    Position__c: 'Board Member'
+
+- object: CategoryRule__c
+  just_once: True
+  fields:
+    Category__c: 'Client'
+    Object__c: 'Contact'
+    Position__c: 'Client'
+
+- object: CategoryRule__c
+  just_once: True
+  fields:
+    Category__c: 'Facilitator'
+    Object__c: 'Contact'
+    Position__c: 'Team Facilitator'
+
+- object: CategoryRule__c
+  just_once: True
+  fields:
+    Category__c: 'Facilitator'
+    Object__c: 'Contact'
+    Position__c: 'Team Facilitator Lead'
+
+- object: CategoryRule__c
+  just_once: True
+  fields:
+    Category__c: 'Puppy'
+    Object__c: 'Contact'
+    Position__c: 'Puppy Raiser'
+
+- object: CategoryRule__c
+  just_once: True
+  fields:
+    Category__c: 'Staff'
+    Object__c: 'Contact'
+    Position__c: 'Staff'
+
+- object: CategoryRule__c
+  just_once: True
+  fields:
+    Category__c: 'Trainer'
+    Object__c: 'Contact'
+    Position__c: 'Trainer'
+
+- object: CategoryRule__c
+  just_once: True
+  fields:
+    Category__c: 'Volunteer'
+    Object__c: 'Contact'
+    Position__c: 'Volunteer'

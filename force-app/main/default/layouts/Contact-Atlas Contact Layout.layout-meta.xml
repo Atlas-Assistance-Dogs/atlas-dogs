@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Layout xmlns="http://soap.sforce.com/2006/04/metadata">
-    <excludeButtons>RequestUseSfdc</excludeButtons>
     <layoutSections>
         <customLabel>false</customLabel>
         <detailHeading>false</detailHeading>
@@ -54,7 +53,7 @@
                 <field>Email</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Readonly</behavior>
+                <behavior>Edit</behavior>
                 <field>npe01__HomeEmail__c</field>
             </layoutItems>
             <layoutItems>
@@ -75,6 +74,10 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
+                <field>Contact__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
                 <field>SystemAccess__c</field>
             </layoutItems>
             <layoutItems>
@@ -88,6 +91,10 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>CanvasSisId__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>ShirtSize__c</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsTopToBottom</style>
@@ -323,6 +330,7 @@
         <fields>NAME</fields>
         <fields>Dog__c</fields>
         <fields>Type__c</fields>
+        <fields>DogStatus__c</fields>
         <relatedList>DogRelationship__c.Contact__c</relatedList>
     </relatedLists>
     <relatedLists>
@@ -344,7 +352,7 @@
     <showRunAssignmentRulesCheckbox>false</showRunAssignmentRulesCheckbox>
     <showSubmitAndAttachButton>false</showSubmitAndAttachButton>
     <summaryLayout>
-        <masterLabel>00h8G000001ju2C</masterLabel>
+        <masterLabel>00h8I000001FCK5</masterLabel>
         <sizeX>4</sizeX>
         <sizeY>0</sizeY>
         <summaryLayoutStyle>Default</summaryLayoutStyle>

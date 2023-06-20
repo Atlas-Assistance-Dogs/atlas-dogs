@@ -9,6 +9,10 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>CategoryRuleController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>ContinuingEducationUnitController</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -21,7 +25,15 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>FileInfo</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>LogController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>LogInfo</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -70,6 +82,21 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>BackgroundCheck__c.Type__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>CategoryRule__c.Category__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>CategoryRule__c.Position__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Contact.ADSiMApplicationReceived__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -96,6 +123,11 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Contact.Age__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Contact.AvailableAsTsimTA__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -145,6 +177,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Contact.ClientCertificationValidUntil__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Contact.ClientMedicalDevices__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -156,6 +193,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Contact.ContactFormReceived__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Contact.Contact__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -186,11 +228,6 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Contact.FacilitatorPracticumReceived__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Contact.FacilitatorProfGrowthPlanReceived__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -310,6 +347,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Contact.LastBoardTermStartDate__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Contact.LeadFacilitatorStatus__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -396,6 +438,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Contact.SexualOrientation__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Contact.ShirtSize__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -594,13 +641,13 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>DogRelationship__c.Dog__c</field>
+        <editable>false</editable>
+        <field>DogRelationship__c.DogStatus__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>DogRelationship__c.Type__c</field>
+        <field>DogRelationship__c.Dog__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -800,16 +847,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Log__c.SupportDetails__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Log__c.SupportDetails__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>ProgramAssignment__c.CompletionDate__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -990,6 +1027,15 @@
         <allowEdit>true</allowEdit>
         <allowRead>true</allowRead>
         <modifyAllRecords>true</modifyAllRecords>
+        <object>CategoryRule__c</object>
+        <viewAllRecords>true</viewAllRecords>
+    </objectPermissions>
+    <objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>true</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>true</modifyAllRecords>
         <object>ContinuingEducationUnit__c</object>
         <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
@@ -1083,6 +1129,10 @@
     </recordTypeVisibilities>
     <tabSettings>
         <tab>BackgroundCheck__c</tab>
+        <visibility>Visible</visibility>
+    </tabSettings>
+    <tabSettings>
+        <tab>CategoryRule__c</tab>
         <visibility>Visible</visibility>
     </tabSettings>
     <tabSettings>

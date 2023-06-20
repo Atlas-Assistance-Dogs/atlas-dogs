@@ -9,6 +9,9 @@
 List<Log__c> logs = [SELECT Id from Log__c];
 delete logs;
 
+List<PuppyLog__c> puppyLogs = [SELECT Id from PuppyLog__c];
+delete puppyLogs;
+
 List<DogRelationship__c> drs = [SELECT Id FROM DogRelationship__c];
 delete drs;
 
@@ -59,3 +62,6 @@ delete accounts;
 
 List<Campaign> campaigns = [SELECT Id FROM Campaign];
 delete campaigns;
+
+List<CategoryRule__c> rules = [SELECT Id FROM CategoryRule__c];
+delete rules;

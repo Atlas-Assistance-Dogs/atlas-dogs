@@ -69,7 +69,15 @@ public with sharing class FileService {
         }
         if (objName == Team__c.class.getName()) {
             updateTeamDates(cvs, entityId);
-            linkDocumentsToTeamMember(cvs, entityId);
+            AtlasSettings__c settings = AtlasSettings__c.getOrgDefaults();
+            // check to see if settings are missing
+            if (settings.DogExamRenewalYears__c == 0) {
+                settings = new AtlasSettings__c();
+                insert settings;
+            }
+            if (settings.LinkFilesToTeamMembers__c) {
+                linkDocumentsToTeamMember(cvs, entityId);
+            }
         }
         if (objName == Contact.class.getName()) {
             updateContactDates(cvs, entityId);
@@ -85,7 +93,7 @@ public with sharing class FileService {
                 if (cv.Type__c == 'VacExams') {
                     continue;
                 }
-                if (cv.Category__c == 'Dog') {
+                if (cv.Category__c == 'TeamDog') {
                     links.add(new ContentDocumentLink(
                         ContentDocumentId = cv.ContentDocumentId,
                         LinkedEntityId = team.Id
@@ -109,7 +117,7 @@ public with sharing class FileService {
                         LinkedEntityId = team.Client__c
                     ));
                 }
-                else if (cv.Category__c == 'Dog') {
+                else if (cv.Category__c == 'TeamDog') {
                     links.add(new ContentDocumentLink(
                         ContentDocumentId = cv.ContentDocumentId,
                         LinkedEntityId = team.Dog__c
@@ -197,7 +205,7 @@ public with sharing class FileService {
             SELECT Id,
                 ADSiMApplicationReceived__c, ADSiMPreApplicationReceived__c, ADSiMProgAgreementReceived__c,
 				BoardAgreementReceived__c, BoardApplicationReceived__c, BoardCoIReceived__c, BoardResumeReceived__c, BoardToNReceived__c,
-				FacilitatorApplicationReceived__c, FacilitatorCertAgreementReceived__c, FacilitatorInfrNoticeReceived__c, FacilitatorPracticumReceived__c, FacilitatorProfGrowthPlanReceived__c, FacilitatorProgAgreementReceived__c, FacilitatorReferenceReceived__c,
+				FacilitatorApplicationReceived__c, FacilitatorCertAgreementReceived__c, FacilitatorInfrNoticeReceived__c, FacilitatorPracticumReceived__c, FacilitatorProgAgreementReceived__c, FacilitatorReferenceReceived__c,
 				PuppyApplicationReceived__c, PuppyCertAgreementReceived__c, PuppyContractReceived__c, PuppyInfrNoticeReceived__c, PuppyProgAgreementReceived__c, PuppyReferenceReceived__c,
 				StaffAgreementReceived__c, StaffApplicationReceived__c, StaffI9Received__c, StaffOfferReceived__c, StaffResumeReceived__c, StaffW4Received__c, StaffW9Received__c,
 				TrainerApplicationReceived__c, TrainerCertAgreementReceived__c, TrainerClientReferenceReceived__c, TrainerInfrNoticeReceived__c, TrainerProfReferenceReceived__c, TrainerProgAgreementReceived__c,
@@ -210,6 +218,13 @@ public with sharing class FileService {
         if (contacts.size() == 0)
             return;
         Contact contact = contacts[0];
+        // Get the Date, order asc so we update the field with the last received
+        cvs = [
+            SELECT Category__c, Type__c, Date__c
+            FROM ContentVersion
+            WHERE Id IN :ids
+            ORDER BY Date__c
+        ];
 
         for (ContentVersion cv : cvs) {        
             if (cv.Category__c == 'ADSiM') {
@@ -304,10 +319,6 @@ public with sharing class FileService {
 
         if (cv.Type__c == 'Practicum' && isLater(contact.FacilitatorPracticumReceived__c, cv.Date__c)) {
             contact.FacilitatorPracticumReceived__c = cv.Date__c;
-        }
-
-        if (cv.Type__c == 'ProfGrowthPlan' && isLater(contact.FacilitatorProfGrowthPlanReceived__c, cv.Date__c)) {
-            contact.FacilitatorProfGrowthPlanReceived__c = cv.Date__c;
         }
 
         if (cv.Type__c == 'ProgAgreement' && isLater(contact.FacilitatorProgAgreementReceived__c, cv.Date__c)) {
@@ -433,7 +444,7 @@ public with sharing class FileService {
         List<Team__c> teams = [
             SELECT Id, Client__c, Dog__c,
                    ClientApplicationReceived__c, ClientApplicationVideoReceived__c, ClientCGCFormReceived__c, ClientCertAgreementReceived__c, ClientLOMIReceived__c, ClientPreApplicationReceived__c, ClientProgAgreementReceived__c, ClientSurveyReceived__c, ClientVAPWReceived__c,
-					HealthFormReceived__c, XrayReceived__c
+				   HealthFormReceived__c, XrayReceived__c
             FROM Team__c
             WHERE Id = :recordId
         ];

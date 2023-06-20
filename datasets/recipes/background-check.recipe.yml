@@ -16,3 +16,7 @@
               - Pending
               - Pass
               - Fail
+      Type__c:
+          random_choice:
+              Criminal: 80%
+              Credit: 20%

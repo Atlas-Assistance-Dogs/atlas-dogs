@@ -16,7 +16,8 @@ public with sharing class PublicAccessTestController {
                     ReviewComments__c,
                     Status__c,
                     Team__c,
-                    Type__c
+                    Type__c,
+                    ValidUntil__c
                 FROM PublicAccessTest__c
                 WHERE Assessor__c = :recordId OR Team__c = :recordId
                 ORDER BY DateCompleted__c DESC NULLS LAST

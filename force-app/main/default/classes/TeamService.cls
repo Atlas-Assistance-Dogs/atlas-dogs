@@ -18,7 +18,7 @@ public with sharing class TeamService {
             Boolean found = false;
             // add client to the type if not already there
             for (DogRelationShip__c relationShip : relationShips) {
-                if (relationShip.Type__c.contains('Client')) {
+                if (relationShip.Type__c != null && relationShip.Type__c.contains('Client')) {
                     found = true;
                     break;
                 }
@@ -28,19 +28,18 @@ public with sharing class TeamService {
             }
             // otherwise, add Client to the first relationship (should be the only one)
             DogRelationShip__c relationShip = relationShips[0];
-            relationShip.Type__c = relationShip.Type__c + ';Client';
+            if (String.isBlank(relationShip.Type__c)) {
+                relationShip.Type__c = 'Client';
+            }
+            else {
+                relationShip.Type__c = relationShip.Type__c + ';Client';
+            }
             update relationShip;
         }
     }
 
-    private static Set<string> inactiveStatus = new Set<string> {'Decertified', 'Discontinued'};
-    
     // Update client status.  This is meant to be called from the team update trigger.
     public static void updateClientStatus(Team__c team) {
-        if (inactiveStatus.contains(team.Status__c)) {
-            return;
-        }
-
         List<Contact> clients = [SELECT ClientStatus__c, ClientCertificationValidUntil__c FROM Contact WHERE Id = :team.Client__c];
 
         if (!clients.isEmpty()) {
@@ -53,10 +52,6 @@ public with sharing class TeamService {
     
     // Update client status.  This is meant to be called from the team update trigger.
     public static void updateDogStatus(Team__c team) {
-        if (inactiveStatus.contains(team.Status__c)) {
-            return;
-        }
-
         List<Dog__c> dogs = [SELECT Status__c FROM Dog__c WHERE Id = :team.Dog__c];
 
         if (!dogs.isEmpty()) {
@@ -64,5 +59,26 @@ public with sharing class TeamService {
             dog.Status__c = team.Status__c;
             update dog;
         }
+    }
+
+    // Update PAT information
+    public static void updatePatInformation(Set<Id> teamIds) {
+        List<Team__c> teams = [SELECT Id, Client__c, PatValidUntil__c, PatCount__c FROM Team__c WHERE Id IN :teamIds];
+
+        for (Team__c team : teams) {
+            List<PublicAccessTest__c> passingPats = [
+                SELECT Id, ValidUntil__c
+                FROM PublicAccessTest__c
+                WHERE Status__c = 'Passed' AND Team__c = :team.Id
+                ORDER BY ValidUntil__c DESC];
+            if (passingPats.isEmpty()) {
+                team.PatValidUntil__c = null;
+            }
+            else if (team.PatValidUntil__c != passingPats[0].ValidUntil__c) {
+                team.PatValidUntil__c = passingPats[0].ValidUntil__c;
+            }
+            team.PatCount__c = passingPats.size();
+        }
+        upsert teams;
     }
 }

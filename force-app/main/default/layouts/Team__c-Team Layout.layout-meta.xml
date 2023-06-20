@@ -20,7 +20,7 @@
                 <field>SecondaryCertification__c</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Edit</behavior>
+                <behavior>Required</behavior>
                 <field>Client__c</field>
             </layoutItems>
             <layoutItems>
@@ -114,7 +114,7 @@
                 <field>XrayReceived__c</field>
             </layoutItems>
         </layoutColumns>
-        <layoutColumns></layoutColumns>
+        <layoutColumns/>
         <style>TwoColumnsLeftToRight</style>
     </layoutSections>
     <layoutSections>

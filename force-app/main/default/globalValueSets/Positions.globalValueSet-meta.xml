@@ -38,7 +38,7 @@
     <customValue>
         <fullName>Staff</fullName>
         <default>false</default>
-        <label>Staff</label>
+        <label>Staff/Contractor</label>
     </customValue>
     <customValue>
         <fullName>Puppy Raiser</fullName>

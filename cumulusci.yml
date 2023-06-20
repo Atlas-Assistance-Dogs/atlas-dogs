@@ -52,8 +52,14 @@ flows:
                 task: assign_permission_sets
                 options:
                     api_names: AtlasSuperUser
-            4:
-                task: load_dataset
+
+    config_managed:
+        steps:
+        # overload load_sample_data for now
+            90:
+                task: assign_permission_sets
+                options:
+                    api_names: AtlasSuperUser
 
     deploy_unmanaged:
         steps:

@@ -5,15 +5,21 @@ public with sharing class TestContactTrigger {
     }
 
     private static Contact getContact(Id id) {
-        return [SELECT Email, FirstName, npe01__HomeEmail__c FROM Contact WHERE Id = :id LIMIT 1];
+        return [
+            SELECT Email, FirstName, npe01__HomeEmail__c, npe01__AlternateEmail__c,
+                Phone, HomePhone, OtherPhone,
+                LastBoardTermStartDate__c, BoardTermValidUntil__c
+            FROM Contact
+            WHERE Id = :id LIMIT 1];
     }
 
     @isTest
-    static void insert_setsHomeEmail_WhenEmailSet() {
+    static void insert_LeavesEmailPhone_WhenHomeNotSetAndContactAtEmpty() {
         Contact joe = new Contact(
             Email = 'joe-blow@pump.com',
             FirstName = 'Joe',
-            LastName = 'Blow'
+            LastName = 'Blow',
+            Phone = 'generic-phone'
         );
 
         // Act
@@ -25,20 +31,26 @@ public with sharing class TestContactTrigger {
         System.assert(result.isSuccess());
         Contact saved = getContact(result.getId());
         System.assert(result.getErrors().size() == 0);
-        System.assertEquals(saved.Email, saved.npe01__HomeEmail__c);
-        System.assertEquals(joe.Email, saved.npe01__HomeEmail__c);
+        System.assertEquals(joe.Email, saved.Email);
+        System.assertEquals(joe.Phone, saved.Phone);
+        System.assert(string.isBlank(saved.npe01__HomeEmail__c));
+        System.assert(string.isBlank(saved.npe01__AlternateEmail__c));
+        System.assert(string.isBlank(saved.HomePhone));
+        System.assert(string.isBlank(saved.OtherPhone));
     }
-/*
+
     @isTest
-    static void update_setsHomeEmail_WhenEmailChanged() {
+    static void update_setsBoardTermEnd_whenStartInJanuary() {
         Contact joe = new Contact(
             Email = 'joe-blow@pump.com',
             FirstName = 'Joe',
-            LastName = 'Blow'
+            LastName = 'Blow',
+            LastBoardTermStartDate__c = null
         );
         insert joe;
 
-        joe.Email = 'another-email@pump.com';
+        Date start = Date.newInstance(2023, 1, 1);
+        joe.LastBoardTermStartDate__c = start;
 
         // Act
         Test.startTest();
@@ -49,8 +61,81 @@ public with sharing class TestContactTrigger {
         System.assert(result.isSuccess());
         Contact saved = getContact(result.getId());
         System.assert(result.getErrors().size() == 0);
-        System.assertEquals(saved.Email, saved.npe01__HomeEmail__c);
-        System.assertEquals(joe.Email, saved.npe01__HomeEmail__c);
+        System.assertEquals(saved.BoardTermValidUntil__c, Date.newInstance(2026, 6, 30));
     }
-    */
+
+    @isTest
+    static void update_setsBoardTermEnd_whenStartJune() {
+        Contact joe = new Contact(
+            Email = 'joe-blow@pump.com',
+            FirstName = 'Joe',
+            LastName = 'Blow',
+            LastBoardTermStartDate__c = null
+        );
+        insert joe;
+
+        Date start = Date.newInstance(2023, 6, 30);
+        joe.LastBoardTermStartDate__c = start;
+
+        // Act
+        Test.startTest();
+        Database.SaveResult result = Database.update(joe, false);
+        Test.stopTest();
+
+        // Assert
+        System.assert(result.isSuccess());
+        Contact saved = getContact(result.getId());
+        System.assert(result.getErrors().size() == 0);
+        System.assertEquals(saved.BoardTermValidUntil__c, Date.newInstance(2026, 6, 30));
+    }
+
+    @isTest
+    static void update_setsBoardTermEnd_whenStartJuly() {
+        Contact joe = new Contact(
+            Email = 'joe-blow@pump.com',
+            FirstName = 'Joe',
+            LastName = 'Blow',
+            LastBoardTermStartDate__c = null
+        );
+        insert joe;
+
+        Date start = Date.newInstance(2022, 7, 4);
+        joe.LastBoardTermStartDate__c = start;
+
+        // Act
+        Test.startTest();
+        Database.SaveResult result = Database.update(joe, false);
+        Test.stopTest();
+
+        // Assert
+        System.assert(result.isSuccess());
+        Contact saved = getContact(result.getId());
+        System.assert(result.getErrors().size() == 0);
+        System.assertEquals(saved.BoardTermValidUntil__c, Date.newInstance(2026, 6, 30));
+    }
+
+    @isTest
+    static void update_setsBoardTermEnd_whenStartDecember() {
+        Contact joe = new Contact(
+            Email = 'joe-blow@pump.com',
+            FirstName = 'Joe',
+            LastName = 'Blow',
+            LastBoardTermStartDate__c = null
+        );
+        insert joe;
+
+        Date start = Date.newInstance(2022, 12, 25);
+        joe.LastBoardTermStartDate__c = start;
+
+        // Act
+        Test.startTest();
+        Database.SaveResult result = Database.update(joe, false);
+        Test.stopTest();
+
+        // Assert
+        System.assert(result.isSuccess());
+        Contact saved = getContact(result.getId());
+        System.assert(result.getErrors().size() == 0);
+        System.assertEquals(saved.BoardTermValidUntil__c, Date.newInstance(2026, 6, 30));
+    }
 }

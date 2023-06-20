@@ -84,6 +84,10 @@ public class TestBackgroundCheckController {
 
         System.assertEquals(1, checks.items.size());
         System.assertEquals(1, checks.total);
+        BackgroundCheck__c check = ((BackgroundCheck)checks.items[0]).check;
+        System.assertEquals(bgCheck.Date__c, check.Date__c);
+        System.assertEquals('Criminal', check.Type__c);
+        System.assertEquals('Pass', check.Status__c);
     }
 
     @isTest
@@ -93,7 +97,8 @@ public class TestBackgroundCheckController {
         BackgroundCheck__c bgCheck = new BackgroundCheck__c(
             Contact__c = jill.Id,
             Date__c = Date.today(),
-            Status__c = 'Pass'
+            Status__c = 'Pass',
+            Type__c = 'Credit'
         );
         insert bgCheck;
 
@@ -121,10 +126,12 @@ public class TestBackgroundCheckController {
 
         System.assertEquals(1, checks.items.size());
         System.assertEquals(1, checks.total);
-        BackgroundCheck check = (BackgroundCheck)checks.items[0];
-        System.assertEquals(contentDocumentId, check.documentId);
-        System.assertEquals('Pass', check.status);
-        System.assertEquals(Date.today(), check.completedDate);
-        System.assertEquals(document.Title, check.fileName);
+        BackgroundCheck info = (BackgroundCheck)checks.items[0];
+        BackgroundCheck__c check = info.check;
+        System.assertEquals(contentDocumentId, info.documentId);
+        System.assertEquals('Pass', check.Status__c);
+        System.assertEquals('Credit', check.Type__c);
+        System.assertEquals(Date.today(), check.Date__c);
+        System.assertEquals(document.Title, info.fileName);
     }
 }
