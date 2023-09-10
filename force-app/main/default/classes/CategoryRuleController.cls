@@ -9,7 +9,6 @@ public with sharing class CategoryRuleController {
         Map<string, string> categoryEntries = FileController.getEntryMap(CategoryRule__c.Category__c.getDescribe());
 
         List<String> groupNames = UserService.GetGroupNames(UserInfo.getUserId());
-        System.debug(groupNames);
 
         // get the categories that work for the object
         List<CategoryRule__c> rules = [SELECT Category__c, Group__c FROM CategoryRule__c WHERE Object__c = :objLabel AND Position__c = null];

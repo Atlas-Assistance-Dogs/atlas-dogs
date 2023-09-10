@@ -7,12 +7,16 @@ public with sharing class UserService {
         Map<Id, Id> grRoleMap = new Map<Id, Id>();
 
         //Populating the Map with RelatedID(i.e.UserRoledId) as Key
-        for (Group gr : [SELECT id, relatedid, name FROM Group]) {
+        for (Group gr : [
+            SELECT Id, RelatedId, Name
+            FROM Group
+            WHERE RelatedId != NULL
+        ]) {
             grRoleMap.put(gr.relatedId, gr.id);
         }
 
         //Groups directly associated to user
-        Set<Id> groupwithUser = new Set<Id>();
+        Set<Id> groupWithUser = new Set<Id>();
 
         //Populating the Group with User with GroupId we are filtering only  for Group of Type Regular,Role and RoleAndSubordinates
         for (GroupMember gm : [
@@ -24,7 +28,7 @@ public with sharing class UserService {
                 OR Group.Type = 'Role'
                 OR Group.Type = 'RoleAndSubordinates')
         ]) {
-            groupwithUser.add(gm.groupId);
+            groupWithUser.add(gm.groupId);
         }
 
         //Groups with Role
@@ -34,8 +38,8 @@ public with sharing class UserService {
                 results.add(grRoleMap.get(user.UserRoleId));
             }
         }
-        //Combining both the Set
-        results.addAll(groupwithUser);
+        //Combining both the Sets
+        results.addAll(groupWithUser);
 
         //Traversing the whole list of Groups to check any other nested Group
         Map<Id, Id> grMap = new Map<Id, Id>();
@@ -49,11 +53,12 @@ public with sharing class UserService {
         ]) {
             grMap.put(gr.UserOrGroupId, gr.Groupid);
         }
-        for (Id i : results) {
-            if (grMap.containsKey(i)) {
-                results.add(grMap.get(i));
+        for (Id groupId : results) {
+            if (grMap.containsKey(groupId)) {
+                results.add(grMap.get(groupId));
             }
         }
+
         List<Group> groups = [SELECT Id, Name FROM Group WHERE Id IN :results];
         List<String> groupNames = new List<String>();
         for (Group grp : groups) {
