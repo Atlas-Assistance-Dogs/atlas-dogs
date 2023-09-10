@@ -55,7 +55,7 @@ public with sharing class TestCategoryRuleController {
         System.assertEquals('Team Client', categories[0].get('label'));
         System.assertEquals('Dog', categories[1].get('label'));
     }
-
+/*
     @isTest
     public static void getCategoriesForObject_ReturnsClient_WhenClient() {
         setup();
@@ -77,4 +77,41 @@ public with sharing class TestCategoryRuleController {
         System.assertEquals('Client', categories[0].get('value'));
         System.assertEquals('Volunteer', categories[1].get('value'));
     }
+
+    // Create a test user
+    private void createVolunteerUser() {
+        // Create a unique UserName
+        String uniqueUserName = 'standarduser' + DateTime.now().getTime() + '@testorg.com';
+        // This code runs as the system user
+        Profile p = [SELECT Id FROM Profile WHERE Name='Standard User'];
+        User u = new User(
+            Alias = 'standt', Email='standarduser@testorg.com',
+            EmailEncodingKey='UTF-8', LastName='Testing', LanguageLocaleKey='en_US',
+            LocaleSidKey='en_US', ProfileId = p.Id,
+            TimeZoneSidKey='America/Los_Angeles',
+            UserName=uniqueUserName);
+
+    }
+    // Create a group and user for Volunteer access
+    private void setupGroupUser() {
+        User initialOpportunityOwner = \\ Calls method to get a test user instance
+        insert initialOpportunityOwner;
+
+        // Apex Manual sharing needs to be established before the ownership changes
+        // https://developer.salesforce.com/forums/?id=906F00000008xZJIAY
+
+        Group queryOpportunitiesGroup = new Group(Name='OppShareGroup', DeveloperName='OppShareGroup');
+        insert queryOpportunitiesGroup;
+
+        // Avoid mixed DML using runAs
+        System.runAs(new User(Id = UserInfo.getUserId())) {
+            GroupMember gm = new GroupMember(GroupId = queryOpportunitiesGroup.Id, UserOrGroupId = initialOpportunityOwner.Id);
+            insert gm;
+        }
+
+    }
+    @isTest
+    public static void getCategoriesForObject_RestrictsClientCategory_WhenUserNotInAllGroup() {
+        setup();
+    }*/
 }

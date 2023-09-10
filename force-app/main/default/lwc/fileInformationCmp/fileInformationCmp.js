@@ -47,7 +47,7 @@ export default class FileInformation extends NavigationMixin(LightningElement) {
 
     @wire(getCategoriesForObject, { recordId: "$objectId" })
     getCategories(result) {
-        if (result?.data) {
+        if (result?.data !== undefined) {
             this.categories = result.data;
             if (this.categories.length == 1) {
                 this.category = this.categories[0].value;
@@ -59,7 +59,7 @@ export default class FileInformation extends NavigationMixin(LightningElement) {
                     title: "Error!!",
                     message:
                         result.error.body?.message ??
-                        "An error occured getting categories",
+                        "An error occurred getting categories",
                     variant: "error"
                 })
             );
@@ -79,7 +79,7 @@ export default class FileInformation extends NavigationMixin(LightningElement) {
                     title: "Error!!",
                     message:
                         error.body?.message ??
-                        "An error occured getting object info",
+                        "An error occurred getting object info",
                     variant: "error"
                 })
             );

@@ -5,6 +5,7 @@ import getRelatedPats from "@salesforce/apex/PublicAccessTestController.getRelat
 import { deleteRecord } from "lightning/uiRecordApi";
 import { refreshApex } from "@salesforce/apex";
 
+import PAT_OBJECT from "@salesforce/schema/PublicAccessTest__c";
 import DATE_FIELD from "@salesforce/schema/PublicAccessTest__c.DateCompleted__c";
 import LOCATION_FIELD from "@salesforce/schema/PublicAccessTest__c.Location__c";
 import STATUS_FIELD from "@salesforce/schema/PublicAccessTest__c.Status__c";
@@ -55,6 +56,7 @@ export default class RelatedPatsCmp extends NavigationMixin(LightningElement) {
     @api objectApiName;
     @api viewAll;
     columns = COLS;
+    relatedObject = PAT_OBJECT;
     data = [];
     total = 0;
     fieldName = STATUS_FIELD.fieldApiName;

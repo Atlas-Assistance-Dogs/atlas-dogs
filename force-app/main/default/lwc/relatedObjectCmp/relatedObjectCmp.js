@@ -2,7 +2,7 @@ import { LightningElement, wire, api, track } from "lwc";
 import { NavigationMixin } from "lightning/navigation";
 import { getObjectInfo } from "lightning/uiObjectInfoApi";
 import { getRecord } from "lightning/uiRecordApi";
-import DOG_OBJECT from "@salesforce/schema/Dog__c";
+import CV_OBJECT from "@salesforce/schema/ContentVersion";
 
 const MAX_DISPLAY = 6;
 export default class RelatedObjectCmp extends NavigationMixin(LightningElement) {
@@ -14,14 +14,15 @@ export default class RelatedObjectCmp extends NavigationMixin(LightningElement) 
     @api recordId;
     @api auraCompName;
     @api objectApiName;
+    @api relatedObject;
 
     @track objectInfo;
 
-    @wire(getObjectInfo, { objectApiName: this.objectApiName })
+    @wire(getObjectInfo, { objectApiName: '$relatedObject' })
     objectInfo;
 
     get visible() {
-        return this.objectInfo.data.queryable;
+        return this.objectInfo?.data?.queryable ?? false;
     }
 
     get showBreadCrumbs() {
@@ -51,7 +52,7 @@ export default class RelatedObjectCmp extends NavigationMixin(LightningElement) 
     }
 
     handleViewAll() {
-        const nsp = this.namespace(DOG_OBJECT.objectApiName);
+        const nsp = this.namespace(CV_OBJECT.objectApiName);
         const component = `${nsp}__${this.auraCompName}`;
         // Navigate to the component.
         this[NavigationMixin.Navigate]({
