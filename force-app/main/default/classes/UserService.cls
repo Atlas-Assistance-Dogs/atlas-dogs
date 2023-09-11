@@ -3,6 +3,14 @@ public with sharing class UserService {
         //Declaring a Set as we don't want Duplicate Group Ids
         Set<Id> results = new Set<Id>();
 
+        // add the groups that the user is the owner of
+        // handy particularly in scratch orgs
+        List<Group> ownedGroups = [SELECT Id, Name FROM Group WHERE OwnerId = :userId OR CreatedById = :userId];
+        System.debug(ownedGroups);
+        for (Group gr: ownedGroups) {
+            results.add(gr.Id);
+        }
+
         ///Declaring a Map for Group with Role
         Map<Id, Id> grRoleMap = new Map<Id, Id>();
 
@@ -20,7 +28,7 @@ public with sharing class UserService {
 
         //Populating the Group with User with GroupId we are filtering only  for Group of Type Regular,Role and RoleAndSubordinates
         for (GroupMember gm : [
-            SELECT groupId
+            SELECT groupId, Group.Name
             FROM GroupMember
             WHERE
                 UserOrGroupId = :userId
@@ -28,6 +36,7 @@ public with sharing class UserService {
                 OR Group.Type = 'Role'
                 OR Group.Type = 'RoleAndSubordinates')
         ]) {
+            System.debug(gm.Group.Name);
             groupWithUser.add(gm.groupId);
         }
 
