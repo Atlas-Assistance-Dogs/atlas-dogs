@@ -387,36 +387,6 @@ public with sharing class TestFileController {
         System.assertEquals(0, related.total);
     }
 
-    // Create a test user
-    private static User createUser() {
-        // Create a unique UserName
-        String uniqueUserName = 'standarduser' + DateTime.now().getTime() + '@testorg.com';
-        // This code runs as the system user
-        Profile p = [SELECT Id FROM Profile WHERE Name='Standard User'];
-        User adminUser = new User(
-            Alias = 'standt', Email='adminuser@testorg.com',
-            EmailEncodingKey='UTF-8', LastName='Testing', LanguageLocaleKey='en_US',
-            LocaleSidKey='en_US', ProfileId = p.Id,
-            TimeZoneSidKey='America/Los_Angeles',
-            UserName=uniqueUserName);
-        return adminUser;
-    }
-
-    private static void addUserToGroups(User user, string[] groupNames) {
-        List<Group> groups = [SELECT Id, Name FROM Group WHERE Name in :groupNames];
-
-        // Avoid mixed DML using runAs
-        System.runAs(new User(Id = UserInfo.getUserId())) {
-            List<GroupMember> gms = new List<GroupMember>();
-            for (Group grp : groups) {
-                gms.add(new GroupMember(GroupId = grp.Id, UserOrGroupId = user.Id));
-            }
-            insert gms;
-            PermissionSet ps = [SELECT Id FROM PermissionSet WHERE Name = 'AtlasSuperUser'];
-            insert new PermissionSetAssignment(AssigneeId = user.id, PermissionSetId = ps.Id);
-        }
-    }
-
     @isTest
     public static void getRelatedFiles_ReturnsRelatedRecords() {
         Dog__c ace = new Dog__c(Name = 'Ace');
@@ -431,9 +401,9 @@ public with sharing class TestFileController {
         }
 
         FileController.relateFiles(ids, ace.Id);
-        User adminUser = createUser();
+        User adminUser = TestUtilities.createUser();
         insert adminUser;
-        addUserToGroups(adminUser, new string[] { 'Team', 'Volunteer', 'Staff' });
+        TestUtilities.addUserToGroups(adminUser, new string[] { 'Team', 'Volunteer', 'Staff' });
         RelatedObjects related;
         Test.startTest();
         System.runAs(new User(Id = adminUser.Id)) {

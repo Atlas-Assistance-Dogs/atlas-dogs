@@ -28,24 +28,28 @@ public with sharing class PositionStatusController {
 
     // We want the position status to be in this order, the Positions set for the contact
     // may not be in this order
-    private String[] POSITIONS = new string[] {
+    public final static String[] POSITION_LIST = new string[] {
         'Volunteer',
         'Team Facilitator',
         'Puppy Raiser',
         'Board',
         'Client',
         'Trainer',
-        'Other Programs'
+        'Other'
     };
 
     private static List<PositionStatus> getStatusForPositions(Contact person) {
-        Set<String> positions = new Set<string>(person.Positions__c.split(';'));
         List<PositionStatus> statuses = new List<PositionStatus>();
-        for (string position : POSITIONS) {
+        if (person.Positions__c == null) {
+            return statuses;
+        }
+        Set<String> positions = new Set<string>(person.Positions__c.split(';'));
+        for (string position : POSITION_LIST) {
             switch on (position) {
                 when 'Volunteer' {
-                    if (positions.contains(position))
+                    if (positions.contains(position)) {
                         statuses.add(new PositionStatus(position, person.GW_Volunteers__Volunteer_Status__c));
+                    }
                 }
 
                 when 'Team Facilitator' {
@@ -72,8 +76,9 @@ public with sharing class PositionStatusController {
                 }
 
                 when 'Board' {
-                    if (positions.contains('Board Member'))
+                    if (positions.contains('Board Member')) {
                         statuses.add(new PositionStatus(position, person.BoardMemberStatus__c));
+                    }
                 }
 
                 when 'Client' {
