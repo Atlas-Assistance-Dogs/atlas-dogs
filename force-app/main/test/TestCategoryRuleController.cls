@@ -23,11 +23,88 @@ public with sharing class TestCategoryRuleController {
         return adminUser;
     }
 
+    public static void createCategoryRules() {
+        List<CategoryRule__c> rules = new List<CategoryRule__c> {
+            new CategoryRule__c(
+                Category__c = 'Dog',
+                Object__c = 'Dog',
+                Group__c = 'Team'
+            ),
+            new CategoryRule__c(
+                Category__c = 'Client',
+                Object__c = 'Team',
+                Group__c = 'Team'
+            ),
+            new CategoryRule__c(
+                Category__c = 'Dog',
+                Object__c = 'Team',
+                Group__c = 'Team'
+            ),
+            new CategoryRule__c(
+                Category__c = 'ADSiM',
+                Object__c = 'Contact',
+                Group__c = 'All'
+            ),
+            new CategoryRule__c(
+                Category__c = 'Standalone',
+                Object__c = 'Contact',
+                Group__c = 'All'
+            ),
+            new CategoryRule__c(
+                Category__c = 'Board',
+                Object__c = 'Contact',
+                Position__c = 'Board Member',
+                Group__c = 'All'
+            ),
+            new CategoryRule__c(
+                Category__c = 'Client',
+                Object__c = 'Contact',
+                Position__c = 'Client',
+                Group__c = 'Team'
+            ),
+            new CategoryRule__c(
+                Category__c = 'Facilitator',
+                Object__c = 'Contact',
+                Position__c = 'Team Facilitator',
+                Group__c = 'Team'
+            ),
+            new CategoryRule__c(
+                Category__c = 'Facilitator',
+                Object__c = 'Contact',
+                Position__c = 'Team Facilitator Lead',
+                Group__c = 'Team'
+            ),
+            new CategoryRule__c(
+                Category__c = 'Puppy',
+                Object__c = 'Contact',
+                Position__c = 'Puppy Raiser',
+                Group__c = 'All'
+            ),
+            new CategoryRule__c(
+                Category__c = 'Staff',
+                Object__c = 'Contact',
+                Position__c = 'Staff',
+                Group__c = 'All'
+            ),
+            new CategoryRule__c(
+                Category__c = 'Trainer',
+                Object__c = 'Contact',
+                Position__c = 'Trainer',
+                Group__c = 'All'
+            ),
+            new CategoryRule__c(
+                Category__c = 'Volunteer',
+                Object__c = 'Contact',
+                Position__c = 'Volunteer',
+                Group__c = 'Volunteer'
+            )
+        };
+        insert rules;
+    }
+
     private static void setup() {
         volunteerGroup = [SELECT Id, Name FROM Group WHERE Name='Volunteer' LIMIT 1];
-        teamGroup = new Group(Name='Team', DeveloperName='Team');
-        Group[] groups = new Group[] { teamGroup };
-        insert groups;
+        teamGroup = [SELECT Id, Name FROM Group WHERE Name='Team' LIMIT 1];
 
         adminUser = createAdminUser();
         insert adminUser;
