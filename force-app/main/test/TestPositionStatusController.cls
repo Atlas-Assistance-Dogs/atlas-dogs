@@ -34,9 +34,32 @@ public with sharing class TestPositionStatusController {
         System.assert(statuses.isEmpty());
     }
 
-    @isTest
-    public static void getPositionStatusForContact_ReturnsFullList_WhenPositionsFull() {
-        // Arrange
+    private static final List<PositionStatus> EXPECTED_POSITION_STATUSES = new List<PositionStatus>{
+        new PositionStatus('Volunteer', 'Active'),
+        new PositionStatus(
+            PositionStatusController.POSITION_LIST[1],
+            'Certified-Active'
+        ),
+        new PositionStatus(
+            PositionStatusController.POSITION_LIST[2],
+            'Inactive'
+        ),
+        new PositionStatus(
+            PositionStatusController.POSITION_LIST[3],
+            'Onboarding'
+        ),
+        new PositionStatus(
+            PositionStatusController.POSITION_LIST[4],
+            'In Training'
+        ),
+        new PositionStatus(
+            PositionStatusController.POSITION_LIST[5],
+            'Suspended'
+        ),
+        new PositionStatus(PositionStatusController.POSITION_LIST[6], 'Decertifed/Suspended')
+    };
+
+    private static Id setupFullStatus() {
         Contact joe = new Contact(
             FirstName = 'Joe',
             LastName = 'Blow',
@@ -55,23 +78,63 @@ public with sharing class TestPositionStatusController {
         insert joe;
         AtlasSettings__c settings = new AtlasSettings__c();
         upsert settings;
-        Program__c program = new Program__c(Name = 'Super Dogs', Standalone__c = true, Months__c = 6);
+        Program__c program = new Program__c(
+            Name = 'Super Dogs',
+            Standalone__c = true,
+            Months__c = 6
+        );
         insert program;
-        ProgramAssignment__c pa = new ProgramAssignment__c(Contact__c = joe.Id, Program__c = program.Id, AssignedDate__c = Date.today());
+        ProgramAssignment__c pa = new ProgramAssignment__c(
+            Contact__c = joe.Id,
+            Program__c = program.Id,
+            AssignedDate__c = Date.today()
+        );
         insert pa;
+        return joe.Id;
+    }
+
+    @isTest
+    public static void getPositionStatusForContact_ReturnsFullList_WhenPositionsFull() {
+        // Arrange
+        Id joeId = setupFullStatus();
 
         // Act
         List<PositionStatus> statuses = PositionStatusController.getPositionStatusForContact(
-            joe.Id
+            joeId
         );
 
         // Assert
         Integer idx = 0;
-        for (string position : PositionStatusController.POSITION_LIST) {
+        for (PositionStatus ps : EXPECTED_POSITION_STATUSES) {
             PositionStatus status = statuses[idx++];
-            System.assertEquals(position, status.position);
-            //System.assertEquals('Active', statuses[0].status);
+            System.assertEquals(ps.position, status.position);
+            System.assertEquals(ps.status, status.status);
         }
-        System.assertEquals(PositionStatusController.POSITION_LIST.size(), statuses.size());
+    }
+
+
+    @isTest
+    public static void getPositionStatusForContact_ReturnsVolunteer_WhenUserVolunteer() {
+        // Arrange
+        Id joeId = setupFullStatus();
+
+        User buddy = TestUtilities.createUser('Atlas Minimum Access');
+        TestUtilities.addUserToPermissionSet(buddy.Id, 'VolunteerUser');
+
+        // Act
+        System.runAs(buddy) {
+            List<PositionStatus> statuses = PositionStatusController.getPositionStatusForContact(
+                joeId
+            );
+
+            // Assert
+            System.assertEquals(2, statuses.size());
+            // Integer idx = 0;
+            // for (PositionStatus ps : EXPECTED_POSITION_STATUSES) {
+            //     PositionStatus status = statuses[idx++];
+            //     System.assertEquals(ps.position, status.position);
+            //     System.assertEquals(ps.status, status.status);
+            // }
+        }
     }
 }

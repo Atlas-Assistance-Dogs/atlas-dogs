@@ -401,7 +401,7 @@ public with sharing class TestFileController {
         }
 
         FileController.relateFiles(ids, ace.Id);
-        User adminUser = TestUtilities.createUser();
+        User adminUser = TestUtilities.createUser('Standard User');
         insert adminUser;
         TestUtilities.addUserToGroups(adminUser, new string[] { 'Team', 'Volunteer', 'Staff' });
         RelatedObjects related;
