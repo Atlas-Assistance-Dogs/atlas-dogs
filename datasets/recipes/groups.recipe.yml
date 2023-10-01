@@ -1,0 +1,16 @@
+# Lead recipe
+# To run this code against a fresh scratch org called ("qa"):
+#
+# cci task run generate_and_load_from_yaml -o generator_yaml datasets/recipes/groups.recipe.yml --org qa
+
+- object: Group
+  fields:
+      Name: Volunteer
+
+- object: Group
+  fields:
+      Name: All
+
+- object: Group
+  fields:
+      Name: Team

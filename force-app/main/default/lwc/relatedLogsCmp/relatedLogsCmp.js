@@ -5,6 +5,7 @@ import getRelatedLogs from "@salesforce/apex/LogController.getRelatedLogs";
 import { deleteRecord } from "lightning/uiRecordApi";
 import { refreshApex } from "@salesforce/apex";
 
+import LOG_OBJECT from "@salesforce/schema/Log__c";
 import ATLAS_SUPPORT_FIELD from "@salesforce/schema/Log__c.RequestSupportFromAtlas__c";
 import TEAM_OBJECT from "@salesforce/schema/Team__c";
 import CLIENT_STRESS_FIELD from "@salesforce/schema/Log__c.ClientStress__c";
@@ -176,6 +177,7 @@ export default class RelatedLogsCmp extends NavigationMixin(LightningElement) {
             );
         }
     }
+    relatedObject = LOG_OBJECT;
     data = [];
     hiddenCols;
 

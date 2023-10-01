@@ -401,10 +401,14 @@ public with sharing class TestFileController {
         }
 
         FileController.relateFiles(ids, ace.Id);
-
+        User adminUser = TestUtilities.createUser('Standard User');
+        insert adminUser;
+        TestUtilities.addUserToGroups(adminUser, new string[] { 'Team', 'Volunteer', 'Staff' });
+        RelatedObjects related;
         Test.startTest();
-        RelatedObjects related = FileController.getRelatedFiles(ace.Id, 6);
-
+        System.runAs(new User(Id = adminUser.Id)) {
+            related = FileController.getRelatedFiles(ace.Id, 6);
+        }
         Test.stopTest();
 
         System.assertEquals(documents.size(), related.items.size());

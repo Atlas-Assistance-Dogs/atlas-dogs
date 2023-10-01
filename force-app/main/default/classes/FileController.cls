@@ -101,6 +101,8 @@ public inherited sharing class FileController {
             // get a map of the category and type labels
             Map<string, string> categoryEntries = getEntryMap(ContentVersion.Category__c.getDescribe());
             Map<string, string> typeEntries = getEntryMap(ContentVersion.Type__c.getDescribe());
+            List<string> allowedCategories = CategoryRuleController.getAllowedCategoriesForObject(recordId);
+            allowedCategories.add('');
             List<ContentVersion> files = [
                 SELECT
                     Title,
@@ -109,7 +111,7 @@ public inherited sharing class FileController {
                     Type__c,
                     Date__c
                 FROM ContentVersion
-                WHERE ContentDocumentId IN :lstConDocs AND FileType != 'SNOTE'
+                WHERE ContentDocumentId IN :lstConDocs AND FileType != 'SNOTE' AND Category__c IN :allowedCategories
                 ORDER BY Date__c DESC
                 LIMIT :max
             ];

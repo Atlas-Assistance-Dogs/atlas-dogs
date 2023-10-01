@@ -61,6 +61,7 @@ Insert CategoryRule__c:
   table: CategoryRule__c
   fields:
   - Category__c
+  - Group__c
   - Object__c
   - Position__c
 Insert Program__c:

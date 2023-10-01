@@ -36,7 +36,10 @@ delete rels;
 List<npe03__Recurring_Donation__c> rds = [SELECT Id FROM npe03__Recurring_Donation__c];
 delete rds;
 
-List<Contact> contacts = [SELECT Id FROM Contact];
+List<Contact> contacts = [SELECT Id FROM Contact LIMIT 900];
+delete contacts;
+
+contacts = [SELECT Id FROM Contact LIMIT 900];
 delete contacts;
 
 List<Dog__c> dogs = [SELECT Id FROM Dog__c];

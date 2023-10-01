@@ -5,7 +5,7 @@ import getRelatedChecks from "@salesforce/apex/BackgroundCheckController.getRela
 import { deleteRecord } from "lightning/uiRecordApi";
 import { refreshApex } from "@salesforce/apex";
 
-import CONTACT_FIELD from "@salesforce/schema/BackgroundCheck__c.Contact__c";
+import BACKGROUND_CHECK from "@salesforce/schema/BackgroundCheck__c";
 import DATE_FIELD from "@salesforce/schema/BackgroundCheck__c.Date__c";
 import STATUS_FIELD from "@salesforce/schema/BackgroundCheck__c.Status__c";
 import TYPE_FIELD from "@salesforce/schema/BackgroundCheck__c.Type__c";
@@ -49,6 +49,7 @@ export default class RelatedBackgroundChecksCmp extends NavigationMixin(
     data = [];
     wiredChecks;
     total = 0;
+    relatedObject = BACKGROUND_CHECK;
 
     defaultSortDirection = "asc";
     sortDirection = "asc";
