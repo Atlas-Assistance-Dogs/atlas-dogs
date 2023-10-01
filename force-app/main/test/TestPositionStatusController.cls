@@ -119,7 +119,7 @@ public with sharing class TestPositionStatusController {
         Id joeId = setupFullStatus();
 
         User buddy = TestUtilities.createUser('Atlas Minimum Access');
-        TestUtilities.addUserToPermissionSet(buddy.Id, 'VolunteerUser');
+        TestUtilities.addUserToPermissionSet(buddy.Id, 'AtlasVolunteerUser');
 
         // Act
         System.runAs(buddy) {

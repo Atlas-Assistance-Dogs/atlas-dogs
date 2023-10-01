@@ -37,6 +37,10 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>PositionStatusController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>ProgramAssignmentController</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -68,7 +72,7 @@
         <apexClass>UserService</apexClass>
         <enabled>true</enabled>
     </classAccesses>
-    <description>Ability to access all objects, flows, etc.</description>
+    <description>Ability to access all objects, flows, for managing volunteers</description>
     <fieldPermissions>
         <editable>true</editable>
         <field>Account.Email__c</field>
@@ -380,7 +384,7 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>false</editable>
+        <editable>true</editable>
         <field>Contact.Positions__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -397,6 +401,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Contact.Pronoun__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Contact.Pronouns</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -675,7 +684,7 @@
         <readable>true</readable>
     </fieldPermissions>
     <hasActivationRequired>false</hasActivationRequired>
-    <label>Volunteer Admin User</label>
+    <label>Atlas Volunteer User</label>
     <objectPermissions>
         <allowCreate>true</allowCreate>
         <allowDelete>true</allowDelete>
