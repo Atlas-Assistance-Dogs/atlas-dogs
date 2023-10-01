@@ -205,6 +205,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Contact.EmailInclusion__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Contact.FacilitatorApplicationReceived__c</field>
         <readable>true</readable>
     </fieldPermissions>
