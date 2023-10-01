@@ -129,12 +129,12 @@ public with sharing class TestPositionStatusController {
 
             // Assert
             System.assertEquals(2, statuses.size());
-            // Integer idx = 0;
-            // for (PositionStatus ps : EXPECTED_POSITION_STATUSES) {
-            //     PositionStatus status = statuses[idx++];
-            //     System.assertEquals(ps.position, status.position);
-            //     System.assertEquals(ps.status, status.status);
-            // }
+            PositionStatus volunteerStatus = statuses[0];
+            System.assertEquals(EXPECTED_POSITION_STATUSES[0].position, volunteerStatus.position);
+            System.assertEquals(EXPECTED_POSITION_STATUSES[0].status, volunteerStatus.status);
+            PositionStatus otherStatus = statuses[0];
+            System.assertEquals(EXPECTED_POSITION_STATUSES[1].position, otherStatus.position);
+            System.assertEquals(EXPECTED_POSITION_STATUSES[1].status, otherStatus.status);
         }
     }
 }
