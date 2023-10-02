@@ -119,7 +119,7 @@ public with sharing class TestPositionStatusController {
         Id joeId = setupFullStatus();
 
         User buddy = TestUtilities.createUser('Atlas Minimum Access');
-        TestUtilities.addUserToPermissionSet(buddy.Id, 'AtlasVolunteerUser');
+        TestUtilities.addUserToPermissionSet(buddy.Id, 'AtlasVolunteer');
 
         // Act
         System.runAs(buddy) {
@@ -132,9 +132,9 @@ public with sharing class TestPositionStatusController {
             PositionStatus volunteerStatus = statuses[0];
             System.assertEquals(EXPECTED_POSITION_STATUSES[0].position, volunteerStatus.position);
             System.assertEquals(EXPECTED_POSITION_STATUSES[0].status, volunteerStatus.status);
-            PositionStatus otherStatus = statuses[0];
-            System.assertEquals(EXPECTED_POSITION_STATUSES[1].position, otherStatus.position);
-            System.assertEquals(EXPECTED_POSITION_STATUSES[1].status, otherStatus.status);
+            PositionStatus otherStatus = statuses[1];
+            System.assertEquals(EXPECTED_POSITION_STATUSES[6].position, otherStatus.position);
+            System.assertEquals(EXPECTED_POSITION_STATUSES[6].status, otherStatus.status);
         }
     }
 }

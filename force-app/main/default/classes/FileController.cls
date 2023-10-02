@@ -34,12 +34,20 @@ public inherited sharing class FileController {
             throw new AuraHandledException('cdl must be non-null');
         }
         try {
-            Integer count = [SELECT COUNT() FROM ContentDocumentLink WHERE ContentDocumentId = :cdl.ContentDocumentId];
+            Integer count = [
+                SELECT COUNT()
+                FROM ContentDocumentLink
+                WHERE ContentDocumentId = :cdl.ContentDocumentId
+            ];
             if (count > 1) {
                 delete cdl;
                 return;
             }
-            delete [SELECT Id FROM ContentDocument WHERE Id = :cdl.ContentDocumentId];
+            delete [
+                SELECT Id
+                FROM ContentDocument
+                WHERE Id = :cdl.ContentDocumentId
+            ];
         } catch (DmlException ex) {
             throw new AuraHandledException(ex.getMessage());
         }
@@ -99,19 +107,24 @@ public inherited sharing class FileController {
             RelatedObjects related = new RelatedObjects();
 
             // get a map of the category and type labels
-            Map<string, string> categoryEntries = getEntryMap(ContentVersion.Category__c.getDescribe());
-            Map<string, string> typeEntries = getEntryMap(ContentVersion.Type__c.getDescribe());
-            List<string> allowedCategories = CategoryRuleController.getAllowedCategoriesForObject(recordId);
+            Map<string, string> categoryEntries = getEntryMap(
+                ContentVersion.Category__c.getDescribe()
+            );
+            Map<string, string> typeEntries = getEntryMap(
+                ContentVersion.Type__c.getDescribe()
+            );
+            List<string> allowedCategories = CategoryRuleController.getAllowedCategoriesForObject(
+                recordId
+            );
+            System.debug(allowedCategories);
             allowedCategories.add('');
             List<ContentVersion> files = [
-                SELECT
-                    Title,
-                    ContentDocumentId,
-                    Category__c,
-                    Type__c,
-                    Date__c
+                SELECT Title, ContentDocumentId, Category__c, Type__c, Date__c
                 FROM ContentVersion
-                WHERE ContentDocumentId IN :lstConDocs AND FileType != 'SNOTE' AND Category__c IN :allowedCategories
+                WHERE
+                    ContentDocumentId IN :lstConDocs
+                    AND FileType != 'SNOTE'
+                    AND Category__c IN :allowedCategories
                 ORDER BY Date__c DESC
                 LIMIT :max
             ];
@@ -123,14 +136,23 @@ public inherited sharing class FileController {
                 info.type = typeEntries.get(cv.Type__c);
                 related.items.add(info);
             }
-            related.total = [SELECT Count() FROM ContentVersion WHERE ContentDocumentId IN :lstConDocs AND FileType != 'SNOTE'];
+            related.total = [
+                SELECT COUNT()
+                FROM ContentVersion
+                WHERE
+                    ContentDocumentId IN :lstConDocs
+                    AND FileType != 'SNOTE'
+                    AND Category__c IN :allowedCategories
+            ];
             return related;
         } else {
             return new RelatedObjects();
         }
     }
 
-    public static Map<string, string> getEntryMap(Schema.DescribeFieldResult field) {
+    public static Map<string, string> getEntryMap(
+        Schema.DescribeFieldResult field
+    ) {
         List<Schema.PicklistEntry> entries = field.getPicklistValues();
         Map<string, string> entryMap = new Map<string, string>();
         for (Schema.PicklistEntry entry : entries) {
@@ -140,7 +162,11 @@ public inherited sharing class FileController {
     }
 
     @AuraEnabled
-    public static ContentVersion relateFile(Id documentId, Id recordId, Date docDate) {
+    public static ContentVersion relateFile(
+        Id documentId,
+        Id recordId,
+        Date docDate
+    ) {
         try {
             ContentDocumentLink link = new ContentDocumentLink(
                 ContentDocumentId = documentId,

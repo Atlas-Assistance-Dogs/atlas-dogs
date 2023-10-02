@@ -389,6 +389,8 @@ public with sharing class TestFileController {
 
     @isTest
     public static void getRelatedFiles_ReturnsRelatedRecords() {
+        TestCategoryRuleController.createCategoryRules();
+        
         Dog__c ace = new Dog__c(Name = 'Ace');
         insert ace;
 
@@ -402,7 +404,6 @@ public with sharing class TestFileController {
 
         FileController.relateFiles(ids, ace.Id);
         User adminUser = TestUtilities.createUser('Standard User');
-        insert adminUser;
         TestUtilities.addUserToGroups(adminUser, new string[] { 'Team', 'Volunteer', 'Staff' });
         RelatedObjects related;
         Test.startTest();

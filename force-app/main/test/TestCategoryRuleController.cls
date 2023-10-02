@@ -84,7 +84,7 @@ public with sharing class TestCategoryRuleController {
                 Category__c = 'Staff',
                 Object__c = 'Contact',
                 Position__c = 'Staff',
-                Group__c = 'All'
+                Group__c = 'Staff'
             ),
             new CategoryRule__c(
                 Category__c = 'Trainer',
@@ -229,7 +229,7 @@ public with sharing class TestCategoryRuleController {
         System.runAs(new User(Id = UserInfo.getUserId())) {
             GroupMember gm = new GroupMember(GroupId = volunteerGroup.Id, UserOrGroupId = volunteerUser.Id);
             insert gm;
-            PermissionSet ps = [SELECT Id FROM PermissionSet WHERE Name = 'VolunteerUser'];
+            PermissionSet ps = [SELECT Id FROM PermissionSet WHERE Name = 'AtlasVolunteer'];
             insert new PermissionSetAssignment(AssigneeId = volunteerUser.Id, PermissionSetId = ps.Id);
         }
         return volunteerUser;
