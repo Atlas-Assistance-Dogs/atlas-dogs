@@ -208,7 +208,7 @@ public with sharing class TestCategoryRuleController {
         // Create a unique UserName
         String uniqueUserName = 'standarduser' + DateTime.now().getTime() + '@testorg.com';
         // This code runs as the system user
-        Profile p = [SELECT Id FROM Profile WHERE Name='Atlas Minimum Access'];
+        Profile p = [SELECT Id FROM Profile WHERE Name='Minimum Access - Salesforce'];
         User volunteerUser = new User(
             Alias = 'standt', Email='standarduser@testorg.com',
             EmailEncodingKey='UTF-8', LastName='Testing', LanguageLocaleKey='en_US',
