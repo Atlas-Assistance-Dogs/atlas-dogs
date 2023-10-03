@@ -54,7 +54,7 @@ public with sharing class TestCategoryRuleController {
                 Category__c = 'Board',
                 Object__c = 'Contact',
                 Position__c = 'Board Member',
-                Group__c = 'All'
+                Group__c = 'Board'
             ),
             new CategoryRule__c(
                 Category__c = 'Client',
