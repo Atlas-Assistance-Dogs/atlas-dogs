@@ -56,14 +56,14 @@ public with sharing class TestPositionStatusController {
             PositionStatusController.POSITION_LIST[5],
             'Suspended'
         ),
-        new PositionStatus(PositionStatusController.POSITION_LIST[6], 'Decertifed/Suspended')
+        new PositionStatus(PositionStatusController.POSITION_LIST[6], 'Initial Inquiry')
     };
 
     private static Id setupFullStatus() {
         Contact joe = new Contact(
             FirstName = 'Joe',
             LastName = 'Blow',
-            Positions__c = 'Client;Volunteer;Trainer;Team Facilitator;Team Facilitator Lead;Puppy Raiser;Board Member',
+            Positions__c = 'Client;Volunteer;Trainer;Team Facilitator;Team Facilitator Lead;Puppy Raiser;Board Member;Standalone',
             GW_Volunteers__Volunteer_Status__c = 'Active',
             FacilitatorStatus__c = 'Certified-Active',
             FacilitatorCertAgreementReceived__c = Date.today().addDays(-250),
@@ -72,6 +72,7 @@ public with sharing class TestPositionStatusController {
             BoardMemberStatus__c = 'Onboarding',
             ClientStatus__c = 'In Training',
             ClientCertificationValidUntil__c = Date.today().addDays(300),
+            StandaloneStatus__c = 'Initial Inquiry',
             TrainerStatus__c = 'Suspended',
             TrainerCertAgreementReceived__c = Date.today()
         );
@@ -128,13 +129,10 @@ public with sharing class TestPositionStatusController {
             );
 
             // Assert
-            System.assertEquals(2, statuses.size());
+            System.assertEquals(1, statuses.size());
             PositionStatus volunteerStatus = statuses[0];
             System.assertEquals(EXPECTED_POSITION_STATUSES[0].position, volunteerStatus.position);
             System.assertEquals(EXPECTED_POSITION_STATUSES[0].status, volunteerStatus.status);
-            PositionStatus otherStatus = statuses[1];
-            System.assertEquals(EXPECTED_POSITION_STATUSES[6].position, otherStatus.position);
-            System.assertEquals(EXPECTED_POSITION_STATUSES[6].status, otherStatus.status);
         }
     }
 }
