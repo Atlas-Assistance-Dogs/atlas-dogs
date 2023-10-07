@@ -330,6 +330,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Contact.IsStandalone__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Contact.IsTeamFacilitator__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -516,6 +521,21 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Contact.StaffW9Received__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Contact.StandaloneApplicationReceived__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Contact.StandaloneProgAgreementReceived__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Contact.StandaloneStatus__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
