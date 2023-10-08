@@ -152,6 +152,11 @@ public with sharing class ContactService {
             String[] pos = relation.npe4__Contact__r.Positions__c.split(';');
             positions.addAll(pos);
         }
+        Group[] groups = getGroupsForPositions(positions);
+        return shareContactWithGroups(recordId, groups);
+    }
+
+    private static List<Group> getGroupsForPositions(Set<String> positions) {
         // Get the groups that can see each position
         List<CategoryRule__c> rules = [
             SELECT Group__c
@@ -167,7 +172,10 @@ public with sharing class ContactService {
             FROM Group
             WHERE Name IN :groupNames
         ];
+        return groups;
+    }
 
+    private static boolean shareContactWithGroups(Id recordId, Group[] groups) {
         // Create new sharing objects for the contact based on the related contacts
         List<ContactShare> shares = new List<ContactShare>();
 
@@ -216,5 +224,12 @@ public with sharing class ContactService {
             }
         }
         return success;
+    }
+
+    // Share the contact with the appropriate groups based on which positions they have
+    public static boolean shareContactBasedOnPositions(Contact person) {
+        Set<String> positions = new Set<String>(person.Positions__c.split(';'));
+        Group[] groups = getGroupsForPositions(positions);
+        return shareContactWithGroups(person.Id, groups);
     }
 }
