@@ -141,7 +141,7 @@ public with sharing class TestCategoryRuleController {
         );
         insert team;
 
-        createCategoryRules();
+        TestUtilities.insertCategoryRules();
     }
 
     @isTest

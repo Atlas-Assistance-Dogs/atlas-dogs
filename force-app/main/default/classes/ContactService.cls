@@ -136,27 +136,54 @@ public with sharing class ContactService {
         }
     }
 
+    // Share the contact with the appropriate groups based on which positions they have,
+    // and the positions they are emergency contacts for
+    public static boolean shareContactBasedOnPositions(Contact person) {
+        // Create a set of the positions the user currently has
+        Set<String> positions = new Set<String>();
+        if (!String.isBlank(person.Positions__c)) {
+            positions.addAll(person.Positions__c.split(';'));
+        }
+        positions.addAll(getEmergencyRelationShipPositions(person.Id));
+        Set<Group> groups = getGroupsForPositions(positions);
+
+        // Get groups the contact is shared with now
+        List<Group> sharedGroups = getContactSharedGroups(person);
+
+        // remove the groups the user is already shared with
+        List<Id> removeGroupIds = new List<Id>();
+        for (Group grp : sharedGroups) {
+            groups.remove(grp);
+            removeGroupIds.add(grp.Id);
+        }
+        removeContactFromGroups(person.Id, removeGroupIds);
+        return shareContactWithGroups(person.Id, groups);
+    }
+
     // Share the contact with the appropriate groups based on which contacts they are emergency contacts for
-    public static boolean shareContactBasedOnEmergencyRelationShips(Id recordId) {
+    public static Set<String> getEmergencyRelationShipPositions(Id recordId) {
         // Find who the contact is related to as an emergency contact
         npe4__Relationship__c[] related = [
             SELECT Id, npe4__Contact__r.Positions__c
             FROM npe4__Relationship__c
             WHERE
-                npe4__Type__c LIKE '%Emergency Contact'
+                (npe4__Type__c LIKE '%Emergency Contact' OR npe4__Type__c = 'Guardian')
                 AND npe4__Status__c = 'Current'
                 AND npe4__RelatedContact__c = :recordId
         ];
         Set<String> positions = new Set<String>();
         for (npe4__Relationship__c relation : related) {
+            if (String.isBlank(relation.npe4__Contact__r.Positions__c)) {
+                continue;
+            }
             String[] pos = relation.npe4__Contact__r.Positions__c.split(';');
             positions.addAll(pos);
         }
-        Group[] groups = getGroupsForPositions(positions);
-        return shareContactWithGroups(recordId, groups);
+        return positions;
     }
 
-    private static List<Group> getGroupsForPositions(Set<String> positions) {
+    // Get the groups that the category rules assign for the positions
+    private static Set<Group> getGroupsForPositions(Set<String> positions) {
         // Get the groups that can see each position
         List<CategoryRule__c> rules = [
             SELECT Group__c
@@ -172,28 +199,32 @@ public with sharing class ContactService {
             FROM Group
             WHERE Name IN :groupNames
         ];
-        return groups;
+        return new Set<Group>(groups);
     }
 
-    private static boolean shareContactWithGroups(Id recordId, Group[] groups) {
+    // Get a list of the groups a contact is shared with
+    private static List<Group> getContactSharedGroups(Contact person) {
+        List<ContactShare> shares = [SELECT Id, UserOrGroupId FROM ContactShare WHERE ContactId = :person.Id];
+        Set<Id> sharedGroups = new Set<Id>();
+        for (ContactShare share : shares) {
+            sharedGroups.add(share.UserOrGroupId);
+        }
+        return [SELECT Id, Name FROM Group WHERE Id IN :sharedGroups];
+    }
+
+    private static boolean shareContactWithGroups(Id recordId, Set<Group> groups) {
         // Create new sharing objects for the contact based on the related contacts
         List<ContactShare> shares = new List<ContactShare>();
 
         for (Group grp : groups) {
-            ContactShare share = new ContactShare();
-
-            // Set the ID of record being shared.
-            share.ContactId = recordId;
-
-            // Set the ID of user or group being granted access.
-            share.UserOrGroupId = grp.Id;
-
-            // Set the access level.
-            share.ContactAccessLevel = 'Edit';
-
-            // Set rowCause to 'manual' for manual sharing.
-            // This line can be omitted as 'manual' is the default value for sharing objects.
-            share.RowCause = Schema.ContactShare.RowCause.Manual;
+            ContactShare share = new ContactShare(
+                // Set the ID of record being shared.
+                ContactId = recordId,
+                // Set the ID of user or group being granted access.
+                UserOrGroupId = grp.Id,
+                // Set the access level.
+                ContactAccessLevel = 'Edit'
+            );
 
             shares.add(share);
         }
@@ -226,10 +257,9 @@ public with sharing class ContactService {
         return success;
     }
 
-    // Share the contact with the appropriate groups based on which positions they have
-    public static boolean shareContactBasedOnPositions(Contact person) {
-        Set<String> positions = new Set<String>(person.Positions__c.split(';'));
-        Group[] groups = getGroupsForPositions(positions);
-        return shareContactWithGroups(person.Id, groups);
+    // Remove the contact with Id from the given group ids
+    public static void removeContactFromGroups(Id contactId, List<Id> groupIds) {
+        List<ContactShare> shares = [SELECT Id FROM ContactShare WHERE ContactId = :contactId AND UserOrGroupId IN :groupIds];
+        delete shares;
     }
 }
