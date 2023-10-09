@@ -1,38 +1,75 @@
 @isTest
 public with sharing class TestContactService {
-    // Test for the manualShareRead method
+    // Test for the shareContactBasedOnPositions method
     static testMethod void shareContactBasedOnPositions_sharesClientAndRelatedContacts() {
         // Arrange
+        setupBradyBunch();
+
+        // Act
+        ContactService.shareContactBasedOnPositions(cindy);
+
+        // Assert
+        // Get the Client group Id
+        Group clientGroup = [SELECT Id FROM Group WHERE Name = 'Team' LIMIT 1];
+        assertGroupShare(cindy.Id, clientGroup.Id);
+        assertGroupShare(marsha.Id, clientGroup.Id);
+        assertGroupShare(mike.Id, clientGroup.Id);
+        assertGroupShare(carol.Id, clientGroup.Id);
+    }
+
+    static testMethod void shareContactBasedOnPositions_updatesShareForClientAndRelatedContacts() {
+        // Arrange
+        setupBradyBunch();
+        ContactService.shareContactBasedOnPositions(cindy);
+        cindy.Positions__c = 'Volunteer';
+        update cindy;
+
+        // Act
+        ContactService.shareContactBasedOnPositions(cindy);
+
+        // Assert
+        // Get the Client group Id
+        Group clientGroup = [SELECT Id FROM Group WHERE Name = 'Volunteer' LIMIT 1];
+        assertGroupShare(cindy.Id, clientGroup.Id);
+        assertGroupShare(marsha.Id, clientGroup.Id);
+        assertGroupShare(mike.Id, clientGroup.Id);
+        assertGroupShare(carol.Id, clientGroup.Id);
+    }
+
+    private static Contact cindy;
+    private static Contact marsha;
+    private static Contact mike;
+    private static Contact carol;
+    private static Contact bobby;
+
+    private static void setupBradyBunch() {
         TestUtilities.insertCategoryRules();
 
         // Select users for the test.
         List<User> users = [SELECT Id FROM User WHERE IsActive = TRUE LIMIT 2];
-        Id user1Id = users[0].Id;
-        Id user2Id = users[1].Id;
 
         // Create new Client
-        Contact cindy = new Contact(
+        cindy = new Contact(
             FirstName = 'Cindy',
             LastName = 'Brady',
             Email = 'janet@brady.com',
-            OwnerId = user1Id,
             Positions__c = 'Client'
         );
 
         // Create Emergency Contacts
-        Contact marsha = new Contact(
+        marsha = new Contact(
             FirstName = 'Marsha',
             LastName = 'Brady',
             Email = 'marsha@brady.com'
         );
-        Contact mike = new Contact(
+        mike = new Contact(
             FirstName = 'Mike',
             LastName = 'Brady',
             Email = 'mike@brady.com'
         );
 
         // Create Guardian
-        Contact carol = new Contact(
+        carol = new Contact(
             FirstName = 'Carol',
             LastName = 'Brady',
             Email = 'carol@brady.com'
@@ -65,17 +102,6 @@ public with sharing class TestContactService {
             emergency2,
             guardian
         };
-
-        // Act
-        ContactService.shareContactBasedOnPositions(cindy);
-
-        // Assert
-        // Get the Client group Id
-        Group clientGroup = [SELECT Id FROM Group WHERE Name = 'Team' LIMIT 1];
-        assertGroupShare(cindy.Id, clientGroup.Id);
-        assertGroupShare(marsha.Id, clientGroup.Id);
-        assertGroupShare(mike.Id, clientGroup.Id);
-        assertGroupShare(carol.Id, clientGroup.Id);
     }
 
     private static void assertGroupShare(Id contactId, Id groupId) {
