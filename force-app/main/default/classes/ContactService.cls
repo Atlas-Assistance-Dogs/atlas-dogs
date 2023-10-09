@@ -138,17 +138,30 @@ public with sharing class ContactService {
 
     // Share the contact with the appropriate groups based on which positions they have,
     // and the positions they are emergency contacts for
-    public static boolean shareContactBasedOnPositions(Contact person) {
+    public static void shareContactBasedOnPositions(Contact person) {
         // Create a set of the positions the user currently has
         Set<String> positions = new Set<String>();
         if (!String.isBlank(person.Positions__c)) {
             positions.addAll(person.Positions__c.split(';'));
         }
-        positions.addAll(getEmergencyRelationShipPositions(person.Id));
         Set<Group> groups = getGroupsForPositions(positions);
 
+        // update this contact first, then its relations
+        updateContactSharedGroups(person.Id, groups);
+
+        Set<Id> relatedContactIds = getRelatedContactsToShare(person.Id);
+        for (Id relatedId : relatedContactIds) {
+            Set<String> relatedPositions = getRelationShipPositions(relatedId);
+            Set<Group> relatedGroups = getGroupsForPositions(relatedPositions);
+            updateContactSharedGroups(relatedId, relatedGroups);
+        }
+    }
+
+    // We don't want to duplicate shares, so see what groups the contact is shared with,
+    // then add and remove as necessary
+    private static boolean updateContactSharedGroups(Id contactId, Set<Group> groups) {
         // Get groups the contact is shared with now
-        List<Group> sharedGroups = getContactSharedGroups(person);
+        List<Group> sharedGroups = getContactSharedGroups(contactId);
 
         // remove the groups the user is already shared with
         List<Id> removeGroupIds = new List<Id>();
@@ -156,12 +169,30 @@ public with sharing class ContactService {
             groups.remove(grp);
             removeGroupIds.add(grp.Id);
         }
-        removeContactFromGroups(person.Id, removeGroupIds);
-        return shareContactWithGroups(person.Id, groups);
+        removeContactFromGroups(contactId, removeGroupIds);
+        return shareContactWithGroups(contactId, groups);
     }
 
-    // Share the contact with the appropriate groups based on which contacts they are emergency contacts for
-    public static Set<String> getEmergencyRelationShipPositions(Id recordId) {
+    // Share the appropriate related contacts
+    public static Set<Id> getRelatedContactsToShare(Id recordId) {
+        // Find who the contact is related to as emergency contacts or guardian
+        npe4__Relationship__c[] related = [
+            SELECT Id, npe4__RelatedContact__c
+            FROM npe4__Relationship__c
+            WHERE
+                (npe4__Type__c LIKE '%Emergency Contact' OR npe4__Type__c = 'Guardian')
+                AND npe4__Status__c = 'Current'
+                AND npe4__Contact__c = :recordId
+        ];
+        Set<Id> contactIds = new Set<Id>();
+        for (npe4__Relationship__c relation : related) {
+            contactIds.add(relation.npe4__RelatedContact__c);
+        }
+        return contactIds;
+    }
+
+    // Get the positions of the contact relations
+    private static Set<String> getRelationShipPositions(Id recordId) {
         // Find who the contact is related to as an emergency contact
         npe4__Relationship__c[] related = [
             SELECT Id, npe4__Contact__r.Positions__c
@@ -203,8 +234,8 @@ public with sharing class ContactService {
     }
 
     // Get a list of the groups a contact is shared with
-    private static List<Group> getContactSharedGroups(Contact person) {
-        List<ContactShare> shares = [SELECT Id, UserOrGroupId FROM ContactShare WHERE ContactId = :person.Id];
+    private static List<Group> getContactSharedGroups(Id contactId) {
+        List<ContactShare> shares = [SELECT Id, UserOrGroupId FROM ContactShare WHERE ContactId = :contactId];
         Set<Id> sharedGroups = new Set<Id>();
         for (ContactShare share : shares) {
             sharedGroups.add(share.UserOrGroupId);

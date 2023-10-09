@@ -67,10 +67,7 @@ public with sharing class TestContactService {
         };
 
         // Act
-        System.assert(ContactService.shareContactBasedOnPositions(cindy));
-        System.assert(ContactService.shareContactBasedOnPositions(marsha));
-        System.assert(ContactService.shareContactBasedOnPositions(mike));
-        System.assert(ContactService.shareContactBasedOnPositions(carol));
+        ContactService.shareContactBasedOnPositions(cindy);
 
         // Assert
         // Get the Client group Id
