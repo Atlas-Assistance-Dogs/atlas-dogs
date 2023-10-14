@@ -147,32 +147,38 @@ public with sharing class ContactService {
         Set<String> groups = getGroupsForPositions(positions);
 
         // update this contact first, then its relations
-        updateContactSharedGroups(person, groups);
+        shareContactWithGroups(person, groups);
 
-        Set<Id> relatedContactIds = getRelatedContactsToShare(person.Id);
-        for (Id relatedId : relatedContactIds) {
-            Set<String> relatedPositions = getRelationShipPositions(relatedId);
+        Set<Contact> relatedContacts = getRelatedContactsToShare(person.Id);
+        for (Contact related : relatedContacts) {
+            Set<String> relatedPositions = getRelationShipPositions(related.Id);
             Set<String> relatedGroups = getGroupsForPositions(relatedPositions);
-            updateContactSharedGroups(relatedId, relatedGroups);
+            shareContactWithGroups(related, relatedGroups);
         }
     }
 
     // Share the appropriate related contacts
-    public static Set<Id> getRelatedContactsToShare(Id recordId) {
+    public static Set<Contact> getRelatedContactsToShare(Id recordId) {
         // Find who the contact is related to as emergency contacts or guardian
         npe4__Relationship__c[] related = [
-            SELECT Id, npe4__RelatedContact__c
+            SELECT Id, npe4__RelatedContact__c,
+                npe4__RelatedContact__r.ShareWithBoard__c,
+                npe4__RelatedContact__r.ShareWithPuppyRaiser__c,
+                npe4__RelatedContact__r.ShareWithStandalonePrograms__c,
+                npe4__RelatedContact__r.ShareWithTeam__c,
+                npe4__RelatedContact__r.ShareWithTrainer__c,
+                npe4__RelatedContact__r.ShareWithVolunteer__c
             FROM npe4__Relationship__c
             WHERE
                 (npe4__Type__c LIKE '%Emergency Contact' OR npe4__Type__c = 'Guardian')
                 AND npe4__Status__c = 'Current'
                 AND npe4__Contact__c = :recordId
         ];
-        Set<Id> contactIds = new Set<Id>();
+        Set<Contact> contacts = new Set<Contact>();
         for (npe4__Relationship__c relation : related) {
-            contactIds.add(relation.npe4__RelatedContact__c);
+            contacts.add(relation.npe4__RelatedContact__r);
         }
-        return contactIds;
+        return contacts;
     }
 
     // Get the positions of the contact relations
