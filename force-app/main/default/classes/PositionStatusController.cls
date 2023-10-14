@@ -26,6 +26,9 @@ public with sharing class PositionStatusController {
         if (Schema.sObjectType.Contact.fields.PuppyCertAgreementReceived__c.isAccessible()) {
             fields.add('PuppyCertAgreementReceived__c');
         }
+        if (Schema.sObjectType.Contact.fields.PuppyRaiserStatus__c.isAccessible()) {
+            fields.add('StandaloneStatus__c');
+        }
         if (Schema.sObjectType.Contact.fields.TrainerCertAgreementReceived__c.isAccessible()) {
             fields.add('TrainerCertAgreementReceived__c');
         }
@@ -37,11 +40,6 @@ public with sharing class PositionStatusController {
         }
         Contact person = (Contact)Database.query(String.format('SELECT {0} FROM Contact WHERE Id = \'\'{1}\'\'', new List<Object> { String.join(fields, ','), contactId}));
         List<PositionStatus> statuses = getStatusForPositions(person);
-
-        PositionStatus other = getOtherStatus(contactId);
-        if (other != null) {
-            statuses.add(other);
-        }
         return statuses;
     }
 
@@ -54,7 +52,7 @@ public with sharing class PositionStatusController {
         'Board',
         'Client',
         'Trainer',
-        'Other'
+        'Standalone'
     };
 
     private static List<PositionStatus> getStatusForPositions(Contact person) {
@@ -130,6 +128,14 @@ public with sharing class PositionStatusController {
                         statuses.add(new PositionStatus(position, status));
                     }
                 }
+
+                when 'Standalone' {
+                    if (positions.contains(position) &&
+                        Schema.sObjectType.Contact.fields.StandaloneStatus__c.isAccessible()
+                    ) {
+                        statuses.add(new PositionStatus(position, person.StandaloneStatus__c));
+                    }
+                }
             }
         }
         return statuses;
@@ -148,29 +154,6 @@ public with sharing class PositionStatusController {
             }
         }
         return status;
-    }
-
-    private static PositionStatus getOtherStatus(Id recordId) {
-        List<ProgramAssignment__c> programAssignments = ProgramAssignmentController.getProgramAssignments(recordId);
-        if (programAssignments == null)
-            return null;
-        PositionStatus otherPrograms = new PositionStatus();
-        otherPrograms.position = 'Other';
-        for (ProgramAssignment__c pa : programAssignments) {
-            if (pa.Program__c != null && pa.Program__r.Standalone__c) {
-                // we want to prioritize 'In Progress' as a status
-                if (pa.Status__c == 'In Progress') {
-                    otherPrograms.status = pa.Status__c;
-                    break; // we don't care about any other programs
-                } else {
-                    otherPrograms.status = 'Decertifed/Suspended';
-                }
-            }
-        }
-        if (otherPrograms.status == null) {
-            return null;
-        }
-        return otherPrograms;
     }
 
 }

@@ -2,8 +2,6 @@
 
 contact_code_start = '''
     private static void clearContactDate(ContentVersion cv, Id recordId) {{
-        if (cv.Category__c == 'Standalone') return;
- 
         List<Contact> contacts = [
             SELECT Id,
                 {fields}
