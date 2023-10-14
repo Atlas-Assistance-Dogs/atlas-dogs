@@ -144,33 +144,17 @@ public with sharing class ContactService {
         if (!String.isBlank(person.Positions__c)) {
             positions.addAll(person.Positions__c.split(';'));
         }
-        Set<Group> groups = getGroupsForPositions(positions);
+        Set<String> groups = getGroupsForPositions(positions);
 
         // update this contact first, then its relations
-        updateContactSharedGroups(person.Id, groups);
+        updateContactSharedGroups(person, groups);
 
         Set<Id> relatedContactIds = getRelatedContactsToShare(person.Id);
         for (Id relatedId : relatedContactIds) {
             Set<String> relatedPositions = getRelationShipPositions(relatedId);
-            Set<Group> relatedGroups = getGroupsForPositions(relatedPositions);
+            Set<String> relatedGroups = getGroupsForPositions(relatedPositions);
             updateContactSharedGroups(relatedId, relatedGroups);
         }
-    }
-
-    // We don't want to duplicate shares, so see what groups the contact is shared with,
-    // then add and remove as necessary
-    private static boolean updateContactSharedGroups(Id contactId, Set<Group> groups) {
-        // Get groups the contact is shared with now
-        List<Group> sharedGroups = getContactSharedGroups(contactId);
-
-        // remove the groups the user is already shared with
-        List<Id> removeGroupIds = new List<Id>();
-        for (Group grp : sharedGroups) {
-            groups.remove(grp);
-            removeGroupIds.add(grp.Id);
-        }
-        removeContactFromGroups(contactId, removeGroupIds);
-        return shareContactWithGroups(contactId, groups);
     }
 
     // Share the appropriate related contacts
@@ -214,7 +198,7 @@ public with sharing class ContactService {
     }
 
     // Get the groups that the category rules assign for the positions
-    private static Set<Group> getGroupsForPositions(Set<String> positions) {
+    private static Set<String> getGroupsForPositions(Set<String> positions) {
         // Get the groups that can see each position
         List<CategoryRule__c> rules = [
             SELECT Group__c
@@ -225,72 +209,16 @@ public with sharing class ContactService {
         for (CategoryRule__c rule : rules) {
             groupNames.add(rule.Group__c);
         }
-        List<Group> groups = [
-            SELECT Id, Name
-            FROM Group
-            WHERE Name IN :groupNames
-        ];
-        return new Set<Group>(groups);
+        return groupNames;
     }
 
-    // Get a list of the groups a contact is shared with
-    private static List<Group> getContactSharedGroups(Id contactId) {
-        List<ContactShare> shares = [SELECT Id, UserOrGroupId FROM ContactShare WHERE ContactId = :contactId];
-        Set<Id> sharedGroups = new Set<Id>();
-        for (ContactShare share : shares) {
-            sharedGroups.add(share.UserOrGroupId);
-        }
-        return [SELECT Id, Name FROM Group WHERE Id IN :sharedGroups];
-    }
-
-    private static boolean shareContactWithGroups(Id recordId, Set<Group> groups) {
-        // Create new sharing objects for the contact based on the related contacts
-        List<ContactShare> shares = new List<ContactShare>();
-
-        for (Group grp : groups) {
-            ContactShare share = new ContactShare(
-                // Set the ID of record being shared.
-                ContactId = recordId,
-                // Set the ID of user or group being granted access.
-                UserOrGroupId = grp.Id,
-                // Set the access level.
-                ContactAccessLevel = 'Edit'
-            );
-
-            shares.add(share);
-        }
-        // Insert the sharing record and capture the save result.
-        // The false parameter allows for partial processing if multiple records passed
-        // into the operation.
-        List<Database.SaveResult> srs = Database.insert(shares, false);
-        Boolean success = true;
-        for (Database.SaveResult sr : srs) {
-            // Process the save results.
-            if (!sr.isSuccess()) {
-                // Get first save result error.
-                Database.Error err = sr.getErrors()[0];
-
-                // Check if the error is related to trival access level.
-                // Access level must be more permissive than the object's default.
-                // These sharing records are not required and thus an insert exception is acceptable.
-                if (
-                    err.getStatusCode() ==
-                    StatusCode.FIELD_FILTER_VALIDATION_EXCEPTION &&
-                    err.getMessage().contains('AccessLevel')
-                ) {
-                    // Indicates success.
-                } else {
-                    // Indicates failure.
-                    success = false;
-                }
-            }
-        }
-        return success;
-    }
-
-    // Remove the contact with Id from the given group ids
-    public static void removeContactFromGroups(Id contactId, List<Id> groupIds) {
-        List<ContactShare> shares = [SELECT Id FROM ContactShare WHERE ContactId = :contactId AND UserOrGroupId IN :groupIds];
-        delete shares;
+    private static void shareContactWithGroups(Contact contact, Set<String> groupNames) {
+        contact.ShareWithBoard__c = groupNames.contains('Board');
+        contact.ShareWithPuppyRaiser__c = groupNames.contains('Puppy Raiser');
+        contact.ShareWithStaff__c = groupNames.contains('Staff');
+        contact.ShareWithStandalonePrograms__c = groupNames.contains('Standalone Programs');
+        contact.ShareWithTeam__c = groupNames.contains('Team');
+        contact.ShareWithTrainer__c = groupNames.contains('Trainer');
+        contact.ShareWithVolunteer__c = groupNames.contains('Volunteer');
     }
 }

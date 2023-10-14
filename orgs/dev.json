@@ -37,7 +37,14 @@
             "sharingModel": "private"
         },
         "account": {
-            "defaultRecordType": "default"
+            "defaultRecordType": "default",
+            "sharingModel": "private"
+        },
+        "case": {
+            "sharingModel": "private"
+        },
+        "contact": {
+            "sharingModel": "private"
         }
     }
 }
