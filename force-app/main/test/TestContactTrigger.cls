@@ -61,11 +61,11 @@ public with sharing class TestContactTrigger {
         System.assert(result.isSuccess());
         Contact saved = getContact(result.getId());
         System.assert(result.getErrors().size() == 0);
-        System.assertEquals(Date.newInstance(2026, 1, 31), saved.BoardTermValidUntil__c);
+        System.assertEquals(saved.BoardTermValidUntil__c, Date.newInstance(2026, 4, 30));
     }
 
     @isTest
-    static void update_setsBoardTermEnd_whenStartJune() {
+    static void update_setsBoardTermEnd_whenStartInEndMonth() {
         Contact joe = new Contact(
             Email = 'joe-blow@pump.com',
             FirstName = 'Joe',
@@ -74,7 +74,7 @@ public with sharing class TestContactTrigger {
         );
         insert joe;
 
-        Date start = Date.newInstance(2023, 6, 6);
+        Date start = Date.newInstance(2023, 4, 30);
         joe.LastBoardTermStartDate__c = start;
 
         // Act
@@ -86,7 +86,7 @@ public with sharing class TestContactTrigger {
         System.assert(result.isSuccess());
         Contact saved = getContact(result.getId());
         System.assert(result.getErrors().size() == 0);
-        System.assertEquals(Date.newInstance(2026, 6, 30), saved.BoardTermValidUntil__c);
+        System.assertEquals(saved.BoardTermValidUntil__c, Date.newInstance(2026, 4, 30));
     }
 
     @isTest
@@ -111,7 +111,7 @@ public with sharing class TestContactTrigger {
         System.assert(result.isSuccess());
         Contact saved = getContact(result.getId());
         System.assert(result.getErrors().size() == 0);
-        System.assertEquals(Date.newInstance(2025, 7, 31), saved.BoardTermValidUntil__c);
+        System.assertEquals(saved.BoardTermValidUntil__c, Date.newInstance(2026, 4, 30));
     }
 
     @isTest
@@ -136,6 +136,6 @@ public with sharing class TestContactTrigger {
         System.assert(result.isSuccess());
         Contact saved = getContact(result.getId());
         System.assert(result.getErrors().size() == 0);
-        System.assertEquals(Date.newInstance(2025, 12, 31), saved.BoardTermValidUntil__c);
+        System.assertEquals(saved.BoardTermValidUntil__c, Date.newInstance(2026, 4, 30));
     }
 }

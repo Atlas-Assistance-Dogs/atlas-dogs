@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>VaccineRenewalYears__c</fullName>
-    <defaultValue>1</defaultValue>
-    <description>Years before a vaccine needs to be renewed since the last dose</description>
+    <fullName>BoardTermEndMonth__c</fullName>
+    <defaultValue>4</defaultValue>
+    <description>Month number that board member terms are valid until, where 1 is January and 12 is December.</description>
     <externalId>false</externalId>
-    <label>Vaccine Renewal Years</label>
+    <label>Board Term End Month</label>
     <precision>2</precision>
-    <required>false</required>
+    <required>true</required>
     <scale>0</scale>
     <trackTrending>false</trackTrending>
     <type>Number</type>
