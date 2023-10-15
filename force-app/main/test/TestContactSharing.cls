@@ -1,39 +1,59 @@
+/*
+ * This test class verifies code in ContactTrigger, RelationshipTrigger, and ContactService.
+ * Because these three classes inter-relate so much (like Relationships),
+ * Test for the desired combined behavior is here.
+ */
 @isTest
-public with sharing class TestContactService {
-    // Test for the shareContactBasedOnPositions method
-    static testMethod void shareContactBasedOnPositions_sharesClientAndRelatedContacts() {
-        // Arrange
+public with sharing class TestContactSharing    {
+    // Test that the triggers produce the desired sharing
+    static testMethod void shareContactBasedOnPositions_sharesClient() {
+        // Arrange / Act
         setupBradyBunch();
 
-        // Act
-        ContactService.shareContactBasedOnPositions(cindy);
-
         // Assert
-        // Get the Client group Id
-        Group clientGroup = [SELECT Id FROM Group WHERE Name = 'Team' LIMIT 1];
-        assertGroupShare(cindy.Id, clientGroup.Id);
-        assertGroupShare(marsha.Id, clientGroup.Id);
-        assertGroupShare(mike.Id, clientGroup.Id);
-        assertGroupShare(carol.Id, clientGroup.Id);
+        // Get the contacts with lastest sharing fields
+        cindy = getContactWithShares(cindy.Id);
+        marsha = getContactWithShares(marsha.Id);
+        mike = getContactWithShares(mike.Id);
+        carol = getContactWithShares(carol.Id);
+        // check ShareWithTeam
+        System.assert(cindy.ShareWithTeam__c);
+        System.assert(marsha.ShareWithTeam__c);
+        System.assert(mike.ShareWithTeam__c);
+        System.assert(carol.ShareWithTeam__c);
     }
 
-    static testMethod void shareContactBasedOnPositions_updatesShareForClientAndRelatedContacts() {
+    static testMethod void shareContactBasedOnPositions_updatesShareForVolunteer() {
         // Arrange
         setupBradyBunch();
         ContactService.shareContactBasedOnPositions(cindy);
         cindy.Positions__c = 'Volunteer';
-        update cindy;
 
         // Act
-        ContactService.shareContactBasedOnPositions(cindy);
+        update cindy;
 
         // Assert
-        // Get the Client group Id
-        Group clientGroup = [SELECT Id FROM Group WHERE Name = 'Volunteer' LIMIT 1];
-        assertGroupShare(cindy.Id, clientGroup.Id);
-        assertGroupShare(marsha.Id, clientGroup.Id);
-        assertGroupShare(mike.Id, clientGroup.Id);
-        assertGroupShare(carol.Id, clientGroup.Id);
+        // Get the contacts with lastest sharing fields
+        cindy = getContactWithShares(cindy.Id);
+        marsha = getContactWithShares(marsha.Id);
+        mike = getContactWithShares(mike.Id);
+        carol = getContactWithShares(carol.Id);
+        // check ShareWithVolunteer
+        System.assert(cindy.ShareWithVolunteer__c);
+        System.assert(marsha.ShareWithVolunteer__c);
+        System.assert(mike.ShareWithVolunteer__c);
+        System.assert(carol.ShareWithVolunteer__c);
+        // check ShareWithTeam
+        System.assert(!cindy.ShareWithTeam__c);
+        System.assert(!marsha.ShareWithTeam__c);
+        System.assert(!mike.ShareWithTeam__c);
+        System.assert(!carol.ShareWithTeam__c);
+    }
+
+    private static Contact getContactWithShares(Id contactId) {
+        return [SELECT Id, ShareWithBoard__c, ShareWithPuppyRaiser__c, ShareWithStaff__c, ShareWithStandalonePrograms__c,
+        ShareWithTeam__c, ShareWithTrainer__c, ShareWithVolunteer__c
+        FROM Contact WHERE Id = :contactId];
     }
 
     private static Contact cindy;
@@ -102,25 +122,5 @@ public with sharing class TestContactService {
             emergency2,
             guardian
         };
-    }
-
-    private static void assertGroupShare(Id contactId, Id groupId) {
-        // Query job sharing records.
-        List<ContactShare> shares = [
-            SELECT Id, UserOrGroupId, ContactAccessLevel, RowCause
-            FROM Contactshare
-            WHERE ContactId = :contactId AND UserOrGroupId = :groupId
-        ];
-
-        // Test for only one manual share on job.
-        System.assertEquals(
-            1,
-            shares.size(),
-            'Set the object\'s sharing model to Private.'
-        );
-
-        // Test attributes of manual share.
-        System.assertEquals(shares[0].ContactAccessLevel, 'Edit');
-        System.assertEquals(shares[0].RowCause, 'Manual');
     }
 }

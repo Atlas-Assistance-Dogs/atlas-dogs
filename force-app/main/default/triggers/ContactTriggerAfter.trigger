@@ -19,7 +19,7 @@ trigger ContactTriggerAfter on Contact (after update) {
         }
 
         if (newContact.Positions__c != oldPositions) {
-            ContactService.shareContactBasedOnPositions(newContact);
+            ContactService.shareRelatedContactsBasedOnPositions(newContact.Id);
         }
     }
 }
