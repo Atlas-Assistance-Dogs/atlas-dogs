@@ -61,7 +61,7 @@ public with sharing class TestContactTrigger {
         System.assert(result.isSuccess());
         Contact saved = getContact(result.getId());
         System.assert(result.getErrors().size() == 0);
-        System.assertEquals(saved.BoardTermValidUntil__c, Date.newInstance(2026, 4, 30));
+        System.assertEquals(Date.newInstance(2026, 4, 30), saved.BoardTermValidUntil__c);
     }
 
     @isTest
@@ -86,7 +86,7 @@ public with sharing class TestContactTrigger {
         System.assert(result.isSuccess());
         Contact saved = getContact(result.getId());
         System.assert(result.getErrors().size() == 0);
-        System.assertEquals(saved.BoardTermValidUntil__c, Date.newInstance(2026, 4, 30));
+        System.assertEquals(Date.newInstance(2026, 4, 30), saved.BoardTermValidUntil__c);
     }
 
     @isTest
@@ -111,7 +111,7 @@ public with sharing class TestContactTrigger {
         System.assert(result.isSuccess());
         Contact saved = getContact(result.getId());
         System.assert(result.getErrors().size() == 0);
-        System.assertEquals(saved.BoardTermValidUntil__c, Date.newInstance(2026, 4, 30));
+        System.assertEquals(Date.newInstance(2026, 4, 30), saved.BoardTermValidUntil__c);
     }
 
     @isTest
@@ -136,6 +136,6 @@ public with sharing class TestContactTrigger {
         System.assert(result.isSuccess());
         Contact saved = getContact(result.getId());
         System.assert(result.getErrors().size() == 0);
-        System.assertEquals(saved.BoardTermValidUntil__c, Date.newInstance(2026, 4, 30));
+        System.assertEquals(Date.newInstance(2026, 4, 30), saved.BoardTermValidUntil__c);
     }
 }

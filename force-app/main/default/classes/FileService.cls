@@ -73,7 +73,8 @@ public with sharing class FileService {
             // check to see if settings are missing
             if (settings.DogExamRenewalYears__c == 0) {
                 settings = new AtlasSettings__c();
-                insert settings;
+                upsert settings;
+                settings = AtlasSettings__c.getOrgDefaults();
             }
             if (settings.LinkFilesToTeamMembers__c) {
                 linkDocumentsToTeamMember(cvs, entityId);

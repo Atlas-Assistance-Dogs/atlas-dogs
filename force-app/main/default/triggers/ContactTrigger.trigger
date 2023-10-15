@@ -37,19 +37,20 @@ trigger ContactTrigger on Contact (before insert, before update) {
         if (newContact.LastBoardTermStartDate__c != null && newContact.LastBoardTermStartDate__c != oldBoardDate) {
             AtlasSettings__c settings = AtlasSettings__c.getOrgDefaults();
             // check to see if settings are missing
-            if (settings.BoardTermEndMonth__c == 0) {
+            if (settings.BoardTermEndMonth__c == null) {
                 settings = new AtlasSettings__c();
-                insert settings;
+                upsert settings;
+                settings = AtlasSettings__c.getOrgDefaults();
             }
-            final Integer endMonth = (Integer)settings.BoardTermEndMonth__c;
+            Integer endMonth = (Integer)settings.BoardTermEndMonth__c;
             integer month = newContact.LastBoardTermStartDate__c.month();
             Date minTerm = newContact.LastBoardTermStartDate__c.addYears(3);
             integer months = 0;
-            if (month < 6) {
-                months = 6 - month;
+            if (month < endMonth) {
+                months = endMonth - month;
             }
-            else if (month > 6) {
-                months = 18 - month;
+            else if (month > endMonth) {
+                months = 12 + endMonth - month;
             }
             // We want to wind up at the last day of June in the year following 3 years of service.
             // So, months + 1 takes us to July, toStartOfMonth() takes us to July 1, and subtracting
