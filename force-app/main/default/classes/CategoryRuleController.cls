@@ -1,7 +1,6 @@
+// use the category rules to see which categories are available for an object and which
+// groups can see which category
 public with sharing class CategoryRuleController {
-    public CategoryRuleController() {
-
-    }
 
     public static List<String> getAllowedCategoriesForObject(Id recordId) {
         string objLabel = recordId.getSObjectType().getDescribe().getLabel();
