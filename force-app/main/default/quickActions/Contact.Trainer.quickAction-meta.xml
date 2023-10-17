@@ -13,6 +13,11 @@
             </quickActionLayoutItems>
             <quickActionLayoutItems>
                 <emptySpace>false</emptySpace>
+                <field>TrainerInitialCertificationDate__c</field>
+                <uiBehavior>Edit</uiBehavior>
+            </quickActionLayoutItems>
+            <quickActionLayoutItems>
+                <emptySpace>false</emptySpace>
                 <field>TrainerCertificationValidUntil__c</field>
                 <uiBehavior>Readonly</uiBehavior>
             </quickActionLayoutItems>
