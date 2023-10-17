@@ -141,13 +141,7 @@ public with sharing class TestCategoryRuleController {
         );
         insert team;
 
-        List<CategoryRule__c> rules = new List<CategoryRule__c>();
-        rules.add(new CategoryRule__c(Category__c = 'Dog', Object__c = 'Dog', Group__c = 'Team'));
-        rules.add(new CategoryRule__c(Category__c = 'Client', Object__c = 'Team', Group__c = 'Team'));
-        rules.add(new CategoryRule__c(Category__c = 'Dog', Object__c = 'Team', Group__c = 'Team'));
-        rules.add(new CategoryRule__c(Category__c = 'Client', Object__c = 'Contact', Position__c = 'Client', Group__c = 'Team'));
-        rules.add(new CategoryRule__c(Category__c = 'Volunteer', Object__c = 'Contact', Position__c = 'Volunteer', Group__c = 'Volunteer'));
-        insert rules;
+        createCategoryRules();
     }
 
     @isTest
