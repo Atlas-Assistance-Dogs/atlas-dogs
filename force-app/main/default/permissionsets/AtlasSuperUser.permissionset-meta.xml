@@ -89,11 +89,6 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>false</editable>
-        <field>CategoryRule__c.Group__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
         <editable>true</editable>
         <field>CategoryRule__c.Position__c</field>
         <readable>true</readable>
@@ -1036,6 +1031,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Team__c.Status__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Team__c.TrainingStartDate__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
