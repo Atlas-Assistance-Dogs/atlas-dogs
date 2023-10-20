@@ -89,11 +89,6 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>false</editable>
-        <field>CategoryRule__c.Group__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
         <editable>true</editable>
         <field>CategoryRule__c.Position__c</field>
         <readable>true</readable>
@@ -556,6 +551,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Contact.SystemAccess__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Contact.TextMessagesApproved__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
