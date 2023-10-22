@@ -59,8 +59,10 @@ public with sharing class TestPositionStatusController {
         new PositionStatus(PositionStatusController.POSITION_LIST[6], 'Initial Inquiry')
     };
 
+    private static Contact joe;
+
     private static Id setupFullStatus() {
-        Contact joe = new Contact(
+        joe = new Contact(
             FirstName = 'Joe',
             LastName = 'Blow',
             Positions__c = 'Client;Volunteer;Trainer;Team Facilitator;Team Facilitator Lead;Puppy Raiser;Board Member;Standalone',
@@ -113,7 +115,6 @@ public with sharing class TestPositionStatusController {
         }
     }
 
-
     @isTest
     public static void getPositionStatusForContact_ReturnsVolunteer_WhenUserVolunteer() {
         // Arrange
@@ -133,6 +134,215 @@ public with sharing class TestPositionStatusController {
             PositionStatus volunteerStatus = statuses[0];
             System.assertEquals(EXPECTED_POSITION_STATUSES[0].position, volunteerStatus.position);
             System.assertEquals(EXPECTED_POSITION_STATUSES[0].status, volunteerStatus.status);
+        }
+    }
+
+    @isTest
+    public static void getPositionStatusForContact_ReturnsFacilitator_WhenContactTeamFacilitatorLead() {
+        // Arrange
+        Id joeId = setupFullStatus();
+        joe.Positions__c = 'Team Facilitator Lead';
+        update joe;
+
+        User buddy = TestUtilities.createUser('Standard User');
+        TestUtilities.addUserToPermissionSet(buddy.Id, 'AtlasSuperUser');
+
+        // Act
+        System.runAs(buddy) {
+            List<PositionStatus> statuses = PositionStatusController.getPositionStatusForContact(
+                joeId
+            );
+
+            // Assert
+            System.assertEquals(1, statuses.size());
+            PositionStatus facilitatorStatus = statuses[0];
+            System.assertEquals(EXPECTED_POSITION_STATUSES[1].position, facilitatorStatus.position);
+            System.assertEquals(EXPECTED_POSITION_STATUSES[1].status, facilitatorStatus.status);
+        }
+    }
+
+    @isTest
+    public static void getPositionStatusForFacilitator_ReturnsActionNeeded_WhenCertValidDatePast() {
+        // Arrange
+        Id joeId = setupFullStatus();
+        joe.FacilitatorCertAgreementReceived__c = Date.today().addDays(-366);
+
+        update joe;
+
+        User buddy = TestUtilities.createUser('Standard User');
+        TestUtilities.addUserToPermissionSet(buddy.Id, 'AtlasSuperUser');
+
+        // Act
+        System.runAs(buddy) {
+            List<PositionStatus> statuses = PositionStatusController.getPositionStatusForContact(
+                joeId
+            );
+
+            // Assert
+            System.assertEquals(7, statuses.size());
+            PositionStatus facilitatorStatus = statuses[1];
+            System.assertEquals(EXPECTED_POSITION_STATUSES[1].position, facilitatorStatus.position);
+            System.assertEquals('Action Needed', facilitatorStatus.status);
+        }
+    }
+
+    @isTest
+    public static void getPositionStatusForFacilitator_ReturnsActionNeededSoon_WhenCertExpiresSoon() {
+        // Arrange
+        Id joeId = setupFullStatus();
+        joe.FacilitatorCertAgreementReceived__c = Date.today().addDays(-276);
+
+        update joe;
+
+        User buddy = TestUtilities.createUser('Standard User');
+        TestUtilities.addUserToPermissionSet(buddy.Id, 'AtlasSuperUser');
+
+        // Act
+        System.runAs(buddy) {
+            List<PositionStatus> statuses = PositionStatusController.getPositionStatusForContact(
+                joeId
+            );
+
+            // Assert
+            System.assertEquals(7, statuses.size());
+            PositionStatus facilitatorStatus = statuses[1];
+            System.assertEquals(EXPECTED_POSITION_STATUSES[1].position, facilitatorStatus.position);
+            System.assertEquals('Action Needed Soon', facilitatorStatus.status);
+        }
+    }
+
+    @isTest
+    public static void getPositionStatusForClient_ReturnsActionNeeded_WhenCertValidDatePast() {
+        // Arrange
+        Id joeId = setupFullStatus();
+        joe.ClientStatus__c = 'Certified';
+        joe.ClientCertificationValidUntil__c = Date.today().addDays(-3);
+
+        update joe;
+
+        User buddy = TestUtilities.createUser('Standard User');
+        TestUtilities.addUserToPermissionSet(buddy.Id, 'AtlasBase');
+        TestUtilities.addUserToPermissionSet(buddy.Id, 'AtlasTeam');
+
+        // Act
+        System.runAs(buddy) {
+            List<PositionStatus> statuses = PositionStatusController.getPositionStatusForContact(
+                joeId
+            );
+
+            // Assert
+            System.assertEquals(1, statuses.size());
+            PositionStatus clientStatus = statuses[0];
+            System.assertEquals(EXPECTED_POSITION_STATUSES[4].position, clientStatus.position);
+            System.assertEquals('Action Needed', clientStatus.status);
+        }
+    }
+
+    @isTest
+    public static void getPositionStatusForPuppyRaiser_ReturnsActionNeededSoon_WhenCertExpiresSoon() {
+        // Arrange
+        Id joeId = setupFullStatus();
+        joe.PuppyRaiserStatus__c = 'Certified-Active';
+        joe.PuppyCertAgreementReceived__c = Date.today().addMonths(-10);
+
+        update joe;
+
+        User buddy = TestUtilities.createUser('Standard User');
+        TestUtilities.addUserToPermissionSet(buddy.Id, 'AtlasBase');
+        TestUtilities.addUserToPermissionSet(buddy.Id, 'AtlasPuppyRaiser');
+
+        // Act
+        System.runAs(buddy) {
+            List<PositionStatus> statuses = PositionStatusController.getPositionStatusForContact(
+                joeId
+            );
+
+            // Assert
+            System.assertEquals(1, statuses.size());
+            PositionStatus status = statuses[0];
+            System.assertEquals(EXPECTED_POSITION_STATUSES[2].position, status.position);
+            System.assertEquals('Action Needed Soon', status.status);
+        }
+    }
+
+    @isTest
+    public static void getPositionStatusForPuppyRaiser_ReturnsActionNeeded_WhenCertExpired() {
+        // Arrange
+        Id joeId = setupFullStatus();
+        joe.PuppyRaiserStatus__c = 'Certified-Active';
+        joe.PuppyCertAgreementReceived__c = Date.today().addMonths(-13);
+
+        update joe;
+
+        User buddy = TestUtilities.createUser('Standard User');
+        TestUtilities.addUserToPermissionSet(buddy.Id, 'AtlasBase');
+        TestUtilities.addUserToPermissionSet(buddy.Id, 'AtlasPuppyRaiser');
+
+        // Act
+        System.runAs(buddy) {
+            List<PositionStatus> statuses = PositionStatusController.getPositionStatusForContact(
+                joeId
+            );
+
+            // Assert
+            System.assertEquals(1, statuses.size());
+            PositionStatus status = statuses[0];
+            System.assertEquals(EXPECTED_POSITION_STATUSES[2].position, status.position);
+            System.assertEquals('Action Needed', status.status);
+        }
+    }
+
+    @isTest
+    public static void getPositionStatusForTrainer_ReturnsActionNeededSoon_WhenCertExpiresSoon() {
+        // Arrange
+        Id joeId = setupFullStatus();
+        joe.TrainerStatus__c = 'Certified-Active';
+        joe.TrainerCertAgreementReceived__c = Date.today().addMonths(-10);
+
+        update joe;
+
+        User buddy = TestUtilities.createUser('Standard User');
+        TestUtilities.addUserToPermissionSet(buddy.Id, 'AtlasBase');
+        TestUtilities.addUserToPermissionSet(buddy.Id, 'AtlasTrainer');
+
+        // Act
+        System.runAs(buddy) {
+            List<PositionStatus> statuses = PositionStatusController.getPositionStatusForContact(
+                joeId
+            );
+
+            // Assert
+            System.assertEquals(1, statuses.size());
+            PositionStatus status = statuses[0];
+            System.assertEquals(EXPECTED_POSITION_STATUSES[5].position, status.position);
+            System.assertEquals('Action Needed Soon', status.status);
+        }
+    }
+
+    @isTest
+    public static void getPositionStatusForTrainer_ReturnsActionNeededSoon_WhenCertExpired() {
+        // Arrange
+        Id joeId = setupFullStatus();
+        joe.TrainerStatus__c = 'Certified-Active';
+        joe.TrainerCertAgreementReceived__c = Date.today().addMonths(-12).addDays(-2);
+
+        update joe;
+
+        User buddy = TestUtilities.createUser('Standard User');
+        TestUtilities.addUserToPermissionSet(buddy.Id, 'AtlasBase');
+        TestUtilities.addUserToPermissionSet(buddy.Id, 'AtlasTrainer');
+
+        // Act
+        System.runAs(buddy) {
+            List<PositionStatus> statuses = PositionStatusController.getPositionStatusForContact(
+                joeId
+            );
+
+            // Assert
+            System.assertEquals(1, statuses.size());
+            PositionStatus status = statuses[0];
+            System.assertEquals(EXPECTED_POSITION_STATUSES[5].position, status.position);
+            System.assertEquals('Action Needed', status.status);
         }
     }
 }

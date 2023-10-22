@@ -224,6 +224,11 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>Contact.FacilitatorCertificationValidUntil__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>Contact.FacilitatorInfrNoticeReceived__c</field>
         <readable>true</readable>
