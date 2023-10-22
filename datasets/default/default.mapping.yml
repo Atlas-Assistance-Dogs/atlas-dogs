@@ -299,6 +299,7 @@ Insert Contact:
   - Contact__c
   - CriminalConviction__c
   - DateStarted__c
+  - EmailInclusion__c
   - FacilitatorApplicationReceived__c
   - FacilitatorCertAgreementReceived__c
   - FacilitatorInfrNoticeReceived__c
@@ -350,6 +351,9 @@ Insert Contact:
   - StaffStatus__c
   - StaffW4Received__c
   - StaffW9Received__c
+  - StandaloneApplicationReceived__c
+  - StandaloneProgAgreementReceived__c
+  - StandaloneStatus__c
   - SystemAccess__c
   - TrainerApplicationReceived__c
   - TrainerBoardTrain__c

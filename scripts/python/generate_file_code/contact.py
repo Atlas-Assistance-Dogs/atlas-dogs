@@ -2,7 +2,7 @@ from category import Category
 import templates.clear as clear
 import templates.update as update
 
-skip_categories = {'Standalone', 'Client', 'Na'}
+skip_categories = {'Client', 'Na'}
 
 class Contact:
     '''Class to control writing out the generated FileService code for the contact objects'''

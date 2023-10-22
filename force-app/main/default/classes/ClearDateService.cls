@@ -18,8 +18,6 @@ public with sharing class ClearDateService {
     //#region Generated
 
     private static void clearContactDate(ContentVersion cv, Id recordId) {
-        if (cv.Category__c == 'Standalone') return;
- 
         List<Contact> contacts = [
             SELECT Id,
                 ADSiMApplicationReceived__c, ADSiMPreApplicationReceived__c, ADSiMProgAgreementReceived__c,
@@ -27,6 +25,7 @@ public with sharing class ClearDateService {
 				FacilitatorApplicationReceived__c, FacilitatorCertAgreementReceived__c, FacilitatorInfrNoticeReceived__c, FacilitatorPracticumReceived__c, FacilitatorProgAgreementReceived__c, FacilitatorReferenceReceived__c,
 				PuppyApplicationReceived__c, PuppyCertAgreementReceived__c, PuppyContractReceived__c, PuppyInfrNoticeReceived__c, PuppyProgAgreementReceived__c, PuppyReferenceReceived__c,
 				StaffAgreementReceived__c, StaffApplicationReceived__c, StaffI9Received__c, StaffOfferReceived__c, StaffResumeReceived__c, StaffW4Received__c, StaffW9Received__c,
+				StandaloneApplicationReceived__c, StandaloneProgAgreementReceived__c,
 				TrainerApplicationReceived__c, TrainerCertAgreementReceived__c, TrainerClientReferenceReceived__c, TrainerInfrNoticeReceived__c, TrainerProfReferenceReceived__c, TrainerProgAgreementReceived__c,
 				VolunteerAgreementReceived__c, VolunteerApplicationReceived__c, VolunteerResumeReceived__c,
 				ContactFormReceived__c
@@ -55,6 +54,10 @@ public with sharing class ClearDateService {
         
         if (cv.Category__c == 'Staff') {
             clearStaffDate(cv, contact);
+        }
+        
+        if (cv.Category__c == 'Standalone') {
+            clearStandaloneDate(cv, contact);
         }
         
         if (cv.Category__c == 'Trainer') {
@@ -191,6 +194,17 @@ public with sharing class ClearDateService {
 
         if (cv.Type__c == 'W9'){
             contact.StaffW9Received__c = null;
+        }
+    }
+
+    // Clear the last date when the category is Standalone
+    private static void clearStandaloneDate(ContentVersion cv, Contact contact) {
+        if (cv.Type__c == 'Application'){
+            contact.StandaloneApplicationReceived__c = null;
+        }
+
+        if (cv.Type__c == 'ProgAgreement'){
+            contact.StandaloneProgAgreementReceived__c = null;
         }
     }
 

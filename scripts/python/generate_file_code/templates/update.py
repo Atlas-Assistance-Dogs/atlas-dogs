@@ -81,7 +81,7 @@ team_code_start = '''
         }}
         List<Team__c> teams = [
             SELECT Id, Client__c, Dog__c,
-                   {fields}
+                    {fields}
             FROM Team__c
             WHERE Id = :recordId
         ];
