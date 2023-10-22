@@ -293,6 +293,33 @@ public with sharing class TestPositionStatusController {
     }
 
     @isTest
+    public static void getPositionStatusForPuppyRaiser_ReturnsStatus_WhenCertNull() {
+        // Arrange
+        Id joeId = setupFullStatus();
+        joe.PuppyRaiserStatus__c = 'Certified-Active';
+        joe.PuppyCertAgreementReceived__c = null;
+
+        update joe;
+
+        User buddy = TestUtilities.createUser('Standard User');
+        TestUtilities.addUserToPermissionSet(buddy.Id, 'AtlasBase');
+        TestUtilities.addUserToPermissionSet(buddy.Id, 'AtlasPuppyRaiser');
+
+        // Act
+        System.runAs(buddy) {
+            List<PositionStatus> statuses = PositionStatusController.getPositionStatusForContact(
+                joeId
+            );
+
+            // Assert
+            System.assertEquals(1, statuses.size());
+            PositionStatus status = statuses[0];
+            System.assertEquals(EXPECTED_POSITION_STATUSES[2].position, status.position);
+            System.assertEquals('Certified-Active', status.status);
+        }
+    }
+
+    @isTest
     public static void getPositionStatusForTrainer_ReturnsActionNeededSoon_WhenCertExpiresSoon() {
         // Arrange
         Id joeId = setupFullStatus();
