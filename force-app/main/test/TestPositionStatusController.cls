@@ -121,6 +121,7 @@ public with sharing class TestPositionStatusController {
         Id joeId = setupFullStatus();
 
         User buddy = TestUtilities.createUser('Minimum Access - Salesforce');
+        TestUtilities.addUserToPermissionSet(buddy.Id, 'AtlasBase');
         TestUtilities.addUserToPermissionSet(buddy.Id, 'AtlasVolunteer');
 
         // Act
