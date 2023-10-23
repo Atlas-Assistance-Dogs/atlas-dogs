@@ -116,7 +116,7 @@ export default class RelatedFiles extends NavigationMixin(LightningElement) {
 
     // fill in category and type options
     fillOptions() {
-        const categories = [...new Set(this.data.map((x) => x.category))];
+        const categories = [...new Set(this.data.map((x) => x.category ?? 'No Category'))];
         categories.sort();
         this.filterItems[0].options = categories.map((x) => {
             return { label: x, value: x };
@@ -126,7 +126,7 @@ export default class RelatedFiles extends NavigationMixin(LightningElement) {
             value: null
         });
 
-        const types = [...new Set(this.data.map((x) => x.type))];
+        const types = [...new Set(this.data.map((x) => x.type ?? 'No Type'))];
         types.sort();
         this.filterItems[1].options = types.map((x) => {
             return { label: x, value: x };
@@ -202,7 +202,7 @@ export default class RelatedFiles extends NavigationMixin(LightningElement) {
         this.filterPills = items.map((item, idx) => {
             if (item.value) {
                 cloneData = cloneData.filter(
-                    (info) => info[item.name] == item.value
+                    (info) => info[item.name] == item.value || (item.value.includes('No ') && info[item.name] === undefined)
                 );
                 this.filterItems[idx].value = item.value;
                 return {
