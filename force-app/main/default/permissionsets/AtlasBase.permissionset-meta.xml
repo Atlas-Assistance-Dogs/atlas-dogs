@@ -265,11 +265,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Lead.NumberOfEmployees</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>Lead.Phone</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -441,10 +436,6 @@
     </recordTypeVisibilities>
     <recordTypeVisibilities>
         <recordType>Account.Organization</recordType>
-        <visible>true</visible>
-    </recordTypeVisibilities>
-    <recordTypeVisibilities>
-        <recordType>Campaign.GW_Volunteers__Volunteers_Campaign</recordType>
         <visible>true</visible>
     </recordTypeVisibilities>
     <tabSettings>
