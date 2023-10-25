@@ -180,6 +180,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Contact.ClientInitialCertificationDate__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Contact.ClientMedicalDevices__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -231,6 +236,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Contact.FacilitatorInfrNoticeReceived__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Contact.FacilitatorInitialCertificationDate__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -591,6 +601,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Contact.TrainerInfrNoticeReceived__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Contact.TrainerInitialCertificationDate__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -1016,6 +1031,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Team__c.HealthFormReceived__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Team__c.InitialCertificationDate__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

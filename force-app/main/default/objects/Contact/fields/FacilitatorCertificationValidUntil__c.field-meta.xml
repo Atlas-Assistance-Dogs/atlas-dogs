@@ -4,11 +4,13 @@
     <description>The date the Facilitator Certification is valid to</description>
     <externalId>false</externalId>
     <formula>IF( ISNULL(FacilitatorCertAgreementReceived__c),
-/* Find the number of years that have passed between the Last Cert Agreement and the Initial Cert Date.
-   Certification is valid for that many years
+/* Certification is valid for one year
 */
 ADDMONTHS(FacilitatorInitialCertificationDate__c, 12),
- ADDMONTHS(FacilitatorInitialCertificationDate__c, FLOOR(((FacilitatorCertAgreementReceived__c - FacilitatorInitialCertificationDate__c) + 365) / 365) * 12)
+/* Find the number of years that have passed between the Last Cert Agreement and the Initial Cert Date, with a 90 day leeway
+Certification is valid for that many years
+*/
+ ADDMONTHS(FacilitatorInitialCertificationDate__c, FLOOR(((FacilitatorCertAgreementReceived__c - FacilitatorInitialCertificationDate__c) + 365 + 90) / 365) * 12)
 )</formula>
     <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
     <label>Facilitator Certification Valid Until</label>
