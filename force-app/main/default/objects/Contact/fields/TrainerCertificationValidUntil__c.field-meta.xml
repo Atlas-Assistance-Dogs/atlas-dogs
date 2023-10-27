@@ -8,7 +8,7 @@
       have passed between the Last Cert Agreement and the Initial Cert Date, with a 90 day leeway
       Certification is valid for that many years */
       ADDMONTHS(TrainerInitialCertificationDate__c, FLOOR(((TrainerCertAgreementReceived__c
-      - TrainerInitialCertificationDate__c) + 365 + 90) / 365) * 12) )</formula>
+      - TrainerInitialCertificationDate__c) + 365 + 30) / 365) * 12) )</formula>
     <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
     <label>Trainer Certification Valid Until</label>
     <required>false</required>

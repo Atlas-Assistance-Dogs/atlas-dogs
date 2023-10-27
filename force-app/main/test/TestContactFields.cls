@@ -26,7 +26,7 @@ public with sharing class TestContactFields {
             LastName = 'Montana',
             Positions__c = 'Team Facilitator',
             FacilitatorInitialCertificationDate__c = today.addYears(-1),
-            FacilitatorCertAgreementReceived__c = today.addDays(-91)
+            FacilitatorCertAgreementReceived__c = today.addDays(-31)
         );
         insert joe;
         // Assert
@@ -43,7 +43,7 @@ public with sharing class TestContactFields {
             LastName = 'Montana',
             Positions__c = 'Team Facilitator',
             FacilitatorInitialCertificationDate__c = today.addYears(-1),
-            FacilitatorCertAgreementReceived__c = today.addDays(-89)
+            FacilitatorCertAgreementReceived__c = today.addDays(-29)
         );
         insert joe;
         // Assert
@@ -110,7 +110,7 @@ public with sharing class TestContactFields {
             LastName = 'Montana',
             Positions__c = 'Trainer',
             TrainerInitialCertificationDate__c = today.addYears(-1),
-            TrainerCertAgreementReceived__c = today.addDays(-91)
+            TrainerCertAgreementReceived__c = today.addDays(-31)
         );
         insert joe;
         // Assert
@@ -127,7 +127,7 @@ public with sharing class TestContactFields {
             LastName = 'Montana',
             Positions__c = 'Trainer',
             TrainerInitialCertificationDate__c = today.addYears(-1),
-            TrainerCertAgreementReceived__c = today.addDays(-89)
+            TrainerCertAgreementReceived__c = today.addDays(-29)
         );
         insert joe;
         // Assert

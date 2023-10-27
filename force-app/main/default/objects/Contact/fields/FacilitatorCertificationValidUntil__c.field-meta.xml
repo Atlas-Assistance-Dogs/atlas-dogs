@@ -10,7 +10,7 @@ ADDMONTHS(FacilitatorInitialCertificationDate__c, 12),
 /* Find the number of years that have passed between the Last Cert Agreement and the Initial Cert Date, with a 90 day leeway
 Certification is valid for that many years
 */
- ADDMONTHS(FacilitatorInitialCertificationDate__c, FLOOR(((FacilitatorCertAgreementReceived__c - FacilitatorInitialCertificationDate__c) + 365 + 90) / 365) * 12)
+ ADDMONTHS(FacilitatorInitialCertificationDate__c, FLOOR(((FacilitatorCertAgreementReceived__c - FacilitatorInitialCertificationDate__c) + 365 + 30) / 365) * 12)
 )</formula>
     <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
     <label>Facilitator Certification Valid Until</label>
