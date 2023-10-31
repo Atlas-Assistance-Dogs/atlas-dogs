@@ -10,28 +10,23 @@
         view-all={viewAll}
     >
         <div slot="actions">
-            <div class="actions">
-                <lightning-pill-container
-                    items={filterPills}
-                    onitemremove={handleItemRemove}
-                >
-                </lightning-pill-container>
-                <lightning-button
-                    label="Filter"
-                    title="Filter"
-                    icon-name="standard:filter"
-                    onclick={handleFilter}
-                    if:true={data}
-                >
-                </lightning-button>
-                <!-- lightning button for upload files modal -->
-                <lightning-button
-                    label="Upload Files"
-                    title="Upload Files"
-                    onclick={openModal}
-                >
-                </lightning-button>
-            </div>
+            <lightning-button
+                label="Filter"
+                title="Filter"
+                icon-name="standard:filter"
+                onclick={handleFilter}
+                slot="actions"
+                if:true={data}
+            >
+            </lightning-button>
+            <!-- lightning button for upload files modal -->
+            <lightning-button
+                label="Upload Files"
+                title="Upload Files"
+                onclick={openModal}
+                slot="actions"
+            >
+            </lightning-button>
             <c-file-upload-cmp
                 object-id={recordId}
                 onupdate={handleUpdate}
@@ -40,11 +35,7 @@
                 object-id={recordId}
                 onupdate={handleUpdate}
             ></c-file-update-cmp>
-            <c-select-option-cmp
-                title="Filter Files"
-                items={filterItems}
-                onselected={handleFilterSelect}
-            ></c-select-option-cmp>
+            <c-select-option-cmp title="Filter Files" items={filterItems} onselected={handleFilterSelect}></c-select-option-cmp>
         </div>
         <div slot="list">
             <template if:true={data}>

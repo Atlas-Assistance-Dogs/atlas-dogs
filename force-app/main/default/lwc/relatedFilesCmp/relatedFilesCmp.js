@@ -68,12 +68,11 @@ export default class RelatedFiles extends NavigationMixin(LightningElement) {
             options: []
         }
     ];
-    @track filterPills = [];
 
     openModal() {
         this.template.querySelector("c-file-upload-cmp").openModal();
     }
-
+ 
     @api
     get max() {
         return this.viewAll ? 10000 : 6;
@@ -116,25 +115,25 @@ export default class RelatedFiles extends NavigationMixin(LightningElement) {
 
     // fill in category and type options
     fillOptions() {
-        const categories = [...new Set(this.data.map((x) => x.category ?? 'No Category'))];
+        const categories = [
+            ...new Set(
+                this.data.map((x) => x.category)
+            )
+        ];
         categories.sort();
-        this.filterItems[0].options = categories.map((x) => {
-            return { label: x, value: x };
-        });
-        this.filterItems[0].options.unshift({
-            label: "No filter",
-            value: null
-        });
+        this.filterItems[0].options = categories.map(x => { return { label: x, value: x }; });
+        this.filterItems[0].options.unshift({ label: "No filter", value: null });
 
-        const types = [...new Set(this.data.map((x) => x.type ?? 'No Type'))];
+        const types = [
+            ...new Set(
+                this.data.map((x) => x.type)
+            )
+        ];
         types.sort();
         this.filterItems[1].options = types.map((x) => {
             return { label: x, value: x };
         });
-        this.filterItems[1].options.unshift({
-            label: "No filter",
-            value: null
-        });
+        this.filterItems[1].options.unshift({ label: "No filter", value: null });
     }
 
     handleUpdate() {
@@ -199,40 +198,14 @@ export default class RelatedFiles extends NavigationMixin(LightningElement) {
     handleFilterSelect(event) {
         const items = event.detail;
         let cloneData = [...this.bareData];
-        this.filterPills = items.map((item, idx) => {
+        items.forEach((item, idx) => {
             if (item.value) {
                 cloneData = cloneData.filter(
-                    (info) => info[item.name] == item.value || (item.value.includes('No ') && info[item.name] === undefined)
+                    (info) => info[item.name] == item.value
                 );
                 this.filterItems[idx].value = item.value;
-                return {
-                    type: "text",
-                    label: `${item.value}`,
-                    name: `${item.name}:${item.value}`
-                };
             }
-        }).filter(x => x != null);
-        this.data = cloneData;
-    }
-
-    handleItemRemove(event) {
-        let cloneData = [...this.bareData];
-        // Update the filter values
-        const keyval = event.detail.item.name.split(':');
-        const removedName = keyval[0];
-        let filter = this.filterItems.filter(x => x.name === removedName)[0];
-        filter.value = null;
-        // remove the pill from the container
-        const index = event.detail.index;
-        this.filterPills.splice(index, 1);
-        // Update the list of files
-        this.filterPills
-            .forEach((item) => {
-                const keyval = item.name.split(':');
-                const name = keyval[0];
-                const value = keyval[1];
-                cloneData = cloneData.filter((info) => info[name] == value);
-            });
+        });
         this.data = cloneData;
     }
 
@@ -251,7 +224,7 @@ export default class RelatedFiles extends NavigationMixin(LightningElement) {
 
     // TODO: Have Trigger delete ContentDocument when all Links to the document are deleted.
     deleteCons(row) {
-        deleteLink({ cdl: row.cdl })
+        deleteLink({cdl: row.cdl})
             .then((result) => {
                 let res = result;
 
