@@ -1,13 +1,16 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>TrainerCertificationValidUntil__c</fullName>
     <description>The date the Trainer Certification is valid to</description>
     <externalId>false</externalId>
-    <label>Trainer Certification Valid Until</label>
-    <formula>TrainerCertAgreementReceived__c + 365</formula>
+    <formula>IF( ISNULL(TrainerCertAgreementReceived__c),
+ /* Find the number of years that have
+    passed between the Last Cert Agreement and the Initial Cert Date. Certification is valid for
+    that many years */
+ ADDMONTHS(TrainerInitialCertificationDate__c, 12),
+ ADDMONTHS(TrainerInitialCertificationDate__c, FLOOR(((TrainerCertAgreementReceived__c - TrainerInitialCertificationDate__c) + 365) / 365) * 12) )</formula>
     <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Trainer Certification Valid Until</label>
     <required>false</required>
-    <trackHistory>false</trackHistory>
-    <trackTrending>false</trackTrending>
     <type>Date</type>
 </CustomField>

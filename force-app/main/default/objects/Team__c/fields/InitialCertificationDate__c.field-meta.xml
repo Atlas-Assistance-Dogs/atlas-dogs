@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>TrainingStartDate__c</fullName>
+    <fullName>InitialCertificationDate__c</fullName>
     <externalId>false</externalId>
-    <inlineHelpText>The date when Team Training actually starts.</inlineHelpText>
-    <label>Training Start Date</label>
+    <label>Initial Certification Date</label>
     <required>false</required>
     <trackTrending>false</trackTrending>
     <type>Date</type>

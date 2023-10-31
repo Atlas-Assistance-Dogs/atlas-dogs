@@ -40,12 +40,13 @@ public with sharing class TeamService {
 
     // Update client status.  This is meant to be called from the team update trigger.
     public static void updateClientStatus(Team__c team) {
-        List<Contact> clients = [SELECT ClientStatus__c, ClientCertificationValidUntil__c FROM Contact WHERE Id = :team.Client__c];
+        List<Contact> clients = [SELECT ClientStatus__c, ClientCertificationValidUntil__c, ClientInitialCertificationDate__c FROM Contact WHERE Id = :team.Client__c];
 
         if (!clients.isEmpty()) {
             Contact client = clients[0];
             client.ClientCertificationValidUntil__c = team.PatValidUntil__c;
             client.ClientStatus__c = team.Status__c;
+            client.ClientInitialCertificationDate__c = team.InitialCertificationDate__c;
             update client;
         }
     }
