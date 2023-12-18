@@ -45,6 +45,9 @@
         },
         "contact": {
             "sharingModel": "private"
+        },
+        "lead": {
+            "sharingModel": "private"
         }
     }
 }

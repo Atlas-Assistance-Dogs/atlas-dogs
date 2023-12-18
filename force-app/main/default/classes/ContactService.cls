@@ -257,9 +257,7 @@ public with sharing class ContactService {
         contact.ShareWithBoard__c = groupNames.contains('Board');
         contact.ShareWithPuppyRaiser__c = groupNames.contains('Puppy Raiser');
         contact.ShareWithStaff__c = groupNames.contains('Staff');
-        contact.ShareWithStandalonePrograms__c = groupNames.contains(
-            'Standalone Programs'
-        );
+        contact.ShareWithStandalonePrograms__c = groupNames.contains('Standalone Programs');
         contact.ShareWithTeam__c = groupNames.contains('Team');
         contact.ShareWithTrainer__c = groupNames.contains('Trainer');
         contact.ShareWithVolunteer__c = groupNames.contains('Volunteer');

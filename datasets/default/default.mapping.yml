@@ -336,6 +336,13 @@ Insert Contact:
   - PuppyReferenceReceived__c
   - RaceEthnicity__c
   - SexualOrientation__c
+  - ShareWithBoard__c
+  - ShareWithPuppyRaiser__c
+  - ShareWithStaff__c
+  - ShareWithStandalonePrograms__c
+  - ShareWithTeam__c
+  - ShareWithTrainer__c
+  - ShareWithVolunteer__c
   - ShirtSize__c
   - SpecifiedAbilityAccommodation__c
   - SpecifiedAbilityStatus__c
