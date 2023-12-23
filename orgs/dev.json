@@ -33,6 +33,12 @@
         }
     },
     "objectSettings": {
+        "contact": {
+            "sharingModel": "private"
+        },
+        "lead": {
+            "sharingModel": "private"
+        },
         "opportunity": {
             "sharingModel": "private"
         },
@@ -41,12 +47,6 @@
             "sharingModel": "private"
         },
         "case": {
-            "sharingModel": "private"
-        },
-        "contact": {
-            "sharingModel": "private"
-        },
-        "lead": {
             "sharingModel": "private"
         }
     }

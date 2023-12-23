@@ -293,6 +293,8 @@ Insert Contact:
   - BoardToNReceived__c
   - CanvasSisId__c
   - ClientCertificationValidUntil__c
+  - ClientFacilitatorAvailability__c
+  - ClientInitialCertificationDate__c
   - ClientMedicalDevices__c
   - ClientStatus__c
   - ContactFormReceived__c
@@ -303,6 +305,7 @@ Insert Contact:
   - FacilitatorApplicationReceived__c
   - FacilitatorCertAgreementReceived__c
   - FacilitatorInfrNoticeReceived__c
+  - FacilitatorInitialCertificationDate__c
   - FacilitatorPracticumReceived__c
   - FacilitatorProgAgreementReceived__c
   - FacilitatorReferenceReceived__c
@@ -362,11 +365,13 @@ Insert Contact:
   - StandaloneProgAgreementReceived__c
   - StandaloneStatus__c
   - SystemAccess__c
+  - TextMessagesApproved__c
   - TrainerApplicationReceived__c
   - TrainerBoardTrain__c
   - TrainerCertAgreementReceived__c
   - TrainerClientReferenceReceived__c
   - TrainerInfrNoticeReceived__c
+  - TrainerInitialCertificationDate__c
   - TrainerProfReferenceReceived__c
   - TrainerProgAgreementReceived__c
   - TrainerSpecialties__c
@@ -562,6 +567,7 @@ Insert Team__c:
   - ClientSurveyReceived__c
   - ClientVAPWReceived__c
   - HealthFormReceived__c
+  - InitialCertificationDate__c
   - Name
   - PatCount__c
   - PatValidUntil__c
