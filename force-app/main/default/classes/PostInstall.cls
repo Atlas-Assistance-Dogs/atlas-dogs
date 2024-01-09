@@ -221,6 +221,7 @@ global class PostInstall implements InstallHandler {
                 npe4__RelatedContact__r.Positions__c,
                 npe4__RelatedContact__r.ShareWithBoard__c,
                 npe4__RelatedContact__r.ShareWithPuppyRaiser__c,
+                npe4__RelatedContact__r.ShareWithStaff__c,
                 npe4__RelatedContact__r.ShareWithStandalonePrograms__c,
                 npe4__RelatedContact__r.ShareWithTeam__c,
                 npe4__RelatedContact__r.ShareWithTrainer__c,
@@ -234,7 +235,7 @@ global class PostInstall implements InstallHandler {
                 AND npe4__Contact__c IN :contactMap.keySet()
         ];
         for (npe4__Relationship__c relation : related) {
-            Contact shared = contactMap.get(relation.npe4__RelatedContact__c);
+            Contact shared = contactMap.get(relation.npe4__Contact__c);
             Contact share = contactMap.get(relation.npe4__RelatedContact__c);
             if (share == null) {
                 share = relation.npe4__RelatedContact__r;
