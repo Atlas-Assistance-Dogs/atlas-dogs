@@ -2,6 +2,20 @@
 // groups can see which category
 public with sharing class CategoryRuleController {
 
+    public static List<String> getAllowedCategoriesForUser() {
+        List<String> groupNames = UserService.GetGroupNames(UserInfo.getUserId());
+
+        // get the categories that work for the object
+        List<CategoryRule__c> rules = [SELECT Category__c, Group__c FROM CategoryRule__c];
+        List<String> categories = new List<String>();
+        for (CategoryRule__c rule: rules) {
+            if (String.isBlank(rule.Group__c) || groupNames.contains(rule.Group__c)) {
+                categories.addAll(rule.Category__c.split(';'));
+            }
+        }
+        return categories;
+    }
+
     public static List<String> getAllowedCategoriesForObject(Id recordId) {
         string objLabel = recordId.getSObjectType().getDescribe().getLabel();
 

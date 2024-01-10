@@ -113,9 +113,7 @@ public inherited sharing class FileController {
             Map<string, string> typeEntries = getEntryMap(
                 ContentVersion.Type__c.getDescribe()
             );
-            List<string> allowedCategories = CategoryRuleController.getAllowedCategoriesForObject(
-                recordId
-            );
+            List<string> allowedCategories = CategoryRuleController.getAllowedCategoriesForUser();
             System.debug(allowedCategories);
             allowedCategories.add('');
             List<ContentVersion> files = [

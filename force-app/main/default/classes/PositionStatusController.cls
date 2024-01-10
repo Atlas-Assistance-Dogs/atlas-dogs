@@ -108,9 +108,13 @@ public with sharing class PositionStatusController {
                         Schema.sObjectType.Contact.fields.ClientStatus__c.isAccessible() &&
                         Schema.sObjectType.Contact.fields.ClientCertificationValidUntil__c.isAccessible()
                     ) {
+                        Date certDate = null;
+                        if (person.ClientCertificationValidUntil__c != null) {
+                            certDate = person.ClientCertificationValidUntil__c.addDays(-365);
+                        }
                         string status = fineTuneStatus(
                             person.ClientStatus__c,
-                            person.ClientCertificationValidUntil__c.addDays(-365)
+                            certDate
                         );
                         statuses.add(new PositionStatus(position, status));
                     }

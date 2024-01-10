@@ -36,7 +36,6 @@ public with sharing class UserService {
                 OR Group.Type = 'Role'
                 OR Group.Type = 'RoleAndSubordinates')
         ]) {
-            System.debug(gm.Group.Name);
             groupWithUser.add(gm.groupId);
         }
 
