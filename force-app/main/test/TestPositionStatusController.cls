@@ -117,13 +117,13 @@ public with sharing class TestPositionStatusController {
     @isTest
     public static void getPositionStatusForContact_ReturnsVolunteer_WhenUserVolunteer() {
         // Arrange
-        Id joeId = setupFullStatus();
-
         User buddy = TestUtilities.createUser('Minimum Access - Salesforce');
+        TestUtilities.addUserToPermissionSet(buddy.Id, 'AtlasBase');
         TestUtilities.addUserToPermissionSet(buddy.Id, 'AtlasVolunteer');
 
         // Act
         System.runAs(buddy) {
+            Id joeId = setupFullStatus();
             List<PositionStatus> statuses = PositionStatusController.getPositionStatusForContact(
                 joeId
             );
