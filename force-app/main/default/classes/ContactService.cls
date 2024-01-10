@@ -156,10 +156,19 @@ public with sharing class ContactService {
         npe4__Relationship__c[] related = [
             SELECT
                 Id,
+                npe4__Contact__r.Positions__c,
+                npe4__Contact__r.ShareWithBoard__c,
+                npe4__Contact__r.ShareWithPuppyRaiser__c,
+                npe4__Contact__r.ShareWithStaff__c,
+                npe4__Contact__r.ShareWithStandalonePrograms__c,
+                npe4__Contact__r.ShareWithTeam__c,
+                npe4__Contact__r.ShareWithTrainer__c,
+                npe4__Contact__r.ShareWithVolunteer__c,
                 npe4__RelatedContact__c,
                 npe4__RelatedContact__r.Positions__c,
                 npe4__RelatedContact__r.ShareWithBoard__c,
                 npe4__RelatedContact__r.ShareWithPuppyRaiser__c,
+                npe4__RelatedContact__r.ShareWithStaff__c,
                 npe4__RelatedContact__r.ShareWithStandalonePrograms__c,
                 npe4__RelatedContact__r.ShareWithTeam__c,
                 npe4__RelatedContact__r.ShareWithTrainer__c,
@@ -171,17 +180,23 @@ public with sharing class ContactService {
                 AND npe4__Status__c = 'Current'
                 AND npe4__Contact__c = :recordId
         ];
-        Set<Contact> relations = new Set<Contact>();
+        Map<Id, Contact> relations = new Map<Id, Contact>();
+        Contact source = null;
         for (npe4__Relationship__c relation : related) {
-            relations.add(relation.npe4__RelatedContact__r);
+            source = relation.npe4__Contact__r;
+            relations.put(relation.npe4__RelatedContact__c, relation.npe4__RelatedContact__r);
         }
 
-        for (Contact relation : relations) {
-            Set<String> positions = getRelationShipPositions(relation);
-            Set<String> groupNames = getGroupsForPositions(positions);
-            shareContactWithGroups(relation, groupNames);
+        for (Contact relation : relations.values()) {
+            relation.ShareWithBoard__c = relation.ShareWithBoard__c || source.ShareWithBoard__c;
+            relation.ShareWithPuppyRaiser__c = relation.ShareWithPuppyRaiser__c || source.ShareWithPuppyRaiser__c;
+            relation.ShareWithStaff__c = relation.ShareWithStaff__c || source.ShareWithStaff__c;
+            relation.ShareWithStandalonePrograms__c = relation.ShareWithStandalonePrograms__c || source.ShareWithStandalonePrograms__c;
+            relation.ShareWithTeam__c = relation.ShareWithTeam__c || source.ShareWithTeam__c;
+            relation.ShareWithTrainer__c = relation.ShareWithTrainer__c || source.ShareWithTrainer__c;
+            relation.ShareWithVolunteer__c = relation.ShareWithVolunteer__c || source.ShareWithVolunteer__c;
         }
-        update new List<Contact>(relations);
+        update relations.values();
     }
 
     // Share the contact based on the related contact's positions
