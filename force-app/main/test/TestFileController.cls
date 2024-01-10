@@ -407,6 +407,8 @@ public with sharing class TestFileController {
         FileController.relateFiles(ids, rowan.Id);
         User adminUser = TestUtilities.createUser('Standard User');
         TestUtilities.addUserToGroups(adminUser, groups);
+        rowan.OwnerId = adminUser.Id;
+        update rowan;
         RelatedObjects related;
         Test.startTest();
         System.runAs(new User(Id = adminUser.Id)) {

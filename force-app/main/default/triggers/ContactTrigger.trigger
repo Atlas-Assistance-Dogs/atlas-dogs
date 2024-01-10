@@ -2,11 +2,13 @@ trigger ContactTrigger on Contact (before insert, before update) {
     for (Contact newContact : Trigger.new) {
         string oldEmail = newContact.Email;
         string oldPhone = newContact.Phone;
+        string oldPositions = null;
         if (Trigger.isUpdate) {
             //Get Old Value
             Contact oldContact = trigger.oldMap.get(newContact.Id);
             oldEmail = oldContact.Email;
             oldPhone = oldContact.Phone;
+            oldPositions = oldContact.Positions__c;
         }
         
         // Check if Contact is set
@@ -46,6 +48,10 @@ trigger ContactTrigger on Contact (before insert, before update) {
             // So, months + 1 takes us to July, toStartOfMonth() takes us to July 1, and subtracting
             // a day takes us to June 30.
             newContact.BoardTermValidUntil__c = minTerm.addMonths(months + 1).toStartOfMonth().addDays(-1);
+        }
+
+        if (newContact.Positions__c != oldPositions) {
+            ContactService.shareContactBasedOnPositions(newContact);
         }
     }
 }

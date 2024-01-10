@@ -5,8 +5,9 @@ public with sharing class ContactService {
         string contact = newContact.Contact__c;
         if (contact == 'Home' && !string.isBlank(newContact.Email)) {
             newContact.npe01__HomeEmail__c = newContact.Email;
-        }
-        else if (contact == 'Alternate' && !string.isBlank(newContact.Email)) {
+        } else if (
+            contact == 'Alternate' && !string.isBlank(newContact.Email)
+        ) {
             newContact.npe01__AlternateEmail__c = newContact.Email;
         }
         return newContact;
@@ -16,8 +17,9 @@ public with sharing class ContactService {
         string contact = newContact.Contact__c;
         if (contact == 'Home' && !string.isBlank(newContact.Phone)) {
             newContact.HomePhone = newContact.Phone;
-        }
-        else if (contact == 'Alternate' && !string.isBlank(newContact.Phone)) {
+        } else if (
+            contact == 'Alternate' && !string.isBlank(newContact.Phone)
+        ) {
             newContact.OtherPhone = newContact.Phone;
         }
         return newContact;
@@ -30,18 +32,22 @@ public with sharing class ContactService {
             if (!string.isBlank(newContact.npe01__HomeEmail__c)) {
                 newContact.Email = newContact.npe01__HomeEmail__c;
             }
-        }
-        else if (contact == 'Alternate') {
+        } else if (contact == 'Alternate') {
             if (!string.isBlank(newContact.npe01__AlternateEmail__c)) {
                 newContact.Email = newContact.npe01__AlternateEmail__c;
             }
-        }
-        else {
+        } else {
             // see if the type matches a relationship type
             List<npe4__Relationship__c> related = [
-                SELECT Id, npe4__RelatedContact__c, npe4__RelatedContact__r.Email
+                SELECT
+                    Id,
+                    npe4__RelatedContact__c,
+                    npe4__RelatedContact__r.Email
                 FROM npe4__Relationship__c
-                WHERE npe4__Type__c = :contact AND npe4__Contact__c = :newContact.Id AND npe4__Status__c = 'Current'
+                WHERE
+                    npe4__Type__c = :contact
+                    AND npe4__Contact__c = :newContact.Id
+                    AND npe4__Status__c = 'Current'
             ];
             if (!related.isEmpty()) {
                 // use the first Contact that matches
@@ -55,24 +61,28 @@ public with sharing class ContactService {
     }
 
     // Update the Contact's phone based on the current value from ContactAt
-	public static Contact updatePhone(Contact newContact){
+    public static Contact updatePhone(Contact newContact) {
         string contact = newContact.Contact__c;
         if (contact == 'Home') {
             if (!string.isBlank(newContact.HomePhone)) {
                 newContact.Phone = newContact.HomePhone;
             }
-        }
-        else if (contact == 'Alternate') {
+        } else if (contact == 'Alternate') {
             if (!string.isBlank(newContact.OtherPhone)) {
                 newContact.Phone = newContact.OtherPhone;
             }
-        }
-        else {
+        } else {
             // see if the type matches a relationship type
             List<npe4__Relationship__c> related = [
-                SELECT Id, npe4__RelatedContact__c, npe4__RelatedContact__r.Phone
+                SELECT
+                    Id,
+                    npe4__RelatedContact__c,
+                    npe4__RelatedContact__r.Phone
                 FROM npe4__Relationship__c
-                WHERE npe4__Type__c = :contact AND npe4__Contact__c = :newContact.Id AND npe4__Status__c = 'Current'
+                WHERE
+                    npe4__Type__c = :contact
+                    AND npe4__Contact__c = :newContact.Id
+                    AND npe4__Status__c = 'Current'
             ];
             if (!related.isEmpty()) {
                 // use the first Contact that matches
@@ -83,20 +93,36 @@ public with sharing class ContactService {
             }
         }
         return newContact;
-	}
+    }
 
     // Update the email of a related contact
-    public static void updateRelatedContactEmailPhone(Contact current, Boolean changedEmail, Boolean changedPhone) {
+    public static void updateRelatedContactEmailPhone(
+        Contact current,
+        Boolean changedEmail,
+        Boolean changedPhone
+    ) {
         System.debug(current.Id);
         List<npe4__Relationship__c> related = [
-            SELECT Id, npe4__Contact__c, npe4__Type__c, npe4__RelatedContact__c, npe4__Contact__r.Email, npe4__RelatedContact__r.Phone, npe4__Contact__r.Contact__c
+            SELECT
+                Id,
+                npe4__Contact__c,
+                npe4__Type__c,
+                npe4__RelatedContact__c,
+                npe4__Contact__r.Email,
+                npe4__RelatedContact__r.Phone,
+                npe4__Contact__r.Contact__c
             FROM npe4__Relationship__c
-            WHERE npe4__RelatedContact__c = :current.Id AND npe4__Status__c = 'Current'
+            WHERE
+                npe4__RelatedContact__c = :current.Id
+                AND npe4__Status__c = 'Current'
         ];
         if (!related.isEmpty()) {
             List<Contact> contacts = new List<Contact>();
             for (npe4__Relationship__c relationship : related) {
-                if (relationship.npe4__Contact__r.Contact__c == relationship.npe4__Type__c) {
+                if (
+                    relationship.npe4__Contact__r.Contact__c ==
+                    relationship.npe4__Type__c
+                ) {
                     if (changedEmail) {
                         relationship.npe4__Contact__r.Email = current.Email;
                     }
@@ -108,5 +134,147 @@ public with sharing class ContactService {
             }
             update contacts;
         }
+    }
+
+    // Share the contact with the appropriate groups based on which positions they have,
+    // and the positions they are emergency contacts for
+    public static void shareContactBasedOnPositions(Contact person) {
+        // Create a set of the positions the user currently has
+        Set<String> positions = new Set<String>();
+        if (!String.isBlank(person.Positions__c)) {
+            positions.addAll(person.Positions__c.split(';'));
+        }
+        Set<String> groups = getGroupsForPositions(positions);
+
+        // update this contact first, then its relations
+        shareContactWithGroups(person, groups);
+    }
+
+    // Share the appropriate related contacts
+    public static void shareRelatedContactsBasedOnPositions(Id recordId) {
+        // Find who the contact is related to as emergency contacts or guardian
+        npe4__Relationship__c[] related = [
+            SELECT
+                Id,
+                npe4__Contact__r.Positions__c,
+                npe4__Contact__r.ShareWithBoard__c,
+                npe4__Contact__r.ShareWithPuppyRaiser__c,
+                npe4__Contact__r.ShareWithStaff__c,
+                npe4__Contact__r.ShareWithStandalonePrograms__c,
+                npe4__Contact__r.ShareWithTeam__c,
+                npe4__Contact__r.ShareWithTrainer__c,
+                npe4__Contact__r.ShareWithVolunteer__c,
+                npe4__RelatedContact__c,
+                npe4__RelatedContact__r.Positions__c,
+                npe4__RelatedContact__r.ShareWithBoard__c,
+                npe4__RelatedContact__r.ShareWithPuppyRaiser__c,
+                npe4__RelatedContact__r.ShareWithStaff__c,
+                npe4__RelatedContact__r.ShareWithStandalonePrograms__c,
+                npe4__RelatedContact__r.ShareWithTeam__c,
+                npe4__RelatedContact__r.ShareWithTrainer__c,
+                npe4__RelatedContact__r.ShareWithVolunteer__c
+            FROM npe4__Relationship__c
+            WHERE
+                (npe4__Type__c LIKE '%Emergency Contact'
+                OR npe4__Type__c = 'Guardian')
+                AND npe4__Status__c = 'Current'
+                AND npe4__Contact__c = :recordId
+        ];
+        Map<Id, Contact> relations = new Map<Id, Contact>();
+        Contact source = null;
+        for (npe4__Relationship__c relation : related) {
+            source = relation.npe4__Contact__r;
+            relations.put(relation.npe4__RelatedContact__c, relation.npe4__RelatedContact__r);
+        }
+
+        for (Contact relation : relations.values()) {
+            relation.ShareWithBoard__c = relation.ShareWithBoard__c || source.ShareWithBoard__c;
+            relation.ShareWithPuppyRaiser__c = relation.ShareWithPuppyRaiser__c || source.ShareWithPuppyRaiser__c;
+            relation.ShareWithStaff__c = relation.ShareWithStaff__c || source.ShareWithStaff__c;
+            relation.ShareWithStandalonePrograms__c = relation.ShareWithStandalonePrograms__c || source.ShareWithStandalonePrograms__c;
+            relation.ShareWithTeam__c = relation.ShareWithTeam__c || source.ShareWithTeam__c;
+            relation.ShareWithTrainer__c = relation.ShareWithTrainer__c || source.ShareWithTrainer__c;
+            relation.ShareWithVolunteer__c = relation.ShareWithVolunteer__c || source.ShareWithVolunteer__c;
+        }
+        update relations.values();
+    }
+
+    // Share the contact based on the related contact's positions
+    public static void shareContactsBasedOnRelations(Set<Id> contactIds) {
+        List<Contact> contacts = [
+            SELECT
+                Id,
+                Positions__c,
+                ShareWithBoard__c,
+                ShareWithPuppyRaiser__c,
+                ShareWithStaff__c,
+                ShareWithStandalonePrograms__c,
+                ShareWithTeam__c,
+                ShareWithTrainer__c,
+                ShareWithVolunteer__c
+            FROM Contact
+            WHERE Id IN :contactIds
+        ];
+
+        for (Contact person : contacts) {
+            Set<String> positions = getRelationShipPositions(person);
+            Set<String> groupNames = getGroupsForPositions(positions);
+            shareContactWithGroups(person, groupNames);
+        }
+        update contacts;
+    }
+
+    // Get the positions of the contact relations
+    private static Set<String> getRelationShipPositions(Contact record) {
+        // Find who the contact is related to as an emergency contact
+        npe4__Relationship__c[] related = [
+            SELECT Id, npe4__Contact__r.Positions__c
+            FROM npe4__Relationship__c
+            WHERE
+                (npe4__Type__c LIKE '%Emergency Contact'
+                OR npe4__Type__c = 'Guardian')
+                AND npe4__Status__c = 'Current'
+                AND npe4__RelatedContact__c = :record.Id
+        ];
+        Set<String> positions = new Set<String>();
+        if (!String.isBlank(record.Positions__c)) {
+            positions.addAll(record.Positions__c.split(';'));
+        }
+        for (npe4__Relationship__c relation : related) {
+            if (String.isBlank(relation.npe4__Contact__r.Positions__c)) {
+                continue;
+            }
+            String[] pos = relation.npe4__Contact__r.Positions__c.split(';');
+            positions.addAll(pos);
+        }
+        return positions;
+    }
+
+    // Get the groups that the category rules assign for the positions
+    private static Set<String> getGroupsForPositions(Set<String> positions) {
+        // Get the groups that can see each position
+        List<CategoryRule__c> rules = [
+            SELECT Group__c
+            FROM CategoryRule__c
+            WHERE Position__c IN :positions
+        ];
+        Set<String> groupNames = new Set<String>();
+        for (CategoryRule__c rule : rules) {
+            groupNames.add(rule.Group__c);
+        }
+        return groupNames;
+    }
+
+    private static void shareContactWithGroups(
+        Contact contact,
+        Set<String> groupNames
+    ) {
+        contact.ShareWithBoard__c = groupNames.contains('Board');
+        contact.ShareWithPuppyRaiser__c = groupNames.contains('Puppy Raiser');
+        contact.ShareWithStaff__c = groupNames.contains('Staff');
+        contact.ShareWithStandalonePrograms__c = groupNames.contains('Standalone Programs');
+        contact.ShareWithTeam__c = groupNames.contains('Team');
+        contact.ShareWithTrainer__c = groupNames.contains('Trainer');
+        contact.ShareWithVolunteer__c = groupNames.contains('Volunteer');
     }
 }

@@ -141,7 +141,7 @@ public with sharing class TestCategoryRuleController {
         );
         insert team;
 
-        createCategoryRules();
+        TestUtilities.insertCategoryRules();
     }
 
     @isTest
@@ -172,6 +172,8 @@ public with sharing class TestCategoryRuleController {
     @isTest
     public static void getCategoriesForObject_ReturnsClient_WhenClient() {
         setup();
+        ken.OwnerId = adminUser.Id;
+        update ken;
         System.runAs(new User(Id = adminUser.Id)) {
             // Act
             List<map<String,String>> categories = CategoryRuleController.getCategoriesForObject(ken.Id);
@@ -185,6 +187,8 @@ public with sharing class TestCategoryRuleController {
     @isTest
     public static void getCategoriesForObject_ReturnsClientVolunteer_WhenClientVolunteer() {
         setup();
+        debbie.OwnerId = adminUser.Id;
+        update debbie;
         System.runAs(new User(Id = adminUser.Id)) {
             // Act
             List<map<String,String>> categories = CategoryRuleController.getCategoriesForObject(debbie.Id);
@@ -233,6 +237,8 @@ public with sharing class TestCategoryRuleController {
     public static void getCategoriesForObject_RestrictsClientCategory_WhenUserNotInAllGroup() {
         setup();
         User volunteerUser = setupGroupUser();
+        debbie.OwnerId = volunteerUser.Id;
+        update debbie;
 
         System.runAs(new User(Id = volunteerUser.Id)) {
             List<map<String,String>> categories = CategoryRuleController.getCategoriesForObject(debbie.Id);
