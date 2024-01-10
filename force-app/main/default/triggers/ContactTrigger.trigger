@@ -2,7 +2,7 @@ trigger ContactTrigger on Contact (before insert, before update) {
     for (Contact newContact : Trigger.new) {
         string oldEmail = newContact.Email;
         string oldPhone = newContact.Phone;
-        string oldPositions = newContact.Positions__c;
+        string oldPositions = null;
         if (Trigger.isUpdate) {
             //Get Old Value
             Contact oldContact = trigger.oldMap.get(newContact.Id);
