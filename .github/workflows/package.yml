@@ -6,6 +6,7 @@ on:
             - dev
             - staging
             - main
+    workflow_dispatch:
 
 jobs:
     upload-beta:
