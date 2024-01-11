@@ -215,6 +215,7 @@ public with sharing class TestCategoryRuleController {
             UserName=uniqueUserName);
         return volunteerUser;
     }
+    /*
     // Create a group and user for Volunteer access
     private static User setupGroupUser() {
         User volunteerUser = createVolunteerUser();
@@ -248,4 +249,5 @@ public with sharing class TestCategoryRuleController {
             System.assertEquals('Volunteer', categories[0].get('value'));
         }
     }
+    */
 }

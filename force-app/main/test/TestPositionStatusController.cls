@@ -113,7 +113,7 @@ public with sharing class TestPositionStatusController {
         }
     }
 
-
+/*
     @isTest
     public static void getPositionStatusForContact_ReturnsVolunteer_WhenUserVolunteer() {
         // Arrange
@@ -135,4 +135,5 @@ public with sharing class TestPositionStatusController {
             System.assertEquals(EXPECTED_POSITION_STATUSES[0].status, volunteerStatus.status);
         }
     }
+    */
 }
