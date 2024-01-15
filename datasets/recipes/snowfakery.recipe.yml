@@ -4,7 +4,7 @@
 #
 - include_file: common.recipe.yml
 - include_file: volunteer-jobs.recipe.yml
-- include_file: Account_npsp.recipe.yml
+#- include_file: Account_npsp.recipe.yml
 - include_file: contact.recipe.yml
 - include_file: background-check.recipe.yml
 - include_file: CEU.recipe.yml
@@ -13,6 +13,6 @@
 - include_file: groups.recipe.yml
 - include_file: category-rules.recipe.yml
 - include_file: dog.recipe.yml
-- include_file: log.recipe.yml
+# - include_file: log.recipe.yml
 - include_file: lead.recipe.yml
 - include_file: puppy-log.recipe.yml
