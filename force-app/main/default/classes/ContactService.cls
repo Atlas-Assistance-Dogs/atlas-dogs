@@ -101,7 +101,6 @@ public with sharing class ContactService {
         Boolean changedEmail,
         Boolean changedPhone
     ) {
-        System.debug(current.Id);
         List<npe4__Relationship__c> related = [
             SELECT
                 Id,
@@ -138,7 +137,7 @@ public with sharing class ContactService {
 
     // Share the contact with the appropriate groups based on which positions they have,
     // and the positions they are emergency contacts for
-    public static void shareContactBasedOnPositions(Contact person, Map<String, String> positionGroups) {
+    public static Contact shareContactBasedOnPositions(Contact person, Map<String, String> positionGroups) {
         // Create a set of the positions the user currently has
         Set<String> positions = new Set<String>();
         if (!String.isBlank(person.Positions__c)) {
@@ -153,56 +152,8 @@ public with sharing class ContactService {
         }
 
         // update this contact first, then its relations
-        shareContactWithGroups(person, groups);
-    }
-
-    // Share the appropriate related contacts
-    public static Map<Id, Contact> shareContactsBasedOnRelations(Set<Id> recordIds) {
-        // Find who the contact is related to as emergency contacts or guardian
-        npe4__Relationship__c[] relationships = [
-            SELECT
-                Id,
-                npe4__Contact__r.Positions__c,
-                npe4__Contact__r.ShareWithBoard__c,
-                npe4__Contact__r.ShareWithPuppyRaiser__c,
-                npe4__Contact__r.ShareWithStaff__c,
-                npe4__Contact__r.ShareWithStandalonePrograms__c,
-                npe4__Contact__r.ShareWithTeam__c,
-                npe4__Contact__r.ShareWithTrainer__c,
-                npe4__Contact__r.ShareWithVolunteer__c,
-                npe4__RelatedContact__c,
-                npe4__RelatedContact__r.Positions__c,
-                npe4__RelatedContact__r.ShareWithBoard__c,
-                npe4__RelatedContact__r.ShareWithPuppyRaiser__c,
-                npe4__RelatedContact__r.ShareWithStaff__c,
-                npe4__RelatedContact__r.ShareWithStandalonePrograms__c,
-                npe4__RelatedContact__r.ShareWithTeam__c,
-                npe4__RelatedContact__r.ShareWithTrainer__c,
-                npe4__RelatedContact__r.ShareWithVolunteer__c
-            FROM npe4__Relationship__c
-            WHERE
-                (npe4__Type__c LIKE '%Emergency Contact'
-                OR npe4__Type__c = 'Guardian')
-                AND npe4__Status__c = 'Current'
-                AND npe4__RelatedContact__c in :recordIds
-        ];
-        Map<Id, Contact> relations = new Map<Id, Contact>();
-        for (npe4__Relationship__c relationship : relationships) {
-            Contact source = relationship.npe4__Contact__r;
-            Contact relation = relations.get(relationship.npe4__RelatedContact__c);
-            if (relation == null) { // not there yet
-                relation = relationship.npe4__RelatedContact__r;
-                relations.put(relationship.npe4__RelatedContact__c, relation);
-            }
-            relation.ShareWithBoard__c = relation.ShareWithBoard__c || source.ShareWithBoard__c;
-            relation.ShareWithPuppyRaiser__c = relation.ShareWithPuppyRaiser__c || source.ShareWithPuppyRaiser__c;
-            relation.ShareWithStaff__c = relation.ShareWithStaff__c || source.ShareWithStaff__c;
-            relation.ShareWithStandalonePrograms__c = relation.ShareWithStandalonePrograms__c || source.ShareWithStandalonePrograms__c;
-            relation.ShareWithTeam__c = relation.ShareWithTeam__c || source.ShareWithTeam__c;
-            relation.ShareWithTrainer__c = relation.ShareWithTrainer__c || source.ShareWithTrainer__c;
-            relation.ShareWithVolunteer__c = relation.ShareWithVolunteer__c || source.ShareWithVolunteer__c;
-        }
-        return relations;
+        person = shareContactWithGroups(person, groups);
+        return person;
     }
 
     // Get the positions of the contact relations
@@ -246,7 +197,7 @@ public with sharing class ContactService {
         return groupNames;
     }
 
-    private static void shareContactWithGroups(
+    private static Contact shareContactWithGroups(
         Contact contact,
         Set<String> groupNames
     ) {
@@ -257,5 +208,6 @@ public with sharing class ContactService {
         contact.ShareWithTeam__c = groupNames.contains('Team');
         contact.ShareWithTrainer__c = groupNames.contains('Trainer');
         contact.ShareWithVolunteer__c = groupNames.contains('Volunteer');
+        return contact;
     }
 }
