@@ -15,7 +15,7 @@
 - object: CategoryRule__c
   just_once: True
   fields:
-    Category__c: 'Team Dog'
+    Category__c: 'TeamDog'
     Object__c: 'Team'
     Group__c: 'Team'
 

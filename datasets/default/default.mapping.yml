@@ -376,6 +376,7 @@ Insert Contact:
   - TrainerProgAgreementReceived__c
   - TrainerSpecialties__c
   - TrainerStatus__c
+  - UpdateShareSettings__c
   - VeteranStatus__c
   - VolunteerAccess__c
   - VolunteerAgreementReceived__c

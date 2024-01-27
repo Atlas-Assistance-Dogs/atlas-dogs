@@ -138,22 +138,28 @@ public with sharing class ContactService {
 
     // Share the contact with the appropriate groups based on which positions they have,
     // and the positions they are emergency contacts for
-    public static void shareContactBasedOnPositions(Contact person) {
+    public static void shareContactBasedOnPositions(Contact person, Map<String, String> positionGroups) {
         // Create a set of the positions the user currently has
         Set<String> positions = new Set<String>();
         if (!String.isBlank(person.Positions__c)) {
             positions.addAll(person.Positions__c.split(';'));
         }
-        Set<String> groups = getGroupsForPositions(positions);
+        Set<String> groups = new Set<String>();
+        for (String position : positions) {
+            String grp = positionGroups.get(position);
+            if (grp != null) {
+                groups.add(grp);
+            }
+        }
 
         // update this contact first, then its relations
         shareContactWithGroups(person, groups);
     }
 
     // Share the appropriate related contacts
-    public static void shareRelatedContactsBasedOnPositions(Id recordId) {
+    public static Map<Id, Contact> shareContactsBasedOnRelations(Set<Id> recordIds) {
         // Find who the contact is related to as emergency contacts or guardian
-        npe4__Relationship__c[] related = [
+        npe4__Relationship__c[] relationships = [
             SELECT
                 Id,
                 npe4__Contact__r.Positions__c,
@@ -178,16 +184,16 @@ public with sharing class ContactService {
                 (npe4__Type__c LIKE '%Emergency Contact'
                 OR npe4__Type__c = 'Guardian')
                 AND npe4__Status__c = 'Current'
-                AND npe4__Contact__c = :recordId
+                AND npe4__RelatedContact__c in :recordIds
         ];
         Map<Id, Contact> relations = new Map<Id, Contact>();
-        Contact source = null;
-        for (npe4__Relationship__c relation : related) {
-            source = relation.npe4__Contact__r;
-            relations.put(relation.npe4__RelatedContact__c, relation.npe4__RelatedContact__r);
-        }
-
-        for (Contact relation : relations.values()) {
+        for (npe4__Relationship__c relationship : relationships) {
+            Contact source = relationship.npe4__Contact__r;
+            Contact relation = relations.get(relationship.npe4__RelatedContact__c);
+            if (relation == null) { // not there yet
+                relation = relationship.npe4__RelatedContact__r;
+                relations.put(relationship.npe4__RelatedContact__c, relation);
+            }
             relation.ShareWithBoard__c = relation.ShareWithBoard__c || source.ShareWithBoard__c;
             relation.ShareWithPuppyRaiser__c = relation.ShareWithPuppyRaiser__c || source.ShareWithPuppyRaiser__c;
             relation.ShareWithStaff__c = relation.ShareWithStaff__c || source.ShareWithStaff__c;
@@ -196,32 +202,7 @@ public with sharing class ContactService {
             relation.ShareWithTrainer__c = relation.ShareWithTrainer__c || source.ShareWithTrainer__c;
             relation.ShareWithVolunteer__c = relation.ShareWithVolunteer__c || source.ShareWithVolunteer__c;
         }
-        update relations.values();
-    }
-
-    // Share the contact based on the related contact's positions
-    public static void shareContactsBasedOnRelations(Set<Id> contactIds) {
-        List<Contact> contacts = [
-            SELECT
-                Id,
-                Positions__c,
-                ShareWithBoard__c,
-                ShareWithPuppyRaiser__c,
-                ShareWithStaff__c,
-                ShareWithStandalonePrograms__c,
-                ShareWithTeam__c,
-                ShareWithTrainer__c,
-                ShareWithVolunteer__c
-            FROM Contact
-            WHERE Id IN :contactIds
-        ];
-
-        for (Contact person : contacts) {
-            Set<String> positions = getRelationShipPositions(person);
-            Set<String> groupNames = getGroupsForPositions(positions);
-            shareContactWithGroups(person, groupNames);
-        }
-        update contacts;
+        return relations;
     }
 
     // Get the positions of the contact relations
@@ -251,16 +232,16 @@ public with sharing class ContactService {
     }
 
     // Get the groups that the category rules assign for the positions
-    private static Set<String> getGroupsForPositions(Set<String> positions) {
+    public static Map<String, String> getGroupsByPositions() {
         // Get the groups that can see each position
         List<CategoryRule__c> rules = [
-            SELECT Group__c
+            SELECT Group__c, Position__c
             FROM CategoryRule__c
-            WHERE Position__c IN :positions
+            WHERE Position__c != null
         ];
-        Set<String> groupNames = new Set<String>();
+        Map<String, String> groupNames = new Map<String, String>();
         for (CategoryRule__c rule : rules) {
-            groupNames.add(rule.Group__c);
+            groupNames.put(rule.Position__c, rule.Group__c);
         }
         return groupNames;
     }

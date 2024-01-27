@@ -1,4 +1,6 @@
 trigger ContactTrigger on Contact (before insert, before update) {
+    Map<String, String> positionGroups = ContactService.getGroupsByPositions();
+    Set<Id> modifiedContacts = new Set<Id>();
     for (Contact newContact : Trigger.new) {
         string oldEmail = newContact.Email;
         string oldPhone = newContact.Phone;
@@ -50,8 +52,32 @@ trigger ContactTrigger on Contact (before insert, before update) {
             newContact.BoardTermValidUntil__c = minTerm.addMonths(months + 1).toStartOfMonth().addDays(-1);
         }
 
-        if (newContact.Positions__c != oldPositions) {
-            ContactService.shareContactBasedOnPositions(newContact);
+        if (newContact.Positions__c != oldPositions || newContact.UpdateShareSettings__c) {
+            System.debug(newContact.Id);
+            ContactService.shareContactBasedOnPositions(newContact, positionGroups);
+            if (!Trigger.isInsert) {
+                modifiedContacts.add(newContact.Id);
+            }
+            newContact.UpdateShareSettings__c = false;
+        }
+    }
+
+    if (!Trigger.isInsert) {
+        // finish modifying these contacts
+        Map<Id, Contact> contactMap = ContactService.shareContactsBasedOnRelations(modifiedContacts);
+
+        for (Contact newContact : Trigger.new) {
+            Contact changes = contactMap.get(newContact.Id);
+            if (changes != null) {
+                System.debug(newContact.Id);
+                newContact.ShareWithBoard__c = changes.ShareWithBoard__c;
+                newContact.ShareWithPuppyRaiser__c = changes.ShareWithPuppyRaiser__c;
+                newContact.ShareWithStaff__c = changes.ShareWithStaff__c;
+                newContact.ShareWithStandalonePrograms__c = changes.ShareWithStandalonePrograms__c;
+                newContact.ShareWithTeam__c = changes.ShareWithTeam__c;
+                newContact.ShareWithTrainer__c = changes.ShareWithTrainer__c;
+                newContact.ShareWithVolunteer__c = changes.ShareWithVolunteer__c;
+            }
         }
     }
 }

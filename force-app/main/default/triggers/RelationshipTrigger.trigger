@@ -25,5 +25,10 @@ trigger RelationshipTrigger on npe4__Relationship__c (after insert, after update
         }
     }
 
-    ContactService.shareContactsBasedOnRelations(contactIds);
+    List<Contact> related = [SELECT Id, UpdateShareSettings__c FROM Contact WHERE Id in :contactIds];
+    // we need a way for the contact trigger to know to update this contacts share settings
+    for (Contact person : related) {
+        person.UpdateShareSettings__c = true;
+    }
+    update related;
 }
