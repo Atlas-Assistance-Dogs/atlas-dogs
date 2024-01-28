@@ -104,6 +104,7 @@ public with sharing class TestContactRelatedTrigger {
         createContacts();
         relationship.npe4__Status__c = 'Former';
         update relationship;
+        String email = cathy.Email;
 
         cathy.Email = 'cathy-blow@bikepump.com';
 
@@ -115,7 +116,7 @@ public with sharing class TestContactRelatedTrigger {
         // Assert
         System.assert(result.isSuccess());
         System.assert(result.getErrors().size() == 0);
-        assertEmail(joe.Email, joe.Id);
+        assertEmail(email, joe.Id);
         assertEmail(cathy.Email, cathy.Id);
     }
 
@@ -139,6 +140,7 @@ public with sharing class TestContactRelatedTrigger {
     @isTest
     static void update_leavesEmail_WhenGuardianEmailClearedAndContactAtGuardian() {
         createContacts();
+        String email = cathy.Email;
         cathy.Email = '';
 
         // Act
@@ -149,14 +151,14 @@ public with sharing class TestContactRelatedTrigger {
         // Assert
         System.assert(result.isSuccess());
         System.assert(result.getErrors().size() == 0);
-        assertEmail(joe.Email, joe.Id);
+        assertEmail(email, joe.Id);
         assertEmail(cathy.Email, cathy.Id);
     }
 
     @isTest
     static void update_leavesEmail_WhenGuardianEmailNullAndContactAtGuardian() {
         createContacts();
-        string startingEmail = joe.Email;
+        string startingEmail = cathy.Email;
         cathy.Email = null;
 
         // Act
@@ -243,7 +245,7 @@ public with sharing class TestContactRelatedTrigger {
     @isTest
     static void update_leavesPhone_WhenGuardianPhoneClearedAndContactAtGuardian() {
         createContacts();
-        string startPhone = joe.Phone;
+        string startPhone = cathy.Phone;
         cathy.Phone = '';
 
         // Act
@@ -261,7 +263,7 @@ public with sharing class TestContactRelatedTrigger {
     @isTest
     static void update_leavesPhone_WhenGuardianPhoneNullAndContactAtGuardian() {
         createContacts();
-        string startPhone = joe.Phone;
+        string startPhone = cathy.Phone;
         cathy.Phone = null;
 
         // Act
