@@ -115,7 +115,7 @@ public with sharing class TestContactRelatedTrigger {
         // Assert
         System.assert(result.isSuccess());
         System.assert(result.getErrors().size() == 0);
-        //assertEmail(joe.Email, joe.Id);
+        assertEmail(joe.Email, joe.Id);
         assertEmail(cathy.Email, cathy.Id);
     }
 
@@ -149,13 +149,14 @@ public with sharing class TestContactRelatedTrigger {
         // Assert
         System.assert(result.isSuccess());
         System.assert(result.getErrors().size() == 0);
-        //assertEmail(joe.Email, joe.Id);
+        assertEmail(joe.Email, joe.Id);
         assertEmail(cathy.Email, cathy.Id);
     }
 
     @isTest
     static void update_leavesEmail_WhenGuardianEmailNullAndContactAtGuardian() {
         createContacts();
+        string startingEmail = joe.Email;
         cathy.Email = null;
 
         // Act
@@ -166,7 +167,7 @@ public with sharing class TestContactRelatedTrigger {
         // Assert
         System.assert(result.isSuccess());
         System.assert(result.getErrors().size() == 0);
-        //assertEmail(joe.Email, joe.Id);
+        assertEmail(startingEmail, joe.Id);
         assertEmail(cathy.Email, cathy.Id);
     }
 
@@ -242,6 +243,7 @@ public with sharing class TestContactRelatedTrigger {
     @isTest
     static void update_leavesPhone_WhenGuardianPhoneClearedAndContactAtGuardian() {
         createContacts();
+        string startPhone = joe.Phone;
         cathy.Phone = '';
 
         // Act
@@ -252,13 +254,14 @@ public with sharing class TestContactRelatedTrigger {
         // Assert
         System.assert(result.isSuccess());
         System.assert(result.getErrors().size() == 0);
-        //assertPhone(joe.Phone, joe.Id);
-        assertPhone(cathy.Phone, cathy.Id);
+        assertPhone(startPhone, joe.Id);
+        assertPhone('', cathy.Id);
     }
 
     @isTest
     static void update_leavesPhone_WhenGuardianPhoneNullAndContactAtGuardian() {
         createContacts();
+        string startPhone = joe.Phone;
         cathy.Phone = null;
 
         // Act
@@ -270,8 +273,8 @@ public with sharing class TestContactRelatedTrigger {
         System.assert(result.isSuccess());
         Contact saved = getContact(result.getId());
         System.assert(result.getErrors().size() == 0);
-        //assertPhone(joe.Phone, joe.Id);
-        assertPhone(cathy.Phone, cathy.Id);
+        assertPhone(startPhone, joe.Id);
+        assertPhone(null, cathy.Id);
     }
 
     @isTest

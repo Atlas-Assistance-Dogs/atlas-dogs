@@ -188,6 +188,41 @@
                 <default>false</default>
                 <label>Employer</label>
             </value>
+            <value>
+                <fullName>Guardian</fullName>
+                <default>false</default>
+                <label>Guardian</label>
+            </value>
+            <value>
+                <fullName>Contact</fullName>
+                <default>false</default>
+                <label>Contact</label>
+            </value>
+            <value>
+                <fullName>Ward</fullName>
+                <default>false</default>
+                <label>Ward</label>
+            </value>
+            <value>
+                <fullName>Spouse</fullName>
+                <default>false</default>
+                <label>Spouse</label>
+            </value>
+            <value>
+                <fullName>Sibling</fullName>
+                <default>false</default>
+                <label>Sibling</label>
+            </value>
+            <value>
+                <fullName>Boyfriend</fullName>
+                <default>false</default>
+                <label>Boyfriend</label>
+            </value>
+            <value>
+                <fullName>Girlfriend</fullName>
+                <default>false</default>
+                <label>Girlfriend</label>
+            </value>
         </valueSetDefinition>
     </valueSet>
 </CustomField>

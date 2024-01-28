@@ -23,10 +23,10 @@ public with sharing class TestContactSharing    {
         System.assert(carol.ShareWithTeam__c);
     }
 
-    static testMethod void shareContactBasedOnPositions_updatesShareForVolunteer() {
+    @isTest
+    static void shareContactBasedOnPositions_updatesShareForVolunteer() {
         // Arrange
         setupBradyBunch();
-        ContactService.shareContactBasedOnPositions(cindy);
         cindy.Positions__c = 'Volunteer';
 
         // Act
@@ -45,10 +45,9 @@ public with sharing class TestContactSharing    {
         System.assert(carol.ShareWithVolunteer__c);
         // check ShareWithTeam
         System.assert(!cindy.ShareWithTeam__c);
-        /* TODO: fix code and remove these comments
         System.assert(!marsha.ShareWithTeam__c);
         System.assert(!mike.ShareWithTeam__c);
-        System.assert(!carol.ShareWithTeam__c);*/
+        System.assert(!carol.ShareWithTeam__c);
     }
 
     private static Contact getContactWithShares(Id contactId) {
@@ -65,6 +64,7 @@ public with sharing class TestContactSharing    {
 
     private static void setupBradyBunch() {
         TestUtilities.insertCategoryRules();
+        TestUtilities.insertRelationShipLookup();
 
         // Select users for the test.
         List<User> users = [SELECT Id FROM User WHERE IsActive = TRUE LIMIT 2];
@@ -101,20 +101,20 @@ public with sharing class TestContactSharing    {
 
         // create the relationships
         npe4__Relationship__c emergency1 = new npe4__Relationship__c(
-            npe4__Contact__c = marsha.Id,
-            npe4__RelatedContact__c = cindy.Id,
+            npe4__Contact__c = cindy.Id,
+            npe4__RelatedContact__c = marsha.Id,
             npe4__Type__c = 'Primary Emergency Contact',
             npe4__Status__c = 'Current'
         );
         npe4__Relationship__c emergency2 = new npe4__Relationship__c(
-            npe4__Contact__c = mike.Id,
-            npe4__RelatedContact__c = cindy.Id,
+            npe4__Contact__c = cindy.Id,
+            npe4__RelatedContact__c = mike.Id,
             npe4__Type__c = 'Secondary Emergency Contact',
             npe4__Status__c = 'Current'
         );
         npe4__Relationship__c guardian = new npe4__Relationship__c(
-            npe4__Contact__c = carol.Id,
-            npe4__RelatedContact__c = cindy.Id,
+            npe4__Contact__c = cindy.Id,
+            npe4__RelatedContact__c = carol.Id,
             npe4__Type__c = 'Guardian',
             npe4__Status__c = 'Current'
         );

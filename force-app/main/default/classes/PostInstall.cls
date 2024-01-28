@@ -193,7 +193,7 @@ global class PostInstall implements InstallHandler {
         update checks;
     }
 
-    public static void setSharingFields() {
+    global static void setSharingFields() {
         List<Contact> contacts = [
             SELECT IsBoardMember__c, IsClient__c, IsPuppyRaiser__c, IsStaff__c, IsStandalone__c, IsTeamFacilitator__c, IsTrainer__c, IsVolunteer__c,
                     ShareWithBoard__c, ShareWithPuppyRaiser__c, ShareWithStaff__c, ShareWithStandalonePrograms__c, ShareWithTeam__c, ShareWithTrainer__c, ShareWithVolunteer__c

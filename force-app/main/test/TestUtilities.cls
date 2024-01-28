@@ -50,4 +50,28 @@ public with sharing class TestUtilities {
         rules.add(new CategoryRule__c(Category__c = 'Volunteer', Object__c = 'Contact', Position__c = 'Volunteer', Group__c = 'Volunteer'));
         insert rules;
     }
+
+    public static void insertRelationShipLookup() {
+        List<npe4__Relationship_Lookup__c> lookups = new List<npe4__Relationship_Lookup__c> {
+            new npe4__Relationship_Lookup__c(
+                Name = 'Primary Emergency Contact',
+                npe4__Male__c = 'Contact',
+                npe4__Female__c = 'Contact',
+                npe4__Neutral__c = 'Contact'
+            ),
+            new npe4__Relationship_Lookup__c(
+                Name = 'Secondary Emergency Contact',
+                npe4__Male__c = 'Contact',
+                npe4__Female__c = 'Contact',
+                npe4__Neutral__c = 'Contact'
+            ),
+            new npe4__Relationship_Lookup__c(
+                Name = 'Guardian',
+                npe4__Male__c = 'Ward',
+                npe4__Female__c = 'Ward',
+                npe4__Neutral__c = 'Ward'
+            )
+        };
+        insert lookups;
+    }
 }
