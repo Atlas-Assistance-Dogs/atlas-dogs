@@ -46,6 +46,10 @@
                 <behavior>Edit</behavior>
                 <field>OtherLanguages__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>EmailInclusion__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
@@ -87,6 +91,10 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>npsp__Do_Not_Contact__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>TextMessagesApproved__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -352,7 +360,7 @@
     <showRunAssignmentRulesCheckbox>false</showRunAssignmentRulesCheckbox>
     <showSubmitAndAttachButton>false</showSubmitAndAttachButton>
     <summaryLayout>
-        <masterLabel>00h8I000001FCK5</masterLabel>
+        <masterLabel>00hRt000000D4E5</masterLabel>
         <sizeX>4</sizeX>
         <sizeY>0</sizeY>
         <summaryLayoutStyle>Default</summaryLayoutStyle>

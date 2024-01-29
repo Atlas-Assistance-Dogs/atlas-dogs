@@ -13,8 +13,12 @@ To work on this project in a scratch org:
 
 ## Test
 
-To run apex tests, set your default org:
+To run apex tests, set your default org (this is an example for the dev org):
 
-`sfdx config:set defaultusername=atlas-dog__dev`
+`sfdx config:set target-org=atlas-dog__dev`
 
 Then you can run the Apex unit tests from Visual Studio Code.
+
+To assign the VolunteerUser permission set to another user on the default org:
+
+`sfdx force:user:permset:assign -n AtlasVolunteer -o ttest@example.com`

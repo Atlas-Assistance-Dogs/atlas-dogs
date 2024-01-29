@@ -59,6 +59,7 @@ export default class RelatedCeusCmp extends NavigationMixin(LightningElement) {
     wiredCeus;
     total = 0;
     fieldName = STATUS_FIELD.fieldApiName;
+    relatedObject = STATUS_FIELD.objectApiName;
 
     defaultSortDirection = "asc";
     sortDirection = "asc";

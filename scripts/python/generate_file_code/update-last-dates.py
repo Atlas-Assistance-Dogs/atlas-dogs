@@ -29,9 +29,6 @@ meta_path = 'force-app/main/test/TestFileServiceFields.cls-meta.xml'
 
 
 for category, types in settings.items():
-    if category == 'Standalone':
-        continue
-
     category = Category(category, types)
 
     with open(base_file.format(category = category.category), 'w') as test_file:

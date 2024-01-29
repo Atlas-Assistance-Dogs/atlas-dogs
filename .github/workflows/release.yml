@@ -6,7 +6,7 @@ jobs:
         name: "Upload Production Release"
         # Replace this URL with your forked repo.
         # Use the `beta-2gp` workflow if this is a 2GP project.
-        uses: SFDO-Community/standard-workflows/.github/workflows/production-1gp.yml@main
+        uses: Atlas-Assistance-Dogs/standard-cci-workflows/.github/workflows/production-1gp.yml@main
         secrets:
             # If this is a 2GP project, omit the packaging org auth URL.
             packaging-org-auth-url: "${{ secrets.PACKAGING_ORG_AUTH_URL }}"

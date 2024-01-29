@@ -5,6 +5,7 @@ import getRelatedLogs from "@salesforce/apex/PuppyLogController.getRelatedLogs";
 import { deleteRecord } from "lightning/uiRecordApi";
 import { refreshApex } from "@salesforce/apex";
 
+import PUPPY_LOG_OBJECT from "@salesforce/schema/PuppyLog__c";
 import ADDITIONAL_FIELD from "@salesforce/schema/PuppyLog__c.AdditionalInformation__c";
 import DATE_FIELD from "@salesforce/schema/PuppyLog__c.Date__c";
 import DOG_FIELD from "@salesforce/schema/PuppyLog__c.Dog__c";
@@ -82,6 +83,7 @@ export default class RelatedPuppyLogsCmp extends NavigationMixin(LightningElemen
     @api objectApiName;
     @api viewAll;
     columns = COLS;
+    relatedObject = PUPPY_LOG_OBJECT;
     data = [];
     total = 0;
     wiredLogs;

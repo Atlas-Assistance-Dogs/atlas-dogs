@@ -33,11 +33,21 @@
         }
     },
     "objectSettings": {
+        "contact": {
+            "sharingModel": "private"
+        },
+        "lead": {
+            "sharingModel": "private"
+        },
         "opportunity": {
             "sharingModel": "private"
         },
         "account": {
-            "defaultRecordType": "default"
+            "defaultRecordType": "default",
+            "sharingModel": "private"
+        },
+        "case": {
+            "sharingModel": "private"
         }
     }
 }

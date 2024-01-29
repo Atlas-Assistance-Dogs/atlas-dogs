@@ -3,30 +3,35 @@
   fields:
     Category__c: 'Dog'
     Object__c: 'Dog'
+    Group__c: 'Team'
 
 - object: CategoryRule__c
   just_once: True
   fields:
     Category__c: 'Client'
     Object__c: 'Team'
+    Group__c: 'Team'
 
 - object: CategoryRule__c
   just_once: True
   fields:
-    Category__c: 'Dog'
+    Category__c: 'TeamDog'
     Object__c: 'Team'
+    Group__c: 'Team'
 
 - object: CategoryRule__c
   just_once: True
   fields:
     Category__c: 'ADSiM'
     Object__c: 'Contact'
+    Group__c: 'Team'
 
 - object: CategoryRule__c
   just_once: True
   fields:
     Category__c: 'Standalone'
     Object__c: 'Contact'
+    Group__c: 'All'
 
 - object: CategoryRule__c
   just_once: True
@@ -34,6 +39,7 @@
     Category__c: 'Board'
     Object__c: 'Contact'
     Position__c: 'Board Member'
+    Group__c: 'Board'
 
 - object: CategoryRule__c
   just_once: True
@@ -41,6 +47,7 @@
     Category__c: 'Client'
     Object__c: 'Contact'
     Position__c: 'Client'
+    Group__c: 'Team'
 
 - object: CategoryRule__c
   just_once: True
@@ -48,6 +55,7 @@
     Category__c: 'Facilitator'
     Object__c: 'Contact'
     Position__c: 'Team Facilitator'
+    Group__c: 'Team'
 
 - object: CategoryRule__c
   just_once: True
@@ -55,6 +63,7 @@
     Category__c: 'Facilitator'
     Object__c: 'Contact'
     Position__c: 'Team Facilitator Lead'
+    Group__c: 'Team'
 
 - object: CategoryRule__c
   just_once: True
@@ -62,6 +71,7 @@
     Category__c: 'Puppy'
     Object__c: 'Contact'
     Position__c: 'Puppy Raiser'
+    Group__c: 'PuppyRaiser'
 
 - object: CategoryRule__c
   just_once: True
@@ -69,6 +79,7 @@
     Category__c: 'Staff'
     Object__c: 'Contact'
     Position__c: 'Staff'
+    Group__c: 'All'
 
 - object: CategoryRule__c
   just_once: True
@@ -76,6 +87,7 @@
     Category__c: 'Trainer'
     Object__c: 'Contact'
     Position__c: 'Trainer'
+    Group__c: 'All'
 
 - object: CategoryRule__c
   just_once: True
@@ -83,3 +95,4 @@
     Category__c: 'Volunteer'
     Object__c: 'Contact'
     Position__c: 'Volunteer'
+    Group__c: 'Volunteer'

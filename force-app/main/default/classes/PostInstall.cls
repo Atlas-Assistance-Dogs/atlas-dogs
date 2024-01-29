@@ -192,4 +192,65 @@ global class PostInstall implements InstallHandler {
         }
         update checks;
     }
+
+    global static void setSharingFields() {
+        List<Contact> contacts = [
+            SELECT IsBoardMember__c, IsClient__c, IsPuppyRaiser__c, IsStaff__c, IsStandalone__c, IsTeamFacilitator__c, IsTrainer__c, IsVolunteer__c,
+                    ShareWithBoard__c, ShareWithPuppyRaiser__c, ShareWithStaff__c, ShareWithStandalonePrograms__c, ShareWithTeam__c, ShareWithTrainer__c, ShareWithVolunteer__c
+            FROM Contact
+            WHERE IsBoardMember__c = TRUE OR IsClient__c = TRUE OR IsPuppyRaiser__c = TRUE OR IsStaff__c = TRUE OR IsStandalone__c = TRUE OR IsTeamFacilitator__c = TRUE OR IsTrainer__c = TRUE OR IsVolunteer__c = TRUE];
+
+        Map<Id, Contact> contactMap = new Map<Id, Contact>();
+
+        for (Contact person : contacts) {
+            person.ShareWithBoard__c = person.IsBoardMember__c;
+            person.ShareWithPuppyRaiser__c = person.IsPuppyRaiser__c;
+            person.ShareWithStaff__c = person.IsStaff__c;
+            person.ShareWithStandalonePrograms__c = person.IsStandalone__c;
+            person.ShareWithTeam__c = person.IsClient__c || person.IsTeamFacilitator__c;
+            person.ShareWithTrainer__c = person.IsTrainer__c;
+            person.ShareWithVolunteer__c = person.IsVolunteer__c;
+            contactMap.put(person.Id, person);
+        }
+
+        // Get related contacts
+        npe4__Relationship__c[] related = [
+            SELECT
+                Id,
+                npe4__RelatedContact__c,
+                npe4__RelatedContact__r.Positions__c,
+                npe4__RelatedContact__r.ShareWithBoard__c,
+                npe4__RelatedContact__r.ShareWithPuppyRaiser__c,
+                npe4__RelatedContact__r.ShareWithStaff__c,
+                npe4__RelatedContact__r.ShareWithStandalonePrograms__c,
+                npe4__RelatedContact__r.ShareWithTeam__c,
+                npe4__RelatedContact__r.ShareWithTrainer__c,
+                npe4__RelatedContact__r.ShareWithVolunteer__c,
+                npe4__Contact__c
+            FROM npe4__Relationship__c
+            WHERE
+                (npe4__Type__c LIKE '%Emergency Contact'
+                OR npe4__Type__c = 'Guardian')
+                AND npe4__Status__c = 'Current'
+                AND npe4__Contact__c IN :contactMap.keySet()
+        ];
+        for (npe4__Relationship__c relation : related) {
+            Contact shared = contactMap.get(relation.npe4__Contact__c);
+            Contact share = contactMap.get(relation.npe4__RelatedContact__c);
+            if (share == null) {
+                share = relation.npe4__RelatedContact__r;
+            }
+            share.ShareWithBoard__c = share.ShareWithBoard__c || shared.ShareWithBoard__c;
+            share.ShareWithPuppyRaiser__c = share.ShareWithPuppyRaiser__c || shared.ShareWithPuppyRaiser__c;
+            share.ShareWithStaff__c = share.ShareWithStaff__c || share.ShareWithStaff__c;
+            share.ShareWithStandalonePrograms__c = share.ShareWithStandalonePrograms__c || shared.ShareWithStandalonePrograms__c;
+            share.ShareWithTeam__c = share.ShareWithTeam__c || shared.ShareWithTeam__c;
+            share.ShareWithTrainer__c = share.ShareWithTrainer__c || shared.ShareWithTrainer__c;
+            share.ShareWithVolunteer__c = share.ShareWithVolunteer__c || shared.ShareWithVolunteer__c;
+            if (!contactMap.containsKey(relation.npe4__RelatedContact__c)) {
+                contactMap.put(relation.npe4__RelatedContact__c, share);
+            }
+        }
+        update contactMap.values();
+    }
 }
