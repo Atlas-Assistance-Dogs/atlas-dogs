@@ -382,7 +382,7 @@
               - He/Him
               - She/Her
               - They/Them
-              - Prefer to self-describe
+              - Specify
               - Prefer not to answer
       PuppyRaiserStatus__c:
           if:
