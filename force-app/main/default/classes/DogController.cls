@@ -18,4 +18,18 @@ public inherited sharing class DogController {
             throw ahe;
         }
     }
+
+    @AuraEnabled
+    public static Id[] getOwnerIds(Id[] recordIds){
+        try {
+            DogRelationship__c[] relatedOwners = [SELECT Contact__c FROM DogRelationship__c WHERE Type__c = 'Owner' AND Dog__c in :recordIds];
+            Id[] owners = new List<Id>(); 
+            for (DogRelationship__c dr : relatedOwners) {
+                owners.add(dr.Contact__c);
+            }
+            return owners;
+        } catch (Exception e) {
+            throw new AuraHandledException(e.getMessage());
+        }
+    }
 }

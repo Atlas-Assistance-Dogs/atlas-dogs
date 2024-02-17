@@ -1,18 +1,16 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Dog_Certification_date_validation</fullName>
     <active>true</active>
-    <description
-    >Dog can be certified only after 6 months of activation</description>
+    <description>Dog can be certified only after 6 months of activation</description>
     <errorConditionFormula>AND( 
  NOT(ISBLANK(ActivationDate__c)), 
  ADDMONTHS(ActivationDate__c, 6) &gt;= Today(),
- NOT(ISPICKVAL(PRIORVALUE(Status__c), 'Active')),
- ISPICKVAL(Status__c, 'Active'),
+ NOT(ISPICKVAL(PRIORVALUE(Status__c), &apos;Active&apos;)),
+ ISPICKVAL(Status__c, &apos;Active&apos;),
  NOT(ISNULL(MicrochipNumber__c)), 
  SpayedNeutered__c = TRUE  
 )</errorConditionFormula>
     <errorDisplayField>Status__c</errorDisplayField>
-    <errorMessage
-    >Dog can be certified only after 6 months from Activation Date, need to be Spayed/Neutered and need to have Microchip number.</errorMessage>
+    <errorMessage>Dog can be certified only after 6 months from Activation Date, need to be Spayed/Neutered and need to have Microchip number.</errorMessage>
 </ValidationRule>
