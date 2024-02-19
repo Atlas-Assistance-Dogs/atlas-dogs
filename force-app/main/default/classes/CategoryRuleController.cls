@@ -16,14 +16,14 @@ public without sharing class CategoryRuleController {
         return categories;
     }
 
-    public static List<String> getAllowedCategoriesForObject(Id recordId) {
+    public static Set<String> getAllowedCategoriesForObject(Id recordId) {
         string objLabel = recordId.getSObjectType().getDescribe().getLabel();
 
         List<String> groupNames = UserService.GetGroupNames(UserInfo.getUserId());
 
         // get the categories that work for the object
         List<CategoryRule__c> rules = [SELECT Category__c, Group__c FROM CategoryRule__c WHERE Object__c = :objLabel AND Position__c = null];
-        List<String> categories = new List<String>();
+        Set<String> categories = new Set<String>();
         for (CategoryRule__c rule: rules) {
             if (String.isBlank(rule.Group__c) || groupNames.contains(rule.Group__c)) {
                 categories.addAll(rule.Category__c.split(';'));
@@ -51,7 +51,7 @@ public without sharing class CategoryRuleController {
     @AuraEnabled(Cacheable=true)
     public static List<Map<String,String>> getCategoriesForObject(Id recordId) {
         // See what categories the user has access to
-        List<String> categories = getAllowedCategoriesForObject(recordId);
+        Set<String> categories = getAllowedCategoriesForObject(recordId);
 
         // Map in the types for each allowed category
         Map<string, string> categoryEntries = FileController.getEntryMap(CategoryRule__c.Category__c.getDescribe());

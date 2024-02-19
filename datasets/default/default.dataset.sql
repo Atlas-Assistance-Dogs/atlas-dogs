@@ -305,7 +305,7 @@ INSERT INTO "CategoryRule__c" VALUES(1,'Dog','Team','Dog','');
 INSERT INTO "CategoryRule__c" VALUES(2,'Client','Team','Team','');
 INSERT INTO "CategoryRule__c" VALUES(3,'TeamDog','Team','Team','');
 INSERT INTO "CategoryRule__c" VALUES(4,'ADSiM','Team','Contact','');
-INSERT INTO "CategoryRule__c" VALUES(5,'Standalone','All','Contact','');
+INSERT INTO "CategoryRule__c" VALUES(5,'Standalone','StandalonePrograms','Contact','Standalone');
 INSERT INTO "CategoryRule__c" VALUES(6,'Board','Board','Contact','Board Member');
 INSERT INTO "CategoryRule__c" VALUES(7,'Client','Team','Contact','Client');
 INSERT INTO "CategoryRule__c" VALUES(8,'Facilitator','Team','Contact','Team Facilitator');
