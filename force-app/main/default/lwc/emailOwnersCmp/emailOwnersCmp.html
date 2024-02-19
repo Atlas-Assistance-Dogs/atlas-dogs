@@ -1,4 +1,5 @@
 <template>
     <p>These are the dogs: {recordIds}</p>
-    <lightning-button label="Email Owners"></lightning-button>
+    <lightning-pill-container items={items} onitemremove={handleItemRemove} is-collapsible is-expanded={expanded} onfocus={handlePillExpansion}></lightning-pill-container>
+    <lightning-button label="Email Owners" onclick={handleclick}></lightning-button>
 </template>
