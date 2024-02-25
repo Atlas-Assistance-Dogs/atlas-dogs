@@ -1,6 +1,6 @@
 // use the category rules to see which categories are available for an object and which
 // groups can see which category
-public with sharing class CategoryRuleController {
+public without sharing class CategoryRuleController {
 
     public static List<String> getAllowedCategoriesForUser() {
         List<String> groupNames = UserService.GetGroupNames(UserInfo.getUserId());
