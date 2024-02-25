@@ -3,18 +3,6 @@ import getOwners from "@salesforce/apex/DogController.getOwners";
 
 export default class EmailOwnersCmp extends LightningElement {
     @api recordIds;
-    items = [
-        {
-            label: 'Contact1',
-            href: 'https://www.example.com',
-            name: 'contact1'
-        },
-        {
-            label: 'Contact2',
-            href: 'https://www.example.com',
-            name: 'contact2'
-        }
-    ];
     expanded = false;
     wiredOwners = null;
 

@@ -19,11 +19,10 @@ public inherited sharing class DogController {
         }
     }
 
-    @AuraEnabled
+    @AuraEnabled(cacheable=true)
     public static Contact[] getOwners(Id[] recordIds){
         try {
-            System.debug('In getOwners');
-            DogRelationship__c[] relatedOwners = [SELECT Contact__c, Contact__r.Name, Contact__r.Id FROM DogRelationship__c WHERE Type__c = 'Owner' AND Dog__c in :recordIds];
+            DogRelationship__c[] relatedOwners = [SELECT Contact__c, Contact__r.Name, Contact__r.Id FROM DogRelationship__c WHERE Type__c INCLUDES ('Owner') AND Dog__c in :recordIds];
             Contact[] owners = new List<Contact>(); 
             for (DogRelationship__c dr : relatedOwners) {
                 owners.add(dr.Contact__r);
