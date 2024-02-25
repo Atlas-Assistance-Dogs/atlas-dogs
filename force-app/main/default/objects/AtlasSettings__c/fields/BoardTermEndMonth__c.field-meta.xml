@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BoardTermEndMonth__c</fullName>
+    <defaultValue>4</defaultValue>
+    <description>The number for the month a Board Member&apos;s term will end in, such as 1 for January, or 6 for June.  Use 0 if the term will end at the end of the month 3 years after the start date.</description>
+    <externalId>false</externalId>
+    <label>Board Term End Month</label>
+    <precision>2</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>
