@@ -6,7 +6,6 @@ public with sharing class UserService {
         // add the groups that the user is the owner of
         // handy particularly in scratch orgs
         List<Group> ownedGroups = [SELECT Id, Name FROM Group WHERE OwnerId = :userId OR CreatedById = :userId];
-        System.debug(ownedGroups);
         for (Group gr: ownedGroups) {
             results.add(gr.Id);
         }
@@ -23,22 +22,6 @@ public with sharing class UserService {
             grRoleMap.put(gr.relatedId, gr.id);
         }
 
-        //Groups directly associated to user
-        Set<Id> groupWithUser = new Set<Id>();
-
-        //Populating the Group with User with GroupId we are filtering only  for Group of Type Regular,Role and RoleAndSubordinates
-        for (GroupMember gm : [
-            SELECT groupId, Group.Name
-            FROM GroupMember
-            WHERE
-                UserOrGroupId = :userId
-                AND (Group.Type = 'Regular'
-                OR Group.Type = 'Role'
-                OR Group.Type = 'RoleAndSubordinates')
-        ]) {
-            groupWithUser.add(gm.groupId);
-        }
-
         //Groups with Role
         for (User user : [SELECT UserRoleId FROM User WHERE id = :userId]) {
             //Checking if the current User Role is part of Map or not
@@ -46,12 +29,10 @@ public with sharing class UserService {
                 results.add(grRoleMap.get(user.UserRoleId));
             }
         }
-        //Combining both the Sets
-        results.addAll(groupWithUser);
 
-        //Traversing the whole list of Groups to check any other nested Group
+        //Get all the groups and put in a map so we can associate direct and indirectly added groups
         Map<Id, Id> grMap = new Map<Id, Id>();
-        for (GroupMember gr : [
+        for (GroupMember gm : [
             SELECT id, UserOrGroupId, Groupid
             FROM GroupMember
             WHERE
@@ -59,13 +40,20 @@ public with sharing class UserService {
                 OR Group.Type = 'Role'
                 OR Group.Type = 'RoleAndSubordinates'
         ]) {
-            grMap.put(gr.UserOrGroupId, gr.Groupid);
-        }
-        for (Id groupId : results) {
-            if (grMap.containsKey(groupId)) {
-                results.add(grMap.get(groupId));
+            grMap.put(gm.UserOrGroupId, gm.Groupid);
+            if (gm.UserOrGroupId == userId || results.contains(gm.UserOrGroupId)) {
+                results.add(gm.GroupId);
             }
         }
+
+        // Second check for related
+        List<Id> moreGroups = new List<Id>();
+        for (Id groupId : results) {
+            if (grMap.containsKey(groupId)) {
+                moreGroups.add(grMap.get(groupId));
+            }
+        }
+        results.addAll(moreGroups);
 
         List<Group> groups = [SELECT Id, Name FROM Group WHERE Id IN :results];
         List<String> groupNames = new List<String>();
