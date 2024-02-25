@@ -390,7 +390,7 @@ public with sharing class TestFileController {
     // This method is used to setup the getRelatedFilesWith... tests.  The file records have categories
     // of Board, Staff, and Volunteer.
     private static RelatedObjects getRelatedFilesWithGroups(string[] groups) {
-        TestCategoryRuleController.createCategoryRules();
+        TestUtilities.insertCategoryRules();
 
         Contact rowan = new Contact(FirstName = 'Rowan', LastName = 'Engelmeyer-Davis', email='rowan@test.com',
             Positions__c='Client;Volunteer;Staff;Board Member');
