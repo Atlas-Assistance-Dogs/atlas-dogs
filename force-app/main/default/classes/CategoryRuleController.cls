@@ -57,7 +57,6 @@ public without sharing class CategoryRuleController {
         Map<string, string> categoryEntries = FileController.getEntryMap(CategoryRule__c.Category__c.getDescribe());
         List<Map<String,String>> entries = new List<Map<String,String>>();
         for (string category : categories) {
-            Map<String,String> entry = new Map<String,String>();
             entries.add(new Map<String, String>{'value' => category, 'label' => categoryEntries.get(category)});
         }
         return entries;
