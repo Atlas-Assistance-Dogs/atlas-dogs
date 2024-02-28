@@ -21,4 +21,4 @@ Then you can run the Apex unit tests from Visual Studio Code.
 
 To assign the VolunteerUser permission set to another user on the default org:
 
-`sfdx force:user:permset:assign -n AtlasVolunteer -o ttest@example.com`
+`sf org assign permset -n AtlasVolunteer -o ttest@example.com`
