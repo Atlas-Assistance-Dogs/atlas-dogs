@@ -29,6 +29,12 @@
 - object: CategoryRule__c
   just_once: True
   fields:
+    Category__c: 'Na'
+    Object__c: 'Contact'
+
+- object: CategoryRule__c
+  just_once: True
+  fields:
     Category__c: 'Standalone'
     Object__c: 'Contact'
     Group__c: 'All'
