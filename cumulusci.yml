@@ -42,16 +42,16 @@ flows:
     config_qa:
         steps:
             3:
-                task: assign_permission_sets
+                task: assign_permission_set_groups
                 options:
-                    api_names: Atlas_Super_User
+                    api_names: AtlasAll
 
     config_dev:
         steps:
             3:
-                task: assign_permission_sets
+                task: assign_permission_set_groups
                 options:
-                    api_names: AtlasSuperUser
+                    api_names: AtlasAll
             4:
                 task: load_custom_settings
                 options: 
