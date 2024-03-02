@@ -123,6 +123,66 @@ public with sharing class TestFileServiceFacilitatorFields {
     }
 
     @isTest
+    public static void updateDate_FacilitatorFirstAid_SetsDateWhenNull() {
+        Contact record = new Contact(FirstName = 'Test', LastName = 'Contact', Email = 'abc@abc.com');
+        insert record;
+        ContentVersion cv = TestFileServiceFields.createLink('Facilitator', 'FirstAid', Date.today(), record.Id);
+        FileService.updateDate(cv, record.Id);
+
+        record = [
+            SELECT FacilitatorFirstAidReceived__c
+            FROM Contact
+            WHERE Id = :record.Id
+            LIMIT 1
+        ];
+        system.assertEquals(
+            Date.today(),
+            record.FacilitatorFirstAidReceived__c,
+            'FacilitatorFirstAidReceived__c not set'
+        );
+    }
+
+    @isTest
+    public static void updateDate_FacilitatorFirstAid_SetsDateWhenNewer() {
+        Contact record = new Contact(FirstName = 'Test', LastName = 'Contact', Email = 'abc@abc.com', FacilitatorFirstAidReceived__c = Date.today().addDays(-1));
+        insert record;
+        ContentVersion cv = TestFileServiceFields.createLink('Facilitator', 'FirstAid', Date.today(), record.Id);
+        FileService.updateDate(cv, record.Id);
+
+        record = [
+            SELECT FacilitatorFirstAidReceived__c
+            FROM Contact
+            WHERE Id = :record.Id
+            LIMIT 1
+        ];
+        system.assertEquals(
+            Date.today(),
+            record.FacilitatorFirstAidReceived__c,
+            'FacilitatorFirstAidReceived__c not set'
+        );
+    }
+
+    @isTest
+    public static void updateDate_FacilitatorFirstAid_LeavesDateWhenOlder() {
+        Contact record = new Contact(FirstName = 'Test', LastName = 'Contact', Email = 'abc@abc.com', FacilitatorFirstAidReceived__c = Date.today());
+        insert record;
+        ContentVersion cv = TestFileServiceFields.createLink('Facilitator', 'FirstAid', Date.today().addDays(-1), record.Id);
+        FileService.updateDate(cv, record.Id);
+
+        record = [
+            SELECT FacilitatorFirstAidReceived__c
+            FROM Contact
+            WHERE Id = :record.Id
+            LIMIT 1
+        ];
+        system.assertEquals(
+            Date.today(),
+            record.FacilitatorFirstAidReceived__c,
+            'FacilitatorFirstAidReceived__c set to an older date'
+        );
+    }
+
+    @isTest
     public static void updateDate_FacilitatorInfrNotice_SetsDateWhenNull() {
         Contact record = new Contact(FirstName = 'Test', LastName = 'Contact', Email = 'abc@abc.com');
         insert record;
