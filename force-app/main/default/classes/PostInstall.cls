@@ -22,6 +22,7 @@ global class PostInstall implements InstallHandler {
         }
         if (context.previousVersion().compareTo(new Version(1, 5)) <= 0) {
             setBackgroundCheckTypes();
+            setSharingFields();
         }
     }
 
