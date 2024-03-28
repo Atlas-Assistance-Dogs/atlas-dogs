@@ -452,10 +452,6 @@
         <recordType>Account.Organization</recordType>
         <visible>true</visible>
     </recordTypeVisibilities>
-    <recordTypeVisibilities>
-        <recordType>Campaign.GW_Volunteers__Volunteers_Campaign</recordType>
-        <visible>true</visible>
-    </recordTypeVisibilities>
     <tabSettings>
         <tab>BackgroundCheck__c</tab>
         <visibility>Visible</visibility>

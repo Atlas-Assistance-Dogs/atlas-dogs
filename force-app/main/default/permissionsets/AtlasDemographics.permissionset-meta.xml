@@ -1,56 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
-    <description>Ability to access Atlas app and board member data</description>
+    <description>Access to client, dog, and team objects and fields</description>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Contact.BoardAgreementReceived__c</field>
+        <field>Contact.AbilityAccommodation__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Contact.BoardApplicationReceived__c</field>
+        <field>Contact.AbilityStatus__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Contact.BoardCoIReceived__c</field>
+        <field>Contact.GenderIdentity</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Contact.BoardMemberAcceptedDate__c</field>
+        <field>Contact.GenderIdentity__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Contact.BoardMemberStatus__c</field>
+        <field>Contact.RaceEthnicity__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Contact.BoardResumeReceived__c</field>
+        <field>Contact.SexualOrientation__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Contact.BoardTermValidUntil__c</field>
+        <field>Contact.SpecifiedAbilityAccommodation__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Contact.BoardToNReceived__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Contact.IsBoardMember__c</field>
+        <field>Contact.SpecifiedAbilityStatus__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Contact.LastBoardTermStartDate__c</field>
+        <field>Contact.SpecifiedGenderIdentity__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Contact.SpecifiedRaceEthnicity__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Contact.SpecifiedSexualOrientation__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Contact.SpecifiedVeteranStatus__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Contact.VeteranStatus__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <hasActivationRequired>false</hasActivationRequired>
-    <label>Atlas Board</label>
+    <label>Atlas Demographics</label>
 </PermissionSet>
