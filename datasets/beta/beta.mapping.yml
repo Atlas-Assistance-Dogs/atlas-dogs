@@ -5,10 +5,446 @@
 # .load.yml file and re-capturing:
 #
 #  https://cumulusci.readthedocs.io/en/stable/data.html#extracting-and-loading-sample-datasets
-Insert CategoryRule__c:
-  sf_object: CategoryRule__c
-  table: CategoryRule__c
+Insert Campaign:
+  sf_object: Campaign
+  table: Campaign
   fields:
-  - Category__c
-  - Object__c
-  - Position__c
+  - GW_Volunteers__Volunteer_Website_Time_Zone__c
+  - Name
+Insert npo02__Household__c:
+  sf_object: npo02__Household__c
+  table: npo02__Household__c
+  fields:
+  - Name
+  - npo02__Addressee__c
+  - npo02__Always_Anonymous__c
+  - npo02__AverageAmount__c
+  - npo02__Best_Gift_Year_Total__c
+  - npo02__Best_Gift_Year__c
+  - npo02__FirstCloseDate__c
+  - npo02__Formal_Greeting__c
+  - npo02__HouseholdEmail__c
+  - npo02__HouseholdPhone__c
+  - npo02__Household_ID__c
+  - npo02__Informal_Greeting__c
+  - npo02__LargestAmount__c
+  - npo02__LastCloseDate__c
+  - npo02__LastMembershipAmount__c
+  - npo02__LastMembershipDate__c
+  - npo02__LastMembershipLevel__c
+  - npo02__LastMembershipOrigin__c
+  - npo02__LastOppAmount__c
+  - npo02__MailingCity__c
+  - npo02__MailingCountry__c
+  - npo02__MailingPostalCode__c
+  - npo02__MailingState__c
+  - npo02__MailingStreet__c
+  - npo02__MembershipEndDate__c
+  - npo02__MembershipJoinDate__c
+  - npo02__NumberOfClosedOpps__c
+  - npo02__NumberOfMembershipOpps__c
+  - npo02__OppAmount2YearsAgo__c
+  - npo02__OppAmountLastNDays__c
+  - npo02__OppAmountLastYear__c
+  - npo02__OppAmountThisYear__c
+  - npo02__OppsClosed2YearsAgo__c
+  - npo02__OppsClosedLastNDays__c
+  - npo02__OppsClosedLastYear__c
+  - npo02__OppsClosedThisYear__c
+  - npo02__SYSTEM_CUSTOM_NAMING__c
+  - npo02__SmallestAmount__c
+  - npo02__TotalMembershipOppAmount__c
+  - npo02__TotalOppAmount__c
+  - npsp__Number_of_Household_Members__c
+Insert npsp__Batch__c:
+  sf_object: npsp__Batch__c
+  table: npsp__Batch__c
+  fields:
+  - npsp__Object_Name__c
+Insert Lead:
+  sf_object: Lead
+  table: Lead
+  fields:
+  - City
+  - Company
+  - Country
+  - Email
+  - FirstName
+  - IsConverted
+  - LeadSource
+  - MobilePhone
+  - Phone
+  - PostalCode
+  - State
+  - Status
+  - Street
+  - GW_Volunteers__Volunteer_Availability__c
+  - GW_Volunteers__Volunteer_Notes__c
+  - GW_Volunteers__Volunteer_Skills__c
+  - GW_Volunteers__Volunteer_Status__c
+  - atlas1__LeadInterest__c
+  - atlas1__LeadSourceOther__c
+  - atlas1__PronounOther__c
+  - atlas1__Pronoun__c
+  - npe01__Preferred_Email__c
+  - npe01__Preferred_Phone__c
+  - npsp__CompanyCity__c
+  - npsp__CompanyCountry__c
+  - npsp__CompanyPostalCode__c
+  - npsp__CompanyState__c
+  - npsp__CompanyStreet__c
+  - LastName
+  lookups:
+    npsp__Batch__c:
+      table:
+      - npsp__Batch__c
+      key_field: npsp__Batch__c
+Insert GW_Volunteers__Volunteer_Job__c:
+  sf_object: GW_Volunteers__Volunteer_Job__c
+  table: GW_Volunteers__Volunteer_Job__c
+  fields:
+  - GW_Volunteers__Description__c
+  - GW_Volunteers__Display_on_Website__c
+  - GW_Volunteers__External_Signup_Url__c
+  - GW_Volunteers__Inactive__c
+  - GW_Volunteers__Location_City__c
+  - GW_Volunteers__Location_Information__c
+  - GW_Volunteers__Location_Street__c
+  - GW_Volunteers__Location_Zip_Postal_Code__c
+  - GW_Volunteers__Location__c
+  - GW_Volunteers__Ongoing__c
+  - GW_Volunteers__Skills_Needed__c
+  - GW_Volunteers__Volunteer_Website_Time_Zone__c
+  - Name
+  lookups:
+    GW_Volunteers__Campaign__c:
+      table:
+      - Campaign
+      key_field: GW_Volunteers__Campaign__c
+Insert Account:
+  sf_object: Account
+  table: Account
+  fields:
+  - atlas1__Email__c
+  - npe01__SYSTEMIsIndividual__c
+  - npe01__SYSTEM_AccountType__c
+  - npo02__AverageAmount__c
+  - npo02__Best_Gift_Year_Total__c
+  - npo02__Best_Gift_Year__c
+  - npo02__FirstCloseDate__c
+  - npo02__Formal_Greeting__c
+  - npo02__HouseholdPhone__c
+  - npo02__Informal_Greeting__c
+  - npo02__LargestAmount__c
+  - npo02__LastCloseDate__c
+  - npo02__LastMembershipAmount__c
+  - npo02__LastMembershipDate__c
+  - npo02__LastMembershipLevel__c
+  - npo02__LastMembershipOrigin__c
+  - npo02__LastOppAmount__c
+  - npo02__MembershipEndDate__c
+  - npo02__MembershipJoinDate__c
+  - npo02__NumberOfClosedOpps__c
+  - npo02__NumberOfMembershipOpps__c
+  - npo02__OppAmount2YearsAgo__c
+  - npo02__OppAmountLastNDays__c
+  - npo02__OppAmountLastYear__c
+  - npo02__OppAmountThisYear__c
+  - npo02__OppsClosed2YearsAgo__c
+  - npo02__OppsClosedLastNDays__c
+  - npo02__OppsClosedLastYear__c
+  - npo02__OppsClosedThisYear__c
+  - npo02__SYSTEM_CUSTOM_NAMING__c
+  - npo02__SmallestAmount__c
+  - npo02__TotalMembershipOppAmount__c
+  - npo02__TotalOppAmount__c
+  - npsp__All_Members_Deceased__c
+  - npsp__CustomizableRollups_UseSkewMode__c
+  - npsp__Funding_Focus__c
+  - npsp__Grantmaker__c
+  - npsp__Matching_Gift_Administrator_Name__c
+  - npsp__Matching_Gift_Amount_Max__c
+  - npsp__Matching_Gift_Amount_Min__c
+  - npsp__Matching_Gift_Annual_Employee_Max__c
+  - npsp__Matching_Gift_Comments__c
+  - npsp__Matching_Gift_Company__c
+  - npsp__Matching_Gift_Email__c
+  - npsp__Matching_Gift_Info_Updated__c
+  - npsp__Matching_Gift_Percent__c
+  - npsp__Matching_Gift_Phone__c
+  - npsp__Matching_Gift_Request_Deadline__c
+  - npsp__Number_of_Household_Members__c
+  - npsp__Sustainer__c
+  - npsp__Undeliverable_Address__c
+  - Name
+  - RecordTypeId
+  lookups:
+    npe01__One2OneContact__c:
+      table:
+      - Contact
+      key_field: npe01__One2OneContact__c
+      after: Insert Contact
+    npsp__Batch__c:
+      table:
+      - npsp__Batch__c
+      key_field: npsp__Batch__c
+Insert npsp__Address__c:
+  sf_object: npsp__Address__c
+  table: npsp__Address__c
+  fields:
+  - npsp__API_Response__c
+  - npsp__Address_Type__c
+  - npsp__Administrative_Area__c
+  - npsp__Ambiguous__c
+  - npsp__Congressional_District__c
+  - npsp__County_Name__c
+  - npsp__Default_Address__c
+  - npsp__Exclude_from_Updates__c
+  - npsp__Geolocation__Latitude__s
+  - npsp__Geolocation__Longitude__s
+  - npsp__Latest_End_Date__c
+  - npsp__Latest_Start_Date__c
+  - npsp__MailingCity__c
+  - npsp__MailingCountry__c
+  - npsp__MailingPostalCode__c
+  - npsp__MailingState__c
+  - npsp__MailingStreet2__c
+  - npsp__MailingStreet__c
+  - npsp__NCOA_Evaluation_Date__c
+  - npsp__NCOA_Result_Code__c
+  - npsp__Pre_Verification_Address__c
+  - npsp__Seasonal_End_Day__c
+  - npsp__Seasonal_End_Month__c
+  - npsp__Seasonal_Start_Day__c
+  - npsp__Seasonal_Start_Month__c
+  - npsp__State_Lower_District__c
+  - npsp__State_Upper_District__c
+  - npsp__Undeliverable__c
+  - npsp__Verification_Status__c
+  - npsp__Verified_Date__c
+  - npsp__Verified__c
+  lookups:
+    npsp__Household_Account__c:
+      table:
+      - Account
+      key_field: npsp__Household_Account__c
+Insert Contact:
+  sf_object: Contact
+  table: Contact
+  fields:
+  - Email
+  - FirstName
+  - LastName
+  - Phone
+  - GW_Volunteers__Volunteer_Auto_Reminder_Email_Opt_Out__c
+  - GW_Volunteers__Volunteer_Availability__c
+  - GW_Volunteers__Volunteer_Last_Web_Signup_Date__c
+  - GW_Volunteers__Volunteer_Manager_Notes__c
+  - GW_Volunteers__Volunteer_Notes__c
+  - GW_Volunteers__Volunteer_Organization__c
+  - GW_Volunteers__Volunteer_Skills__c
+  - GW_Volunteers__Volunteer_Status__c
+  - atlas1__ADSiMApplicationReceived__c
+  - atlas1__ADSiMPreApplicationReceived__c
+  - atlas1__ADSiMProgAgreementReceived__c
+  - atlas1__AbilityAccommodation__c
+  - atlas1__AbilityStatus__c
+  - atlas1__AvailableAsTsimTA__c
+  - atlas1__BoardAgreementReceived__c
+  - atlas1__BoardApplicationReceived__c
+  - atlas1__BoardCoIReceived__c
+  - atlas1__BoardMemberAcceptedDate__c
+  - atlas1__BoardMemberStatus__c
+  - atlas1__BoardResumeReceived__c
+  - atlas1__BoardTermValidUntil__c
+  - atlas1__BoardToNReceived__c
+  - atlas1__CanvasSisId__c
+  - atlas1__ClientCertificationValidUntil__c
+  - atlas1__ClientFacilitatorAvailability__c
+  - atlas1__ClientInitialCertificationDate__c
+  - atlas1__ClientMedicalDevices__c
+  - atlas1__ClientStatus__c
+  - atlas1__ContactFormReceived__c
+  - atlas1__Contact__c
+  - atlas1__CriminalConviction__c
+  - atlas1__DateStarted__c
+  - atlas1__EmailInclusion__c
+  - atlas1__FacilitatorApplicationReceived__c
+  - atlas1__FacilitatorCertAgreementReceived__c
+  - atlas1__FacilitatorFirstAidReceived__c
+  - atlas1__FacilitatorInfrNoticeReceived__c
+  - atlas1__FacilitatorInitialCertificationDate__c
+  - atlas1__FacilitatorPracticumReceived__c
+  - atlas1__FacilitatorProgAgreementReceived__c
+  - atlas1__FacilitatorReferenceReceived__c
+  - atlas1__FacilitatorStatus__c
+  - atlas1__GenderIdentity__c
+  - atlas1__Language__c
+  - atlas1__LastBoardTermStartDate__c
+  - atlas1__LeadComments__c
+  - atlas1__LeadFacilitatorStatus__c
+  - atlas1__LeadInterest__c
+  - atlas1__LeadSourceOther__c
+  - atlas1__OtherLanguages__c
+  - atlas1__Positions__c
+  - atlas1__PreferredName__c
+  - atlas1__PronounOther__c
+  - atlas1__Pronoun__c
+  - atlas1__PuppyApplicationReceived__c
+  - atlas1__PuppyCertAgreementReceived__c
+  - atlas1__PuppyContractReceived__c
+  - atlas1__PuppyInfrNoticeReceived__c
+  - atlas1__PuppyProgAgreementReceived__c
+  - atlas1__PuppyRaiserStatus__c
+  - atlas1__PuppyReferenceReceived__c
+  - atlas1__RaceEthnicity__c
+  - atlas1__SexualOrientation__c
+  - atlas1__ShareWithBoard__c
+  - atlas1__ShareWithPuppyRaiser__c
+  - atlas1__ShareWithStaff__c
+  - atlas1__ShareWithStandalonePrograms__c
+  - atlas1__ShareWithTeam__c
+  - atlas1__ShareWithTrainer__c
+  - atlas1__ShareWithVolunteer__c
+  - atlas1__ShirtSize__c
+  - atlas1__SpecifiedAbilityAccommodation__c
+  - atlas1__SpecifiedAbilityStatus__c
+  - atlas1__SpecifiedGenderIdentity__c
+  - atlas1__SpecifiedRaceEthnicity__c
+  - atlas1__SpecifiedSexualOrientation__c
+  - atlas1__SpecifiedVeteranStatus__c
+  - atlas1__StaffAgreementReceived__c
+  - atlas1__StaffApplicationReceived__c
+  - atlas1__StaffFirstAidReceived__c
+  - atlas1__StaffI9Received__c
+  - atlas1__StaffOfferReceived__c
+  - atlas1__StaffResumeReceived__c
+  - atlas1__StaffStatus__c
+  - atlas1__StaffW4Received__c
+  - atlas1__StaffW9Received__c
+  - atlas1__StandaloneApplicationReceived__c
+  - atlas1__StandaloneProgAgreementReceived__c
+  - atlas1__StandaloneStatus__c
+  - atlas1__SystemAccess__c
+  - atlas1__TextMessagesApproved__c
+  - atlas1__TrainerApplicationReceived__c
+  - atlas1__TrainerBoardTrain__c
+  - atlas1__TrainerCertAgreementReceived__c
+  - atlas1__TrainerClientReferenceReceived__c
+  - atlas1__TrainerInfrNoticeReceived__c
+  - atlas1__TrainerInitialCertificationDate__c
+  - atlas1__TrainerProfReferenceReceived__c
+  - atlas1__TrainerProgAgreementReceived__c
+  - atlas1__TrainerSpecialties__c
+  - atlas1__TrainerStatus__c
+  - atlas1__UpdateShareSettings__c
+  - atlas1__VeteranStatus__c
+  - atlas1__VolunteerAccess__c
+  - atlas1__VolunteerAgreementReceived__c
+  - atlas1__VolunteerApplicationReceived__c
+  - atlas1__VolunteerFocus__c
+  - atlas1__VolunteerResumeReceived__c
+  - npe01__AlternateEmail__c
+  - npe01__HomeEmail__c
+  - npe01__PreferredPhone__c
+  - npe01__Preferred_Email__c
+  - npe01__Primary_Address_Type__c
+  - npe01__Private__c
+  - npe01__Secondary_Address_Type__c
+  - npe01__SystemAccountProcessor__c
+  - npe01__WorkEmail__c
+  - npe01__WorkPhone__c
+  - npo02__AverageAmount__c
+  - npo02__Best_Gift_Year_Total__c
+  - npo02__Best_Gift_Year__c
+  - npo02__FirstCloseDate__c
+  - npo02__Household_Naming_Order__c
+  - npo02__LargestAmount__c
+  - npo02__LastCloseDate__c
+  - npo02__LastMembershipAmount__c
+  - npo02__LastMembershipDate__c
+  - npo02__LastMembershipLevel__c
+  - npo02__LastMembershipOrigin__c
+  - npo02__LastOppAmount__c
+  - npo02__MembershipEndDate__c
+  - npo02__MembershipJoinDate__c
+  - npo02__Naming_Exclusions__c
+  - npo02__NumberOfClosedOpps__c
+  - npo02__NumberOfMembershipOpps__c
+  - npo02__OppAmount2YearsAgo__c
+  - npo02__OppAmountLastNDays__c
+  - npo02__OppAmountLastYear__c
+  - npo02__OppAmountThisYear__c
+  - npo02__OppsClosed2YearsAgo__c
+  - npo02__OppsClosedLastNDays__c
+  - npo02__OppsClosedLastYear__c
+  - npo02__OppsClosedThisYear__c
+  - npo02__SmallestAmount__c
+  - npo02__Soft_Credit_Last_Year__c
+  - npo02__Soft_Credit_This_Year__c
+  - npo02__Soft_Credit_Total__c
+  - npo02__Soft_Credit_Two_Years_Ago__c
+  - npo02__SystemHouseholdProcessor__c
+  - npo02__TotalMembershipOppAmount__c
+  - npo02__TotalOppAmount__c
+  - npsp__CustomizableRollups_UseSkewMode__c
+  - npsp__Deceased__c
+  - npsp__Do_Not_Contact__c
+  - npsp__Exclude_from_Household_Formal_Greeting__c
+  - npsp__Exclude_from_Household_Informal_Greeting__c
+  - npsp__Exclude_from_Household_Name__c
+  - npsp__First_Soft_Credit_Amount__c
+  - npsp__First_Soft_Credit_Date__c
+  - npsp__Largest_Soft_Credit_Amount__c
+  - npsp__Largest_Soft_Credit_Date__c
+  - npsp__Last_Soft_Credit_Amount__c
+  - npsp__Last_Soft_Credit_Date__c
+  - npsp__Number_of_Soft_Credits_Last_N_Days__c
+  - npsp__Number_of_Soft_Credits_Last_Year__c
+  - npsp__Number_of_Soft_Credits_This_Year__c
+  - npsp__Number_of_Soft_Credits_Two_Years_Ago__c
+  - npsp__Number_of_Soft_Credits__c
+  - npsp__Soft_Credit_Last_N_Days__c
+  - npsp__Sustainer__c
+  - npsp__Undeliverable_Address__c
+  - npsp__is_Address_Override__c
+  lookups:
+    npo02__Household__c:
+      table:
+      - npo02__Household__c
+      key_field: npo02__Household__c
+    npsp__Batch__c:
+      table:
+      - npsp__Batch__c
+      key_field: npsp__Batch__c
+    npsp__Current_Address__c:
+      table:
+      - npsp__Address__c
+      key_field: npsp__Current_Address__c
+    npsp__Primary_Affiliation__c:
+      table:
+      - Account
+      key_field: npsp__Primary_Affiliation__c
+Insert npe4__Relationship__c:
+  sf_object: npe4__Relationship__c
+  table: npe4__Relationship__c
+  fields:
+  - npe4__Description__c
+  - npe4__SYSTEM_SystemCreated__c
+  - npe4__Status__c
+  - npe4__Type__c
+  - npsp__Related_Opportunity_Contact_Role__c
+  lookups:
+    npe4__Contact__c:
+      table:
+      - Contact
+      key_field: npe4__Contact__c
+    npe4__ReciprocalRelationship__c:
+      table:
+      - npe4__Relationship__c
+      key_field: npe4__ReciprocalRelationship__c
+      after: Insert npe4__Relationship__c
+    npe4__RelatedContact__c:
+      table:
+      - Contact
+      key_field: npe4__RelatedContact__c

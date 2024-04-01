@@ -93,66 +93,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>GW_Volunteers__Volunteer_Job__c.GW_Volunteers__Description__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>GW_Volunteers__Volunteer_Job__c.GW_Volunteers__Display_on_Website__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>GW_Volunteers__Volunteer_Job__c.GW_Volunteers__External_Signup_Url__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>GW_Volunteers__Volunteer_Job__c.GW_Volunteers__Inactive__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>GW_Volunteers__Volunteer_Job__c.GW_Volunteers__Location_City__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>GW_Volunteers__Volunteer_Job__c.GW_Volunteers__Location_Information__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>GW_Volunteers__Volunteer_Job__c.GW_Volunteers__Location_Street__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>GW_Volunteers__Volunteer_Job__c.GW_Volunteers__Location_Zip_Postal_Code__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>GW_Volunteers__Volunteer_Job__c.GW_Volunteers__Location__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>GW_Volunteers__Volunteer_Job__c.GW_Volunteers__Ongoing__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>GW_Volunteers__Volunteer_Job__c.GW_Volunteers__Skills_Needed__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>GW_Volunteers__Volunteer_Job__c.GW_Volunteers__Volunteer_Website_Time_Zone__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>Lead.GW_Volunteers__Volunteer_Availability__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -173,26 +113,4 @@
     </fieldPermissions>
     <hasActivationRequired>false</hasActivationRequired>
     <label>Atlas Volunteer</label>
-    <objectPermissions>
-        <allowCreate>false</allowCreate>
-        <allowDelete>false</allowDelete>
-        <allowEdit>false</allowEdit>
-        <allowRead>true</allowRead>
-        <modifyAllRecords>false</modifyAllRecords>
-        <object>Campaign</object>
-        <viewAllRecords>false</viewAllRecords>
-    </objectPermissions>
-    <objectPermissions>
-        <allowCreate>true</allowCreate>
-        <allowDelete>true</allowDelete>
-        <allowEdit>true</allowEdit>
-        <allowRead>true</allowRead>
-        <modifyAllRecords>false</modifyAllRecords>
-        <object>GW_Volunteers__Volunteer_Job__c</object>
-        <viewAllRecords>false</viewAllRecords>
-    </objectPermissions>
-    <tabSettings>
-        <tab>GW_Volunteers__Volunteer_Job__c</tab>
-        <visibility>Visible</visibility>
-    </tabSettings>
 </PermissionSet>
