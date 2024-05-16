@@ -2,8 +2,8 @@ minimum_cumulusci_version: "3.26.0"
 project:
     name: atlas-dog
     package:
-        name: AtlasDogs
-        namespace: atlas1
+        name: Atlas
+        namespace: atlasdog
         api_version: "56.0"
         install_class: "PostInstall"
     dependencies:
@@ -65,12 +65,6 @@ flows:
                 options:
                     api_names: AtlasSuperUser
 
-    deploy_unmanaged:
-        steps:
-            3.1:
-                task: dx_push
-                when: project_config.project__source_format == "sfdx" and org_config.scratch
-
     # Flow to deploy current source to a sandbox for dev or verification
     sandbox:
         steps:
@@ -95,6 +89,13 @@ flows:
                     version_base: latest_github_release
                     version_type: minor
                     force_upload: True
+
+    release_unlocked_beta:
+        steps:
+            1:
+                task: create_package_version
+                options:
+                    create_unlocked_dependency_packages: True
 
 orgs:
     scratch:

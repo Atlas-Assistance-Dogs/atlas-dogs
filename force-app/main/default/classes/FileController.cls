@@ -113,16 +113,12 @@ public inherited sharing class FileController {
             Map<string, string> typeEntries = getEntryMap(
                 ContentVersion.Type__c.getDescribe()
             );
-            List<string> allowedCategories = CategoryRuleController.getAllowedCategoriesForUser();
-            System.debug(allowedCategories);
-            allowedCategories.add('');
             List<ContentVersion> files = [
                 SELECT Title, ContentDocumentId, Category__c, Type__c, Date__c
                 FROM ContentVersion
                 WHERE
                     ContentDocumentId IN :lstConDocs
                     AND FileType != 'SNOTE'
-                    AND Category__c IN :allowedCategories
                 ORDER BY Date__c DESC
                 LIMIT :max
             ];
@@ -140,7 +136,6 @@ public inherited sharing class FileController {
                 WHERE
                     ContentDocumentId IN :lstConDocs
                     AND FileType != 'SNOTE'
-                    AND Category__c IN :allowedCategories
             ];
             return related;
         } else {

@@ -77,9 +77,9 @@ public with sharing class TestCategoryRuleController {
         }
 
         List<Contact> contacts = new List<Contact>();
-        debbie = new Contact(FirstName = 'Debbie', LastName = 'Queen', Positions__c = 'Volunteer;Client', ShareWithTeam__c = True, ShareWithVolunteer__c = True);
-        ken = new Contact(FirstName = 'Ken', LastName = 'King', Positions__c = 'Client', ShareWithTeam__c = True);
-        alexa = new Contact(FirstName = 'Alexa', LastName = 'Hurst', Positions__c = 'Board Member', ShareWithBoard__c = True);
+        debbie = new Contact(FirstName = 'Debbie', LastName = 'Queen', Positions__c = 'Volunteer;Client');
+        ken = new Contact(FirstName = 'Ken', LastName = 'King', Positions__c = 'Client');
+        alexa = new Contact(FirstName = 'Alexa', LastName = 'Hurst', Positions__c = 'Board Member');
         contacts.add(debbie);
         contacts.add(ken);
         contacts.add(alexa);
