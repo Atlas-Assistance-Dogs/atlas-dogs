@@ -1,13 +1,13 @@
-public with sharing class RelatedObjects {
+global with sharing class RelatedObjects {
     // Total number of records of the object
     @AuraEnabled
-    public Integer total { get; set; }
+    global Integer total { get; set; }
     
     // Records of the object
     @AuraEnabled
-    public List<Object> items { get; set; }
+    global List<Object> items { get; set; }
 
-    public RelatedObjects() {
+    global RelatedObjects() {
         items = new List<Object>();
         total = 0;
     }

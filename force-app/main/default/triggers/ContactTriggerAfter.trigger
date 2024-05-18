@@ -16,11 +16,7 @@ trigger ContactTriggerAfter on Contact(after update) {
             !String.isBlank(newContact.Email) && oldEmail != newContact.Email;
         Boolean changedPhone =
             !String.isBlank(newContact.Phone) && oldPhone != newContact.Phone;
-        if (
-            Trigger.isAfter &&
-            Trigger.isUpdate &&
-            (changedEmail || changedPhone)
-        ) {
+        if (changedEmail || changedPhone) {
             ContactService.updateRelatedContactEmailPhone(
                 newContact,
                 changedEmail,

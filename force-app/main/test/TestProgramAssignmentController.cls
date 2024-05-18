@@ -195,7 +195,7 @@ private class TestProgramAssignmentController {
         ));
         pas.add(new ProgramAssignment__c(
             Contact__c = trainer.Id,
-            AssignedDate__c = Date.today().addYears(-1),
+            AssignedDate__c = Date.today().addYears(-2),
             ExpectedCompletion__c = Date.today().addMonths(1),
             Program__c = tsim.Id,
             Status__c = 'In Progress'
@@ -222,8 +222,8 @@ private class TestProgramAssignmentController {
 
         System.assertEquals(3, report.total, 'Returned wrong total');
         System.assertEquals(3, report.items.size(), 'Returned wrong number of records');
-        assertReportData((ProgramReportRow)report.items[0], pas[0], client, ace);
+        assertReportData((ProgramReportRow)report.items[0], pas[2], becky, theo);
         assertReportData((ProgramReportRow)report.items[1], pas[1], trainer, cookie);
-        assertReportData((ProgramReportRow)report.items[2], pas[2], becky, theo);
+        assertReportData((ProgramReportRow)report.items[2], pas[0], client, ace);
     }
 }

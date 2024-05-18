@@ -68,10 +68,6 @@
         <apexClass>TeamController</apexClass>
         <enabled>true</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>UserService</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
     <description>Ability to access all objects, flows, etc.</description>
     <fieldPermissions>
         <editable>true</editable>
@@ -81,11 +77,6 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>CategoryRule__c.Category__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>CategoryRule__c.Group__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

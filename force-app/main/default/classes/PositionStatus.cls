@@ -1,13 +1,13 @@
-public with sharing class PositionStatus {
+global with sharing class PositionStatus {
     @AuraEnabled
-    public string position { get; set; }
+    global string position { get; set; }
 
     @AuraEnabled
-    public string status { get; set; }
+    global string status { get; set; }
 
-    public PositionStatus() {}
+    global PositionStatus() {}
     
-    public PositionStatus(string position, string status) {
+    global PositionStatus(string position, string status) {
         this.position = position;
         this.status = status;
     }

@@ -420,57 +420,6 @@ public with sharing class TestFileController {
     }
 
     @isTest
-    public static void getRelatedFiles_ReturnsRelatedRecords_ForAll() {
-        RelatedObjects related = getRelatedFilesWithGroups(new string[] { 'Board', 'Volunteer', 'Staff' });
-
-        System.assertEquals(3, related.items.size());
-        System.assertEquals(3, related.total);
-    }
-
-    @isTest
-    public static void getRelatedFiles_ReturnsRelatedRecords_ForBoard() {
-        RelatedObjects related = getRelatedFilesWithGroups(new string[] { 'Board' });
-
-        System.assertEquals(1, related.items.size());
-        System.assertEquals(1, related.total);
-        System.assertEquals('Board', ((FileInfo)related.items[0]).category);
-    }
-
-    @isTest
-    public static void getRelatedFiles_ReturnsRelatedRecords_ForVolunteer() {
-        RelatedObjects related = getRelatedFilesWithGroups(new string[] { 'Volunteer' });
-
-        System.assertEquals(1, related.items.size());
-        System.assertEquals(1, related.total);
-        System.assertEquals('Volunteer', ((FileInfo)related.items[0]).category);
-    }
-
-    @isTest
-    public static void getRelatedFiles_ReturnsRelatedRecords_ForStaff() {
-        RelatedObjects related = getRelatedFilesWithGroups(new string[] { 'Staff' });
-
-        System.assertEquals(1, related.items.size());
-        System.assertEquals(1, related.total);
-        System.assertEquals('Staff/Contractor', ((FileInfo)related.items[0]).category);
-    }
-
-    @isTest
-    public static void getRelatedFiles_ReturnsRelatedRecords_ForNone() {
-        RelatedObjects related = getRelatedFilesWithGroups(new string[] { 'Team' });
-
-        System.assertEquals(0, related.items.size());
-        System.assertEquals(0, related.total);
-    }
-
-    @isTest
-    public static void getRelatedFiles_ReturnsRelatedRecords_ForBoardStaff() {
-        RelatedObjects related = getRelatedFilesWithGroups(new string[] { 'Board', 'Staff' });
-
-        System.assertEquals(2, related.items.size());
-        System.assertEquals(2, related.total);
-    }
-
-    @isTest
     public static void relateFile_ThrowsException_WhenNullDocumentId() {
         Dog__c ace = new Dog__c(Name = 'Ace');
         insert ace;

@@ -15,8 +15,6 @@
   nickname: Person
   include: positions
   fields:
-    #   AccountId:
-    #       reference: Household
       FirstName:
           fake: first_name
       LastName:

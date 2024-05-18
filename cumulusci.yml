@@ -2,9 +2,9 @@ minimum_cumulusci_version: "3.26.0"
 project:
     name: atlas-dog
     package:
-        name: Atlas
-        namespace: atlasdog
-        api_version: "56.0"
+        name: AtlasDogs
+        namespace: atlas
+        api_version: "60.0"
         install_class: "PostInstall"
     dependencies:
         - github: "https://github.com/SalesforceFoundation/NPSP"
@@ -89,13 +89,6 @@ flows:
                     version_base: latest_github_release
                     version_type: minor
                     force_upload: True
-
-    release_unlocked_beta:
-        steps:
-            1:
-                task: create_package_version
-                options:
-                    create_unlocked_dependency_packages: True
 
 orgs:
     scratch:

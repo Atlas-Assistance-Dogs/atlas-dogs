@@ -60,5 +60,8 @@ trigger ContactTrigger on Contact (before insert, before update) {
             // a day takes us to June 30.
             newContact.BoardTermValidUntil__c = minTerm.addMonths(months + 1).toStartOfMonth().addDays(-1);
         }
+
+        // we've got the update going, so make sure UpdateForRelated__c is false
+        newContact.UpdateForRelated__c = false;
     }
 }

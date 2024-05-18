@@ -1,6 +1,6 @@
-public with sharing class PositionStatusController {
+global with sharing class PositionStatusController {
     @AuraEnabled(Cacheable=true)
-    public static List<PositionStatus> getPositionStatusForContact(
+    global static List<PositionStatus> getPositionStatusForContact(
         Id contactId
     ) {
         System.debug(contactId);
@@ -27,7 +27,7 @@ public with sharing class PositionStatusController {
 
     // We want the position status to be in this order, the Positions set for the contact
     // may not be in this order
-    public final static String[] POSITION_LIST = new List<string>{
+    global final static String[] POSITION_LIST = new List<string>{
         'Volunteer',
         'Team Facilitator',
         'Puppy Raiser',

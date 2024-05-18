@@ -1,13 +1,9 @@
 // use the category rules to see which categories are available for an object and which
 // groups can see which category
-public without sharing class CategoryRuleController {
+global without sharing class CategoryRuleController {
 
-    public static Set<String> getAllowedCategoriesForObject(Id recordId) {
+    global static Set<String> getAllowedCategoriesForObject(Id recordId) {
         string objLabel = recordId.getSObjectType().getDescribe().getLabel();
-
-        List<String> groupNames = UserService.GetGroupNames(
-            UserInfo.getUserId()
-        );
 
         // get the categories that work for the object
         List<CategoryRule__c> rules = [
@@ -41,7 +37,7 @@ public without sharing class CategoryRuleController {
     }
 
     @AuraEnabled(Cacheable=true)
-    public static List<Map<String, String>> getCategoriesForObject(
+    global static List<Map<String, String>> getCategoriesForObject(
         Id recordId
     ) {
         // See what categories the user has access to
