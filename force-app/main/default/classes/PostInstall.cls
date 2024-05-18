@@ -219,6 +219,8 @@ global class PostInstall implements InstallHandler {
         update checks;
     }
     // This needs to remain since it was released in 1.6, sigh
-    global void setSharingFields() {
+    @deprecated
+    global static void setSharingFields() {
+        System.debug('nothing to do here');
     }
 }
