@@ -326,11 +326,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>CategoryRule__c.Group__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
         <field>CategoryRule__c.Position__c</field>
         <readable>false</readable>
     </fieldPermissions>

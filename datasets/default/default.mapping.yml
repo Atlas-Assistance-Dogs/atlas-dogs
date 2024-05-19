@@ -61,7 +61,6 @@ Insert CategoryRule__c:
   table: CategoryRule__c
   fields:
   - Category__c
-  - Group__c
   - Object__c
   - Position__c
   - Upload__c
