@@ -11,18 +11,20 @@ global class PostInstall implements InstallHandler {
                 combineDogVaccineFields();
                 linkTeamLogs();
                 moveSystemAccess();
-                linkTeamDocuments();                
+                linkTeamDocuments();
             } catch (Exception e) {
                 send(
                     context.installerId(),
                     'Installation Failure' + context.organizationId(),
-                    ' e: ' + e.getMessage() + ' stack trace ' + e.getStackTraceString()
+                    ' e: ' +
+                        e.getMessage() +
+                        ' stack trace ' +
+                        e.getStackTraceString()
                 );
             }
         }
         if (context.previousVersion().compareTo(new Version(1, 5)) <= 0) {
             setBackgroundCheckTypes();
-            setSharingFields();
         }
     }
 
@@ -73,12 +75,17 @@ global class PostInstall implements InstallHandler {
         List<Id> teamIds = new List<Id>();
         for (Team__c team : teams) {
             teamIds.add(team.Id);
-            List<ContentVersion> clientDocs = getEntityDocs(team.Client__c, 'Client');
+            List<ContentVersion> clientDocs = getEntityDocs(
+                team.Client__c,
+                'Client'
+            );
             for (ContentVersion cv : clientDocs) {
-                links.add(new ContentDocumentLink(
-                    ContentDocumentId = cv.ContentDocumentId,
-                    LinkedEntityId = team.Id
-                ));
+                links.add(
+                    new ContentDocumentLink(
+                        ContentDocumentId = cv.ContentDocumentId,
+                        LinkedEntityId = team.Id
+                    )
+                );
             }
 
             List<ContentVersion> dogDocs = getEntityDocs(team.Dog__c, 'Dog');
@@ -86,10 +93,12 @@ global class PostInstall implements InstallHandler {
                 if (cv.Type__c == 'VacExams') {
                     continue;
                 }
-                links.add(new ContentDocumentLink(
-                    ContentDocumentId = cv.ContentDocumentId,
-                    LinkedEntityId = team.Id
-                ));
+                links.add(
+                    new ContentDocumentLink(
+                        ContentDocumentId = cv.ContentDocumentId,
+                        LinkedEntityId = team.Id
+                    )
+                );
             }
         }
 
@@ -106,10 +115,14 @@ global class PostInstall implements InstallHandler {
             WHERE LinkedEntityId = :id
         ];
         List<Id> docIds = new List<Id>();
-        for (ContentDocumentLink cdl: cdls) {
+        for (ContentDocumentLink cdl : cdls) {
             docIds.add(cdl.ContentDocumentId);
         }
-        List<ContentVersion> cvs = [SELECT Id, ContentDocumentId, Category__c, Type__c FROM ContentVersion WHERE ContentDocumentId IN :docIds AND Category__c = :category];
+        List<ContentVersion> cvs = [
+            SELECT Id, ContentDocumentId, Category__c, Type__c
+            FROM ContentVersion
+            WHERE ContentDocumentId IN :docIds AND Category__c = :category
+        ];
 
         return cvs;
     }
@@ -150,35 +163,44 @@ global class PostInstall implements InstallHandler {
     }
 
     public static void send(Id userId, String subject, String htmlBody) {
-        List<User> users = [SELECT Name, FirstName, LastName, UserName, Email FROM User WHERE Id = :userId ];
+        List<User> users = [
+            SELECT Name, FirstName, LastName, UserName, Email
+            FROM User
+            WHERE Id = :userId
+        ];
         User u = users.size() > 0 ? users[0] : new User(Id = userId);
         sendEmail(
-            new List<String>{u.Email, 'deborahe@atlasdog.org'}, // <= replace with your default email
+            new List<String>{ u.Email, 'deborahe@atlasdog.org' }, // <= replace with your default email
             subject,
             htmlBody,
             new Map<String, Blob>()
         );
     }
 
-    public static Boolean sendEmail(List<String> recipients, String subject, String htmlBody, Map<String, Blob> attachments) {
+    public static Boolean sendEmail(
+        List<String> recipients,
+        String subject,
+        String htmlBody,
+        Map<String, Blob> attachments
+    ) {
         Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
         mail.setToAddresses(recipients);
         mail.setSubject(subject);
         mail.setHtmlBody(htmlBody);
-        List<Messaging.EmailFileAttachment> attachmentsList = new List<Messaging.EmailFileAttachment>();        
-        for (String fileName: attachments.keySet()) {
+        List<Messaging.EmailFileAttachment> attachmentsList = new List<Messaging.EmailFileAttachment>();
+        for (String fileName : attachments.keySet()) {
             Messaging.EmailFileAttachment attachment = new Messaging.EmailFileAttachment();
             attachment.setFileName(fileName);
             attachment.setBody(attachments.get(fileName));
             attachmentsList.add(attachment);
         }
         mail.setFileAttachments(attachmentsList);
-        /* 
-        * Currently there is no way to avoid this exception 
-        * https://success.salesforce.com/ideaView?id=08730000000cHBEAA2
-        */
+        /*
+         * Currently there is no way to avoid this exception
+         * https://success.salesforce.com/ideaView?id=08730000000cHBEAA2
+         */
         try {
-            Messaging.sendEmail(new Messaging.SingleEmailMessage[]{mail});
+            Messaging.sendEmail(new List<Messaging.SingleEmailMessage>{ mail });
             return true;
         } catch (EmailException e) {
             //emailInvocationFailures++;
@@ -187,71 +209,18 @@ global class PostInstall implements InstallHandler {
     }
 
     private void setBackgroundCheckTypes() {
-        List<BackgroundCheck__c> checks = [SELECT Id, Type__c FROM BackgroundCheck__c];
+        List<BackgroundCheck__c> checks = [
+            SELECT Id, Type__c
+            FROM BackgroundCheck__c
+        ];
         for (BackgroundCheck__c check : checks) {
             check.Type__c = 'Criminal';
         }
         update checks;
     }
-
+    // This needs to remain since it was released in 1.6, sigh
+    @deprecated
     global static void setSharingFields() {
-        List<Contact> contacts = [
-            SELECT IsBoardMember__c, IsClient__c, IsPuppyRaiser__c, IsStaff__c, IsStandalone__c, IsTeamFacilitator__c, IsTrainer__c, IsVolunteer__c,
-                    ShareWithBoard__c, ShareWithPuppyRaiser__c, ShareWithStaff__c, ShareWithStandalonePrograms__c, ShareWithTeam__c, ShareWithTrainer__c, ShareWithVolunteer__c
-            FROM Contact
-            WHERE IsBoardMember__c = TRUE OR IsClient__c = TRUE OR IsPuppyRaiser__c = TRUE OR IsStaff__c = TRUE OR IsStandalone__c = TRUE OR IsTeamFacilitator__c = TRUE OR IsTrainer__c = TRUE OR IsVolunteer__c = TRUE];
-
-        Map<Id, Contact> contactMap = new Map<Id, Contact>();
-
-        for (Contact person : contacts) {
-            person.ShareWithBoard__c = person.IsBoardMember__c;
-            person.ShareWithPuppyRaiser__c = person.IsPuppyRaiser__c;
-            person.ShareWithStaff__c = person.IsStaff__c;
-            person.ShareWithStandalonePrograms__c = person.IsStandalone__c;
-            person.ShareWithTeam__c = person.IsClient__c || person.IsTeamFacilitator__c;
-            person.ShareWithTrainer__c = person.IsTrainer__c;
-            person.ShareWithVolunteer__c = person.IsVolunteer__c;
-            contactMap.put(person.Id, person);
-        }
-
-        // Get related contacts
-        npe4__Relationship__c[] related = [
-            SELECT
-                Id,
-                npe4__RelatedContact__c,
-                npe4__RelatedContact__r.Positions__c,
-                npe4__RelatedContact__r.ShareWithBoard__c,
-                npe4__RelatedContact__r.ShareWithPuppyRaiser__c,
-                npe4__RelatedContact__r.ShareWithStaff__c,
-                npe4__RelatedContact__r.ShareWithStandalonePrograms__c,
-                npe4__RelatedContact__r.ShareWithTeam__c,
-                npe4__RelatedContact__r.ShareWithTrainer__c,
-                npe4__RelatedContact__r.ShareWithVolunteer__c,
-                npe4__Contact__c
-            FROM npe4__Relationship__c
-            WHERE
-                (npe4__Type__c LIKE '%Emergency Contact'
-                OR npe4__Type__c = 'Guardian')
-                AND npe4__Status__c = 'Current'
-                AND npe4__Contact__c IN :contactMap.keySet()
-        ];
-        for (npe4__Relationship__c relation : related) {
-            Contact shared = contactMap.get(relation.npe4__Contact__c);
-            Contact share = contactMap.get(relation.npe4__RelatedContact__c);
-            if (share == null) {
-                share = relation.npe4__RelatedContact__r;
-            }
-            share.ShareWithBoard__c = share.ShareWithBoard__c || shared.ShareWithBoard__c;
-            share.ShareWithPuppyRaiser__c = share.ShareWithPuppyRaiser__c || shared.ShareWithPuppyRaiser__c;
-            share.ShareWithStaff__c = share.ShareWithStaff__c || share.ShareWithStaff__c;
-            share.ShareWithStandalonePrograms__c = share.ShareWithStandalonePrograms__c || shared.ShareWithStandalonePrograms__c;
-            share.ShareWithTeam__c = share.ShareWithTeam__c || shared.ShareWithTeam__c;
-            share.ShareWithTrainer__c = share.ShareWithTrainer__c || shared.ShareWithTrainer__c;
-            share.ShareWithVolunteer__c = share.ShareWithVolunteer__c || shared.ShareWithVolunteer__c;
-            if (!contactMap.containsKey(relation.npe4__RelatedContact__c)) {
-                contactMap.put(relation.npe4__RelatedContact__c, share);
-            }
-        }
-        update contactMap.values();
+        System.debug('nothing to do here');
     }
 }

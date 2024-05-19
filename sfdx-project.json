@@ -5,7 +5,7 @@
             "default": true
         },
         {
-            "path": "scratch-config",
+            "path": "unpackaged/post",
             "default": false
         },
         {

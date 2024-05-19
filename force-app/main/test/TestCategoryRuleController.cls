@@ -15,38 +15,59 @@ public with sharing class TestCategoryRuleController {
     // Create a test user
     private static User createAllUser() {
         // Create a unique UserName
-        String uniqueUserName = 'standarduser' + DateTime.now().getTime() + '@testorg.com';
+        String uniqueUserName =
+            'standarduser' +
+            DateTime.now().getTime() +
+            '@testorg.com';
         // This code runs as the system user
-        Profile p = [SELECT Id FROM Profile WHERE Name='Standard User'];
+        Profile p = [SELECT Id FROM Profile WHERE Name = 'Standard User'];
         User adminUser = new User(
-            Alias = 'standt', Email='adminuser@testorg.com',
-            EmailEncodingKey='UTF-8', LastName='Testing', LanguageLocaleKey='en_US',
-            LocaleSidKey='en_US', ProfileId = p.Id,
-            TimeZoneSidKey='America/Los_Angeles',
-            UserName=uniqueUserName);
+            Alias = 'standt',
+            Email = 'adminuser@testorg.com',
+            EmailEncodingKey = 'UTF-8',
+            LastName = 'Testing',
+            LanguageLocaleKey = 'en_US',
+            LocaleSidKey = 'en_US',
+            ProfileId = p.Id,
+            TimeZoneSidKey = 'America/Los_Angeles',
+            UserName = uniqueUserName
+        );
         return adminUser;
     }
 
     // Create a test team user
     private static User createTeamUser() {
         // Create a unique UserName
-        String uniqueUserName = 'standarduser' + DateTime.now().getTime() + '@testorg.com';
+        String uniqueUserName =
+            'standarduser' +
+            DateTime.now().getTime() +
+            '@testorg.com';
         // This code runs as the system user
-        Profile p = [SELECT Id FROM Profile WHERE Name='Standard User'];
+        Profile p = [SELECT Id FROM Profile WHERE Name = 'Standard User'];
         User adminUser = new User(
-            Alias = 'teamuser', Email='teamuser@testorg.com',
-            EmailEncodingKey='UTF-8', LastName='Testing', LanguageLocaleKey='en_US',
-            LocaleSidKey='en_US', ProfileId = p.Id,
-            TimeZoneSidKey='America/Los_Angeles',
-            UserName=uniqueUserName);
+            Alias = 'teamuser',
+            Email = 'teamuser@testorg.com',
+            EmailEncodingKey = 'UTF-8',
+            LastName = 'Testing',
+            LanguageLocaleKey = 'en_US',
+            LocaleSidKey = 'en_US',
+            ProfileId = p.Id,
+            TimeZoneSidKey = 'America/Los_Angeles',
+            UserName = uniqueUserName
+        );
         return adminUser;
     }
 
     private static void setup() {
-        volunteerGroup = [SELECT Id, Name FROM Group WHERE Name='Volunteer' LIMIT 1];
-        teamGroup = [SELECT Id, Name FROM Group WHERE Name='Team' LIMIT 1];
-        boardGroup = [SELECT Id, Name FROM Group WHERE Name='Board' LIMIT 1];
-        allGroup = [SELECT Id, Name FROM Group WHERE Name='All' LIMIT 1];
+        volunteerGroup = [
+            SELECT Id, Name
+            FROM Group
+            WHERE Name = 'Volunteer'
+            LIMIT 1
+        ];
+        teamGroup = [SELECT Id, Name FROM Group WHERE Name = 'Team' LIMIT 1];
+        boardGroup = [SELECT Id, Name FROM Group WHERE Name = 'Board' LIMIT 1];
+        allGroup = [SELECT Id, Name FROM Group WHERE Name = 'All' LIMIT 1];
 
         allUser = createAllUser();
         insert allUser;
@@ -57,29 +78,80 @@ public with sharing class TestCategoryRuleController {
         // Avoid mixed DML using runAs
         System.runAs(new User(Id = UserInfo.getUserId())) {
             List<GroupMember> gms = new List<GroupMember>();
-            gms.add(new GroupMember(GroupId = allGroup.Id, UserOrGroupId = allUser.Id));
-            gms.add(new GroupMember(GroupId = volunteerGroup.Id, UserOrGroupId = allGroup.Id));
-            gms.add(new GroupMember(GroupId = boardGroup.Id, UserOrGroupId = allGroup.Id));
-            gms.add(new GroupMember(GroupId = teamGroup.Id, UserOrGroupId = allGroup.Id));
-            gms.add(new GroupMember(GroupId = teamGroup.Id, UserOrGroupId = teamUser.Id));
+            gms.add(
+                new GroupMember(
+                    GroupId = allGroup.Id,
+                    UserOrGroupId = allUser.Id
+                )
+            );
+            gms.add(
+                new GroupMember(
+                    GroupId = volunteerGroup.Id,
+                    UserOrGroupId = allGroup.Id
+                )
+            );
+            gms.add(
+                new GroupMember(
+                    GroupId = boardGroup.Id,
+                    UserOrGroupId = allGroup.Id
+                )
+            );
+            gms.add(
+                new GroupMember(
+                    GroupId = teamGroup.Id,
+                    UserOrGroupId = allGroup.Id
+                )
+            );
+            gms.add(
+                new GroupMember(
+                    GroupId = teamGroup.Id,
+                    UserOrGroupId = teamUser.Id
+                )
+            );
             insert gms;
-            List<PermissionSet> permissionSets = [SELECT Id, Name FROM PermissionSet WHERE Name LIKE 'Atlas%'];
+            List<PermissionSet> permissionSets = [
+                SELECT Id, Name
+                FROM PermissionSet
+                WHERE Name LIKE 'Atlas%'
+            ];
             List<PermissionSetAssignment> assignments = new List<PermissionSetAssignment>();
             for (PermissionSet ps : permissionSets) {
                 if (!ps.Name.contains('Super')) {
-                    assignments.add(new PermissionSetAssignment(AssigneeId = allUser.id, PermissionSetId = ps.Id));
+                    assignments.add(
+                        new PermissionSetAssignment(
+                            AssigneeId = allUser.id,
+                            PermissionSetId = ps.Id
+                        )
+                    );
                 }
                 if (ps.Name.contains('Team') || ps.Name.contains('Base')) {
-                    assignments.add(new PermissionSetAssignment(AssigneeId = teamUser.id, PermissionSetId = ps.Id));
+                    assignments.add(
+                        new PermissionSetAssignment(
+                            AssigneeId = teamUser.id,
+                            PermissionSetId = ps.Id
+                        )
+                    );
                 }
             }
             insert assignments;
         }
 
         List<Contact> contacts = new List<Contact>();
-        debbie = new Contact(FirstName = 'Debbie', LastName = 'Queen', Positions__c = 'Volunteer;Client', ShareWithTeam__c = True, ShareWithVolunteer__c = True);
-        ken = new Contact(FirstName = 'Ken', LastName = 'King', Positions__c = 'Client', ShareWithTeam__c = True);
-        alexa = new Contact(FirstName = 'Alexa', LastName = 'Hurst', Positions__c = 'Board Member', ShareWithBoard__c = True);
+        debbie = new Contact(
+            FirstName = 'Debbie',
+            LastName = 'Queen',
+            Positions__c = 'Volunteer;Client'
+        );
+        ken = new Contact(
+            FirstName = 'Ken',
+            LastName = 'King',
+            Positions__c = 'Client'
+        );
+        alexa = new Contact(
+            FirstName = 'Alexa',
+            LastName = 'Hurst',
+            Positions__c = 'Board Member'
+        );
         contacts.add(debbie);
         contacts.add(ken);
         contacts.add(alexa);
@@ -108,7 +180,9 @@ public with sharing class TestCategoryRuleController {
         setup();
         System.runAs(new User(Id = allUser.Id)) {
             // Act
-            List<Map<String,String>> categories = CategoryRuleController.getCategoriesForObject(ace.Id);
+            List<Map<String, String>> categories = CategoryRuleController.getCategoriesForObject(
+                ace.Id
+            );
             // Assert
             System.assertEquals(1, categories.size());
             System.assertEquals('Dog', categories[0].get('label'));
@@ -120,7 +194,9 @@ public with sharing class TestCategoryRuleController {
         setup();
         System.runAs(new User(Id = teamUser.Id)) {
             // Act
-            List<map<String,String>> categories = CategoryRuleController.getCategoriesForObject(team.Id);
+            List<map<String, String>> categories = CategoryRuleController.getCategoriesForObject(
+                team.Id
+            );
             // Assert
             System.assertEquals(2, categories.size());
             System.assertEquals('Team Client', categories[0].get('label'));
@@ -135,7 +211,9 @@ public with sharing class TestCategoryRuleController {
         update ken;
         System.runAs(new User(Id = allUser.Id)) {
             // Act
-            List<map<String,String>> categories = CategoryRuleController.getCategoriesForObject(ken.Id);
+            List<map<String, String>> categories = CategoryRuleController.getCategoriesForObject(
+                ken.Id
+            );
             // Assert
             System.assertEquals(2, categories.size());
             System.assertEquals('ADSiM', categories[0].get('value'));
@@ -149,7 +227,9 @@ public with sharing class TestCategoryRuleController {
         setup();
         System.runAs(new User(Id = allUser.Id)) {
             // Act
-            List<map<String,String>> categories = CategoryRuleController.getCategoriesForObject(alexa.Id);
+            List<map<String, String>> categories = CategoryRuleController.getCategoriesForObject(
+                alexa.Id
+            );
             // Assert
             System.assertEquals(2, categories.size());
             System.assertEquals('Board', categories[1].get('label'));
@@ -162,7 +242,9 @@ public with sharing class TestCategoryRuleController {
         setup();
         System.runAs(new User(Id = allUser.Id)) {
             // Act
-            List<map<String,String>> categories = CategoryRuleController.getCategoriesForObject(debbie.Id);
+            List<map<String, String>> categories = CategoryRuleController.getCategoriesForObject(
+                debbie.Id
+            );
             // Assert
             System.assertEquals(3, categories.size());
             System.assertEquals('Team Client', categories[1].get('label'));
@@ -175,50 +257,27 @@ public with sharing class TestCategoryRuleController {
     // Create a test user
     private static User createVolunteerUser() {
         // Create a unique UserName
-        String uniqueUserName = 'standarduser' + DateTime.now().getTime() + '@testorg.com';
+        String uniqueUserName =
+            'standarduser' +
+            DateTime.now().getTime() +
+            '@testorg.com';
         // This code runs as the system user
-        Profile p = [SELECT Id FROM Profile WHERE Name='Minimum Access - Salesforce'];
+        Profile p = [
+            SELECT Id
+            FROM Profile
+            WHERE Name = 'Minimum Access - Salesforce'
+        ];
         User volunteerUser = new User(
-            Alias = 'standt', Email='standarduser@testorg.com',
-            EmailEncodingKey='UTF-8', LastName='Testing', LanguageLocaleKey='en_US',
-            LocaleSidKey='en_US', ProfileId = p.Id,
-            TimeZoneSidKey='America/Los_Angeles',
-            UserName=uniqueUserName);
+            Alias = 'standt',
+            Email = 'standarduser@testorg.com',
+            EmailEncodingKey = 'UTF-8',
+            LastName = 'Testing',
+            LanguageLocaleKey = 'en_US',
+            LocaleSidKey = 'en_US',
+            ProfileId = p.Id,
+            TimeZoneSidKey = 'America/Los_Angeles',
+            UserName = uniqueUserName
+        );
         return volunteerUser;
     }
-    /*
-    // Create a group and user for Volunteer access
-    private static User setupGroupUser() {
-        User volunteerUser = createVolunteerUser();
-        insert volunteerUser;
-
-        // Apex Manual sharing needs to be established before the ownership changes
-        // https://developer.salesforce.com/forums/?id=906F00000008xZJIAY
-
-        // Avoid mixed DML using runAs
-        System.runAs(new User(Id = UserInfo.getUserId())) {
-            GroupMember gm = new GroupMember(GroupId = volunteerGroup.Id, UserOrGroupId = volunteerUser.Id);
-            insert gm;
-            PermissionSet ps = [SELECT Id FROM PermissionSet WHERE Name = 'AtlasVolunteer'];
-            insert new PermissionSetAssignment(AssigneeId = volunteerUser.Id, PermissionSetId = ps.Id);
-        }
-        return volunteerUser;
-    }
-
-    @isTest
-    public static void getCategoriesForObject_RestrictsClientCategory_WhenUserNotInAllGroup() {
-        setup();
-        User volunteerUser = setupGroupUser();
-        debbie.OwnerId = volunteerUser.Id;
-        update debbie;
-
-        System.runAs(new User(Id = volunteerUser.Id)) {
-            List<map<String,String>> categories = CategoryRuleController.getCategoriesForObject(debbie.Id);
-            // Assert
-            System.assertEquals(1, categories.size());
-            System.assertEquals('Volunteer', categories[0].get('label'));
-            System.assertEquals('Volunteer', categories[0].get('value'));
-        }
-    }
-    */
 }

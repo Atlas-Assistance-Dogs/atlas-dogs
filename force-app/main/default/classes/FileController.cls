@@ -1,6 +1,6 @@
-public inherited sharing class FileController {
+global inherited sharing class FileController {
     @AuraEnabled
-    public static void updateRecords(
+    global static void updateRecords(
         String category,
         String docType,
         Date docDate,
@@ -29,7 +29,7 @@ public inherited sharing class FileController {
     // Delete the link if there is more than one CDL for the document,
     // Otherwise, delete the document
     @AuraEnabled
-    public static void deleteLink(ContentDocumentLink cdl) {
+    global static void deleteLink(ContentDocumentLink cdl) {
         if (cdl == null) {
             throw new AuraHandledException('cdl must be non-null');
         }
@@ -54,7 +54,7 @@ public inherited sharing class FileController {
     }
 
     @AuraEnabled
-    public static void updateContentVersion(
+    global static void updateContentVersion(
         String category,
         String docType,
         Date docDate,
@@ -81,7 +81,7 @@ public inherited sharing class FileController {
     }
 
     @AuraEnabled(cacheable=true)
-    public static RelatedObjects getRelatedFiles(Id recordId, Integer max) {
+    global static RelatedObjects getRelatedFiles(Id recordId, Integer max) {
         if (max == null) {
             max = 6;
         }
@@ -113,16 +113,12 @@ public inherited sharing class FileController {
             Map<string, string> typeEntries = getEntryMap(
                 ContentVersion.Type__c.getDescribe()
             );
-            List<string> allowedCategories = CategoryRuleController.getAllowedCategoriesForUser();
-            System.debug(allowedCategories);
-            allowedCategories.add('');
             List<ContentVersion> files = [
                 SELECT Title, ContentDocumentId, Category__c, Type__c, Date__c
                 FROM ContentVersion
                 WHERE
                     ContentDocumentId IN :lstConDocs
                     AND FileType != 'SNOTE'
-                    AND Category__c IN :allowedCategories
                 ORDER BY Date__c DESC
                 LIMIT :max
             ];
@@ -140,7 +136,6 @@ public inherited sharing class FileController {
                 WHERE
                     ContentDocumentId IN :lstConDocs
                     AND FileType != 'SNOTE'
-                    AND Category__c IN :allowedCategories
             ];
             return related;
         } else {
@@ -148,7 +143,7 @@ public inherited sharing class FileController {
         }
     }
 
-    public static Map<string, string> getEntryMap(
+    global static Map<string, string> getEntryMap(
         Schema.DescribeFieldResult field
     ) {
         List<Schema.PicklistEntry> entries = field.getPicklistValues();
@@ -160,7 +155,7 @@ public inherited sharing class FileController {
     }
 
     @AuraEnabled
-    public static ContentVersion relateFile(
+    global static ContentVersion relateFile(
         Id documentId,
         Id recordId,
         Date docDate
@@ -195,7 +190,7 @@ public inherited sharing class FileController {
     }
 
     @AuraEnabled
-    public static void relateFiles(List<Id> documentIds, Id recordId) {
+    global static void relateFiles(List<Id> documentIds, Id recordId) {
         try {
             List<ContentDocumentLink> links = new List<ContentDocumentLink>();
             for (Id documentId : documentIds) {

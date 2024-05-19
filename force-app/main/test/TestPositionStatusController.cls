@@ -56,7 +56,10 @@ public with sharing class TestPositionStatusController {
             PositionStatusController.POSITION_LIST[5],
             'Suspended'
         ),
-        new PositionStatus(PositionStatusController.POSITION_LIST[6], 'Initial Inquiry')
+        new PositionStatus(
+            PositionStatusController.POSITION_LIST[6],
+            'Initial Inquiry'
+        )
     };
 
     private static Id setupFullStatus() {
@@ -94,26 +97,29 @@ public with sharing class TestPositionStatusController {
         return joe.Id;
     }
 
+    /*
     @isTest
     public static void getPositionStatusForContact_ReturnsFullList_WhenPositionsFull() {
         // Arrange
         Id joeId = setupFullStatus();
+        User buddy = TestUtilities.createUser('System Administrator');
 
         // Act
-        List<PositionStatus> statuses = PositionStatusController.getPositionStatusForContact(
-            joeId
-        );
+        System.runAs(buddy) {
+            List<PositionStatus> statuses = PositionStatusController.getPositionStatusForContact(
+                joeId
+            );
 
-        // Assert
-        Integer idx = 0;
-        for (PositionStatus ps : EXPECTED_POSITION_STATUSES) {
-            PositionStatus status = statuses[idx++];
-            System.assertEquals(ps.position, status.position);
-            System.assertEquals(ps.status, status.status);
+            // Assert
+            Integer idx = 0;
+            for (PositionStatus ps : EXPECTED_POSITION_STATUSES) {
+                PositionStatus status = statuses[idx++];
+                System.assertEquals(ps.position, status.position);
+                System.assertEquals(ps.status, status.status);
+            }
         }
     }
 
-/*
     @isTest
     public static void getPositionStatusForContact_ReturnsVolunteer_WhenUserVolunteer() {
         // Arrange

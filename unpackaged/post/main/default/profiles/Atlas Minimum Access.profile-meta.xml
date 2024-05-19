@@ -297,10 +297,6 @@
         <apexClass>TestTeamTrigger</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>UserService</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
     <custom>true</custom>
     <description>Profile for Atlas users with minimum access</description>
     <fieldPermissions>
