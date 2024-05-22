@@ -5,10 +5,6 @@
             "default": true
         },
         {
-            "path": "unpackaged/post",
-            "default": false
-        },
-        {
             "path": "unpackaged/pre",
             "default": false
         }

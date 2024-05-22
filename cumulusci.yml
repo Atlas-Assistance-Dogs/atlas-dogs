@@ -49,9 +49,9 @@ flows:
     config_dev:
         steps:
             3:
-                task: assign_permission_set_groups
+                task: assign_permission_sets
                 options:
-                    api_names: AtlasAll
+                    api_names: AtlasBackgroundCheck,AtlasBoard,AtlasDemographics,AtlasFacilitator,AtlasPuppyRaiser,AtlasStaff,AtlasStandalone,AtlasTeam,AtlasTrainer,AtlasVolunteer
             4:
                 task: load_custom_settings
                 options: 

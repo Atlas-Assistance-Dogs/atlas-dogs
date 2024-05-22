@@ -15,7 +15,7 @@ To work on this project in a scratch org:
 
 To run apex tests, set your default org (this is an example for the dev org):
 
-`sfdx config:set target-org=atlas-dog__dev`
+`sf config:set target-org=atlas-dog__dev`
 
 Then you can run the Apex unit tests from Visual Studio Code.
 
