@@ -1,8 +1,50 @@
 // use the category rules to see which categories are available for an object and which
 // groups can see which category
 global without sharing class CategoryRuleController {
+    public static List<String> getAllowedCategoriesForUser() {
+        List<String> groupNames = UserService.GetGroupNames(UserInfo.getUserId());
 
-    global static Set<String> getAllowedCategoriesForObject(Id recordId) {
+        // get the categories that work for the object
+        List<CategoryRule__c> rules = [SELECT Category__c, Group__c FROM CategoryRule__c];
+        List<String> categories = new List<String>();
+        for (CategoryRule__c rule: rules) {
+            if (String.isBlank(rule.Group__c) || groupNames.contains(rule.Group__c)) {
+                categories.addAll(rule.Category__c.split(';'));
+            }
+        }
+        return categories;
+    }
+
+    global static Set<String> getAllowedCategoriesForObject(Id recordId, Boolean isUpload) {
+        if (isUpload == null) isUpload = false;
+        System.debug(isUpload);
+        string objLabel = recordId.getSObjectType().getDescribe().getLabel();
+
+        List<String> groupNames = UserService.GetGroupNames(UserInfo.getUserId());
+
+        // get the categories that work for the object from atlas1
+        Set<String> allCategories = CategoryRuleController.getCategoriesForObject(recordId);
+
+        Set<String> categories = new Set<String>();
+        // only allow the categories that match the groups the user is in
+        List<CategoryRule__c> rules = [
+            SELECT Category__c, Group__c, ReadOnly__c
+            FROM CategoryRule__c
+            WHERE (Group__c IN :groupNames OR Group__c = null OR Group__c = '')
+            AND Object__c = :objLabel
+            AND Category__c IN :allCategories
+        ];
+        for (CategoryRule__c rule: rules) {
+            System.debug(rule);
+            if (((isUpload && rule.ReadOnly__c != true) || !isUpload) && rule.Category__c != null) {
+                categories.addAll(rule.Category__c.split(';'));
+            }
+        }
+        
+        return categories;
+    }
+
+    global static Set<String> getCategoriesForObject(Id recordId) {
         string objLabel = recordId.getSObjectType().getDescribe().getLabel();
 
         // get the categories that work for the object
@@ -37,25 +79,19 @@ global without sharing class CategoryRuleController {
     }
 
     @AuraEnabled(Cacheable=true)
-    global static List<Map<String, String>> getCategoriesForObject(
-        Id recordId
-    ) {
+    public static List<Option> getCategoryEntriesForObject(Id recordId, Boolean isUpload) {
         // See what categories the user has access to
-        Set<String> categories = getAllowedCategoriesForObject(recordId);
+        Set<String> categories = getAllowedCategoriesForObject(recordId, isUpload);
 
         // Map in the types for each allowed category
-        Map<string, string> categoryEntries = FileController.getEntryMap(
-            CategoryRule__c.Category__c.getDescribe()
-        );
-        List<Map<String, String>> entries = new List<Map<String, String>>();
+        Map<string, string> categoryEntries = FileController.getEntryMap(CategoryRule__c.Category__c.getDescribe());
+        List<Option> entries = new List<Option>();
         for (string category : categories) {
-            entries.add(
-                new Map<String, String>{
-                    'value' => category,
-                    'label' => categoryEntries.get(category)
-                }
-            );
+            Option option = new Option(category, categoryEntries.get(category));
+            entries.add(option);
         }
+        entries.sort();
+        System.debug(entries);
         return entries;
     }
 }

@@ -24,7 +24,11 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Upload__c</field>
+                <field>Group__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>ReadOnly__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
