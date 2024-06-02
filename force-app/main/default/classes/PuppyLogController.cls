@@ -25,7 +25,7 @@ public with sharing class PuppyLogController {
                 plog.dogName = log.Dog__r.Name;
                 plog.raiserName = log.Raiser__r.Name;
 
-                RelatedObjects files = FileController.getRelatedFiles(log.Id, 1);
+                RelatedObjects files = FileController.getAllRelatedFiles(log.Id, 1);
                 if (files != null && !files.items.isEmpty()) {
                     FileInfo info = (FileInfo)files.items[0];
                     plog.documentId = info.cv.ContentDocumentId;
