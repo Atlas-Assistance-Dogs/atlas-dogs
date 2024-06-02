@@ -19,7 +19,7 @@ public with sharing class BackgroundCheckController {
                 BackgroundCheck outCheck = new BackgroundCheck();
                 outCheck.check = bgc;
                 outCheck.noFile = true;
-                RelatedObjects files = FileController.getRelatedFiles(
+                RelatedObjects files = FileController.getAllRelatedFiles(
                     bgc.Id, 1
                 );
                 if (files != null && !files.items.isEmpty()) {

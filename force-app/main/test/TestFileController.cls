@@ -40,6 +40,17 @@ public with sharing class TestFileController {
                 Date__c = Date.today()
             )
         );
+        documents.add(
+            new ContentVersion(
+                Title = 'TestDocument4',
+                PathOnClient = 'TestDocument4.jpg',
+                Origin = 'H',
+                VersionData = Blob.valueOf('Document Body 4'),
+                Category__c = 'Trainer',
+                Type__c = 'Application',
+                Date__c = Date.today().addDays(-10)
+            )
+        );
         insert documents;
 
         documents = [

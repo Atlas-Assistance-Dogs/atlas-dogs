@@ -80,7 +80,7 @@ global inherited sharing class FileController {
         }
     }
 
-    static RelatedObjects getAllRelatedFiles(Id recordId, Integer max) {
+    public static RelatedObjects getAllRelatedFiles(Id recordId, Integer max) {
         if (max == null) {
             max = 6;
         }
