@@ -23,6 +23,7 @@ export default class DocumentUploadCmp extends FileInformationCmp {
             ".zip"
         ];
     }
+    isUpload = true;
 
     @api
     openModal() {

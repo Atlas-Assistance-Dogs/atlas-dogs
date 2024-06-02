@@ -2,7 +2,7 @@ import { LightningElement, track, api, wire } from "lwc";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
 import { getObjectInfo } from "lightning/uiObjectInfoApi";
 import { getRecord } from "lightning/uiRecordApi";
-import getCategoriesForObject from "@salesforce/apex/CategoryRuleController.getCategoriesForObject";
+import getCategoriesForObject from "@salesforce/apex/CategoryRuleController.getCategoryEntriesForObject";
 import { getPicklistValues } from "lightning/uiObjectInfoApi";
 import { NavigationMixin } from "lightning/navigation";
 
@@ -16,6 +16,7 @@ import TYPE_FIELD from "@salesforce/schema/ContentVersion.Type__c";
 export default class FileInformation extends NavigationMixin(LightningElement) {
     @api objectId; // Id of the object the file is/will be linked to
     @api recordId; // ContentVersion Id if editing
+    @api isUpload = false; // true if uploading file
     @track fileUploadList = [];
     @track fileIDs = [];
     isErrorMessage = false;
@@ -45,7 +46,7 @@ export default class FileInformation extends NavigationMixin(LightningElement) {
         };
     }
 
-    @wire(getCategoriesForObject, { recordId: "$objectId" })
+    @wire(getCategoriesForObject, { recordId: "$objectId", isUpload: "$isUpload" })
     getCategories(result) {
         if (result?.data !== undefined) {
             this.categories = result.data;

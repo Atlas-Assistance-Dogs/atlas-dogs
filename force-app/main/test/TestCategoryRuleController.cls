@@ -180,12 +180,27 @@ public with sharing class TestCategoryRuleController {
         setup();
         System.runAs(new User(Id = allUser.Id)) {
             // Act
-            List<Map<String, String>> categories = CategoryRuleController.getCategoriesForObject(
-                ace.Id
+            List<Option> categories = CategoryRuleController.getCategoryEntriesForObject(
+                ace.Id, false
+            );
+            // Assert
+            System.assertEquals(2, categories.size());
+            System.assertEquals('Dog', categories[0].label);
+            System.assertEquals('Team Dog', categories[1].label);
+        }
+    }
+
+    @isTest
+    public static void getCategoriesForObject_OmitsTeamDog_WhenDogFileUpload() {
+        setup();
+        System.runAs(new User(Id = allUser.Id)) {
+            // Act
+            List<Option> categories = CategoryRuleController.getCategoryEntriesForObject(
+                ace.Id, true
             );
             // Assert
             System.assertEquals(1, categories.size());
-            System.assertEquals('Dog', categories[0].get('label'));
+            System.assertEquals('Dog', categories[0].label);
         }
     }
 
@@ -194,13 +209,13 @@ public with sharing class TestCategoryRuleController {
         setup();
         System.runAs(new User(Id = teamUser.Id)) {
             // Act
-            List<map<String, String>> categories = CategoryRuleController.getCategoriesForObject(
-                team.Id
+            List<Option> categories = CategoryRuleController.getCategoryEntriesForObject(
+                team.Id, false
             );
             // Assert
             System.assertEquals(2, categories.size());
-            System.assertEquals('Team Client', categories[0].get('label'));
-            System.assertEquals('Dog', categories[1].get('label'));
+            System.assertEquals('Team Client', categories[0].label);
+            System.assertEquals('Team Dog', categories[1].label);
         }
     }
 
@@ -211,14 +226,32 @@ public with sharing class TestCategoryRuleController {
         update ken;
         System.runAs(new User(Id = allUser.Id)) {
             // Act
-            List<map<String, String>> categories = CategoryRuleController.getCategoriesForObject(
-                ken.Id
+            List<Option> categories = CategoryRuleController.getCategoryEntriesForObject(
+                ken.Id, false
+            );
+            // Assert
+            System.assertEquals(3, categories.size());
+            System.assertEquals('ADSiM', categories[0].value);
+            System.assertEquals('Na', categories[1].value);
+            System.assertEquals('Client', categories[2].value);
+            System.assertEquals('Team Client', categories[2].label);
+        }
+    }
+
+    @isTest
+    public static void getCategoriesForObject_OmitsClient_WhenClientUpload() {
+        setup();
+        ken.OwnerId = allUser.Id;
+        update ken;
+        System.runAs(new User(Id = allUser.Id)) {
+            // Act
+            List<Option> categories = CategoryRuleController.getCategoryEntriesForObject(
+                ken.Id, true
             );
             // Assert
             System.assertEquals(2, categories.size());
-            System.assertEquals('ADSiM', categories[0].get('value'));
-            System.assertEquals('Team Client', categories[1].get('label'));
-            System.assertEquals('Client', categories[1].get('value'));
+            System.assertEquals('ADSiM', categories[0].value);
+            System.assertEquals('Na', categories[1].value);
         }
     }
 
@@ -227,13 +260,13 @@ public with sharing class TestCategoryRuleController {
         setup();
         System.runAs(new User(Id = allUser.Id)) {
             // Act
-            List<map<String, String>> categories = CategoryRuleController.getCategoriesForObject(
-                alexa.Id
+            List<Option> categories = CategoryRuleController.getCategoryEntriesForObject(
+                alexa.Id, false
             );
             // Assert
-            System.assertEquals(2, categories.size());
-            System.assertEquals('Board', categories[1].get('label'));
-            System.assertEquals('Board', categories[1].get('value'));
+            System.assertEquals(3, categories.size());
+            System.assertEquals('Board', categories[1].label);
+            System.assertEquals('Board', categories[1].value);
         }
     }
 
@@ -242,15 +275,16 @@ public with sharing class TestCategoryRuleController {
         setup();
         System.runAs(new User(Id = allUser.Id)) {
             // Act
-            List<map<String, String>> categories = CategoryRuleController.getCategoriesForObject(
-                debbie.Id
+            List<Option> categories = CategoryRuleController.getCategoryEntriesForObject(
+                debbie.Id, false
             );
             // Assert
-            System.assertEquals(3, categories.size());
-            System.assertEquals('Team Client', categories[1].get('label'));
-            System.assertEquals('Volunteer', categories[2].get('label'));
-            System.assertEquals('Client', categories[1].get('value'));
-            System.assertEquals('Volunteer', categories[2].get('value'));
+            System.assertEquals(4, categories.size());
+            System.assertEquals('ADSiM', categories[0].value);
+            System.assertEquals('N/A', categories[1].label);
+            System.assertEquals('Team Client', categories[2].label);
+            System.assertEquals('Volunteer', categories[3].label);
+            System.assertEquals('Volunteer', categories[3].value);
         }
     }
 

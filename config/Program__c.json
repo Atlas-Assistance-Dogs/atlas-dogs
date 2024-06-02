@@ -2,228 +2,228 @@
     "records": [
         {
             "attributes": {
-                "type": "atlas1__Program__c",
+                "type": "Program__c",
                 "referenceId": "Program__cRef1"
             },
-            "atlas1__CEU__c": false,
-            "atlas1__Current__c": true,
-            "atlas1__Months__c": 4,
-            "atlas1__Reminder__c": 30,
-            "atlas1__Standalone__c": false,
+            "CEU__c": false,
+            "Current__c": true,
+            "Months__c": 4,
+            "Reminder__c": 30,
+            "Standalone__c": false,
             "Name": "Puppy Raiser"
         },
         {
             "attributes": {
-                "type": "atlas1__Program__c",
+                "type": "Program__c",
                 "referenceId": "Program__cRef2"
             },
-            "atlas1__CEU__c": false,
-            "atlas1__Current__c": true,
-            "atlas1__Months__c": 0.3,
-            "atlas1__Reminder__c": 7,
-            "atlas1__Standalone__c": false,
+            "CEU__c": false,
+            "Current__c": true,
+            "Months__c": 0.3,
+            "Reminder__c": 7,
+            "Standalone__c": false,
             "Name": "Staff"
         },
         {
             "attributes": {
-                "type": "atlas1__Program__c",
+                "type": "Program__c",
                 "referenceId": "Program__cRef3"
             },
-            "atlas1__CEU__c": true,
-            "atlas1__Current__c": true,
-            "atlas1__Months__c": 3,
-            "atlas1__Standalone__c": true,
+            "CEU__c": true,
+            "Current__c": true,
+            "Months__c": 3,
+            "Standalone__c": true,
             "Name": "Sweet Snoopers [CEU]"
         },
         {
             "attributes": {
-                "type": "atlas1__Program__c",
+                "type": "Program__c",
                 "referenceId": "Program__cRef4"
             },
-            "atlas1__CEU__c": false,
-            "atlas1__Current__c": true,
-            "atlas1__Months__c": 4,
-            "atlas1__Reminder__c": 30,
-            "atlas1__Standalone__c": true,
+            "CEU__c": false,
+            "Current__c": true,
+            "Months__c": 4,
+            "Reminder__c": 30,
+            "Standalone__c": true,
             "Name": "Team Facilitator"
         },
         {
             "attributes": {
-                "type": "atlas1__Program__c",
+                "type": "Program__c",
                 "referenceId": "Program__cRef5"
             },
-            "atlas1__CEU__c": false,
-            "atlas1__Current__c": true,
-            "atlas1__Months__c": 6,
-            "atlas1__Standalone__c": true,
+            "CEU__c": false,
+            "Current__c": true,
+            "Months__c": 6,
+            "Standalone__c": true,
             "Name": "Teams Set in Motion Client"
         },
         {
             "attributes": {
-                "type": "atlas1__Program__c",
+                "type": "Program__c",
                 "referenceId": "Program__cRef6"
             },
-            "atlas1__CEU__c": true,
-            "atlas1__Current__c": true,
-            "atlas1__Months__c": 9,
-            "atlas1__Reminder__c": 30,
-            "atlas1__Standalone__c": false,
+            "CEU__c": true,
+            "Current__c": true,
+            "Months__c": 9,
+            "Reminder__c": 30,
+            "Standalone__c": false,
             "Name": "Trainer Certification"
         },
         {
             "attributes": {
-                "type": "atlas1__Program__c",
+                "type": "Program__c",
                 "referenceId": "Program__cRef7"
             },
-            "atlas1__CEU__c": false,
-            "atlas1__Current__c": true,
-            "atlas1__Months__c": 0.5,
-            "atlas1__Reminder__c": 7,
-            "atlas1__Standalone__c": false,
+            "CEU__c": false,
+            "Current__c": true,
+            "Months__c": 0.5,
+            "Reminder__c": 7,
+            "Standalone__c": false,
             "Name": "Volunteer"
         },
         {
             "attributes": {
-                "type": "atlas1__Program__c",
+                "type": "Program__c",
                 "referenceId": "Program__cRef8"
             },
-            "atlas1__CEU__c": false,
-            "atlas1__Current__c": true,
-            "atlas1__Months__c": 6,
-            "atlas1__Reminder__c": 30,
-            "atlas1__Standalone__c": false,
+            "CEU__c": false,
+            "Current__c": true,
+            "Months__c": 6,
+            "Reminder__c": 30,
+            "Standalone__c": false,
             "Name": "Client Certification"
         },
         {
             "attributes": {
-                "type": "atlas1__Program__c",
+                "type": "Program__c",
                 "referenceId": "Program__cRef9"
             },
-            "atlas1__CEU__c": false,
-            "atlas1__Current__c": true,
-            "atlas1__Months__c": 1,
-            "atlas1__Standalone__c": true,
+            "CEU__c": false,
+            "Current__c": true,
+            "Months__c": 1,
+            "Standalone__c": true,
             "Name": "Fitness"
         },
         {
             "attributes": {
-                "type": "atlas1__Program__c",
+                "type": "Program__c",
                 "referenceId": "Program__cRef10"
             },
-            "atlas1__CEU__c": false,
-            "atlas1__Current__c": true,
-            "atlas1__Months__c": 1,
-            "atlas1__Standalone__c": true,
+            "CEU__c": false,
+            "Current__c": true,
+            "Months__c": 1,
+            "Standalone__c": true,
             "Name": "Service Dog Selection"
         },
         {
             "attributes": {
-                "type": "atlas1__Program__c",
+                "type": "Program__c",
                 "referenceId": "Program__cRef11"
             },
-            "atlas1__CEU__c": true,
-            "atlas1__Current__c": true,
-            "atlas1__Months__c": 1.5,
-            "atlas1__Standalone__c": true,
+            "CEU__c": true,
+            "Current__c": true,
+            "Months__c": 1.5,
+            "Standalone__c": true,
             "Name": "Service Dog Selection [CEU]"
         },
         {
             "attributes": {
-                "type": "atlas1__Program__c",
+                "type": "Program__c",
                 "referenceId": "Program__cRef12"
             },
-            "atlas1__CEU__c": true,
-            "atlas1__Current__c": true,
-            "atlas1__Months__c": 4,
-            "atlas1__Standalone__c": true,
+            "CEU__c": true,
+            "Current__c": true,
+            "Months__c": 4,
+            "Standalone__c": true,
             "Name": "Service Dog Training Bundle"
         },
         {
             "attributes": {
-                "type": "atlas1__Program__c",
+                "type": "Program__c",
                 "referenceId": "Program__cRef13"
             },
-            "atlas1__CEU__c": false,
-            "atlas1__Current__c": true,
-            "atlas1__Months__c": 1,
-            "atlas1__Standalone__c": true,
+            "CEU__c": false,
+            "Current__c": true,
+            "Months__c": 1,
+            "Standalone__c": true,
             "Name": "Service Dogs Foundations"
         },
         {
             "attributes": {
-                "type": "atlas1__Program__c",
+                "type": "Program__c",
                 "referenceId": "Program__cRef14"
             },
-            "atlas1__CEU__c": false,
-            "atlas1__Current__c": true,
-            "atlas1__Months__c": 1.5,
-            "atlas1__Standalone__c": true,
+            "CEU__c": false,
+            "Current__c": true,
+            "Months__c": 1.5,
+            "Standalone__c": true,
             "Name": "Service Dogs Foundations [CEU]"
         },
         {
             "attributes": {
-                "type": "atlas1__Program__c",
+                "type": "Program__c",
                 "referenceId": "Program__cRef23"
             },
-            "atlas1__CEU__c": true,
-            "atlas1__Current__c": true,
-            "atlas1__Months__c": 1.5,
-            "atlas1__Standalone__c": true,
+            "CEU__c": true,
+            "Current__c": true,
+            "Months__c": 1.5,
+            "Standalone__c": true,
             "Name": "Fitness [CEU]"
         },
         {
             "attributes": {
-                "type": "atlas1__Program__c",
+                "type": "Program__c",
                 "referenceId": "Program__cRef24"
             },
-            "atlas1__CEU__c": false,
-            "atlas1__Current__c": true,
-            "atlas1__Months__c": 1,
-            "atlas1__Standalone__c": true,
+            "CEU__c": false,
+            "Current__c": true,
+            "Months__c": 1,
+            "Standalone__c": true,
             "Name": "Medical Disability"
         },
         {
             "attributes": {
-                "type": "atlas1__Program__c",
+                "type": "Program__c",
                 "referenceId": "Program__cRef25"
             },
-            "atlas1__CEU__c": false,
-            "atlas1__Current__c": true,
-            "atlas1__Months__c": 1.5,
-            "atlas1__Standalone__c": true,
+            "CEU__c": false,
+            "Current__c": true,
+            "Months__c": 1.5,
+            "Standalone__c": true,
             "Name": "Medical Disability [CEU]"
         },
         {
             "attributes": {
-                "type": "atlas1__Program__c",
+                "type": "Program__c",
                 "referenceId": "Program__cRef28"
             },
-            "atlas1__CEU__c": true,
-            "atlas1__Current__c": true,
-            "atlas1__Months__c": 4,
-            "atlas1__Standalone__c": true,
+            "CEU__c": true,
+            "Current__c": true,
+            "Months__c": 4,
+            "Standalone__c": true,
             "Name": "OT Advanced Bundle [CEU]"
         },
         {
             "attributes": {
-                "type": "atlas1__Program__c",
+                "type": "Program__c",
                 "referenceId": "Program__cRef29"
             },
-            "atlas1__CEU__c": false,
-            "atlas1__Current__c": true,
-            "atlas1__Months__c": 1,
-            "atlas1__Standalone__c": true,
+            "CEU__c": false,
+            "Current__c": true,
+            "Months__c": 1,
+            "Standalone__c": true,
             "Name": "Psychiatric Disability"
         },
         {
             "attributes": {
-                "type": "atlas1__Program__c",
+                "type": "Program__c",
                 "referenceId": "Program__cRef30"
             },
-            "atlas1__CEU__c": true,
-            "atlas1__Current__c": true,
-            "atlas1__Months__c": 1.5,
-            "atlas1__Standalone__c": true,
+            "CEU__c": true,
+            "Current__c": true,
+            "Months__c": 1.5,
+            "Standalone__c": true,
             "Name": "Psychiatric Disability [CEU]"
         }
     ]

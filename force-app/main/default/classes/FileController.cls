@@ -80,8 +80,7 @@ global inherited sharing class FileController {
         }
     }
 
-    @AuraEnabled(cacheable=true)
-    global static RelatedObjects getRelatedFiles(Id recordId, Integer max) {
+    static RelatedObjects getAllRelatedFiles(Id recordId, Integer max) {
         if (max == null) {
             max = 6;
         }
@@ -207,6 +206,44 @@ global inherited sharing class FileController {
             throw new AuraHandledException(ex.getMessage());
         } catch (DmlException ex) {
             throw new AuraHandledException(ex.getMessage());
+        }
+    }
+    @AuraEnabled(cacheable=true)
+    global static RelatedObjects getRelatedFiles(Id recordId, Integer max) {
+        if (max == null) {
+            max = 6;
+        }
+        if (recordId == null) {
+            throw new AuraHandledException('recordId must not be null');
+        }
+        // get all, since we can't be sure how many will be filtered out
+        RelatedObjects allFiles = FileController.getAllRelatedFiles(recordId, 10000);
+
+        RelatedObjects objects = new RelatedObjects();
+
+        if (allFiles.total > 0) {
+            RelatedObjects related = new RelatedObjects();
+
+            // get a map of the category and type labels
+            Map<string, string> categoryEntries = FileController.getEntryMap(
+                ContentVersion.Category__c.getDescribe()
+            );
+            Map<string, string> typeEntries = FileController.getEntryMap(
+                ContentVersion.Type__c.getDescribe()
+            );
+            Set<String> allowedCategories = new Set<String>(CategoryRuleController.getAllowedCategoriesForUser());
+            allowedCategories.add('');
+            
+            for (Object item : allFiles.items) {
+                FileInfo info = (FileInfo)item;
+                if (allowedCategories.contains(info.cv.Category__c)) {
+                    related.items.add(info);
+                }
+            }
+            related.total = related.items.size();
+            return related;
+        } else {
+            return new RelatedObjects();
         }
     }
 }
