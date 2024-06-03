@@ -33,7 +33,7 @@ trigger ContactTriggerAfter on Contact(after update) {
     
     // now update the modified contacts relations
     List<npe4__Relationship__c> relationships = [
-        SELECT npe4__RelatedContact__c, npe4__RelatedContact__r.Name, npe4__RelatedContact__r.UpdateShareSettings__c
+        SELECT npe4__RelatedContact__c, npe4__RelatedContact__r.Name, npe4__RelatedContact__r.UpdateSharing__c
         FROM npe4__Relationship__c
         WHERE
             (npe4__Type__c LIKE '%Emergency Contact'
@@ -43,7 +43,7 @@ trigger ContactTriggerAfter on Contact(after update) {
     ];
     Map<Id, Contact> related = new Map<Id, Contact>();
     for (npe4__Relationship__c relationship : relationships) {
-        relationship.npe4__RelatedContact__r.UpdateShareSettings__c = true;
+        relationship.npe4__RelatedContact__r.UpdateSharing__c = true;
         related.put(
             relationship.npe4__RelatedContact__c,
             relationship.npe4__RelatedContact__r

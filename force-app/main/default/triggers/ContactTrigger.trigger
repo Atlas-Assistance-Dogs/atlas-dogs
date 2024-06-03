@@ -66,9 +66,9 @@ trigger ContactTrigger on Contact (before insert, before update) {
         newContact.UpdateForRelated__c = false;
 
 
-        if (newContact.Positions__c != oldPositions || newContact.UpdateShareSettings__c) {
+        if (newContact.Positions__c != oldPositions || newContact.UpdateSharing__c) {
             newContact = ContactService.shareContactBasedOnPositions(newContact, positionGroups);
-            newContact.UpdateShareSettings__c = false;
+            newContact.UpdateSharing__c = false;
             if (!Trigger.isInsert) {
                 modifiedContacts.put(newContact.Id, newContact);
             }

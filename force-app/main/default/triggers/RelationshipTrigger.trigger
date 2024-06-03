@@ -29,14 +29,14 @@ trigger RelationshipTrigger on npe4__Relationship__c(
         }
 
         List<Contact> related = [
-            SELECT Id, UpdateForRelated__c, UpdateShareSettings__c
+            SELECT Id, UpdateForRelated__c, UpdateSharing__c
             FROM Contact
             WHERE Id IN :contactIds
         ];
         // we need a way for the contact trigger to know to update this contacts settings
         for (Contact person : related) {
             person.UpdateForRelated__c = true;
-            person.UpdateShareSettings__c = true;
+            person.UpdateSharing__c = true;
         }
         update related;
     }

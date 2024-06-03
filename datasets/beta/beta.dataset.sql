@@ -386,7 +386,7 @@ CREATE TABLE "Contact" (
 	"TrainerProgAgreementReceived__c" VARCHAR(255), 
 	"TrainerSpecialties__c" VARCHAR(255), 
 	"TrainerStatus__c" VARCHAR(255), 
-	"UpdateShareSettings__c" VARCHAR(255), 
+	"UpdateSharing__c" VARCHAR(255), 
 	"VeteranStatus__c" VARCHAR(255), 
 	"VolunteerAccess__c" VARCHAR(255), 
 	"VolunteerAgreementReceived__c" VARCHAR(255), 

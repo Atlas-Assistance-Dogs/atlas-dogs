@@ -1,4 +1,4 @@
-public with sharing class UserService {
+public with sharing class UserAccessService {
     public static List<String> GetGroupNames(ID userId) {
         //Declaring a Set as we don't want Duplicate Group Ids
         Set<Id> results = new Set<Id>();

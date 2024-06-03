@@ -2,7 +2,7 @@
 // groups can see which category
 global without sharing class CategoryRuleController {
     public static List<String> getAllowedCategoriesForUser() {
-        List<String> groupNames = UserService.GetGroupNames(UserInfo.getUserId());
+        List<String> groupNames = UserAccessService.GetGroupNames(UserInfo.getUserId());
 
         // get the categories that work for the object
         List<CategoryRule__c> rules = [SELECT Category__c, GroupName__c FROM CategoryRule__c];
@@ -20,7 +20,7 @@ global without sharing class CategoryRuleController {
         System.debug(isUpload);
         string objLabel = recordId.getSObjectType().getDescribe().getLabel();
 
-        List<String> groupNames = UserService.GetGroupNames(UserInfo.getUserId());
+        List<String> groupNames = UserAccessService.GetGroupNames(UserInfo.getUserId());
 
         // get the categories that work for the object from atlas1
         Set<String> allCategories = CategoryRuleController.getCategoriesForObject(recordId);
