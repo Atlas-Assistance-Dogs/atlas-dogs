@@ -97,7 +97,6 @@ public with sharing class TestPositionStatusController {
         return joe.Id;
     }
 
-    /*
     @isTest
     public static void getPositionStatusForContact_ReturnsFullList_WhenPositionsFull() {
         // Arrange
@@ -117,6 +116,34 @@ public with sharing class TestPositionStatusController {
                 System.assertEquals(ps.position, status.position);
                 System.assertEquals(ps.status, status.status);
             }
+        }
+    }
+
+    @isTest
+    public static void getPositionStatusForContact_ReturnsTeamFacilitator_WhenFacilitatorLead() {
+        // Arrange
+        // Arrange
+        Contact joe = new Contact(
+            FirstName = 'Joe',
+            LastName = 'Blow',
+            Positions__c = 'Team Facilitator Lead',
+            FacilitatorStatus__c = 'Discontinued'
+        );
+        insert joe;
+        
+        User buddy = TestUtilities.createUser('System Administrator');
+
+        // Act
+        System.runAs(buddy) {
+            List<PositionStatus> statuses = PositionStatusController.getPositionStatusForContact(
+                joe.Id
+            );
+
+            // Assert
+            Integer idx = 0;
+            PositionStatus status = statuses[0];
+            System.assertEquals('Team Facilitator', status.position);
+            System.assertEquals('Discontinued', status.status);
         }
     }
 
@@ -141,5 +168,4 @@ public with sharing class TestPositionStatusController {
             System.assertEquals(EXPECTED_POSITION_STATUSES[0].status, volunteerStatus.status);
         }
     }
-    */
 }
