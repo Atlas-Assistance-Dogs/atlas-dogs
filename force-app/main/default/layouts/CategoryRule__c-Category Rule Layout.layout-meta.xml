@@ -24,7 +24,7 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Group__c</field>
+                <field>GroupName__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>

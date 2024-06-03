@@ -81,7 +81,7 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>CategoryRule__c.Group__c</field>
+        <field>CategoryRule__c.GroupName__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

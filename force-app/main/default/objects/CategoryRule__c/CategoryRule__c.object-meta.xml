@@ -165,7 +165,7 @@
         <searchResultsAdditionalFields>Object__c</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>Position__c</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>Category__c</searchResultsAdditionalFields>
-        <searchResultsAdditionalFields>Group__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>GroupName__c</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>ReadOnly__c</searchResultsAdditionalFields>
     </searchLayouts>
     <sharingModel>ReadWrite</sharingModel>

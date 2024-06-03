@@ -74,28 +74,28 @@ public with sharing class TestUtilities {
             new CategoryRule__c(
                 Category__c = 'Dog',
                 Object__c = 'Dog',
-                Group__c = 'Team'
+                GroupName__c = 'Team'
             )
         );
         rules.add(
             new CategoryRule__c(
                 Category__c = 'Client',
                 Object__c = 'Team',
-                Group__c = 'Team'
+                GroupName__c = 'Team'
             )
         );
         rules.add(
             new CategoryRule__c(
                 Category__c = 'TeamDog',
                 Object__c = 'Team',
-                Group__c = 'Team'
+                GroupName__c = 'Team'
             )
         );
         rules.add(
             new CategoryRule__c(
                 Category__c = 'ADSiM',
                 Object__c = 'Contact',
-                Group__c = 'Team'
+                GroupName__c = 'Team'
             )
         );
         rules.add(
@@ -103,7 +103,7 @@ public with sharing class TestUtilities {
                 Category__c = 'Standalone',
                 Object__c = 'Contact',
                 Position__c = 'Standalone',
-                Group__c = 'Standalone'
+                GroupName__c = 'Standalone'
             )
         );
         rules.add(
@@ -111,7 +111,7 @@ public with sharing class TestUtilities {
                 Category__c = 'Board',
                 Object__c = 'Contact',
                 Position__c = 'Board Member',
-                Group__c = 'Board'
+                GroupName__c = 'Board'
             )
         );
         rules.add(
@@ -119,7 +119,7 @@ public with sharing class TestUtilities {
                 Category__c = 'Facilitator',
                 Object__c = 'Contact',
                 Position__c = 'Team Facilitator',
-                Group__c = 'Team'
+                GroupName__c = 'Team'
             )
         );
         rules.add(
@@ -127,7 +127,7 @@ public with sharing class TestUtilities {
                 Category__c = 'Facilitator',
                 Object__c = 'Contact',
                 Position__c = 'Team Facilitator Lead',
-                Group__c = 'Team'
+                GroupName__c = 'Team'
             )
         );
         rules.add(
@@ -135,7 +135,7 @@ public with sharing class TestUtilities {
                 Category__c = 'Puppy',
                 Object__c = 'Contact',
                 Position__c = 'Puppy Raiser',
-                Group__c = 'All'
+                GroupName__c = 'All'
             )
         );
         rules.add(
@@ -143,7 +143,7 @@ public with sharing class TestUtilities {
                 Category__c = 'Staff',
                 Object__c = 'Contact',
                 Position__c = 'Staff',
-                Group__c = 'Staff'
+                GroupName__c = 'Staff'
             )
         );
         rules.add(
@@ -151,7 +151,7 @@ public with sharing class TestUtilities {
                 Category__c = 'Trainer',
                 Object__c = 'Contact',
                 Position__c = 'Trainer',
-                Group__c = 'Trainer'
+                GroupName__c = 'Trainer'
             )
         );
         rules.add(
@@ -159,7 +159,7 @@ public with sharing class TestUtilities {
                 Category__c = 'Volunteer',
                 Object__c = 'Contact',
                 Position__c = 'Volunteer',
-                Group__c = 'Volunteer'
+                GroupName__c = 'Volunteer'
             )
         );
         rules.add(
@@ -173,7 +173,7 @@ public with sharing class TestUtilities {
             new CategoryRule__c(
                 Category__c = 'TeamDog',
                 Object__c = 'Dog',
-                Group__c = 'Team',
+                GroupName__c = 'Team',
                 ReadOnly__c = true
             )
         );
@@ -182,7 +182,7 @@ public with sharing class TestUtilities {
                 Category__c = 'Client',
                 Object__c = 'Contact',
                 Position__c = 'Client',
-                Group__c = 'Team',
+                GroupName__c = 'Team',
                 ReadOnly__c = true
             )
         );

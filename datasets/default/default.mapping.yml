@@ -63,7 +63,7 @@ Insert CategoryRule__c:
   - Category__c
   - Object__c
   - Position__c
-  - Group__c
+  - GroupName__c
   - ReadOnly__c
 Insert Program__c:
   sf_object: Program__c

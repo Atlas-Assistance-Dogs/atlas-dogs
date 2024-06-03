@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>ShareWithStandalonePrograms__c</fullName>
+    <fullName>ShareTrainer__c</fullName>
     <defaultValue>false</defaultValue>
-    <description>Share this contact with users in the Standalone Programs group</description>
+    <description>Share this contact with users in the Trainer group</description>
     <externalId>false</externalId>
-    <label>Share With Standalone Programs</label>
+    <label>Share With Trainer</label>
     <trackFeedHistory>false</trackFeedHistory>
     <type>Checkbox</type>
 </CustomField>

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>ShareWithVolunteer__c</fullName>
+    <fullName>ShareBoard__c</fullName>
     <defaultValue>false</defaultValue>
-    <description>Share this contact with users in the Volunteer group</description>
+    <description>Share this contact with users in the Board group</description>
     <externalId>false</externalId>
-    <label>Share With Volunteer</label>
+    <label>Share With Board</label>
     <trackFeedHistory>false</trackFeedHistory>
     <type>Checkbox</type>
 </CustomField>
