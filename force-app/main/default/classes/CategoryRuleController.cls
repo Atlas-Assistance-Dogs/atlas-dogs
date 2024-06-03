@@ -5,10 +5,10 @@ global without sharing class CategoryRuleController {
         List<String> groupNames = UserService.GetGroupNames(UserInfo.getUserId());
 
         // get the categories that work for the object
-        List<CategoryRule__c> rules = [SELECT Category__c, Group__c FROM CategoryRule__c];
+        List<CategoryRule__c> rules = [SELECT Category__c, GroupName__c FROM CategoryRule__c];
         List<String> categories = new List<String>();
         for (CategoryRule__c rule: rules) {
-            if (String.isBlank(rule.Group__c) || groupNames.contains(rule.Group__c)) {
+            if (String.isBlank(rule.GroupName__c) || groupNames.contains(rule.GroupName__c)) {
                 categories.addAll(rule.Category__c.split(';'));
             }
         }
@@ -28,9 +28,9 @@ global without sharing class CategoryRuleController {
         Set<String> categories = new Set<String>();
         // only allow the categories that match the groups the user is in
         List<CategoryRule__c> rules = [
-            SELECT Category__c, Group__c, ReadOnly__c
+            SELECT Category__c, GroupName__c, ReadOnly__c
             FROM CategoryRule__c
-            WHERE (Group__c IN :groupNames OR Group__c = null OR Group__c = '')
+            WHERE (GroupName__c IN :groupNames OR GroupName__c = null OR GroupName__c = '')
             AND Object__c = :objLabel
             AND Category__c IN :allCategories
         ];

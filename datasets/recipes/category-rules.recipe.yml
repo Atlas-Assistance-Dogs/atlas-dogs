@@ -3,28 +3,28 @@
   fields:
     Category__c: 'Dog'
     Object__c: 'Dog'
-    Group__c: 'Team'
+    GroupName__c: 'Team'
 
 - object: CategoryRule__c
   just_once: True
   fields:
     Category__c: 'Client'
     Object__c: 'Team'
-    Group__c: 'Team'
+    GroupName__c: 'Team'
 
 - object: CategoryRule__c
   just_once: True
   fields:
     Category__c: 'TeamDog'
     Object__c: 'Team'
-    Group__c: 'Team'
+    GroupName__c: 'Team'
 
 - object: CategoryRule__c
   just_once: True
   fields:
     Category__c: 'TeamDog'
     Object__c: 'Dog'
-    Group__c: 'Team'
+    GroupName__c: 'Team'
     ReadOnly__c: True
 
 - object: CategoryRule__c
@@ -32,7 +32,7 @@
   fields:
     Category__c: 'ADSiM'
     Object__c: 'Contact'
-    Group__c: 'Team'
+    GroupName__c: 'Team'
 
 - object: CategoryRule__c
   just_once: True
@@ -52,7 +52,7 @@
     Category__c: 'Board'
     Object__c: 'Contact'
     Position__c: 'Board Member'
-    Group__c: 'Board'
+    GroupName__c: 'Board'
 
 - object: CategoryRule__c
   just_once: True
@@ -60,7 +60,7 @@
     Category__c: 'Client'
     Object__c: 'Contact'
     Position__c: 'Client'
-    Group__c: 'Team'
+    GroupName__c: 'Team'
     ReadOnly__c: True
 
 - object: CategoryRule__c
@@ -69,7 +69,7 @@
     Category__c: 'Facilitator'
     Object__c: 'Contact'
     Position__c: 'Team Facilitator'
-    Group__c: 'Team'
+    GroupName__c: 'Team'
 
 - object: CategoryRule__c
   just_once: True
@@ -77,7 +77,7 @@
     Category__c: 'Facilitator'
     Object__c: 'Contact'
     Position__c: 'Team Facilitator Lead'
-    Group__c: 'Team'
+    GroupName__c: 'Team'
 
 - object: CategoryRule__c
   just_once: True
@@ -85,7 +85,7 @@
     Category__c: 'Puppy'
     Object__c: 'Contact'
     Position__c: 'Puppy Raiser'
-    Group__c: 'PuppyRaiser'
+    GroupName__c: 'PuppyRaiser'
 
 - object: CategoryRule__c
   just_once: True
@@ -107,4 +107,4 @@
     Category__c: 'Volunteer'
     Object__c: 'Contact'
     Position__c: 'Volunteer'
-    Group__c: 'Volunteer'
+    GroupName__c: 'Volunteer'

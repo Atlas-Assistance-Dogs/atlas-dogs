@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>ShareWithTeam__c</fullName>
+    <fullName>ShareTeam__c</fullName>
     <defaultValue>false</defaultValue>
     <description>Share this contact with users in the Team group</description>
     <externalId>false</externalId>

@@ -16,11 +16,11 @@ public with sharing class TestContactSharing    {
         marsha = getContactWithShares(marsha.Id);
         mike = getContactWithShares(mike.Id);
         carol = getContactWithShares(carol.Id);
-        // check ShareWithTeam
-        System.assert(cindy.ShareWithTeam__c);
-        System.assert(marsha.ShareWithTeam__c);
-        System.assert(mike.ShareWithTeam__c);
-        System.assert(carol.ShareWithTeam__c);
+        // check ShareTeam
+        System.assert(cindy.ShareTeam__c);
+        System.assert(marsha.ShareTeam__c);
+        System.assert(mike.ShareTeam__c);
+        System.assert(carol.ShareTeam__c);
     }
 
     @isTest
@@ -38,21 +38,21 @@ public with sharing class TestContactSharing    {
         marsha = getContactWithShares(marsha.Id);
         mike = getContactWithShares(mike.Id);
         carol = getContactWithShares(carol.Id);
-        // check ShareWithVolunteer
-        System.assert(cindy.ShareWithVolunteer__c);
-        System.assert(marsha.ShareWithVolunteer__c);
-        System.assert(mike.ShareWithVolunteer__c);
-        System.assert(carol.ShareWithVolunteer__c);
-        // check ShareWithTeam
-        System.assert(!cindy.ShareWithTeam__c);
-        System.assert(!marsha.ShareWithTeam__c);
-        System.assert(!mike.ShareWithTeam__c);
-        System.assert(!carol.ShareWithTeam__c);
+        // check ShareVolunteer
+        System.assert(cindy.ShareVolunteer__c);
+        System.assert(marsha.ShareVolunteer__c);
+        System.assert(mike.ShareVolunteer__c);
+        System.assert(carol.ShareVolunteer__c);
+        // check ShareTeam
+        System.assert(!cindy.ShareTeam__c);
+        System.assert(!marsha.ShareTeam__c);
+        System.assert(!mike.ShareTeam__c);
+        System.assert(!carol.ShareTeam__c);
     }
 
     private static Contact getContactWithShares(Id contactId) {
-        return [SELECT Id, ShareWithBoard__c, ShareWithPuppyRaiser__c, ShareWithStaff__c, ShareWithStandalonePrograms__c,
-        ShareWithTeam__c, ShareWithTrainer__c, ShareWithVolunteer__c
+        return [SELECT Id, ShareBoard__c, SharePuppyRaiser__c, ShareStaff__c, ShareStandalonePrograms__c,
+        ShareTeam__c, ShareTrainer__c, ShareVolunteer__c
         FROM Contact WHERE Id = :contactId];
     }
 

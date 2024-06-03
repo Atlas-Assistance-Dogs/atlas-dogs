@@ -81,22 +81,22 @@ trigger ContactTrigger on Contact (before insert, before update) {
         npe4__Relationship__c[] relationships = [
             SELECT
                 npe4__Contact__r.Positions__c,
-                npe4__Contact__r.ShareWithBoard__c,
-                npe4__Contact__r.ShareWithPuppyRaiser__c,
-                npe4__Contact__r.ShareWithStaff__c,
-                npe4__Contact__r.ShareWithStandalonePrograms__c,
-                npe4__Contact__r.ShareWithTeam__c,
-                npe4__Contact__r.ShareWithTrainer__c,
-                npe4__Contact__r.ShareWithVolunteer__c,
+                npe4__Contact__r.ShareBoard__c,
+                npe4__Contact__r.SharePuppyRaiser__c,
+                npe4__Contact__r.ShareStaff__c,
+                npe4__Contact__r.ShareStandalonePrograms__c,
+                npe4__Contact__r.ShareTeam__c,
+                npe4__Contact__r.ShareTrainer__c,
+                npe4__Contact__r.ShareVolunteer__c,
                 npe4__RelatedContact__c,
                 npe4__RelatedContact__r.Positions__c,
-                npe4__RelatedContact__r.ShareWithBoard__c,
-                npe4__RelatedContact__r.ShareWithPuppyRaiser__c,
-                npe4__RelatedContact__r.ShareWithStaff__c,
-                npe4__RelatedContact__r.ShareWithStandalonePrograms__c,
-                npe4__RelatedContact__r.ShareWithTeam__c,
-                npe4__RelatedContact__r.ShareWithTrainer__c,
-                npe4__RelatedContact__r.ShareWithVolunteer__c
+                npe4__RelatedContact__r.ShareBoard__c,
+                npe4__RelatedContact__r.SharePuppyRaiser__c,
+                npe4__RelatedContact__r.ShareStaff__c,
+                npe4__RelatedContact__r.ShareStandalonePrograms__c,
+                npe4__RelatedContact__r.ShareTeam__c,
+                npe4__RelatedContact__r.ShareTrainer__c,
+                npe4__RelatedContact__r.ShareVolunteer__c
             FROM npe4__Relationship__c
             WHERE
                 (npe4__Type__c LIKE '%Emergency Contact'
@@ -109,13 +109,13 @@ trigger ContactTrigger on Contact (before insert, before update) {
             Contact source = relationship.npe4__Contact__r;
             Contact relation = modifiedContacts.get(relationship.npe4__RelatedContact__c);
             if (relation != null) {
-                relation.ShareWithBoard__c = relation.ShareWithBoard__c || source.ShareWithBoard__c;
-                relation.ShareWithPuppyRaiser__c = relation.ShareWithPuppyRaiser__c || source.ShareWithPuppyRaiser__c;
-                relation.ShareWithStaff__c = relation.ShareWithStaff__c || source.ShareWithStaff__c;
-                relation.ShareWithStandalonePrograms__c = relation.ShareWithStandalonePrograms__c || source.ShareWithStandalonePrograms__c;
-                relation.ShareWithTeam__c = relation.ShareWithTeam__c || source.ShareWithTeam__c;
-                relation.ShareWithTrainer__c = relation.ShareWithTrainer__c || source.ShareWithTrainer__c;
-                relation.ShareWithVolunteer__c = relation.ShareWithVolunteer__c || source.ShareWithVolunteer__c;
+                relation.ShareBoard__c = relation.ShareBoard__c || source.ShareBoard__c;
+                relation.SharePuppyRaiser__c = relation.SharePuppyRaiser__c || source.SharePuppyRaiser__c;
+                relation.ShareStaff__c = relation.ShareStaff__c || source.ShareStaff__c;
+                relation.ShareStandalonePrograms__c = relation.ShareStandalonePrograms__c || source.ShareStandalonePrograms__c;
+                relation.ShareTeam__c = relation.ShareTeam__c || source.ShareTeam__c;
+                relation.ShareTrainer__c = relation.ShareTrainer__c || source.ShareTrainer__c;
+                relation.ShareVolunteer__c = relation.ShareVolunteer__c || source.ShareVolunteer__c;
             }
         }
     }
