@@ -44,6 +44,7 @@ public inherited sharing class ProgramAssignmentController {
             WHERE
                 Program__r.Name = :name
                 AND Status__c IN ('In Progress', 'Pending')
+            ORDER BY AssignedDate__c
         ];
 
         RelatedObjects related = new RelatedObjects();

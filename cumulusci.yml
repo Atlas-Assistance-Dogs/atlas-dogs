@@ -4,7 +4,7 @@ project:
     package:
         name: AtlasDogs
         namespace: atlas1
-        api_version: "56.0"
+        api_version: "60.0"
         install_class: "PostInstall"
     dependencies:
         - github: "https://github.com/SalesforceFoundation/NPSP"
@@ -42,16 +42,16 @@ flows:
     config_qa:
         steps:
             3:
-                task: assign_permission_sets
+                task: assign_permission_set_groups
                 options:
-                    api_names: Atlas_Super_User
+                    api_names: AtlasAll
 
     config_dev:
         steps:
             3:
                 task: assign_permission_sets
                 options:
-                    api_names: AtlasSuperUser
+                    api_names: AtlasBackgroundCheck,AtlasBoard,AtlasDemographics,AtlasFacilitator,AtlasPuppyRaiser,AtlasStaff,AtlasStandalone,AtlasTeam,AtlasTrainer,AtlasVolunteer
             4:
                 task: load_custom_settings
                 options: 
@@ -64,12 +64,6 @@ flows:
                 task: assign_permission_sets
                 options:
                     api_names: AtlasSuperUser
-
-    deploy_unmanaged:
-        steps:
-            3.1:
-                task: dx_push
-                when: project_config.project__source_format == "sfdx" and org_config.scratch
 
     # Flow to deploy current source to a sandbox for dev or verification
     sandbox:

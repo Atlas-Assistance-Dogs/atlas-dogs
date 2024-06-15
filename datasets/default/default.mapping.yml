@@ -61,9 +61,9 @@ Insert CategoryRule__c:
   table: CategoryRule__c
   fields:
   - Category__c
-  - Group__c
   - Object__c
   - Position__c
+  - Upload__c
 Insert Program__c:
   sf_object: Program__c
   table: Program__c
@@ -114,7 +114,8 @@ Insert Lead:
   - LastName
   lookups:
     npsp__Batch__c:
-      table: npsp__Batch__c
+      table:
+      - npsp__Batch__c
       key_field: npsp__Batch__c
 Insert GW_Volunteers__Volunteer_Job__c:
   sf_object: GW_Volunteers__Volunteer_Job__c
@@ -135,7 +136,8 @@ Insert GW_Volunteers__Volunteer_Job__c:
   - Name
   lookups:
     GW_Volunteers__Campaign__c:
-      table: Campaign
+      table:
+      - Campaign
       key_field: GW_Volunteers__Campaign__c
 Insert Account:
   sf_object: Account
@@ -196,11 +198,13 @@ Insert Account:
   - RecordTypeId
   lookups:
     npe01__One2OneContact__c:
-      table: Contact
+      table:
+      - Contact
       key_field: npe01__One2OneContact__c
       after: Insert Contact
     npsp__Batch__c:
-      table: npsp__Batch__c
+      table:
+      - npsp__Batch__c
       key_field: npsp__Batch__c
 Insert npsp__Address__c:
   sf_object: npsp__Address__c
@@ -239,7 +243,8 @@ Insert npsp__Address__c:
   - npsp__Verified__c
   lookups:
     npsp__Household_Account__c:
-      table: Account
+      table:
+      - Account
       key_field: npsp__Household_Account__c
 Insert Dog__c:
   sf_object: Dog__c
@@ -267,7 +272,8 @@ Insert Dog__c:
   - VaccineDueRabies__c
   lookups:
     VetClinic__c:
-      table: Account
+      table:
+      - Account
       key_field: VetClinic__c
 Insert Contact:
   sf_object: Contact
@@ -304,6 +310,7 @@ Insert Contact:
   - EmailInclusion__c
   - FacilitatorApplicationReceived__c
   - FacilitatorCertAgreementReceived__c
+  - FacilitatorFirstAidReceived__c
   - FacilitatorInfrNoticeReceived__c
   - FacilitatorInitialCertificationDate__c
   - FacilitatorPracticumReceived__c
@@ -339,13 +346,6 @@ Insert Contact:
   - PuppyReferenceReceived__c
   - RaceEthnicity__c
   - SexualOrientation__c
-  - ShareWithBoard__c
-  - ShareWithPuppyRaiser__c
-  - ShareWithStaff__c
-  - ShareWithStandalonePrograms__c
-  - ShareWithTeam__c
-  - ShareWithTrainer__c
-  - ShareWithVolunteer__c
   - ShirtSize__c
   - SpecifiedAbilityAccommodation__c
   - SpecifiedAbilityStatus__c
@@ -355,6 +355,7 @@ Insert Contact:
   - SpecifiedVeteranStatus__c
   - StaffAgreementReceived__c
   - StaffApplicationReceived__c
+  - StaffFirstAidReceived__c
   - StaffI9Received__c
   - StaffOfferReceived__c
   - StaffResumeReceived__c
@@ -376,7 +377,7 @@ Insert Contact:
   - TrainerProgAgreementReceived__c
   - TrainerSpecialties__c
   - TrainerStatus__c
-  - UpdateShareSettings__c
+  - UpdateForRelated__c
   - VeteranStatus__c
   - VolunteerAccess__c
   - VolunteerAgreementReceived__c
@@ -449,16 +450,20 @@ Insert Contact:
   - npsp__is_Address_Override__c
   lookups:
     npo02__Household__c:
-      table: npo02__Household__c
+      table:
+      - npo02__Household__c
       key_field: npo02__Household__c
     npsp__Batch__c:
-      table: npsp__Batch__c
+      table:
+      - npsp__Batch__c
       key_field: npsp__Batch__c
     npsp__Current_Address__c:
-      table: npsp__Address__c
+      table:
+      - npsp__Address__c
       key_field: npsp__Current_Address__c
     npsp__Primary_Affiliation__c:
-      table: Account
+      table:
+      - Account
       key_field: npsp__Primary_Affiliation__c
 Insert npe4__Relationship__c:
   sf_object: npe4__Relationship__c
@@ -471,14 +476,17 @@ Insert npe4__Relationship__c:
   - npsp__Related_Opportunity_Contact_Role__c
   lookups:
     npe4__Contact__c:
-      table: Contact
+      table:
+      - Contact
       key_field: npe4__Contact__c
     npe4__ReciprocalRelationship__c:
-      table: npe4__Relationship__c
+      table:
+      - npe4__Relationship__c
       key_field: npe4__ReciprocalRelationship__c
       after: Insert npe4__Relationship__c
     npe4__RelatedContact__c:
-      table: Contact
+      table:
+      - Contact
       key_field: npe4__RelatedContact__c
 Insert BackgroundCheck__c:
   sf_object: BackgroundCheck__c
@@ -490,7 +498,8 @@ Insert BackgroundCheck__c:
   - Type__c
   lookups:
     Contact__c:
-      table: Contact
+      table:
+      - Contact
       key_field: Contact__c
 Insert ContinuingEducationUnit__c:
   sf_object: ContinuingEducationUnit__c
@@ -510,7 +519,8 @@ Insert ContinuingEducationUnit__c:
   - Status__c
   lookups:
     Trainer__c:
-      table: Contact
+      table:
+      - Contact
       key_field: Trainer__c
 Insert DogRelationship__c:
   sf_object: DogRelationship__c
@@ -519,10 +529,12 @@ Insert DogRelationship__c:
   - Type__c
   lookups:
     Contact__c:
-      table: Contact
+      table:
+      - Contact
       key_field: Contact__c
     Dog__c:
-      table: Dog__c
+      table:
+      - Dog__c
       key_field: Dog__c
 Insert ProgramAssignment__c:
   sf_object: ProgramAssignment__c
@@ -535,10 +547,12 @@ Insert ProgramAssignment__c:
   - TeacherAssistantRequested__c
   lookups:
     Contact__c:
-      table: Contact
+      table:
+      - Contact
       key_field: Contact__c
     Program__c:
-      table: Program__c
+      table:
+      - Program__c
       key_field: Program__c
 Insert PuppyLog__c:
   sf_object: PuppyLog__c
@@ -549,10 +563,12 @@ Insert PuppyLog__c:
   - RequestSupportFromAtlas__c
   lookups:
     Dog__c:
-      table: Dog__c
+      table:
+      - Dog__c
       key_field: Dog__c
     Raiser__c:
-      table: Contact
+      table:
+      - Contact
       key_field: Raiser__c
 Insert Team__c:
   sf_object: Team__c
@@ -575,16 +591,20 @@ Insert Team__c:
   - PrimaryCertification__c
   - SecondaryCertification__c
   - Status__c
+  - TrainingStartDate__c
   - XrayReceived__c
   lookups:
     Client__c:
-      table: Contact
+      table:
+      - Contact
       key_field: Client__c
     Dog__c:
-      table: Dog__c
+      table:
+      - Dog__c
       key_field: Dog__c
     Handler__c:
-      table: Contact
+      table:
+      - Contact
       key_field: Handler__c
 Insert Log__c:
   sf_object: Log__c
@@ -605,13 +625,16 @@ Insert Log__c:
   - RecordTypeId
   lookups:
     Facilitator__c:
-      table: Contact
+      table:
+      - Contact
       key_field: Facilitator__c
     Submitter__c:
-      table: Contact
+      table:
+      - Contact
       key_field: Submitter__c
     Team__c:
-      table: Team__c
+      table:
+      - Team__c
       key_field: Team__c
 Insert PublicAccessTest__c:
   sf_object: PublicAccessTest__c
@@ -626,8 +649,10 @@ Insert PublicAccessTest__c:
   - ValidUntil__c
   lookups:
     Assessor__c:
-      table: Contact
+      table:
+      - Contact
       key_field: Assessor__c
     Team__c:
-      table: Team__c
+      table:
+      - Team__c
       key_field: Team__c

@@ -15,8 +15,6 @@
   nickname: Person
   include: positions
   fields:
-    #   AccountId:
-    #       reference: Household
       FirstName:
           fake: first_name
       LastName:
@@ -382,7 +380,7 @@
               - He/Him
               - She/Her
               - They/Them
-              - Prefer to self-describe
+              - Specify
               - Prefer not to answer
       PuppyRaiserStatus__c:
           if:

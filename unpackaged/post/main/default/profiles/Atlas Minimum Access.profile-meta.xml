@@ -297,10 +297,6 @@
         <apexClass>TestTeamTrigger</apexClass>
         <enabled>false</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>UserService</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
     <custom>true</custom>
     <description>Profile for Atlas users with minimum access</description>
     <fieldPermissions>
@@ -326,11 +322,6 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>CategoryRule__c.Category__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>CategoryRule__c.Group__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>

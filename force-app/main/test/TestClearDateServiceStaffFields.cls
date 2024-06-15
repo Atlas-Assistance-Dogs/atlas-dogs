@@ -42,6 +42,26 @@ public with sharing class TestClearDateServiceStaffFields {
     }
 
     @isTest
+    public static void clearDate_StaffFirstAid_SetsDateToNull() {
+        ContentVersion cv = new ContentVersion(Category__c = 'Staff', Type__c = 'FirstAid');
+        Contact record = new Contact(FirstName = 'Test', LastName = 'Contact', Email = 'abc@abc.com');
+        insert record;
+        ClearDateService.clear(cv, record.Id);
+
+        record = [
+            SELECT StaffFirstAidReceived__c
+            FROM Contact
+            WHERE Id = :record.Id
+            LIMIT 1
+        ];
+        system.assertEquals(
+            null,
+            record.StaffFirstAidReceived__c,
+            'StaffFirstAidReceived__c not cleared'
+        );
+    }
+
+    @isTest
     public static void clearDate_StaffI9_SetsDateToNull() {
         ContentVersion cv = new ContentVersion(Category__c = 'Staff', Type__c = 'I9');
         Contact record = new Contact(FirstName = 'Test', LastName = 'Contact', Email = 'abc@abc.com');

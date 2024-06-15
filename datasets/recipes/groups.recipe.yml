@@ -4,13 +4,16 @@
 # cci task run generate_and_load_from_yaml -o generator_yaml datasets/recipes/groups.recipe.yml --org qa
 
 - object: Group
+  just_once: True
   fields:
       Name: Volunteer
 
 - object: Group
+  just_once: True
   fields:
       Name: All
 
 - object: Group
+  just_once: True
   fields:
       Name: Team

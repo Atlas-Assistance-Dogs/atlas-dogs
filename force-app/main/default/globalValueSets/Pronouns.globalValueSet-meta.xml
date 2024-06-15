@@ -16,7 +16,7 @@
         <label>She/Her</label>
     </customValue>
     <customValue>
-        <fullName>Prefer to self-describe</fullName>
+        <fullName>Specify</fullName>
         <default>false</default>
         <label>Prefer to self-describe</label>
     </customValue>

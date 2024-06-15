@@ -4,6 +4,7 @@
     Category__c: 'Dog'
     Object__c: 'Dog'
     Group__c: 'Team'
+    Upload__c: True
 
 - object: CategoryRule__c
   just_once: True
@@ -11,6 +12,7 @@
     Category__c: 'Client'
     Object__c: 'Team'
     Group__c: 'Team'
+    Upload__c: True
 
 - object: CategoryRule__c
   just_once: True
@@ -18,6 +20,7 @@
     Category__c: 'TeamDog'
     Object__c: 'Team'
     Group__c: 'Team'
+    Upload__c: True
 
 - object: CategoryRule__c
   just_once: True
@@ -29,9 +32,17 @@
 - object: CategoryRule__c
   just_once: True
   fields:
+    Category__c: 'Na'
+    Object__c: 'Contact'
+    Upload__c: True
+
+- object: CategoryRule__c
+  just_once: True
+  fields:
     Category__c: 'Standalone'
     Object__c: 'Contact'
     Group__c: 'All'
+    Upload__c: True
 
 - object: CategoryRule__c
   just_once: True
@@ -40,6 +51,7 @@
     Object__c: 'Contact'
     Position__c: 'Board Member'
     Group__c: 'Board'
+    Upload__c: True
 
 - object: CategoryRule__c
   just_once: True
@@ -72,6 +84,7 @@
     Object__c: 'Contact'
     Position__c: 'Puppy Raiser'
     Group__c: 'PuppyRaiser'
+    Upload__c: True
 
 - object: CategoryRule__c
   just_once: True
@@ -79,7 +92,8 @@
     Category__c: 'Staff'
     Object__c: 'Contact'
     Position__c: 'Staff'
-    Group__c: 'All'
+    Group__c: 'Staff'
+    Upload__c: True
 
 - object: CategoryRule__c
   just_once: True
@@ -87,7 +101,8 @@
     Category__c: 'Trainer'
     Object__c: 'Contact'
     Position__c: 'Trainer'
-    Group__c: 'All'
+    Group__c: 'Trainer'
+    Upload__c: True
 
 - object: CategoryRule__c
   just_once: True
@@ -96,3 +111,4 @@
     Object__c: 'Contact'
     Position__c: 'Volunteer'
     Group__c: 'Volunteer'
+    Upload__c: True

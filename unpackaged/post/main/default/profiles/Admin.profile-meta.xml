@@ -297,10 +297,6 @@
         <apexClass>TestTeamTrigger</apexClass>
         <enabled>true</enabled>
     </classAccesses>
-    <classAccesses>
-        <apexClass>UserService</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
     <custom>false</custom>
     <fieldPermissions>
         <editable>true</editable>
@@ -325,11 +321,6 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>CategoryRule__c.Category__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>CategoryRule__c.Group__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

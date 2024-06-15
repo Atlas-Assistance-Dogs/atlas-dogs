@@ -5,16 +5,11 @@
             "default": true
         },
         {
-            "path": "scratch-config",
-            "default": false
-        },
-        {
             "path": "unpackaged/pre",
             "default": false
         }
     ],
     "namespace": "atlas1",
     "sfdcLoginUrl": "https://login.salesforce.com",
-    "sourceApiVersion": "58.0",
-    "pushPackageDirectoriesSequentially": true
+    "sourceApiVersion": "58.0"
 }
