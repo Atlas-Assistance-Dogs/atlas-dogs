@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TrainerInitialCertificationDate__c</fullName>
+    <description>Date that the Trainer was first certified.</description>
+    <externalId>false</externalId>
+    <label>Trainer Initial Certification Date</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Date</type>
+</CustomField>

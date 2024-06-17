@@ -205,9 +205,10 @@ public with sharing class FileService {
             SELECT Id,
                 ADSiMApplicationReceived__c, ADSiMPreApplicationReceived__c, ADSiMProgAgreementReceived__c,
 				BoardAgreementReceived__c, BoardApplicationReceived__c, BoardCoIReceived__c, BoardResumeReceived__c, BoardToNReceived__c,
-				FacilitatorApplicationReceived__c, FacilitatorCertAgreementReceived__c, FacilitatorInfrNoticeReceived__c, FacilitatorPracticumReceived__c, FacilitatorProgAgreementReceived__c, FacilitatorReferenceReceived__c,
+				FacilitatorApplicationReceived__c, FacilitatorCertAgreementReceived__c, FacilitatorFirstAidReceived__c, FacilitatorInfrNoticeReceived__c, FacilitatorPracticumReceived__c, FacilitatorProgAgreementReceived__c, FacilitatorReferenceReceived__c,
 				PuppyApplicationReceived__c, PuppyCertAgreementReceived__c, PuppyContractReceived__c, PuppyInfrNoticeReceived__c, PuppyProgAgreementReceived__c, PuppyReferenceReceived__c,
-				StaffAgreementReceived__c, StaffApplicationReceived__c, StaffI9Received__c, StaffOfferReceived__c, StaffResumeReceived__c, StaffW4Received__c, StaffW9Received__c,
+				StaffAgreementReceived__c, StaffApplicationReceived__c, StaffFirstAidReceived__c, StaffI9Received__c, StaffOfferReceived__c, StaffResumeReceived__c, StaffW4Received__c, StaffW9Received__c,
+				StandaloneApplicationReceived__c, StandaloneProgAgreementReceived__c,
 				TrainerApplicationReceived__c, TrainerCertAgreementReceived__c, TrainerClientReferenceReceived__c, TrainerInfrNoticeReceived__c, TrainerProfReferenceReceived__c, TrainerProgAgreementReceived__c,
 				VolunteerAgreementReceived__c, VolunteerApplicationReceived__c, VolunteerResumeReceived__c,
 				ContactFormReceived__c
@@ -245,6 +246,10 @@ public with sharing class FileService {
         
             if (cv.Category__c == 'Staff') {
                 updateStaffDate(cv, contact);
+            }
+        
+            if (cv.Category__c == 'Standalone') {
+                updateStandaloneDate(cv, contact);
             }
         
             if (cv.Category__c == 'Trainer') {
@@ -313,6 +318,10 @@ public with sharing class FileService {
             contact.FacilitatorCertAgreementReceived__c = cv.Date__c;
         }
 
+        if (cv.Type__c == 'FirstAid' && isLater(contact.FacilitatorFirstAidReceived__c, cv.Date__c)) {
+            contact.FacilitatorFirstAidReceived__c = cv.Date__c;
+        }
+
         if (cv.Type__c == 'InfrNotice' && isLater(contact.FacilitatorInfrNoticeReceived__c, cv.Date__c)) {
             contact.FacilitatorInfrNoticeReceived__c = cv.Date__c;
         }
@@ -369,6 +378,10 @@ public with sharing class FileService {
             contact.StaffApplicationReceived__c = cv.Date__c;
         }
 
+        if (cv.Type__c == 'FirstAid' && isLater(contact.StaffFirstAidReceived__c, cv.Date__c)) {
+            contact.StaffFirstAidReceived__c = cv.Date__c;
+        }
+
         if (cv.Type__c == 'I9' && isLater(contact.StaffI9Received__c, cv.Date__c)) {
             contact.StaffI9Received__c = cv.Date__c;
         }
@@ -387,6 +400,18 @@ public with sharing class FileService {
 
         if (cv.Type__c == 'W9' && isLater(contact.StaffW9Received__c, cv.Date__c)) {
             contact.StaffW9Received__c = cv.Date__c;
+        }
+    }
+
+    // Update the last date when the category is Standalone
+    private static void updateStandaloneDate(ContentVersion cv, Contact contact) {
+
+        if (cv.Type__c == 'Application' && isLater(contact.StandaloneApplicationReceived__c, cv.Date__c)) {
+            contact.StandaloneApplicationReceived__c = cv.Date__c;
+        }
+
+        if (cv.Type__c == 'ProgAgreement' && isLater(contact.StandaloneProgAgreementReceived__c, cv.Date__c)) {
+            contact.StandaloneProgAgreementReceived__c = cv.Date__c;
         }
     }
 
@@ -443,8 +468,8 @@ public with sharing class FileService {
         }
         List<Team__c> teams = [
             SELECT Id, Client__c, Dog__c,
-                   ClientApplicationReceived__c, ClientApplicationVideoReceived__c, ClientCGCFormReceived__c, ClientCertAgreementReceived__c, ClientLOMIReceived__c, ClientPreApplicationReceived__c, ClientProgAgreementReceived__c, ClientSurveyReceived__c, ClientVAPWReceived__c,
-				   HealthFormReceived__c, XrayReceived__c
+                    ClientApplicationReceived__c, ClientApplicationVideoReceived__c, ClientCGCFormReceived__c, ClientCertAgreementReceived__c, ClientLOMIReceived__c, ClientPreApplicationReceived__c, ClientProgAgreementReceived__c, ClientSurveyReceived__c, ClientVAPWReceived__c,
+					HealthFormReceived__c, XrayReceived__c
             FROM Team__c
             WHERE Id = :recordId
         ];

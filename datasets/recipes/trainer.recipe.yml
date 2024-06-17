@@ -9,18 +9,18 @@
 #- include_file: standard_objs.recipe.yml
 - include_file: common.recipe.yml
 
-- object: Account
-  nickname: Household
-  fields:
-      name: The Household
-      RecordType: HH_Account
+# - object: Account
+#   nickname: Household
+#   fields:
+#       name: The Household
+#       RecordType: HH_Account
 
 - object: Contact
   nickname: Trainer
   include: positions
   fields:
-      AccountId:
-          reference: Household
+    #   AccountId:
+    #       reference: Household
       FirstName:
           fake: first_name
       LastName:
@@ -178,7 +178,7 @@
               - He/Him
               - She/Her
               - They/Them
-              - Prefer to self-describe
+              - Specify
               - Prefer not to answer
       ShirtSize__c:
           random_choice:
@@ -266,8 +266,8 @@
       npe4__RelatedContact__c:
           - object: Contact
             fields:
-                AccountId:
-                    reference: Household
+                # AccountId:
+                #     reference: Household
                 FirstName:
                     fake: last_name
                 LastName:
@@ -312,8 +312,8 @@
       npe4__RelatedContact__c:
           - object: Contact
             fields:
-                AccountId:
-                    reference: Household
+                # AccountId:
+                #     reference: Household
                 FirstName:
                     fake: last_name
                 LastName:

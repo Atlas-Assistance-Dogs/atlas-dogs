@@ -5,8 +5,9 @@ public with sharing class ContactService {
         string contact = newContact.Contact__c;
         if (contact == 'Home' && !string.isBlank(newContact.Email)) {
             newContact.npe01__HomeEmail__c = newContact.Email;
-        }
-        else if (contact == 'Alternate' && !string.isBlank(newContact.Email)) {
+        } else if (
+            contact == 'Alternate' && !string.isBlank(newContact.Email)
+        ) {
             newContact.npe01__AlternateEmail__c = newContact.Email;
         }
         return newContact;
@@ -16,8 +17,9 @@ public with sharing class ContactService {
         string contact = newContact.Contact__c;
         if (contact == 'Home' && !string.isBlank(newContact.Phone)) {
             newContact.HomePhone = newContact.Phone;
-        }
-        else if (contact == 'Alternate' && !string.isBlank(newContact.Phone)) {
+        } else if (
+            contact == 'Alternate' && !string.isBlank(newContact.Phone)
+        ) {
             newContact.OtherPhone = newContact.Phone;
         }
         return newContact;
@@ -30,18 +32,22 @@ public with sharing class ContactService {
             if (!string.isBlank(newContact.npe01__HomeEmail__c)) {
                 newContact.Email = newContact.npe01__HomeEmail__c;
             }
-        }
-        else if (contact == 'Alternate') {
+        } else if (contact == 'Alternate') {
             if (!string.isBlank(newContact.npe01__AlternateEmail__c)) {
                 newContact.Email = newContact.npe01__AlternateEmail__c;
             }
-        }
-        else {
+        } else {
             // see if the type matches a relationship type
             List<npe4__Relationship__c> related = [
-                SELECT Id, npe4__RelatedContact__c, npe4__RelatedContact__r.Email
+                SELECT
+                    Id,
+                    npe4__RelatedContact__c,
+                    npe4__RelatedContact__r.Email
                 FROM npe4__Relationship__c
-                WHERE npe4__Type__c = :contact AND npe4__Contact__c = :newContact.Id AND npe4__Status__c = 'Current'
+                WHERE
+                    npe4__Type__c = :contact
+                    AND npe4__Contact__c = :newContact.Id
+                    AND npe4__Status__c = 'Current'
             ];
             if (!related.isEmpty()) {
                 // use the first Contact that matches
@@ -55,24 +61,28 @@ public with sharing class ContactService {
     }
 
     // Update the Contact's phone based on the current value from ContactAt
-	public static Contact updatePhone(Contact newContact){
+    public static Contact updatePhone(Contact newContact) {
         string contact = newContact.Contact__c;
         if (contact == 'Home') {
             if (!string.isBlank(newContact.HomePhone)) {
                 newContact.Phone = newContact.HomePhone;
             }
-        }
-        else if (contact == 'Alternate') {
+        } else if (contact == 'Alternate') {
             if (!string.isBlank(newContact.OtherPhone)) {
                 newContact.Phone = newContact.OtherPhone;
             }
-        }
-        else {
+        } else {
             // see if the type matches a relationship type
             List<npe4__Relationship__c> related = [
-                SELECT Id, npe4__RelatedContact__c, npe4__RelatedContact__r.Phone
+                SELECT
+                    Id,
+                    npe4__RelatedContact__c,
+                    npe4__RelatedContact__r.Phone
                 FROM npe4__Relationship__c
-                WHERE npe4__Type__c = :contact AND npe4__Contact__c = :newContact.Id AND npe4__Status__c = 'Current'
+                WHERE
+                    npe4__Type__c = :contact
+                    AND npe4__Contact__c = :newContact.Id
+                    AND npe4__Status__c = 'Current'
             ];
             if (!related.isEmpty()) {
                 // use the first Contact that matches
@@ -83,20 +93,35 @@ public with sharing class ContactService {
             }
         }
         return newContact;
-	}
+    }
 
     // Update the email of a related contact
-    public static void updateRelatedContactEmailPhone(Contact current, Boolean changedEmail, Boolean changedPhone) {
-        System.debug(current.Id);
+    public static void updateRelatedContactEmailPhone(
+        Contact current,
+        Boolean changedEmail,
+        Boolean changedPhone
+    ) {
         List<npe4__Relationship__c> related = [
-            SELECT Id, npe4__Contact__c, npe4__Type__c, npe4__RelatedContact__c, npe4__Contact__r.Email, npe4__RelatedContact__r.Phone, npe4__Contact__r.Contact__c
+            SELECT
+                Id,
+                npe4__Contact__c,
+                npe4__Type__c,
+                npe4__RelatedContact__c,
+                npe4__Contact__r.Email,
+                npe4__RelatedContact__r.Phone,
+                npe4__Contact__r.Contact__c
             FROM npe4__Relationship__c
-            WHERE npe4__RelatedContact__c = :current.Id AND npe4__Status__c = 'Current'
+            WHERE
+                npe4__RelatedContact__c = :current.Id
+                AND npe4__Status__c = 'Current'
         ];
         if (!related.isEmpty()) {
             List<Contact> contacts = new List<Contact>();
             for (npe4__Relationship__c relationship : related) {
-                if (relationship.npe4__Contact__r.Contact__c == relationship.npe4__Type__c) {
+                if (
+                    relationship.npe4__Contact__r.Contact__c ==
+                    relationship.npe4__Type__c
+                ) {
                     if (changedEmail) {
                         relationship.npe4__Contact__r.Email = current.Email;
                     }

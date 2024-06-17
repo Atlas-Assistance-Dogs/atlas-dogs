@@ -5,6 +5,7 @@ import getRelatedTeams from "@salesforce/apex/TeamController.getRelatedTeams";
 import { deleteRecord } from 'lightning/uiRecordApi';
 import { refreshApex } from "@salesforce/apex";
 
+import TEAM_OBJECT from "@salesforce/schema/Team__c";
 import CERTIFICATION_FIELD from "@salesforce/schema/Team__c.PrimaryCertification__c";
 import DATE_FIELD from "@salesforce/schema/Team__c.PatValidUntil__c";
 import DOG_FIELD from "@salesforce/schema/Team__c.Dog__c";
@@ -68,6 +69,7 @@ export default class RelatedTeams extends NavigationMixin(LightningElement) {
     @api objectApiName;
     @api viewAll;
     columns = COLS;
+    relatedObject = TEAM_OBJECT;
     data = [];
     total = 0;
     defaultSortDirection = "asc";

@@ -16,32 +16,32 @@
       npsp__Day_Of_Month__c: 30
       npe03__Contact__c:
           reference: Contact
-      npe03__Recurring_Donation_Campaign__c:
-          reference: Campaign
+    #   npe03__Recurring_Donation_Campaign__c:
+    #       reference: Campaign
 
-- object: Account
-  nickname: Household
-  fields:
-      name: The Household
-      RecordType: HH_Account
+# - object: Account
+#   nickname: Household
+#   fields:
+#       name: The Household
+#       RecordType: HH_Account
 
-- object: Account
-  nickname: Organization
-  fields:
-      name:
-          fake: company
-      RecordType: Organization
+# - object: Account
+#   nickname: Organization
+#   fields:
+#       name:
+#           fake: company
+#       RecordType: Organization
 
-- object: npsp__Address__c
-  fields:
-      npsp__MailingStreet__c:
-          fake: street_address
-      npsp__MailingCity__c:
-          fake: city
-      npsp__MailingPostalCode__c:
-          fake: postcode
-      npsp__MailingState__c:
-          fake: state
-      npsp__Address_Type__c: Home
-      npsp__Household_Account__c:
-          reference: Household
+# - object: npsp__Address__c
+#   fields:
+#       npsp__MailingStreet__c:
+#           fake: street_address
+#       npsp__MailingCity__c:
+#           fake: city
+#       npsp__MailingPostalCode__c:
+#           fake: postcode
+#       npsp__MailingState__c:
+#           fake: state
+#       npsp__Address_Type__c: Home
+#       npsp__Household_Account__c:
+#           reference: Household

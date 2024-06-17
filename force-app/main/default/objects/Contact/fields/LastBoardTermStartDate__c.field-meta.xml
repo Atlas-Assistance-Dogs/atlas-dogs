@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>LastBoardTermStartDate__c</fullName>
-    <defaultValue>Today()</defaultValue>
     <description>Board member&apos;s start date for their most recent term</description>
     <externalId>false</externalId>
     <label>Last Board Term Start Date</label>

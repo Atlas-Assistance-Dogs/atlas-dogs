@@ -11,12 +11,15 @@ global class PostInstall implements InstallHandler {
                 combineDogVaccineFields();
                 linkTeamLogs();
                 moveSystemAccess();
-                linkTeamDocuments();                
+                linkTeamDocuments();
             } catch (Exception e) {
                 send(
                     context.installerId(),
                     'Installation Failure' + context.organizationId(),
-                    ' e: ' + e.getMessage() + ' stack trace ' + e.getStackTraceString()
+                    ' e: ' +
+                        e.getMessage() +
+                        ' stack trace ' +
+                        e.getStackTraceString()
                 );
             }
         }
@@ -72,12 +75,17 @@ global class PostInstall implements InstallHandler {
         List<Id> teamIds = new List<Id>();
         for (Team__c team : teams) {
             teamIds.add(team.Id);
-            List<ContentVersion> clientDocs = getEntityDocs(team.Client__c, 'Client');
+            List<ContentVersion> clientDocs = getEntityDocs(
+                team.Client__c,
+                'Client'
+            );
             for (ContentVersion cv : clientDocs) {
-                links.add(new ContentDocumentLink(
-                    ContentDocumentId = cv.ContentDocumentId,
-                    LinkedEntityId = team.Id
-                ));
+                links.add(
+                    new ContentDocumentLink(
+                        ContentDocumentId = cv.ContentDocumentId,
+                        LinkedEntityId = team.Id
+                    )
+                );
             }
 
             List<ContentVersion> dogDocs = getEntityDocs(team.Dog__c, 'Dog');
@@ -85,10 +93,12 @@ global class PostInstall implements InstallHandler {
                 if (cv.Type__c == 'VacExams') {
                     continue;
                 }
-                links.add(new ContentDocumentLink(
-                    ContentDocumentId = cv.ContentDocumentId,
-                    LinkedEntityId = team.Id
-                ));
+                links.add(
+                    new ContentDocumentLink(
+                        ContentDocumentId = cv.ContentDocumentId,
+                        LinkedEntityId = team.Id
+                    )
+                );
             }
         }
 
@@ -105,10 +115,14 @@ global class PostInstall implements InstallHandler {
             WHERE LinkedEntityId = :id
         ];
         List<Id> docIds = new List<Id>();
-        for (ContentDocumentLink cdl: cdls) {
+        for (ContentDocumentLink cdl : cdls) {
             docIds.add(cdl.ContentDocumentId);
         }
-        List<ContentVersion> cvs = [SELECT Id, ContentDocumentId, Category__c, Type__c FROM ContentVersion WHERE ContentDocumentId IN :docIds AND Category__c = :category];
+        List<ContentVersion> cvs = [
+            SELECT Id, ContentDocumentId, Category__c, Type__c
+            FROM ContentVersion
+            WHERE ContentDocumentId IN :docIds AND Category__c = :category
+        ];
 
         return cvs;
     }
@@ -149,35 +163,44 @@ global class PostInstall implements InstallHandler {
     }
 
     public static void send(Id userId, String subject, String htmlBody) {
-        List<User> users = [SELECT Name, FirstName, LastName, UserName, Email FROM User WHERE Id = :userId ];
+        List<User> users = [
+            SELECT Name, FirstName, LastName, UserName, Email
+            FROM User
+            WHERE Id = :userId
+        ];
         User u = users.size() > 0 ? users[0] : new User(Id = userId);
         sendEmail(
-            new List<String>{u.Email, 'deborahe@atlasdog.org'}, // <= replace with your default email
+            new List<String>{ u.Email, 'deborahe@atlasdog.org' }, // <= replace with your default email
             subject,
             htmlBody,
             new Map<String, Blob>()
         );
     }
 
-    public static Boolean sendEmail(List<String> recipients, String subject, String htmlBody, Map<String, Blob> attachments) {
+    public static Boolean sendEmail(
+        List<String> recipients,
+        String subject,
+        String htmlBody,
+        Map<String, Blob> attachments
+    ) {
         Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
         mail.setToAddresses(recipients);
         mail.setSubject(subject);
         mail.setHtmlBody(htmlBody);
-        List<Messaging.EmailFileAttachment> attachmentsList = new List<Messaging.EmailFileAttachment>();        
-        for (String fileName: attachments.keySet()) {
+        List<Messaging.EmailFileAttachment> attachmentsList = new List<Messaging.EmailFileAttachment>();
+        for (String fileName : attachments.keySet()) {
             Messaging.EmailFileAttachment attachment = new Messaging.EmailFileAttachment();
             attachment.setFileName(fileName);
             attachment.setBody(attachments.get(fileName));
             attachmentsList.add(attachment);
         }
         mail.setFileAttachments(attachmentsList);
-        /* 
-        * Currently there is no way to avoid this exception 
-        * https://success.salesforce.com/ideaView?id=08730000000cHBEAA2
-        */
+        /*
+         * Currently there is no way to avoid this exception
+         * https://success.salesforce.com/ideaView?id=08730000000cHBEAA2
+         */
         try {
-            Messaging.sendEmail(new Messaging.SingleEmailMessage[]{mail});
+            Messaging.sendEmail(new List<Messaging.SingleEmailMessage>{ mail });
             return true;
         } catch (EmailException e) {
             //emailInvocationFailures++;
@@ -186,10 +209,17 @@ global class PostInstall implements InstallHandler {
     }
 
     private void setBackgroundCheckTypes() {
-        List<BackgroundCheck__c> checks = [SELECT Id, Type__c FROM BackgroundCheck__c];
+        List<BackgroundCheck__c> checks = [
+            SELECT Id, Type__c
+            FROM BackgroundCheck__c
+        ];
         for (BackgroundCheck__c check : checks) {
             check.Type__c = 'Criminal';
         }
         update checks;
+    }
+    // This needs to remain since it was released in 1.6, sigh
+    global static void setSharingFields() {
+        System.debug('nothing to do here');
     }
 }

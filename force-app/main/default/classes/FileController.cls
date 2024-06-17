@@ -1,6 +1,6 @@
-public inherited sharing class FileController {
+global inherited sharing class FileController {
     @AuraEnabled
-    public static void updateRecords(
+    global static void updateRecords(
         String category,
         String docType,
         Date docDate,
@@ -29,24 +29,32 @@ public inherited sharing class FileController {
     // Delete the link if there is more than one CDL for the document,
     // Otherwise, delete the document
     @AuraEnabled
-    public static void deleteLink(ContentDocumentLink cdl) {
+    global static void deleteLink(ContentDocumentLink cdl) {
         if (cdl == null) {
             throw new AuraHandledException('cdl must be non-null');
         }
         try {
-            Integer count = [SELECT COUNT() FROM ContentDocumentLink WHERE ContentDocumentId = :cdl.ContentDocumentId];
+            Integer count = [
+                SELECT COUNT()
+                FROM ContentDocumentLink
+                WHERE ContentDocumentId = :cdl.ContentDocumentId
+            ];
             if (count > 1) {
                 delete cdl;
                 return;
             }
-            delete [SELECT Id FROM ContentDocument WHERE Id = :cdl.ContentDocumentId];
+            delete [
+                SELECT Id
+                FROM ContentDocument
+                WHERE Id = :cdl.ContentDocumentId
+            ];
         } catch (DmlException ex) {
             throw new AuraHandledException(ex.getMessage());
         }
     }
 
     @AuraEnabled
-    public static void updateContentVersion(
+    global static void updateContentVersion(
         String category,
         String docType,
         Date docDate,
@@ -73,7 +81,7 @@ public inherited sharing class FileController {
     }
 
     @AuraEnabled(cacheable=true)
-    public static RelatedObjects getRelatedFiles(Id recordId, Integer max) {
+    global static RelatedObjects getRelatedFiles(Id recordId, Integer max) {
         if (max == null) {
             max = 6;
         }
@@ -99,17 +107,18 @@ public inherited sharing class FileController {
             RelatedObjects related = new RelatedObjects();
 
             // get a map of the category and type labels
-            Map<string, string> categoryEntries = getEntryMap(ContentVersion.Category__c.getDescribe());
-            Map<string, string> typeEntries = getEntryMap(ContentVersion.Type__c.getDescribe());
+            Map<string, string> categoryEntries = getEntryMap(
+                ContentVersion.Category__c.getDescribe()
+            );
+            Map<string, string> typeEntries = getEntryMap(
+                ContentVersion.Type__c.getDescribe()
+            );
             List<ContentVersion> files = [
-                SELECT
-                    Title,
-                    ContentDocumentId,
-                    Category__c,
-                    Type__c,
-                    Date__c
+                SELECT Title, ContentDocumentId, Category__c, Type__c, Date__c
                 FROM ContentVersion
-                WHERE ContentDocumentId IN :lstConDocs AND FileType != 'SNOTE'
+                WHERE
+                    ContentDocumentId IN :lstConDocs
+                    AND FileType != 'SNOTE'
                 ORDER BY Date__c DESC
                 LIMIT :max
             ];
@@ -121,14 +130,22 @@ public inherited sharing class FileController {
                 info.type = typeEntries.get(cv.Type__c);
                 related.items.add(info);
             }
-            related.total = [SELECT Count() FROM ContentVersion WHERE ContentDocumentId IN :lstConDocs AND FileType != 'SNOTE'];
+            related.total = [
+                SELECT COUNT()
+                FROM ContentVersion
+                WHERE
+                    ContentDocumentId IN :lstConDocs
+                    AND FileType != 'SNOTE'
+            ];
             return related;
         } else {
             return new RelatedObjects();
         }
     }
 
-    public static Map<string, string> getEntryMap(Schema.DescribeFieldResult field) {
+    global static Map<string, string> getEntryMap(
+        Schema.DescribeFieldResult field
+    ) {
         List<Schema.PicklistEntry> entries = field.getPicklistValues();
         Map<string, string> entryMap = new Map<string, string>();
         for (Schema.PicklistEntry entry : entries) {
@@ -138,7 +155,11 @@ public inherited sharing class FileController {
     }
 
     @AuraEnabled
-    public static ContentVersion relateFile(Id documentId, Id recordId, Date docDate) {
+    global static ContentVersion relateFile(
+        Id documentId,
+        Id recordId,
+        Date docDate
+    ) {
         try {
             ContentDocumentLink link = new ContentDocumentLink(
                 ContentDocumentId = documentId,
@@ -169,7 +190,7 @@ public inherited sharing class FileController {
     }
 
     @AuraEnabled
-    public static void relateFiles(List<Id> documentIds, Id recordId) {
+    global static void relateFiles(List<Id> documentIds, Id recordId) {
         try {
             List<ContentDocumentLink> links = new List<ContentDocumentLink>();
             for (Id documentId : documentIds) {

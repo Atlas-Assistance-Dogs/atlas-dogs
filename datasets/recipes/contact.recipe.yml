@@ -15,8 +15,6 @@
   nickname: Person
   include: positions
   fields:
-      AccountId:
-          reference: Household
       FirstName:
           fake: first_name
       LastName:
@@ -99,8 +97,8 @@
               - All Individual Contacts
               - All New or Edited Contacts
               - No Contacts
-      npsp__Current_Address__c:
-          reference: npsp__Address__c
+    #   npsp__Current_Address__c:
+    #       reference: npsp__Address__c
       npsp__First_Soft_Credit_Amount__c:
           random_number:
               min: 1
@@ -221,7 +219,7 @@
           fake: catch_phrase
       AssistantName:
           fake: name
-      npe4__Contact__c:
+      Contact__c:
           random_choice:
              Home: 80%
              Alternate: 10%
@@ -382,7 +380,7 @@
               - He/Him
               - She/Her
               - They/Them
-              - Prefer to self-describe
+              - Specify
               - Prefer not to answer
       PuppyRaiserStatus__c:
           if:
@@ -530,8 +528,8 @@
       npe4__RelatedContact__c:
           - object: Contact
             fields:
-                AccountId:
-                    reference: Household
+                # AccountId:
+                #     reference: Household
                 FirstName:
                     fake: last_name
                 LastName:
@@ -576,8 +574,8 @@
       npe4__RelatedContact__c:
           - object: Contact
             fields:
-                AccountId:
-                    reference: Household
+                # AccountId:
+                #     reference: Household
                 FirstName:
                     fake: last_name
                 LastName:

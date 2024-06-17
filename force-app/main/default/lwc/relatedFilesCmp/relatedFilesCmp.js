@@ -49,6 +49,7 @@ export default class RelatedFiles extends NavigationMixin(LightningElement) {
     @api recordId;
     @api viewAll;
     columns = COLS;
+    relatedObject = CV_OBJECT;
     @track data;
     total = 0;
     @track filterItems = [

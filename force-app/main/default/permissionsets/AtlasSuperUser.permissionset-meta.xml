@@ -37,6 +37,10 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>PositionStatusController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>ProgramAssignmentController</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -72,12 +76,12 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>BackgroundCheck__c.Notes__c</field>
+        <field>CategoryRule__c.Category__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>BackgroundCheck__c.Status__c</field>
+        <field>CategoryRule__c.Position__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -182,6 +186,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Contact.ClientFacilitatorAvailability__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Contact.ClientMedicalDevices__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -208,6 +217,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Contact.DateStarted__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Contact.EmailInclusion__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -302,6 +316,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Contact.GenderIdentity</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Contact.GenderIdentity__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -323,6 +342,11 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Contact.IsStaff__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Contact.IsStandalone__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -393,6 +417,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Contact.Pronoun__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Contact.Pronouns</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -517,7 +546,27 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Contact.StandaloneApplicationReceived__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Contact.StandaloneProgAgreementReceived__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Contact.StandaloneStatus__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Contact.SystemAccess__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Contact.TextMessagesApproved__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -1002,6 +1051,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Team__c.TrainingStartDate__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Team__c.XrayReceived__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -1018,7 +1072,7 @@
         <allowEdit>true</allowEdit>
         <allowRead>true</allowRead>
         <modifyAllRecords>true</modifyAllRecords>
-        <object>BackgroundCheck__c</object>
+        <object>CategoryRule__c</object>
         <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
     <objectPermissions>
@@ -1128,7 +1182,7 @@
         <visible>true</visible>
     </recordTypeVisibilities>
     <tabSettings>
-        <tab>BackgroundCheck__c</tab>
+        <tab>CategoryRule__c</tab>
         <visibility>Visible</visibility>
     </tabSettings>
     <tabSettings>

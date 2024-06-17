@@ -387,10 +387,14 @@ public with sharing class TestFileController {
         System.assertEquals(0, related.total);
     }
 
-    @isTest
-    public static void getRelatedFiles_ReturnsRelatedRecords() {
-        Dog__c ace = new Dog__c(Name = 'Ace');
-        insert ace;
+    // This method is used to setup the getRelatedFilesWith... tests.  The file records have categories
+    // of Board, Staff, and Volunteer.
+    private static RelatedObjects getRelatedFilesWithGroups(string[] groups) {
+        TestUtilities.insertCategoryRules();
+
+        Contact rowan = new Contact(FirstName = 'Rowan', LastName = 'Engelmeyer-Davis', email='rowan@test.com',
+            Positions__c='Client;Volunteer;Staff;Board Member');
+        insert rowan;
 
         List<ContentVersion> documents = insertRecords();
 
@@ -400,15 +404,19 @@ public with sharing class TestFileController {
             ids.add(documents[idx].ContentDocumentId);
         }
 
-        FileController.relateFiles(ids, ace.Id);
-
+        FileController.relateFiles(ids, rowan.Id);
+        User adminUser = TestUtilities.createUser('Standard User');
+        TestUtilities.addUserToGroups(adminUser, groups);
+        rowan.OwnerId = adminUser.Id;
+        update rowan;
+        RelatedObjects related;
         Test.startTest();
-        RelatedObjects related = FileController.getRelatedFiles(ace.Id, 6);
-
+        System.runAs(new User(Id = adminUser.Id)) {
+            related = FileController.getRelatedFiles(rowan.Id, 6);
+        }
         Test.stopTest();
 
-        System.assertEquals(documents.size(), related.items.size());
-        System.assertEquals(documents.size(), related.total);
+        return related;
     }
 
     @isTest

@@ -146,12 +146,14 @@
                 <default>false</default>
                 <label>CGC Form</label>
             </value>
+            <value>
+                <fullName>FirstAid</fullName>
+                <default>false</default>
+                <label>First Aid Certificate</label>
+            </value>
         </valueSetDefinition>
         <valueSettings>
-            <controllingFieldValue>Na</controllingFieldValue>
-            <valueName>ContactForm</valueName>
-        </valueSettings>
-        <valueSettings>
+            <controllingFieldValue>Staff</controllingFieldValue>
             <controllingFieldValue>Volunteer</controllingFieldValue>
             <controllingFieldValue>Board</controllingFieldValue>
             <controllingFieldValue>Client</controllingFieldValue>
@@ -160,28 +162,44 @@
             <controllingFieldValue>Facilitator</controllingFieldValue>
             <controllingFieldValue>Puppy</controllingFieldValue>
             <controllingFieldValue>Trainer</controllingFieldValue>
-            <controllingFieldValue>Staff</controllingFieldValue>
             <valueName>Application</valueName>
         </valueSettings>
         <valueSettings>
+            <controllingFieldValue>Staff</controllingFieldValue>
             <controllingFieldValue>Volunteer</controllingFieldValue>
             <controllingFieldValue>Board</controllingFieldValue>
-            <controllingFieldValue>Staff</controllingFieldValue>
             <valueName>Agreement</valueName>
         </valueSettings>
         <valueSettings>
+            <controllingFieldValue>Staff</controllingFieldValue>
             <controllingFieldValue>Volunteer</controllingFieldValue>
             <controllingFieldValue>Board</controllingFieldValue>
-            <controllingFieldValue>Staff</controllingFieldValue>
             <valueName>Resume</valueName>
         </valueSettings>
         <valueSettings>
-            <controllingFieldValue>TeamDog</controllingFieldValue>
-            <valueName>HealthForm</valueName>
+            <controllingFieldValue>Staff</controllingFieldValue>
+            <valueName>Offer</valueName>
         </valueSettings>
         <valueSettings>
-            <controllingFieldValue>TeamDog</controllingFieldValue>
-            <valueName>Xray</valueName>
+            <controllingFieldValue>Staff</controllingFieldValue>
+            <valueName>W4</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Staff</controllingFieldValue>
+            <valueName>I9</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Staff</controllingFieldValue>
+            <valueName>W9</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Staff</controllingFieldValue>
+            <controllingFieldValue>Facilitator</controllingFieldValue>
+            <valueName>FirstAid</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Dog</controllingFieldValue>
+            <valueName>VacExams</valueName>
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Board</controllingFieldValue>
@@ -190,6 +208,10 @@
         <valueSettings>
             <controllingFieldValue>Board</controllingFieldValue>
             <valueName>ToN</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Na</controllingFieldValue>
+            <valueName>ContactForm</valueName>
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Client</controllingFieldValue>
@@ -233,6 +255,14 @@
             <valueName>CGCForm</valueName>
         </valueSettings>
         <valueSettings>
+            <controllingFieldValue>TeamDog</controllingFieldValue>
+            <valueName>HealthForm</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>TeamDog</controllingFieldValue>
+            <valueName>Xray</valueName>
+        </valueSettings>
+        <valueSettings>
             <controllingFieldValue>Facilitator</controllingFieldValue>
             <controllingFieldValue>Puppy</controllingFieldValue>
             <valueName>Reference</valueName>
@@ -258,26 +288,6 @@
         <valueSettings>
             <controllingFieldValue>Trainer</controllingFieldValue>
             <valueName>ProfReference</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Staff</controllingFieldValue>
-            <valueName>Offer</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Staff</controllingFieldValue>
-            <valueName>W4</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Staff</controllingFieldValue>
-            <valueName>I9</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Staff</controllingFieldValue>
-            <valueName>W9</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Dog</controllingFieldValue>
-            <valueName>VacExams</valueName>
         </valueSettings>
     </valueSet>
 </CustomField>
