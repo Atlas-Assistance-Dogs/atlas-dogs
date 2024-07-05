@@ -7,6 +7,7 @@ import { refreshApex } from "@salesforce/apex";
 
 import BACKGROUND_CHECK from "@salesforce/schema/BackgroundCheck__c";
 import DATE_FIELD from "@salesforce/schema/BackgroundCheck__c.Date__c";
+import NAME_FIELD from "@salesforce/schema/BackgroundCheck__c.Name";
 import STATUS_FIELD from "@salesforce/schema/BackgroundCheck__c.Status__c";
 import TYPE_FIELD from "@salesforce/schema/BackgroundCheck__c.Type__c";
 
@@ -16,6 +17,16 @@ const actions = [
 ];
 
 const COLS = [
+    {
+        label: "Name",
+        type: "button",
+        typeAttributes: {
+            name: "goto",
+            label: { fieldName: NAME_FIELD.fieldApiName },
+            variant: "base"
+        },
+        sortable: true
+    },
     {
         label: "Completed Date",
         fieldName: DATE_FIELD.fieldApiName,
@@ -92,6 +103,9 @@ export default class RelatedBackgroundChecksCmp extends NavigationMixin(
             case "edit":
                 const payload = { mode: "edit", recordId: row.Id };
                 this.template.querySelector("c-related-background-check-cmp").openModal(payload);
+                break;
+            case "goto":
+                this.navigateToRecord(row.Id, this.objectApiName);
                 break;
             case "view":
                 this.navigateToFiles(row);
@@ -170,5 +184,16 @@ export default class RelatedBackgroundChecksCmp extends NavigationMixin(
 
     handleChange() {
         refreshApex(this.wiredChecks);
+    }
+
+    navigateToRecord(recordId, objectName) {
+        this[NavigationMixin.Navigate]({
+            type: "standard__recordPage",
+            attributes: {
+                recordId: recordId,
+                objectApiName: objectName,
+                actionName: "view"
+            }
+        });
     }
 }
