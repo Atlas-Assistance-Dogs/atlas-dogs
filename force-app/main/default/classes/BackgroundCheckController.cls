@@ -8,7 +8,7 @@ public with sharing class BackgroundCheckController {
         try {
             RelatedObjects related = new RelatedObjects();
             List<BackgroundCheck__c> checks = [
-                SELECT Contact__c, Date__c, Notes__c, Status__c, Type__c
+                SELECT Name, Contact__c, Date__c, Notes__c, Status__c, Type__c
                 FROM BackgroundCheck__c
                 WHERE Contact__c = :contactId
                 LIMIT :max

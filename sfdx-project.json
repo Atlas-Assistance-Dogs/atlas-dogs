@@ -7,6 +7,10 @@
         {
             "path": "unpackaged/pre",
             "default": false
+        },
+        {   
+            "path": "unpackaged/post",
+            "default": false
         }
     ],
     "namespace": "atlas1",
