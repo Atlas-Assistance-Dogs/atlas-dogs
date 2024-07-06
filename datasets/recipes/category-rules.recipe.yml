@@ -32,6 +32,7 @@
   fields:
     Category__c: 'ADSiM'
     Object__c: 'Contact'
+    Position__c: 'Client'
     GroupName__c: 'Team'
 
 - object: CategoryRule__c
@@ -45,6 +46,7 @@
   fields:
     Category__c: 'Standalone'
     Object__c: 'Contact'
+    Position__c: 'Standalone'
 
 - object: CategoryRule__c
   just_once: True
@@ -93,6 +95,7 @@
     Category__c: 'Staff'
     Object__c: 'Contact'
     Position__c: 'Staff'
+    GroupName__c: 'Staff'
 
 - object: CategoryRule__c
   just_once: True
@@ -100,6 +103,7 @@
     Category__c: 'Trainer'
     Object__c: 'Contact'
     Position__c: 'Trainer'
+    GroupName__c: 'Trainer'
 
 - object: CategoryRule__c
   just_once: True
