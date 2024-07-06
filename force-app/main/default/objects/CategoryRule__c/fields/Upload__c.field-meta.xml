@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Upload__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>User can upload a file with this object/category, if true, user can only view and update files with this category.
+        Deprecated in favor of ReadOnly.
+    </description>
+    <externalId>false</externalId>
+    <label>Upload</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

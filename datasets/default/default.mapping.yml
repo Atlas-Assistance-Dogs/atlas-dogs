@@ -61,10 +61,11 @@ Insert CategoryRule__c:
   table: CategoryRule__c
   fields:
   - Category__c
+  - GroupName__c
   - Object__c
   - Position__c
-  - GroupName__c
   - ReadOnly__c
+  - Upload__c
 Insert Program__c:
   sf_object: Program__c
   table: Program__c
