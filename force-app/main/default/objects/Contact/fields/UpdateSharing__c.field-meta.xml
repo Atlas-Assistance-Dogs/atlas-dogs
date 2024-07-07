@@ -4,7 +4,7 @@
     <defaultValue>false</defaultValue>
     <description>Update the share settings for this contact</description>
     <externalId>false</externalId>
-    <label>Share With Related</label>
+    <label>Update sharing</label>
     <trackFeedHistory>false</trackFeedHistory>
     <type>Checkbox</type>
 </CustomField>

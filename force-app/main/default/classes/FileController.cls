@@ -217,7 +217,7 @@ global inherited sharing class FileController {
             throw new AuraHandledException('recordId must not be null');
         }
         // get all, since we can't be sure how many will be filtered out
-        RelatedObjects allFiles = FileController.getAllRelatedFiles(recordId, 10000);
+        RelatedObjects allFiles = getAllRelatedFiles(recordId, 10000);
 
         RelatedObjects objects = new RelatedObjects();
 
