@@ -11,34 +11,32 @@ trigger RelationshipTrigger on npe4__Relationship__c(
         String oldType = null;
         if (Trigger.isUpdate || Trigger.isDelete) {
             //Get Old Value
-            npe4__Relationship__c oldRelationship = Trigger.oldMap
-                .get(newRelationship.Id);
+            npe4__Relationship__c oldRelationship = trigger.oldMap.get(newRelationship.Id);
             // If the relationship affects them, reset sharing rules
-            if (
-                oldRelationship.npe4__Status__c == 'Current' &&
-                oldRelationship.npe4__Type__c == 'Guardian'
-            ) {
+            if (oldRelationship.npe4__Status__c == 'Current' &&
+                (oldRelationship.npe4__Type__c.contains('Emergency Contact') ||
+                oldRelationship.npe4__Type__c == 'Guardian')) {
                 contactIds.add(oldRelationship.npe4__RelatedContact__c);
             }
         }
         if (!Trigger.isDelete) {
             // If the relationship affects them, reset sharing rules
-            if (
-                newRelationship.npe4__Status__c == 'Current' &&
-                newRelationship.npe4__Type__c == 'Guardian'
-            ) {
+            if (newRelationship.npe4__Status__c == 'Current' &&
+                    (newRelationship.npe4__Type__c.contains('Emergency Contact') ||
+                    newRelationship.npe4__Type__c == 'Guardian')) {
                 contactIds.add(newRelationship.npe4__RelatedContact__c);
             }
         }
 
         List<Contact> related = [
-            SELECT Id, UpdateForRelated__c
+            SELECT Id, UpdateForRelated__c, UpdateSharing__c
             FROM Contact
             WHERE Id IN :contactIds
         ];
         // we need a way for the contact trigger to know to update this contacts settings
         for (Contact person : related) {
             person.UpdateForRelated__c = true;
+            person.UpdateSharing__c = true;
         }
         update related;
     }

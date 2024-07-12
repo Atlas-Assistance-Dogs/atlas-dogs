@@ -7,6 +7,7 @@
 - include_file: standard_objs.recipe.yml
 
 - object: GW_Volunteers__Volunteer_Job__c
+  just_once: True
   nickname: Academy
   fields:
       GW_Volunteers__Description__c: Academy decscription
@@ -17,6 +18,7 @@
       Name: Academy
 
 - object: GW_Volunteers__Volunteer_Job__c
+  just_once: True
   nickname: ADI Accreditation
   fields:
       GW_Volunteers__Description__c: ADI Accreditation decscription
@@ -27,6 +29,7 @@
       Name: ADI Accreditation
 
 - object: GW_Volunteers__Volunteer_Job__c
+  just_once: True
   nickname: Branding and Marketing
   fields:
       GW_Volunteers__Description__c: Branding and Marketing decscription
@@ -37,6 +40,7 @@
       Name: Branding and Marketing
 
 - object: GW_Volunteers__Volunteer_Job__c
+  just_once: True
   nickname: Client Certification
   fields:
       GW_Volunteers__Description__c: Client Certification decscription
@@ -47,6 +51,7 @@
       Name: Client Certification
 
 - object: GW_Volunteers__Volunteer_Job__c
+  just_once: True
   nickname: Client Operations
   fields:
       GW_Volunteers__Description__c: Client Operations
@@ -57,6 +62,7 @@
       Name: Client Operations
 
 - object: GW_Volunteers__Volunteer_Job__c
+  just_once: True
   nickname: Community Outreach and Education
   fields:
       GW_Volunteers__Description__c: Community Outreach and Education
@@ -67,6 +73,7 @@
       Name: Community Outreach and Education
 
 - object: GW_Volunteers__Volunteer_Job__c
+  just_once: True
   nickname: Dog Availability
   fields:
       GW_Volunteers__Description__c: Dog Availability
@@ -77,6 +84,7 @@
       Name: Dog Availability
 
 - object: GW_Volunteers__Volunteer_Job__c
+  just_once: True
   nickname: Financial Operations
   fields:
       GW_Volunteers__Description__c: Financial Operations
@@ -87,6 +95,7 @@
       Name: Financial Operations
 
 - object: GW_Volunteers__Volunteer_Job__c
+  just_once: True
   nickname: Fund Development
   fields:
       GW_Volunteers__Description__c: Fund Development
@@ -97,6 +106,7 @@
       Name: Fund Development
 
 - object: GW_Volunteers__Volunteer_Job__c
+  just_once: True
   nickname: Governance and Compliance and Operations
   fields:
       GW_Volunteers__Description__c: Governance and Compliance and Operations
@@ -107,6 +117,7 @@
       Name: Governance and Compliance and Operations
 
 - object: GW_Volunteers__Volunteer_Job__c
+  just_once: True
   nickname: Operations Master Docs
   fields:
       GW_Volunteers__Description__c: Operations Master Docs
@@ -117,6 +128,7 @@
       Name: Operations Master Docs
 
 - object: GW_Volunteers__Volunteer_Job__c
+  just_once: True
   nickname: Research and Development
   fields:
       GW_Volunteers__Description__c: Research and Development
@@ -127,6 +139,7 @@
       Name: Research and Development
 
 - object: GW_Volunteers__Volunteer_Job__c
+  just_once: True
   nickname: Scholarships
   fields:
       GW_Volunteers__Description__c: Scholarships
@@ -137,6 +150,7 @@
       Name: Scholarships
 
 - object: GW_Volunteers__Volunteer_Job__c
+  just_once: True
   nickname: State Registration
   fields:
       GW_Volunteers__Description__c: State Registration
@@ -147,6 +161,7 @@
       Name: State Registration
 
 - object: GW_Volunteers__Volunteer_Job__c
+  just_once: True
   nickname: Team Facilitator Certification
   fields:
       GW_Volunteers__Description__c: Team Facilitator Certification
@@ -157,6 +172,7 @@
       Name: Team Facilitator Certification
 
 - object: GW_Volunteers__Volunteer_Job__c
+  just_once: True
   nickname: Team Facilitator Operations
   fields:
       GW_Volunteers__Description__c: Team Facilitator Operations
@@ -167,6 +183,7 @@
       Name: Team Facilitator Operations
 
 - object: GW_Volunteers__Volunteer_Job__c
+  just_once: True
   nickname: Technology Infrastructure
   fields:
       GW_Volunteers__Description__c: Technology Infrastructure
@@ -177,6 +194,7 @@
       Name: Technology Infrastructure
 
 - object: GW_Volunteers__Volunteer_Job__c
+  just_once: True
   nickname: Trainer Certification
   fields:
       GW_Volunteers__Description__c: Trainer Certification
@@ -187,6 +205,7 @@
       Name: Trainer Certification
 
 - object: GW_Volunteers__Volunteer_Job__c
+  just_once: True
   nickname: Volunteer and Staff Operations
   fields:
       GW_Volunteers__Description__c: Volunteer and Staff Operations
@@ -197,6 +216,7 @@
       Name: Volunteer and Staff Operations
 
 - object: GW_Volunteers__Volunteer_Job__c
+  just_once: True
   nickname: Volunteer Recruitment and Retention
   fields:
       GW_Volunteers__Description__c: Volunteer Recruitment and Retention
@@ -207,6 +227,7 @@
       Name: Volunteer Recruitment and Retention
 
 - object: GW_Volunteers__Volunteer_Job__c
+  just_once: True
   nickname: Academy-Content Creator
   fields:
       GW_Volunteers__Description__c: Academy-Content Creator
@@ -217,6 +238,7 @@
       Name: Academy-Content Creator
 
 - object: GW_Volunteers__Volunteer_Job__c
+  just_once: True
   nickname: Academy-Content Editor
   fields:
       GW_Volunteers__Description__c: Academy-Content Editor
@@ -227,6 +249,7 @@
       Name: Academy-Content Editor
 
 - object: GW_Volunteers__Volunteer_Job__c
+  just_once: True
   nickname: Marketing- Graphic Design
   fields:
       GW_Volunteers__Description__c: Marketing- Graphic Design
@@ -237,6 +260,7 @@
       Name: Marketing- Graphic Design
 
 - object: GW_Volunteers__Volunteer_Job__c
+  just_once: True
   nickname: Marketing- Video
   fields:
       GW_Volunteers__Description__c: Marketing- Video
@@ -247,6 +271,7 @@
       Name: Marketing- Video
 
 - object: GW_Volunteers__Volunteer_Job__c
+  just_once: True
   nickname: Marketing- Photo
   fields:
       GW_Volunteers__Description__c: Marketing- Photo
@@ -257,6 +282,7 @@
       Name: Marketing- Photo
 
 - object: GW_Volunteers__Volunteer_Job__c
+  just_once: True
   nickname: Marketing- Writing
   fields:
       GW_Volunteers__Description__c: Marketing- Writing
@@ -267,6 +293,7 @@
       Name: Marketing- Writing
 
 - object: GW_Volunteers__Volunteer_Job__c
+  just_once: True
   nickname: Marketing- Leadership
   fields:
       GW_Volunteers__Description__c: Marketing- Leadership
@@ -277,6 +304,7 @@
       Name: Marketing- Leadership
 
 - object: GW_Volunteers__Volunteer_Job__c
+  just_once: True
   nickname: Marketing- SEO
   fields:
       GW_Volunteers__Description__c: Marketing- SEO
@@ -287,6 +315,7 @@
       Name: Marketing- SEO
 
 - object: GW_Volunteers__Volunteer_Job__c
+  just_once: True
   nickname: Marketing- Website
   fields:
       GW_Volunteers__Description__c: Marketing- Website
@@ -297,6 +326,7 @@
       Name: Marketing- Website
 
 - object: GW_Volunteers__Volunteer_Job__c
+  just_once: True
   nickname: Marketing- Sales
   fields:
       GW_Volunteers__Description__c: Marketing- Sales
@@ -307,6 +337,7 @@
       Name: Marketing- Sales
 
 - object: GW_Volunteers__Volunteer_Job__c
+  just_once: True
   nickname: Marketing- Advertising
   fields:
       GW_Volunteers__Description__c: Marketing- Advertising
@@ -317,6 +348,7 @@
       Name: Marketing- Advertising
 
 - object: GW_Volunteers__Volunteer_Job__c
+  just_once: True
   nickname: Marketing- Events
   fields:
       GW_Volunteers__Description__c: Marketing- Events
@@ -327,6 +359,7 @@
       Name: Marketing- Events
 
 - object: GW_Volunteers__Volunteer_Job__c
+  just_once: True
   nickname: Administrative- Client
   fields:
       GW_Volunteers__Description__c: Administrative- Client
@@ -337,6 +370,7 @@
       Name: Administrative- Client
 
 - object: GW_Volunteers__Volunteer_Job__c
+  just_once: True
   nickname: Administrative- Volunteer
   fields:
       GW_Volunteers__Description__c: Administrative- Volunteer
@@ -347,6 +381,7 @@
       Name: Administrative- Volunteer
 
 - object: GW_Volunteers__Volunteer_Job__c
+  just_once: True
   nickname: Administrative- Trainer
   fields:
       GW_Volunteers__Description__c: Administrative- Trainer
@@ -357,6 +392,7 @@
       Name: Administrative- Trainer
 
 - object: GW_Volunteers__Volunteer_Job__c
+  just_once: True
   nickname: Administrative- General
   fields:
       GW_Volunteers__Description__c: Administrative- General
@@ -367,6 +403,7 @@
       Name: Administrative- General
 
 - object: GW_Volunteers__Volunteer_Job__c
+  just_once: True
   nickname: Administrative- Technology
   fields:
       GW_Volunteers__Description__c: Administrative- Technology
@@ -377,6 +414,7 @@
       Name: Administrative- Technology
 
 - object: GW_Volunteers__Volunteer_Job__c
+  just_once: True
   nickname: Outreach- Clients
   fields:
       GW_Volunteers__Description__c: Outreach- Clients
@@ -387,6 +425,7 @@
       Name: Outreach- Clients
 
 - object: GW_Volunteers__Volunteer_Job__c
+  just_once: True
   nickname: Outreach- Disability Orgs
   fields:
       GW_Volunteers__Description__c: Outreach- Disability Orgs
@@ -397,6 +436,7 @@
       Name: Outreach- Disability Orgs
 
 - object: GW_Volunteers__Volunteer_Job__c
+  just_once: True
   nickname: Outreach- Dogs
   fields:
       GW_Volunteers__Description__c: Outreach- Dogs
@@ -407,6 +447,7 @@
       Name: Outreach- Dogs
 
 - object: GW_Volunteers__Volunteer_Job__c
+  just_once: True
   nickname: Outreach- Veterinarians
   fields:
       GW_Volunteers__Description__c: Outreach- Veterinarians
@@ -417,6 +458,7 @@
       Name: Outreach- Veterinarians
 
 - object: GW_Volunteers__Volunteer_Job__c
+  just_once: True
   nickname: Outreach- Medical Providers
   fields:
       GW_Volunteers__Description__c: Outreach- Medical Providers
@@ -427,6 +469,7 @@
       Name: Outreach- Medical Providers
 
 - object: GW_Volunteers__Volunteer_Job__c
+  just_once: True
   nickname: Outreach- Diversity
   fields:
       GW_Volunteers__Description__c: Outreach- Diversity

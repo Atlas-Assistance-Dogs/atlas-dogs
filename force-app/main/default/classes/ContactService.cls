@@ -134,4 +134,141 @@ public with sharing class ContactService {
             update contacts;
         }
     }
+
+    // Share the contact with the appropriate groups based on which positions they have,
+    // and the positions they are emergency contacts for
+    public static Contact shareContactBasedOnPositions(Contact person, Map<String, String> positionGroups) {
+        // Create a set of the positions the user currently has
+        Set<String> positions = new Set<String>();
+        if (!String.isBlank(person.Positions__c)) {
+            positions.addAll(person.Positions__c.split(';'));
+        }
+        Set<String> groups = new Set<String>();
+        for (String position : positions) {
+            String grp = positionGroups.get(position);
+            if (grp != null) {
+                groups.add(grp);
+            }
+        }
+
+        // update this contact first, then its relations
+        person = shareContactWithGroups(person, groups);
+        return person;
+    }
+
+    // Get the positions of the contact relations
+    private static Set<String> getRelationShipPositions(Contact record) {
+        // Find who the contact is related to as an emergency contact
+        npe4__Relationship__c[] related = [
+            SELECT Id, npe4__Contact__r.Positions__c
+            FROM npe4__Relationship__c
+            WHERE
+                (npe4__Type__c LIKE '%Emergency Contact'
+                OR npe4__Type__c = 'Guardian')
+                AND npe4__Status__c = 'Current'
+                AND npe4__RelatedContact__c = :record.Id
+        ];
+        Set<String> positions = new Set<String>();
+        if (!String.isBlank(record.Positions__c)) {
+            positions.addAll(record.Positions__c.split(';'));
+        }
+        for (npe4__Relationship__c relation : related) {
+            if (String.isBlank(relation.npe4__Contact__r.Positions__c)) {
+                continue;
+            }
+            String[] pos = relation.npe4__Contact__r.Positions__c.split(';');
+            positions.addAll(pos);
+        }
+        return positions;
+    }
+
+    // Get the groups that the category rules assign for the positions
+    public static Map<String, String> getGroupsByPositions() {
+        // Get the groups that can see each position
+        List<CategoryRule__c> rules = [
+            SELECT GroupName__c, Position__c
+            FROM CategoryRule__c
+            WHERE Position__c != null
+        ];
+        Map<String, String> groupNames = new Map<String, String>();
+        for (CategoryRule__c rule : rules) {
+            groupNames.put(rule.Position__c, rule.GroupName__c);
+        }
+        return groupNames;
+    }
+
+    private static Contact shareContactWithGroups(
+        Contact contact,
+        Set<String> groupNames
+    ) {
+        contact.ShareBoard__c = groupNames.contains('Board');
+        contact.SharePuppyRaiser__c = groupNames.contains('Puppy Raiser');
+        contact.ShareStaff__c = groupNames.contains('Staff');
+        contact.ShareStandalonePrograms__c = groupNames.contains('Standalone Programs');
+        contact.ShareTeam__c = groupNames.contains('Team');
+        contact.ShareTrainer__c = groupNames.contains('Trainer');
+        contact.ShareVolunteer__c = groupNames.contains('Volunteer');
+        return contact;
+    }
+
+    public static void setSharingFields() {
+        List<Contact> contacts = [
+            SELECT IsBoardMember__c, IsClient__c, IsPuppyRaiser__c, IsStaff__c, IsStandalone__c, IsTeamFacilitator__c, IsTrainer__c, IsVolunteer__c,
+                    ShareBoard__c, SharePuppyRaiser__c, ShareStaff__c, ShareStandalonePrograms__c, ShareTeam__c, ShareTrainer__c, ShareVolunteer__c
+            FROM Contact
+            WHERE IsBoardMember__c = TRUE OR IsClient__c = TRUE OR IsPuppyRaiser__c = TRUE OR IsStaff__c = TRUE OR IsStandalone__c = TRUE OR IsTeamFacilitator__c = TRUE OR IsTrainer__c = TRUE OR IsVolunteer__c = TRUE];
+
+        Map<Id, Contact> contactMap = new Map<Id, Contact>();
+
+        for (Contact person : contacts) {
+            person.ShareBoard__c = person.IsBoardMember__c;
+            person.SharePuppyRaiser__c = person.IsPuppyRaiser__c;
+            person.ShareStaff__c = person.IsStaff__c;
+            person.ShareStandalonePrograms__c = person.IsStandalone__c;
+            person.ShareTeam__c = person.IsClient__c || person.IsTeamFacilitator__c;
+            person.ShareTrainer__c = person.IsTrainer__c;
+            person.ShareVolunteer__c = person.IsVolunteer__c;
+            contactMap.put(person.Id, person);
+        }
+
+        // Get related contacts
+        npe4__Relationship__c[] related = [
+            SELECT
+                Id,
+                npe4__RelatedContact__c,
+                npe4__RelatedContact__r.Positions__c,
+                npe4__RelatedContact__r.ShareBoard__c,
+                npe4__RelatedContact__r.SharePuppyRaiser__c,
+                npe4__RelatedContact__r.ShareStaff__c,
+                npe4__RelatedContact__r.ShareStandalonePrograms__c,
+                npe4__RelatedContact__r.ShareTeam__c,
+                npe4__RelatedContact__r.ShareTrainer__c,
+                npe4__RelatedContact__r.ShareVolunteer__c,
+                npe4__Contact__c
+            FROM npe4__Relationship__c
+            WHERE
+                (npe4__Type__c LIKE '%Emergency Contact'
+                OR npe4__Type__c = 'Guardian')
+                AND npe4__Status__c = 'Current'
+                AND npe4__Contact__c IN :contactMap.keySet()
+        ];
+        for (npe4__Relationship__c relation : related) {
+            Contact shared = contactMap.get(relation.npe4__Contact__c);
+            Contact share = contactMap.get(relation.npe4__RelatedContact__c);
+            if (share == null) {
+                share = relation.npe4__RelatedContact__r;
+            }
+            share.ShareBoard__c = share.ShareBoard__c || shared.ShareBoard__c;
+            share.SharePuppyRaiser__c = share.SharePuppyRaiser__c || shared.SharePuppyRaiser__c;
+            share.ShareStaff__c = share.ShareStaff__c || share.ShareStaff__c;
+            share.ShareStandalonePrograms__c = share.ShareStandalonePrograms__c || shared.ShareStandalonePrograms__c;
+            share.ShareTeam__c = share.ShareTeam__c || shared.ShareTeam__c;
+            share.ShareTrainer__c = share.ShareTrainer__c || shared.ShareTrainer__c;
+            share.ShareVolunteer__c = share.ShareVolunteer__c || shared.ShareVolunteer__c;
+            if (!contactMap.containsKey(relation.npe4__RelatedContact__c)) {
+                contactMap.put(relation.npe4__RelatedContact__c, share);
+            }
+        }
+        update contactMap.values();
+    }
 }

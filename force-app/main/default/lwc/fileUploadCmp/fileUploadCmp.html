@@ -5,7 +5,7 @@
         onsubmit={handleSubmit}
     >
         <div slot="body">
-            <c-file-information-cmp object-id={objectId} record-id={recordId}></c-file-information-cmp>
+            <c-file-information-cmp object-id={objectId} record-id={recordId} is-upload={isUpload}></c-file-information-cmp>
             <div class="fileUpload slds-p-vertical_medium">
                 <lightning-file-upload
                     label="Add Files"
