@@ -1,19 +1,18 @@
 trigger RelationshipTrigger on npe4__Relationship__c(
     after insert,
     after update,
-    after delete
+    before delete
 ) {
     // track which Contacts have changed here
     Set<Id> contactIds = new Set<Id>();
     for (npe4__Relationship__c newRelationship : Trigger.new) {
-        Id oldContactId = null;
-        Id oldRelatedId = null;
-        String oldType = null;
+        System.debug('in loop');
         if (Trigger.isUpdate || Trigger.isDelete) {
             //Get Old Value
             npe4__Relationship__c oldRelationship = trigger.oldMap.get(newRelationship.Id);
             // If the relationship affects them, reset sharing rules
             if (oldRelationship.npe4__Status__c == 'Current' &&
+	    	oldRelationship.npe4__RelatedContact__c != null
                 (oldRelationship.npe4__Type__c.contains('Emergency Contact') ||
                 oldRelationship.npe4__Type__c == 'Guardian')) {
                 contactIds.add(oldRelationship.npe4__RelatedContact__c);
