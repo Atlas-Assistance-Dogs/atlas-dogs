@@ -4,7 +4,7 @@
  * Test for the desired combined behavior is here.
  */
 @isTest
-public with sharing class TestContactSharing    {
+public with sharing class TestContactSharingRules    {
     // Test that the triggers produce the desired sharing
     static testMethod void shareContactBasedOnPositions_sharesClient() {
         // Arrange / Act

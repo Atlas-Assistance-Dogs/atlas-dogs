@@ -15,7 +15,18 @@ global without sharing class CategoryRuleController {
         return categories;
     }
 
-    global static Set<String> getAllowedCategoriesForObject(Id recordId, Boolean isUpload) {
+    @AuraEnabled(Cacheable=true)
+    global static List<Map<String, String>> getCategoriesForObject(
+        Id recordId
+    ) {
+        return new List<Map<String, String>>();
+    }
+ 
+    global static Set<String> getAllowedCategoriesForObject(Id recordId) {
+        return new Set<String>();
+    }
+
+    public static Set<String> getAllowedCategoriesForObject(Id recordId, Boolean isUpload) {
         if (isUpload == null) isUpload = false;
         System.debug(isUpload);
         string objLabel = recordId.getSObjectType().getDescribe().getLabel();
@@ -23,7 +34,7 @@ global without sharing class CategoryRuleController {
         List<String> groupNames = UserAccessService.GetGroupNames(UserInfo.getUserId());
 
         // get the categories that work for the object from atlas1
-        Set<String> allCategories = CategoryRuleController.getCategoriesForObject(recordId);
+        Set<String> allCategories = CategoryRuleController.getCategorySetForObject(recordId);
 
         Set<String> categories = new Set<String>();
         // only allow the categories that match the groups the user is in
@@ -44,7 +55,7 @@ global without sharing class CategoryRuleController {
         return categories;
     }
 
-    global static Set<String> getCategoriesForObject(Id recordId) {
+    global static Set<String> getCategorySetForObject(Id recordId) {
         string objLabel = recordId.getSObjectType().getDescribe().getLabel();
 
         // get the categories that work for the object
