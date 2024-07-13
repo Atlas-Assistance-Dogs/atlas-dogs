@@ -236,7 +236,7 @@ global inherited sharing class FileController {
             
             for (Object item : allFiles.items) {
                 FileInfo info = (FileInfo)item;
-                if (allowedCategories.contains(info.cv.Category__c)) {
+                if (allowedCategories.contains(info.cv.Category__c) || info.cv.Category__c == null) {
                     related.items.add(info);
                 }
             }
