@@ -98,7 +98,7 @@ public with sharing class TestContactSharingRules    {
         setupBradyBunch();
 
         // Act
-        delete emergency2;
+        delete guardian;
 
         // Assert
         // Get the contacts with lastest sharing fields
