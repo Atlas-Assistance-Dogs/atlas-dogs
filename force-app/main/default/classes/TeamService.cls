@@ -40,20 +40,36 @@ public with sharing class TeamService {
 
     // Update client status.  This is meant to be called from the team update trigger.
     public static void updateClientStatus(Team__c team) {
-        List<Contact> clients = [SELECT ClientStatus__c, ClientCertificationValidUntil__c, ClientInitialCertificationDate__c FROM Contact WHERE Id = :team.Client__c];
+        List<Contact> clients = [
+            SELECT
+                ClientStatus__c,
+                ClientDog__c,
+                ClientCertificationValidUntil__c,
+                ClientInitialCertificationDate__c
+            FROM Contact
+            WHERE Id = :team.Client__c
+        ];
+        List<Dog__c> dogs = [SELECT Name FROM Dog__c WHERE Id = :team.Dog__c];
 
         if (!clients.isEmpty()) {
             Contact client = clients[0];
             client.ClientCertificationValidUntil__c = team.PatValidUntil__c;
             client.ClientStatus__c = team.Status__c;
             client.ClientInitialCertificationDate__c = team.InitialCertificationDate__c;
+            if (!dogs.isEmpty()) {
+                client.ClientDog__c = dogs[0].Name;
+            }
             update client;
         }
     }
-    
+
     // Update client status.  This is meant to be called from the team update trigger.
     public static void updateDogStatus(Team__c team) {
-        List<Dog__c> dogs = [SELECT Status__c FROM Dog__c WHERE Id = :team.Dog__c];
+        List<Dog__c> dogs = [
+            SELECT Status__c
+            FROM Dog__c
+            WHERE Id = :team.Dog__c
+        ];
 
         if (!dogs.isEmpty()) {
             Dog__c dog = dogs[0];

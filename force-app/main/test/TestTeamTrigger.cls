@@ -169,13 +169,14 @@ public with sharing class TestTeamTrigger {
         // Assert
         System.assert(result.isSuccess());
         Contact client = [
-            SELECT ClientStatus__c, ClientCertificationValidUntil__c, ClientInitialCertificationDate__c
+            SELECT ClientStatus__c, ClientDog__c, ClientCertificationValidUntil__c, ClientInitialCertificationDate__c
             FROM Contact
             WHERE Id = :joe.Id
         ];
         System.assertEquals(expectedStatus, client.ClientStatus__c);
         System.assertEquals(expectedCert, client.ClientCertificationValidUntil__c);
         System.assertEquals(team.InitialCertificationDate__c, client.ClientInitialCertificationDate__c);
+        System.assertEquals(boomer.Name, client.ClientDog__c);
 
         Dog__c dog = [
             SELECT Status__c

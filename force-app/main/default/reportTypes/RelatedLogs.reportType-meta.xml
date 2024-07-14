@@ -131,6 +131,11 @@
             <field>Facilitator__c</field>
             <table>Log__c</table>
         </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>DidMeetThisWeek__c</field>
+            <table>Log__c</table>
+        </columns>
         <masterLabel>Logs</masterLabel>
     </sections>
 </ReportType>
