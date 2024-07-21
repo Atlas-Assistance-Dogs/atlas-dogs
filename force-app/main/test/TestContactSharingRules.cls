@@ -50,10 +50,83 @@ public with sharing class TestContactSharingRules    {
         System.assert(!carol.ShareTeam__c);
     }
 
+    @isTest
+    static void deletingEmergency1Relationship_removesShare() {
+        // Arrange
+        setupBradyBunch();
+
+        // Act
+        delete emergency1;
+
+        // Assert
+        // Get the contacts with lastest sharing fields
+        cindy = getContactWithShares(cindy.Id);
+        marsha = getContactWithShares(marsha.Id);
+        mike = getContactWithShares(mike.Id);
+        carol = getContactWithShares(carol.Id);
+        // check ShareTeam
+        System.assert(cindy.ShareTeam__c);
+        System.assert(!marsha.ShareTeam__c);
+        System.assert(mike.ShareTeam__c);
+        System.assert(carol.ShareTeam__c);
+    }
+
+    @isTest
+    static void deletingEmergency2Relationship_removesShare() {
+        // Arrange
+        setupBradyBunch();
+
+        // Act
+        delete emergency2;
+
+        // Assert
+        // Get the contacts with lastest sharing fields
+        cindy = getContactWithShares(cindy.Id);
+        marsha = getContactWithShares(marsha.Id);
+        mike = getContactWithShares(mike.Id);
+        carol = getContactWithShares(carol.Id);
+        // check ShareVolunteer
+        System.assert(cindy.ShareTeam__c);
+        System.assert(marsha.ShareTeam__c);
+        System.assert(!mike.ShareTeam__c);
+        System.assert(carol.ShareTeam__c);
+    }
+
+    @isTest
+    static void deletingGuardianRelationship_removesShare() {
+        // Arrange
+        setupBradyBunch();
+
+        // Act
+        delete guardian;
+
+        // Assert
+        // Get the contacts with lastest sharing fields
+        cindy = getContactWithShares(cindy.Id);
+        marsha = getContactWithShares(marsha.Id);
+        mike = getContactWithShares(mike.Id);
+        carol = getContactWithShares(carol.Id);
+        // check ShareVolunteer
+        System.assert(cindy.ShareTeam__c);
+        System.assert(marsha.ShareTeam__c);
+        System.assert(mike.ShareTeam__c);
+        System.assert(!carol.ShareTeam__c);
+    }
+
     private static Contact getContactWithShares(Id contactId) {
-        return [SELECT Id, ShareBoard__c, SharePuppyRaiser__c, ShareStaff__c, ShareStandalonePrograms__c,
-        ShareTeam__c, ShareTrainer__c, ShareVolunteer__c
-        FROM Contact WHERE Id = :contactId];
+        return [
+            SELECT
+                Id,
+                ShareBoard__c,
+                SharePuppyRaiser__c,
+                ShareStaff__c,
+                ShareStandalonePrograms__c,
+                ShareTeam__c,
+                ShareTrainer__c,
+                ShareVolunteer__c
+            FROM Contact
+            WHERE Id = :contactId
+        ];
     }
 
     private static Contact cindy;
@@ -61,6 +134,9 @@ public with sharing class TestContactSharingRules    {
     private static Contact mike;
     private static Contact carol;
     private static Contact bobby;
+    private static npe4__Relationship__c emergency1;
+    private static npe4__Relationship__c emergency2;
+    private static npe4__Relationship__c guardian;
 
     private static void setupBradyBunch() {
         TestUtilities.insertCategoryRules();
@@ -100,19 +176,19 @@ public with sharing class TestContactSharingRules    {
         insert new List<Contact>{ cindy, marsha, mike, carol };
 
         // create the relationships
-        npe4__Relationship__c emergency1 = new npe4__Relationship__c(
+        emergency1 = new npe4__Relationship__c(
             npe4__Contact__c = cindy.Id,
             npe4__RelatedContact__c = marsha.Id,
             npe4__Type__c = 'Primary Emergency Contact',
             npe4__Status__c = 'Current'
         );
-        npe4__Relationship__c emergency2 = new npe4__Relationship__c(
+        emergency2 = new npe4__Relationship__c(
             npe4__Contact__c = cindy.Id,
             npe4__RelatedContact__c = mike.Id,
             npe4__Type__c = 'Secondary Emergency Contact',
             npe4__Status__c = 'Current'
         );
-        npe4__Relationship__c guardian = new npe4__Relationship__c(
+        guardian = new npe4__Relationship__c(
             npe4__Contact__c = cindy.Id,
             npe4__RelatedContact__c = carol.Id,
             npe4__Type__c = 'Guardian',
