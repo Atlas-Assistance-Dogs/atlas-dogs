@@ -301,11 +301,6 @@
     <description>Profile for Atlas users with minimum access</description>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Account.Email__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
         <field>BackgroundCheck__c.Notes__c</field>
         <readable>false</readable>
     </fieldPermissions>
