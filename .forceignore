@@ -14,8 +14,8 @@ package.xml
 
 # ignore profiles
 **/profiles/**
-!scratch-config/main/default/profiles/Admin*
-!scratch-config/main/default/profiles/Atlas*
+!unpackaged/post/main/default/profiles/Admin*
+!unpackaged/post/main/default/profiles/Atlas*
 
 # NPSP files
 **/npsp__*
