@@ -9,6 +9,7 @@ import CLIENT_HOURS_FIELD from "@salesforce/schema/Log__c.ClientHours__c";
 import CLIENT_STRESS_FIELD from "@salesforce/schema/Log__c.ClientStress__c";
 import DATE_FIELD from "@salesforce/schema/Log__c.Date__c";
 import DETAILS_FIELD from "@salesforce/schema/Log__c.Details__c";
+import DID_MEET_FIELD from "@salesforce/schema/Log__c.DidMeetThisWeek__c";
 import OTHER_HOURS_FIELD from "@salesforce/schema/Log__c.OtherHours__c";
 import PAH_FIELD from "@salesforce/schema/Log__c.PublicAccessHours__c";
 import RECORD_TYPE_FIELD from "@salesforce/schema/Log__c.RecordTypeId";
@@ -34,6 +35,7 @@ export default class LogFormCmp extends LightningElement {
         facilitator: TEAM_FACILITATOR_FIELD,
         recordType: RECORD_TYPE_FIELD,
         date: DATE_FIELD,
+        didMeet: DID_MEET_FIELD,
         clientHours: CLIENT_HOURS_FIELD,
         publicAccessHours: PAH_FIELD,
         lesson: SESSION_TYPE_FIELD,
@@ -119,6 +121,7 @@ export default class LogFormCmp extends LightningElement {
             (a, x) => ({ ...a, [x.fieldName]: x.value }),
             {}
         );
+        console.log(record);
         if (!this.recordTypeId) {
             this.dispatchEvent(
                 new ShowToastEvent({
@@ -137,7 +140,14 @@ export default class LogFormCmp extends LightningElement {
 
     handleSuccess() {
         this.dispatchEvent(new CustomEvent("changed"));
-        this.closeModal();
+        this.dispatchEvent(
+            new ShowToastEvent({
+                title: "Success",
+                message: "Created Log",
+                variant: "success"
+            })
+        );
+    this.closeModal();
     }
 
     handleError(event) {

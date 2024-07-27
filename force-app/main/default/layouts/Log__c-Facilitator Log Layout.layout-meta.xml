@@ -72,10 +72,6 @@
                 <behavior>Edit</behavior>
                 <field>Satisfaction__c</field>
             </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>DidMeetThisWeek__c</field>
-            </layoutItems>
         </layoutColumns>
         <style>TwoColumnsTopToBottom</style>
     </layoutSections>
