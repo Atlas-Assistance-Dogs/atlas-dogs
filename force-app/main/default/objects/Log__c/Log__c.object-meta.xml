@@ -168,6 +168,7 @@
         <searchResultsAdditionalFields>Team__c</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>Handler__c</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>Facilitator__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>DidMeetThisWeek__c</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>RequestSupportFromAtlas__c</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>RequestSupportFromTeam__c</searchResultsAdditionalFields>
     </searchLayouts>
