@@ -31,6 +31,10 @@
                 <behavior>Edit</behavior>
                 <field>FacilitatorAvailability__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Facilitator__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>

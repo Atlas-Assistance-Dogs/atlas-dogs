@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
     <actionOverrides>
         <actionName>Accept</actionName>
@@ -162,16 +162,11 @@
     <pluralLabel>Teams</pluralLabel>
     <searchLayouts>
         <searchResultsAdditionalFields>Client__c</searchResultsAdditionalFields>
-        <searchResultsAdditionalFields
-        >Handler__c</searchResultsAdditionalFields>
-        <searchResultsAdditionalFields
-        >PatValidUntil__c</searchResultsAdditionalFields>
-        <searchResultsAdditionalFields
-        >PatCount__c</searchResultsAdditionalFields>
-        <searchResultsAdditionalFields
-        >PrimaryCertification__c</searchResultsAdditionalFields>
-        <searchResultsAdditionalFields
-        >SecondaryCertification__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Handler__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>PatValidUntil__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>PatCount__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>PrimaryCertification__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>SecondaryCertification__c</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>Dog__c</searchResultsAdditionalFields>
     </searchLayouts>
     <sharingModel>ReadWrite</sharingModel>

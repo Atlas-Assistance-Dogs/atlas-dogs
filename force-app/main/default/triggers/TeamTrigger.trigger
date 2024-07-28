@@ -3,5 +3,6 @@ trigger TeamTrigger on Team__c (after insert, after update) {
         TeamService.setClientDogRelationShip(newTeam);
         TeamService.updateClientStatus(newTeam);
         TeamService.updateDogStatus(newTeam);
+        TeamService.setClientFacilitatorRelationShip(newTeam);
     }
 }
