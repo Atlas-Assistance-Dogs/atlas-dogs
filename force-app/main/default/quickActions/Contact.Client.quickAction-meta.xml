@@ -13,6 +13,11 @@
             </quickActionLayoutItems>
             <quickActionLayoutItems>
                 <emptySpace>false</emptySpace>
+                <field>ClientDog__c</field>
+                <uiBehavior>Edit</uiBehavior>
+            </quickActionLayoutItems>
+            <quickActionLayoutItems>
+                <emptySpace>false</emptySpace>
                 <field>ClientInitialCertificationDate__c</field>
                 <uiBehavior>Edit</uiBehavior>
             </quickActionLayoutItems>

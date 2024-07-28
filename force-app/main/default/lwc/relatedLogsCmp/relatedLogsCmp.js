@@ -11,6 +11,7 @@ import TEAM_OBJECT from "@salesforce/schema/Team__c";
 import CLIENT_STRESS_FIELD from "@salesforce/schema/Log__c.ClientStress__c";
 import DATE_FIELD from "@salesforce/schema/Log__c.Date__c";
 import DETAILS_FIELD from "@salesforce/schema/Log__c.Details__c";
+import DID_MEET_FIELD from "@salesforce/schema/Log__c.DidMeetThisWeek__c";
 import FACILITATOR_FIELD from "@salesforce/schema/Log__c.Facilitator__c";
 import SUBMITTER_FIELD from "@salesforce/schema/Log__c.Submitter__c";
 import NAME_FIELD from "@salesforce/schema/Log__c.Name";
@@ -97,6 +98,11 @@ const COLS = {
         fieldName: TEAM_SUPPORT_FIELD.fieldApiName,
         type: "boolean"
     },
+    didMeet: {
+        label: "Met this Week?",
+        fieldName: DID_MEET_FIELD.fieldApiName,
+        type: "boolean"
+    },
     stress: { label: "Stress", fieldName: STRESS_FIELD.fieldApiName },
     clientStress: {
         label: "Client Stress",
@@ -126,6 +132,7 @@ const CLIENT_COLS = [
     COLS.submitter,
     COLS.hours,
     COLS.otherHours,
+    COLS.didMeet,
     COLS.teamSupport,
     COLS.stress,
     COLS.satisfaction,
