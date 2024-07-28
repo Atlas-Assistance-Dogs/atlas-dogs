@@ -3,8 +3,11 @@ public with sharing class TeamService {
     // This is meant to be called from the team update trigger.
     public static void setClientDogRelationShip(Team__c newTeam) {
         // See if there is an existing relationship between the dog and client
-        List<DogRelationShip__c> relationShips = [SELECT Id, Type__c FROM DogRelationShip__c
-            WHERE Contact__c = :newTeam.Client__c AND Dog__c = :newTeam.Dog__c];
+        List<DogRelationShip__c> relationShips = [
+            SELECT Id, Type__c
+            FROM DogRelationShip__c
+            WHERE Contact__c = :newTeam.Client__c AND Dog__c = :newTeam.Dog__c
+        ];
 
         if (relationShips.size() == 0) {
             DogRelationShip__c relationShip = new DogRelationShip__c(
@@ -13,12 +16,14 @@ public with sharing class TeamService {
                 Type__c = 'Client'
             );
             insert relationShip;
-        }
-        else {
+        } else {
             Boolean found = false;
             // add client to the type if not already there
             for (DogRelationShip__c relationShip : relationShips) {
-                if (relationShip.Type__c != null && relationShip.Type__c.contains('Client')) {
+                if (
+                    relationShip.Type__c != null &&
+                    relationShip.Type__c.contains('Client')
+                ) {
                     found = true;
                     break;
                 }
@@ -30,8 +35,7 @@ public with sharing class TeamService {
             DogRelationShip__c relationShip = relationShips[0];
             if (String.isBlank(relationShip.Type__c)) {
                 relationShip.Type__c = 'Client';
-            }
-            else {
+            } else {
                 relationShip.Type__c = relationShip.Type__c + ';Client';
             }
             update relationShip;
@@ -82,22 +86,56 @@ public with sharing class TeamService {
 
     // Update PAT information
     public static void updatePatInformation(Set<Id> teamIds) {
-        List<Team__c> teams = [SELECT Id, Client__c, PatValidUntil__c, PatCount__c FROM Team__c WHERE Id IN :teamIds];
+        List<Team__c> teams = [
+            SELECT Id, Client__c, PatValidUntil__c, PatCount__c
+            FROM Team__c
+            WHERE Id IN :teamIds
+        ];
 
         for (Team__c team : teams) {
             List<PublicAccessTest__c> passingPats = [
                 SELECT Id, ValidUntil__c
                 FROM PublicAccessTest__c
                 WHERE Status__c = 'Passed' AND Team__c = :team.Id
-                ORDER BY ValidUntil__c DESC];
+                ORDER BY ValidUntil__c DESC
+            ];
             if (passingPats.isEmpty()) {
                 team.PatValidUntil__c = null;
-            }
-            else if (team.PatValidUntil__c != passingPats[0].ValidUntil__c) {
+            } else if (team.PatValidUntil__c != passingPats[0].ValidUntil__c) {
                 team.PatValidUntil__c = passingPats[0].ValidUntil__c;
             }
             team.PatCount__c = passingPats.size();
         }
         upsert teams;
+    }
+    // Set the dog/client relationship.
+    // This is meant to be called from the team update trigger.
+    public static void setClientFacilitatorRelationShip(Team__c newTeam) {
+        // See if there is an existing relationship between the client and facilitator
+        List<npe4__Relationship__c> relationShips = [
+            SELECT Id, npe4__Type__c, npe4__Status__c, npe4__RelatedContact__c
+            FROM npe4__Relationship__c
+        ];
+
+        // see if there is an existing relationship object to use
+        for (npe4__Relationship__c relationShip : relationShips) {
+            if (relationShip.npe4__Type__c == 'Team Faciliator') {
+                if (relationShip.npe4__Status__c == 'Current') {
+                    return;
+                }
+                // Set the status to current if not
+                relationShip.npe4__Status__c = 'Current';
+                update relationShip;
+                return;
+            }
+        }
+        // if we made it to here, there isn't an existing relationship, so create a new one
+        npe4__Relationship__c relationShip = new npe4__Relationship__c(
+            npe4__Contact__c = newTeam.Client__c,
+            npe4__RelatedContact__c = newTeam.Facilitator__c,
+            npe4__Type__c = 'Team Faciliator',
+            npe4__Status__c = 'Current'
+        );
+        insert relationShip;
     }
 }
