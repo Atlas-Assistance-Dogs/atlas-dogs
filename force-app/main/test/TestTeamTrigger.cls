@@ -151,11 +151,12 @@ public with sharing class TestTeamTrigger {
         System.assertEquals('Client', relationship.Type__c);
     }
 
-    private static void testClientDogStatus(string status, Date cert, string expectedStatus, Date expectedCert) {
+    private static void testClientDogStatus(string status, Date cert, string expectedStatus, Date expectedCert, string expectedAvail) {
         Team__c team = new Team__c(
             Name = 'Joe_Boomer',
             Client__c = joe.Id,
             Dog__c = boomer.Id,
+            FacilitatorAvailability__c = expectedAvail,
             Status__c = status,
             PatValidUntil__c = cert,
             InitialCertificationDate__c = expectedCert.addMonths(-1)
@@ -169,12 +170,13 @@ public with sharing class TestTeamTrigger {
         // Assert
         System.assert(result.isSuccess());
         Contact client = [
-            SELECT ClientStatus__c, ClientDog__c, ClientCertificationValidUntil__c, ClientInitialCertificationDate__c
+            SELECT ClientStatus__c, ClientDog__c, ClientCertificationValidUntil__c, ClientFacilitatorAvailability__c, ClientInitialCertificationDate__c
             FROM Contact
             WHERE Id = :joe.Id
         ];
         System.assertEquals(expectedStatus, client.ClientStatus__c);
         System.assertEquals(expectedCert, client.ClientCertificationValidUntil__c);
+        System.assertEquals(expectedAvail, client.ClientFacilitatorAvailability__c);
         System.assertEquals(team.InitialCertificationDate__c, client.ClientInitialCertificationDate__c);
         System.assertEquals(boomer.Name, client.ClientDog__c);
 
@@ -191,7 +193,7 @@ public with sharing class TestTeamTrigger {
         setup();
         string status = 'Decertified';
         Date expected = Date.today().addMonths(5);
-        testClientDogStatus(status, expected, status, expected);
+        testClientDogStatus(status, expected, status, expected, 'None');
     }
     
     @isTest
@@ -199,7 +201,7 @@ public with sharing class TestTeamTrigger {
         setup();
         string status = 'Discontinued';
         Date expected = Date.today().addMonths(5);
-        testClientDogStatus(status, expected, status, expected);
+        testClientDogStatus(status, expected, status, expected, 'None');
     }
     
     @isTest
@@ -207,7 +209,7 @@ public with sharing class TestTeamTrigger {
         setup();
         string status = 'None';
         Date expected = Date.today().addMonths(5);
-        testClientDogStatus(status, expected, status, expected);
+        testClientDogStatus(status, expected, status, expected, null);
     }
     
     @isTest
@@ -215,7 +217,7 @@ public with sharing class TestTeamTrigger {
         setup();
         string status = 'Initial Inquiry';
         Date expected = Date.today().addMonths(5);
-        testClientDogStatus(status, expected, status, expected);
+        testClientDogStatus(status, expected, status, expected, 'Forecast');
     }
     
     @isTest
@@ -223,7 +225,7 @@ public with sharing class TestTeamTrigger {
         setup();
         string status = 'In ADSiM';
         Date expected = Date.today().addMonths(5);
-        testClientDogStatus(status, expected, status, expected);
+        testClientDogStatus(status, expected, status, expected, 'Waitlist');
     }
     
     @isTest
@@ -231,7 +233,7 @@ public with sharing class TestTeamTrigger {
         setup();
         string status = 'Onboarding';
         Date expected = Date.today().addMonths(5);
-        testClientDogStatus(status, expected, status, expected);
+        testClientDogStatus(status, expected, status, expected, 'Available');
     }
     
     @isTest
@@ -239,7 +241,7 @@ public with sharing class TestTeamTrigger {
         setup();
         string status = 'In Training';
         Date expected = Date.today().addMonths(5);
-        testClientDogStatus(status, expected, status, expected);
+        testClientDogStatus(status, expected, status, expected, 'Available');
     }
     
     @isTest
@@ -247,6 +249,6 @@ public with sharing class TestTeamTrigger {
         setup();
         string status = 'Certified';
         Date expected = Date.today().addMonths(5);
-        testClientDogStatus(status, expected, status, expected);
+        testClientDogStatus(status, expected, status, expected, 'Available');
     }
 }
