@@ -34,7 +34,7 @@ class CategoryType:
                 self.fields = new_team
                 self.setup = update.test_team_setup
 
-        elif typ == 'ContactForm':
+        elif cat == 'Na':
             self.name = 'contact'
             self.field = typ + 'Received__c'
             self.object = 'Contact'

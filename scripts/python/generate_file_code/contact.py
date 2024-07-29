@@ -2,7 +2,7 @@ from category import Category
 import templates.clear as clear
 import templates.update as update
 
-skip_categories = {'Client', 'Na'}
+skip_categories = {'Client'}
 
 class Contact:
     '''Class to control writing out the generated FileService code for the contact objects'''
@@ -15,7 +15,6 @@ class Contact:
     def fields(self):
         '''List the fields'''
         fields = [', '.join(category.fields()) for category in self.sorted_categories if (category.category not in skip_categories)]
-        fields.append('ContactFormReceived__c')
         return ',\n\t\t\t\t'.join(fields)
 
 
@@ -23,14 +22,14 @@ class Contact:
         self.file.write(update.contact_code_start.format(fields = self.fields()))
         for category in self.sorted_categories:
             if (category.category in skip_categories):
-                continue;
+                continue
             self.file.write(category.check())
 
         self.file.write(update.contact_code_end)
 
         for category in self.sorted_categories:
             if (category.category in skip_categories):
-                continue;
+                continue
             self.file.write(category.method())
 
 

@@ -14,9 +14,6 @@ contact_code_start = '''
 '''
 
 contact_code_end = '''
-        if (cv.Type__c == 'ContactForm'){
-            contact.ContactFormReceived__c = null;
-        }
         update contact;
     }
 '''

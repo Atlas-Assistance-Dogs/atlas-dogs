@@ -27,11 +27,7 @@ contact_code_start = '''
 
         for (ContentVersion cv : cvs) {{'''
 
-contact_code_end = '''
-            if (cv.Type__c == 'ContactForm' && isLater(contact.ContactFormReceived__c, cv.Date__c)) {
-                contact.ContactFormReceived__c = cv.Date__c;
-            }
-        }
+contact_code_end = '''        }
         update contact;
     }
 '''
