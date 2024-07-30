@@ -45,6 +45,7 @@ public with sharing class TeamService {
                 ClientStatus__c,
                 ClientDog__c,
                 ClientCertificationValidUntil__c,
+                ClientFacilitatorAvailability__c,
                 ClientInitialCertificationDate__c
             FROM Contact
             WHERE Id = :team.Client__c
@@ -56,6 +57,7 @@ public with sharing class TeamService {
             client.ClientCertificationValidUntil__c = team.PatValidUntil__c;
             client.ClientStatus__c = team.Status__c;
             client.ClientInitialCertificationDate__c = team.InitialCertificationDate__c;
+            client.ClientFacilitatorAvailability__c = team.FacilitatorAvailability__c;
             if (!dogs.isEmpty()) {
                 client.ClientDog__c = dogs[0].Name;
             }
