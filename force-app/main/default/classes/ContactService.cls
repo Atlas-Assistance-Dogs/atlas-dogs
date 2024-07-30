@@ -137,7 +137,10 @@ public with sharing class ContactService {
 
     // Share the contact with the appropriate groups based on which positions they have,
     // and the positions they are emergency contacts for
-    public static Contact shareContactBasedOnPositions(Contact person, Map<String, String> positionGroups) {
+    public static Contact shareContactBasedOnPositions(
+        Contact person,
+        Map<String, String> positionGroups
+    ) {
         // Create a set of the positions the user currently has
         Set<String> positions = new Set<String>();
         if (!String.isBlank(person.Positions__c)) {
@@ -188,7 +191,7 @@ public with sharing class ContactService {
         List<CategoryRule__c> rules = [
             SELECT GroupName__c, Position__c
             FROM CategoryRule__c
-            WHERE Position__c != null
+            WHERE Position__c != NULL
         ];
         Map<String, String> groupNames = new Map<String, String>();
         for (CategoryRule__c rule : rules) {
@@ -204,7 +207,9 @@ public with sharing class ContactService {
         contact.ShareBoard__c = groupNames.contains('Board');
         contact.SharePuppyRaiser__c = groupNames.contains('Puppy Raiser');
         contact.ShareStaff__c = groupNames.contains('Staff');
-        contact.ShareStandalonePrograms__c = groupNames.contains('Standalone Programs');
+        contact.ShareStandalonePrograms__c = groupNames.contains(
+            'Standalone Programs'
+        );
         contact.ShareTeam__c = groupNames.contains('Team');
         contact.ShareTrainer__c = groupNames.contains('Trainer');
         contact.ShareVolunteer__c = groupNames.contains('Volunteer');
@@ -213,10 +218,33 @@ public with sharing class ContactService {
 
     public static void setSharingFields() {
         List<Contact> contacts = [
-            SELECT IsBoardMember__c, IsClient__c, IsPuppyRaiser__c, IsStaff__c, IsStandalone__c, IsTeamFacilitator__c, IsTrainer__c, IsVolunteer__c,
-                    ShareBoard__c, SharePuppyRaiser__c, ShareStaff__c, ShareStandalonePrograms__c, ShareTeam__c, ShareTrainer__c, ShareVolunteer__c
+            SELECT
+                IsBoardMember__c,
+                IsClient__c,
+                IsPuppyRaiser__c,
+                IsStaff__c,
+                IsStandalone__c,
+                IsTeamFacilitator__c,
+                IsTrainer__c,
+                IsVolunteer__c,
+                ShareBoard__c,
+                SharePuppyRaiser__c,
+                ShareStaff__c,
+                ShareStandalonePrograms__c,
+                ShareTeam__c,
+                ShareTrainer__c,
+                ShareVolunteer__c
             FROM Contact
-            WHERE IsBoardMember__c = TRUE OR IsClient__c = TRUE OR IsPuppyRaiser__c = TRUE OR IsStaff__c = TRUE OR IsStandalone__c = TRUE OR IsTeamFacilitator__c = TRUE OR IsTrainer__c = TRUE OR IsVolunteer__c = TRUE];
+            WHERE
+                IsBoardMember__c = TRUE
+                OR IsClient__c = TRUE
+                OR IsPuppyRaiser__c = TRUE
+                OR IsStaff__c = TRUE
+                OR IsStandalone__c = TRUE
+                OR IsTeamFacilitator__c = TRUE
+                OR IsTrainer__c = TRUE
+                OR IsVolunteer__c = TRUE
+        ];
 
         Map<Id, Contact> contactMap = new Map<Id, Contact>();
 
@@ -225,7 +253,8 @@ public with sharing class ContactService {
             person.SharePuppyRaiser__c = person.IsPuppyRaiser__c;
             person.ShareStaff__c = person.IsStaff__c;
             person.ShareStandalonePrograms__c = person.IsStandalone__c;
-            person.ShareTeam__c = person.IsClient__c || person.IsTeamFacilitator__c;
+            person.ShareTeam__c =
+                person.IsClient__c || person.IsTeamFacilitator__c;
             person.ShareTrainer__c = person.IsTrainer__c;
             person.ShareVolunteer__c = person.IsVolunteer__c;
             contactMap.put(person.Id, person);
@@ -259,16 +288,79 @@ public with sharing class ContactService {
                 share = relation.npe4__RelatedContact__r;
             }
             share.ShareBoard__c = share.ShareBoard__c || shared.ShareBoard__c;
-            share.SharePuppyRaiser__c = share.SharePuppyRaiser__c || shared.SharePuppyRaiser__c;
+            share.SharePuppyRaiser__c =
+                share.SharePuppyRaiser__c || shared.SharePuppyRaiser__c;
             share.ShareStaff__c = share.ShareStaff__c || share.ShareStaff__c;
-            share.ShareStandalonePrograms__c = share.ShareStandalonePrograms__c || shared.ShareStandalonePrograms__c;
+            share.ShareStandalonePrograms__c =
+                share.ShareStandalonePrograms__c ||
+                shared.ShareStandalonePrograms__c;
             share.ShareTeam__c = share.ShareTeam__c || shared.ShareTeam__c;
-            share.ShareTrainer__c = share.ShareTrainer__c || shared.ShareTrainer__c;
-            share.ShareVolunteer__c = share.ShareVolunteer__c || shared.ShareVolunteer__c;
+            share.ShareTrainer__c =
+                share.ShareTrainer__c || shared.ShareTrainer__c;
+            share.ShareVolunteer__c =
+                share.ShareVolunteer__c || shared.ShareVolunteer__c;
             if (!contactMap.containsKey(relation.npe4__RelatedContact__c)) {
                 contactMap.put(relation.npe4__RelatedContact__c, share);
             }
         }
         update contactMap.values();
+    }
+
+    public static void setBoardTermValidUntil(
+        Contact newContact,
+        Date oldBoardDate
+    ) {
+        if (
+            newContact.LastBoardTermStartDate__c != null &&
+            newContact.LastBoardTermStartDate__c != oldBoardDate
+        ) {
+            AtlasSettings__c settings = AtlasSettings__c.getOrgDefaults();
+            // check to see if settings are missing
+            if (settings.BoardTermEndMonth__c == null) {
+                // TODO: get default value
+                settings.BoardTermEndMonth__c = 4;
+                upsert settings;
+            }
+            Integer endMonth = (Integer) settings.BoardTermEndMonth__c;
+            integer month = newContact.LastBoardTermStartDate__c.month();
+            Date minTerm = newContact.LastBoardTermStartDate__c.addYears(3);
+            integer months = 0;
+            if (month < endMonth) {
+                months = endMonth - month;
+            } else if (month > endMonth && endMonth > 0) {
+                months = 12 + endMonth - month;
+            }
+            // We want to wind up at the last day of June in the year following 3 years of service.
+            // So, months + 1 takes us to July, toStartOfMonth() takes us to July 1, and subtracting
+            // a day takes us to June 30.
+            newContact.BoardTermValidUntil__c = minTerm.addMonths(months + 1)
+                .toStartOfMonth()
+                .addDays(-1);
+        }
+    }
+
+    public static void updateFirstAidValidUntil(
+        Contact newContact,
+        Date oldFirstAidDate
+    ) {
+        if (newContact.FirstAidReceived__c == null) {
+            newContact.FirstAidValidUntil__c = null;
+            return;
+        }
+        if (
+            newContact.FirstAidReceived__c != null &&
+            newContact.FirstAidReceived__c != oldFirstAidDate
+        ) {
+            AtlasSettings__c settings = AtlasSettings__c.getOrgDefaults();
+            // check to see if settings are missing
+            if (settings.FirstAidRenewalYears__c == null) {
+                // TODO: get default value
+                settings.FirstAidRenewalYears__c = 2;
+                upsert settings;
+            }
+            newContact.FirstAidValidUntil__c = newContact.FirstAidReceived__c.addYears(
+                (integer) settings.FirstAidRenewalYears__c
+            );
+        }
     }
 }
