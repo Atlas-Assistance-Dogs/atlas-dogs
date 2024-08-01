@@ -205,13 +205,13 @@ public with sharing class FileService {
             SELECT Id,
                 ADSiMApplicationReceived__c, ADSiMPreApplicationReceived__c, ADSiMProgAgreementReceived__c,
 				BoardAgreementReceived__c, BoardApplicationReceived__c, BoardCoIReceived__c, BoardResumeReceived__c, BoardToNReceived__c,
-				FacilitatorApplicationReceived__c, FacilitatorCertAgreementReceived__c, FacilitatorFirstAidReceived__c, FacilitatorInfrNoticeReceived__c, FacilitatorPracticumReceived__c, FacilitatorProgAgreementReceived__c, FacilitatorReferenceReceived__c,
+				FacilitatorApplicationReceived__c, FacilitatorCertAgreementReceived__c, FacilitatorInfrNoticeReceived__c, FacilitatorPracticumReceived__c, FacilitatorProgAgreementReceived__c, FacilitatorReferenceReceived__c,
+				ContactFormReceived__c, FirstAidReceived__c,
 				PuppyApplicationReceived__c, PuppyCertAgreementReceived__c, PuppyContractReceived__c, PuppyInfrNoticeReceived__c, PuppyProgAgreementReceived__c, PuppyReferenceReceived__c,
-				StaffAgreementReceived__c, StaffApplicationReceived__c, StaffFirstAidReceived__c, StaffI9Received__c, StaffOfferReceived__c, StaffResumeReceived__c, StaffW4Received__c, StaffW9Received__c,
+				StaffAgreementReceived__c, StaffApplicationReceived__c, StaffI9Received__c, StaffOfferReceived__c, StaffResumeReceived__c, StaffW4Received__c, StaffW9Received__c,
 				StandaloneApplicationReceived__c, StandaloneProgAgreementReceived__c,
 				TrainerApplicationReceived__c, TrainerCertAgreementReceived__c, TrainerClientReferenceReceived__c, TrainerInfrNoticeReceived__c, TrainerProfReferenceReceived__c, TrainerProgAgreementReceived__c,
-				VolunteerAgreementReceived__c, VolunteerApplicationReceived__c, VolunteerResumeReceived__c,
-				ContactFormReceived__c
+				VolunteerAgreementReceived__c, VolunteerApplicationReceived__c, VolunteerResumeReceived__c
             FROM Contact
             WHERE Id = :recordId
         ];
@@ -240,6 +240,10 @@ public with sharing class FileService {
                 updateFacilitatorDate(cv, contact);
             }
         
+            if (cv.Category__c == 'Na') {
+                updateNaDate(cv, contact);
+            }
+        
             if (cv.Category__c == 'Puppy') {
                 updatePuppyDate(cv, contact);
             }
@@ -258,10 +262,6 @@ public with sharing class FileService {
         
             if (cv.Category__c == 'Volunteer') {
                 updateVolunteerDate(cv, contact);
-            }
-
-            if (cv.Type__c == 'ContactForm' && isLater(contact.ContactFormReceived__c, cv.Date__c)) {
-                contact.ContactFormReceived__c = cv.Date__c;
             }
         }
         update contact;
@@ -318,10 +318,6 @@ public with sharing class FileService {
             contact.FacilitatorCertAgreementReceived__c = cv.Date__c;
         }
 
-        if (cv.Type__c == 'FirstAid' && isLater(contact.FacilitatorFirstAidReceived__c, cv.Date__c)) {
-            contact.FacilitatorFirstAidReceived__c = cv.Date__c;
-        }
-
         if (cv.Type__c == 'InfrNotice' && isLater(contact.FacilitatorInfrNoticeReceived__c, cv.Date__c)) {
             contact.FacilitatorInfrNoticeReceived__c = cv.Date__c;
         }
@@ -336,6 +332,18 @@ public with sharing class FileService {
 
         if (cv.Type__c == 'Reference' && isLater(contact.FacilitatorReferenceReceived__c, cv.Date__c)) {
             contact.FacilitatorReferenceReceived__c = cv.Date__c;
+        }
+    }
+
+    // Update the last date when the category is Na
+    private static void updateNaDate(ContentVersion cv, Contact contact) {
+
+        if (cv.Type__c == 'ContactForm' && isLater(contact.ContactFormReceived__c, cv.Date__c)) {
+            contact.ContactFormReceived__c = cv.Date__c;
+        }
+
+        if (cv.Type__c == 'FirstAid' && isLater(contact.FirstAidReceived__c, cv.Date__c)) {
+            contact.FirstAidReceived__c = cv.Date__c;
         }
     }
 
@@ -376,10 +384,6 @@ public with sharing class FileService {
 
         if (cv.Type__c == 'Application' && isLater(contact.StaffApplicationReceived__c, cv.Date__c)) {
             contact.StaffApplicationReceived__c = cv.Date__c;
-        }
-
-        if (cv.Type__c == 'FirstAid' && isLater(contact.StaffFirstAidReceived__c, cv.Date__c)) {
-            contact.StaffFirstAidReceived__c = cv.Date__c;
         }
 
         if (cv.Type__c == 'I9' && isLater(contact.StaffI9Received__c, cv.Date__c)) {

@@ -42,26 +42,6 @@ public with sharing class TestClearDateServiceFacilitatorFields {
     }
 
     @isTest
-    public static void clearDate_FacilitatorFirstAid_SetsDateToNull() {
-        ContentVersion cv = new ContentVersion(Category__c = 'Facilitator', Type__c = 'FirstAid');
-        Contact record = new Contact(FirstName = 'Test', LastName = 'Contact', Email = 'abc@abc.com');
-        insert record;
-        ClearDateService.clear(cv, record.Id);
-
-        record = [
-            SELECT FacilitatorFirstAidReceived__c
-            FROM Contact
-            WHERE Id = :record.Id
-            LIMIT 1
-        ];
-        system.assertEquals(
-            null,
-            record.FacilitatorFirstAidReceived__c,
-            'FacilitatorFirstAidReceived__c not cleared'
-        );
-    }
-
-    @isTest
     public static void clearDate_FacilitatorInfrNotice_SetsDateToNull() {
         ContentVersion cv = new ContentVersion(Category__c = 'Facilitator', Type__c = 'InfrNotice');
         Contact record = new Contact(FirstName = 'Test', LastName = 'Contact', Email = 'abc@abc.com');

@@ -123,66 +123,6 @@ public with sharing class TestFileServiceStaffFields {
     }
 
     @isTest
-    public static void updateDate_StaffFirstAid_SetsDateWhenNull() {
-        Contact record = new Contact(FirstName = 'Test', LastName = 'Contact', Email = 'abc@abc.com');
-        insert record;
-        ContentVersion cv = TestFileServiceFields.createLink('Staff', 'FirstAid', Date.today(), record.Id);
-        FileService.updateDate(cv, record.Id);
-
-        record = [
-            SELECT StaffFirstAidReceived__c
-            FROM Contact
-            WHERE Id = :record.Id
-            LIMIT 1
-        ];
-        system.assertEquals(
-            Date.today(),
-            record.StaffFirstAidReceived__c,
-            'StaffFirstAidReceived__c not set'
-        );
-    }
-
-    @isTest
-    public static void updateDate_StaffFirstAid_SetsDateWhenNewer() {
-        Contact record = new Contact(FirstName = 'Test', LastName = 'Contact', Email = 'abc@abc.com', StaffFirstAidReceived__c = Date.today().addDays(-1));
-        insert record;
-        ContentVersion cv = TestFileServiceFields.createLink('Staff', 'FirstAid', Date.today(), record.Id);
-        FileService.updateDate(cv, record.Id);
-
-        record = [
-            SELECT StaffFirstAidReceived__c
-            FROM Contact
-            WHERE Id = :record.Id
-            LIMIT 1
-        ];
-        system.assertEquals(
-            Date.today(),
-            record.StaffFirstAidReceived__c,
-            'StaffFirstAidReceived__c not set'
-        );
-    }
-
-    @isTest
-    public static void updateDate_StaffFirstAid_LeavesDateWhenOlder() {
-        Contact record = new Contact(FirstName = 'Test', LastName = 'Contact', Email = 'abc@abc.com', StaffFirstAidReceived__c = Date.today());
-        insert record;
-        ContentVersion cv = TestFileServiceFields.createLink('Staff', 'FirstAid', Date.today().addDays(-1), record.Id);
-        FileService.updateDate(cv, record.Id);
-
-        record = [
-            SELECT StaffFirstAidReceived__c
-            FROM Contact
-            WHERE Id = :record.Id
-            LIMIT 1
-        ];
-        system.assertEquals(
-            Date.today(),
-            record.StaffFirstAidReceived__c,
-            'StaffFirstAidReceived__c set to an older date'
-        );
-    }
-
-    @isTest
     public static void updateDate_StaffI9_SetsDateWhenNull() {
         Contact record = new Contact(FirstName = 'Test', LastName = 'Contact', Email = 'abc@abc.com');
         insert record;

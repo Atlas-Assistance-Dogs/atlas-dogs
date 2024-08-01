@@ -39,7 +39,7 @@ class Category:
     private static void update{category}Date(ContentVersion cv, {object} {name}) {{
 '''
         definition = template.format(category = self.category, object = self.object, name = self.name)
-        types = [typ.code() for typ in self.types if typ.doc_type != 'ContactForm']
+        types = [typ.code() for typ in self.types]
         end = '    }\n'
         return definition + ''.join(types) + end
 
@@ -49,7 +49,7 @@ class Category:
     // Clear the last date when the category is {category}
     private static void clear{category}Date(ContentVersion cv, {object} {name}) {{'''
         definition = template.format(category = self.category, object = self.object, name = self.name)
-        types = [typ.clear_code() for typ in self.types if typ.doc_type != 'ContactForm']
+        types = [typ.clear_code() for typ in self.types]
         end = '    }\n'
         return definition + ''.join(types) + end
 
@@ -65,7 +65,7 @@ class Category:
 
     def fields(self):
         '''Return the list of fields for this category'''
-        return [typ.field for typ in self.types if typ.doc_type != 'ContactForm']
+        return [typ.field for typ in self.types]
 
 
     def test(self, test_file):

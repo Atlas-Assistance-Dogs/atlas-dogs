@@ -61,4 +61,64 @@ public with sharing class TestFileServiceNaFields {
             'ContactFormReceived__c set to an older date'
         );
     }
+
+    @isTest
+    public static void updateDate_NaFirstAid_SetsDateWhenNull() {
+        Contact record = new Contact(FirstName = 'Test', LastName = 'Contact', Email = 'abc@abc.com');
+        insert record;
+        ContentVersion cv = TestFileServiceFields.createLink('Na', 'FirstAid', Date.today(), record.Id);
+        FileService.updateDate(cv, record.Id);
+
+        record = [
+            SELECT FirstAidReceived__c
+            FROM Contact
+            WHERE Id = :record.Id
+            LIMIT 1
+        ];
+        system.assertEquals(
+            Date.today(),
+            record.FirstAidReceived__c,
+            'FirstAidReceived__c not set'
+        );
+    }
+
+    @isTest
+    public static void updateDate_NaFirstAid_SetsDateWhenNewer() {
+        Contact record = new Contact(FirstName = 'Test', LastName = 'Contact', Email = 'abc@abc.com', FirstAidReceived__c = Date.today().addDays(-1));
+        insert record;
+        ContentVersion cv = TestFileServiceFields.createLink('Na', 'FirstAid', Date.today(), record.Id);
+        FileService.updateDate(cv, record.Id);
+
+        record = [
+            SELECT FirstAidReceived__c
+            FROM Contact
+            WHERE Id = :record.Id
+            LIMIT 1
+        ];
+        system.assertEquals(
+            Date.today(),
+            record.FirstAidReceived__c,
+            'FirstAidReceived__c not set'
+        );
+    }
+
+    @isTest
+    public static void updateDate_NaFirstAid_LeavesDateWhenOlder() {
+        Contact record = new Contact(FirstName = 'Test', LastName = 'Contact', Email = 'abc@abc.com', FirstAidReceived__c = Date.today());
+        insert record;
+        ContentVersion cv = TestFileServiceFields.createLink('Na', 'FirstAid', Date.today().addDays(-1), record.Id);
+        FileService.updateDate(cv, record.Id);
+
+        record = [
+            SELECT FirstAidReceived__c
+            FROM Contact
+            WHERE Id = :record.Id
+            LIMIT 1
+        ];
+        system.assertEquals(
+            Date.today(),
+            record.FirstAidReceived__c,
+            'FirstAidReceived__c set to an older date'
+        );
+    }
 }
