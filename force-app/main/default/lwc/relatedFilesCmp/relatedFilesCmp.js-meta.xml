@@ -7,4 +7,9 @@
     <targets>
         <target>lightning__RecordPage</target>
     </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__RecordPage">
+            <property name="numRecords" type="Integer" label="Number of Records to Display" default="6" />
+        </targetConfig>
+    </targetConfigs>
 </LightningComponentBundle>

@@ -48,6 +48,7 @@ export default class RelatedFiles extends NavigationMixin(LightningElement) {
     @api objectApiName;
     @api recordId;
     @api viewAll;
+    @api numRecords = 6;
     columns = COLS;
     relatedObject = CV_OBJECT;
     @track data;
@@ -75,7 +76,7 @@ export default class RelatedFiles extends NavigationMixin(LightningElement) {
  
     @api
     get max() {
-        return this.viewAll ? 10000 : 6;
+        return this.viewAll ? 10000 : this.numRecords;
     }
 
     bareData;
@@ -144,31 +145,19 @@ export default class RelatedFiles extends NavigationMixin(LightningElement) {
     sortDirection = "asc";
     sortedBy;
 
-    // Used to sort the columns
-    sortBy(field, reverse, primer) {
-        const key = primer
-            ? function (x) {
-                  return primer(x[field]);
-              }
-            : function (x) {
-                  return x[field];
-              };
-
-        return function (a, b) {
-            a = key(a);
-            b = key(b);
-            return reverse * ((a > b) - (b > a));
-        };
-    }
-
     handleSort(event) {
-        const { fieldName: sortedBy, sortDirection } = event.detail;
+        var fieldName = event.detail.fieldName;
+        var sortDirection = event.detail.sortDirection;
         const cloneData = [...this.data];
 
-        cloneData.sort(this.sortBy(sortedBy, sortDirection === "asc" ? 1 : -1));
+        cloneData.sort((a, b) => {
+            const x1 = a[fieldName] ?? '';
+            const x2 = b[fieldName] ?? '';
+            const asc = x1 > x2 ? 1 : x1 < x2 ? -1 : 0;
+            return sortDirection === "asc" ? asc : asc * -1});
         this.data = cloneData;
+        this.sortedBy = fieldName;
         this.sortDirection = sortDirection;
-        this.sortedBy = sortedBy;
     }
 
     handleRowAction(event) {
