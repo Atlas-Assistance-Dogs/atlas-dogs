@@ -209,23 +209,6 @@ export default class RelatedLogsCmp extends NavigationMixin(LightningElement) {
     sortDirection = "asc";
     sortedBy;
 
-    // Used to sort the 'Age' column
-    sortBy(field, reverse, primer) {
-        const key = primer
-            ? function (x) {
-                  return primer(x[field]);
-              }
-            : function (x) {
-                  return x[field];
-              };
-
-        return function (a, b) {
-            a = key(a);
-            b = key(b);
-            return reverse * ((a > b) - (b > a));
-        };
-    }
-
     handleSort(event) {
         const { fieldName, sortDirection } = event.detail;
         const cloneData = [...this.data];
