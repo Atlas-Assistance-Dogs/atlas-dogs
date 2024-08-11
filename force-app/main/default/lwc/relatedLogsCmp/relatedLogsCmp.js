@@ -47,7 +47,7 @@ const COLS = {
     },
     team: {
         label: "Team",
-        fieldName: TEAM_FIELD.fieldApiName,
+        fieldName: "teamName",
         type: "button",
         typeAttributes: {
             name: "team",
@@ -59,7 +59,7 @@ const COLS = {
     },
     facilitator: {
         label: "Facilitator",
-        fieldName: FACILITATOR_FIELD.fieldApiName,
+        fieldName: "facilitatorName",
         type: "button",
         typeAttributes: {
             name: "facilitator",
@@ -71,7 +71,7 @@ const COLS = {
     },
     submitter: {
         label: "Submitter",
-        fieldName: SUBMITTER_FIELD.fieldApiName,
+        fieldName: "submitterName",
         type: "button",
         typeAttributes: {
             name: "submitter",
@@ -227,13 +227,17 @@ export default class RelatedLogsCmp extends NavigationMixin(LightningElement) {
     }
 
     handleSort(event) {
-        const { fieldName: sortedBy, sortDirection } = event.detail;
+        const { fieldName, sortDirection } = event.detail;
         const cloneData = [...this.data];
 
-        cloneData.sort(this.sortBy(sortedBy, sortDirection === "asc" ? 1 : -1));
+        cloneData.sort((a, b) => {
+            const x1 = a[fieldName] ?? '';
+            const x2 = b[fieldName] ?? '';
+            const asc = x1 > x2 ? 1 : x1 < x2 ? -1 : 0;
+            return sortDirection === "asc" ? asc : asc * -1});
         this.data = cloneData;
         this.sortDirection = sortDirection;
-        this.sortedBy = sortedBy;
+        this.sortedBy = fieldName;
     }
 
     handleRowAction(event) {
