@@ -48,6 +48,7 @@ export default class RelatedFiles extends NavigationMixin(LightningElement) {
     @api objectApiName;
     @api recordId;
     @api viewAll;
+    @api numRecords = 6;
     columns = COLS;
     relatedObject = CV_OBJECT;
     @track data;
@@ -75,7 +76,7 @@ export default class RelatedFiles extends NavigationMixin(LightningElement) {
  
     @api
     get max() {
-        return this.viewAll ? 10000 : 6;
+        return this.viewAll ? 10000 : this.numRecords;
     }
 
     bareData;
