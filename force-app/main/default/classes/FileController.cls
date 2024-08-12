@@ -115,9 +115,7 @@ global inherited sharing class FileController {
             List<ContentVersion> files = [
                 SELECT Title, ContentDocumentId, Category__c, Type__c, Date__c
                 FROM ContentVersion
-                WHERE
-                    ContentDocumentId IN :lstConDocs
-                    AND FileType != 'SNOTE'
+                WHERE ContentDocumentId IN :lstConDocs AND FileType != 'SNOTE'
                 ORDER BY Date__c DESC
                 LIMIT :max
             ];
@@ -132,9 +130,7 @@ global inherited sharing class FileController {
             related.total = [
                 SELECT COUNT()
                 FROM ContentVersion
-                WHERE
-                    ContentDocumentId IN :lstConDocs
-                    AND FileType != 'SNOTE'
+                WHERE ContentDocumentId IN :lstConDocs AND FileType != 'SNOTE'
             ];
             return related;
         } else {
@@ -216,34 +212,30 @@ global inherited sharing class FileController {
         if (recordId == null) {
             throw new AuraHandledException('recordId must not be null');
         }
-        // get all, since we can't be sure how many will be filtered out
+        Set<String> allowedCategories = new Set<String>(
+            CategoryRuleController.getAllowedCategoriesForObject(recordId)
+        );
+        allowedCategories.add('');
         RelatedObjects allFiles = getAllRelatedFiles(recordId, 10000);
 
-        RelatedObjects objects = new RelatedObjects();
+        RelatedObjects related = new RelatedObjects();
 
         if (allFiles.total > 0) {
-            RelatedObjects related = new RelatedObjects();
-
-            // get a map of the category and type labels
-            Map<string, string> categoryEntries = FileController.getEntryMap(
-                ContentVersion.Category__c.getDescribe()
-            );
-            Map<string, string> typeEntries = FileController.getEntryMap(
-                ContentVersion.Type__c.getDescribe()
-            );
-            Set<String> allowedCategories = new Set<String>(CategoryRuleController.getAllowedCategoriesForUser());
-            allowedCategories.add('');
-            
             for (Object item : allFiles.items) {
-                FileInfo info = (FileInfo)item;
-                if (allowedCategories.contains(info.cv.Category__c) || info.cv.Category__c == null) {
-                    related.items.add(info);
+                FileInfo info = (FileInfo) item;
+                if (
+                    allowedCategories.contains(info.cv.Category__c) ||
+                    info.cv.Category__c == null
+                ) {
+                    if (related.total < max) {
+                        related.items.add(info);
+                    }
+                    related.total = related.total + 1;
                 }
             }
-            related.total = related.items.size();
             return related;
         } else {
-            return new RelatedObjects();
+            return related;
         }
     }
 }

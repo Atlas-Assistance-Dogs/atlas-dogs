@@ -63,7 +63,7 @@ flows:
             90:
                 task: assign_permission_sets
                 options:
-                    api_names: AtlasSuperUser
+                    api_names: AtlasBackgroundCheck,AtlasBase,AtlasBoard,AtlasDemographics,AtlasFacilitator,AtlasPuppyRaiser,AtlasStaff,AtlasStandalonePrograms,AtlasTeam,AtlasTrainer,AtlasVolunteer
 
     # Flow to deploy current source to a sandbox for dev or verification
     sandbox:

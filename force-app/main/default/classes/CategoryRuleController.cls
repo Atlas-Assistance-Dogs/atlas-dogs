@@ -23,12 +23,11 @@ global without sharing class CategoryRuleController {
     }
  
     global static Set<String> getAllowedCategoriesForObject(Id recordId) {
-        return new Set<String>();
+        return getAllowedCategoriesForObject(recordId, false);
     }
 
     public static Set<String> getAllowedCategoriesForObject(Id recordId, Boolean isUpload) {
         if (isUpload == null) isUpload = false;
-        System.debug(isUpload);
         string objLabel = recordId.getSObjectType().getDescribe().getLabel();
 
         List<String> groupNames = UserAccessService.GetGroupNames(UserInfo.getUserId());
@@ -45,13 +44,13 @@ global without sharing class CategoryRuleController {
             AND Object__c = :objLabel
             AND Category__c IN :allCategories
         ];
+
         for (CategoryRule__c rule: rules) {
-            System.debug(rule);
             if (((isUpload && rule.ReadOnly__c != true) || !isUpload) && rule.Category__c != null) {
                 categories.addAll(rule.Category__c.split(';'));
             }
         }
-        
+
         return categories;
     }
 
@@ -102,7 +101,6 @@ global without sharing class CategoryRuleController {
             entries.add(option);
         }
         entries.sort();
-        System.debug(entries);
         return entries;
     }
 }

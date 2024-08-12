@@ -212,4 +212,90 @@ public with sharing class TestUtilities {
         };
         insert lookups;
     }
+    class MyPickListInfo {
+        public Boolean active;
+        public Boolean defaultValue;
+        public String label;
+        public String validFor;
+        public String value;
+    }
+    public static Map<String, List<String>> getCategoryTypeDependencies() {
+        Map<String, List<String>> controllingInfo = new Map<String, List<String>>();
+
+        Schema.SObjectType objType = Schema.getGlobalDescribe()
+            .get('ContentVersion');
+
+        Schema.DescribeSObjectResult describeResult = objType.getDescribe();
+        Schema.DescribeFieldResult controllingFieldInfo = describeResult.fields.getMap()
+            .get('Category__c')
+            .getDescribe();
+        Schema.DescribeFieldResult dependentFieldInfo = describeResult.fields.getMap()
+            .get('Type__c')
+            .getDescribe();
+
+        List<Schema.PicklistEntry> controllingValues = controllingFieldInfo.getPicklistValues();
+        List<Schema.PicklistEntry> dependentValues = dependentFieldInfo.getPicklistValues();
+
+        for (Schema.PicklistEntry currControllingValue : controllingValues) {
+            controllingInfo.put(
+                currControllingValue.getValue(),
+                new List<String>()
+            );
+        }
+
+        for (Schema.PicklistEntry currDependentValue : dependentValues) {
+            String jsonString = JSON.serialize(currDependentValue);
+
+            MyPickListInfo info = (MyPickListInfo) JSON.deserialize(
+                jsonString,
+                MyPickListInfo.class
+            );
+
+            String hexString = EncodingUtil.convertToHex(
+                    EncodingUtil.base64Decode(info.validFor)
+                )
+                .toUpperCase();
+
+            Integer baseCount = 0;
+
+            for (Integer curr : hexString.getChars()) {
+                Integer val = 0;
+
+                if (curr >= 65) {
+                    val = curr - 65 + 10;
+                } else {
+                    val = curr - 48;
+                }
+
+                if ((val & 8) == 8) {
+                    controllingInfo.get(
+                            controllingValues[baseCount + 0].getValue()
+                        )
+                        .add(currDependentValue.getValue());
+                }
+                if ((val & 4) == 4) {
+                    controllingInfo.get(
+                            controllingValues[baseCount + 1].getValue()
+                        )
+                        .add(currDependentValue.getValue());
+                }
+                if ((val & 2) == 2) {
+                    controllingInfo.get(
+                            controllingValues[baseCount + 2].getValue()
+                        )
+                        .add(currDependentValue.getValue());
+                }
+                if ((val & 1) == 1) {
+                    controllingInfo.get(
+                            controllingValues[baseCount + 3].getValue()
+                        )
+                        .add(currDependentValue.getValue());
+                }
+
+                baseCount += 4;
+            }
+        }
+
+        return controllingInfo;
+    }
 }
