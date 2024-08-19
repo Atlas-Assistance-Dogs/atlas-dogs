@@ -6,9 +6,9 @@
     <formula>IF( ISNULL(TrainerCertAgreementReceived__c),
  /* Find the number of years that have
     passed between the Last Cert Agreement and the Initial Cert Date. Certification is valid for
-    that many years */
+    that many years, with a leeway from custom settings. */
  ADDMONTHS(TrainerInitialCertificationDate__c, 12),
- ADDMONTHS(TrainerInitialCertificationDate__c, FLOOR(((TrainerCertAgreementReceived__c - TrainerInitialCertificationDate__c) + 365) / 365) * 12) )</formula>
+ ADDMONTHS(TrainerInitialCertificationDate__c, FLOOR((TrainerCertAgreementReceived__c - TrainerInitialCertificationDate__c + 365 +  $Setup.AtlasSettings__c.RenewalLeeway__c ) / 365) * 12) )</formula>
     <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
     <label>Trainer Certification Valid Until</label>
     <required>false</required>
