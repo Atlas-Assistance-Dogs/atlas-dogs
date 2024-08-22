@@ -55,6 +55,10 @@ trigger ContactTrigger on Contact (before insert, before update) {
         }
 
         ContactService.updateFirstAidValidUntil(newContact, oldFirstAidDate);
+
+        if (newContact.isTrainer__c && newContact.TrainerCertAgreementReceived__c != null) {
+            ContactService.updateCertValidUntil(newContact);
+        }
     }
 
     if (!Trigger.isInsert) {

@@ -363,4 +363,72 @@ public with sharing class ContactService {
             );
         }
     }
+
+    class Dates {
+        public Date initial { get; set; }
+        public Date expiration { get; set; }
+    }
+
+    public static void updateCertValidUntil(Contact trainer) {
+        // check to see if settings are missing
+        Boolean updateSettings = false;
+        AtlasSettings__c settings = AtlasSettings__c.getOrgDefaults();
+        if (settings.CertRenewalYears__c == null) {
+            // TODO: get default value
+            settings.CertRenewalYears__c = 1;
+            updateSettings = true;
+        }
+        if (settings.EarlyRenewal__c == null) {
+            // TODO: get default value
+            settings.EarlyRenewal__c = 90;
+            updateSettings = true;
+        }
+        if (settings.RenewalLeeway__c == null) {
+            // TODO: get default value
+            settings.RenewalLeeway__c = 30;
+            updateSettings = true;
+        }
+        if (updateSettings) {
+            upsert settings;
+        }
+        Integer years = (Integer) settings.CertRenewalYears__c;
+        Integer early = (Integer) settings.EarlyRenewal__c;
+        Integer leeway = (Integer) settings.RenewalLeeway__c;
+        if (
+            trainer.IsTrainer__c &&
+            trainer.TrainerCertAgreementReceived__c != null
+        ) {
+            if (trainer.TrainerInitialCertificationDate__c == null) {
+                trainer.TrainerInitialCertificationDate__c = trainer.TrainerCertAgreementReceived__c;
+                trainer.TrainerCertValidUntil__c = trainer.TrainerCertAgreementReceived__c.addYears(1);
+                return;
+            }
+            Integer days = trainer.TrainerCertAgreementReceived__c.daysBetween(trainer.TrainerCertValidUntil__c);
+            if (days >= -early && days <= leeway) {
+                trainer.TrainerCertValidUntil__c = trainer.TrainerCertValidUntil__c.addYears(years);
+            }
+        }
+    }
+
+    private static Dates getCertExpiration(
+        Date initial,
+        Date agreement,
+        Integer early,
+        Integer years,
+        Integer leeway
+    ) {
+        Dates cdates = new Dates();
+        cdates.initial = initial;
+        if (agreement == null) {
+            return cdates;
+        }
+        if (initial == null) {
+            cdates.initial = agreement;
+            cdates.expiration = agreement.addYears(years);
+        } else {
+            Integer moreYears = (agreement.daysBetween(initial) + 365 + leeway) / 365;
+            cdates.expiration = initial.addYears(moreYears);
+        }
+        return cdates;
+    }
 }

@@ -21,3 +21,7 @@ package.xml
 **/npsp__*
 **/npe01__*
 **/npo02__*
+
+**/tsconfig.json
+
+**/*.ts
