@@ -85,7 +85,7 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>SystemAccess__c</field>
+                <field>VolunteerAccess__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>

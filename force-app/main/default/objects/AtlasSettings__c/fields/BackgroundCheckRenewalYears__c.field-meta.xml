@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BackgroundCheckRenewalYears__c</fullName>
+    <defaultValue>1</defaultValue>
+    <description>Years between background checks</description>
+    <externalId>false</externalId>
+    <label>Background Check Renewal Years</label>
+    <precision>2</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>
