@@ -53,7 +53,6 @@ public with sharing class BackgroundCheckController {
         Date threshold = Date.today()
             .addYears(-1 * (Integer) settings.BackgroundCheckRenewalYears__c)
             .addMonths(1);
-        System.debug(threshold);
 
         // Get the group to assign the task to
         Group adminGroup = [
@@ -64,7 +63,7 @@ public with sharing class BackgroundCheckController {
 
         // Make sure we only have one Background check per contact
         Set<Id> contactIds = new Set<Id>();
-        // Check for any cantacts that need background checks
+        // Check for any contacts that need background checks
         Contact[] contacts = [
             SELECT Id, Name
             FROM Contact
@@ -87,7 +86,7 @@ public with sharing class BackgroundCheckController {
                 OR Contact__r.VolunteerAccess__c = 'Background Check Required')
             ORDER BY Date__c DESC // get the most recent first
         ];
-        System.debug(checks);
+
         // Remove the contacts with recent-enough background checks from the list
         for (BackgroundCheck__c check : checks) {
             contactIds.remove(check.Contact__c);
