@@ -113,7 +113,7 @@ global inherited sharing class FileController {
                 ContentVersion.Type__c.getDescribe()
             );
             List<ContentVersion> files = [
-                SELECT Title, ContentDocumentId, Category__c, Type__c, Date__c
+                SELECT Title, FileType, ContentDocumentId, Category__c, Type__c, Date__c
                 FROM ContentVersion
                 WHERE ContentDocumentId IN :lstConDocs AND FileType != 'SNOTE'
                 ORDER BY Date__c DESC
@@ -169,7 +169,8 @@ global inherited sharing class FileController {
                     Date__c,
                     LastModifiedDate,
                     Category__c,
-                    Type__c
+                    Type__c,
+                    FileType
                 FROM ContentVersion
                 WHERE ContentDocumentId = :link.ContentDocumentId
                 LIMIT 1
