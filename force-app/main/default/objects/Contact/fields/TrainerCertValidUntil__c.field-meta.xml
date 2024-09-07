@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TrainerCertValidUntil__c</fullName>
+    <description>The date the Trainer Certification is valid to</description>
+    <externalId>false</externalId>
+    <label>Trainer Certification Valid Until</label>
+    <required>false</required>
+    <type>Date</type>
+</CustomField>
