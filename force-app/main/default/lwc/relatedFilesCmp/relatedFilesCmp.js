@@ -26,6 +26,11 @@ const COLS = [
         }
     },
     {
+        label: "Type",
+        fieldName: 'FileType',
+        sortable: true
+    },
+    {
         label: "Category",
         fieldName: 'category',
         sortable: true
@@ -168,7 +173,7 @@ export default class RelatedFiles extends NavigationMixin(LightningElement) {
                 this.deleteCons(row);
                 break;
             case "edit":
-                const payload = { recordId: row.Id, fileName: row.Title };
+                const payload = { recordId: row.Id, fileName: row.Title, fileType: row.FileType };
                 this.template
                     .querySelector("c-file-update-cmp")
                     .openModal(payload);

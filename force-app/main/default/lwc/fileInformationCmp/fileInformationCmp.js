@@ -11,6 +11,7 @@ import CATEGORY_FIELD from "@salesforce/schema/ContentVersion.Category__c";
 import DATE_FIELD from "@salesforce/schema/ContentVersion.Date__c";
 import DOCID_FIELD from "@salesforce/schema/ContentVersion.ContentDocumentId";
 import TITLE_FIELD from "@salesforce/schema/ContentVersion.Title";
+import FILE_TYPE_FIELD from "@salesforce/schema/ContentVersion.FileType";
 import TYPE_FIELD from "@salesforce/schema/ContentVersion.Type__c";
 
 export default class FileInformation extends NavigationMixin(LightningElement) {
@@ -124,16 +125,17 @@ export default class FileInformation extends NavigationMixin(LightningElement) {
     // Get the file name, document id, and current values
     @wire(getRecord, {
         recordId: "$recordId",
-        fields: [CATEGORY_FIELD, DOCID_FIELD, TITLE_FIELD, TYPE_FIELD]
+        fields: [CATEGORY_FIELD, DOCID_FIELD, TITLE_FIELD, FILE_TYPE_FIELD, TYPE_FIELD]
     })
     getFileInfo(result) {
         if (result?.data) {
             const title = result.data.fields.Title.value;
+            const fileType = result.data.fields.FileType.value;
             this.category = result.data.fields[CATEGORY_FIELD.fieldApiName].value;
             this.type = result.data.fields[TYPE_FIELD.fieldApiName].value;
             const contentDocumentId = result.data.fields.ContentDocumentId.value;
             this.dispatchEvent(new CustomEvent("info", {
-                detail: {category: this.category, type: this.type, title: title, contentDocumentId: contentDocumentId}}));
+                detail: {category: this.category, type: this.type, title: title, fileType: fileType, contentDocumentId: contentDocumentId}}));
             if (this.categoryTypes) {
                 this.types = this.categoryTypes[this.category];
             }

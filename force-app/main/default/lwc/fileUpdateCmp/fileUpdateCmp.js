@@ -23,7 +23,7 @@ export default class DocumentUploadCmp extends FileInformationCmp {
     }
 
     handleInfo(event) {
-        this.title = event.detail.title;
+        this.title = `${event.detail.title} (${event.detail.fileType})`;
         this.contentDocumentId = event.detail.contentDocumentId;
     }
 
