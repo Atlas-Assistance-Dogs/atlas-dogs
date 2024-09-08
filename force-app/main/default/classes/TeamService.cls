@@ -111,6 +111,7 @@ public with sharing class TeamService {
     // Set the dog/client relationship.
     // This is meant to be called from the team update trigger.
     public static void setClientFacilitatorRelationShip(Team__c newTeam) {
+        
         // See if there is an existing relationship between the client and facilitator
         List<npe4__Relationship__c> relationShips = [
             SELECT Id, npe4__Type__c, npe4__Status__c, npe4__RelatedContact__c
@@ -129,6 +130,7 @@ public with sharing class TeamService {
                 return;
             }
         }
+        if (newTeam.Facilitator__c == null) return; // nothing to do
         // if we made it to here, there isn't an existing relationship, so create a new one
         npe4__Relationship__c relationShip = new npe4__Relationship__c(
             npe4__Contact__c = newTeam.Client__c,
@@ -137,5 +139,10 @@ public with sharing class TeamService {
             npe4__Status__c = 'Current'
         );
         insert relationShip;
+    }
+
+    // Remind the client in a Team to submit training logs
+    public static void remindClient() {
+
     }
 }
