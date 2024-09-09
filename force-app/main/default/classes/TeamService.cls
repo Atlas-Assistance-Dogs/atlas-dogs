@@ -141,6 +141,18 @@ public with sharing class TeamService {
         insert relationShip;
     }
 
+    public static void createReminders() {
+        List<Team> teams = [SELECT Id, TrainingStartDate__c FROM Team__c WHERE Status__c = 'In Training'];
+        // Find Client logs for the last week
+        List<Log__c> clientLogs = [SELECT Team__c, Team__r.Client__c, Team__r.Facilitator__c, Team__r.Name, Team__r.Dog__c FROM Log__c WHERE
+        RecordType = 'Client' AND
+        Date__c > LAST_N_DAYS:7];
+        // Find Team Facilitator logs for the last 2 weeks
+        List<Log__c> facilitatorLogs = [SELECT Team__c, Team__r.Client__c, Team__r.Facilitator__c, Team__r.Name, Team__r.Dog__c FROM Log__c WHERE
+        RecordType = 'Client' AND
+        Date__c > LAST_N_DAYS:14];
+    }
+
     // Remind the client in a Team to submit training logs
     public static void remindClient() {
 
