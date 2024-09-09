@@ -142,19 +142,52 @@ public with sharing class TeamService {
     }
 
     public static void createReminders() {
-        List<Team> teams = [SELECT Id, TrainingStartDate__c FROM Team__c WHERE Status__c = 'In Training'];
-        // Find Client logs for the last week
-        List<Log__c> clientLogs = [SELECT Team__c, Team__r.Client__c, Team__r.Facilitator__c, Team__r.Name, Team__r.Dog__c FROM Log__c WHERE
-        RecordType = 'Client' AND
-        Date__c > LAST_N_DAYS:7];
+        List<Team__c> teams = [SELECT Id, TrainingStartDate__c FROM Team__c WHERE Status__c = 'In Training'];
         // Find Team Facilitator logs for the last 2 weeks
         List<Log__c> facilitatorLogs = [SELECT Team__c, Team__r.Client__c, Team__r.Facilitator__c, Team__r.Name, Team__r.Dog__c FROM Log__c WHERE
-        RecordType = 'Client' AND
+        RecordType.DeveloperName = 'TeamFacilitator' AND
         Date__c > LAST_N_DAYS:14];
+        OrgWideEmailAddress address = [select Id, Address, DisplayName from OrgWideEmailAddress WHERE DisplayName = 'Atlas Assistance Dogs'];
     }
 
     // Remind the client in a Team to submit training logs
-    public static void remindClient() {
+    public static void remindClients(List<Team__c> teams) {
+        // Find Client logs for the last week
+        List<Log__c> clientLogs = [SELECT Team__c, Team__r.Client__c, Team__r.Facilitator__c, Team__r.Name, Team__r.Dog__c FROM Log__c WHERE
+        RecordType.DeveloperName = 'Client' AND
+        Date__c > LAST_N_DAYS:7];
 
+        // Put client logs in a Map referenced by team
+        Map<Id, Log__c> clientLogMap = new Map<Id, Log__c>();
+        for (Log__c log : clientLogs) {
+            clientLogMap.add(log.Team__c, log);
+        }
+
+        // Loop through the teams and remind the clients that haven't logged this week
+        EmailTemplate template = [SELECT Id FROM EmailTemplate WHERE DeveloperName = 'ClientLogReminder'];
+        
+        List<Messaging.SingleEmailMessage> emails = new List<Messaging.SingleEmailMessage>();
+        for (Team__c team : teams) {
+            if (!clientLogMap.contains(team.Id)) {
+                emails.add(createEmail(team, team.Client__c, template.Id));
+            }
+        }
+        Messaging.sendEmail(emails);
+    }
+
+    public Messaging.SingleEmailMessage createEmail(Team__c team, Contact contact, Id templateId)
+    {
+        Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
+        mail.setOrgWideEmailAddressId(emailAddressId);
+        mail.setTargetObjectId(contact.Id);
+        //Change with Template ID
+        mail.setTemplateId(templateId); 
+        
+        //Record ID for which letter will be generated
+        mail.setWhatId(team.Id); 
+        mail.setBccSender(false); 
+        mail.setUseSignature(false); 
+        mail.setSenderDisplayName('Atlas Assistance Dogs'); 
+        mail.setSaveAsActivity(false); 
     }
 }
