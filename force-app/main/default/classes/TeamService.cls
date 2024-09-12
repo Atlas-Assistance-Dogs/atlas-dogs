@@ -111,7 +111,6 @@ public with sharing class TeamService {
     // Set the dog/client relationship.
     // This is meant to be called from the team update trigger.
     public static void setClientFacilitatorRelationShip(Team__c newTeam) {
-        
         // See if there is an existing relationship between the client and facilitator
         List<npe4__Relationship__c> relationShips = [
             SELECT Id, npe4__Type__c, npe4__Status__c, npe4__RelatedContact__c
@@ -130,7 +129,8 @@ public with sharing class TeamService {
                 return;
             }
         }
-        if (newTeam.Facilitator__c == null) return; // nothing to do
+        if (newTeam.Facilitator__c == null)
+            return; // nothing to do
         // if we made it to here, there isn't an existing relationship, so create a new one
         npe4__Relationship__c relationShip = new npe4__Relationship__c(
             npe4__Contact__c = newTeam.Client__c,
@@ -142,10 +142,31 @@ public with sharing class TeamService {
     }
 
     public static void createReminders() {
-        List<Team__c> teams = [SELECT Id, TrainingStartDate__c FROM Team__c WHERE Status__c = 'In Training'];
-        OrgWideEmailAddress address = [SELECT Id FROM OrgWideEmailAddress WHERE DisplayName = 'Atlas Assistance Dogs'];
+        List<Team__c> teams = [
+            SELECT Id, Client__c, TrainingStartDate__c
+            FROM Team__c
+            WHERE Status__c = 'In Training'
+        ];
+        if (teams.isEmpty()) {
+            return;
+        }
+        AtlasSettings__c settings = AtlasSettings__c.getOrgDefaults();
+        String emailName = settings.OrgWideEmailName__c;
+        if (emailName == null) {
+            settings.OrgWideEmailName__c = 'Atlas Assistance Dogs';
+            upsert settings;
+        }
+        Id addressId = null;
+        OrgWideEmailAddress[] addresses = [
+            SELECT Id
+            FROM OrgWideEmailAddress
+            WHERE DisplayName = :emailName
+        ];
+        if (addresses.size() > 0) {
+            addressId = addresses[0].Id;
+        }
 
-        remindClients(teams, address.Id);
+        remindClients(teams, addressId);
 
         List<Team__c> facilitatorTeams = new List<Team__c>();
         for (Team__c team : teams) {
@@ -155,15 +176,26 @@ public with sharing class TeamService {
                 facilitatorTeams.add(team);
             }
         }
-        remindFacilitators(teams, address.Id);
+        if (!facilitatorTeams.isEmpty()) {
+            remindFacilitators(facilitatorTeams, addressId);
+        }
     }
 
     // Remind the client in a Team to submit training logs
-    public static void remindClients(List<Team__c> teams, Id emailAddressId) {
+    private static void remindClients(List<Team__c> teams, Id emailAddressId) {
         // Find Client logs for the last week
-        List<Log__c> clientLogs = [SELECT Team__c, Team__r.Client__c, Team__r.Facilitator__c, Team__r.Name, Team__r.Dog__c FROM Log__c WHERE
-        RecordType.DeveloperName = 'Client' AND
-        Date__c > LAST_N_DAYS:7];
+        List<Log__c> clientLogs = [
+            SELECT
+                Team__c,
+                Team__r.Client__c,
+                Team__r.Facilitator__c,
+                Team__r.Name,
+                Team__r.Dog__c
+            FROM Log__c
+            WHERE
+                RecordType.DeveloperName = 'Client'
+                AND Date__c > LAST_N_DAYS:7
+        ];
 
         // Put client logs in a Map referenced by team
         Map<Id, Log__c> clientLogMap = new Map<Id, Log__c>();
@@ -172,65 +204,127 @@ public with sharing class TeamService {
         }
 
         // Loop through the teams and remind the clients that haven't logged this week
-        EmailTemplate template = [SELECT Id FROM EmailTemplate WHERE DeveloperName = 'ClientLogReminder'];
-        
+        EmailTemplate template = [
+            SELECT Id
+            FROM EmailTemplate
+            WHERE DeveloperName = 'ClientLogReminder'
+        ];
+
         List<Messaging.SingleEmailMessage> emails = new List<Messaging.SingleEmailMessage>();
         for (Team__c team : teams) {
             if (!clientLogMap.containsKey(team.Id)) {
-                emails.add(createEmail(team.Id, team.Client__c, template.Id, emailAddressId));
+                emails.add(
+                    createEmail(
+                        team.Id,
+                        team.Client__c,
+                        template.Id,
+                        emailAddressId
+                    )
+                );
             }
         }
         Messaging.sendEmail(emails);
     }
 
     // Remind the client facilitators to submit training logs
-    public static void remindFacilitators(List<Team__c> teams, Id emailAddressId) {
+    private static void remindFacilitators(
+        List<Team__c> teams,
+        Id emailAddressId
+    ) {
         // Find Team Facilitator logs for the last 2 weeks
-        List<Log__c> facilitatorLogs = [SELECT Team__c, Team__r.Client__c, Team__r.Facilitator__c, Team__r.Name, Team__r.Dog__c FROM Log__c WHERE
-        RecordType.DeveloperName = 'TeamFacilitator' AND
-        Date__c > LAST_N_DAYS:14];
+        List<Log__c> facilitatorLogs = [
+            SELECT
+                Team__c,
+                Team__r.Client__c,
+                Team__r.Facilitator__c,
+                Team__r.Name,
+                Team__r.Dog__c
+            FROM Log__c
+            WHERE
+                RecordType.DeveloperName = 'TeamFacilitator'
+                AND Date__c > LAST_N_DAYS:14
+        ];
 
         Map<Id, Id> teamContactIds = new Map<Id, Id>();
         for (Team__c team : teams) {
             teamContactIds.put(team.Client__c, team.Id);
         }
 
-        List<npe4__Relationship__c> relationships = [SELECT Id, npe4__Contact__c, npe4__RelatedContact__c FROM npe4__Relationship__c
-        WHERE npe4__Contact__c in :teamContactIds.keySet() AND npe4__Status__c = 'Current' AND npe4__Type__c = 'Team Faciliator' ];
+        List<npe4__Relationship__c> relationships = [
+            SELECT Id, npe4__Contact__c, npe4__RelatedContact__c
+            FROM npe4__Relationship__c
+            WHERE
+                npe4__Contact__c IN :teamContactIds.keySet()
+                AND npe4__Status__c = 'Current'
+                AND npe4__Type__c = 'Team Faciliator'
+        ];
 
         // Create a set of keys by facilitator id and team id
         Set<String> logKeys = new Set<String>();
         for (Log__c log : facilitatorLogs) {
-            logKeys.add(String.join(new String[] {log.Facilitator__c, log.Team__r.Client__c}, '-'));
+            logKeys.add(
+                String.join(
+                    new List<String>{
+                        log.Facilitator__c,
+                        log.Team__r.Client__c
+                    },
+                    '-'
+                )
+            );
         }
 
         // Loop through the teams and remind the faciltators that haven't logged in the past 2 weeks
-        EmailTemplate template = [SELECT Id FROM EmailTemplate WHERE DeveloperName = 'FacilitatorLogReminder'];
-        
+        EmailTemplate template = [
+            SELECT Id
+            FROM EmailTemplate
+            WHERE DeveloperName = 'FacilitatorLogReminder'
+        ];
+
         List<Messaging.SingleEmailMessage> emails = new List<Messaging.SingleEmailMessage>();
         for (npe4__Relationship__c relationship : relationships) {
-            String key = String.join(new String[] {relationship.npe4__RelatedContact__c, relationship.npe4__Contact__c }, '-');
+            String key = String.join(
+                new List<String>{
+                    relationship.npe4__RelatedContact__c,
+                    relationship.npe4__Contact__c
+                },
+                '-'
+            );
             if (!logKeys.contains(key)) {
-                emails.add(createEmail(teamContactIds.get(relationship.npe4__Contact__c), relationship.npe4__RelatedContact__c, template.Id, emailAddressId));
+                emails.add(
+                    createEmail(
+                        teamContactIds.get(relationship.npe4__Contact__c),
+                        relationship.npe4__RelatedContact__c,
+                        template.Id,
+                        emailAddressId
+                    )
+                );
             }
         }
         Messaging.sendEmail(emails);
     }
 
-    public static Messaging.SingleEmailMessage createEmail(Id teamId, Id contactId, Id templateId, Id emailAddressId)
-    {
+    private static Messaging.SingleEmailMessage createEmail(
+        Id teamId,
+        Id contactId,
+        Id templateId,
+        Id emailAddressId
+    ) {
+        System.debug('creating email');
         Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
-        mail.setOrgWideEmailAddressId(emailAddressId);
+        if (emailAddressId != null) {
+            mail.setOrgWideEmailAddressId(emailAddressId);
+        }
         mail.setTargetObjectId(contactId);
         //Change with Template ID
-        mail.setTemplateId(templateId); 
-        
+        mail.setTemplateId(templateId);
+
         //Record ID for which letter will be generated
-        mail.setWhatId(teamId); 
-        mail.setBccSender(false); 
-        mail.setUseSignature(false); 
-        mail.setSenderDisplayName('Atlas Assistance Dogs'); 
-        mail.setSaveAsActivity(false); 
+        mail.setWhatId(teamId);
+        mail.setBccSender(false);
+        mail.setUseSignature(false);
+        mail.setSenderDisplayName('Atlas Assistance Dogs');
+        mail.setSaveAsActivity(false);
+        System.debug(mail);
         return mail;
     }
 }

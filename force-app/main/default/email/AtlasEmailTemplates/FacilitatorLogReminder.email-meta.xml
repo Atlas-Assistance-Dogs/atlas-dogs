@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
-    <available>false</available>
+    <available>true</available>
     <description>Remind facilitator to submit training log</description>
     <encodingKey>UTF-8</encodingKey>
     <letterhead>AtlasLetterhead_v2</letterhead>
