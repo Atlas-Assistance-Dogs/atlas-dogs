@@ -1,4 +1,4 @@
-public inherited sharing class LogService {
+public inherited sharing class LogService implements ILogService {
     public LogService() {
         ILogSelector LogSelector = (ILogSelector)Application.Selector.newInstance(
             Log__c.SObjectType

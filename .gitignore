@@ -31,3 +31,32 @@ test_results.json
 test_results.xml
 
 .sf/
+
+# fflib files
+at4dx
+force-di
+**/fflib*
+**/di_*
+**/Abstract*
+**/Application*
+**/IApplication*
+**/IDomain*
+**/IEventsConsumer*
+**/Domain*
+**/ISelector*
+**/ITestData*
+**/PlatformEvent*
+**/SelectorConfig*/
+**/AT4DX*
+**/TestDataSupp*
+**/force_di*
+
+force-app/main/default/layouts/SelectorConfig_FieldSetInclusion__mdt-Selector Config - Fieldset Inclusion Layout.layout-meta.xml
+
+force-app/main/default/layouts/TestDataSupplementer__mdt-Test Data Supplementer Layout.layout-meta.xml
+
+force-app/main/default/objects/TestDataSupplementer__mdt/TestDataSupplementer__mdt.object-meta.xml
+
+force-app/main/default/objects/TestDataSupplementer__mdt/validationRules/BindObj_Or_BindObjAlt.validationRule-meta.xml
+
+force-app/main/default/labels/CustomLabels.labels-meta.xml
