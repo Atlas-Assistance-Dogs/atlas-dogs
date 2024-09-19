@@ -84,4 +84,52 @@ public inherited sharing class LogSelector extends ApplicationSObjectSelector im
         qf.selectFields(getSObjectFieldListWithRelatedFields());
         return Database.query(qf.toSOQL());
     }
+
+    public List<Log__c> selectRelated(
+        Id recordId,
+        String recordType
+    ) {
+        fflib_QueryFactory qf = getQueryFactory();
+        qf.selectFields(getSObjectFieldListWithRelatedFields());
+        qf.setCondition(
+            String.join(
+                new List<String>{
+                    '(Team__r.Client__c = :recordId',
+                    'OR Submitter__c = :recordId',
+                    'OR Facilitator__c = :recordId',
+                    'OR Team__r.Dog__c = :recordId)',
+                    'AND RecordType.DeveloperName = :recordType'
+                },
+                ' '
+            )
+        );
+        Schema.SObjectField field = fflib_SObjectDescribe.getDescribe('Log__c')
+            .getField('Date__c');
+        fflib_QueryFactory.Ordering order = new fflib_QueryFactory.Ordering(
+            field,
+            fflib_QueryFactory.SortOrder.DESCENDING,
+            true
+        );
+        qf.setOrdering(order);
+        return Database.query(qf.toSOQL());
+    }
+
+    public List<Log__c> selectForTeam(
+        Id recordId,
+        String recordType
+    ) {
+        fflib_QueryFactory qf = getQueryFactory();
+        qf.selectFields(getSObjectFieldListWithRelatedFields());
+        qf.setCondition('Team__c = :recordId AND RecordType.DeveloperName = :recordType');
+        Schema.SObjectField field = fflib_SObjectDescribe.getDescribe('Log__c')
+            .getField('Date__c');
+        fflib_QueryFactory.Ordering order = new fflib_QueryFactory.Ordering(
+            field,
+            fflib_QueryFactory.SortOrder.DESCENDING,
+            true
+        );
+        qf.setOrdering(order);
+        return Database.query(qf.toSOQL());
+    }
+
 }

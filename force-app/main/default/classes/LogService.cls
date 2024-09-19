@@ -1,10 +1,23 @@
 public inherited sharing class LogService implements ILogService {
+    private ILogSelector selector;
     public LogService() {
-        ILogSelector LogSelector = (ILogSelector)Application.Selector.newInstance(
+        selector = (ILogSelector) Application.Selector.newInstance(
             Log__c.SObjectType
         );
-        List<Log__c> Logs = LogSelector.selectById(
-          new Set<Id>{'SF_RECORD_ID'}
-        );       
+    }
+    public List<Log__c> getAllLogs() {
+        return selector.selectAll();
+    }
+    public List<Log__c> getRelatedLogs(
+        Id recordId,
+        String recordType
+    ) {
+        return selector.selectRelated(recordId, recordType);
+    }
+    public List<Log__c> getTeamLogs(
+        Id recordId,
+        String recordType
+    ) {
+        return selector.selectForTeam(recordId, recordType);
     }
 }
