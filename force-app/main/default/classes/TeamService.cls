@@ -1,4 +1,4 @@
-public with sharing class TeamService {
+public inherited sharing class TeamService implements ITeamService {
     // Set the dog/client relationship.
     // This is meant to be called from the team update trigger.
     public static void setClientDogRelationShip(Team__c newTeam) {
@@ -86,11 +86,10 @@ public with sharing class TeamService {
 
     // Update PAT information
     public static void updatePatInformation(Set<Id> teamIds) {
-        List<Team__c> teams = [
-            SELECT Id, Client__c, PatValidUntil__c, PatCount__c
-            FROM Team__c
-            WHERE Id IN :teamIds
-        ];
+        ITeamSelector selector = (ITeamSelector)Application.Selector.newInstance(
+            Team__c.SObjectType
+        );
+        List<Team__c> teams = selector.selectById(teamIds);
 
         for (Team__c team : teams) {
             List<PublicAccessTest__c> passingPats = [
