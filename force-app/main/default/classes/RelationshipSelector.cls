@@ -47,12 +47,14 @@ public inherited sharing class RelationshipSelector extends ApplicationSObjectSe
 
         fflib_QueryFactory qf = getQueryFactory();
         qf.selectFields(getSObjectFieldListWithRelatedFields());
-        qf.setCondition('Id IN :idSet');
+        qf.setCondition('Id IN :idSet ' + getFilterIsCurrent());
         return Database.query(qf.toSOQL());
     }
 
     public npe4__Relationship__c selectById(Id recordId) {
-        List<npe4__Relationship__c> recordList = selectById(new Set<Id>{ recordId });
+        List<npe4__Relationship__c> recordList = selectById(
+            new Set<Id>{ recordId }
+        );
         return recordList.isEmpty() ? null : recordList[0];
     }
 
@@ -62,23 +64,44 @@ public inherited sharing class RelationshipSelector extends ApplicationSObjectSe
         return Database.query(qf.toSOQL());
     }
 
-    public List<npe4__Relationship__c> selectByContact(
-        Id recordId
-    ) {
+    public List<npe4__Relationship__c> selectByContact(Id recordId, String type) {
         fflib_QueryFactory qf = getQueryFactory();
         qf.selectFields(getSObjectFieldListWithRelatedFields());
-        qf.setCondition('npe4__Contact__c = :recordId AND npe4__Status__c = \'Current\'');
+        List<String> filters = new List<String>{
+            'npe4__Contact__c = :recordId'
+        };
+        if (type != null) {
+            filters.add('npe4__Type__c = :type');
+        }
+        qf.setCondition(String.join(filters, ' '));
         return Database.query(qf.toSOQL());
     }
 
     public List<npe4__Relationship__c> selectByRelated(
         Id recordId,
-        String recordType
+        String type
     ) {
         fflib_QueryFactory qf = getQueryFactory();
         qf.selectFields(getSObjectFieldListWithRelatedFields());
-        qf.setCondition('npe4__RelatedContact__c = :recordId AND npe4__Status__c = \'Current\'');
+        List<String> filters = new List<String>{
+            'npe4__RelatedContact__c = :recordId'
+        };
+        if (type != null) {
+            filters.add('npe4__Type__c = :type');
+        }
+        filters.add(getFilterIsCurrent());
+        qf.setCondition(String.join(filters, ' '));
         return Database.query(qf.toSOQL());
     }
-
+    // Most queries will want the status to be current, but add this for looking at
+    // non-current relationships
+    private Boolean filterisCurrent = true;
+    public void setFilterIsCurrent(Boolean isCurrent) {
+        this.filterIsCurrent = isCurrent;
+    }
+    private String getFilterIsCurrent() {
+        return this.filterIsCurrent == true
+            ? ' AND npe4__Status__c = \'Current\' '
+            : ' ';
+    }
 }

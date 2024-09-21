@@ -8,4 +8,7 @@ public inherited sharing class RelationshipService implements IRelationshipServi
     public List<npe4__Relationship__c> getByRelatedContact(Id recordId) {
         return null;
     }
+    public List<npe4__Relationship__c> getByContactAndType(Id recordId, string type) {
+        return null;
+    }
 }
