@@ -71,7 +71,20 @@ public inherited sharing class RelationshipSelector extends ApplicationSObjectSe
             'npe4__Contact__c = :recordId'
         };
         if (type != null) {
-            filters.add('npe4__Type__c = :type');
+            filters.add('AND npe4__Type__c = :type');
+        }
+        qf.setCondition(String.join(filters, ' '));
+        return Database.query(qf.toSOQL());
+    }
+
+    public List<npe4__Relationship__c> selectByContact(Id recordId, String[] types) {
+        fflib_QueryFactory qf = getQueryFactory();
+        qf.selectFields(getSObjectFieldListWithRelatedFields());
+        List<String> filters = new List<String>{
+            'npe4__Contact__c = :recordId'
+        };
+        if (types != null) {
+            filters.add('AND npe4__Type__c IN :types');
         }
         qf.setCondition(String.join(filters, ' '));
         return Database.query(qf.toSOQL());
@@ -87,7 +100,7 @@ public inherited sharing class RelationshipSelector extends ApplicationSObjectSe
             'npe4__RelatedContact__c = :recordId'
         };
         if (type != null) {
-            filters.add('npe4__Type__c = :type');
+            filters.add('AND npe4__Type__c = :type');
         }
         filters.add(getFilterIsCurrent());
         qf.setCondition(String.join(filters, ' '));
