@@ -79,9 +79,19 @@ public inherited sharing class LogSelector extends ApplicationSObjectSelector im
         return recordList.isEmpty() ? null : recordList[0];
     }
 
-    public List<Log__c> selectAll() {
+    public List<Log__c> selectAllWithinDays(String recordType, Integer days) {
         fflib_QueryFactory qf = getQueryFactory();
         qf.selectFields(getSObjectFieldListWithRelatedFields());
+        List<String> filters = new List<String>();
+        if (recordType != null) {
+            filters.add('RecordType.DeveloperName = :recordType');
+        }
+        if (days != null) {
+            filters.add('Date__c > LAST_N_DAYS:' + days.toString());
+        }
+        if (filters.size() > 0) {
+            qf.setCondition(String.join(filters, ' AND '));
+        }
         return Database.query(qf.toSOQL());
     }
 

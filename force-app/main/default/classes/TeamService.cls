@@ -86,18 +86,18 @@ public inherited sharing class TeamService implements ITeamService {
 
     // Update PAT information
     public static void updatePatInformation(Set<Id> teamIds) {
-        ITeamSelector selector = (ITeamSelector)Application.Selector.newInstance(
+        ITeamSelector selector = (ITeamSelector) Application.Selector.newInstance(
             Team__c.SObjectType
+        );
+        IPublicAccessTestSelector patSelector = (IPublicAccessTestSelector) Application.Selector.newInstance(
+            PublicAccessTest__c.SObjectType
         );
         List<Team__c> teams = selector.selectById(teamIds);
 
         for (Team__c team : teams) {
-            List<PublicAccessTest__c> passingPats = [
-                SELECT Id, ValidUntil__c
-                FROM PublicAccessTest__c
-                WHERE Status__c = 'Passed' AND Team__c = :team.Id
-                ORDER BY ValidUntil__c DESC
-            ];
+            List<PublicAccessTest__c> passingPats = patSelector.selectTeamPassing(
+                team.Id
+            );
             if (passingPats.isEmpty()) {
                 team.PatValidUntil__c = null;
             } else if (team.PatValidUntil__c != passingPats[0].ValidUntil__c) {
@@ -110,34 +110,39 @@ public inherited sharing class TeamService implements ITeamService {
     // Set the dog/client relationship.
     // This is meant to be called from the team update trigger.
     public static void setClientFacilitatorRelationShip(Team__c newTeam) {
+        IRelationshipSelector relationshipSelector = (IRelationshipSelector) Application.Selector.newInstance(
+            PublicAccessTest__c.SObjectType
+        );
         // See if there is an existing relationship between the client and facilitator
-        List<npe4__Relationship__c> relationShips = [
-            SELECT Id, npe4__Type__c, npe4__Status__c, npe4__RelatedContact__c
-            FROM npe4__Relationship__c
-        ];
+        relationshipSelector.setFilterIsCurrent(false);
+        List<npe4__Relationship__c> relationships = relationshipSelector.selectByContact(
+            newTeam.Client__c,
+            'Team Faciliator'
+        );
+
+        if (newTeam.Facilitator__c == null)
+            return; // nothing to do
 
         // see if there is an existing relationship object to use
-        for (npe4__Relationship__c relationShip : relationShips) {
-            if (relationShip.npe4__Type__c == 'Team Faciliator') {
-                if (relationShip.npe4__Status__c == 'Current') {
+        for (npe4__Relationship__c relationship : relationships) {
+            if (relationship.npe4__RelatedContact__c == newTeam.Facilitator__c) {
+                if (relationship.npe4__Status__c == 'Current') {
                     return;
                 }
                 // Set the status to current if not
-                relationShip.npe4__Status__c = 'Current';
+                relationship.npe4__Status__c = 'Current';
                 update relationShip;
                 return;
             }
         }
-        if (newTeam.Facilitator__c == null)
-            return; // nothing to do
         // if we made it to here, there isn't an existing relationship, so create a new one
-        npe4__Relationship__c relationShip = new npe4__Relationship__c(
+        npe4__Relationship__c relationship = new npe4__Relationship__c(
             npe4__Contact__c = newTeam.Client__c,
             npe4__RelatedContact__c = newTeam.Facilitator__c,
             npe4__Type__c = 'Team Faciliator',
             npe4__Status__c = 'Current'
         );
-        insert relationShip;
+        insert relationship;
     }
 
     public static void createReminders() {
@@ -182,19 +187,11 @@ public inherited sharing class TeamService implements ITeamService {
 
     // Remind the client in a Team to submit training logs
     private static void remindClients(List<Team__c> teams, Id emailAddressId) {
+        ILogSelector logSelector = (ILogSelector) Application.Selector.newInstance(
+            Log__c.SObjectType
+        );
         // Find Client logs for the last week
-        List<Log__c> clientLogs = [
-            SELECT
-                Team__c,
-                Team__r.Client__c,
-                Team__r.Facilitator__c,
-                Team__r.Name,
-                Team__r.Dog__c
-            FROM Log__c
-            WHERE
-                RecordType.DeveloperName = 'Client'
-                AND Date__c > LAST_N_DAYS:7
-        ];
+        List<Log__c> clientLogs = logSelector.selectAllWithinDays('Client', 7);
 
         // Put client logs in a Map referenced by team
         Map<Id, Log__c> clientLogMap = new Map<Id, Log__c>();
