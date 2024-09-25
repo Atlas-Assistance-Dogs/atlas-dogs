@@ -1,8 +1,8 @@
 public inherited sharing class EmailService implements IEmailService {
     public EmailService() {
-
+        
     }
-
+    
     public EmailTemplate getTemplate(String name) {
         EmailTemplate template = [
             SELECT Id
@@ -11,7 +11,7 @@ public inherited sharing class EmailService implements IEmailService {
         ];
         return template;
     }
-
+    
     public void sendEmail(List<Messaging.SingleEmailMessage> emails){
         Messaging.sendEmail(emails);
     }

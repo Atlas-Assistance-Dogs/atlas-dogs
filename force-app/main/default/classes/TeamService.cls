@@ -190,32 +190,21 @@ public inherited sharing class TeamService {
 
     // Remind the client in a Team to submit training logs
     private void remindClients(List<Team__c> teams, Id emailAddressId) {
-        // Find Client logs for the last week
-        List<Log__c> clientLogs = this.logRepo.getRecent('Client', 7);
-
-        // Put client logs in a Map referenced by team
-        Map<Id, Log__c> clientLogMap = new Map<Id, Log__c>();
-        for (Log__c log : clientLogs) {
-            clientLogMap.put(log.Team__c, log);
-        }
-
         // Loop through the teams and remind the clients that haven't logged this week
         EmailTemplate template = this.emailServ.getTemplate('ClientLogReminder');
 
         List<Messaging.SingleEmailMessage> emails = new List<Messaging.SingleEmailMessage>();
         for (Team__c team : teams) {
-            if (!clientLogMap.containsKey(team.Id)) {
-                emails.add(
-                    createEmail(
-                        team.Id,
-                        team.Client__c,
-                        template.Id,
-                        emailAddressId
-                    )
-                );
-            }
+            emails.add(
+                createEmail(
+                    team.Id,
+                    team.Client__c,
+                    template.Id,
+                    emailAddressId
+                )
+            );
         }
-        Messaging.sendEmail(emails);
+        emailServ.sendEmail(emails);
     }
 
     // Remind the client facilitators to submit training logs
@@ -233,42 +222,19 @@ public inherited sharing class TeamService {
 
         List<npe4__Relationship__c> relationships = relationshipRepo.getCurrentRelated(teamContactIds.keySet(), 'Team Faciliator');
 
-        // Create a set of keys by facilitator id and team id
-        Set<String> logKeys = new Set<String>();
-        for (Log__c log : facilitatorLogs) {
-            logKeys.add(
-                String.join(
-                    new List<String>{
-                        log.Facilitator__c,
-                        log.Team__r.Client__c
-                    },
-                    '-'
-                )
-            );
-        }
-
         // Loop through the teams and remind the faciltators that haven't logged in the past 2 weeks
         EmailTemplate template = emailServ.getTemplate('FacilitatorLogReminder');
 
         List<Messaging.SingleEmailMessage> emails = new List<Messaging.SingleEmailMessage>();
         for (npe4__Relationship__c relationship : relationships) {
-            String key = String.join(
-                new List<String>{
+            emails.add(
+                createEmail(
+                    teamContactIds.get(relationship.npe4__Contact__c),
                     relationship.npe4__RelatedContact__c,
-                    relationship.npe4__Contact__c
-                },
-                '-'
+                    template.Id,
+                    emailAddressId
+                )
             );
-            if (!logKeys.contains(key)) {
-                emails.add(
-                    createEmail(
-                        teamContactIds.get(relationship.npe4__Contact__c),
-                        relationship.npe4__RelatedContact__c,
-                        template.Id,
-                        emailAddressId
-                    )
-                );
-            }
         }
         emailServ.sendEmail(emails);
     }
