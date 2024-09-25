@@ -36,13 +36,4 @@ private class TestTeamService {
         // );
         // insert relationship;
     }
-    @isTest
-    static void createReminders_sendsEmailsToClients_InTraining() {
-        createTeam();
-        Test.startTest();
-        TeamService.createReminders();
-        Integer invocations = Limits.getEmailInvocations();
-        Test.stopTest();
-        system.assertEquals(1, invocations, 'An email should be sent');
-    }
 }

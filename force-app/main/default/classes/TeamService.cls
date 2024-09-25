@@ -1,4 +1,14 @@
-public with sharing class TeamService {
+public inherited sharing class TeamService {
+    public TeamService(ITeamRepository teamRepo, ILogRepository logRepo, IRelationshipRepository relationshipRepo, IEmailService emailServ) {
+        this.logRepo = logRepo;
+        this.teamRepo = teamRepo;
+        this.emailServ = emailServ;
+    }
+    private ILogRepository logRepo;
+    private ITeamRepository teamRepo;
+    private IRelationshipRepository relationshipRepo;
+    private IEmailService emailServ;
+
     // Set the dog/client relationship.
     // This is meant to be called from the team update trigger.
     public static void setClientDogRelationShip(Team__c newTeam) {
@@ -141,12 +151,9 @@ public with sharing class TeamService {
         insert relationShip;
     }
 
-    public static void createReminders() {
-        List<Team__c> teams = [
-            SELECT Id, Client__c, TrainingStartDate__c
-            FROM Team__c
-            WHERE Status__c = 'In Training'
-        ];
+    public void createReminders() {
+        List<Team__c> teams = teamRepo.getByStatus('In Training');
+
         if (teams.isEmpty()) {
             return;
         }
@@ -182,20 +189,9 @@ public with sharing class TeamService {
     }
 
     // Remind the client in a Team to submit training logs
-    private static void remindClients(List<Team__c> teams, Id emailAddressId) {
+    private void remindClients(List<Team__c> teams, Id emailAddressId) {
         // Find Client logs for the last week
-        List<Log__c> clientLogs = [
-            SELECT
-                Team__c,
-                Team__r.Client__c,
-                Team__r.Facilitator__c,
-                Team__r.Name,
-                Team__r.Dog__c
-            FROM Log__c
-            WHERE
-                RecordType.DeveloperName = 'Client'
-                AND Date__c > LAST_N_DAYS:7
-        ];
+        List<Log__c> clientLogs = this.logRepo.getRecent('Client', 7);
 
         // Put client logs in a Map referenced by team
         Map<Id, Log__c> clientLogMap = new Map<Id, Log__c>();
@@ -204,11 +200,7 @@ public with sharing class TeamService {
         }
 
         // Loop through the teams and remind the clients that haven't logged this week
-        EmailTemplate template = [
-            SELECT Id
-            FROM EmailTemplate
-            WHERE DeveloperName = 'ClientLogReminder'
-        ];
+        EmailTemplate template = this.emailServ.getTemplate('ClientLogReminder');
 
         List<Messaging.SingleEmailMessage> emails = new List<Messaging.SingleEmailMessage>();
         for (Team__c team : teams) {
@@ -227,37 +219,19 @@ public with sharing class TeamService {
     }
 
     // Remind the client facilitators to submit training logs
-    private static void remindFacilitators(
+    private void remindFacilitators(
         List<Team__c> teams,
         Id emailAddressId
     ) {
         // Find Team Facilitator logs for the last 2 weeks
-        List<Log__c> facilitatorLogs = [
-            SELECT
-                Team__c,
-                Team__r.Client__c,
-                Team__r.Facilitator__c,
-                Team__r.Name,
-                Team__r.Dog__c
-            FROM Log__c
-            WHERE
-                RecordType.DeveloperName = 'TeamFacilitator'
-                AND Date__c > LAST_N_DAYS:14
-        ];
+        List<Log__c> facilitatorLogs = logRepo.getRecent('TeamFacilitator', 14);
 
         Map<Id, Id> teamContactIds = new Map<Id, Id>();
         for (Team__c team : teams) {
             teamContactIds.put(team.Client__c, team.Id);
         }
 
-        List<npe4__Relationship__c> relationships = [
-            SELECT Id, npe4__Contact__c, npe4__RelatedContact__c
-            FROM npe4__Relationship__c
-            WHERE
-                npe4__Contact__c IN :teamContactIds.keySet()
-                AND npe4__Status__c = 'Current'
-                AND npe4__Type__c = 'Team Faciliator'
-        ];
+        List<npe4__Relationship__c> relationships = relationshipRepo.getCurrentRelated(teamContactIds.keySet(), 'Team Faciliator');
 
         // Create a set of keys by facilitator id and team id
         Set<String> logKeys = new Set<String>();
@@ -274,11 +248,7 @@ public with sharing class TeamService {
         }
 
         // Loop through the teams and remind the faciltators that haven't logged in the past 2 weeks
-        EmailTemplate template = [
-            SELECT Id
-            FROM EmailTemplate
-            WHERE DeveloperName = 'FacilitatorLogReminder'
-        ];
+        EmailTemplate template = emailServ.getTemplate('FacilitatorLogReminder');
 
         List<Messaging.SingleEmailMessage> emails = new List<Messaging.SingleEmailMessage>();
         for (npe4__Relationship__c relationship : relationships) {
@@ -300,10 +270,10 @@ public with sharing class TeamService {
                 );
             }
         }
-        Messaging.sendEmail(emails);
+        emailServ.sendEmail(emails);
     }
 
-    private static Messaging.SingleEmailMessage createEmail(
+    private Messaging.SingleEmailMessage createEmail(
         Id teamId,
         Id contactId,
         Id templateId,
