@@ -2,6 +2,7 @@ public inherited sharing class TeamService {
     public TeamService(TeamRepository teamRepo, LogRepository logRepo, RelationshipRepository relationshipRepo, EmailService emailServ) {
         this.logRepo = logRepo;
         this.teamRepo = teamRepo;
+        this.relationshipRepo = relationshipRepo;
         this.emailServ = emailServ;
     }
     private LogRepository logRepo;
@@ -157,7 +158,7 @@ public inherited sharing class TeamService {
         if (teams.isEmpty()) return;
         // Loop through the teams and remind the clients that haven't logged this week
         Id orgAddressId = emailServ.getOrgEmailAddressId();
-        EmailTemplate template = this.emailServ.getTemplate('ClientLogReminder');
+        EmailTemplate template = emailServ.getTemplate('ClientLogReminder');
 
         List<Messaging.SingleEmailMessage> emails = new List<Messaging.SingleEmailMessage>();
         for (Team__c team : teams) {
