@@ -1,5 +1,6 @@
+/* Test the methods used in the TeamController and TeamTrigger */
 @isTest
-private class TestTeamService {
+public class TestTeamService {
     private static Contact joe;
     private static Contact jack;
     private static Dog__c buddy;

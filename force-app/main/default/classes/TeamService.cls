@@ -1,24 +1,35 @@
 public inherited sharing class TeamService {
-    public TeamService(TeamRepository teamRepo, LogRepository logRepo, RelationshipRepository relationshipRepo, EmailService emailServ) {
+
+    public TeamService() {
+        this.logRepo = new LogRepository();
+        this.dogRepo = new DogRepository();
+        this.contactRepo = new ContactRepository();
+        this.teamRepo = new TeamRepository();
+        this.relationshipRepo = new RelationshipRepository();
+        this.emailServ = new EmailService();
+    }
+    @testVisible
+    private TeamService(TeamRepository teamRepo, LogRepository logRepo, RelationshipRepository relationshipRepo, EmailService emailServ, DogRepository dogRepo,
+    ContactRepository contactRepo) {
         this.logRepo = logRepo;
+        this.dogRepo = dogRepo;
+        this.contactRepo = contactRepo;
         this.teamRepo = teamRepo;
         this.relationshipRepo = relationshipRepo;
         this.emailServ = emailServ;
     }
     private LogRepository logRepo;
+    private ContactRepository contactRepo;
+    private DogRepository dogRepo;
     private TeamRepository teamRepo;
     private RelationshipRepository relationshipRepo;
     private EmailService emailServ;
 
     // Set the dog/client relationship.
     // This is meant to be called from the team update trigger.
-    public static void setClientDogRelationShip(Team__c newTeam) {
+    public void setClientDogRelationShip(Team__c newTeam) {
         // See if there is an existing relationship between the dog and client
-        List<DogRelationShip__c> relationShips = [
-            SELECT Id, Type__c
-            FROM DogRelationShip__c
-            WHERE Contact__c = :newTeam.Client__c AND Dog__c = :newTeam.Dog__c
-        ];
+        List<DogRelationShip__c> relationShips = dogRepo.getRelationships(newTeam.Client__c, newTeam.Dog__c);
 
         if (relationShips.size() == 0) {
             DogRelationShip__c relationShip = new DogRelationShip__c(
@@ -26,21 +37,16 @@ public inherited sharing class TeamService {
                 Dog__c = newTeam.Dog__c,
                 Type__c = 'Client'
             );
-            insert relationShip;
+            dogRepo.createRelationship(relationShip);
         } else {
-            Boolean found = false;
             // add client to the type if not already there
             for (DogRelationShip__c relationShip : relationShips) {
                 if (
                     relationShip.Type__c != null &&
                     relationShip.Type__c.contains('Client')
                 ) {
-                    found = true;
-                    break;
+                    return;
                 }
-            }
-            if (found) {
-                return; // check next team
             }
             // otherwise, add Client to the first relationship (should be the only one)
             DogRelationShip__c relationShip = relationShips[0];
@@ -49,49 +55,34 @@ public inherited sharing class TeamService {
             } else {
                 relationShip.Type__c = relationShip.Type__c + ';Client';
             }
-            update relationShip;
+            dogRepo.modifyRelationship(relationShip);
         }
     }
 
     // Update client status.  This is meant to be called from the team update trigger.
-    public static void updateClientStatus(Team__c team) {
-        List<Contact> clients = [
-            SELECT
-                ClientStatus__c,
-                ClientDog__c,
-                ClientCertificationValidUntil__c,
-                ClientFacilitatorAvailability__c,
-                ClientInitialCertificationDate__c
-            FROM Contact
-            WHERE Id = :team.Client__c
-        ];
-        List<Dog__c> dogs = [SELECT Name FROM Dog__c WHERE Id = :team.Dog__c];
+    public void updateClientStatus(Team__c team) {
+        Contact client = contactRepo.getClientStatus(team.Client__c);
 
-        if (!clients.isEmpty()) {
-            Contact client = clients[0];
+        if (client != null) {
+            Dog__c dog = dogRepo.getById(team.Dog__c);
             client.ClientCertificationValidUntil__c = team.PatValidUntil__c;
             client.ClientStatus__c = team.Status__c;
             client.ClientInitialCertificationDate__c = team.InitialCertificationDate__c;
             client.ClientFacilitatorAvailability__c = team.FacilitatorAvailability__c;
-            if (!dogs.isEmpty()) {
-                client.ClientDog__c = dogs[0].Name;
+            if (dog != null) {
+                client.ClientDog__c = dog.Name;
             }
-            update client;
+            contactRepo.modify(client);
         }
     }
 
     // Update client status.  This is meant to be called from the team update trigger.
-    public static void updateDogStatus(Team__c team) {
-        List<Dog__c> dogs = [
-            SELECT Status__c
-            FROM Dog__c
-            WHERE Id = :team.Dog__c
-        ];
+    public void updateDogStatus(Team__c team) {
+        Dog__c dog = dogRepo.getById(team.Dog__c);
 
-        if (!dogs.isEmpty()) {
-            Dog__c dog = dogs[0];
+        if (dog != null) {
             dog.Status__c = team.Status__c;
-            update dog;
+            dogRepo.modify(dog);
         }
     }
 
@@ -119,29 +110,24 @@ public inherited sharing class TeamService {
         }
         upsert teams;
     }
-    // Set the dog/client relationship.
+    // Set the client/facilitator relationship.
     // This is meant to be called from the team update trigger.
-    public static void setClientFacilitatorRelationShip(Team__c newTeam) {
+    public void setClientFacilitatorRelationShip(Team__c newTeam) {
+        if (newTeam.Facilitator__c == null)
+            return; // nothing to do
         // See if there is an existing relationship between the client and facilitator
-        List<npe4__Relationship__c> relationShips = [
-            SELECT Id, npe4__Type__c, npe4__Status__c, npe4__RelatedContact__c
-            FROM npe4__Relationship__c
-        ];
+        List<npe4__Relationship__c> relationShips = relationshipRepo.getForPair(newTeam.Client__c, newTeam.Facilitator__c, 'Team Faciliator');
 
         // see if there is an existing relationship object to use
         for (npe4__Relationship__c relationShip : relationShips) {
-            if (relationShip.npe4__Type__c == 'Team Faciliator') {
-                if (relationShip.npe4__Status__c == 'Current') {
-                    return;
-                }
-                // Set the status to current if not
-                relationShip.npe4__Status__c = 'Current';
-                update relationShip;
+            if (relationShip.npe4__Status__c == 'Current') {
                 return;
             }
+            // Set the status to current if not
+            relationShip.npe4__Status__c = 'Current';
+            relationshipRepo.modify(relationShip);
+            return;
         }
-        if (newTeam.Facilitator__c == null)
-            return; // nothing to do
         // if we made it to here, there isn't an existing relationship, so create a new one
         npe4__Relationship__c relationShip = new npe4__Relationship__c(
             npe4__Contact__c = newTeam.Client__c,
@@ -149,7 +135,7 @@ public inherited sharing class TeamService {
             npe4__Type__c = 'Team Faciliator',
             npe4__Status__c = 'Current'
         );
-        insert relationShip;
+        relationshipRepo.create(relationShip);
     }
 
     // Remind the client in a Team to submit training logs
