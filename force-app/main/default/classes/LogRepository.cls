@@ -1,4 +1,4 @@
-public class LogRepository implements ILogRepository {
+public class LogRepository {
 
     public List<Log__c> getRecent(String recordType, Integer days) {
         Date cutoff = Date.today().addDays(0 - days);

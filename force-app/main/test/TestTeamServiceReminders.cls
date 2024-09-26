@@ -1,18 +1,19 @@
 @isTest
 public with sharing class TestTeamServiceReminders {
+    private static MockProvider mocks;
     private static TeamService service;
-    private static MockTeamRepository teamRepo;
-    private static MockLogRepository logRepo;
-    private static MockRelationshipRepository relationshipRepo;
-    private static MockEmailService emailSrv;
+    private static TeamRepository teamRepo;
+    private static LogRepository logRepo;
+    private static RelationshipRepository relationshipRepo;
+    private static EmailService emailSrv;
     // references to mocks
     
-    @TestSetup
-    static void makeData(){
-        teamRepo = new MockTeamRepository();
-        logRepo = new MockLogRepository();
-        relationshipRepo = new MockRelationshipRepository();
-        emailSrv = new MockEmailService();
+    private static void makeData(){
+        mocks = new MockProvider();
+        teamRepo = (TeamRepository)mocks.createMock(TeamRepository.class);
+        logRepo = (LogRepository)mocks.createMock(LogRepository.class);
+        relationshipRepo = (RelationshipRepository)mocks.createMock(RelationshipRepository.class);
+        emailSrv = (EmailService)mocks.createMock(EmailService.class);
         service = new TeamService(teamRepo, logRepo, relationshipRepo, emailSrv);
     }
     
@@ -23,47 +24,65 @@ public with sharing class TestTeamServiceReminders {
         '003E200000WBWDeIAP',
         '003E200000WBWDfIAP',
         '003E200000WBWDgIAP',
-        '003E200000WBWDhIAP' ,
-        '003E200000WBWDiIAP' ,
-        '003E200000WBWDjIAP' ,
-        '003E200000WBWDkIAP' ,
-        '003E200000WBWDlIAP' ,
-        '003E200000WBWDmIAP' ,
-        '003E200000WBWDnIAP' };
+        '003E200000WBWDhIAP',
+        '003E200000WBWDiIAP',
+        '003E200000WBWDjIAP',
+        '003E200000WBWDkIAP',
+        '003E200000WBWDlIAP',
+        '003E200000WBWDmIAP',
+        '003E200000WBWDnIAP'
+    };
     private static final String templateId = '00XE20000053FkPMAU';
     private static final String template2Id = '00XE200000539jrMAA';
+    
     @isTest
-    static void createReminders_sendsEmailToClient_InTraining() {
+    static void remindClients_sendsEmailToClient_InTraining() {
         makeData();
+        mocks.expectedCalls.add(new MockCallData(emailSrv, 'getTemplate', new EmailTemplate(Id = templateId)));
+        mocks.expectedCalls.add(new MockCallData(emailSrv, 'sendEmail'));
         Team__c team = new Team__c(Id = teamids[0], Client__c = contactids[0], Status__c = 'In Training', TrainingStartDate__c = Date.today().addDays(-6));
-        teamRepo.teams = new List<Team__c>{team};
-        emailSrv.templateId = templateId;
-        service.createReminders();
-        System.assertEquals(1, emailSrv.sentEmails.size());
-        Messaging.SingleEmailMessage message = emailSrv.sentEmails[0];
+        mocks.expectedCalls.add(new MockCallData(teamRepo, 'getByStatus', new List<Team__c>{team}));
+        service.remindClients();
+        
+        // Assert
+        System.assert(!mocks.actualCalls.isEmpty());
+        // the first call would be to get teams
+        MockCallData getTeams = mocks.actualCalls[0];
+        System.assertEquals('getByStatus', getTeams.methodName);
+        System.assertEquals('In Training', getTeams.args[0]);
+        // the last call would be to send emails
+        MockCallData data = mocks.actualCalls[mocks.actualCalls.size() - 1];
+        List<Messaging.SingleEmailMessage> emails = (List<Messaging.SingleEmailMessage>)data.args[0];
+        System.assertEquals(1, emails.size());
+        Messaging.SingleEmailMessage message = emails[0];
         System.assertEquals(team.Client__c, message.targetobjectid);
         System.assertEquals(team.Id, message.whatid);
         System.assertEquals(templateId, message.templateid);
     }
-
+    
     @isTest
-    static void createReminders_sendsEmailsToClients_InTraining() {
+    static void remindClients_sendsEmailsToClients_InTraining() {
         makeData();
         Team__c[] teams = new Team__c[5];
         for (Integer i = 0; i < 5; i++) {
             teams[i] = new Team__c(Id = teamids[i], Client__c = contactids[i], Status__c = 'In Training', TrainingStartDate__c = Date.today().addDays(0 - i));
         }
-        teamRepo.teams = teams;
-        emailSrv.templateId = templateId;
-        service.createReminders();
-        System.assertEquals(5, emailSrv.sentEmails.size());
+        mocks.expectedCalls.add(new MockCallData(teamRepo, 'getByStatus', teams));
+        mocks.expectedCalls.add(new MockCallData(emailSrv, 'getTemplate', new EmailTemplate(Id = templateId)));
+        mocks.expectedCalls.add(new MockCallData(emailSrv, 'sendEmail'));
+        service.remindClients();
+        
+        // Assert
+        // the last call would be to send emails
+        MockCallData data = mocks.actualCalls[mocks.actualCalls.size() - 1];
+        List<Messaging.SingleEmailMessage> emails = (List<Messaging.SingleEmailMessage>)data.args[0];
         for (Integer i = 0; i < 5; i++) {
             Team__c team = teams[i];
-            Messaging.SingleEmailMessage message = emailSrv.sentEmails[i];
+            Messaging.SingleEmailMessage message = emails[i];
             System.assertEquals(team.Client__c, message.targetobjectid);
             System.assertEquals(team.Id, message.whatid);
             System.assertEquals(templateId, message.templateid);
         }
     }
-
+    
 }

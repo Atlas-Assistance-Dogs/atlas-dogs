@@ -1,4 +1,4 @@
-public class TeamRepository implements ITeamRepository {
+public class TeamRepository {
 
     public TeamRepository(){}
 

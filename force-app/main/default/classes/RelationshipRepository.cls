@@ -1,4 +1,4 @@
-public class RelationshipRepository implements IRelationshipRepository {
+public class RelationshipRepository {
 
     public List<npe4__Relationship__c> getCurrentRelated(Set<Id> contactIds, String type) {
         return [

@@ -1,13 +1,13 @@
 public inherited sharing class TeamService {
-    public TeamService(ITeamRepository teamRepo, ILogRepository logRepo, IRelationshipRepository relationshipRepo, IEmailService emailServ) {
+    public TeamService(TeamRepository teamRepo, LogRepository logRepo, RelationshipRepository relationshipRepo, EmailService emailServ) {
         this.logRepo = logRepo;
         this.teamRepo = teamRepo;
         this.emailServ = emailServ;
     }
-    private ILogRepository logRepo;
-    private ITeamRepository teamRepo;
-    private IRelationshipRepository relationshipRepo;
-    private IEmailService emailServ;
+    private LogRepository logRepo;
+    private TeamRepository teamRepo;
+    private RelationshipRepository relationshipRepo;
+    private EmailService emailServ;
 
     // Set the dog/client relationship.
     // This is meant to be called from the team update trigger.
@@ -151,46 +151,12 @@ public inherited sharing class TeamService {
         insert relationShip;
     }
 
-    public void createReminders() {
-        List<Team__c> teams = teamRepo.getByStatus('In Training');
-
-        if (teams.isEmpty()) {
-            return;
-        }
-        AtlasSettings__c settings = AtlasSettings__c.getOrgDefaults();
-        String emailName = settings.OrgWideEmailName__c;
-        if (emailName == null) {
-            settings.OrgWideEmailName__c = 'Atlas Assistance Dogs';
-            upsert settings;
-        }
-        Id addressId = null;
-        OrgWideEmailAddress[] addresses = [
-            SELECT Id
-            FROM OrgWideEmailAddress
-            WHERE DisplayName = :emailName
-        ];
-        if (addresses.size() > 0) {
-            addressId = addresses[0].Id;
-        }
-
-        remindClients(teams, addressId);
-
-        List<Team__c> facilitatorTeams = new List<Team__c>();
-        for (Team__c team : teams) {
-            Integer days = team.TrainingStartDate__c.daysBetween(Date.today());
-            Integer span = 14;
-            if (Math.Mod(days, span) > 7) {
-                facilitatorTeams.add(team);
-            }
-        }
-        if (!facilitatorTeams.isEmpty()) {
-            remindFacilitators(facilitatorTeams, addressId);
-        }
-    }
-
     // Remind the client in a Team to submit training logs
-    private void remindClients(List<Team__c> teams, Id emailAddressId) {
+    public void remindClients() {
+        List<Team__c> teams = teamRepo.getByStatus('In Training');
+        if (teams.isEmpty()) return;
         // Loop through the teams and remind the clients that haven't logged this week
+        Id orgAddressId = emailServ.getOrgEmailAddressId();
         EmailTemplate template = this.emailServ.getTemplate('ClientLogReminder');
 
         List<Messaging.SingleEmailMessage> emails = new List<Messaging.SingleEmailMessage>();
@@ -200,7 +166,7 @@ public inherited sharing class TeamService {
                     team.Id,
                     team.Client__c,
                     template.Id,
-                    emailAddressId
+                    orgAddressId
                 )
             );
         }
@@ -208,12 +174,13 @@ public inherited sharing class TeamService {
     }
 
     // Remind the client facilitators to submit training logs
-    private void remindFacilitators(
-        List<Team__c> teams,
-        Id emailAddressId
-    ) {
-        // Find Team Facilitator logs for the last 2 weeks
-        List<Log__c> facilitatorLogs = logRepo.getRecent('TeamFacilitator', 14);
+    public void remindFacilitators() {
+        List<Team__c> teams = teamRepo.getByStatus('In Training');
+        if (teams.isEmpty()) return;
+
+        // Get the org email address and template
+        Id orgAddressId = emailServ.getOrgEmailAddressId();
+        EmailTemplate template = emailServ.getTemplate('FacilitatorLogReminder');
 
         Map<Id, Id> teamContactIds = new Map<Id, Id>();
         for (Team__c team : teams) {
@@ -222,9 +189,7 @@ public inherited sharing class TeamService {
 
         List<npe4__Relationship__c> relationships = relationshipRepo.getCurrentRelated(teamContactIds.keySet(), 'Team Faciliator');
 
-        // Loop through the teams and remind the faciltators that haven't logged in the past 2 weeks
-        EmailTemplate template = emailServ.getTemplate('FacilitatorLogReminder');
-
+        // Loop through the teams and remind the faciltators for them
         List<Messaging.SingleEmailMessage> emails = new List<Messaging.SingleEmailMessage>();
         for (npe4__Relationship__c relationship : relationships) {
             emails.add(
@@ -232,7 +197,7 @@ public inherited sharing class TeamService {
                     teamContactIds.get(relationship.npe4__Contact__c),
                     relationship.npe4__RelatedContact__c,
                     template.Id,
-                    emailAddressId
+                    orgAddressId
                 )
             );
         }
@@ -245,7 +210,6 @@ public inherited sharing class TeamService {
         Id templateId,
         Id emailAddressId
     ) {
-        System.debug('creating email');
         Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
         if (emailAddressId != null) {
             mail.setOrgWideEmailAddressId(emailAddressId);
@@ -260,7 +224,6 @@ public inherited sharing class TeamService {
         mail.setUseSignature(false);
         mail.setSenderDisplayName('Atlas Assistance Dogs');
         mail.setSaveAsActivity(false);
-        System.debug(mail);
         return mail;
     }
 }
