@@ -46,6 +46,27 @@ public with sharing class TestTeamServiceReminders {
     private static final String template2Id = '00XE200000539jrMAA';
     
     @isTest
+    static void remindClients_sendsNoEmails_whenNoTeams() {
+        makeData();
+        mocks.expectedCalls.add(new MockCallData(teamRepo, 'getByStatus', new List<Team__c>()));
+        service.remindClients();
+        
+        // Assert
+        System.assert(!mocks.actualCalls.isEmpty());
+        // the first call would be to get teams
+        MockCallData getTeams = mocks.actualCalls[0];
+        System.assertEquals('getByStatus', getTeams.methodName);
+        System.assertEquals('In Training', getTeams.args[0]);
+
+        // see if there is a call to sendEmail, if there is, there should be no emails
+        for (MockCallData call : mocks.actualCalls) {
+            if (call.obj == emailSrv && call.methodName == 'sendEmail') {
+                System.assert(((List<Messaging.SingleEmailMessage>)call.args[0]).isEmpty());
+            }
+        }
+    }
+   
+    @isTest
     static void remindClients_sendsEmailToClient_InTraining() {
         makeData();
         mocks.expectedCalls.add(new MockCallData(emailSrv, 'getTemplate', new EmailTemplate(Id = templateId)));

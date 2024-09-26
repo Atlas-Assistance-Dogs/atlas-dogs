@@ -1,3 +1,11 @@
+/* This class uses the StubProvider interface.  Use it by instantiating it in each test case,
+    creating mock classes to inject, then setting the expectedCalls
+    using MockCallData objects.
+
+    Calls that are not expected return null/void.
+
+    The actual calls can be checked as part of the test assertions.
+*/
 @isTest
 public class MockProvider implements System.StubProvider {
     public MockProvider() {
