@@ -1,4 +1,5 @@
 trigger PatTrigger on PublicAccessTest__c (after insert, after update, after delete) {
+    TeamService service = new TeamService();
     Set<Id> teamIds = new Set<Id>();
     if (Trigger.old != null) {
         for (PublicAccessTest__c oldPat: Trigger.old) {
@@ -11,5 +12,5 @@ trigger PatTrigger on PublicAccessTest__c (after insert, after update, after del
         }
     }
 
-    TeamService.updatePatInformation(teamIds);
+    service.updatePatInformation(teamIds);
 }

@@ -14,4 +14,9 @@ public class TeamRepository {
             WHERE Status__c = :status
         ];
     }
+
+    public List<Team__c> modify(List<Team__c> teams) {
+        upsert teams;
+        return teams;
+    }
 }

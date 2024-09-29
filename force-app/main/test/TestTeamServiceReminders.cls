@@ -3,18 +3,22 @@ public with sharing class TestTeamServiceReminders {
     private static MockProvider mocks;
     private static TeamService service;
     private static TeamRepository teamRepo;
-    private static LogRepository logRepo;
+    private static PublicAccessTestRepository patRepo;
+    private static DogRepository dogRepo;
     private static RelationshipRepository relationshipRepo;
+    private static ContactRepository contactRepo;
     private static EmailService emailSrv;
     // references to mocks
     
     private static void makeData(){
         mocks = new MockProvider();
         teamRepo = (TeamRepository)mocks.createMock(TeamRepository.class);
-        logRepo = (LogRepository)mocks.createMock(LogRepository.class);
+        dogRepo = (DogRepository)mocks.createMock(DogRepository.class);
+        patRepo = (PublicAccessTestRepository)mocks.createMock(PublicAccessTestRepository.class);
         relationshipRepo = (RelationshipRepository)mocks.createMock(RelationshipRepository.class);
+        ContactRepo = (ContactRepository)mocks.createMock(ContactRepository.class);
         emailSrv = (EmailService)mocks.createMock(EmailService.class);
-        service = new TeamService(teamRepo, logRepo, relationshipRepo, emailSrv);
+        service = new TeamService(teamRepo, patRepo, relationshipRepo, emailSrv, dogRepo, contactRepo);
     }
     
     private static final String[] teamids = new String[]{'a1BE200000K4ZN3MAN', 'a1BE200000K4ZN4MAN', 'a1BE200000K4ZN5MAN', 'a1BE200000K4ZN6MAN', 'a1BE200000K4ZN7MAN',

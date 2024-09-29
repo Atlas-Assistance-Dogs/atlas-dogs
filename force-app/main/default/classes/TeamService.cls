@@ -1,24 +1,24 @@
 public inherited sharing class TeamService {
 
     public TeamService() {
-        this.logRepo = new LogRepository();
+        this.patRepo = new PublicAccessTestRepository();
         this.dogRepo = new DogRepository();
         this.contactRepo = new ContactRepository();
         this.teamRepo = new TeamRepository();
         this.relationshipRepo = new RelationshipRepository();
         this.emailServ = new EmailService();
     }
-    @testVisible
-    private TeamService(TeamRepository teamRepo, LogRepository logRepo, RelationshipRepository relationshipRepo, EmailService emailServ, DogRepository dogRepo,
+    @TestVisible
+    private TeamService(TeamRepository teamRepo, PublicAccessTestRepository patRepo, RelationshipRepository relationshipRepo, EmailService emailServ, DogRepository dogRepo,
     ContactRepository contactRepo) {
-        this.logRepo = logRepo;
+        this.patRepo = patRepo;
         this.dogRepo = dogRepo;
         this.contactRepo = contactRepo;
         this.teamRepo = teamRepo;
         this.relationshipRepo = relationshipRepo;
         this.emailServ = emailServ;
     }
-    private LogRepository logRepo;
+    private PublicAccessTestRepository patRepo;
     private ContactRepository contactRepo;
     private DogRepository dogRepo;
     private TeamRepository teamRepo;
@@ -87,7 +87,7 @@ public inherited sharing class TeamService {
     }
 
     // Update PAT information
-    public static void updatePatInformation(Set<Id> teamIds) {
+    public void updatePatInformation(Set<Id> teamIds) {
         List<Team__c> teams = [
             SELECT Id, Client__c, PatValidUntil__c, PatCount__c
             FROM Team__c
@@ -95,12 +95,7 @@ public inherited sharing class TeamService {
         ];
 
         for (Team__c team : teams) {
-            List<PublicAccessTest__c> passingPats = [
-                SELECT Id, ValidUntil__c
-                FROM PublicAccessTest__c
-                WHERE Status__c = 'Passed' AND Team__c = :team.Id
-                ORDER BY ValidUntil__c DESC
-            ];
+            List<PublicAccessTest__c> passingPats = patRepo.getPassing(team.Id);
             if (passingPats.isEmpty()) {
                 team.PatValidUntil__c = null;
             } else if (team.PatValidUntil__c != passingPats[0].ValidUntil__c) {
@@ -108,7 +103,7 @@ public inherited sharing class TeamService {
             }
             team.PatCount__c = passingPats.size();
         }
-        upsert teams;
+        teamRepo.modify(teams);
     }
     // Set the client/facilitator relationship.
     // This is meant to be called from the team update trigger.
@@ -200,7 +195,7 @@ public inherited sharing class TeamService {
         Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
         if (emailAddressId != null) {
             mail.setOrgWideEmailAddressId(emailAddressId);
-        }
+        }   
         mail.setTargetObjectId(contactId);
         //Change with Template ID
         mail.setTemplateId(templateId);
@@ -209,7 +204,7 @@ public inherited sharing class TeamService {
         mail.setWhatId(teamId);
         mail.setBccSender(false);
         mail.setUseSignature(false);
-        mail.setSenderDisplayName('Atlas Assistance Dogs');
+        // mail.setSenderDisplayName('Atlas Assistance Dogs');
         mail.setSaveAsActivity(false);
         return mail;
     }
