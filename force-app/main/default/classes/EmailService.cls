@@ -1,6 +1,5 @@
 public inherited sharing class EmailService {
     public EmailService() {
-        
     }
 
     public ID getOrgEmailAddressId() {
@@ -21,7 +20,6 @@ public inherited sharing class EmailService {
         }
         return addressId;
     }
-    
     public EmailTemplate getTemplate(String name) {
         EmailTemplate template = [
             SELECT Id
@@ -30,7 +28,6 @@ public inherited sharing class EmailService {
         ];
         return template;
     }
-    
     public void sendEmail(List<Messaging.SingleEmailMessage> emails){
         Messaging.sendEmail(emails);
     }
