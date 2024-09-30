@@ -1,4 +1,16 @@
-public with sharing class ContactService {
+public inherited sharing class ContactService {
+    private ContactRepository contactRepo;
+    private EmailService emailServ;
+    public ContactService() {
+        contactRepo = new ContactRepository();
+        emailServ = new EmailService();
+    }
+
+    @TestVisible
+    private ContactService(ContactRepository contactRepo, EmailService emailServ) {
+        this.contactRepo = contactRepo;
+        this.emailServ = emailServ;
+    }
     // This copies the contact email and phone to the ContactAt email & phone,
     // as long as the Email and Phone are not blank and ContactAt is Home or Alternate
     public static Contact updateContactAtEmail(Contact newContact) {
@@ -430,5 +442,177 @@ public with sharing class ContactService {
             cdates.expiration = initial.addYears(moreYears);
         }
         return cdates;
+    }
+
+    public List<PositionStatus> getPositionStatusForContact(
+        Id contactId
+    ) {
+        Contact person = contactRepo.getPositionStatusForContact(contactId);
+        List<PositionStatus> statuses = getStatusForPositions(person);
+        return statuses;
+    }
+
+    // We want the position status to be in this order, the Positions set for the contact
+    // may not be in this order
+    public final static String[] POSITION_LIST = new List<string>{
+        'Volunteer',
+        'Team Facilitator',
+        'Puppy Raiser',
+        'Board',
+        'Client',
+        'Trainer',
+        'Standalone'
+    };
+
+    private static List<PositionStatus> getStatusForPositions(Contact person) {
+        List<PositionStatus> statuses = new List<PositionStatus>();
+        if (person.Positions__c == null) {
+            return statuses;
+        }
+        Set<String> positions = new Set<string>(person.Positions__c.split(';'));
+        for (string position : POSITION_LIST) {
+            switch on (position) {
+                when 'Volunteer' {
+                    if (
+                        positions.contains(position) &&
+                        Schema.sObjectType.Contact.fields.GW_Volunteers__Volunteer_Status__c.isAccessible()
+                    ) {
+                        statuses.add(
+                            new PositionStatus(
+                                position,
+                                person.GW_Volunteers__Volunteer_Status__c
+                            )
+                        );
+                    }
+                }
+                when 'Team Facilitator' {
+                    if (
+                        (positions.contains(position) ||
+                        positions.contains('Team Facilitator Lead')) &&
+                        Schema.sObjectType.Contact.fields.FacilitatorStatus__c.isAccessible() &&
+                        Schema.sObjectType.Contact.fields.FacilitatorCertAgreementReceived__c.isAccessible()
+                    ) {
+                        string status = fineTuneStatus(
+                            person.FacilitatorStatus__c,
+                            person.FacilitatorCertAgreementReceived__c
+                        );
+                        statuses.add(new PositionStatus(position, status));
+                    }
+                }
+                when 'Puppy Raiser' {
+                    if (
+                        positions.contains(position) &&
+                        Schema.sObjectType.Contact.fields.BoardMemberStatus__c.isAccessible()
+                    ) {
+                        string status = fineTuneStatus(
+                            person.PuppyRaiserStatus__c,
+                            person.PuppyCertAgreementReceived__c
+                        );
+                        statuses.add(new PositionStatus(position, status));
+                    }
+                }
+                when 'Board' {
+                    if (
+                        positions.contains('Board Member') &&
+                        Schema.sObjectType.Contact.fields.BoardMemberStatus__c.isAccessible()
+                    ) {
+                        statuses.add(
+                            new PositionStatus(
+                                position,
+                                person.BoardMemberStatus__c
+                            )
+                        );
+                    }
+                }
+                when 'Client' {
+                    if (
+                        positions.contains(position) &&
+                        Schema.sObjectType.Contact.fields.ClientStatus__c.isAccessible() &&
+                        Schema.sObjectType.Contact.fields.ClientCertificationValidUntil__c.isAccessible()
+                    ) {
+                        Date certDate = null;
+                        if (person.ClientCertificationValidUntil__c != null) {
+                            certDate = person.ClientCertificationValidUntil__c.addDays(
+                                -365
+                            );
+                        }
+                        string status = fineTuneStatus(
+                            person.ClientStatus__c,
+                            certDate
+                        );
+                        statuses.add(new PositionStatus(position, status));
+                    }
+                }
+                when 'Trainer' {
+                    if (
+                        positions.contains(position) &&
+                        Schema.sObjectType.Contact.fields.TrainerStatus__c.isAccessible() &&
+                        Schema.sObjectType.Contact.fields.TrainerCertAgreementReceived__c.isAccessible()
+                    ) {
+                        string status = fineTuneStatus(
+                            person.TrainerStatus__c,
+                            person.TrainerCertAgreementReceived__c
+                        );
+                        statuses.add(new PositionStatus(position, status));
+                    }
+                }
+                when 'Standalone' {
+                    if (
+                        positions.contains(position) &&
+                        Schema.sObjectType.Contact.fields.StandaloneStatus__c.isAccessible()
+                    ) {
+                        statuses.add(
+                            new PositionStatus(
+                                position,
+                                person.StandaloneStatus__c
+                            )
+                        );
+                    }
+                }
+            }
+        }
+        return statuses;
+    }
+
+    private static string fineTuneStatus(string status, Date certDate) {
+        Date today = Date.today();
+        if (status == 'Active' || (status == 'Certified' && certDate != null)) {
+            if (certDate.addDays(365) < today) {
+                status = 'Action Needed';
+            } else if (certDate.addDays(270) < today) {
+                status = 'Action Needed Soon';
+            }
+        }
+        return status;
+    }
+
+    public void remindFacilitatorsToGetCeus() {
+        Set<Id> facilitators = contactRepo.getActiveFacilitators();
+        // Remind the client in a Team to submit training logs
+
+        if (facilitators.isEmpty()) return;
+        // Remind these facilitators to get their CEUs
+        Id orgAddressId = emailServ.getOrgEmailAddressId();
+        EmailTemplate template = emailServ.getTemplate('FacilitatorCeuReminder');
+
+        List<Messaging.SingleEmailMessage> emails = new List<Messaging.SingleEmailMessage>();
+        for (Id facilitator : facilitators) {
+            Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
+            if (orgAddressId != null) {
+                mail.setOrgWideEmailAddressId(orgAddressId);
+            }   
+            mail.setTargetObjectId(facilitator);
+            mail.setTemplateId(template.Id);
+    
+            //Record ID for which letter will be generated
+            mail.setBccSender(false);
+            mail.setUseSignature(false);
+            if (orgAddressId == null){
+                mail.setSenderDisplayName('Atlas Assistance Dogs');
+            }
+            mail.setSaveAsActivity(false);
+            emails.add(mail);
+        }
+        emailServ.sendEmail(emails);
     }
 }
