@@ -164,11 +164,18 @@ public inherited sharing class TeamService {
         Id orgAddressId = emailServ.getOrgEmailAddressId();
         EmailTemplate template = emailServ.getTemplate('FacilitatorLogReminder');
 
+        Date today = Date.today();
         Map<Id, Id> teamContactIds = new Map<Id, Id>();
         for (Team__c team : teams) {
-            teamContactIds.put(team.Client__c, team.Id);
+            Integer weeks = team.TrainingStartDate__c.daysBetween(today) / 7;
+            if (Math.mod(weeks, 2) == 1){
+                // remind the facilitators
+                teamContactIds.put(team.Client__c, team.Id);
+            }
         }
-
+        if (teamContactIds.isEmpty()){
+            return;
+        }
         List<npe4__Relationship__c> relationships = relationshipRepo.getCurrentRelated(teamContactIds.keySet(), 'Team Faciliator');
 
         // Loop through the teams and remind the faciltators for them
@@ -204,7 +211,9 @@ public inherited sharing class TeamService {
         mail.setWhatId(teamId);
         mail.setBccSender(false);
         mail.setUseSignature(false);
-        // mail.setSenderDisplayName('Atlas Assistance Dogs');
+        if (emailAddressId == null) {
+            mail.setSenderDisplayName('Atlas Assistance Dogs');
+        }
         mail.setSaveAsActivity(false);
         return mail;
     }
