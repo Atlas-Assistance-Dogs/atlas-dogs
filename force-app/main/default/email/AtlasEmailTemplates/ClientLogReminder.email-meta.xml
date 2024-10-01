@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Remind client to submit training log</description>
+    <encodingKey>UTF-8</encodingKey>
+    <letterhead>AtlasLetterhead_v2</letterhead>
+    <name>ClientLogReminder</name>
+    <style>formalLetter</style>
+    <subject>Please remember to submit your client training logs for your team: {!Team__c.Name}</subject>
+    <textOnly>Dear {!Contact.PreferredName__c},
+We hope your week is going wonderfully.
+
+If you have recently submitted your client log for your team, {!Team__c.Name}, then thank you! If not, please remember to submit your logs each week. The URL below is specific to your team and has data is pre-populated for you. These logs are critical to track progress, make sure we are supporting you properly, and to maintain compliance with the organizations we seek accreditation with.
+
+Simply go here to submit your logs:
+
+&lt;a href=&quot;https://atlasdog.tfaforms.net/4821671?tfa_3={!Contact.Name}&amp;tfa_7={!Dog__c.Name}&amp;tfa_56={!Team__c.Name}&quot;&gt;https://atlasdog.tfaforms.net/4821671&lt;/a&gt;
+
+Thank you for being a part of Atlas.</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>
