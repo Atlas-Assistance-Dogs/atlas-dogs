@@ -1,4 +1,5 @@
 trigger ContactTriggerAfter on Contact(after update) {
+    ContactService service = new ContactService();
     Set<Id> modified = new Set<Id>();
     for (Contact newContact : Trigger.new) {
         string oldEmail = newContact.Email;
@@ -23,7 +24,7 @@ trigger ContactTriggerAfter on Contact(after update) {
         Boolean changedPhone =
             !String.isBlank(newContact.Phone) && oldPhone != newContact.Phone;
         if (changedEmail || changedPhone) {
-            ContactService.updateRelatedContactEmailPhone(
+            service.updateRelatedContactEmailPhone(
                 newContact,
                 changedEmail,
                 changedPhone
