@@ -1,4 +1,5 @@
 trigger ContactTrigger on Contact (before insert, before update) {
+    ContactService service = new ContactService();
     Map<Id, Contact> modifiedContacts = new Map<Id, Contact>();
     Map<String, String> positionGroups = ContactService.getGroupsByPositions();
     for (Contact newContact : Trigger.new) {
@@ -23,14 +24,14 @@ trigger ContactTrigger on Contact (before insert, before update) {
                 newContact = ContactService.updateContactAtEmail(newContact);
             }
             else {
-                newContact = ContactService.updateEmail(newContact);
+                newContact = service.updateEmail(newContact);
             }
 
             if (oldPhone != newContact.Phone) {
                 newContact = ContactService.updateContactAtPhone(newContact);
             }
             else {
-                newContact = ContactService.updatePhone(newContact);
+                newContact = service.updatePhone(newContact);
             }
         }
 

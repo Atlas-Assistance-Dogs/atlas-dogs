@@ -1,8 +1,10 @@
 public inherited sharing class ContactService {
     private ContactRepository contactRepo;
+    private RelationshipRepository relationshipRepo;
     private EmailService emailServ;
     public ContactService() {
         contactRepo = new ContactRepository();
+        relationshipRepo = new RelationshipRepository();
         emailServ = new EmailService();
     }
 
@@ -38,7 +40,7 @@ public inherited sharing class ContactService {
     }
 
     // Update email based on the ContactAt value
-    public static Contact updateEmail(Contact newContact) {
+    public Contact updateEmail(Contact newContact) {
         string contact = newContact.Contact__c;
         if (contact == 'Home') {
             if (!string.isBlank(newContact.npe01__HomeEmail__c)) {
@@ -50,17 +52,7 @@ public inherited sharing class ContactService {
             }
         } else {
             // see if the type matches a relationship type
-            List<npe4__Relationship__c> related = [
-                SELECT
-                    Id,
-                    npe4__RelatedContact__c,
-                    npe4__RelatedContact__r.Email
-                FROM npe4__Relationship__c
-                WHERE
-                    npe4__Type__c = :contact
-                    AND npe4__Contact__c = :newContact.Id
-                    AND npe4__Status__c = 'Current'
-            ];
+            List<npe4__Relationship__c> related = relationshipRepo.getCurrentRelated(newContact.Id, contact);
             if (!related.isEmpty()) {
                 // use the first Contact that matches
                 Contact person = related[0].npe4__RelatedContact__r;
@@ -73,7 +65,7 @@ public inherited sharing class ContactService {
     }
 
     // Update the Contact's phone based on the current value from ContactAt
-    public static Contact updatePhone(Contact newContact) {
+    public Contact updatePhone(Contact newContact) {
         string contact = newContact.Contact__c;
         if (contact == 'Home') {
             if (!string.isBlank(newContact.HomePhone)) {
@@ -85,17 +77,7 @@ public inherited sharing class ContactService {
             }
         } else {
             // see if the type matches a relationship type
-            List<npe4__Relationship__c> related = [
-                SELECT
-                    Id,
-                    npe4__RelatedContact__c,
-                    npe4__RelatedContact__r.Phone
-                FROM npe4__Relationship__c
-                WHERE
-                    npe4__Type__c = :contact
-                    AND npe4__Contact__c = :newContact.Id
-                    AND npe4__Status__c = 'Current'
-            ];
+            List<npe4__Relationship__c> related = relationshipRepo.getCurrentRelated(newContact.Id, contact);
             if (!related.isEmpty()) {
                 // use the first Contact that matches
                 Contact person = related[0].npe4__RelatedContact__r;
@@ -108,25 +90,13 @@ public inherited sharing class ContactService {
     }
 
     // Update the email of a related contact
-    public static void updateRelatedContactEmailPhone(
+    public void updateRelatedContactEmailPhone(
         Contact current,
         Boolean changedEmail,
         Boolean changedPhone
     ) {
-        List<npe4__Relationship__c> related = [
-            SELECT
-                Id,
-                npe4__Contact__c,
-                npe4__Type__c,
-                npe4__RelatedContact__c,
-                npe4__Contact__r.Email,
-                npe4__RelatedContact__r.Phone,
-                npe4__Contact__r.Contact__c
-            FROM npe4__Relationship__c
-            WHERE
-                npe4__RelatedContact__c = :current.Id
-                AND npe4__Status__c = 'Current'
-        ];
+        List<npe4__Relationship__c> related = relationshipRepo.getCurrentRelated(current.Id);
+        
         if (!related.isEmpty()) {
             List<Contact> contacts = new List<Contact>();
             for (npe4__Relationship__c relationship : related) {
@@ -172,17 +142,9 @@ public inherited sharing class ContactService {
     }
 
     // Get the positions of the contact relations
-    private static Set<String> getRelationShipPositions(Contact record) {
+    private Set<String> getRelationShipPositions(Contact record) {
         // Find who the contact is related to as an emergency contact
-        npe4__Relationship__c[] related = [
-            SELECT Id, npe4__Contact__r.Positions__c
-            FROM npe4__Relationship__c
-            WHERE
-                (npe4__Type__c LIKE '%Emergency Contact'
-                OR npe4__Type__c = 'Guardian')
-                AND npe4__Status__c = 'Current'
-                AND npe4__RelatedContact__c = :record.Id
-        ];
+        npe4__Relationship__c[] related = relationshipRepo.getSharingPositions(record.Id);
         Set<String> positions = new Set<String>();
         if (!String.isBlank(record.Positions__c)) {
             positions.addAll(record.Positions__c.split(';'));
