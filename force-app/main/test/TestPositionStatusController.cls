@@ -80,8 +80,6 @@ public with sharing class TestPositionStatusController {
             TrainerCertAgreementReceived__c = Date.today()
         );
         insert joe;
-        AtlasSettings__c settings = new AtlasSettings__c();
-        upsert settings;
         Program__c program = new Program__c(
             Name = 'Super Dogs',
             Standalone__c = true,
