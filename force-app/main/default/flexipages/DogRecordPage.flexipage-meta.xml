@@ -88,6 +88,16 @@
                     <name>uiBehavior</name>
                     <value>none</value>
                 </fieldInstanceProperties>
+                <fieldItem>Record.Weight__c</fieldItem>
+                <identifier>RecordWeight__cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
                 <fieldItem>Record.SpayedNeutered__c</fieldItem>
                 <identifier>RecordSpayedNeutered__cField</identifier>
             </fieldInstance>
@@ -146,6 +156,16 @@
                 <identifier>RecordPicture__cField</identifier>
             </fieldInstance>
         </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Height__c</fieldItem>
+                <identifier>RecordHeight__cField</identifier>
+            </fieldInstance>
+        </itemInstances>
         <name>Facet-8290113d-0854-429a-82e5-da8d1e36086e</name>
         <type>Facet</type>
     </flexiPageRegions>
@@ -179,6 +199,10 @@
                 <componentInstanceProperties>
                     <name>columns</name>
                     <value>Facet-e4b452cd-19ec-48cb-85eb-c8ccab652cc6</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>horizontalAlignment</name>
+                    <value>false</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>label</name>
@@ -332,6 +356,10 @@
                     <value>Facet-837ed4db-1698-4b82-8d79-6ffa8a9097de</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
+                    <name>horizontalAlignment</name>
+                    <value>false</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
                     <name>label</name>
                 </componentInstanceProperties>
                 <componentName>flexipage:fieldSection</componentName>
@@ -343,6 +371,10 @@
                 <componentInstanceProperties>
                     <name>columns</name>
                     <value>Facet-7cf65a87-7ce2-4d81-bd42-542129dc9168</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>horizontalAlignment</name>
+                    <value>false</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>label</name>
@@ -357,6 +389,10 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
+                <componentInstanceProperties>
+                    <name>numRecords</name>
+                    <value>6</value>
+                </componentInstanceProperties>
                 <componentName>relatedFilesCmp</componentName>
                 <identifier>relatedFilesCmp2</identifier>
             </componentInstance>
@@ -458,6 +494,10 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
+                <componentInstanceProperties>
+                    <name>showLegacyActivityComposer</name>
+                    <value>false</value>
+                </componentInstanceProperties>
                 <componentName>runtime_sales_activities:activityPanel</componentName>
                 <identifier>runtime_sales_activities_activityPanel</identifier>
             </componentInstance>
