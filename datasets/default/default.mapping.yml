@@ -603,6 +603,10 @@ Insert Team__c:
       table:
         - Dog__c
       key_field: Dog__c
+    Facilitator__c:
+      table:
+      - Contact
+      key_field: Facilitator__c
     Handler__c:
       table:
         - Contact
