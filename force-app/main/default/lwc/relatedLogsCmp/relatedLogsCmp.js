@@ -234,6 +234,7 @@ export default class RelatedLogsCmp extends NavigationMixin(LightningElement) {
                 const payload = {
                     mode: "edit",
                     recordId: row.Id,
+                    record: row,
                     recordType:
                         this._recordType === "Client"
                             ? "Client"

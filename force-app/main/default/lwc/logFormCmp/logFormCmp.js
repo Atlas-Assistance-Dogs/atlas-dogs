@@ -9,6 +9,8 @@ import CLIENT_HOURS_FIELD from "@salesforce/schema/Log__c.ClientHours__c";
 import CLIENT_STRESS_FIELD from "@salesforce/schema/Log__c.ClientStress__c";
 import DATE_FIELD from "@salesforce/schema/Log__c.Date__c";
 import DETAILS_FIELD from "@salesforce/schema/Log__c.Details__c";
+import FIRST_AID_FIELD from "@salesforce/schema/Log__c.FirstAidSuppliesUsed__c";
+import FIRST_AID_DETAILS_FIELD from "@salesforce/schema/Log__c.FirstAidDetails__c";
 import DID_MEET_FIELD from "@salesforce/schema/Log__c.DidMeetThisWeek__c";
 import OTHER_HOURS_FIELD from "@salesforce/schema/Log__c.OtherHours__c";
 import PAH_FIELD from "@salesforce/schema/Log__c.PublicAccessHours__c";
@@ -41,6 +43,8 @@ export default class LogFormCmp extends LightningElement {
         lesson: SESSION_TYPE_FIELD,
         otherHours: OTHER_HOURS_FIELD,
         details: DETAILS_FIELD,
+        firstAid: FIRST_AID_FIELD,
+        firstAidDetails: FIRST_AID_DETAILS_FIELD,
         teamSupport: TEAM_SUPPORT_FIELD,
         supportDetails: SUPPORT_DETAILS_FIELD,
         stress: STRESS_FIELD,
@@ -50,6 +54,7 @@ export default class LogFormCmp extends LightningElement {
     };
     objectName = ATLAS_SUPPORT_FIELD.objectApiName;
     wantSupport = false;
+    didFirstAid = false;
 
     @wire(getObjectInfo, { objectApiName: LOG_OBJECT })
     objectInfo({ error, data }) {
@@ -89,9 +94,15 @@ export default class LogFormCmp extends LightningElement {
     @api
     openModal(message) {
         this.recordId = message.recordId;
+        this.wantSupport = false;
+        this.didFirstAid = false;
         if (message.recordType) {
             this.recordTypeId = this.recordTypeNames[message.recordType];
             this.recordTypeName = message.recordType;
+        }
+        if (message.record) {
+            this.wantSupport = message.record.RequestSupportFromTeam__c;
+            this.didFirstAid = message.record.FirstAidSuppliesUsed__c;
         }
         this.template.querySelector("c-modal-cmp").openModal();
     }
@@ -102,6 +113,10 @@ export default class LogFormCmp extends LightningElement {
 
     handleSubmitterChange(event) {
         this.isSubmitter = event.target.checked;
+    }
+
+    handleFirstAidChange(event) {
+        this.didFirstAid = event.target.value;
     }
 
     handleTeamSupportChange(event) {
@@ -121,7 +136,6 @@ export default class LogFormCmp extends LightningElement {
             (a, x) => ({ ...a, [x.fieldName]: x.value }),
             {}
         );
-        console.log(record);
         if (!this.recordTypeId) {
             this.dispatchEvent(
                 new ShowToastEvent({
