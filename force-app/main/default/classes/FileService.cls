@@ -472,7 +472,7 @@ public with sharing class FileService {
         }
         List<Team__c> teams = [
             SELECT Id, Client__c, Dog__c,
-                    ClientApplicationReceived__c, ClientApplicationVideoReceived__c, ClientCGCFormReceived__c, ClientCertAgreementReceived__c, ClientLOMIReceived__c, ClientPreApplicationReceived__c, ClientProgAgreementReceived__c, ClientSurveyReceived__c, ClientVAPWReceived__c,
+                    ClientApplicationReceived__c, ClientApplicationVideoReceived__c, ClientCGCFormReceived__c, ClientCertAgreementReceived__c, ClientLOMIReceived__c, ClientMentalHealthFormReceived__c, ClientPreApplicationReceived__c, ClientProgAgreementReceived__c, ClientProvRelFormReceived__c, ClientSurveyReceived__c, ClientVAPWReceived__c,
 					HealthFormReceived__c, XrayReceived__c
             FROM Team__c
             WHERE Id = :recordId
@@ -512,12 +512,20 @@ public with sharing class FileService {
             team.ClientLOMIReceived__c = cv.Date__c;
         }
 
+        if (cv.Type__c == 'MentalHealthForm' && isLater(team.ClientMentalHealthFormReceived__c, cv.Date__c)) {
+            team.ClientMentalHealthFormReceived__c = cv.Date__c;
+        }
+
         if (cv.Type__c == 'PreApplication' && isLater(team.ClientPreApplicationReceived__c, cv.Date__c)) {
             team.ClientPreApplicationReceived__c = cv.Date__c;
         }
 
         if (cv.Type__c == 'ProgAgreement' && isLater(team.ClientProgAgreementReceived__c, cv.Date__c)) {
             team.ClientProgAgreementReceived__c = cv.Date__c;
+        }
+
+        if (cv.Type__c == 'ProvRelForm' && isLater(team.ClientProvRelFormReceived__c, cv.Date__c)) {
+            team.ClientProvRelFormReceived__c = cv.Date__c;
         }
 
         if (cv.Type__c == 'Survey' && isLater(team.ClientSurveyReceived__c, cv.Date__c)) {

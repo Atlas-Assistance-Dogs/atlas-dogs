@@ -151,6 +151,16 @@
                 <default>false</default>
                 <label>First Aid Certificate</label>
             </value>
+            <value>
+                <fullName>MentalHealthForm</fullName>
+                <default>false</default>
+                <label>Mental Health Provider Form</label>
+            </value>
+            <value>
+                <fullName>ProvRelForm</fullName>
+                <default>false</default>
+                <label>Provider Release Form</label>
+            </value>
         </valueSetDefinition>
         <valueSettings>
             <controllingFieldValue>Staff</controllingFieldValue>
@@ -193,10 +203,6 @@
             <valueName>W9</valueName>
         </valueSettings>
         <valueSettings>
-            <controllingFieldValue>Na</controllingFieldValue>
-            <valueName>FirstAid</valueName>
-        </valueSettings>
-        <valueSettings>
             <controllingFieldValue>Dog</controllingFieldValue>
             <valueName>VacExams</valueName>
         </valueSettings>
@@ -211,6 +217,10 @@
         <valueSettings>
             <controllingFieldValue>Na</controllingFieldValue>
             <valueName>ContactForm</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Na</controllingFieldValue>
+            <valueName>FirstAid</valueName>
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Client</controllingFieldValue>
@@ -252,6 +262,14 @@
         <valueSettings>
             <controllingFieldValue>Client</controllingFieldValue>
             <valueName>CGCForm</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Client</controllingFieldValue>
+            <valueName>MentalHealthForm</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Client</controllingFieldValue>
+            <valueName>ProvRelForm</valueName>
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>TeamDog</controllingFieldValue>

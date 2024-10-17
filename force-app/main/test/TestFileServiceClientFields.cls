@@ -328,6 +328,69 @@ public with sharing class TestFileServiceClientFields {
     }
 
     @isTest
+    public static void updateDate_ClientMentalHealthForm_SetsDateWhenNull() {
+        createTeamMembers();
+        Team__c record = new Team__c(Name = 'Test', Client__c = client.Id, Dog__c = dog.Id);
+        insert record;
+        ContentVersion cv = TestFileServiceFields.createLink('Client', 'MentalHealthForm', Date.today(), record.Id);
+        FileService.updateDate(cv, record.Id);
+
+        record = [
+            SELECT ClientMentalHealthFormReceived__c
+            FROM Team__c
+            WHERE Id = :record.Id
+            LIMIT 1
+        ];
+        system.assertEquals(
+            Date.today(),
+            record.ClientMentalHealthFormReceived__c,
+            'ClientMentalHealthFormReceived__c not set'
+        );
+    }
+
+    @isTest
+    public static void updateDate_ClientMentalHealthForm_SetsDateWhenNewer() {
+        createTeamMembers();
+        Team__c record = new Team__c(Name = 'Test', Client__c = client.Id, Dog__c = dog.Id, ClientMentalHealthFormReceived__c = Date.today().addDays(-1));
+        insert record;
+        ContentVersion cv = TestFileServiceFields.createLink('Client', 'MentalHealthForm', Date.today(), record.Id);
+        FileService.updateDate(cv, record.Id);
+
+        record = [
+            SELECT ClientMentalHealthFormReceived__c
+            FROM Team__c
+            WHERE Id = :record.Id
+            LIMIT 1
+        ];
+        system.assertEquals(
+            Date.today(),
+            record.ClientMentalHealthFormReceived__c,
+            'ClientMentalHealthFormReceived__c not set'
+        );
+    }
+
+    @isTest
+    public static void updateDate_ClientMentalHealthForm_LeavesDateWhenOlder() {
+        createTeamMembers();
+        Team__c record = new Team__c(Name = 'Test', Client__c = client.Id, Dog__c = dog.Id, ClientMentalHealthFormReceived__c = Date.today());
+        insert record;
+        ContentVersion cv = TestFileServiceFields.createLink('Client', 'MentalHealthForm', Date.today().addDays(-1), record.Id);
+        FileService.updateDate(cv, record.Id);
+
+        record = [
+            SELECT ClientMentalHealthFormReceived__c
+            FROM Team__c
+            WHERE Id = :record.Id
+            LIMIT 1
+        ];
+        system.assertEquals(
+            Date.today(),
+            record.ClientMentalHealthFormReceived__c,
+            'ClientMentalHealthFormReceived__c set to an older date'
+        );
+    }
+
+    @isTest
     public static void updateDate_ClientPreApplication_SetsDateWhenNull() {
         createTeamMembers();
         Team__c record = new Team__c(Name = 'Test', Client__c = client.Id, Dog__c = dog.Id);
@@ -450,6 +513,69 @@ public with sharing class TestFileServiceClientFields {
             Date.today(),
             record.ClientProgAgreementReceived__c,
             'ClientProgAgreementReceived__c set to an older date'
+        );
+    }
+
+    @isTest
+    public static void updateDate_ClientProvRelForm_SetsDateWhenNull() {
+        createTeamMembers();
+        Team__c record = new Team__c(Name = 'Test', Client__c = client.Id, Dog__c = dog.Id);
+        insert record;
+        ContentVersion cv = TestFileServiceFields.createLink('Client', 'ProvRelForm', Date.today(), record.Id);
+        FileService.updateDate(cv, record.Id);
+
+        record = [
+            SELECT ClientProvRelFormReceived__c
+            FROM Team__c
+            WHERE Id = :record.Id
+            LIMIT 1
+        ];
+        system.assertEquals(
+            Date.today(),
+            record.ClientProvRelFormReceived__c,
+            'ClientProvRelFormReceived__c not set'
+        );
+    }
+
+    @isTest
+    public static void updateDate_ClientProvRelForm_SetsDateWhenNewer() {
+        createTeamMembers();
+        Team__c record = new Team__c(Name = 'Test', Client__c = client.Id, Dog__c = dog.Id, ClientProvRelFormReceived__c = Date.today().addDays(-1));
+        insert record;
+        ContentVersion cv = TestFileServiceFields.createLink('Client', 'ProvRelForm', Date.today(), record.Id);
+        FileService.updateDate(cv, record.Id);
+
+        record = [
+            SELECT ClientProvRelFormReceived__c
+            FROM Team__c
+            WHERE Id = :record.Id
+            LIMIT 1
+        ];
+        system.assertEquals(
+            Date.today(),
+            record.ClientProvRelFormReceived__c,
+            'ClientProvRelFormReceived__c not set'
+        );
+    }
+
+    @isTest
+    public static void updateDate_ClientProvRelForm_LeavesDateWhenOlder() {
+        createTeamMembers();
+        Team__c record = new Team__c(Name = 'Test', Client__c = client.Id, Dog__c = dog.Id, ClientProvRelFormReceived__c = Date.today());
+        insert record;
+        ContentVersion cv = TestFileServiceFields.createLink('Client', 'ProvRelForm', Date.today().addDays(-1), record.Id);
+        FileService.updateDate(cv, record.Id);
+
+        record = [
+            SELECT ClientProvRelFormReceived__c
+            FROM Team__c
+            WHERE Id = :record.Id
+            LIMIT 1
+        ];
+        system.assertEquals(
+            Date.today(),
+            record.ClientProvRelFormReceived__c,
+            'ClientProvRelFormReceived__c set to an older date'
         );
     }
 
