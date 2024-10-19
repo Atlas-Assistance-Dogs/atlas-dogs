@@ -1,7 +1,9 @@
 trigger TeamTrigger on Team__c (after insert, after update) {
+    TeamService service = new TeamService();
     for (Team__c newTeam : Trigger.new) {
-        TeamService.setClientDogRelationShip(newTeam);
-        TeamService.updateClientStatus(newTeam);
-        TeamService.updateDogStatus(newTeam);
+        service.setClientDogRelationShip(newTeam);
+        service.updateClientStatus(newTeam);
+        service.updateDogStatus(newTeam);
+        service.setClientFacilitatorRelationShip(newTeam);
     }
 }
