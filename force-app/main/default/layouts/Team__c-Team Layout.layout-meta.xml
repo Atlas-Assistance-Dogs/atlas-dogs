@@ -97,10 +97,18 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>ClientVAPWReceived__c</field>
+                <field>ClientMentalHealthFormReceived__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>ClientProvRelFormReceived__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>ClientVAPWReceived__c</field>
+            </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>ClientProgAgreementReceived__c</field>

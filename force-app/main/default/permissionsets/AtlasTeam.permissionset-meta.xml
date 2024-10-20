@@ -298,12 +298,22 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Team__c.ClientMentalHealthFormReceived__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Team__c.ClientPreApplicationReceived__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
         <field>Team__c.ClientProgAgreementReceived__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Team__c.ClientProvRelFormReceived__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
