@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>XrayReceived__c</fullName>
     <description>The date the most recent version of Vet Xray Report was uploaded</description>
@@ -6,7 +6,6 @@
     <inlineHelpText>Set at the time of file upload. Do not edit directly.</inlineHelpText>
     <label>Last Vet Xray Report</label>
     <required>false</required>
-    <trackHistory>false</trackHistory>
     <trackTrending>false</trackTrending>
     <type>Date</type>
 </CustomField>
