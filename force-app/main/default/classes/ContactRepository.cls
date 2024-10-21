@@ -1,6 +1,5 @@
-public with sharing class ContactRepository {
+public inherited sharing class ContactRepository {
     public ContactRepository() {
-        
     }
     public Contact getPositionStatusForContact(
         Id contactId
@@ -34,8 +33,10 @@ public with sharing class ContactRepository {
         Set<Id> facilitators = new Set<Id>();
         for (Contact facilitator : active) {
             facilitators.add(facilitator.Id);
+        }
+        return facilitators;
     }
-
+    
     public Contact getClientStatus(Id contactId) {
         List<Contact> clients = [
             SELECT
@@ -52,7 +53,7 @@ public with sharing class ContactRepository {
         }
         return null;
     }
-
+    
     public Contact modify(Contact cntct) {
         return cntct;
     }
