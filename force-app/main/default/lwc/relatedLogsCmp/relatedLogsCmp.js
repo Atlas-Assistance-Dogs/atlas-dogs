@@ -13,6 +13,7 @@ import DATE_FIELD from "@salesforce/schema/Log__c.Date__c";
 import DETAILS_FIELD from "@salesforce/schema/Log__c.Details__c";
 import DID_MEET_FIELD from "@salesforce/schema/Log__c.DidMeetThisWeek__c";
 import FACILITATOR_FIELD from "@salesforce/schema/Log__c.Facilitator__c";
+import FIRST_AID_SUPPLIES_FIELD from "@salesforce/schema/Log__c.FirstAidSuppliesUsed__c";
 import SUBMITTER_FIELD from "@salesforce/schema/Log__c.Submitter__c";
 import NAME_FIELD from "@salesforce/schema/Log__c.Name";
 import OTHER_HOURS_FIELD from "@salesforce/schema/Log__c.OtherHours__c";
@@ -117,6 +118,11 @@ const COLS = {
         fieldName: ATLAS_SUPPORT_FIELD.fieldApiName,
         type: "boolean"
     },
+    aid: {
+        label: "1st Aid Supplies Used?",
+        fieldName: FIRST_AID_SUPPLIES_FIELD.fieldApiName,
+        type: "boolean"
+    },
     details: {
         label: "Details",
         fieldName: DETAILS_FIELD.fieldApiName
@@ -153,6 +159,7 @@ const FAC_COLS = [
     COLS.clientStress,
     COLS.stress,
     COLS.atlas,
+    COLS.aid,
     COLS.details,
     COLS.action
 ];
