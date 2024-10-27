@@ -1,130 +1,80 @@
 <template>
-    <c-modal-cmp
-        title={title}
-        submitlabel="Save"
-        onsubmit={handleSubmit}
-        onclose={handleClose}
-    >
+    <c-modal-cmp title={title} submitlabel="Save" onsubmit={handleSubmit} onclose={handleClose}>
         <div slot="body">
-            <lightning-record-edit-form
-                object-api-name={objectName}
-                class="slds-scrollable"
-                style="height: 25rem"
-                layout-type="full"
-                record-id={recordId}
-                onsuccess={handleSuccess}
-                onerror={handleError}
-            >
+            <lightning-record-edit-form object-api-name={objectName} class="slds-scrollable" style="height: 25rem"
+                layout-type="full" record-id={recordId} onsuccess={handleSuccess} onerror={handleError}>
                 <div class="slds-grid slds-wrap">
                     <div class="slds-col slds-size_1-of-2">
-                        <lightning-input-field
-                            field-name={fields.date}
-                            class="category slds-p-bottom_medium"
-                        ></lightning-input-field>
+                        <lightning-input-field field-name={fields.date}
+                            class="category slds-p-bottom_medium"></lightning-input-field>
                     </div>
                     <div class="slds-col slds-size_1-of-2">
-                        <lightning-input-field
-                            field-name={fields.submitter}
-                            class="category slds-p-bottom_medium"
-                        ></lightning-input-field>
+                        <lightning-input-field field-name={fields.submitter}
+                            class="category slds-p-bottom_medium"></lightning-input-field>
                     </div>
                     <div class="slds-col slds-size_1-of-2">
-                        <lightning-input-field
-                            field-name={fields.team}
-                            class="category slds-p-bottom_medium"
-                        ></lightning-input-field>
+                        <lightning-input-field field-name={fields.team}
+                            class="category slds-p-bottom_medium"></lightning-input-field>
                     </div>
                     <div class="slds-col slds-size_1-of-2">
-                        <lightning-input-field
-                            field-name={fields.facilitator}
-                            class="category slds-p-bottom_medium"
-                        ></lightning-input-field>
+                        <lightning-input-field field-name={fields.facilitator}
+                            class="category slds-p-bottom_medium"></lightning-input-field>
                     </div>
-                    <div
-                        if:true={isFacilitator}
-                        class="slds-col slds-size_1-of-2"
-                    >
-                        <lightning-input-field
-                            field-name={fields.lesson}
-                            class="category slds-p-bottom_medium"
-                            required
-                        ></lightning-input-field>
+                    <div if:true={isFacilitator} class="slds-col slds-size_1-of-2">
+                        <lightning-input-field field-name={fields.lesson} class="category slds-p-bottom_medium"
+                            required></lightning-input-field>
                     </div>
-                    <div
-                        if:true={isFacilitator}
-                        class="slds-col slds-size_1-of-2"
-                    >
-                        <lightning-input-field
-                            field-name={fields.clientHours}
-                            class="category slds-p-bottom_medium"
-                        ></lightning-input-field>
+                    <div if:true={isFacilitator} class="slds-col slds-size_1-of-2">
+                        <lightning-input-field field-name={fields.clientHours}
+                            class="category slds-p-bottom_medium"></lightning-input-field>
                     </div>
                     <div class="slds-col slds-size_1-of-2">
-                        <lightning-input-field
-                            field-name={fields.publicAccessHours}
-                            class="category slds-p-bottom_medium"
-                        ></lightning-input-field>
+                        <lightning-input-field field-name={fields.publicAccessHours}
+                            class="category slds-p-bottom_medium"></lightning-input-field>
                     </div>
                     <div class="slds-col slds-size_1-of-2">
-                        <lightning-input-field
-                            field-name={fields.otherHours}
-                            class="category slds-p-bottom_medium"
-                        ></lightning-input-field>
+                        <lightning-input-field field-name={fields.otherHours}
+                            class="category slds-p-bottom_medium"></lightning-input-field>
                     </div>
                     <div class="slds-col slds-size_2-of-2">
-                        <lightning-input-field
-                            field-name={fields.details}
-                            class="category slds-p-bottom_medium"
-                        ></lightning-input-field>
+                        <lightning-input-field field-name={fields.details}
+                            class="category slds-p-bottom_medium"></lightning-input-field>
+                    </div>
+                    <div if:true={isFacilitator} class="slds-col slds-size_2-of-2">
+                        <lightning-input-field field-name={fields.firstAid}
+                            class="slds-p-bottom_medium" onchange={handleFirstAidChange}></lightning-input-field>
+                        <div if:true={didFirstAid}>
+                            <lightning-input-field field-name={fields.firstAidDetails}
+                                class="slds-p-bottom_medium"></lightning-input-field>
+                        </div>
                     </div>
                     <div if:false={isFacilitator} class="slds-col slds-size_1-of-2">
-                        <lightning-input-field
-                            field-name={fields.didMeet}
-                            class="category slds-p-bottom_medium"
-                        ></lightning-input-field>
+                        <lightning-input-field field-name={fields.didMeet}
+                            class="category slds-p-bottom_medium"></lightning-input-field>
                     </div>
                     <div class="slds-col slds-size_1-of-2">
-                        <lightning-input-field
-                            field-name={fields.teamSupport}
-                            class="category slds-p-bottom_medium"
-                            onchange={handleTeamSupportChange}
-                        ></lightning-input-field>
+                        <lightning-input-field field-name={fields.teamSupport} class="category slds-p-bottom_medium"
+                            onchange={handleTeamSupportChange}></lightning-input-field>
                     </div>
-                    <div
-                        if:true={wantSupport}
-                        class="slds-col slds-size_2-of-2"
-                    >
-                        <lightning-input-field
-                            field-name={fields.supportDetails}
-                            class="category slds-p-bottom_medium"
-                        ></lightning-input-field>
+                    <div if:true={wantSupport} class="slds-col slds-size_2-of-2">
+                        <lightning-input-field field-name={fields.supportDetails}
+                            class="category slds-p-bottom_medium"></lightning-input-field>
                     </div>
                     <div class="slds-col slds-size_1-of-2">
-                        <lightning-input-field
-                            field-name={fields.atlasSupport}
-                            class="category slds-p-bottom_medium"
-                        ></lightning-input-field>
+                        <lightning-input-field field-name={fields.atlasSupport}
+                            class="category slds-p-bottom_medium"></lightning-input-field>
                     </div>
                     <div class="slds-col slds-size_1-of-2">
-                        <lightning-input-field
-                            field-name={fields.stress}
-                            class="category slds-p-bottom_medium"
-                        ></lightning-input-field>
+                        <lightning-input-field field-name={fields.stress}
+                            class="category slds-p-bottom_medium"></lightning-input-field>
                     </div>
-                    <div
-                        if:true={isFacilitator}
-                        class="slds-col slds-size_1-of-2"
-                    >
-                        <lightning-input-field
-                            field-name={fields.clientStress}
-                            class="category slds-p-bottom_medium"
-                        ></lightning-input-field>
+                    <div if:true={isFacilitator} class="slds-col slds-size_1-of-2">
+                        <lightning-input-field field-name={fields.clientStress}
+                            class="category slds-p-bottom_medium"></lightning-input-field>
                     </div>
                     <div if:true={isClient} class="slds-col slds-size_1-of-2">
-                        <lightning-input-field
-                            field-name={fields.satisfaction}
-                            class="category slds-p-bottom_medium"
-                        ></lightning-input-field>
+                        <lightning-input-field field-name={fields.satisfaction}
+                            class="category slds-p-bottom_medium"></lightning-input-field>
                     </div>
                 </div>
             </lightning-record-edit-form>
