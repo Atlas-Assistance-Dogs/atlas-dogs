@@ -4,7 +4,7 @@
     <description>Template name to use for this category</description>
     <externalId>false</externalId>
     <fieldManageability>SubscriberControlled</fieldManageability>
-    <label>Template</label>
+    <label>Template Name</label>
     <length>128</length>
     <required>true</required>
     <type>Text</type>

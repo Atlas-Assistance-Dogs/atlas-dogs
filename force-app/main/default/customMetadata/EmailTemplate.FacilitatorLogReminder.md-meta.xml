@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <label>Client Log Reminders</label>
+    <label>Facilitator Log Reminders</label>
     <protected>false</protected>
     <values>
-        <field>Category__c</field>
-        <value xsi:type="xsd:string">client-log</value>
-    </values>
-    <values>
         <field>Template__c</field>
-        <value xsi:type="xsd:string">ClientLogReminder</value>
+        <value xsi:type="xsd:string">FacilitatorLogReminder</value>
     </values>
 </CustomMetadata>

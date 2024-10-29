@@ -3,11 +3,7 @@
     <label>Facilitator Log Reminders</label>
     <protected>false</protected>
     <values>
-        <field>Category__c</field>
-        <value xsi:type="xsd:string">facilitator-log-reminder</value>
-    </values>
-    <values>
         <field>Template__c</field>
-        <value xsi:type="xsd:string">FacilitatorLogReminder</value>
+        <value xsi:type="xsd:string">FacilitatorCeuReminder</value>
     </values>
 </CustomMetadata>
