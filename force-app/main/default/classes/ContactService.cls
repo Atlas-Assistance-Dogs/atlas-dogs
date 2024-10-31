@@ -7,7 +7,7 @@ public inherited sharing class ContactService {
         relationshipRepo = new RelationshipRepository();
         emailServ = new EmailService();
     }
-
+    
     @TestVisible
     private ContactService(ContactRepository contactRepo, EmailService emailServ) {
         this.contactRepo = contactRepo;
@@ -20,25 +20,25 @@ public inherited sharing class ContactService {
         if (contact == 'Home' && !string.isBlank(newContact.Email)) {
             newContact.npe01__HomeEmail__c = newContact.Email;
         } else if (
-            contact == 'Alternate' && !string.isBlank(newContact.Email)
+        contact == 'Alternate' && !string.isBlank(newContact.Email)
         ) {
             newContact.npe01__AlternateEmail__c = newContact.Email;
         }
         return newContact;
     }
-
+    
     public static Contact updateContactAtPhone(Contact newContact) {
         string contact = newContact.Contact__c;
         if (contact == 'Home' && !string.isBlank(newContact.Phone)) {
             newContact.HomePhone = newContact.Phone;
         } else if (
-            contact == 'Alternate' && !string.isBlank(newContact.Phone)
+        contact == 'Alternate' && !string.isBlank(newContact.Phone)
         ) {
             newContact.OtherPhone = newContact.Phone;
         }
         return newContact;
     }
-
+    
     // Update email based on the ContactAt value
     public Contact updateEmail(Contact newContact) {
         string contact = newContact.Contact__c;
@@ -63,7 +63,7 @@ public inherited sharing class ContactService {
         }
         return newContact;
     }
-
+    
     // Update the Contact's phone based on the current value from ContactAt
     public Contact updatePhone(Contact newContact) {
         string contact = newContact.Contact__c;
@@ -88,12 +88,12 @@ public inherited sharing class ContactService {
         }
         return newContact;
     }
-
+    
     // Update the email of a related contact
     public void updateRelatedContactEmailPhone(
         Contact current,
-        Boolean changedEmail,
-        Boolean changedPhone
+    Boolean changedEmail,
+    Boolean changedPhone
     ) {
         List<npe4__Relationship__c> related = relationshipRepo.getCurrentRelated(current.Id);
         
@@ -116,12 +116,12 @@ public inherited sharing class ContactService {
             update contacts;
         }
     }
-
+    
     // Share the contact with the appropriate groups based on which positions they have,
     // and the positions they are emergency contacts for
     public static Contact shareContactBasedOnPositions(
         Contact person,
-        Map<String, String> positionGroups
+    Map<String, String> positionGroups
     ) {
         // Create a set of the positions the user currently has
         Set<String> positions = new Set<String>();
@@ -135,12 +135,12 @@ public inherited sharing class ContactService {
                 groups.add(grp);
             }
         }
-
+        
         // update this contact first, then its relations
         person = shareContactWithGroups(person, groups);
         return person;
     }
-
+    
     // Get the positions of the contact relations
     private Set<String> getRelationShipPositions(Contact record) {
         // Find who the contact is related to as an emergency contact
@@ -158,7 +158,7 @@ public inherited sharing class ContactService {
         }
         return positions;
     }
-
+    
     // Get the groups that the category rules assign for the positions
     public static Map<String, String> getGroupsByPositions() {
         // Get the groups that can see each position
@@ -173,23 +173,23 @@ public inherited sharing class ContactService {
         }
         return groupNames;
     }
-
+    
     private static Contact shareContactWithGroups(
         Contact contact,
-        Set<String> groupNames
+    Set<String> groupNames
     ) {
         contact.ShareBoard__c = groupNames.contains('Board');
         contact.SharePuppyRaiser__c = groupNames.contains('Puppy Raiser');
         contact.ShareStaff__c = groupNames.contains('Staff');
         contact.ShareStandalonePrograms__c = groupNames.contains(
             'Standalone Programs'
-        );
+            );
         contact.ShareTeam__c = groupNames.contains('Team');
         contact.ShareTrainer__c = groupNames.contains('Trainer');
         contact.ShareVolunteer__c = groupNames.contains('Volunteer');
         return contact;
     }
-
+    
     public static void setSharingFields() {
         List<Contact> contacts = [
             SELECT
@@ -219,9 +219,9 @@ public inherited sharing class ContactService {
                 OR IsTrainer__c = TRUE
                 OR IsVolunteer__c = TRUE
         ];
-
+        
         Map<Id, Contact> contactMap = new Map<Id, Contact>();
-
+        
         for (Contact person : contacts) {
             person.ShareBoard__c = person.IsBoardMember__c;
             person.SharePuppyRaiser__c = person.IsPuppyRaiser__c;
@@ -233,7 +233,7 @@ public inherited sharing class ContactService {
             person.ShareVolunteer__c = person.IsVolunteer__c;
             contactMap.put(person.Id, person);
         }
-
+        
         // Get related contacts
         npe4__Relationship__c[] related = [
             SELECT
@@ -279,10 +279,10 @@ public inherited sharing class ContactService {
         }
         update contactMap.values();
     }
-
+    
     public static void setBoardTermValidUntil(
         Contact newContact,
-        Date oldBoardDate
+    Date oldBoardDate
     ) {
         if (
             newContact.LastBoardTermStartDate__c != null &&
@@ -312,10 +312,10 @@ public inherited sharing class ContactService {
                 .addDays(-1);
         }
     }
-
+    
     public static void updateFirstAidValidUntil(
         Contact newContact,
-        Date oldFirstAidDate
+    Date oldFirstAidDate
     ) {
         if (newContact.FirstAidReceived__c == null) {
             newContact.FirstAidValidUntil__c = null;
@@ -334,15 +334,15 @@ public inherited sharing class ContactService {
             }
             newContact.FirstAidValidUntil__c = newContact.FirstAidReceived__c.addYears(
                 (integer) settings.FirstAidRenewalYears__c
-            );
+                );
         }
     }
-
+    
     class Dates {
         public Date initial { get; set; }
         public Date expiration { get; set; }
     }
-
+    
     public static void updateCertValidUntil(Contact trainer) {
         // check to see if settings are missing
         Boolean updateSettings = false;
@@ -383,13 +383,13 @@ public inherited sharing class ContactService {
             }
         }
     }
-
+    
     private static Dates getCertExpiration(
         Date initial,
-        Date agreement,
-        Integer early,
-        Integer years,
-        Integer leeway
+    Date agreement,
+    Integer early,
+    Integer years,
+    Integer leeway
     ) {
         Dates cdates = new Dates();
         cdates.initial = initial;
@@ -405,7 +405,7 @@ public inherited sharing class ContactService {
         }
         return cdates;
     }
-
+    
     public List<PositionStatus> getPositionStatusForContact(
         Id contactId
     ) {
@@ -413,7 +413,7 @@ public inherited sharing class ContactService {
         List<PositionStatus> statuses = getStatusForPositions(person);
         return statuses;
     }
-
+    
     // We want the position status to be in this order, the Positions set for the contact
     // may not be in this order
     public final static String[] POSITION_LIST = new List<string>{
@@ -425,7 +425,7 @@ public inherited sharing class ContactService {
         'Trainer',
         'Standalone'
     };
-
+    
     private static List<PositionStatus> getStatusForPositions(Contact person) {
         List<PositionStatus> statuses = new List<PositionStatus>();
         if (person.Positions__c == null) {
@@ -441,10 +441,10 @@ public inherited sharing class ContactService {
                     ) {
                         statuses.add(
                             new PositionStatus(
-                                position,
-                                person.GW_Volunteers__Volunteer_Status__c
+                            position,
+                        person.GW_Volunteers__Volunteer_Status__c
                             )
-                        );
+                            );
                     }
                 }
                 when 'Team Facilitator' {
@@ -456,8 +456,8 @@ public inherited sharing class ContactService {
                     ) {
                         string status = fineTuneStatus(
                             person.FacilitatorStatus__c,
-                            person.FacilitatorCertAgreementReceived__c
-                        );
+                        person.FacilitatorCertAgreementReceived__c
+                            );
                         statuses.add(new PositionStatus(position, status));
                     }
                 }
@@ -468,8 +468,8 @@ public inherited sharing class ContactService {
                     ) {
                         string status = fineTuneStatus(
                             person.PuppyRaiserStatus__c,
-                            person.PuppyCertAgreementReceived__c
-                        );
+                        person.PuppyCertAgreementReceived__c
+                            );
                         statuses.add(new PositionStatus(position, status));
                     }
                 }
@@ -480,10 +480,10 @@ public inherited sharing class ContactService {
                     ) {
                         statuses.add(
                             new PositionStatus(
-                                position,
-                                person.BoardMemberStatus__c
+                            position,
+                        person.BoardMemberStatus__c
                             )
-                        );
+                            );
                     }
                 }
                 when 'Client' {
@@ -496,12 +496,12 @@ public inherited sharing class ContactService {
                         if (person.ClientCertificationValidUntil__c != null) {
                             certDate = person.ClientCertificationValidUntil__c.addDays(
                                 -365
-                            );
+                                );
                         }
                         string status = fineTuneStatus(
                             person.ClientStatus__c,
-                            certDate
-                        );
+                        certDate
+                            );
                         statuses.add(new PositionStatus(position, status));
                     }
                 }
@@ -513,8 +513,8 @@ public inherited sharing class ContactService {
                     ) {
                         string status = fineTuneStatus(
                             person.TrainerStatus__c,
-                            person.TrainerCertAgreementReceived__c
-                        );
+                        person.TrainerCertAgreementReceived__c
+                            );
                         statuses.add(new PositionStatus(position, status));
                     }
                 }
@@ -525,17 +525,17 @@ public inherited sharing class ContactService {
                     ) {
                         statuses.add(
                             new PositionStatus(
-                                position,
-                                person.StandaloneStatus__c
+                            position,
+                        person.StandaloneStatus__c
                             )
-                        );
+                            );
                     }
                 }
             }
         }
         return statuses;
     }
-
+    
     private static string fineTuneStatus(string status, Date certDate) {
         Date today = Date.today();
         if (status == 'Active' || (status == 'Certified' && certDate != null)) {
@@ -547,25 +547,25 @@ public inherited sharing class ContactService {
         }
         return status;
     }
-
+    
     public void remindFacilitatorsToGetCeus() {
         Set<Id> facilitators = contactRepo.getActiveFacilitators();
         // Remind the client in a Team to submit training logs
-
+        
         if (facilitators.isEmpty()) return;
         // Remind these facilitators to get their CEUs
         Id orgAddressId = emailServ.getOrgEmailAddressId();
         EmailTemplate template = emailServ.getTemplate('FacilitatorCeuReminder');
-
+        
         List<Messaging.SingleEmailMessage> emails = new List<Messaging.SingleEmailMessage>();
         for (Id facilitator : facilitators) {
             Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
             if (orgAddressId != null) {
                 mail.setOrgWideEmailAddressId(orgAddressId);
-            }   
+            }
             mail.setTargetObjectId(facilitator);
             mail.setTemplateId(template.Id);
-    
+            
             //Record ID for which letter will be generated
             mail.setBccSender(false);
             mail.setUseSignature(false);

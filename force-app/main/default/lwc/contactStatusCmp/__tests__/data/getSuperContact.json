@@ -1,34 +1,32 @@
 {
-    "fields": {
-        "Positions__c": {
-            "value": "Volunteer;Team Facilitator;Team Facilitator Lead;Board Member;Trainer;Client;Donor;Staff"
+    "roles": [
+        {
+            "position": "Volunteer",
+            "status": "Active"
         },
-        "BoardMemberStatus__c": {
-            "value": "Initial Inquiry"
+        {
+            "position": "Team Facilitator",
+            "status": "Onboarding"
         },
-        "ClientCertAgreementReceived__c": {
-            "value": "Fri Apr 29 2021"
+        {
+            "position": "Puppy Raiser",
+            "status": "Onboarding"
         },
-        "ClientStatus__c": {
-            "value": "Certified-Active"
+        {
+            "position": "Board Member",
+            "status": "Initial Inquiry"
         },
-        "FacilitatorCertAgreementReceived__c": {
-            "value": "2022-04-30T03:14:13.702Z"
+        {
+            "position": "Client",
+            "status": "Certified-Active"
         },
-        "FacilitatorStatus__c": {
-            "value": "Onboarding"
+        {
+            "position": "Trainer",
+            "status": "Inactive"
         },
-        "LeadFacilitatorStatus__c": {
-            "value": "Discontinued"
-        },
-        "TrainerCertAgreementReceived__c": {
-            "value": "Fri Apr 29 2022"
-        },
-        "TrainerStatus__c": {
-            "value": "Inactive"
-        },
-        "GW_Volunteers__Volunteer_Status__c": {
-            "value": "Active"
+        {
+            "position": "Standalone",
+            "status": "Active"
         }
-    }
+    ]
 }
