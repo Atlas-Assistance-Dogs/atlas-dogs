@@ -21,35 +21,6 @@ public with sharing class TestTeamServiceReminders {
         service = new TeamService(teamRepo, patRepo, relationshipRepo, emailSrv, dogRepo, contactRepo);
     }
     
-    private static final String[] teamids = new String[]{'a1BE200000K4ZN3MAN', 'a1BE200000K4ZN4MAN', 'a1BE200000K4ZN5MAN', 'a1BE200000K4ZN6MAN', 'a1BE200000K4ZN7MAN',
-    'a1BE200000K4ZN8MAN', 'a1BE200000K4ZN9MAN', 'a1BE200000K4ZNAMA3', 'a1BE200000K4ZNBMA3', 'a1BE200000K4ZNCMA3'};
-    
-    private static final String[] contactids = new String[]{
-        '003E200000WBWDeIAP',
-        '003E200000WBWDfIAP',
-        '003E200000WBWDgIAP',
-        '003E200000WBWDhIAP',
-        '003E200000WBWDiIAP',
-        '003E200000WBWDjIAP',
-        '003E200000WBWDkIAP',
-        '003E200000WBWDlIAP',
-        '003E200000WBWDmIAP',
-        '003E200000WBWDnIAP'
-    };
-    
-    private static final String[] relationshipids = new String[]{
-        'a0FE2000003J7gsMAC',
-        'a0FE2000003J7gtMAC',
-        'a0FE2000003J9icMAC',
-        'a0FE2000003J9idMAC',
-        'a0FE2000003JC6zMAG',
-        'a0FE2000003JC70MAG',
-        'a0FE2000003JC8bMAG',
-        'a0FE2000003JC8cMAG'
-    };
-    private static final String templateId = '00XE20000053FkPMAU';
-    private static final String template2Id = '00XE200000539jrMAA';
-    
     @isTest
     static void remindClients_sendsNoEmails_whenNoTeams() {
         makeData();
@@ -74,9 +45,9 @@ public with sharing class TestTeamServiceReminders {
     @isTest
     static void remindClients_sendsEmailToClient_InTraining() {
         makeData();
-        mocks.expectedCalls.add(new MockCallData(emailSrv, 'getTemplate', new EmailTemplate(Id = templateId)));
+        mocks.expectedCalls.add(new MockCallData(emailSrv, 'getTemplate', new EmailTemplate(Id = MockProvider.templateIds[0])));
         mocks.expectedCalls.add(new MockCallData(emailSrv, 'sendEmail'));
-        Team__c team = new Team__c(Id = teamids[0], Client__c = contactids[0], Status__c = 'In Training', TrainingStartDate__c = Date.today().addDays(-6));
+        Team__c team = new Team__c(Id = MockProvider.teamids[0], Client__c = MockProvider.contactids[0], Status__c = 'In Training', TrainingStartDate__c = Date.today().addDays(-6));
         mocks.expectedCalls.add(new MockCallData(teamRepo, 'getByStatus', new List<Team__c>{team}));
         service.remindClients();
         
@@ -93,7 +64,7 @@ public with sharing class TestTeamServiceReminders {
         Messaging.SingleEmailMessage message = emails[0];
         System.assertEquals(team.Client__c, message.targetobjectid);
         System.assertEquals(team.Id, message.whatid);
-        System.assertEquals(templateId, message.templateid);
+        System.assertEquals(MockProvider.templateIds[0], message.templateid);
     }
     
     @isTest
@@ -101,10 +72,10 @@ public with sharing class TestTeamServiceReminders {
         makeData();
         Team__c[] teams = new Team__c[5];
         for (Integer i = 0; i < 5; i++) {
-            teams[i] = new Team__c(Id = teamids[i], Client__c = contactids[i], Status__c = 'In Training', TrainingStartDate__c = Date.today().addDays(0 - i));
+            teams[i] = new Team__c(Id = MockProvider.teamids[i], Client__c = MockProvider.contactids[i], Status__c = 'In Training', TrainingStartDate__c = Date.today().addDays(0 - i));
         }
         mocks.expectedCalls.add(new MockCallData(teamRepo, 'getByStatus', teams));
-        mocks.expectedCalls.add(new MockCallData(emailSrv, 'getTemplate', new EmailTemplate(Id = templateId)));
+        mocks.expectedCalls.add(new MockCallData(emailSrv, 'getTemplate', new EmailTemplate(Id = MockProvider.templateIds[0])));
         mocks.expectedCalls.add(new MockCallData(emailSrv, 'sendEmail'));
         service.remindClients();
         
@@ -117,7 +88,7 @@ public with sharing class TestTeamServiceReminders {
             Messaging.SingleEmailMessage message = emails[i];
             System.assertEquals(team.Client__c, message.targetobjectid);
             System.assertEquals(team.Id, message.whatid);
-            System.assertEquals(templateId, message.templateid);
+            System.assertEquals(MockProvider.templateIds[0], message.templateid);
         }
     }
 
@@ -127,12 +98,12 @@ public with sharing class TestTeamServiceReminders {
 
     private static void setupCalls(Integer[] daysTraining) {
         makeData();
-        mocks.expectedCalls.add(new MockCallData(emailSrv, 'getTemplate', new EmailTemplate(Id = templateId)));
+        mocks.expectedCalls.add(new MockCallData(emailSrv, 'getTemplate', new EmailTemplate(Id = MockProvider.templateIds[0])));
         mocks.expectedCalls.add(new MockCallData(emailSrv, 'sendEmail'));
         List<Team__c> teams = new List<Team__c>();
         for (Integer i = 0; i < daysTraining.size(); i++){
             Integer days = daysTraining[i];
-            teams.add(new Team__c(Id = teamids[i], Client__c = contactids[i], Status__c = 'In Training', TrainingStartDate__c = Date.today().addDays(0 - days)));
+            teams.add(new Team__c(Id = MockProvider.teamids[i], Client__c = MockProvider.contactids[i], Status__c = 'In Training', TrainingStartDate__c = Date.today().addDays(0 - days)));
         }
         mocks.expectedCalls.add(new MockCallData(teamRepo, 'getByStatus', teams));
         facilitatorToTeamIds = new Map<Id, Id>();
@@ -140,11 +111,11 @@ public with sharing class TestTeamServiceReminders {
         clientIds = new Set<Id>();
         List<npe4__Relationship__c> relationships = new List<npe4__Relationship__c>();
         for (Integer i = 0; i < daysTraining.size(); i++){
-            Id currentId = contactids[9 - i];
-            relationships.add(new npe4__Relationship__c(Id = relationshipids[i], npe4__Contact__c = contactids[i], npe4__RelatedContact__c = currentId));
+            Id currentId = MockProvider.contactids[9 - i];
+            relationships.add(new npe4__Relationship__c(Id = MockProvider.relationshipids[i], npe4__Contact__c = MockProvider.contactids[i], npe4__RelatedContact__c = currentId));
             facilitatorIds.add(currentId);
-            clientIds.add(contactids[i]);
-            facilitatorToTeamIds.put(currentId, teamids[i]);
+            clientIds.add(MockProvider.contactids[i]);
+            facilitatorToTeamIds.put(currentId, MockProvider.teamids[i]);
         }
         mocks.expectedCalls.add(new MockCallData(relationshipRepo, 'getCurrentRelated', relationships));
     }
@@ -183,7 +154,7 @@ public with sharing class TestTeamServiceReminders {
         for (Messaging.SingleEmailMessage message : emails) {
             System.assert(facilitatorIds.contains(message.targetobjectid));
             System.assertEquals(facilitatorToTeamIds.get(message.targetObjectId), message.whatid);
-            System.assertEquals(templateId, message.templateid);
+            System.assertEquals(MockProvider.templateIds[0], message.templateid);
             facilitatorIds.remove(message.targetobjectid);
         }
     }
@@ -243,9 +214,9 @@ public with sharing class TestTeamServiceReminders {
     @isTest
     static void remindFacilitators_sendsNoEmails_whenNoFacilitators() {
         makeData();
-        mocks.expectedCalls.add(new MockCallData(emailSrv, 'getTemplate', new EmailTemplate(Id = templateId)));
+        mocks.expectedCalls.add(new MockCallData(emailSrv, 'getTemplate', new EmailTemplate(Id = MockProvider.templateIds[0])));
         mocks.expectedCalls.add(new MockCallData(emailSrv, 'sendEmail'));
-        Team__c team = new Team__c(Id = teamids[0], Client__c = contactids[0], Status__c = 'In Training', TrainingStartDate__c = Date.today().addDays(-8));
+        Team__c team = new Team__c(Id = MockProvider.teamids[0], Client__c = MockProvider.contactids[0], Status__c = 'In Training', TrainingStartDate__c = Date.today().addDays(-8));
         mocks.expectedCalls.add(new MockCallData(teamRepo, 'getByStatus', new List<Team__c>{team}));
         List<npe4__Relationship__c> relationships = new List<npe4__Relationship__c>{};
         mocks.expectedCalls.add(new MockCallData(relationshipRepo, 'getCurrentRelated', relationships));

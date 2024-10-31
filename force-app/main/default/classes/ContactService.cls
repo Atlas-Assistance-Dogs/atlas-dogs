@@ -9,8 +9,9 @@ public inherited sharing class ContactService {
     }
     
     @TestVisible
-    private ContactService(ContactRepository contactRepo, EmailService emailServ) {
+    private ContactService(ContactRepository contactRepo, RelationshipRepository relationshipRepo, EmailService emailServ) {
         this.contactRepo = contactRepo;
+        this.relationshipRepo = relationshipRepo;
         this.emailServ = emailServ;
     }
     // This copies the contact email and phone to the ContactAt email & phone,
