@@ -83,4 +83,42 @@ private class TestTeamRepository {
 
         System.assertEquals(new Set<Id>{team1.Id, team3.Id}, teamIds);
    }
+   @isTest
+   static void create_handlesNull() {
+        TeamRepository repo = new TeamRepository();
+        Team__c result = repo.create(null);
+        System.assertEquals(null, result);
+   }
+   @isTest
+   static void create_inserts() {
+        Team__c team1 = TestTeamController.setup();
+        Team__c team = new Team__c(
+            Client__c = team1.Handler__c,
+            Dog__c = team1.Dog__c,
+            Handler__c = team1.Client__c,
+            Facilitator__c = null,
+            Name = 'Happy Trio',
+            PatValidUntil__c = Date.today().addMonths(10),
+            PatCount__c = 42,
+            PrimaryCertification__c = 'Allergen Alert',
+            SecondaryCertification__c = 'Autism',
+            Status__c = 'Certified',
+            TrainingStartDate__c = Date.today().addMonths(-6)
+        );
+        TeamRepository repo = new TeamRepository();
+        Team__c result = repo.create(team);
+        System.assert(null != result);
+        System.assert(null != result.Id);
+        System.assertEquals(team1.Handler__c, result.Client__c);
+        System.assertEquals(team1.Dog__c, result.Dog__c);
+        System.assertEquals(team1.Client__c, result.Handler__c);
+        System.assertEquals(null, result.Facilitator__c);
+        System.assertEquals(team.Name, result.Name);
+        System.assertEquals(team.PatCount__c, result.PatCount__c);
+        System.assertEquals(team.PatValidUntil__c, result.PatValidUntil__c);
+        System.assertEquals(team.PrimaryCertification__c, result.PrimaryCertification__c);
+        System.assertEquals(team.SecondaryCertification__c, result.SecondaryCertification__c);
+        System.assertEquals(team.Status__c, result.Status__c);
+        System.assertEquals(team.TrainingStartDate__c, result.TrainingStartDate__c);
+   }
 }
