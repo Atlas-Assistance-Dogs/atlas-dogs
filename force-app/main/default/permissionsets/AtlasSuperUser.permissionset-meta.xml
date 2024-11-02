@@ -666,22 +666,22 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>ContinuingEducationUnit__c.AuthorityOther__c</field>
+        <field>CEU__c.AuthorityOther__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>ContinuingEducationUnit__c.Comments__c</field>
+        <field>CEU__c.Comments__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>ContinuingEducationUnit__c.ProgramHours__c</field>
+        <field>CEU__c.ProgramHours__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>ContinuingEducationUnit__c.Status__c</field>
+        <field>CEU__c.Status__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -1090,7 +1090,7 @@
         <allowEdit>true</allowEdit>
         <allowRead>true</allowRead>
         <modifyAllRecords>true</modifyAllRecords>
-        <object>ContinuingEducationUnit__c</object>
+        <object>CEU__c</object>
         <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
     <objectPermissions>
@@ -1190,7 +1190,7 @@
         <visibility>Visible</visibility>
     </tabSettings>
     <tabSettings>
-        <tab>ContinuingEducationUnit__c</tab>
+        <tab>CEU__c</tab>
         <visibility>Visible</visibility>
     </tabSettings>
     <tabSettings>

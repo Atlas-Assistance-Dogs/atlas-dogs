@@ -147,21 +147,22 @@
     <allowInChatterGroups>false</allowInChatterGroups>
     <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
     <deploymentStatus>Deployed</deploymentStatus>
-    <description>Continuing Education Units</description>
+    <description>Continuing Education Unit</description>
     <enableActivities>false</enableActivities>
     <enableBulkApi>true</enableBulkApi>
     <enableFeeds>false</enableFeeds>
     <enableHistory>false</enableHistory>
     <enableLicensing>false</enableLicensing>
-    <enableReports>false</enableReports>
+    <enableReports>true</enableReports>
     <enableSearch>false</enableSearch>
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
     <externalSharingModel>Private</externalSharingModel>
     <label>CEU</label>
     <nameField>
+        <displayFormat>CEU-{0000}</displayFormat>
         <label>CEU Name</label>
-        <type>Text</type>
+        <type>AutoNumber</type>
     </nameField>
     <pluralLabel>CEUs</pluralLabel>
     <searchLayouts>
@@ -169,7 +170,7 @@
         <searchResultsAdditionalFields>DateCompleted__c</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>Quantity__c</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>Status__c</searchResultsAdditionalFields>
-        <searchResultsAdditionalFields>Trainer__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Contact__c</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>Role__c</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>Comments__c</searchResultsAdditionalFields>
     </searchLayouts>
