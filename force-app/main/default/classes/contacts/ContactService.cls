@@ -345,12 +345,9 @@ public inherited sharing class ContactService {
     }
   }
 
-  class Dates {
-    public Date initial { get; set; }
-    public Date expiration { get; set; }
-  }
 
-  public static void updateCertValidUntil(Contact trainer) {
+    
+    public static void updateCertValidUntil(Contact person) {
     // check to see if settings are missing
     Boolean updateSettings = false;
     AtlasSettings__c settings = AtlasSettings__c.getOrgDefaults();
@@ -375,43 +372,36 @@ public inherited sharing class ContactService {
     Integer years = (Integer) settings.CertRenewalYears__c;
     Integer early = (Integer) settings.EarlyRenewal__c;
     Integer leeway = (Integer) settings.RenewalLeeway__c;
-    if (
-      trainer.IsTrainer__c && trainer.TrainerCertAgreementReceived__c != null
-    ) {
-      if (trainer.TrainerInitialCertificationDate__c == null) {
-        trainer.TrainerInitialCertificationDate__c = trainer.TrainerCertAgreementReceived__c;
-        trainer.TrainerCertValidUntil__c = trainer.TrainerCertAgreementReceived__c.addYears(1);
+        // update trainer cert
+        if (
+            person.IsTrainer__c &&
+            person.TrainerCertAgreementReceived__c != null
+        ) {
+            if (person.TrainerInitialCertificationDate__c == null) {
+                person.TrainerInitialCertificationDate__c = person.TrainerCertAgreementReceived__c;
+                person.TrainerCertValidUntil__c = person.addYears(1);
         return;
       }
-      Integer days = trainer.TrainerCertAgreementReceived__c.daysBetween(
-        trainer.TrainerCertValidUntil__c
-      );
-      if (days >= -early && days <= leeway) {
-        trainer.TrainerCertValidUntil__c = trainer.TrainerCertValidUntil__c.addYears(years);
+            Integer days = trainer.person.daysBetween(person.TrainerCertValidUntil__c);
+            if (days >= -early && days <= leeway) {
+                person.TrainerCertValidUntil__c = person.addYears(years);
       }
     }
-  }
-
-  private static Dates getCertExpiration(
-    Date initial,
-    Date agreement,
-    Integer early,
-    Integer years,
-    Integer leeway
-  ) {
-    Dates cdates = new Dates();
-    cdates.initial = initial;
-    if (agreement == null) {
-      return cdates;
+        // update facilitator cert
+        if (
+            person.IsFacilitator__c &&
+            person.FacilitatorCertAgreementReceived__c != null
+    ) {
+            if (person.FacilitatorInitialCertificationDate__c == null) {
+                person.FacilitatorInitialCertificationDate__c = person.FacilitatorInitialCertificationDate__c;
+                person.FacilitatorCertValidUntil__c = person.addYears(1);
+                return;
+        }
+            Integer days = trainer.person.daysBetween(person.TrainerCertValidUntil__c);
+            if (days >= -early && days <= leeway) {
+                person.FacilitatorCertValidUntil__c = person.addYears(years);
+            }
     }
-    if (initial == null) {
-      cdates.initial = agreement;
-      cdates.expiration = agreement.addYears(years);
-    } else {
-      Integer moreYears = (agreement.daysBetween(initial) + 365 + leeway) / 365;
-      cdates.expiration = initial.addYears(moreYears);
-    }
-    return cdates;
   }
 
   public List<PositionStatus> getPositionStatusForContact(Id contactId) {
