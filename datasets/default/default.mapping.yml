@@ -301,6 +301,7 @@ Insert Contact:
   - BoardToNReceived__c
   - CanvasSisId__c
   - ClientCertificationValidUntil__c
+  - ClientDog__c
   - ClientFacilitatorAvailability__c
   - ClientInitialCertificationDate__c
   - ClientMedicalDevices__c
@@ -319,6 +320,8 @@ Insert Contact:
   - FacilitatorProgAgreementReceived__c
   - FacilitatorReferenceReceived__c
   - FacilitatorStatus__c
+  - FirstAidReceived__c
+  - FirstAidValidUntil__c
   - GW_Volunteers__Volunteer_Auto_Reminder_Email_Opt_Out__c
   - GW_Volunteers__Volunteer_Availability__c
   - GW_Volunteers__Volunteer_Last_Web_Signup_Date__c
@@ -335,6 +338,7 @@ Insert Contact:
   - LeadInterest__c
   - LeadSourceOther__c
   - OtherLanguages__c
+  - Photo__c
   - Positions__c
   - PreferredName__c
   - PronounOther__c
@@ -348,6 +352,13 @@ Insert Contact:
   - PuppyReferenceReceived__c
   - RaceEthnicity__c
   - SexualOrientation__c
+  - ShareBoard__c
+  - SharePuppyRaiser__c
+  - ShareStaff__c
+  - ShareStandalonePrograms__c
+  - ShareTeam__c
+  - ShareTrainer__c
+  - ShareVolunteer__c
   - ShirtSize__c
   - SpecifiedAbilityAccommodation__c
   - SpecifiedAbilityStatus__c
@@ -372,6 +383,7 @@ Insert Contact:
   - TrainerApplicationReceived__c
   - TrainerBoardTrain__c
   - TrainerCertAgreementReceived__c
+  - TrainerCertValidUntil__c
   - TrainerClientReferenceReceived__c
   - TrainerInfrNoticeReceived__c
   - TrainerInitialCertificationDate__c
@@ -380,6 +392,7 @@ Insert Contact:
   - TrainerSpecialties__c
   - TrainerStatus__c
   - UpdateForRelated__c
+  - UpdateSharing__c
   - VeteranStatus__c
   - VolunteerAccess__c
   - VolunteerAgreementReceived__c
@@ -507,6 +520,7 @@ Insert CEU__c:
   sf_object: CEU__c
   table: CEU__c
   fields:
+  - Applied__c
   - AuthorityOther__c
   - Authority__c
   - Comments__c
@@ -580,15 +594,19 @@ Insert Team__c:
   - ClientCGCFormReceived__c
   - ClientCertAgreementReceived__c
   - ClientLOMIReceived__c
+  - ClientMentalHealthFormReceived__c
   - ClientPreApplicationReceived__c
   - ClientProgAgreementReceived__c
+  - ClientProvRelFormReceived__c
   - ClientSurveyReceived__c
   - ClientVAPWReceived__c
+  - FacilitatorAvailability__c
   - HealthFormReceived__c
   - InitialCertificationDate__c
   - Name
   - PatCount__c
   - PatValidUntil__c
+  - Photo__c
   - PrimaryCertification__c
   - SecondaryCertification__c
   - Status__c
@@ -603,6 +621,10 @@ Insert Team__c:
       table:
       - Dog__c
       key_field: Dog__c
+    Facilitator__c:
+      table:
+      - Contact
+      key_field: Facilitator__c
     Handler__c:
       table:
       - Contact

@@ -431,4 +431,22 @@ public with sharing class ContactService {
         }
         return cdates;
     }
+
+    // Update the CEUs upto to the certDate as being Applied for that position
+    public void updateCeus(Id contactId, Date certDate, String position) {
+        CeuRepository ceuRepo = new CeuRepository();
+        List<CEU__c> ceus = ceuRepo.getYearEnding(contactId, certDate);
+        for (CEU__c ceu : ceus) {
+            if (ceu.Applied__c == null) {
+                // easy, just set the position
+                ceu.Applied__c = position;
+                continue;
+            }
+            // Otherwise, there is a position in there, split the string so we can add to it
+            List<String> positions = ceu.Applied__c.split(';');
+            positions.add(position);
+            ceu.Applied__c = String.join(positions, ';');
+        }
+        ceuRepo.modify(ceus);
+    }
 }
