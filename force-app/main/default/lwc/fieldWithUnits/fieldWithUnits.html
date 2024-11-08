@@ -1,0 +1,8 @@
+<template>
+    <lightning-messages></lightning-messages>
+    <!--Other fields here-->
+    <lightning-input type="number" name="value" label={info.label} value={displayValue}
+        onchange={handleValueChange}></lightning-input>
+    <lightning-combobox name="units" label="Units" value={info.currentUnits} placeholder="Select Units"
+        options={options} onchange={handleUnitChange}></lightning-combobox>
+</template>
