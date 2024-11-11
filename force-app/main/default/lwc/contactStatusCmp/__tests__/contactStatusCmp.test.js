@@ -1,7 +1,7 @@
 import { createElement } from "lwc";
 import ContactStatusCmp from "c/contactStatusCmp";
 import { getRecord } from "lightning/uiRecordApi";
-import getProgramAssignments from "@salesforce/apex/ContactController.getProgramAssignments";
+import getPositionStatus from "@salesforce/apex/PositionStatusController.getPositionStatusForContact";
 
 // Import mock data to send through the wire adapter.
 const mockSuperContact = require("./data/getSuperContact.json");
@@ -9,7 +9,7 @@ jest.mock("c/contactStatusIndicatorCmp");
 
 // Mock Apex wire adapter
 jest.mock(
-    "@salesforce/apex/ContactController.getProgramAssignments",
+    "@salesforce/apex/PositionStatusController.getPositionStatusForContact",
     () => {
         const {
             createApexTestWireAdapter
@@ -37,40 +37,33 @@ describe("c-contact-status-cmp", () => {
         return Promise.resolve();
     }
 
-    it("Super contact has expected status", () => {
-        const expected = [
-            { position: "Volunteer", status: "Active" },
-            {
-                position: "Team Facilitator",
-                status: mockSuperContact.fields.FacilitatorStatus__c.value
-            },
-            {
-                position: "Board",
-                status: mockSuperContact.fields.BoardMemberStatus__c.value
-            },
-            {
-                position: "Client",
-                status: mockSuperContact.fields.ClientStatus__c.value
-            },
-            {
-                position: "Trainer",
-                status: mockSuperContact.fields.TrainerStatus__c.value
-            }
-        ];
-        let superContact = { ...mockSuperContact };
-        let daysAgo = new Date();
-        daysAgo.setDate(daysAgo.getDate() - 100);
-        superContact.fields.ClientCertAgreementReceived__c.value = daysAgo;
-        superContact.fields.FacilitatorCertAgreementReceived__c.value = daysAgo;
-        superContact.fields.TrainerCertAgreementReceived__c.value = daysAgo;
+    it("renders without errors", () => {
         const element = createElement("c-contact-status-cmp", {
             is: ContactStatusCmp
         });
         document.body.appendChild(element);
 
         // Emit mock record into the wired field
-        getRecord.emit(superContact);
-        getProgramAssignments.emit([]);
+        getPositionStatus.emit(null);
+        // Resolve a promise to wait for a rerender of the new content.
+        return Promise.resolve().then(() => {
+            const indicators = element.shadowRoot.querySelectorAll(
+                "c-contact-status-indicator-cmp"
+            );
+            expect(indicators).toBeDefined();
+        });
+    });
+
+    it("shows expected status for super concact", () => {
+        const expected = mockSuperContact.roles;
+        let superContact = [...mockSuperContact.roles];
+        const element = createElement("c-contact-status-cmp", {
+            is: ContactStatusCmp
+        });
+        document.body.appendChild(element);
+
+        // Emit mock record into the wired field
+        getPositionStatus.emit(superContact);
 
         // Resolve a promise to wait for a rerender of the new content.
         return Promise.resolve().then(() => {
@@ -89,24 +82,14 @@ describe("c-contact-status-cmp", () => {
         });
     });
 
-    it("Client has action soon", () => {
-        let daysAgo = new Date();
-        daysAgo.setDate(daysAgo.getDate() - 300);
-        const client = {
-            fields: {
-                Positions__c: { value: "Client" },
-                ClientStatus__c: { value: "Certified" },
-                ClientCertAgreementReceived__c: { value: daysAgo }
-            }
-        };
+    it("shows just one", () => {
         const element = createElement("c-contact-status-cmp", {
             is: ContactStatusCmp
         });
         document.body.appendChild(element);
 
         // Emit mock record into the wired field
-        getRecord.emit(client);
-        getProgramAssignments.emit([]);
+        getPositionStatus.emit(mockSuperContact.roles.slice(0, 1));
 
         // Resolve a promise to wait for a rerender of the new content.
         return Promise.resolve().then(() => {
@@ -117,29 +100,19 @@ describe("c-contact-status-cmp", () => {
             expect(indicators).not.toBeNull();
             expect(indicators.length).toBe(1);
             const indicator = indicators[0];
-            expect(indicator.position).toBe("Client");
-            expect(indicator.status).toBe("Action Needed Soon");
+            expect(indicator.position).toBe(mockSuperContact.roles[0].position);
+            expect(indicator.status).toBe(mockSuperContact.roles[0].status);
         });
     });
 
-    it("Team Facilitator has action needed", () => {
-        let daysAgo = new Date();
-        daysAgo.setDate(daysAgo.getDate() - 370);
-        const contact = {
-            fields: {
-                Positions__c: { value: "Team Facilitator" },
-                FacilitatorStatus__c: { value: "Active" },
-                FacilitatorCertAgreementReceived__c: { value: daysAgo }
-            }
-        };
+    it("shows none", () => {
         const element = createElement("c-contact-status-cmp", {
             is: ContactStatusCmp
         });
         document.body.appendChild(element);
 
         // Emit mock record into the wired field
-        getRecord.emit(contact);
-        getProgramAssignments.emit([]);
+        getPositionStatus.emit([]);
 
         // Resolve a promise to wait for a rerender of the new content.
         return Promise.resolve().then(() => {
@@ -148,311 +121,7 @@ describe("c-contact-status-cmp", () => {
             );
             // Child is the mock, not the real component
             expect(indicators).not.toBeNull();
-            expect(indicators.length).toBe(1);
-            const indicator = indicators[0];
-            expect(indicator.position).toBe("Team Facilitator");
-            expect(indicator.status).toBe("Action Needed");
-        });
-    });
-
-    it("Trainer has action needed", () => {
-        let daysAgo = new Date();
-        daysAgo.setDate(daysAgo.getDate() - 365);
-        const contact = {
-            fields: {
-                Positions__c: { value: "Trainer" },
-                TrainerStatus__c: { value: "Active" },
-                TrainerCertAgreementReceived__c: { value: daysAgo }
-            }
-        };
-        const element = createElement("c-contact-status-cmp", {
-            is: ContactStatusCmp
-        });
-        document.body.appendChild(element);
-
-        // Emit mock record into the wired field
-        getRecord.emit(contact);
-        getProgramAssignments.emit([]);
-
-        // Resolve a promise to wait for a rerender of the new content.
-        return Promise.resolve().then(() => {
-            const indicators = element.shadowRoot.querySelectorAll(
-                "c-contact-status-indicator-cmp"
-            );
-            // Child is the mock, not the real component
-            expect(indicators).not.toBeNull();
-            expect(indicators.length).toBe(1);
-            const indicator = indicators[0];
-            expect(indicator.position).toBe("Trainer");
-            expect(indicator.status).toBe("Action Needed");
-        });
-    });
-
-    it("Trainer has action needed soon", () => {
-        let daysAgo = new Date();
-        daysAgo.setDate(daysAgo.getDate() - 364);
-        const contact = {
-            fields: {
-                Positions__c: { value: "Trainer" },
-                TrainerStatus__c: { value: "Active" },
-                TrainerCertAgreementReceived__c: { value: daysAgo }
-            }
-        };
-        const element = createElement("c-contact-status-cmp", {
-            is: ContactStatusCmp
-        });
-        document.body.appendChild(element);
-
-        // Emit mock record into the wired field
-        getRecord.emit(contact);
-        getProgramAssignments.emit([]);
-
-        // Resolve a promise to wait for a rerender of the new content.
-        return Promise.resolve().then(() => {
-            const indicators = element.shadowRoot.querySelectorAll(
-                "c-contact-status-indicator-cmp"
-            );
-            // Child is the mock, not the real component
-            expect(indicators).not.toBeNull();
-            expect(indicators.length).toBe(1);
-            const indicator = indicators[0];
-            expect(indicator.position).toBe("Trainer");
-            expect(indicator.status).toBe("Action Needed Soon");
-        });
-    });
-
-    it("Trainer is no longer active", () => {
-        let daysAgo = new Date();
-        daysAgo.setDate(daysAgo.getDate() - 400);
-        const contact = {
-            fields: {
-                Positions__c: { value: "Trainer" },
-                TrainerStatus__c: { value: "Inactive" },
-                TrainerCertAgreementReceived__c: { value: daysAgo }
-            }
-        };
-        const element = createElement("c-contact-status-cmp", {
-            is: ContactStatusCmp
-        });
-        document.body.appendChild(element);
-
-        // Emit mock record into the wired field
-        getRecord.emit(contact);
-        getProgramAssignments.emit([]);
-
-        // Resolve a promise to wait for a rerender of the new content.
-        return Promise.resolve().then(() => {
-            const indicators = element.shadowRoot.querySelectorAll(
-                "c-contact-status-indicator-cmp"
-            );
-            // Child is the mock, not the real component
-            expect(indicators).not.toBeNull();
-            expect(indicators.length).toBe(1);
-            const indicator = indicators[0];
-            expect(indicator.position).toBe("Trainer");
-            expect(indicator.status).toBe("Inactive");
-        });
-    });
-
-    it("Puppy Raiser has action needed", () => {
-        let daysAgo = new Date();
-        daysAgo.setDate(daysAgo.getDate() - 370);
-        const contact = {
-            fields: {
-                Positions__c: { value: "Puppy Raiser" },
-                PuppyRaiserStatus__c: { value: "Certified" },
-                PuppyCertAgreementReceived__c: { value: daysAgo }
-            }
-        };
-        const element = createElement("c-contact-status-cmp", {
-            is: ContactStatusCmp
-        });
-        document.body.appendChild(element);
-
-        // Emit mock record into the wired field
-        getRecord.emit(contact);
-        getProgramAssignments.emit([]);
-
-        // Resolve a promise to wait for a rerender of the new content.
-        return Promise.resolve().then(() => {
-            const indicators = element.shadowRoot.querySelectorAll(
-                "c-contact-status-indicator-cmp"
-            );
-            // Child is the mock, not the real component
-            expect(indicators).not.toBeNull();
-            expect(indicators.length).toBe(1);
-            const indicator = indicators[0];
-            expect(indicator.position).toBe("Puppy Raiser");
-            expect(indicator.status).toBe("Action Needed");
-        });
-    });
-
-    it("Contact has Other in training", () => {
-        let daysAgo = new Date();
-        daysAgo.setDate(daysAgo.getDate() - 370);
-        const contact = {
-            fields: {
-                Positions__c: { value: null },
-                PuppyRaiserStatus__c: { value: undefined },
-                PuppyCertAgreementReceived__c: { value: undefined }
-            }
-        };
-        const programAssignments = [
-            {
-                AssignedDate__c: new Date(),
-                CompletionDate__c: undefined,
-                ExpectedCompletion__c: new Date(),
-                Program__c: "number",
-                Program2__r: { Name: "Medical Alert", Standalone__c: true },
-                Status__c: "In Progress"
-            }
-        ];
-        const element = createElement("c-contact-status-cmp", {
-            is: ContactStatusCmp
-        });
-        document.body.appendChild(element);
-
-        // Emit mock record into the wired field
-        getRecord.emit(contact);
-        getProgramAssignments.emit(programAssignments);
-
-        // Resolve a promise to wait for a rerender of the new content.
-        return Promise.resolve().then(() => {
-            const indicators = element.shadowRoot.querySelectorAll(
-                "c-contact-status-indicator-cmp"
-            );
-            // Child is the mock, not the real component
-            expect(indicators).not.toBeNull();
-            expect(indicators.length).toBe(1);
-            const indicator = indicators[0];
-            expect(indicator.position).toBe("Other");
-            expect(indicator.status).toBe("In Progress");
-        });
-    });
-
-    it("Contact has Other in training when one program complete", () => {
-        let daysAgo = new Date();
-        daysAgo.setDate(daysAgo.getDate() - 370);
-        const contact = {
-            fields: {
-                Positions__c: { value: null },
-                PuppyRaiserStatus__c: { value: undefined },
-                PuppyCertAgreementReceived__c: { value: undefined }
-            }
-        };
-        const programAssignments = [
-            {
-                AssignedDate__c: new Date(),
-                CompletionDate__c: undefined,
-                ExpectedCompletion__c: new Date(),
-                Program__c: "number",
-                Program2__r: { Name: "Medical Alert", Standalone__c: true },
-                Status__c: "In Progress"
-            },
-            {
-                AssignedDate__c: new Date(),
-                CompletionDate__c: undefined,
-                ExpectedCompletion__c: new Date(),
-                Program__c: "number",
-                Program2__r: { Name: "Fitness", Standalone__c: true },
-                Status__c: "Completed"
-            },
-            {
-                AssignedDate__c: new Date(),
-                CompletionDate__c: undefined,
-                ExpectedCompletion__c: new Date(),
-                Program__c: "number",
-                Program2__r: { Name: "Fitness", Standalone__c: true },
-                Status__c: "Discontinued"
-            },
-            {
-                AssignedDate__c: new Date(),
-                CompletionDate__c: undefined,
-                ExpectedCompletion__c: new Date(),
-                Program__c: "number",
-                Program2__r: { Name: "Fitness", Standalone__c: true },
-                Status__c: "Removed"
-            }
-        ];
-        const element = createElement("c-contact-status-cmp", {
-            is: ContactStatusCmp
-        });
-        document.body.appendChild(element);
-
-        // Emit mock record into the wired field
-        getRecord.emit(contact);
-        getProgramAssignments.emit(programAssignments);
-
-        // Resolve a promise to wait for a rerender of the new content.
-        return Promise.resolve().then(() => {
-            const indicators = element.shadowRoot.querySelectorAll(
-                "c-contact-status-indicator-cmp"
-            );
-            // Child is the mock, not the real component
-            expect(indicators).not.toBeNull();
-            expect(indicators.length).toBe(1);
-            const indicator = indicators[0];
-            expect(indicator.position).toBe("Other");
-            expect(indicator.status).toBe("In Progress");
-        });
-    });
-
-    it("Contact has Other Decertifed/Suspended when all program complete", () => {
-        let daysAgo = new Date();
-        daysAgo.setDate(daysAgo.getDate() - 370);
-        const contact = {
-            fields: {
-                Positions__c: { value: null },
-                PuppyRaiserStatus__c: { value: undefined },
-                PuppyCertAgreementReceived__c: { value: undefined }
-            }
-        };
-        const programAssignments = [
-            {
-                AssignedDate__c: new Date(),
-                CompletionDate__c: undefined,
-                ExpectedCompletion__c: new Date(),
-                Program__c: "number",
-                Program2__r: { Name: "Fitness", Standalone__c: true },
-                Status__c: "Completed"
-            },
-            {
-                AssignedDate__c: new Date(),
-                CompletionDate__c: undefined,
-                ExpectedCompletion__c: new Date(),
-                Program__c: "number",
-                Program2__r: { Name: "Fitness", Standalone__c: true },
-                Status__c: "Discontinued"
-            },
-            {
-                AssignedDate__c: new Date(),
-                CompletionDate__c: undefined,
-                ExpectedCompletion__c: new Date(),
-                Program__c: "number",
-                Program2__r: { Name: "Fitness", Standalone__c: true },
-                Status__c: "Removed"
-            }
-        ];
-        const element = createElement("c-contact-status-cmp", {
-            is: ContactStatusCmp
-        });
-        document.body.appendChild(element);
-
-        // Emit mock record into the wired field
-        getRecord.emit(contact);
-        getProgramAssignments.emit(programAssignments);
-
-        // Resolve a promise to wait for a rerender of the new content.
-        return Promise.resolve().then(() => {
-            const indicators = element.shadowRoot.querySelectorAll(
-                "c-contact-status-indicator-cmp"
-            );
-            // Child is the mock, not the real component
-            expect(indicators).not.toBeNull();
-            expect(indicators.length).toBe(1);
-            const indicator = indicators[0];
-            expect(indicator.position).toBe("Other");
-            expect(indicator.status).toBe("Decertifed/Suspended");
+            expect(indicators).toHaveLength(0);
         });
     });
 });

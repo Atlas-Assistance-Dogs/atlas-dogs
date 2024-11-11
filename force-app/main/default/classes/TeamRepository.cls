@@ -3,7 +3,9 @@ public class TeamRepository {
     public TeamRepository(){}
 
     public Team__c create(Team__c team) {
-        insert team;
+        if (team != null) {
+            insert team;
+        }
         return team;
     }
 

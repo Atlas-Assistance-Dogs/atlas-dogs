@@ -1,4 +1,19 @@
-public with sharing class ContactService {
+public inherited sharing class ContactService {
+    private ContactRepository contactRepo;
+    private RelationshipRepository relationshipRepo;
+    private EmailService emailServ;
+    public ContactService() {
+        contactRepo = new ContactRepository();
+        relationshipRepo = new RelationshipRepository();
+        emailServ = new EmailService();
+    }
+    
+    @TestVisible
+    private ContactService(ContactRepository contactRepo, RelationshipRepository relationshipRepo, EmailService emailServ) {
+        this.contactRepo = contactRepo;
+        this.relationshipRepo = relationshipRepo;
+        this.emailServ = emailServ;
+    }
     // This copies the contact email and phone to the ContactAt email & phone,
     // as long as the Email and Phone are not blank and ContactAt is Home or Alternate
     public static Contact updateContactAtEmail(Contact newContact) {
@@ -6,27 +21,27 @@ public with sharing class ContactService {
         if (contact == 'Home' && !string.isBlank(newContact.Email)) {
             newContact.npe01__HomeEmail__c = newContact.Email;
         } else if (
-            contact == 'Alternate' && !string.isBlank(newContact.Email)
+        contact == 'Alternate' && !string.isBlank(newContact.Email)
         ) {
             newContact.npe01__AlternateEmail__c = newContact.Email;
         }
         return newContact;
     }
-
+    
     public static Contact updateContactAtPhone(Contact newContact) {
         string contact = newContact.Contact__c;
         if (contact == 'Home' && !string.isBlank(newContact.Phone)) {
             newContact.HomePhone = newContact.Phone;
         } else if (
-            contact == 'Alternate' && !string.isBlank(newContact.Phone)
+        contact == 'Alternate' && !string.isBlank(newContact.Phone)
         ) {
             newContact.OtherPhone = newContact.Phone;
         }
         return newContact;
     }
-
+    
     // Update email based on the ContactAt value
-    public static Contact updateEmail(Contact newContact) {
+    public Contact updateEmail(Contact newContact) {
         string contact = newContact.Contact__c;
         if (contact == 'Home') {
             if (!string.isBlank(newContact.npe01__HomeEmail__c)) {
@@ -38,17 +53,7 @@ public with sharing class ContactService {
             }
         } else {
             // see if the type matches a relationship type
-            List<npe4__Relationship__c> related = [
-                SELECT
-                    Id,
-                    npe4__RelatedContact__c,
-                    npe4__RelatedContact__r.Email
-                FROM npe4__Relationship__c
-                WHERE
-                    npe4__Type__c = :contact
-                    AND npe4__Contact__c = :newContact.Id
-                    AND npe4__Status__c = 'Current'
-            ];
+            List<npe4__Relationship__c> related = relationshipRepo.getCurrentRelated(newContact.Id, contact);
             if (!related.isEmpty()) {
                 // use the first Contact that matches
                 Contact person = related[0].npe4__RelatedContact__r;
@@ -59,9 +64,9 @@ public with sharing class ContactService {
         }
         return newContact;
     }
-
+    
     // Update the Contact's phone based on the current value from ContactAt
-    public static Contact updatePhone(Contact newContact) {
+    public Contact updatePhone(Contact newContact) {
         string contact = newContact.Contact__c;
         if (contact == 'Home') {
             if (!string.isBlank(newContact.HomePhone)) {
@@ -73,17 +78,7 @@ public with sharing class ContactService {
             }
         } else {
             // see if the type matches a relationship type
-            List<npe4__Relationship__c> related = [
-                SELECT
-                    Id,
-                    npe4__RelatedContact__c,
-                    npe4__RelatedContact__r.Phone
-                FROM npe4__Relationship__c
-                WHERE
-                    npe4__Type__c = :contact
-                    AND npe4__Contact__c = :newContact.Id
-                    AND npe4__Status__c = 'Current'
-            ];
+            List<npe4__Relationship__c> related = relationshipRepo.getCurrentRelated(newContact.Id, contact);
             if (!related.isEmpty()) {
                 // use the first Contact that matches
                 Contact person = related[0].npe4__RelatedContact__r;
@@ -94,27 +89,15 @@ public with sharing class ContactService {
         }
         return newContact;
     }
-
+    
     // Update the email of a related contact
-    public static void updateRelatedContactEmailPhone(
+    public void updateRelatedContactEmailPhone(
         Contact current,
-        Boolean changedEmail,
-        Boolean changedPhone
+    Boolean changedEmail,
+    Boolean changedPhone
     ) {
-        List<npe4__Relationship__c> related = [
-            SELECT
-                Id,
-                npe4__Contact__c,
-                npe4__Type__c,
-                npe4__RelatedContact__c,
-                npe4__Contact__r.Email,
-                npe4__RelatedContact__r.Phone,
-                npe4__Contact__r.Contact__c
-            FROM npe4__Relationship__c
-            WHERE
-                npe4__RelatedContact__c = :current.Id
-                AND npe4__Status__c = 'Current'
-        ];
+        List<npe4__Relationship__c> related = relationshipRepo.getCurrentRelated(current.Id);
+        
         if (!related.isEmpty()) {
             List<Contact> contacts = new List<Contact>();
             for (npe4__Relationship__c relationship : related) {
@@ -134,12 +117,12 @@ public with sharing class ContactService {
             update contacts;
         }
     }
-
+    
     // Share the contact with the appropriate groups based on which positions they have,
     // and the positions they are emergency contacts for
     public static Contact shareContactBasedOnPositions(
         Contact person,
-        Map<String, String> positionGroups
+    Map<String, String> positionGroups
     ) {
         // Create a set of the positions the user currently has
         Set<String> positions = new Set<String>();
@@ -153,24 +136,16 @@ public with sharing class ContactService {
                 groups.add(grp);
             }
         }
-
+        
         // update this contact first, then its relations
         person = shareContactWithGroups(person, groups);
         return person;
     }
-
+    
     // Get the positions of the contact relations
-    private static Set<String> getRelationShipPositions(Contact record) {
+    private Set<String> getRelationShipPositions(Contact record) {
         // Find who the contact is related to as an emergency contact
-        npe4__Relationship__c[] related = [
-            SELECT Id, npe4__Contact__r.Positions__c
-            FROM npe4__Relationship__c
-            WHERE
-                (npe4__Type__c LIKE '%Emergency Contact'
-                OR npe4__Type__c = 'Guardian')
-                AND npe4__Status__c = 'Current'
-                AND npe4__RelatedContact__c = :record.Id
-        ];
+        npe4__Relationship__c[] related = relationshipRepo.getSharingPositions(record.Id);
         Set<String> positions = new Set<String>();
         if (!String.isBlank(record.Positions__c)) {
             positions.addAll(record.Positions__c.split(';'));
@@ -184,7 +159,7 @@ public with sharing class ContactService {
         }
         return positions;
     }
-
+    
     // Get the groups that the category rules assign for the positions
     public static Map<String, String> getGroupsByPositions() {
         // Get the groups that can see each position
@@ -199,23 +174,23 @@ public with sharing class ContactService {
         }
         return groupNames;
     }
-
+    
     private static Contact shareContactWithGroups(
         Contact contact,
-        Set<String> groupNames
+    Set<String> groupNames
     ) {
         contact.ShareBoard__c = groupNames.contains('Board');
         contact.SharePuppyRaiser__c = groupNames.contains('Puppy Raiser');
         contact.ShareStaff__c = groupNames.contains('Staff');
         contact.ShareStandalonePrograms__c = groupNames.contains(
             'Standalone Programs'
-        );
+            );
         contact.ShareTeam__c = groupNames.contains('Team');
         contact.ShareTrainer__c = groupNames.contains('Trainer');
         contact.ShareVolunteer__c = groupNames.contains('Volunteer');
         return contact;
     }
-
+    
     public static void setSharingFields() {
         List<Contact> contacts = [
             SELECT
@@ -245,9 +220,9 @@ public with sharing class ContactService {
                 OR IsTrainer__c = TRUE
                 OR IsVolunteer__c = TRUE
         ];
-
+        
         Map<Id, Contact> contactMap = new Map<Id, Contact>();
-
+        
         for (Contact person : contacts) {
             person.ShareBoard__c = person.IsBoardMember__c;
             person.SharePuppyRaiser__c = person.IsPuppyRaiser__c;
@@ -259,7 +234,7 @@ public with sharing class ContactService {
             person.ShareVolunteer__c = person.IsVolunteer__c;
             contactMap.put(person.Id, person);
         }
-
+        
         // Get related contacts
         npe4__Relationship__c[] related = [
             SELECT
@@ -305,10 +280,10 @@ public with sharing class ContactService {
         }
         update contactMap.values();
     }
-
+    
     public static void setBoardTermValidUntil(
         Contact newContact,
-        Date oldBoardDate
+    Date oldBoardDate
     ) {
         if (
             newContact.LastBoardTermStartDate__c != null &&
@@ -338,10 +313,10 @@ public with sharing class ContactService {
                 .addDays(-1);
         }
     }
-
+    
     public static void updateFirstAidValidUntil(
         Contact newContact,
-        Date oldFirstAidDate
+    Date oldFirstAidDate
     ) {
         if (newContact.FirstAidReceived__c == null) {
             newContact.FirstAidValidUntil__c = null;
@@ -360,15 +335,15 @@ public with sharing class ContactService {
             }
             newContact.FirstAidValidUntil__c = newContact.FirstAidReceived__c.addYears(
                 (integer) settings.FirstAidRenewalYears__c
-            );
+                );
         }
     }
-
+    
     class Dates {
         public Date initial { get; set; }
         public Date expiration { get; set; }
     }
-
+    
     public static void updateCertValidUntil(Contact trainer) {
         // check to see if settings are missing
         Boolean updateSettings = false;
@@ -409,13 +384,13 @@ public with sharing class ContactService {
             }
         }
     }
-
+    
     private static Dates getCertExpiration(
         Date initial,
-        Date agreement,
-        Integer early,
-        Integer years,
-        Integer leeway
+    Date agreement,
+    Integer early,
+    Integer years,
+    Integer leeway
     ) {
         Dates cdates = new Dates();
         cdates.initial = initial;
@@ -430,5 +405,177 @@ public with sharing class ContactService {
             cdates.expiration = initial.addYears(moreYears);
         }
         return cdates;
+    }
+    
+    public List<PositionStatus> getPositionStatusForContact(
+        Id contactId
+    ) {
+        Contact person = contactRepo.getPositionStatusForContact(contactId);
+        List<PositionStatus> statuses = getStatusForPositions(person);
+        return statuses;
+    }
+    
+    // We want the position status to be in this order, the Positions set for the contact
+    // may not be in this order
+    public final static String[] POSITION_LIST = new List<string>{
+        'Volunteer',
+        'Team Facilitator',
+        'Puppy Raiser',
+        'Board',
+        'Client',
+        'Trainer',
+        'Standalone'
+    };
+    
+    private static List<PositionStatus> getStatusForPositions(Contact person) {
+        List<PositionStatus> statuses = new List<PositionStatus>();
+        if (person.Positions__c == null) {
+            return statuses;
+        }
+        Set<String> positions = new Set<string>(person.Positions__c.split(';'));
+        for (string position : POSITION_LIST) {
+            switch on (position) {
+                when 'Volunteer' {
+                    if (
+                        positions.contains(position) &&
+                        Schema.sObjectType.Contact.fields.GW_Volunteers__Volunteer_Status__c.isAccessible()
+                    ) {
+                        statuses.add(
+                            new PositionStatus(
+                            position,
+                        person.GW_Volunteers__Volunteer_Status__c
+                            )
+                            );
+                    }
+                }
+                when 'Team Facilitator' {
+                    if (
+                        (positions.contains(position) ||
+                        positions.contains('Team Facilitator Lead')) &&
+                        Schema.sObjectType.Contact.fields.FacilitatorStatus__c.isAccessible() &&
+                        Schema.sObjectType.Contact.fields.FacilitatorCertAgreementReceived__c.isAccessible()
+                    ) {
+                        string status = fineTuneStatus(
+                            person.FacilitatorStatus__c,
+                        person.FacilitatorCertAgreementReceived__c
+                            );
+                        statuses.add(new PositionStatus(position, status));
+                    }
+                }
+                when 'Puppy Raiser' {
+                    if (
+                        positions.contains(position) &&
+                        Schema.sObjectType.Contact.fields.BoardMemberStatus__c.isAccessible()
+                    ) {
+                        string status = fineTuneStatus(
+                            person.PuppyRaiserStatus__c,
+                        person.PuppyCertAgreementReceived__c
+                            );
+                        statuses.add(new PositionStatus(position, status));
+                    }
+                }
+                when 'Board' {
+                    if (
+                        positions.contains('Board Member') &&
+                        Schema.sObjectType.Contact.fields.BoardMemberStatus__c.isAccessible()
+                    ) {
+                        statuses.add(
+                            new PositionStatus(
+                            position,
+                        person.BoardMemberStatus__c
+                            )
+                            );
+                    }
+                }
+                when 'Client' {
+                    if (
+                        positions.contains(position) &&
+                        Schema.sObjectType.Contact.fields.ClientStatus__c.isAccessible() &&
+                        Schema.sObjectType.Contact.fields.ClientCertificationValidUntil__c.isAccessible()
+                    ) {
+                        Date certDate = null;
+                        if (person.ClientCertificationValidUntil__c != null) {
+                            certDate = person.ClientCertificationValidUntil__c.addDays(
+                                -365
+                                );
+                        }
+                        string status = fineTuneStatus(
+                            person.ClientStatus__c,
+                        certDate
+                            );
+                        statuses.add(new PositionStatus(position, status));
+                    }
+                }
+                when 'Trainer' {
+                    if (
+                        positions.contains(position) &&
+                        Schema.sObjectType.Contact.fields.TrainerStatus__c.isAccessible() &&
+                        Schema.sObjectType.Contact.fields.TrainerCertAgreementReceived__c.isAccessible()
+                    ) {
+                        string status = fineTuneStatus(
+                            person.TrainerStatus__c,
+                        person.TrainerCertAgreementReceived__c
+                            );
+                        statuses.add(new PositionStatus(position, status));
+                    }
+                }
+                when 'Standalone' {
+                    if (
+                        positions.contains(position) &&
+                        Schema.sObjectType.Contact.fields.StandaloneStatus__c.isAccessible()
+                    ) {
+                        statuses.add(
+                            new PositionStatus(
+                            position,
+                        person.StandaloneStatus__c
+                            )
+                            );
+                    }
+                }
+            }
+        }
+        return statuses;
+    }
+    
+    private static string fineTuneStatus(string status, Date certDate) {
+        Date today = Date.today();
+        if (status == 'Active' || (status == 'Certified' && certDate != null)) {
+            if (certDate.addDays(365) < today) {
+                status = 'Action Needed';
+            } else if (certDate.addDays(270) < today) {
+                status = 'Action Needed Soon';
+            }
+        }
+        return status;
+    }
+    
+    public void remindFacilitatorsToGetCeus() {
+        Set<Id> facilitators = contactRepo.getActiveFacilitators();
+        // Remind the client in a Team to submit training logs
+        
+        if (facilitators.isEmpty()) return;
+        // Remind these facilitators to get their CEUs
+        Id orgAddressId = emailServ.getOrgEmailAddressId();
+        EmailTemplate template = emailServ.getTemplate('FacilitatorCeuReminder');
+        
+        List<Messaging.SingleEmailMessage> emails = new List<Messaging.SingleEmailMessage>();
+        for (Id facilitator : facilitators) {
+            Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
+            if (orgAddressId != null) {
+                mail.setOrgWideEmailAddressId(orgAddressId);
+            }
+            mail.setTargetObjectId(facilitator);
+            mail.setTemplateId(template.Id);
+            
+            //Record ID for which letter will be generated
+            mail.setBccSender(false);
+            mail.setUseSignature(false);
+            if (orgAddressId == null){
+                mail.setSenderDisplayName('Atlas Assistance Dogs');
+            }
+            mail.setSaveAsActivity(false);
+            emails.add(mail);
+        }
+        emailServ.sendEmail(emails);
     }
 }

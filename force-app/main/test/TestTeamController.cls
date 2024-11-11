@@ -2,15 +2,15 @@
 public with sharing class TestTeamController {
     private static Contact debbie;
     private static Contact ken;
+    private static Contact wanda;
     private static Dog__c ace;
     private static Team__c team;
 
-    private static void setup() {
-        List<Contact> contacts = new List<Contact>();
+    public static Team__c setup() {
         debbie = new Contact(FirstName = 'Debbie', LastName = 'Queen');
         ken = new Contact(FirstName = 'Ken', LastName = 'King');
-        contacts.add(debbie);
-        contacts.add(ken);
+        wanda = new Contact(FirstName = 'Wanda', LastName = 'Around');
+        List<Contact> contacts = new List<Contact>{debbie, ken, wanda};
         insert contacts;
 
         ace = new Dog__c(Name = 'Ace');
@@ -20,14 +20,17 @@ public with sharing class TestTeamController {
             Client__c = ken.Id,
             Dog__c = ace.Id,
             Handler__c = debbie.Id,
+            Facilitator__c = wanda.Id,
             Name = 'Camelot',
             PatValidUntil__c = Date.today().addMonths(12),
             PatCount__c = 21,
             PrimaryCertification__c = 'Allergen Alert',
             SecondaryCertification__c = 'Autism',
-            Status__c = 'Certified'
+            Status__c = 'Certified',
+            TrainingStartDate__c = Date.today()
         );
         insert team;
+        return team;
     }
 
     private static void teamsMatch(Team__c expected, Object actualObject) {
