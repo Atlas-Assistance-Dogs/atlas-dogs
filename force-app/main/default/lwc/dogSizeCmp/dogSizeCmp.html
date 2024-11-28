@@ -1,0 +1,12 @@
+<template>
+    <lightning-card title="Dog Size">
+        <div class="slds-m-around_medium">
+            <lightning-input type="checkbox" label="Use SI Units" checked={useSi} onchange={handleUnitChange}>
+            </lightning-input>
+            <c-field-with-units-cmp name="height" label="Height" value={height} units={heightUnits} base-units="cm"
+                conversion={heightConversion} onchange={handleHeightChange}></c-field-with-units-cmp>
+            <c-field-with-units-cmp name="weight" label="Weight" value={weight} units={weightUnits} base-units="kg"
+                conversion={weightConversion} onchange={handleWeightChange}></c-field-with-units-cmp>
+        </div>
+    </lightning-card>
+</template>
