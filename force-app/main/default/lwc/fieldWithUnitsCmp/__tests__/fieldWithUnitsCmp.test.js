@@ -1,6 +1,6 @@
 import { createElement } from 'lwc';
 import FieldWithUnits from 'c/fieldWithUnits';
-import { FieldInfo } from '../fieldWithUnits';
+import { FieldInfo } from '../fieldWithUnitsCmp';
 
 describe('c-field-with-units', () => {
     afterEach(() => {
