@@ -1,5 +1,7 @@
 import { api, LightningElement, wire } from "lwc";
 import getSize from "@salesforce/apex/DogController.getSize";
+import setSize from "@salesforce/apex/DogController.setSize";
+import { ShowToastEvent } from "lightning/platformShowToastEvent";
 import { refreshApex } from "@salesforce/apex";
 
 const POUND_TO_KG = 0.45359237;
@@ -16,11 +18,11 @@ export default class DogSizeCmp extends LightningElement {
     useSi = false;
     weight;
     height;
-    wiredChecks;
+    wiredInfo;
 
     @wire(getSize, { recordId: "$recordId" })
     getSize(result) {
-        this.wiredChecks = result;
+        this.wiredInfo = result;
         if (result.data) {
             this.useSi = result.data.useSiUnits;
             const size = result.data;
@@ -50,7 +52,9 @@ export default class DogSizeCmp extends LightningElement {
         if (from === "in") return value * INCHES_TO_CM;
         return value / INCHES_TO_CM;
     };
-    handleHeightChange() {}
+    handleHeightChange(event) {
+        if (typeof event.detail === "number") this.height = event.detail;
+    }
 
     get weightUnits() {
         return this.useSi ? "kg" : "lb";
@@ -61,5 +65,34 @@ export default class DogSizeCmp extends LightningElement {
         if (from === "lb") return value * POUND_TO_KG;
         return value / POUND_TO_KG;
     };
-    handleWeightChange() {}
+    handleWeightChange(event) {
+        if (typeof event.detail === "number") this.weight = event.detail;
+    }
+
+    handleSave() {
+        setSize({
+            recordId: this.recordId,
+            height: this.height,
+            weight: this.weight
+        })
+            .then((data) => {
+                this.dispatchEvent(
+                    new ShowToastEvent({
+                        title: "Size Updated",
+                        message: data,
+                        variant: "success"
+                    })
+                );
+                refreshApex();
+            })
+            .catch((error) => {
+                this.dispatchEvent(
+                    new ShowToastEvent({
+                        title: "Error!!",
+                        message: error.body.message,
+                        variant: "error"
+                    })
+                );
+            });
+    }
 }

@@ -88,16 +88,6 @@
                     <name>uiBehavior</name>
                     <value>none</value>
                 </fieldInstanceProperties>
-                <fieldItem>Record.Weight__c</fieldItem>
-                <identifier>RecordWeight__cField</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
-                    <value>none</value>
-                </fieldInstanceProperties>
                 <fieldItem>Record.SpayedNeutered__c</fieldItem>
                 <identifier>RecordSpayedNeutered__cField</identifier>
             </fieldInstance>
@@ -154,16 +144,6 @@
                 </fieldInstanceProperties>
                 <fieldItem>Record.Picture__c</fieldItem>
                 <identifier>RecordPicture__cField</identifier>
-            </fieldInstance>
-        </itemInstances>
-        <itemInstances>
-            <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
-                    <value>none</value>
-                </fieldInstanceProperties>
-                <fieldItem>Record.Height__c</fieldItem>
-                <identifier>RecordHeight__cField</identifier>
             </fieldInstance>
         </itemInstances>
         <name>Facet-8290113d-0854-429a-82e5-da8d1e36086e</name>
@@ -530,6 +510,12 @@
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentName>dogSizeCmp</componentName>
+                <identifier>c_dogSizeCmp</identifier>
+            </componentInstance>
+        </itemInstances>
         <itemInstances>
             <componentInstance>
                 <componentInstanceProperties>

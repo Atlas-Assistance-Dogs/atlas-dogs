@@ -14,16 +14,17 @@ export default class FieldWithUnitsCmp extends LightningElement {
     }
     get displayValue() {
         let value = this.conversion(Number(this.value), this.baseUnits, this.units);
-        let rounded = Math.round(value);
+        let rounded = Math.round(value * 100) / 100;
         return rounded;
     }
 
     handleValueChange(event) {
-        this.value = this.conversion(
+        const value = this.conversion(
             Number(event.detail.value),
             this.units,
             this.baseUnits
         );
-        this.dispatchEvent(new CustomEvent("change", { detail: this.value }));
+        this.dispatchEvent(new CustomEvent("change", { detail: value }));
+        this.value = value;
     }
 }
