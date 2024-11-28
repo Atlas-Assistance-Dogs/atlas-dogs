@@ -46,4 +46,14 @@ public inherited sharing class DogController {
         }
         return new SizeInfo(dog, settings.ShowSiUnits__c);
     }
+
+    @AuraEnabled
+    public static Dog__c setSize(Id recordId, Double height, Double weight){
+        DogRepository repo = new DogRepository();
+        Dog__c dog = repo.getSize(recordId);
+        dog.Height__c = height;
+        dog.Weight__c = weight;
+        dog = repo.modify(dog);
+        return dog;
+    }
 }

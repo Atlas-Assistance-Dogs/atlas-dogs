@@ -8,5 +8,7 @@
             <c-field-with-units-cmp name="weight" label="Weight" value={weight} units={weightUnits} base-units="kg"
                 conversion={weightConversion} onchange={handleWeightChange}></c-field-with-units-cmp>
         </div>
+        <lightning-button slot="footer" class="slds-m-around_small" onclick={handleSave} variant="brand"
+            label="Save"></lightning-button>
     </lightning-card>
 </template>
