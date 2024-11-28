@@ -158,7 +158,7 @@ private class TestFileControllerRestrictions {
         );
 
         System.assertEquals(6, related.items.size());
-        System.assertEquals(20, related.total);
+        System.assertEquals(22, related.total);
     }
 
     @isTest

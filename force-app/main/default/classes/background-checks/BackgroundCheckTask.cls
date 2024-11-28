@@ -1,6 +1,9 @@
 global class BackgroundCheckTask implements Schedulable {
-    global void execute(SchedulableContext SC) {
+    BackgroundCheckService service;
+    global BackgroundCheckTask() {
         BackgroundCheckService service = new BackgroundCheckService();
-        service.createReminderTask();
+    }
+    global void execute(SchedulableContext SC) {
+       service.createReminderTask();
     }
 }

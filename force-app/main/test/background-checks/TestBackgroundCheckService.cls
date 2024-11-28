@@ -1,5 +1,5 @@
 @isTest
-public with sharing class TestBackgroundCheckReminders {
+public with sharing class TestBackgroundCheckService {
     private static MockProvider mocks;
     private static BackgroundCheckService service;
     private static ContactRepository contactRepo;

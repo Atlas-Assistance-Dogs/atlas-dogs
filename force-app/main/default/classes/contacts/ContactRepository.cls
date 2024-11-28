@@ -55,6 +55,7 @@ public inherited sharing class ContactRepository {
     }
     
     public Contact modify(Contact cntct) {
+        upsert cntct;
         return cntct;
     }
 

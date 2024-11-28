@@ -1,4 +1,4 @@
-public with sharing class ClearDateService {
+public inherited sharing class ClearDateService {
 
     // Update the date for the record tied to a file
     public static void clear(ContentVersion cv, Id recordId){
