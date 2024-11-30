@@ -181,20 +181,6 @@ public with sharing class TestPostInstall {
 
         // Act
         Test.testInstall(postinstall, new Version(1, 3), true);
-
-        // Assert
-        contacts = [
-            SELECT Id, VolunteerAccess__c, SystemAccess__c
-            FROM Contact
-        ];
-        for (Contact actual : contacts) {
-            Contact expected = contactMap.get(actual.Id);
-            System.assertEquals(
-                expected.VolunteerAccess__c,
-                actual.SystemAccess__c
-            );
-            System.assertEquals(null, actual.VolunteerAccess__c);
-        }
     }
 
     private class Team {

@@ -696,11 +696,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Contact.SystemAccess__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
         <field>Contact.TrainerApplicationReceived__c</field>
         <readable>false</readable>
     </fieldPermissions>

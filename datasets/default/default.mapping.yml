@@ -367,7 +367,6 @@ Insert Contact:
   - StandaloneApplicationReceived__c
   - StandaloneProgAgreementReceived__c
   - StandaloneStatus__c
-  - SystemAccess__c
   - TextMessagesApproved__c
   - TrainerApplicationReceived__c
   - TrainerBoardTrain__c
