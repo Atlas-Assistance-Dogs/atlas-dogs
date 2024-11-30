@@ -1,6 +1,5 @@
 import { api, LightningElement, wire } from "lwc";
 import getSize from "@salesforce/apex/DogController.getSize";
-import setSize from "@salesforce/apex/DogController.setSize";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
 import { refreshApex } from "@salesforce/apex";
 
