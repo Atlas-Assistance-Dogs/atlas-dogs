@@ -37,4 +37,8 @@ public with sharing class DogRepository {
         upsert relationship;
         return relationship;
     }
+
+    public Dog__c getSize(Id recordId) {
+        return [SELECT Height__c, Weight__c FROM Dog__c WHERE Id = :recordId];
+    }
 }

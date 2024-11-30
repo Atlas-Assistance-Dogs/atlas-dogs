@@ -181,6 +181,10 @@
                     <value>Facet-e4b452cd-19ec-48cb-85eb-c8ccab652cc6</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
+                    <name>horizontalAlignment</name>
+                    <value>false</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
                     <name>label</name>
                 </componentInstanceProperties>
                 <componentName>flexipage:fieldSection</componentName>
@@ -332,6 +336,10 @@
                     <value>Facet-837ed4db-1698-4b82-8d79-6ffa8a9097de</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
+                    <name>horizontalAlignment</name>
+                    <value>false</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
                     <name>label</name>
                 </componentInstanceProperties>
                 <componentName>flexipage:fieldSection</componentName>
@@ -343,6 +351,10 @@
                 <componentInstanceProperties>
                     <name>columns</name>
                     <value>Facet-7cf65a87-7ce2-4d81-bd42-542129dc9168</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>horizontalAlignment</name>
+                    <value>false</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>label</name>
@@ -357,6 +369,10 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
+                <componentInstanceProperties>
+                    <name>numRecords</name>
+                    <value>6</value>
+                </componentInstanceProperties>
                 <componentName>relatedFilesCmp</componentName>
                 <identifier>relatedFilesCmp2</identifier>
             </componentInstance>
@@ -458,6 +474,10 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
+                <componentInstanceProperties>
+                    <name>showLegacyActivityComposer</name>
+                    <value>false</value>
+                </componentInstanceProperties>
                 <componentName>runtime_sales_activities:activityPanel</componentName>
                 <identifier>runtime_sales_activities_activityPanel</identifier>
             </componentInstance>
@@ -490,6 +510,12 @@
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentName>dogSizeCmp</componentName>
+                <identifier>c_dogSizeCmp</identifier>
+            </componentInstance>
+        </itemInstances>
         <itemInstances>
             <componentInstance>
                 <componentInstanceProperties>
