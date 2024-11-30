@@ -10,7 +10,6 @@ global class PostInstall implements InstallHandler {
             try {
                 combineDogVaccineFields();
                 linkTeamLogs();
-                moveSystemAccess();
                 linkTeamDocuments();                
             } catch (Exception e) {
                 send(
@@ -147,19 +146,6 @@ global class PostInstall implements InstallHandler {
             }
             update logs;
         }
-    }
-
-    public void moveSystemAccess() {
-        List<Contact> contacts = [
-            SELECT Id, SystemAccess__c, VolunteerAccess__c
-            FROM Contact
-            WHERE VolunteerAccess__c != NULL
-        ];
-        for (Contact contact : contacts) {
-            contact.SystemAccess__c = contact.VolunteerAccess__c;
-            contact.VolunteerAccess__c = null;
-        }
-        update contacts;
     }
 
     public static void send(Id userId, String subject, String htmlBody) {
