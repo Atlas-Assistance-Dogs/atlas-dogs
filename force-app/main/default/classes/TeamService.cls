@@ -88,18 +88,24 @@ public inherited sharing class TeamService {
 
     // Update PAT information
     public void updatePatInformation(Set<Id> teamIds) {
-        List<Team__c> teams = [
-            SELECT Id, Client__c, PatValidUntil__c, PatCount__c
-            FROM Team__c
-            WHERE Id IN :teamIds
-        ];
+        List<Team__c> teams = teamRepo.getPatStatus(teamIds);
 
         for (Team__c team : teams) {
-            List<PublicAccessTest__c> passingPats = patRepo.getPassing(team.Id);
+            PublicAccessTest__c[] passingPats = patRepo.getPassing(team.Id);
             if (passingPats.isEmpty()) {
                 team.PatValidUntil__c = null;
-            } else if (team.PatValidUntil__c != passingPats[0].ValidUntil__c) {
-                team.PatValidUntil__c = passingPats[0].ValidUntil__c;
+                team.InitialCertificationDate__c = null;
+            } else {
+                if (team.PatValidUntil__c != passingPats[0].ValidUntil__c) {
+                    team.PatValidUntil__c = passingPats[0].ValidUntil__c;
+                }
+                for (Integer i = passingPats.size() - 1; i >= 0; i--) {
+                    PublicAccessTest__c pat = passingPats[i];
+                    if (pat.Type__c == 'Initial') {
+                        team.InitialCertificationDate__c = pat.DateCompleted__c;
+                        break;
+                    }
+                }
             }
             team.PatCount__c = passingPats.size();
         }

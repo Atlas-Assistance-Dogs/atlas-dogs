@@ -60,8 +60,8 @@ public class MockProvider implements System.StubProvider {
     
     // handle the mocked method call
     public Object handleMethodCall(Object stubbedObject, String stubbedMethodName,
-    Type returnType, List<Type> listOfParamTypes, List<String> listOfParamNames,
-    List<Object> listOfArgs) {
+        Type returnType, List<Type> listOfParamTypes, List<String> listOfParamNames,
+        List<Object> listOfArgs) {
         
         // create MockCallData to track the call
         MockCallData actual = new MockCallData();
