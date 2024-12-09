@@ -174,7 +174,6 @@ public with sharing class TestTeamTrigger {
       FacilitatorAvailability__c = expectedAvail,
       Status__c = status,
       PatValidUntil__c = cert,
-            InitialCertificationDate__c = expectedCert.addYears(-1)
     );
 
     // Act
@@ -210,7 +209,6 @@ public with sharing class TestTeamTrigger {
     ];
     System.assertEquals(expectedStatus, dog.Status__c);
   }
-
   @isTest
   public static void trigger_UpdatesClientDogStatus_WhenDecertified() {
     setup();
@@ -218,7 +216,6 @@ public with sharing class TestTeamTrigger {
     Date expected = Date.today().addMonths(5);
     testClientDogStatus(status, expected, status, expected, 'None');
   }
-
   @isTest
   public static void trigger_UpdatesClientDogStatus_WhenDiscontinued() {
     setup();
@@ -226,7 +223,6 @@ public with sharing class TestTeamTrigger {
     Date expected = Date.today().addMonths(5);
     testClientDogStatus(status, expected, status, expected, 'None');
   }
-
   @isTest
   public static void trigger_UpdatesClientDogStatus_WhenNone() {
     setup();
@@ -234,7 +230,6 @@ public with sharing class TestTeamTrigger {
     Date expected = Date.today().addMonths(5);
     testClientDogStatus(status, expected, status, expected, null);
   }
-
   @isTest
   public static void trigger_UpdatesClientDogStatus_WhenInitialInquiry() {
     setup();
@@ -242,7 +237,6 @@ public with sharing class TestTeamTrigger {
     Date expected = Date.today().addMonths(5);
     testClientDogStatus(status, expected, status, expected, 'Forecast');
   }
-
   @isTest
   public static void trigger_UpdatesClientDogStatus_WhenInADSiM() {
     setup();
@@ -250,7 +244,6 @@ public with sharing class TestTeamTrigger {
     Date expected = Date.today().addMonths(5);
     testClientDogStatus(status, expected, status, expected, 'Waitlist');
   }
-
   @isTest
   public static void trigger_UpdatesClientDogStatus_WhenOnboarding() {
     setup();
@@ -258,7 +251,6 @@ public with sharing class TestTeamTrigger {
     Date expected = Date.today().addMonths(5);
     testClientDogStatus(status, expected, status, expected, 'Available');
   }
-
   @isTest
   public static void trigger_UpdatesClientDogStatus_WhenInTraining() {
     setup();
@@ -266,7 +258,6 @@ public with sharing class TestTeamTrigger {
     Date expected = Date.today().addMonths(5);
     testClientDogStatus(status, expected, status, expected, 'Available');
   }
-
   @isTest
   public static void trigger_UpdatesClientDogStatus_WhenCertified() {
     setup();
