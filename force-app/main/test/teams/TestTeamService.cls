@@ -37,7 +37,7 @@ private class TestTeamService {
         // Arrange
         makeData();
         List<Team__c> teams = new List<Team__c>();
-        mocks.expectedCalls.add(new MockCallData(teamRepo, 'getPatStatus', teams));
+        mocks.expectedCalls.add(new MockCallData(teamRepo, 'getCertificationStatus', teams));
         mocks.expectedCalls.add(new MockCallData(patRepo, 'getPassing', new PublicAccessTest__c[]{}));
 
         // Act
@@ -59,7 +59,7 @@ private class TestTeamService {
         List<Team__c> teams = new List<Team__c>{
             new Team__c(Id = MockProvider.teamids[0], Client__c = MockProvider.contactids[0], InitialCertificationDate__c = Date.today(), PatValidUntil__c = Date.today().addYears(1))
         };
-        mocks.expectedCalls.add(new MockCallData(teamRepo, 'getPatStatus', teams));
+        mocks.expectedCalls.add(new MockCallData(teamRepo, 'getCertificationStatus', teams));
         mocks.expectedCalls.add(new MockCallData(patRepo, 'getPassing', new PublicAccessTest__c[]{}));
 
         // Act
@@ -83,7 +83,7 @@ private class TestTeamService {
         List<Team__c> teams = new List<Team__c>{
             new Team__c(Id = MockProvider.teamids[0], Client__c = MockProvider.contactids[0], InitialCertificationDate__c = null, PatValidUntil__c = null)
         };
-        mocks.expectedCalls.add(new MockCallData(teamRepo, 'getPatStatus', teams));
+        mocks.expectedCalls.add(new MockCallData(teamRepo, 'getCertificationStatus', teams));
         PublicAccessTest__c pat = new PublicAccessTest__c(Id = patids[0], Type__c = 'Initial', DateCompleted__c = Date.today(), ValidUntil__c = Date.today().addYears(1));
         mocks.expectedCalls.add(new MockCallData(patRepo, 'getPassing', new PublicAccessTest__c[] { pat }));
 
@@ -107,7 +107,7 @@ private class TestTeamService {
         List<Team__c> teams = new List<Team__c>{
             new Team__c(Id = MockProvider.teamids[0], Client__c = MockProvider.contactids[0], InitialCertificationDate__c = null, PatValidUntil__c = null)
         };
-        mocks.expectedCalls.add(new MockCallData(teamRepo, 'getPatStatus', teams));
+        mocks.expectedCalls.add(new MockCallData(teamRepo, 'getCertificationStatus', teams));
         PublicAccessTest__c pat = new PublicAccessTest__c(Id = patids[0], Type__c = 'Initial', DateCompleted__c = Date.today(), ValidUntil__c = Date.today().addYears(1));
         mocks.expectedCalls.add(new MockCallData(patRepo, 'getPassing', new PublicAccessTest__c[] { pat }));
 

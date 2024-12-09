@@ -88,7 +88,7 @@ public inherited sharing class TeamService {
 
     // Update PAT information
     public void updatePatInformation(Set<Id> teamIds) {
-        List<Team__c> teams = teamRepo.getPatStatus(teamIds);
+        List<Team__c> teams = teamRepo.getCertificationStatus(teamIds);
 
         for (Team__c team : teams) {
             PublicAccessTest__c[] passingPats = patRepo.getPassing(team.Id);

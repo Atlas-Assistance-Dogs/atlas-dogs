@@ -17,7 +17,7 @@ public class TeamRepository {
         ];
     }
 
-    public List<Team__c> getPatStatus(Set<Id> teamIds) {
+    public List<Team__c> getCertificationStatus(Set<Id> teamIds) {
         return [
             SELECT Id, Client__c, InitialCertificationDate__c, PatValidUntil__c, PatCount__c
             FROM Team__c
