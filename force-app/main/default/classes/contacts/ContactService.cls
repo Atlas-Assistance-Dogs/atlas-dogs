@@ -475,7 +475,7 @@ public inherited sharing class ContactService {
         when 'Puppy Raiser' {
           if (
             positions.contains(position) &&
-            Schema.sObjectType.Contact.fields.BoardMemberStatus__c.isAccessible()
+            Schema.sObjectType.Contact.fields.PuppyRaiserStatus__c.isAccessible()
           ) {
             string status = fineTuneStatus(
               person.PuppyRaiserStatus__c,
@@ -536,7 +536,11 @@ public inherited sharing class ContactService {
             positions.contains(position) &&
             Schema.sObjectType.Contact.fields.StaffStatus__c.isAccessible()
           ) {
-            statuses.add(new PositionStatus(position, person.StaffStatus__c));
+            String status = person.StaffStatus__c;
+            if (status == 'Employee' || status == 'Contractor') {
+              status = 'Active';
+            }
+            statuses.add(new PositionStatus(position, status));
           }
         }
       }
