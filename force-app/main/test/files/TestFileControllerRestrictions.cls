@@ -21,153 +21,147 @@
  */
 @isTest
 private class TestFileControllerRestrictions {
-    public static List<ContentVersion> insertRecords() {
-        // get a map of the category and type labels
-        Map<String, List<String>> allCategories = TestUtilities.getCategoryTypeDependencies();
-        List<ContentVersion> documents = new List<ContentVersion>();
-        Integer count = 1;
-        for (String category : allCategories.keySet()) {
-            List<String> types = allCategories.get(category);
-            for (String docType : types) {
-                List<Object> parameters = new List<Object>{ count };
-                documents.add(
-                    new ContentVersion(
-                        Title = String.format('TestDocument{0}', parameters),
-                        PathOnClient = String.format(
-                            'TestDocument{0}.jpg',
-                            parameters
-                        ),
-                        Origin = 'H',
-                        VersionData = Blob.valueOf('Document Body'),
-                        Category__c = category,
-                        Type__c = docType,
-                        Date__c = Date.today().addDays(-count)
-                    )
-                );
-                count = count + 1;
-            }
-        }
-
-        insert documents;
-
-        // We need to do the query here to get the ContentDocumentId's
-        documents = [
-            SELECT
-                Id,
-                ContentDocumentId,
-                Title,
-                PathOnClient,
-                Origin,
-                VersionData,
-                Category__c,
-                Type__c,
-                Date__c
-            FROM ContentVersion
-        ];
-        return documents;
+  public static List<ContentVersion> insertRecords() {
+    // get a map of the category and type labels
+    Map<String, List<String>> allCategories = TestUtilities.getCategoryTypeDependencies();
+    List<ContentVersion> documents = new List<ContentVersion>();
+    Integer count = 1;
+    for (String category : allCategories.keySet()) {
+      List<String> types = allCategories.get(category);
+      for (String docType : types) {
+        List<Object> parameters = new List<Object>{ count };
+        documents.add(
+          new ContentVersion(
+            Title = String.format('TestDocument{0}', parameters),
+            PathOnClient = String.format('TestDocument{0}.jpg', parameters),
+            Origin = 'H',
+            VersionData = Blob.valueOf('Document Body'),
+            Category__c = category,
+            Type__c = docType,
+            Date__c = Date.today().addDays(-count)
+          )
+        );
+        count = count + 1;
+      }
     }
 
-    // This method is used to setup the getRelatedFilesWith... tests.  The file records have all category/type combinations
-    private static RelatedObjects getRelatedFilesWithGroups(string[] groups) {
-        TestUtilities.insertCategoryRules();
+    insert documents;
 
-        List<ContentVersion> documents = insertRecords();
+    // We need to do the query here to get the ContentDocumentId's
+    documents = [
+      SELECT
+        Id,
+        ContentDocumentId,
+        Title,
+        PathOnClient,
+        Origin,
+        VersionData,
+        Category__c,
+        Type__c,
+        Date__c
+      FROM ContentVersion
+    ];
+    return documents;
+  }
 
-        // Get the ids of all these documents
-        List<Id> ids = new List<Id>();
-        for (ContentVersion cv : documents) {
-            ids.add(cv.ContentDocumentId);
-        }
-        Contact ronan = new Contact(
-            FirstName = 'Ronan',
-            LastName = 'Dax',
-            email = 'ronan@test.com',
-            Positions__c = 'Board Member;Client;Puppy Raiser;Standalone;Staff;Team Facilitator;Team Facilitator Lead;Trainer;Volunteer',
-            ShareBoard__c = true,
-            SharePuppyRaiser__c = true,
-            ShareStaff__c = true,
-            ShareStandalonePrograms__c = true,
-            ShareTeam__c = true,
-            ShareTrainer__c = true,
-            ShareVolunteer__c = true
-        );
-        insert ronan;
-        FileController.relateFiles(ids, ronan.Id);
+  // This method is used to setup the getRelatedFilesWith... tests.  The file records have all category/type combinations
+  private static RelatedObjects getRelatedFilesWithGroups(string[] groups) {
+    TestUtilities.insertCategoryRules();
 
-        User testUser = TestUtilities.createUser('System Administrator');
-        TestUtilities.addUserToGroups(testUser, groups);
-        RelatedObjects related = new RelatedObjects();
-        Test.startTest();
-        System.runAs(new User(Id = testUser.Id)) {
-            related = FileController.getRelatedFiles(ronan.Id, 6);
-        }
-        Test.stopTest();
+    List<ContentVersion> documents = insertRecords();
 
-        return related;
+    // Get the ids of all these documents
+    List<Id> ids = new List<Id>();
+    for (ContentVersion cv : documents) {
+      ids.add(cv.ContentDocumentId);
     }
+    Contact ronan = new Contact(
+      FirstName = 'Ronan',
+      LastName = 'Dax',
+      email = 'ronan@test.com',
+      Positions__c = 'Board Member;Client;Puppy Raiser;Standalone;Staff;Team Facilitator;Team Facilitator Lead;Trainer;Volunteer',
+      ShareBoard__c = true,
+      SharePuppyRaiser__c = true,
+      ShareStaff__c = true,
+      ShareStandalonePrograms__c = true,
+      ShareTeam__c = true,
+      ShareTrainer__c = true,
+      ShareVolunteer__c = true
+    );
+    insert ronan;
+    FileController.relateFiles(ids, ronan.Id);
 
-    @isTest
-    public static void getRelatedFiles_ReturnsRelatedRecords_ForBoardVolunteerTrainer() {
-        RelatedObjects related = getRelatedFilesWithGroups(
-            new List<string>{ 'Board', 'Volunteer', 'Trainer' }
-        );
-        System.assert(related.items.size() <= 6);
-        System.assertEquals(16, related.total);
+    User testUser = TestUtilities.createUser('System Administrator');
+    TestUtilities.addUserToGroups(testUser, groups);
+    RelatedObjects related = new RelatedObjects();
+    Test.startTest();
+    System.runAs(new User(Id = testUser.Id)) {
+      related = FileController.getRelatedFiles(ronan.Id, 6);
     }
+    Test.stopTest();
 
-    @isTest
-    public static void getRelatedFiles_ReturnsRelatedRecords_ForBoard() {
-        RelatedObjects related = getRelatedFilesWithGroups(
-            new List<string>{ 'Board' }
-        );
+    return related;
+  }
 
-        System.assertEquals(6, related.items.size());
-        System.assertEquals(7, related.total);
-        System.assertEquals('Board', ((FileInfo) related.items[0]).category);
-    }
+  @isTest
+  public static void getRelatedFiles_ReturnsRelatedRecords_ForBoardVolunteerTrainer() {
+    RelatedObjects related = getRelatedFilesWithGroups(
+      new List<string>{ 'Board', 'Volunteer', 'Trainer' }
+    );
+    System.assert(related.items.size() <= 6);
+    System.assertEquals(16, related.total);
+  }
 
-    @isTest
-    public static void getRelatedFiles_ReturnsRelatedRecords_ForVolunteer() {
-        RelatedObjects related = getRelatedFilesWithGroups(
-            new List<string>{ 'Volunteer' }
-        );
+  @isTest
+  public static void getRelatedFiles_ReturnsRelatedRecords_ForBoard() {
+    RelatedObjects related = getRelatedFilesWithGroups(
+      new List<string>{ 'Board' }
+    );
 
-        System.assertEquals(5, related.items.size());
-        System.assertEquals(5, related.total);
-        System.assertEquals(
-            'Volunteer',
-            ((FileInfo) related.items[0]).category
-        );
-    }
+    System.assertEquals(6, related.items.size());
+    System.assertEquals(7, related.total);
+    System.assertEquals('Board', ((FileInfo) related.items[0]).category);
+  }
 
-    @isTest
-    public static void getRelatedFiles_ReturnsRelatedRecords_ForTrainer() {
-        RelatedObjects related = getRelatedFilesWithGroups(
-            new List<string>{ 'Trainer' }
-        );
+  @isTest
+  public static void getRelatedFiles_ReturnsRelatedRecords_ForVolunteer() {
+    RelatedObjects related = getRelatedFilesWithGroups(
+      new List<string>{ 'Volunteer' }
+    );
 
-        System.assertEquals(6, related.items.size());
-        System.assertEquals(8, related.total);
-        System.assertEquals('Trainer', ((FileInfo) related.items[3]).category);
-    }
+    System.assertEquals(5, related.items.size());
+    System.assertEquals(5, related.total);
+    System.assertEquals('Volunteer', ((FileInfo) related.items[0]).category);
+  }
 
-    @isTest
-    public static void getRelatedFiles_ReturnsRelatedRecords_ForTeam() {
-        RelatedObjects related = getRelatedFilesWithGroups(
-            new List<string>{ 'Team' }
-        );
+  @isTest
+  public static void getRelatedFiles_ReturnsRelatedRecords_ForTrainer() {
+    RelatedObjects related = getRelatedFilesWithGroups(
+      new List<string>{ 'Trainer' }
+    );
 
-        System.assertEquals(6, related.items.size());
+    System.assertEquals(6, related.items.size());
+    System.assertEquals(8, related.total);
+    System.assertEquals('Trainer', ((FileInfo) related.items[3]).category);
+  }
+
+  @isTest
+  public static void getRelatedFiles_ReturnsRelatedRecords_ForTeam() {
+    RelatedObjects related = getRelatedFilesWithGroups(
+      new List<string>{ 'Team' }
+    );
+
+    System.assertEquals(6, related.items.size());
         System.assertEquals(22, related.total);
-    }
+  }
 
-    @isTest
-    public static void getRelatedFiles_ReturnsRelatedRecords_ForBoardTrainer() {
-        RelatedObjects related = getRelatedFilesWithGroups(
-            new List<string>{ 'Board', 'Trainer' }
-        );
+  @isTest
+  public static void getRelatedFiles_ReturnsRelatedRecords_ForBoardTrainer() {
+    RelatedObjects related = getRelatedFilesWithGroups(
+      new List<string>{ 'Board', 'Trainer' }
+    );
 
-        System.assertEquals(6, related.items.size());
-        System.assertEquals(13, related.total);
-    }
+    System.assertEquals(6, related.items.size());
+    System.assertEquals(13, related.total);
+  }
 }

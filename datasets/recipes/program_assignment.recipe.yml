@@ -5,246 +5,246 @@
   nickname: client_program
   just_once: True
   fields:
-      Name: "Client Certification"
-      CEU__c: false
-      Current__c: true
-      Months__c: 6
-      Reminder__c: 30
+    Name: "Client Certification"
+    CEU__c: false
+    Current__c: true
+    Months__c: 6
+    Reminder__c: 30
 
 - object: Program__c
   just_once: True
   fields:
-      Name: "Fitness"
-      CEU__c: false
-      Current__c: true
-      Months__c: 1
-      Standalone__c: true
+    Name: "Fitness"
+    CEU__c: false
+    Current__c: true
+    Months__c: 1
+    Standalone__c: true
 
 - object: Program__c
   just_once: True
   fields:
-      Name: "Fitness [CEU]"
-      CEU__c: true
-      Current__c: true
-      Months__c: 1.5
-      Standalone__c: true
+    Name: "Fitness [CEU]"
+    CEU__c: true
+    Current__c: true
+    Months__c: 1.5
+    Standalone__c: true
 
 - object: Program__c
   just_once: True
   fields:
-      Name: "Medical Disability"
-      CEU__c: false
-      Current__c: true
-      Months__c: 1
-      Standalone__c: true
+    Name: "Medical Disability"
+    CEU__c: false
+    Current__c: true
+    Months__c: 1
+    Standalone__c: true
 
 - object: Program__c
   just_once: True
   fields:
-      Name: "Medical Disability [CEU]"
-      CEU__c: true
-      Current__c: true
-      Months__c: 1.5
-      Standalone__c: true
+    Name: "Medical Disability [CEU]"
+    CEU__c: true
+    Current__c: true
+    Months__c: 1.5
+    Standalone__c: true
 
 - object: Program__c
   just_once: True
   fields:
-      Name: "OT Advanced Bundle"
-      CEU__c: false
-      Current__c: true
-      Months__c: 3
-      Standalone__c: true
+    Name: "OT Advanced Bundle"
+    CEU__c: false
+    Current__c: true
+    Months__c: 3
+    Standalone__c: true
 
 - object: Program__c
   just_once: True
   fields:
-      Name: "OT Advanced Bundle [CEU]"
-      CEU__c: true
-      Current__c: true
-      Months__c: 4
-      Standalone__c: true
+    Name: "OT Advanced Bundle [CEU]"
+    CEU__c: true
+    Current__c: true
+    Months__c: 4
+    Standalone__c: true
 
 - object: Program__c
   just_once: True
   fields:
-      Name: "Psychiatric Disability"
-      CEU__c: false
-      Current__c: true
-      Months__c: 1
-      Standalone__c: true
+    Name: "Psychiatric Disability"
+    CEU__c: false
+    Current__c: true
+    Months__c: 1
+    Standalone__c: true
 
 - object: Program__c
   just_once: True
   fields:
-      Name: "Psychiatric Disability [CEU]"
-      CEU__c: true
-      Current__c: true
-      Months__c: 1.5
-      Standalone__c: true
+    Name: "Psychiatric Disability [CEU]"
+    CEU__c: true
+    Current__c: true
+    Months__c: 1.5
+    Standalone__c: true
 
 - object: Program__c
   just_once: True
   fields:
-      Name: "Puppy Raiser"
-      Current__c: true
-      Months__c: 4
-      Reminder__c: 30
+    Name: "Puppy Raiser"
+    Current__c: true
+    Months__c: 4
+    Reminder__c: 30
 
 - object: Program__c
   just_once: True
   fields:
-      Name: "Service Dog Selection"
-      CEU__c: false
-      Current__c: true
-      Months__c: 1
-      Standalone__c: true
+    Name: "Service Dog Selection"
+    CEU__c: false
+    Current__c: true
+    Months__c: 1
+    Standalone__c: true
 
 - object: Program__c
   just_once: True
   fields:
-      Name: "Service Dog Selection [CEU]"
-      CEU__c: true
-      Current__c: true
-      Months__c: 1.5
-      Standalone__c: true
+    Name: "Service Dog Selection [CEU]"
+    CEU__c: true
+    Current__c: true
+    Months__c: 1.5
+    Standalone__c: true
 
 - object: Program__c
   just_once: True
   fields:
-      Name: "Service Dog Training Bundle"
-      CEU__c: true
-      Current__c: true
-      Months__c: 4
-      Standalone__c: true
+    Name: "Service Dog Training Bundle"
+    CEU__c: true
+    Current__c: true
+    Months__c: 4
+    Standalone__c: true
 
 - object: Program__c
   just_once: True
   fields:
-      Name: "Service Dogs Foundations"
-      CEU__c: false
-      Current__c: true
-      Months__c: 1
-      Standalone__c: true
+    Name: "Service Dogs Foundations"
+    CEU__c: false
+    Current__c: true
+    Months__c: 1
+    Standalone__c: true
 
 - object: Program__c
   just_once: True
   fields:
-      Name: "Service Dogs Foundations [CEU]"
-      CEU__c: false
-      Current__c: true
-      Months__c: 1.5
-      Standalone__c: true
+    Name: "Service Dogs Foundations [CEU]"
+    CEU__c: false
+    Current__c: true
+    Months__c: 1.5
+    Standalone__c: true
 
 - object: Program__c
   just_once: True
   nickname: staff_program
   fields:
-      Name: "Staff"
-      CEU__c: false
-      Current__c: true
-      Months__c: .3
-      Reminder__c: 7
+    Name: "Staff"
+    CEU__c: false
+    Current__c: true
+    Months__c: .3
+    Reminder__c: 7
 
 - object: Program__c
   just_once: True
   nickname: snoopers_program
   fields:
-      Name: "Sweet Snoopers [CEU]"
-      CEU__c: true
-      Current__c: true
-      Months__c: 3
-      Standalone__c: true
+    Name: "Sweet Snoopers [CEU]"
+    CEU__c: true
+    Current__c: true
+    Months__c: 3
+    Standalone__c: true
 
 - object: Program__c
   just_once: True
   nickname: facilitator_program
   fields:
-      Name: "Team Facilitator"
-      CEU__c: false
-      Current__c: true
-      Months__c: 4
-      Reminder__c: 30
-      Standalone__c: true
+    Name: "Team Facilitator"
+    CEU__c: false
+    Current__c: true
+    Months__c: 4
+    Reminder__c: 30
+    Standalone__c: true
 
 - object: Program__c
   just_once: True
   nickname: TSiM
   fields:
-      Name: "Teams Set in Motion Client"
-      CEU__c: false
-      Current__c: true
-      Months__c: 6
-      Standalone__c: true
+    Name: "Teams Set in Motion Client"
+    CEU__c: false
+    Current__c: true
+    Months__c: 6
+    Standalone__c: true
 
 - object: Program__c
   just_once: True
   nickname: trainer_program
   fields:
-      Name: "Trainer Certification"
-      CEU__c: true
-      Current__c: true
-      Months__c: 9
-      Reminder__c: 30
+    Name: "Trainer Certification"
+    CEU__c: true
+    Current__c: true
+    Months__c: 9
+    Reminder__c: 30
 
 - object: Program__c
   just_once: True
   nickname: volunteer_program
   fields:
-      Name: "Volunteer"
-      CEU__c: false
-      Current__c: true
-      Months__c: .5
-      Reminder__c: 7
+    Name: "Volunteer"
+    CEU__c: false
+    Current__c: true
+    Months__c: .5
+    Reminder__c: 7
 
 - object: ProgramAssignment__c
   fields:
-      AssignedDate__c:
-          date_between:
-              start_date: 2015-01-01
-              end_date: today
-      CompletionDate__c:
-          date_between:
-              start_date: ${{date(AssignedDate__c)}}
-              end_date: today
-      Contact__c:
-          reference: Person
-      ExpectedCompletion__c:
-          date_between:
-              start_date: ${{date(AssignedDate__c)}}
-              end_date: today
-      Program__c:
-          if:
-              - choice:
-                    when: ${{'Trainer' in Contact__c.Positions__c}}
-                    pick:
-                        reference: trainer_program
-              - choice:
-                    when: ${{'Client' in Contact__c.Positions__c}}
-                    pick:
-                        reference: client_program
-              - choice:
-                    when: ${{'Team Facilitator' in Contact__c.Positions__c}}
-                    pick:
-                        reference: facilitator_program
-              - choice:
-                    when: ${{'Team Facilitator Lead' in Contact__c.Positions__c}}
-                    pick:
-                        reference: facilitator_program
-              - choice:
-                    when: ${{'Staff' in Contact__c.Positions__c}}
-                    pick:
-                        reference: staff_program
-              - choice:
-                    when: ${{'Volunteer' in Contact__c.Positions__c}}
-                    pick:
-                        reference: volunteer_program
-              - choice:
-                    pick:
-                        reference: TSiM
-      Status__c:
-          random_choice:
-              - In progress
-              - Completed
-              - Discontinued
-              - Removed
+    AssignedDate__c:
+      date_between:
+        start_date: 2015-01-01
+        end_date: today
+    CompletionDate__c:
+      date_between:
+        start_date: ${{date(AssignedDate__c)}}
+        end_date: today
+    Contact__c:
+      reference: Person
+    ExpectedCompletion__c:
+      date_between:
+        start_date: ${{date(AssignedDate__c)}}
+        end_date: today
+    Program__c:
+      if:
+        - choice:
+            when: ${{'Trainer' in Contact__c.Positions__c}}
+            pick:
+              reference: trainer_program
+        - choice:
+            when: ${{'Client' in Contact__c.Positions__c}}
+            pick:
+              reference: client_program
+        - choice:
+            when: ${{'Team Facilitator' in Contact__c.Positions__c}}
+            pick:
+              reference: facilitator_program
+        - choice:
+            when: ${{'Team Facilitator Lead' in Contact__c.Positions__c}}
+            pick:
+              reference: facilitator_program
+        - choice:
+            when: ${{'Staff' in Contact__c.Positions__c}}
+            pick:
+              reference: staff_program
+        - choice:
+            when: ${{'Volunteer' in Contact__c.Positions__c}}
+            pick:
+              reference: volunteer_program
+        - choice:
+            pick:
+              reference: TSiM
+    Status__c:
+      random_choice:
+        - In progress
+        - Completed
+        - Discontinued
+        - Removed

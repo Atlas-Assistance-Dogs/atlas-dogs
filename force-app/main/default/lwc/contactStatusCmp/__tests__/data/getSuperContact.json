@@ -1,32 +1,32 @@
 {
-    "roles": [
-        {
-            "position": "Volunteer",
-            "status": "Active"
-        },
-        {
-            "position": "Team Facilitator",
-            "status": "Onboarding"
-        },
-        {
-            "position": "Puppy Raiser",
-            "status": "Onboarding"
-        },
-        {
-            "position": "Board Member",
-            "status": "Initial Inquiry"
-        },
-        {
-            "position": "Client",
-            "status": "Certified-Active"
-        },
-        {
-            "position": "Trainer",
-            "status": "Inactive"
-        },
-        {
-            "position": "Standalone",
-            "status": "Active"
-        }
-    ]
+  "roles": [
+    {
+      "position": "Volunteer",
+      "status": "Active"
+    },
+    {
+      "position": "Team Facilitator",
+      "status": "Onboarding"
+    },
+    {
+      "position": "Puppy Raiser",
+      "status": "Onboarding"
+    },
+    {
+      "position": "Board Member",
+      "status": "Initial Inquiry"
+    },
+    {
+      "position": "Client",
+      "status": "Certified-Active"
+    },
+    {
+      "position": "Trainer",
+      "status": "Inactive"
+    },
+    {
+      "position": "Standalone",
+      "status": "Active"
+    }
+  ]
 }

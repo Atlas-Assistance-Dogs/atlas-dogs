@@ -1,53 +1,53 @@
 {
-    "orgName": "atlas-dog - Dev Org",
-    "edition": "Developer",
-    "settings": {
-        "lightningExperienceSettings": {
-            "enableS1DesktopEnabled": true
-        },
-        "chatterSettings": {
-            "enableChatter": true
-        },
-        "userManagementSettings": {
-            "enableNewProfileUI": true
-        },
-        "securitySettings": {
-            "enableAdminLoginAsAnyUser": true,
-            "sessionSettings": {
-                "forceRelogin": false,
-                "lockerServiceNext": false
-            }
-        },
-        "enhancedNotesSettings": {
-            "enableEnhancedNotes": true
-        },
-        "languageSettings": {
-            "enableTranslationWorkbench": true
-        },
-        "emailAdministrationSettings": {
-            "enableEnhancedEmailEnabled": true
-        },
-        "nameSettings": {
-            "enableMiddleName": true,
-            "enableNameSuffix": true
-        }
+  "orgName": "atlas-dog - Dev Org",
+  "edition": "Developer",
+  "settings": {
+    "lightningExperienceSettings": {
+      "enableS1DesktopEnabled": true
     },
-    "objectSettings": {
-        "contact": {
-            "sharingModel": "private"
-        },
-        "lead": {
-            "sharingModel": "private"
-        },
-        "opportunity": {
-            "sharingModel": "private"
-        },
-        "account": {
-            "defaultRecordType": "default",
-            "sharingModel": "private"
-        },
-        "case": {
-            "sharingModel": "private"
-        }
+    "chatterSettings": {
+      "enableChatter": true
+    },
+    "userManagementSettings": {
+      "enableNewProfileUI": true
+    },
+    "securitySettings": {
+      "enableAdminLoginAsAnyUser": true,
+      "sessionSettings": {
+        "forceRelogin": false,
+        "lockerServiceNext": false
+      }
+    },
+    "enhancedNotesSettings": {
+      "enableEnhancedNotes": true
+    },
+    "languageSettings": {
+      "enableTranslationWorkbench": true
+    },
+    "emailAdministrationSettings": {
+      "enableEnhancedEmailEnabled": true
+    },
+    "nameSettings": {
+      "enableMiddleName": true,
+      "enableNameSuffix": true
     }
+  },
+  "objectSettings": {
+    "contact": {
+      "sharingModel": "private"
+    },
+    "lead": {
+      "sharingModel": "private"
+    },
+    "opportunity": {
+      "sharingModel": "private"
+    },
+    "account": {
+      "defaultRecordType": "default",
+      "sharingModel": "private"
+    },
+    "case": {
+      "sharingModel": "private"
+    }
+  }
 }

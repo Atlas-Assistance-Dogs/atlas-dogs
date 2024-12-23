@@ -1,19 +1,19 @@
 {
-    "packageDirectories": [
-        {
-            "path": "force-app",
-            "default": true
-        },
-        {
-            "path": "unpackaged/pre",
-            "default": false
-        },
-        {   
-            "path": "unpackaged/post",
-            "default": false
-        }
-    ],
-    "namespace": "atlas1",
-    "sfdcLoginUrl": "https://login.salesforce.com",
-    "sourceApiVersion": "60.0"
+  "packageDirectories": [
+    {
+      "path": "force-app",
+      "default": true
+    },
+    {
+      "path": "unpackaged/pre",
+      "default": false
+    },
+    {
+      "path": "unpackaged/post",
+      "default": false
+    }
+  ],
+  "namespace": "atlas1",
+  "sfdcLoginUrl": "https://login.salesforce.com",
+  "sourceApiVersion": "60.0"
 }

@@ -1,76 +1,76 @@
 <template>
-    <c-modal-cmp
-        title={title}
-        submitlabel="Save"
-        onsubmit={handleSubmit}
-        oncancel={handleCancel}
-    >
-        <div slot="body">
-            <lightning-record-edit-form
-                object-api-name={object}
-                record-id={recordId}
-                onsuccess={handleSuccess}
-            >
-                <lightning-input-field
-                    field-name={fields.team}
-                    class="category slds-p-bottom_medium"
-                    value={teamId}
-                ></lightning-input-field>
-                <lightning-input-field
-                    field-name={fields.date}
-                    class="category slds-p-bottom_medium"
-                ></lightning-input-field>
-                <lightning-input-field
-                    field-name={fields.status}
-                    class="category slds-p-bottom_medium"
-                    onchange={handleChange}
-                ></lightning-input-field>
-                <div if:true={passed}>
-                    <lightning-input-field
-                        field-name={fields.validUntil}
-                        class="category slds-p-bottom_medium"
-                    ></lightning-input-field>
-                </div>
-                <lightning-input-field
-                    field-name={fields.type}
-                    class="category slds-p-bottom_medium"
-                ></lightning-input-field>
-                <lightning-input-field
-                    field-name={fields.location}
-                    class="category slds-p-bottom_medium"
-                ></lightning-input-field>
-                <lightning-input-field
-                    field-name={fields.assessor}
-                    class="category slds-p-bottom_medium"
-                ></lightning-input-field>
-                <lightning-input-field
-                    field-name={fields.assessorComments}
-                    class="category slds-p-bottom_medium"
-                ></lightning-input-field>
-                <lightning-input-field
-                    field-name={fields.reviewComments}
-                    class="category slds-p-bottom_medium"
-                ></lightning-input-field>
-            </lightning-record-edit-form>
-            <lightning-file-upload
-                label="Add File"
-                name="fileUploader"
-                accept={acceptedFormats}
-                record-id={recordId}
-                onuploadfinished={handleUploadFinished}
-                multiple="true"
-                slot="actions"
-            ></lightning-file-upload>
-            <template if:true={relatedFiles}>
-                <lightning-datatable
-                    data={relatedFiles}
-                    columns={columns}
-                    hide-checkbox-column
-                    key-field="documentId"
-                    onrowaction={handleRowAction}
-                >
-                </lightning-datatable>
-            </template>
+  <c-modal-cmp
+    title={title}
+    submitlabel="Save"
+    onsubmit={handleSubmit}
+    oncancel={handleCancel}
+  >
+    <div slot="body">
+      <lightning-record-edit-form
+        object-api-name={object}
+        record-id={recordId}
+        onsuccess={handleSuccess}
+      >
+        <lightning-input-field
+          field-name={fields.team}
+          class="category slds-p-bottom_medium"
+          value={teamId}
+        ></lightning-input-field>
+        <lightning-input-field
+          field-name={fields.date}
+          class="category slds-p-bottom_medium"
+        ></lightning-input-field>
+        <lightning-input-field
+          field-name={fields.status}
+          class="category slds-p-bottom_medium"
+          onchange={handleChange}
+        ></lightning-input-field>
+        <div if:true={passed}>
+          <lightning-input-field
+            field-name={fields.validUntil}
+            class="category slds-p-bottom_medium"
+          ></lightning-input-field>
         </div>
-    </c-modal-cmp>
+        <lightning-input-field
+          field-name={fields.type}
+          class="category slds-p-bottom_medium"
+        ></lightning-input-field>
+        <lightning-input-field
+          field-name={fields.location}
+          class="category slds-p-bottom_medium"
+        ></lightning-input-field>
+        <lightning-input-field
+          field-name={fields.assessor}
+          class="category slds-p-bottom_medium"
+        ></lightning-input-field>
+        <lightning-input-field
+          field-name={fields.assessorComments}
+          class="category slds-p-bottom_medium"
+        ></lightning-input-field>
+        <lightning-input-field
+          field-name={fields.reviewComments}
+          class="category slds-p-bottom_medium"
+        ></lightning-input-field>
+      </lightning-record-edit-form>
+      <lightning-file-upload
+        label="Add File"
+        name="fileUploader"
+        accept={acceptedFormats}
+        record-id={recordId}
+        onuploadfinished={handleUploadFinished}
+        multiple="true"
+        slot="actions"
+      ></lightning-file-upload>
+      <template if:true={relatedFiles}>
+        <lightning-datatable
+          data={relatedFiles}
+          columns={columns}
+          hide-checkbox-column
+          key-field="documentId"
+          onrowaction={handleRowAction}
+        >
+        </lightning-datatable>
+      </template>
+    </div>
+  </c-modal-cmp>
 </template>

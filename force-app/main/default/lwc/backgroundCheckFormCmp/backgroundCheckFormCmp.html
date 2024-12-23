@@ -1,54 +1,55 @@
 <template>
-    <lightning-record-edit-form
-        object-api-name={objectName}
-        layout-type="full"
-        record-id={recordId}
-        onsuccess={handleSuccess}
-    >
-        <div class="slds-grid">
-            <div class="slds-col slds-size_1-of-2">
-                <!-- Your lightning-input-field components here -->
-                <lightning-input-field
-                    field-name={fields.date}
-                    class="category slds-p-bottom_medium"
-                ></lightning-input-field>
-                <lightning-input-field
-                    field-name={fields.result}
-                    class="category slds-p-bottom_medium"
-                ></lightning-input-field>
-            </div>
-            <div class="slds-col slds-size_1-of-2">
-                <!-- More lightning-input-field components here -->
-                <lightning-input-field
-                    field-name={fields.contact}
-                    class="category slds-p-bottom_medium"
-                    value={contactId}
-                ></lightning-input-field>
-                <lightning-input-field
-                    field-name={fields.type}
-                    class="category slds-p-bottom_medium">
-                </lightning-input-field>
-                <div
-                    if:false={hasFile}
-                    class="fileUpload slds-p-vertical_medium slds-p-horizontal_x-small"
-                >
-                    <lightning-file-upload
-                        label="Add File"
-                        name="fileUploader"
-                        accept={acceptedFormats}
-                        record-id={recordId}
-                        onuploadfinished={handleUploadFinished}
-                        slot="actions"
-                    ></lightning-file-upload>
-                </div>
-                <div if:true={hasFile} class="slds-p-vertical_medium">
-                    <c-file-view-cmp file={currentCv}></c-file-view-cmp>
-                </div>
-            </div>
-        </div>
+  <lightning-record-edit-form
+    object-api-name={objectName}
+    layout-type="full"
+    record-id={recordId}
+    onsuccess={handleSuccess}
+  >
+    <div class="slds-grid">
+      <div class="slds-col slds-size_1-of-2">
+        <!-- Your lightning-input-field components here -->
         <lightning-input-field
-            field-name={fields.notes}
-            class="category slds-p-bottom_medium"
+          field-name={fields.date}
+          class="category slds-p-bottom_medium"
         ></lightning-input-field>
-    </lightning-record-edit-form>
+        <lightning-input-field
+          field-name={fields.result}
+          class="category slds-p-bottom_medium"
+        ></lightning-input-field>
+      </div>
+      <div class="slds-col slds-size_1-of-2">
+        <!-- More lightning-input-field components here -->
+        <lightning-input-field
+          field-name={fields.contact}
+          class="category slds-p-bottom_medium"
+          value={contactId}
+        ></lightning-input-field>
+        <lightning-input-field
+          field-name={fields.type}
+          class="category slds-p-bottom_medium"
+        >
+        </lightning-input-field>
+        <div
+          if:false={hasFile}
+          class="fileUpload slds-p-vertical_medium slds-p-horizontal_x-small"
+        >
+          <lightning-file-upload
+            label="Add File"
+            name="fileUploader"
+            accept={acceptedFormats}
+            record-id={recordId}
+            onuploadfinished={handleUploadFinished}
+            slot="actions"
+          ></lightning-file-upload>
+        </div>
+        <div if:true={hasFile} class="slds-p-vertical_medium">
+          <c-file-view-cmp file={currentCv}></c-file-view-cmp>
+        </div>
+      </div>
+    </div>
+    <lightning-input-field
+      field-name={fields.notes}
+      class="category slds-p-bottom_medium"
+    ></lightning-input-field>
+  </lightning-record-edit-form>
 </template>

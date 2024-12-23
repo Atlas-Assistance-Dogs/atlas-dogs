@@ -1,28 +1,32 @@
 <template>
-    <c-modal-cmp
-        title="Upload One or More Files"
-        submitlabel="Done"
-        onsubmit={handleSubmit}
-    >
-        <div slot="body">
-            <c-file-information-cmp object-id={objectId} record-id={recordId} is-upload={isUpload}></c-file-information-cmp>
-            <div class="fileUpload slds-p-vertical_medium">
-                <lightning-file-upload
-                    label="Add Files"
-                    name="fileUploader"
-                    accept={acceptedFormats}
-                    record-id={objectId}
-                    onuploadfinished={handleUploadFinished}
-                    slot="actions"
-                    multiple
-                ></lightning-file-upload>
-            </div>
-            <template if:true={isErrorMessage}>
-                <span class="slds-text-color_error">{message}</span>
-            </template>
-            <template if:false={isErrorMessage}>
-                <span class="slds-text-color_success">{message}</span>
-            </template>
-        </div>
-    </c-modal-cmp>
+  <c-modal-cmp
+    title="Upload One or More Files"
+    submitlabel="Done"
+    onsubmit={handleSubmit}
+  >
+    <div slot="body">
+      <c-file-information-cmp
+        object-id={objectId}
+        record-id={recordId}
+        is-upload={isUpload}
+      ></c-file-information-cmp>
+      <div class="fileUpload slds-p-vertical_medium">
+        <lightning-file-upload
+          label="Add Files"
+          name="fileUploader"
+          accept={acceptedFormats}
+          record-id={objectId}
+          onuploadfinished={handleUploadFinished}
+          slot="actions"
+          multiple
+        ></lightning-file-upload>
+      </div>
+      <template if:true={isErrorMessage}>
+        <span class="slds-text-color_error">{message}</span>
+      </template>
+      <template if:false={isErrorMessage}>
+        <span class="slds-text-color_success">{message}</span>
+      </template>
+    </div>
+  </c-modal-cmp>
 </template>

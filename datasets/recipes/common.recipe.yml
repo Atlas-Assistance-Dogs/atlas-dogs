@@ -1,34 +1,34 @@
 - macro: positions
   fields:
-      Positions__c:
-          random_choice:
-              - Volunteer
-              - Team Facilitator
-              - Team Facilitator Lead
-              - Board Member
-              - Puppy Raiser
-              - Trainer
-              - Client
-              - Donor
-              - Volunteer;Client
-              - Volunteer;Trainer
-              - Team Facilitator;Volunteer
-              - Trainer;Client
-              - Team Facilitator Lead;Volunteer;Client
-              - Staff
-              - Puppy Raiser;Client
-              - Puppy Raiser;Volunteer
+    Positions__c:
+      random_choice:
+        - Volunteer
+        - Team Facilitator
+        - Team Facilitator Lead
+        - Board Member
+        - Puppy Raiser
+        - Trainer
+        - Client
+        - Donor
+        - Volunteer;Client
+        - Volunteer;Trainer
+        - Team Facilitator;Volunteer
+        - Trainer;Client
+        - Team Facilitator Lead;Volunteer;Client
+        - Staff
+        - Puppy Raiser;Client
+        - Puppy Raiser;Volunteer
 
 - macro: position
   fields:
-      Position__c:
-          random_choice:
-              - Volunteer
-              - Team Facilitator
-              - Team Facilitator Lead
-              - Board Member
-              - Puppy Raiser
-              - Trainer
-              - Client
-              - Donor
-              - Staff
+    Position__c:
+      random_choice:
+        - Volunteer
+        - Team Facilitator
+        - Team Facilitator Lead
+        - Board Member
+        - Puppy Raiser
+        - Trainer
+        - Client
+        - Donor
+        - Staff

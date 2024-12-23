@@ -3,45 +3,43 @@ import { NavigationMixin } from "lightning/navigation";
 import { refreshApex } from "@salesforce/apex";
 
 export default class RelatedPuppyLogCmp extends NavigationMixin(
-    LightningElement
+  LightningElement
 ) {
-    @api recordId;
-    @api contactId = "";
-    @api objectApiName;
-    @api viewAll;
-    message;
-    contentType = "Puppy Log";
-    title = "Puppy Raiser Log";
+  @api recordId;
+  @api contactId = "";
+  @api objectApiName;
+  @api viewAll;
+  message;
+  contentType = "Puppy Log";
+  title = "Puppy Raiser Log";
 
-    @api
-    openModal(message) {
-        this.message = "";
-        this.recordId = message?.recordId;
-        // Set defaults if this is a new record
-        if (message && !message.recordId) {
-            this.contactId = message.contactId;
-            this.dogId = message.dogId;
-        }
-        refreshApex();
-        this.template.querySelector("c-modal-cmp").openModal();
+  @api
+  openModal(message) {
+    this.message = "";
+    this.recordId = message?.recordId;
+    // Set defaults if this is a new record
+    if (message && !message.recordId) {
+      this.contactId = message.contactId;
+      this.dogId = message.dogId;
     }
-    closeModal() {
-        this.template.querySelector("c-modal-cmp").closeModal();
-    }
+    refreshApex();
+    this.template.querySelector("c-modal-cmp").openModal();
+  }
+  closeModal() {
+    this.template.querySelector("c-modal-cmp").closeModal();
+  }
 
-    handleSubmit(event) {
-        event.preventDefault();
-        this.template.querySelector("c-puppy-log-form-cmp").handleSubmit(event);
-    }
+  handleSubmit(event) {
+    event.preventDefault();
+    this.template.querySelector("c-puppy-log-form-cmp").handleSubmit(event);
+  }
 
-    handleChanged(event) {
-        this.dispatchEvent(new CustomEvent("changed", { detail: event.detail }));
-        this.template.querySelector("c-modal-cmp").closeModal();
-    }
+  handleChanged(event) {
+    this.dispatchEvent(new CustomEvent("changed", { detail: event.detail }));
+    this.template.querySelector("c-modal-cmp").closeModal();
+  }
 
-    handleCancel() {
-        this.dispatchEvent(
-            new CustomEvent("cancel")
-        );
-    }
+  handleCancel() {
+    this.dispatchEvent(new CustomEvent("cancel"));
+  }
 }

@@ -1,115 +1,115 @@
 - object: CategoryRule__c
   just_once: True
   fields:
-    Category__c: 'Dog'
-    Object__c: 'Dog'
-    GroupName__c: 'Team'
+    Category__c: "Dog"
+    Object__c: "Dog"
+    GroupName__c: "Team"
 
 - object: CategoryRule__c
   just_once: True
   fields:
-    Category__c: 'Client'
-    Object__c: 'Team'
-    GroupName__c: 'Team'
+    Category__c: "Client"
+    Object__c: "Team"
+    GroupName__c: "Team"
 
 - object: CategoryRule__c
   just_once: True
   fields:
-    Category__c: 'TeamDog'
-    Object__c: 'Team'
-    GroupName__c: 'Team'
+    Category__c: "TeamDog"
+    Object__c: "Team"
+    GroupName__c: "Team"
 
 - object: CategoryRule__c
   just_once: True
   fields:
-    Category__c: 'TeamDog'
-    Object__c: 'Dog'
-    GroupName__c: 'Team'
+    Category__c: "TeamDog"
+    Object__c: "Dog"
+    GroupName__c: "Team"
     ReadOnly__c: True
 
 - object: CategoryRule__c
   just_once: True
   fields:
-    Category__c: 'ADSiM'
-    Object__c: 'Contact'
-    Position__c: 'Client'
-    GroupName__c: 'Team'
+    Category__c: "ADSiM"
+    Object__c: "Contact"
+    Position__c: "Client"
+    GroupName__c: "Team"
 
 - object: CategoryRule__c
   just_once: True
   fields:
-    Category__c: 'Na'
-    Object__c: 'Contact'
+    Category__c: "Na"
+    Object__c: "Contact"
 
 - object: CategoryRule__c
   just_once: True
   fields:
-    Category__c: 'Standalone'
-    Object__c: 'Contact'
-    Position__c: 'Standalone'
-    Group__c: 'Standalone Programs'
+    Category__c: "Standalone"
+    Object__c: "Contact"
+    Position__c: "Standalone"
+    Group__c: "Standalone Programs"
 
 - object: CategoryRule__c
   just_once: True
   fields:
-    Category__c: 'Board'
-    Object__c: 'Contact'
-    Position__c: 'Board Member'
-    GroupName__c: 'Board'
+    Category__c: "Board"
+    Object__c: "Contact"
+    Position__c: "Board Member"
+    GroupName__c: "Board"
 
 - object: CategoryRule__c
   just_once: True
   fields:
-    Category__c: 'Client'
-    Object__c: 'Contact'
-    Position__c: 'Client'
-    GroupName__c: 'Team'
+    Category__c: "Client"
+    Object__c: "Contact"
+    Position__c: "Client"
+    GroupName__c: "Team"
     ReadOnly__c: True
 
 - object: CategoryRule__c
   just_once: True
   fields:
-    Category__c: 'Facilitator'
-    Object__c: 'Contact'
-    Position__c: 'Team Facilitator'
-    GroupName__c: 'Team'
+    Category__c: "Facilitator"
+    Object__c: "Contact"
+    Position__c: "Team Facilitator"
+    GroupName__c: "Team"
 
 - object: CategoryRule__c
   just_once: True
   fields:
-    Category__c: 'Facilitator'
-    Object__c: 'Contact'
-    Position__c: 'Team Facilitator Lead'
-    GroupName__c: 'Team'
+    Category__c: "Facilitator"
+    Object__c: "Contact"
+    Position__c: "Team Facilitator Lead"
+    GroupName__c: "Team"
 
 - object: CategoryRule__c
   just_once: True
   fields:
-    Category__c: 'Puppy'
-    Object__c: 'Contact'
-    Position__c: 'Puppy Raiser'
-    GroupName__c: 'PuppyRaiser'
+    Category__c: "Puppy"
+    Object__c: "Contact"
+    Position__c: "Puppy Raiser"
+    GroupName__c: "PuppyRaiser"
 
 - object: CategoryRule__c
   just_once: True
   fields:
-    Category__c: 'Staff'
-    Object__c: 'Contact'
-    Position__c: 'Staff'
-    GroupName__c: 'Staff'
+    Category__c: "Staff"
+    Object__c: "Contact"
+    Position__c: "Staff"
+    GroupName__c: "Staff"
 
 - object: CategoryRule__c
   just_once: True
   fields:
-    Category__c: 'Trainer'
-    Object__c: 'Contact'
-    Position__c: 'Trainer'
-    GroupName__c: 'Trainer'
+    Category__c: "Trainer"
+    Object__c: "Contact"
+    Position__c: "Trainer"
+    GroupName__c: "Trainer"
 
 - object: CategoryRule__c
   just_once: True
   fields:
-    Category__c: 'Volunteer'
-    Object__c: 'Contact'
-    Position__c: 'Volunteer'
-    GroupName__c: 'Volunteer'
+    Category__c: "Volunteer"
+    Object__c: "Contact"
+    Position__c: "Volunteer"
+    GroupName__c: "Volunteer"

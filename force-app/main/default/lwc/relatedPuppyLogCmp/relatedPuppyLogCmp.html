@@ -1,11 +1,16 @@
 <template>
-    <c-modal-cmp title={title} submitlabel="Save" onsubmit={handleSubmit} oncancel={handleCancel}>
-        <c-puppy-log-form-cmp
-            slot="body"
-            record-id={recordId}
-            contact-id={contactId}
-            onchanged={handleChanged}
-            dog-id={dogId}
-        ></c-puppy-log-form-cmp>
-    </c-modal-cmp>
+  <c-modal-cmp
+    title={title}
+    submitlabel="Save"
+    onsubmit={handleSubmit}
+    oncancel={handleCancel}
+  >
+    <c-puppy-log-form-cmp
+      slot="body"
+      record-id={recordId}
+      contact-id={contactId}
+      onchanged={handleChanged}
+      dog-id={dogId}
+    ></c-puppy-log-form-cmp>
+  </c-modal-cmp>
 </template>

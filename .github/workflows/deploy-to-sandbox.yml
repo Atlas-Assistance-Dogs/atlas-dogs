@@ -1,42 +1,42 @@
 name: Deploy to Sandbox
 
 on:
-    workflow_dispatch:
+  workflow_dispatch:
 
 env:
-    CUMULUSCI_KEYCHAIN_CLASS: cumulusci.core.keychain.EnvironmentProjectKeychain
-    CUMULUSCI_SERVICE_github: ${{ secrets.CUMULUSCI_SERVICE_github }}
-    CUMULUSCI_ORG_devint: '{"username": "cumulusci@atlasdog.org.devint", "instance_url": "https://test.salesforce.com"}'
-    CUMULUSCI_ORG_staging: '{"username": "cumulusci@atlasdog.org.staging", "instance_url": "https://test.salesforce.com"}'
-    SFDX_CLIENT_ID: ${{ secrets.CLIENT_ID }}
-    SFDX_HUB_KEY: ${{ secrets.SSH_KEY }}
-    SFDX_AUDIENCE_URL: "https://test.salesforce.com"
+  CUMULUSCI_KEYCHAIN_CLASS: cumulusci.core.keychain.EnvironmentProjectKeychain
+  CUMULUSCI_SERVICE_github: ${{ secrets.CUMULUSCI_SERVICE_github }}
+  CUMULUSCI_ORG_devint: '{"username": "cumulusci@atlasdog.org.devint", "instance_url": "https://test.salesforce.com"}'
+  CUMULUSCI_ORG_staging: '{"username": "cumulusci@atlasdog.org.staging", "instance_url": "https://test.salesforce.com"}'
+  SFDX_CLIENT_ID: ${{ secrets.CLIENT_ID }}
+  SFDX_HUB_KEY: ${{ secrets.SSH_KEY }}
+  SFDX_AUDIENCE_URL: "https://test.salesforce.com"
 
 jobs:
-    deploy_to_sandbox:
-        name: "Deploy to sandbox"
-        runs-on: ubuntu-latest
-        steps:
-            - name: Set env to dev
-              if: endsWith(github.ref, '/dev')
-              run: |
-                  echo "name=dev" >> $GITHUB_ENV
-            - uses: actions/checkout@v2
-            - name: Install sfdx
-              run: |
-                  mkdir sfdx
-                  wget -qO- https://developer.salesforce.com/media/salesforce-cli/sfdx-linux-amd64.tar.xz | tar xJ -C sfdx --strip-components 1
-                  ./sfdx/install
-                  echo ${{ secrets.SFDX_AUTH_URL }} > sfdx_auth
-                  sfdx auth:sfdxurl:store -f sfdx_auth -d
-            - name: Set up Python
-              uses: actions/setup-python@v1
-              with:
-                  python-version: "3.8"
-            - name: Install CumulusCI
-              run: |
-                  python -m pip install -U pip
-                  pip install cumulusci
-            - name: Deploy source to devint sandbox
-              run: |
-                  cci flow run ci_master --org devint
+  deploy_to_sandbox:
+    name: "Deploy to sandbox"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set env to dev
+        if: endsWith(github.ref, '/dev')
+        run: |
+          echo "name=dev" >> $GITHUB_ENV
+      - uses: actions/checkout@v2
+      - name: Install sfdx
+        run: |
+          mkdir sfdx
+          wget -qO- https://developer.salesforce.com/media/salesforce-cli/sfdx-linux-amd64.tar.xz | tar xJ -C sfdx --strip-components 1
+          ./sfdx/install
+          echo ${{ secrets.SFDX_AUTH_URL }} > sfdx_auth
+          sfdx auth:sfdxurl:store -f sfdx_auth -d
+      - name: Set up Python
+        uses: actions/setup-python@v1
+        with:
+          python-version: "3.8"
+      - name: Install CumulusCI
+        run: |
+          python -m pip install -U pip
+          pip install cumulusci
+      - name: Deploy source to devint sandbox
+        run: |
+          cci flow run ci_master --org devint

@@ -7,4 +7,4 @@
   nickname: Conference
   just_once: True
   fields:
-      name: The Conference
+    name: The Conference

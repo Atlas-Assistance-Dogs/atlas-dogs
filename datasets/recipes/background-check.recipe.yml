@@ -3,20 +3,20 @@
 
 - object: BackgroundCheck__c
   fields:
-      Contact__c:
-          random_reference: Contact
-      Date__c:
-          date_between:
-              start_date: 2015-01-01
-              end_date: today
-      Notes__c:
-          fake: paragraph
-      Status__c:
-          random_choice:
-              - Pending
-              - Pass
-              - Fail
-      Type__c:
-          random_choice:
-              Criminal: 80%
-              Credit: 20%
+    Contact__c:
+      random_reference: Contact
+    Date__c:
+      date_between:
+        start_date: 2015-01-01
+        end_date: today
+    Notes__c:
+      fake: paragraph
+    Status__c:
+      random_choice:
+        - Pending
+        - Pass
+        - Fail
+    Type__c:
+      random_choice:
+        Criminal: 80%
+        Credit: 20%

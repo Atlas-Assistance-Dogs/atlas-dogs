@@ -1,18 +1,18 @@
 name: Feature Test
 on:
-    push:
-        branches:
-            - dev
-            - main
-    workflow_dispatch:
+  push:
+    branches:
+      - dev
+      - main
+  workflow_dispatch:
 jobs:
-    feature-test:
-        name: "Feature Test"
-        # Replace this URL with your forked repo.
-        # Use the feature test workflow that matches your project needs.
-        uses: Atlas-Assistance-Dogs/standard-cci-workflows/.github/workflows/feature.yml@main
-        with:
-            cumulusci-version: "3.83.0"
-            sfdx-version: "@salesforce/cli/2.21.8"
-        secrets:
-            dev-hub-auth-url: "${{ secrets.DEV_HUB_AUTH_URL }}"
+  feature-test:
+    name: "Feature Test"
+    # Replace this URL with your forked repo.
+    # Use the feature test workflow that matches your project needs.
+    uses: Atlas-Assistance-Dogs/standard-cci-workflows/.github/workflows/feature.yml@main
+    with:
+      cumulusci-version: "3.83.0"
+      sfdx-version: "@salesforce/cli/2.21.8"
+    secrets:
+      dev-hub-auth-url: "${{ secrets.DEV_HUB_AUTH_URL }}"

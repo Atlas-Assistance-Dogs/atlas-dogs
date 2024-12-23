@@ -1,3 +1,10 @@
-<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId,lightning:actionOverride" access="global">
-    <c:newPuppyLogCmp aura:id="modal" recordId="{!v.recordId}" title="Puppy Raiser Log" />
-</aura:component>	
+<aura:component
+  implements="flexipage:availableForRecordHome,force:hasRecordId,lightning:actionOverride"
+  access="global"
+>
+  <c:newPuppyLogCmp
+    aura:id="modal"
+    recordId="{!v.recordId}"
+    title="Puppy Raiser Log"
+  />
+</aura:component>

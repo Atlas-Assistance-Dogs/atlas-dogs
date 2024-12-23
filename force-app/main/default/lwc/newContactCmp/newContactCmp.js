@@ -22,94 +22,95 @@ import BIRTHDATE_FIELD from "@salesforce/schema/Contact.Birthdate";
 import DESCRIPTION_FIELD from "@salesforce/schema/Contact.Description";
 
 export default class NewContact extends NavigationMixin(LightningElement) {
-    showSourceOther = false;
+  showSourceOther = false;
 
-    object = NAME_FIELD.objectApiName;
-    field = {
-        name: NAME_FIELD,
-        email: EMAIL_FIELD,
-        phone: PHONE_FIELD,
-        preferredName: PREFERRED_NAME_FIELD,
-        pronoun: PRONOUN_FIELD,
-        pronounOther: PRONOUN_OTHER_FIELD,
-        street: STREET_FIELD,
-        city: CITY_FIELD,
-        state: STATE_FIELD,
-        country: COUNTRY_FIELD,
-        postalCode: POSTAL_CODE_FIELD,
-        interest: INTEREST_FIELD,
-        leadSource: LEAD_SOURCE_FIELD,
-        otherSource: OTHER_SOURCE_FIELD,
-        language: LANGUAGE_FIELD,
-        otherLanguages: OTHER_LANGUAGES_FIELD,
-        birthDate: BIRTHDATE_FIELD,
-        description: DESCRIPTION_FIELD
-    };
+  object = NAME_FIELD.objectApiName;
+  field = {
+    name: NAME_FIELD,
+    email: EMAIL_FIELD,
+    phone: PHONE_FIELD,
+    preferredName: PREFERRED_NAME_FIELD,
+    pronoun: PRONOUN_FIELD,
+    pronounOther: PRONOUN_OTHER_FIELD,
+    street: STREET_FIELD,
+    city: CITY_FIELD,
+    state: STATE_FIELD,
+    country: COUNTRY_FIELD,
+    postalCode: POSTAL_CODE_FIELD,
+    interest: INTEREST_FIELD,
+    leadSource: LEAD_SOURCE_FIELD,
+    otherSource: OTHER_SOURCE_FIELD,
+    language: LANGUAGE_FIELD,
+    otherLanguages: OTHER_LANGUAGES_FIELD,
+    birthDate: BIRTHDATE_FIELD,
+    description: DESCRIPTION_FIELD
+  };
 
-    // Standard lifecycle hooks used run when loaded
-    renderedCallback() {
-        this.template.querySelector("c-modal-cmp").openModal();
+  // Standard lifecycle hooks used run when loaded
+  renderedCallback() {
+    this.template.querySelector("c-modal-cmp").openModal();
+  }
+
+  handleSourceChange(event) {
+    this.showSourceOther = event.detail.value === "Other";
+  }
+
+  validateFields() {
+    return [...this.template.querySelectorAll("lightning-input-field")].reduce(
+      (validSoFar, field) => {
+        return validSoFar && field.reportValidity();
+      },
+      true
+    );
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+
+    if (!this.validateFields()) {
+      const toast = new ShowToastEvent({
+        message: "All fields marked with an asterix are required.",
+        variant: "error"
+      });
+      this.dispatchEvent(toast);
+    } else {
+      this.template.querySelector("lightning-record-edit-form").submit();
+      const toast = new ShowToastEvent({
+        message: "Creating Contact."
+      });
+      this.dispatchEvent(toast);
     }
+  }
 
-    handleSourceChange(event) {
-        this.showSourceOther = event.detail.value === "Other";
-    }
+  handleSuccess(event) {
+    this[NavigationMixin.Navigate]({
+      type: "standard__recordPage",
+      attributes: {
+        recordId: event.detail.id,
+        objectApiName: this.object,
+        actionName: "view"
+      }
+    });
+  }
 
-    validateFields() {
-        return [
-            ...this.template.querySelectorAll("lightning-input-field")
-        ].reduce((validSoFar, field) => {
-            return validSoFar && field.reportValidity();
-        }, true);
-    }
+  handleError(event) {
+    console.log("handleError event");
+    console.log(JSON.stringify(event.detail));
+    const evt = new ShowToastEvent({
+      title: "Error in Record Creation",
+      message: event.detail.detail,
+      variant: "error"
+    });
+    this.dispatchEvent(evt);
+  }
 
-    handleSubmit(event) {
-        event.preventDefault();
-
-        if (!this.validateFields()) {
-            const toast = new ShowToastEvent({
-                message: "All fields marked with an asterix are required.",
-                variant: "error"
-            });
-            this.dispatchEvent(toast);
-        } else {
-            this.template.querySelector("lightning-record-edit-form").submit();
-            const toast = new ShowToastEvent({
-                message: "Creating Contact."
-            });
-            this.dispatchEvent(toast);
-        }
-    }
-
-    handleSuccess(event) {
-        this[NavigationMixin.Navigate]({
-            type: "standard__recordPage",
-            attributes: {
-                recordId: event.detail.id,
-                objectApiName: this.object,
-                actionName: "view"
-            }
-        });
-    }
-
-    handleError(event) {
-        console.log("handleError event");
-        console.log(JSON.stringify(event.detail));
-        const evt = new ShowToastEvent({
-            title: "Error in Record Creation",
-            message: event.detail.detail,
-            variant: "error"
-        });
-        this.dispatchEvent(evt);
-    }
-
-    handleCancel() {
-        this[NavigationMixin.Navigate]({
-            type: "standard__objectPage",
-            attributes: {
-                objectApiName: this.object,
-                actionName: "home"
-            }
-        });
-    }
+  handleCancel() {
+    this[NavigationMixin.Navigate]({
+      type: "standard__objectPage",
+      attributes: {
+        objectApiName: this.object,
+        actionName: "home"
+      }
+    });
+  }
 }
