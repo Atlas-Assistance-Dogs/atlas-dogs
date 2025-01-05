@@ -786,22 +786,22 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>ContinuingEducationUnit__c.AuthorityOther__c</field>
+        <field>CEU__c.AuthorityOther__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>ContinuingEducationUnit__c.Comments__c</field>
+        <field>CEU__c.Comments__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>ContinuingEducationUnit__c.ProgramHours__c</field>
+        <field>CEU__c.ProgramHours__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>ContinuingEducationUnit__c.Status__c</field>
+        <field>CEU__c.Status__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -1199,7 +1199,7 @@
         <layout>Contact-Atlas Contact Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>ContinuingEducationUnit__c-CEU Layout</layout>
+        <layout>CEU__c-CEU Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
         <layout>DogRelationship__c-Dog Relationship Layout</layout>
@@ -1254,10 +1254,6 @@
     </tabVisibilities>
     <tabVisibilities>
         <tab>CategoryRule__c</tab>
-        <visibility>Hidden</visibility>
-    </tabVisibilities>
-    <tabVisibilities>
-        <tab>ContinuingEducationUnit__c</tab>
         <visibility>Hidden</visibility>
     </tabVisibilities>
     <tabVisibilities>
