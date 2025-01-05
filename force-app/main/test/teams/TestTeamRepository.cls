@@ -44,6 +44,28 @@ private class TestTeamRepository {
     }
 
     @isTest
+    static void create() {
+        // Arrange
+        setup();
+        Team__c expected = new Team__c(
+            Name = 'Joe_Boomer2',
+            Client__c = joe.Id,
+            Dog__c = boomer.Id,
+            Status__c = 'Certified'
+        );
+        // Act
+        TeamRepository repo = new TeamRepository();
+        Team__c actual = repo.create(expected);
+        // Assert
+        System.assertNotEquals(team.Id, actual.Id);
+        System.assertNotEquals(null, actual.Id);
+        System.assertEquals(expected.Name, actual.Name);
+        System.assertEquals(expected.Client__c, actual.Client__c);
+        System.assertEquals(expected.Dog__c, actual.Dog__c);
+        System.assertEquals(expected.Status__c, actual.Status__c);
+    }
+
+    @isTest
     static void getCertificationStatus_returnsUnsetCertificationStatus() {
         // Arrange
         setup();
@@ -73,5 +95,40 @@ private class TestTeamRepository {
         System.assertEquals(team.InitialCertificationDate__c, actual.InitialCertificationDate__c);
         System.assertEquals(team.PatValidUntil__c, actual.PatValidUntil__c);
         System.assertEquals(team.PatCount__c, actual.PatCount__c);
+    }
+
+    @isTest
+    static void modify_updates() {
+        // Arrange
+        setup();
+        team.InitialCertificationDate__c = Date.today().addDays(-22);
+        team.PatValidUntil__c = Date.today().addMonths(10);
+        team.PatCount__c = 5;
+        // Act
+        TeamRepository repo = new TeamRepository();
+        Team__c[] result = repo.modify(new Team__c[] { team });
+        // Assert
+        Team__c actual = result[0];
+        System.assertEquals(team.InitialCertificationDate__c, actual.InitialCertificationDate__c);
+        System.assertEquals(team.PatValidUntil__c, actual.PatValidUntil__c);
+        System.assertEquals(team.PatCount__c, actual.PatCount__c);
+    }
+
+    @isTest
+    static void modify_returnsNull_whenNull() {
+        // Act
+        TeamRepository repo = new TeamRepository();
+        Team__c[] actual = repo.modify(null);
+        // Assert
+        System.assertEquals(null, actual);
+    }
+
+    @isTest
+    static void modify_returnsEmpty_whenEmpty() {
+        // Act
+        TeamRepository repo = new TeamRepository();
+        Team__c[] actual = repo.modify(new List<Team__c>());
+        // Assert
+        System.assert(actual.isEmpty());
     }
 }

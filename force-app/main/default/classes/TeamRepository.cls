@@ -26,6 +26,7 @@ public class TeamRepository {
     }
 
     public List<Team__c> modify(List<Team__c> teams) {
+        if (teams == null) return null;
         upsert teams;
         return teams;
     }
