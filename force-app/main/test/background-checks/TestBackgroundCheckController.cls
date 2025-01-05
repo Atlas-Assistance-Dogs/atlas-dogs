@@ -29,16 +29,16 @@ public class TestBackgroundCheckController {
       new Contact(
         FirstName = 'Jack',
         LastName = 'Contact',
-                Email = 'jack@test.com'
-                VolunteerAccess__c = ''
+        Email = 'jack@test.com',
+        VolunteerAccess__c = ''
       )
     );
     contacts.add(
       new Contact(
         FirstName = 'Jill',
         LastName = 'Contact',
-                Email = 'jill@test.com'
-                VolunteerAccess__c = ''
+        Email = 'jill@test.com',
+        VolunteerAccess__c = ''
       )
     );
     insert contacts;

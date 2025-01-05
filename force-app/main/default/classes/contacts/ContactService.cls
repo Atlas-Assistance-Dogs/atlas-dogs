@@ -380,18 +380,14 @@ public inherited sharing class ContactService {
     ) {
       if (trainer.TrainerInitialCertificationDate__c == null) {
         trainer.TrainerInitialCertificationDate__c = trainer.TrainerCertAgreementReceived__c;
-        trainer.TrainerCertValidUntil__c = trainer.TrainerCertAgreementReceived__c.addYears(
-          1
-        );
+        trainer.TrainerCertValidUntil__c = trainer.TrainerCertAgreementReceived__c.addYears(1);
         return;
       }
       Integer days = trainer.TrainerCertAgreementReceived__c.daysBetween(
         trainer.TrainerCertValidUntil__c
       );
       if (days >= -early && days <= leeway) {
-        trainer.TrainerCertValidUntil__c = trainer.TrainerCertValidUntil__c.addYears(
-          years
-        );
+        trainer.TrainerCertValidUntil__c = trainer.TrainerCertValidUntil__c.addYears(years);
       }
     }
   }
