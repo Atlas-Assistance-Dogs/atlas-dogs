@@ -135,6 +135,21 @@
                 <default>false</default>
                 <label>Active Projects- Volunteer Recruitment and Retention</label>
             </value>
+            <value>
+                <fullName>Credit Check Required</fullName>
+                <default>false</default>
+                <label>Credit Check Required</label>
+            </value>
+            <value>
+                <fullName>Background Check Required</fullName>
+                <default>false</default>
+                <label>Background Check Required</label>
+            </value>
+            <value>
+                <fullName>First Aid Required</fullName>
+                <default>false</default>
+                <label>First Aid Required</label>
+            </value>
         </valueSetDefinition>
     </valueSet>
     <visibleLines>6</visibleLines>
