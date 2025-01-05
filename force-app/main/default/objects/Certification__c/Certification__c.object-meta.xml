@@ -86,20 +86,16 @@
     </actionOverrides>
     <actionOverrides>
         <actionName>New</actionName>
-        <content>ContinuingEducationUnitFormCmp</content>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
         <formFactor>Large</formFactor>
-        <skipRecordTypeSelect>false</skipRecordTypeSelect>
-        <type>LightningComponent</type>
+        <type>Default</type>
     </actionOverrides>
     <actionOverrides>
         <actionName>New</actionName>
-        <content>ContinuingEducationUnitFormCmp</content>
         <formFactor>Small</formFactor>
-        <skipRecordTypeSelect>false</skipRecordTypeSelect>
-        <type>LightningComponent</type>
-    </actionOverrides>
-    <actionOverrides>
-        <actionName>New</actionName>
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
@@ -147,32 +143,25 @@
     <allowInChatterGroups>false</allowInChatterGroups>
     <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
     <deploymentStatus>Deployed</deploymentStatus>
-    <description>Continuing Education Units</description>
+    <description>Track progress toward a certification or renewal.  CEUs are be associated with certifications</description>
     <enableActivities>false</enableActivities>
     <enableBulkApi>true</enableBulkApi>
     <enableFeeds>false</enableFeeds>
     <enableHistory>false</enableHistory>
     <enableLicensing>false</enableLicensing>
-    <enableReports>false</enableReports>
+    <enableReports>true</enableReports>
     <enableSearch>false</enableSearch>
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
     <externalSharingModel>Private</externalSharingModel>
-    <label>CEU</label>
+    <label>Certification</label>
     <nameField>
-        <label>CEU Name</label>
-        <type>Text</type>
+        <displayFormat>C-{0000}</displayFormat>
+        <label>Certification Name</label>
+        <type>AutoNumber</type>
     </nameField>
-    <pluralLabel>CEUs</pluralLabel>
-    <searchLayouts>
-        <searchResultsAdditionalFields>ProgramTitle__c</searchResultsAdditionalFields>
-        <searchResultsAdditionalFields>DateCompleted__c</searchResultsAdditionalFields>
-        <searchResultsAdditionalFields>Quantity__c</searchResultsAdditionalFields>
-        <searchResultsAdditionalFields>Status__c</searchResultsAdditionalFields>
-        <searchResultsAdditionalFields>Trainer__c</searchResultsAdditionalFields>
-        <searchResultsAdditionalFields>Role__c</searchResultsAdditionalFields>
-        <searchResultsAdditionalFields>Comments__c</searchResultsAdditionalFields>
-    </searchLayouts>
+    <pluralLabel>Certifications</pluralLabel>
+    <searchLayouts></searchLayouts>
     <sharingModel>ReadWrite</sharingModel>
     <visibility>Public</visibility>
 </CustomObject>

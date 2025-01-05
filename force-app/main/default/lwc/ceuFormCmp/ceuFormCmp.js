@@ -5,18 +5,18 @@ import getRelatedFiles from "@salesforce/apex/FileController.getRelatedFiles";
 import relateFiles from "@salesforce/apex/FileController.relateFiles";
 import { refreshApex } from "@salesforce/apex";
 
-import AUTHORITY_FIELD from "@salesforce/schema/ContinuingEducationUnit__c.Authority__c";
-import AUTHORITY_OTHER_FIELD from "@salesforce/schema/ContinuingEducationUnit__c.AuthorityOther__c";
-import COMMENTS_FIELD from "@salesforce/schema/ContinuingEducationUnit__c.Comments__c";
-import DATE_COMPLETED_FIELD from "@salesforce/schema/ContinuingEducationUnit__c.DateCompleted__c";
-import DATE_SUBMITTED_FIELD from "@salesforce/schema/ContinuingEducationUnit__c.DateSubmitted__c";
-import PROGRAM_DATE_FIELD from "@salesforce/schema/ContinuingEducationUnit__c.ProgramDate__c";
-import PROGRAM_HOURS_FIELD from "@salesforce/schema/ContinuingEducationUnit__c.ProgramHours__c";
-import PROGRAM_TITLE_FIELD from "@salesforce/schema/ContinuingEducationUnit__c.ProgramTitle__c";
-import QUANTITY_FIELD from "@salesforce/schema/ContinuingEducationUnit__c.Quantity__c";
-import ROLE_FIELD from "@salesforce/schema/ContinuingEducationUnit__c.Role__c";
-import STATUS_FIELD from "@salesforce/schema/ContinuingEducationUnit__c.Status__c";
-import TRAINER_FIELD from "@salesforce/schema/ContinuingEducationUnit__c.Trainer__c";
+import AUTHORITY_FIELD from "@salesforce/schema/CEU__c.Authority__c";
+import AUTHORITY_OTHER_FIELD from "@salesforce/schema/CEU__c.AuthorityOther__c";
+import COMMENTS_FIELD from "@salesforce/schema/CEU__c.Comments__c";
+import DATE_COMPLETED_FIELD from "@salesforce/schema/CEU__c.DateCompleted__c";
+import DATE_SUBMITTED_FIELD from "@salesforce/schema/CEU__c.DateSubmitted__c";
+import PROGRAM_DATE_FIELD from "@salesforce/schema/CEU__c.ProgramDate__c";
+import PROGRAM_HOURS_FIELD from "@salesforce/schema/CEU__c.ProgramHours__c";
+import PROGRAM_TITLE_FIELD from "@salesforce/schema/CEU__c.ProgramTitle__c";
+import QUANTITY_FIELD from "@salesforce/schema/CEU__c.Quantity__c";
+import ROLE_FIELD from "@salesforce/schema/CEU__c.Role__c";
+import STATUS_FIELD from "@salesforce/schema/CEU__c.Status__c";
+import TRAINER_FIELD from "@salesforce/schema/CEU__c.Contact__c";
 
 const COLS = [
   {

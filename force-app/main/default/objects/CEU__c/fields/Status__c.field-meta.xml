@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Role__c</fullName>
+    <fullName>Status__c</fullName>
     <externalId>false</externalId>
-    <label>Role</label>
-    <required>true</required>
+    <label>Status</label>
+    <required>false</required>
     <trackTrending>false</trackTrending>
     <type>Picklist</type>
     <valueSet>
@@ -11,14 +11,19 @@
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
-                <fullName>Attendee</fullName>
+                <fullName>Approved</fullName>
                 <default>false</default>
-                <label>Attendee</label>
+                <label>Approved</label>
             </value>
             <value>
-                <fullName>Presenter</fullName>
+                <fullName>Pending</fullName>
+                <default>true</default>
+                <label>Pending</label>
+            </value>
+            <value>
+                <fullName>Denied</fullName>
                 <default>false</default>
-                <label>Presenter</label>
+                <label>Denied</label>
             </value>
         </valueSetDefinition>
     </valueSet>

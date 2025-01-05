@@ -42,7 +42,7 @@ extract:
     fields: FIELDS(ALL)
   CategoryRule__c:
     fields: FIELDS(ALL)
-  ContinuingEducationUnit__c:
+    CEU__c:
     fields: FIELDS(ALL)
   Dog__c:
     fields: FIELDS(ALL)

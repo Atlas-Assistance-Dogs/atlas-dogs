@@ -24,7 +24,7 @@ delete teams;
 List<ProgramAssignment__c> pas = [SELECT Id FROM ProgramAssignment__c];
 delete pas;
 
-List<ContinuingEducationUnit__c> ceus = [SELECT Id FROM ContinuingEducationUnit__c];
+List<CEU__c> ceus = [SELECT Id FROM CEU__c];
 delete ceus;
 
 List<BackgroundCheck__c> bgcs = [SELECT Id FROM BackgroundCheck__c];

@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>AuthorityOther__c</fullName>
+    <fullName>ProgramTitle__c</fullName>
     <externalId>false</externalId>
-    <label>CUE Authority (Other)</label>
-    <length>128</length>
-    <required>false</required>
+    <label>Program Title</label>
+    <length>80</length>
+    <required>true</required>
     <trackTrending>false</trackTrending>
     <type>Text</type>
     <unique>false</unique>
