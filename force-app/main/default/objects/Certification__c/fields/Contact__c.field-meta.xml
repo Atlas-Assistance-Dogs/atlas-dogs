@@ -1,12 +1,13 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Trainer__c</fullName>
+    <fullName>Contact__c</fullName>
     <deleteConstraint>Restrict</deleteConstraint>
+    <description>Trainer or Facilitator</description>
     <externalId>false</externalId>
-    <label>Trainer</label>
+    <label>Contact</label>
     <referenceTo>Contact</referenceTo>
-    <relationshipLabel>CEUs</relationshipLabel>
-    <relationshipName>CEUs</relationshipName>
+    <relationshipLabel>Certifications</relationshipLabel>
+    <relationshipName>Certifications</relationshipName>
     <required>true</required>
     <trackTrending>false</trackTrending>
     <type>Lookup</type>

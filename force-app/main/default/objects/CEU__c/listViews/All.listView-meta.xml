@@ -6,7 +6,7 @@
     <columns>DateCompleted__c</columns>
     <columns>Quantity__c</columns>
     <columns>Status__c</columns>
-    <columns>Trainer__c</columns>
+    <columns>Contact__c</columns>
     <columns>Role__c</columns>
     <columns>Comments__c</columns>
     <filterScope>Everything</filterScope>

@@ -779,7 +779,7 @@ CREATE TABLE "ContinuingEducationUnit__c" (
 	"Quantity__c" VARCHAR(255), 
 	"Role__c" VARCHAR(255), 
 	"Status__c" VARCHAR(255), 
-	"Trainer__c" VARCHAR(255), 
+	"Contact__c" VARCHAR(255), 
 	PRIMARY KEY (id)
 );
 INSERT INTO "ContinuingEducationUnit__c" VALUES('ContinuingEducationUnit__c-1','Villanueva, Deleon and Yu','None','Affect support during audience charge think our.','2015-03-12','2014-03-30','Pre-emptive user-facing superstructure','2018-12-03','913.0','Enterprise-wide bi-directional Local Area Network','6.0','Attendee','Pending','Contact-133');
