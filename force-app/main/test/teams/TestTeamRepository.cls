@@ -147,7 +147,6 @@ private class TestTeamRepository {
     System.assertEquals(team.Status__c, result.Status__c);
     System.assertEquals(team.TrainingStartDate__c, result.TrainingStartDate__c);
   }
-  
   @isTest
       static void getCertificationStatus_returnsUnsetCertificationStatus() {
         // Arrange
@@ -178,5 +177,40 @@ private class TestTeamRepository {
         System.assertEquals(team.InitialCertificationDate__c, actual.InitialCertificationDate__c);
         System.assertEquals(team.PatValidUntil__c, actual.PatValidUntil__c);
         System.assertEquals(team.PatCount__c, actual.PatCount__c);
+    }
+
+    @isTest
+    static void modify_updates() {
+        // Arrange
+        setup();
+        team.InitialCertificationDate__c = Date.today().addDays(-22);
+        team.PatValidUntil__c = Date.today().addMonths(10);
+        team.PatCount__c = 5;
+        // Act
+        TeamRepository repo = new TeamRepository();
+        Team__c[] result = repo.modify(new Team__c[] { team });
+        // Assert
+        Team__c actual = result[0];
+        System.assertEquals(team.InitialCertificationDate__c, actual.InitialCertificationDate__c);
+        System.assertEquals(team.PatValidUntil__c, actual.PatValidUntil__c);
+        System.assertEquals(team.PatCount__c, actual.PatCount__c);
+    }
+
+    @isTest
+    static void modify_returnsNull_whenNull() {
+        // Act
+        TeamRepository repo = new TeamRepository();
+        Team__c[] actual = repo.modify(null);
+        // Assert
+        System.assertEquals(null, actual);
+    }
+
+    @isTest
+    static void modify_returnsEmpty_whenEmpty() {
+        // Act
+        TeamRepository repo = new TeamRepository();
+        Team__c[] actual = repo.modify(new List<Team__c>());
+        // Assert
+        System.assert(actual.isEmpty());
     }
 }
