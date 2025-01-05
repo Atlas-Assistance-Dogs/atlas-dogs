@@ -1,14 +1,11 @@
 <template>
-    <lightning-card>
-        <div class="slds-p-horizontal_medium">
-        <lightning-record-view-form
-            record-id={dogId}
-            object-api-name={dogObject}
-        >
-            <lightning-output-field
-                field-name={field.status}
-            ></lightning-output-field>
-        </lightning-record-view-form>
+  <lightning-card>
+    <div class="slds-p-horizontal_medium">
+      <lightning-record-view-form record-id={dogId} object-api-name={dogObject}>
+        <lightning-output-field
+          field-name={field.status}
+        ></lightning-output-field>
+      </lightning-record-view-form>
     </div>
-    </lightning-card>
+  </lightning-card>
 </template>

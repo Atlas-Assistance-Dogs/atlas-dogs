@@ -1,35 +1,35 @@
 {
-    "orgName": "atlas-dog - Feature Test Org",
-    "edition": "Developer",
-    "settings": {
-        "lightningExperienceSettings": {
-            "enableS1DesktopEnabled": true
-        },
-        "chatterSettings": {
-            "enableChatter": true
-        },
-        "userManagementSettings": {
-            "enableNewProfileUI": true
-        },
-        "securitySettings": {
-            "enableAdminLoginAsAnyUser": true,
-            "sessionSettings": {
-                "forceRelogin": false
-            }
-        },
-        "enhancedNotesSettings": {
-            "enableEnhancedNotes": true
-        },
-        "languageSettings": {
-            "enableTranslationWorkbench": true
-        }
+  "orgName": "atlas-dog - Feature Test Org",
+  "edition": "Developer",
+  "settings": {
+    "lightningExperienceSettings": {
+      "enableS1DesktopEnabled": true
     },
-    "objectSettings": {
-        "opportunity": {
-            "sharingModel": "private"
-        },
-        "account": {
-            "defaultRecordType": "default"
-        }
+    "chatterSettings": {
+      "enableChatter": true
+    },
+    "userManagementSettings": {
+      "enableNewProfileUI": true
+    },
+    "securitySettings": {
+      "enableAdminLoginAsAnyUser": true,
+      "sessionSettings": {
+        "forceRelogin": false
+      }
+    },
+    "enhancedNotesSettings": {
+      "enableEnhancedNotes": true
+    },
+    "languageSettings": {
+      "enableTranslationWorkbench": true
     }
+  },
+  "objectSettings": {
+    "opportunity": {
+      "sharingModel": "private"
+    },
+    "account": {
+      "defaultRecordType": "default"
+    }
+  }
 }

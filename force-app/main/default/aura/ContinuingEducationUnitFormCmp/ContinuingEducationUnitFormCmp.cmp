@@ -1,3 +1,10 @@
-<aura:component implements="lightning:actionOverride,force:hasRecordId,force:hasSObjectName" access="global">
-    <c:editCeuCmp aura:id="modal" recordId="{!v.recordId}" objectApiName="{!v.objectApiName}"/>
-</aura:component>	
+<aura:component
+  implements="lightning:actionOverride,force:hasRecordId,force:hasSObjectName"
+  access="global"
+>
+  <c:editCeuCmp
+    aura:id="modal"
+    recordId="{!v.recordId}"
+    objectApiName="{!v.objectApiName}"
+  />
+</aura:component>

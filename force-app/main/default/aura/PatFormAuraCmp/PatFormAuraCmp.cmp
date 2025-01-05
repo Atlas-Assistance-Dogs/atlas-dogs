@@ -1,3 +1,10 @@
-<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId,lightning:actionOverride" access="global">
-    <c:newPatCmp aura:id="modal" recordId="{!v.recordId}" title="New Public Access Test" />
+<aura:component
+  implements="flexipage:availableForRecordHome,force:hasRecordId,lightning:actionOverride"
+  access="global"
+>
+  <c:newPatCmp
+    aura:id="modal"
+    recordId="{!v.recordId}"
+    title="New Public Access Test"
+  />
 </aura:component>

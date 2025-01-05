@@ -15,78 +15,79 @@ import DA2PP_DUE_FIELD from "@salesforce/schema/Dog__c.VaccineDueDA2PP__c";
 import RABIES_DUE_FIELD from "@salesforce/schema/Dog__c.VaccineDueRabies__c";
 
 export default class NewDogCmp extends NavigationMixin(LightningElement) {
-    showSourceOther = false;
-    showPnounOther = false;
+  showSourceOther = false;
+  showPnounOther = false;
 
-    object = NAME_FIELD.objectApiName;
-    fields = {
-        name: NAME_FIELD,
-        breed: BREED_FIELD,
-        gender: GENDER_FIELD,
-        spayed: SPAYED_NEUTERED_FIELD,
-        birthdate: BIRTHDATE_FIELD,
-        status: STATUS_FIELD,
-        microchip: MICROCHIP_FIELD,
-        health: HEALTH_FIELD,
-        examDue: EXAM_DUE_FIELD,
-        da2ppDue: DA2PP_DUE_FIELD,
-        rabiesDue: RABIES_DUE_FIELD
-    };
+  object = NAME_FIELD.objectApiName;
+  fields = {
+    name: NAME_FIELD,
+    breed: BREED_FIELD,
+    gender: GENDER_FIELD,
+    spayed: SPAYED_NEUTERED_FIELD,
+    birthdate: BIRTHDATE_FIELD,
+    status: STATUS_FIELD,
+    microchip: MICROCHIP_FIELD,
+    health: HEALTH_FIELD,
+    examDue: EXAM_DUE_FIELD,
+    da2ppDue: DA2PP_DUE_FIELD,
+    rabiesDue: RABIES_DUE_FIELD
+  };
 
-    // Standard lifecycle hooks used run when loaded
-    renderedCallback() {
-        this.template.querySelector("c-modal-cmp").openModal();
+  // Standard lifecycle hooks used run when loaded
+  renderedCallback() {
+    this.template.querySelector("c-modal-cmp").openModal();
+  }
+
+  validateFields() {
+    return [...this.template.querySelectorAll("lightning-input-field")].reduce(
+      (validSoFar, field) => {
+        return validSoFar && field.reportValidity();
+      },
+      true
+    );
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+
+    if (!this.validateFields()) {
+      const toast = new ShowToastEvent({
+        message: "All fields marked with an asterix are required.",
+        variant: "error"
+      });
+      this.dispatchEvent(toast);
+    } else {
+      this.template.querySelector("lightning-record-edit-form").submit();
     }
+  }
 
-    validateFields() {
-        return [
-            ...this.template.querySelectorAll("lightning-input-field")
-        ].reduce((validSoFar, field) => {
-            return validSoFar && field.reportValidity();
-        }, true);
-    }
+  handleSuccess(event) {
+    this[NavigationMixin.Navigate]({
+      type: "standard__recordPage",
+      attributes: {
+        recordId: event.detail.id,
+        objectApiName: this.object,
+        actionName: "view"
+      }
+    });
+  }
 
-    handleSubmit(event) {
-        event.preventDefault();
+  handleError(event) {
+    const evt = new ShowToastEvent({
+      title: "Error in Record Creation",
+      message: event.detail.detail,
+      variant: "error"
+    });
+    this.dispatchEvent(evt);
+  }
 
-        if (!this.validateFields()) {
-            const toast = new ShowToastEvent({
-                message: "All fields marked with an asterix are required.",
-                variant: "error"
-            });
-            this.dispatchEvent(toast);
-        } else {
-            this.template.querySelector("lightning-record-edit-form").submit();
-        }
-    }
-
-    handleSuccess(event) {
-        this[NavigationMixin.Navigate]({
-            type: "standard__recordPage",
-            attributes: {
-                recordId: event.detail.id,
-                objectApiName: this.object,
-                actionName: "view"
-            }
-        });
-    }
-
-    handleError(event) {
-        const evt = new ShowToastEvent({
-            title: "Error in Record Creation",
-            message: event.detail.detail,
-            variant: "error"
-        });
-        this.dispatchEvent(evt);
-    }
-
-    handleCancel() {
-        this[NavigationMixin.Navigate]({
-            type: "standard__objectPage",
-            attributes: {
-                objectApiName: this.object,
-                actionName: "home"
-            }
-        });
-    }
+  handleCancel() {
+    this[NavigationMixin.Navigate]({
+      type: "standard__objectPage",
+      attributes: {
+        objectApiName: this.object,
+        actionName: "home"
+      }
+    });
+  }
 }

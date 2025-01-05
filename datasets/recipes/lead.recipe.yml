@@ -8,72 +8,72 @@
 
 - object: Lead
   fields:
-      Company: N/A
-      FirstName:
-          fake: first_name
-      Email:
-          fake: email
-      Phone:
-          fake: phone_number
-      Street:
-          fake: street_address
-      City:
-          fake: city
-      State:
-          fake: state
-      PostalCode:
-          fake: postalcode
-      Country:
-          fake: country
-      IsConverted: false
-      LastName:
-          fake: last_name
-      LeadInterest__c:
-          random_choice:
-              - Volunteering
-              - Team Facilitator Certification
-              - Trainer Certification
-              - Client Certification
-              - Teams Set in Motion Program
-              - Sweet Snoopers Training Program
-              - Sponsorship/Donations
-              - General info/Other
-              - Assistance Dogs Set in Motion Program
-      LeadSource:
-          random_choice:
-              - Website
-              - Search Engine
-              - Facebook
-              - Instagram
-              - Twitter
-              - Health Provider
-              - Other
-      PronounOther__c:
-          if:
-              - choice:
-                    when: ${{Pronoun__c == 'specify'}}
-                    pick:
-                        fake.text:
-                            max_nb_chars: 10
-      Pronoun__c:
-          random_choice:
-              - He/Him
-              - She/Her
-              - They/Them
-              - Specify
-              - Prefer not to answer
-      Status:
-          random_choice:
-              - Open - Not Contacted
-              - Working - Contacted
-      npe01__Preferred_Email__c:
-          random_choice:
-              - Personal
-              - Work
-              - Alternate
-      npe01__Preferred_Phone__c:
-          random_choice:
-              - Home
-              - Mobile
-              - Work
-              - Other
+    Company: N/A
+    FirstName:
+      fake: first_name
+    Email:
+      fake: email
+    Phone:
+      fake: phone_number
+    Street:
+      fake: street_address
+    City:
+      fake: city
+    State:
+      fake: state
+    PostalCode:
+      fake: postalcode
+    Country:
+      fake: country
+    IsConverted: false
+    LastName:
+      fake: last_name
+    LeadInterest__c:
+      random_choice:
+        - Volunteering
+        - Team Facilitator Certification
+        - Trainer Certification
+        - Client Certification
+        - Teams Set in Motion Program
+        - Sweet Snoopers Training Program
+        - Sponsorship/Donations
+        - General info/Other
+        - Assistance Dogs Set in Motion Program
+    LeadSource:
+      random_choice:
+        - Website
+        - Search Engine
+        - Facebook
+        - Instagram
+        - Twitter
+        - Health Provider
+        - Other
+    PronounOther__c:
+      if:
+        - choice:
+            when: ${{Pronoun__c == 'specify'}}
+            pick:
+              fake.text:
+                max_nb_chars: 10
+    Pronoun__c:
+      random_choice:
+        - He/Him
+        - She/Her
+        - They/Them
+        - Specify
+        - Prefer not to answer
+    Status:
+      random_choice:
+        - Open - Not Contacted
+        - Working - Contacted
+    npe01__Preferred_Email__c:
+      random_choice:
+        - Personal
+        - Work
+        - Alternate
+    npe01__Preferred_Phone__c:
+      random_choice:
+        - Home
+        - Mobile
+        - Work
+        - Other

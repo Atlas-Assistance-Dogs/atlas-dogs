@@ -1,100 +1,99 @@
 minimum_cumulusci_version: "3.26.0"
 project:
-    name: atlas-dog
-    package:
-        name: AtlasDogs
-        namespace: atlas1
-        api_version: "60.0"
-        install_class: "PostInstall"
-    dependencies:
-        - github: "https://github.com/SalesforceFoundation/NPSP"
-        - github: "https://github.com/SalesforceFoundation/Volunteers-for-Salesforce"
-    git:
-        default_branch: "dev"
-    source_format: sfdx
+  name: atlas-dog
+  package:
+    name: AtlasDogs
+    namespace: atlas1
+    api_version: "60.0"
+    install_class: "PostInstall"
+  dependencies:
+    - github: "https://github.com/SalesforceFoundation/NPSP"
+    - github: "https://github.com/SalesforceFoundation/Volunteers-for-Salesforce"
+  git:
+    default_branch: "dev"
+  source_format: sfdx
 
 tasks:
-    robot:
-        options:
-            suites: robot/atlas-dog/tests
-            options:
-                outputdir: robot/atlas-dog/results
+  robot:
+    options:
+      suites: robot/atlas-dog/tests
+      options:
+        outputdir: robot/atlas-dog/results
 
-    robot_testdoc:
-        options:
-            path: robot/atlas-dog/tests
-            output: robot/atlas-dog/doc/atlas-dog_tests.html
+  robot_testdoc:
+    options:
+      path: robot/atlas-dog/tests
+      output: robot/atlas-dog/doc/atlas-dog_tests.html
 
-    run_tests:
-        options:
-            managed: true
+  run_tests:
+    options:
+      managed: true
 
-    create_package_version:
-        options:
-            create_unlocked_dependency_packages: True
+  create_package_version:
+    options:
+      create_unlocked_dependency_packages: True
 
-    uninstall_packaged_incremental:
-        options:
-            ignore_types:
-                ["RecordType", "CustomObjectTranslation", "QuickAction"]
+  uninstall_packaged_incremental:
+    options:
+      ignore_types: ["RecordType", "CustomObjectTranslation", "QuickAction"]
 
 flows:
-    config_qa:
-        steps:
-            3:
-                task: assign_permission_set_groups
-                options:
-                    api_names: AtlasAll
+  config_qa:
+    steps:
+      3:
+        task: assign_permission_set_groups
+        options:
+          api_names: AtlasAll
 
-    config_dev:
-        steps:
-            3:
-                task: assign_permission_sets
-                options:
-                    api_names: AtlasBackgroundCheck,AtlasBase,AtlasBoard,AtlasDemographics,AtlasFacilitator,AtlasPuppyRaiser,AtlasStaff,AtlasStandalonePrograms,AtlasTeam,AtlasTrainer,AtlasVolunteer
-            4:
-                task: load_custom_settings
-                options: 
-                    settings_path: datasets/default/custom-settings.yml
+  config_dev:
+    steps:
+      3:
+        task: assign_permission_sets
+        options:
+          api_names: AtlasBackgroundCheck,AtlasBase,AtlasBoard,AtlasDemographics,AtlasFacilitator,AtlasPuppyRaiser,AtlasStaff,AtlasStandalonePrograms,AtlasTeam,AtlasTrainer,AtlasVolunteer
+      4:
+        task: load_custom_settings
+        options:
+          settings_path: datasets/default/custom-settings.yml
 
-    config_managed:
-        steps:
-        # overload load_sample_data for now
-            90:
-                task: assign_permission_sets
-                options:
-                    api_names: AtlasBackgroundCheck,AtlasBase,AtlasBoard,AtlasDemographics,AtlasFacilitator,AtlasPuppyRaiser,AtlasStaff,AtlasStandalonePrograms,AtlasTeam,AtlasTrainer,AtlasVolunteer
+  config_managed:
+    steps:
+      # overload load_sample_data for now
+      90:
+        task: assign_permission_sets
+        options:
+          api_names: AtlasBackgroundCheck,AtlasBase,AtlasBoard,AtlasDemographics,AtlasFacilitator,AtlasPuppyRaiser,AtlasStaff,AtlasStandalonePrograms,AtlasTeam,AtlasTrainer,AtlasVolunteer
 
-    # Flow to deploy current source to a sandbox for dev or verification
-    sandbox:
-        steps:
-            1:
-                flow: dependencies
-            2:
-                task: dx
-                options:
-                    command: force:source:deploy
-                    extra: -p force-app/main/default
+  # Flow to deploy current source to a sandbox for dev or verification
+  sandbox:
+    steps:
+      1:
+        flow: dependencies
+      2:
+        task: dx
+        options:
+          command: force:source:deploy
+          extra: -p force-app/main/default
 
-    release_2gp_beta:
-        steps:
-            1:
-                task: create_package_version
-                options:
-                    create_unlocked_dependency_packages: True
-                    package_type: Managed
-                    package_name: $project_config.project__package__name
-                    skip_validation: False
-                    ancestor_id: latest_github_release
-                    version_base: latest_github_release
-                    version_type: minor
-                    force_upload: True
+  release_2gp_beta:
+    steps:
+      1:
+        task: create_package_version
+        options:
+          create_unlocked_dependency_packages: True
+          package_type: Managed
+          package_name: $project_config.project__package__name
+          skip_validation: False
+          ancestor_id: latest_github_release
+          version_base: latest_github_release
+          version_type: minor
+          force_upload: True
 
 orgs:
-    scratch:
-        build:
-            config_file: orgs/build.json
+  scratch:
+    build:
+      config_file: orgs/build.json
 
 sources:
-    npsp:
-        github: https://github.com/SalesforceFoundation/NPSP
+  npsp:
+    github: https://github.com/SalesforceFoundation/NPSP

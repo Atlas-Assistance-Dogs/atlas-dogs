@@ -1,17 +1,17 @@
 global class RemindFacilitatorsToGetCeus implements Schedulable {
-    private final ContactService service;
+  private final ContactService service;
 
-    // default constructor
-    public RemindFacilitatorsToGetCeus() {
-        service = new ContactService();
-    }
+  // default constructor
+  public RemindFacilitatorsToGetCeus() {
+    service = new ContactService();
+  }
 
-    @TestVisible
-    private RemindFacilitatorsToGetCeus(ContactService service) {
-        this.service = service;
-    }
+  @TestVisible
+  private RemindFacilitatorsToGetCeus(ContactService service) {
+    this.service = service;
+  }
 
-    global void execute(SchedulableContext SC) {
-        service.remindFacilitatorsToGetCeus();
-    }
+  global void execute(SchedulableContext SC) {
+    service.remindFacilitatorsToGetCeus();
+  }
 }

@@ -20,99 +20,100 @@ import POSTAL_CODE_FIELD from "@salesforce/schema/Lead.PostalCode";
 import DESCRIPTION_FIELD from "@salesforce/schema/Lead.Description";
 
 export default class NewLeadCmp extends NavigationMixin(LightningElement) {
-    showSourceOther = false;
-    showPnounOther = false;
+  showSourceOther = false;
+  showPnounOther = false;
 
-    object = NAME_FIELD.objectApiName;
-    fields = {
-        name: NAME_FIELD,
-        email: EMAIL_FIELD,
-        company: COMPANY_FIELD,
-        source: SOURCE_FIELD,
-        status: STATUS_FIELD,
-        sourceOther: SOURCE_OTHER_FIELD,
-        phone: PHONE_FIELD,
-        pronoun: PRONOUN_FIELD,
-        pronounOther: PRONOUN_OTHER_FIELD,
-        interest: INTEREST_FIELD,
-        street: STREET_FIELD,
-        city: CITY_FIELD,
-        state: STATE_FIELD,
-        country: COUNTRY_FIELD,
-        postalCode: POSTAL_CODE_FIELD,
-        description: DESCRIPTION_FIELD
-    };
+  object = NAME_FIELD.objectApiName;
+  fields = {
+    name: NAME_FIELD,
+    email: EMAIL_FIELD,
+    company: COMPANY_FIELD,
+    source: SOURCE_FIELD,
+    status: STATUS_FIELD,
+    sourceOther: SOURCE_OTHER_FIELD,
+    phone: PHONE_FIELD,
+    pronoun: PRONOUN_FIELD,
+    pronounOther: PRONOUN_OTHER_FIELD,
+    interest: INTEREST_FIELD,
+    street: STREET_FIELD,
+    city: CITY_FIELD,
+    state: STATE_FIELD,
+    country: COUNTRY_FIELD,
+    postalCode: POSTAL_CODE_FIELD,
+    description: DESCRIPTION_FIELD
+  };
 
-    // Standard lifecycle hooks used run when loaded
-    renderedCallback() {
-        this.template.querySelector("c-modal-cmp").openModal();
+  // Standard lifecycle hooks used run when loaded
+  renderedCallback() {
+    this.template.querySelector("c-modal-cmp").openModal();
+  }
+
+  handlePnounChange(event) {
+    if (event.detail.value === "Specify") {
+      this.showPnounOther = true;
+    } else {
+      this.showPnounOther = false;
     }
+  }
 
-    handlePnounChange(event) {
-        if (event.detail.value === "Specify") {
-            this.showPnounOther = true;
-        } else {
-            this.showPnounOther = false;
-        }
+  handleSourceChange(event) {
+    if (event.detail.value === "Other") {
+      this.showSourceOther = true;
+    } else {
+      this.showSourceOther = false;
     }
+  }
 
-    handleSourceChange(event) {
-        if (event.detail.value === "Other") {
-            this.showSourceOther = true;
-        } else {
-            this.showSourceOther = false;
-        }
+  validateFields() {
+    return [...this.template.querySelectorAll("lightning-input-field")].reduce(
+      (validSoFar, field) => {
+        return validSoFar && field.reportValidity();
+      },
+      true
+    );
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+
+    if (!this.validateFields()) {
+      const toast = new ShowToastEvent({
+        message: "All fields marked with an asterix are required.",
+        variant: "error"
+      });
+      this.dispatchEvent(toast);
+    } else {
+      this.template.querySelector("lightning-record-edit-form").submit();
     }
+  }
 
-    validateFields() {
-        return [
-            ...this.template.querySelectorAll("lightning-input-field")
-        ].reduce((validSoFar, field) => {
-            return validSoFar && field.reportValidity();
-        }, true);
-    }
+  handleSuccess(event) {
+    this[NavigationMixin.Navigate]({
+      type: "standard__recordPage",
+      attributes: {
+        recordId: event.detail.id,
+        objectApiName: this.object,
+        actionName: "view"
+      }
+    });
+  }
 
-    handleSubmit(event) {
-        event.preventDefault();
+  handleError(event) {
+    const evt = new ShowToastEvent({
+      title: "Error in Record Creation",
+      message: event.detail.detail,
+      variant: "error"
+    });
+    this.dispatchEvent(evt);
+  }
 
-        if (!this.validateFields()) {
-            const toast = new ShowToastEvent({
-                message: "All fields marked with an asterix are required.",
-                variant: "error"
-            });
-            this.dispatchEvent(toast);
-        } else {
-            this.template.querySelector("lightning-record-edit-form").submit();
-        }
-    }
-
-    handleSuccess(event) {
-        this[NavigationMixin.Navigate]({
-            type: "standard__recordPage",
-            attributes: {
-                recordId: event.detail.id,
-                objectApiName: this.object,
-                actionName: "view"
-            }
-        });
-    }
-
-    handleError(event) {
-        const evt = new ShowToastEvent({
-            title: "Error in Record Creation",
-            message: event.detail.detail,
-            variant: "error"
-        });
-        this.dispatchEvent(evt);
-    }
-
-    handleCancel() {
-        this[NavigationMixin.Navigate]({
-            type: "standard__objectPage",
-            attributes: {
-                objectApiName: this.object,
-                actionName: "home"
-            }
-        });
-    }
+  handleCancel() {
+    this[NavigationMixin.Navigate]({
+      type: "standard__objectPage",
+      attributes: {
+        objectApiName: this.object,
+        actionName: "home"
+      }
+    });
+  }
 }

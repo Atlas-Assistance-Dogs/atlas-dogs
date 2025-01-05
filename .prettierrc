@@ -10,5 +10,5 @@
       "options": { "parser": "html" }
     }
   ],
-  "tabWidth": 4
+  "tabWidth": 2
 }

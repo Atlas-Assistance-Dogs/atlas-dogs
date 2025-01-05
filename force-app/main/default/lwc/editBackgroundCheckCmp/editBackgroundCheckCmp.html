@@ -1,10 +1,15 @@
 <template>
-    <c-modal-cmp title={title} onclose={handleCancel} oncancel={handleCancel} onsubmit={handleSubmit}>
-        <c-background-check-form-cmp
-            slot="body"
-            record-id={recordId}
-            onsuccess={onChanged}
-            oncancel={handleCancel}
-        ></c-background-check-form-cmp>
-    </c-modal-cmp>
+  <c-modal-cmp
+    title={title}
+    onclose={handleCancel}
+    oncancel={handleCancel}
+    onsubmit={handleSubmit}
+  >
+    <c-background-check-form-cmp
+      slot="body"
+      record-id={recordId}
+      onsuccess={onChanged}
+      oncancel={handleCancel}
+    ></c-background-check-form-cmp>
+  </c-modal-cmp>
 </template>

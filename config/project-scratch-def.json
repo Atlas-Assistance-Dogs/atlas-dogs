@@ -19,7 +19,7 @@
     },
     "nameSettings": {
       "enableMiddleName": true,
-      "enableNameSuffix" : true
+      "enableNameSuffix": true
     }
   }
 }

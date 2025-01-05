@@ -4,64 +4,64 @@
 - object: Log__c
   count: 20
   fields:
-      ClientHours__c:
-          random_number:
-              min: 0
-              max: 100
-      ClientStress__c:
-          random_choice:
-              - Not at all
-              - Only a little
-              - To some extent
-              - Rather much
-              - Very much
-      Date__c:
-          date_between:
-              start_date: 2015-01-01
-              end_date: today
-      Details__c:
-          fake: paragraph
-      Handler__c:
-          fake: FirstName
-      OtherHours__c:
-          random_number:
-              min: 0
-              max: 100
-      PublicAccessHours__c:
-          random_number:
-              min: 0
-              max: 100
-      RequestSupportFromAtlas__c:
-          fake: boolean
-      RequestSupportFromTeam__c:
-          fake: boolean
-      Satisfaction__c:
-          random_choice:
-              - No enjoyment
-              - A little enjoyment
-              - Some enjoyment
-              - Rather much enjoyment
-              - Extreme amount of enjoyment
-      SessionType__c:
-          random_choice:
-              - In Person
-              - Virtual
-      Stress__c:
-          random_choice:
-              - Not at all
-              - Only a little
-              - To some extent
-              - Rather much
-              - Very much
-      Submitter__c:
-          random_reference: Contact
-      SupportDetails__c:
-          fake: paragraph
-      Team__c:
-          random_reference: Team__c
-      Facilitator__c:
-          random_reference: Contact
-      RecordType:
-          random_choice:
-              - Client
-              - TeamFacilitator
+    ClientHours__c:
+      random_number:
+        min: 0
+        max: 100
+    ClientStress__c:
+      random_choice:
+        - Not at all
+        - Only a little
+        - To some extent
+        - Rather much
+        - Very much
+    Date__c:
+      date_between:
+        start_date: 2015-01-01
+        end_date: today
+    Details__c:
+      fake: paragraph
+    Handler__c:
+      fake: FirstName
+    OtherHours__c:
+      random_number:
+        min: 0
+        max: 100
+    PublicAccessHours__c:
+      random_number:
+        min: 0
+        max: 100
+    RequestSupportFromAtlas__c:
+      fake: boolean
+    RequestSupportFromTeam__c:
+      fake: boolean
+    Satisfaction__c:
+      random_choice:
+        - No enjoyment
+        - A little enjoyment
+        - Some enjoyment
+        - Rather much enjoyment
+        - Extreme amount of enjoyment
+    SessionType__c:
+      random_choice:
+        - In Person
+        - Virtual
+    Stress__c:
+      random_choice:
+        - Not at all
+        - Only a little
+        - To some extent
+        - Rather much
+        - Very much
+    Submitter__c:
+      random_reference: Contact
+    SupportDetails__c:
+      fake: paragraph
+    Team__c:
+      random_reference: Team__c
+    Facilitator__c:
+      random_reference: Contact
+    RecordType:
+      random_choice:
+        - Client
+        - TeamFacilitator

@@ -1,30 +1,30 @@
 <template>
-    <c-modal-cmp
-        title="Update File Attributes"
-        submitlabel="Submit"
-        onsubmit={handleSubmit}
-    >
-        <div slot="body" class="form">
-            <c-file-information-cmp
-                object-id={objectId}
-                record-id={recordId}
-                oninfo={handleInfo}
-            ></c-file-information-cmp>
-            <lightning-button
-                label={title}
-                variant="base"
-                name="view"
-                icon-name="utility:file"
-                icon-position="left"
-                onclick={handleView}
-            >
-            </lightning-button>
-            <template if:true={isErrorMessage}>
-                <span class="slds-text-color_error">{message}</span>
-            </template>
-            <template if:false={isErrorMessage}>
-                <span class="slds-text-color_success">{message}</span>
-            </template>
-        </div>
-    </c-modal-cmp>
+  <c-modal-cmp
+    title="Update File Attributes"
+    submitlabel="Submit"
+    onsubmit={handleSubmit}
+  >
+    <div slot="body" class="form">
+      <c-file-information-cmp
+        object-id={objectId}
+        record-id={recordId}
+        oninfo={handleInfo}
+      ></c-file-information-cmp>
+      <lightning-button
+        label={title}
+        variant="base"
+        name="view"
+        icon-name="utility:file"
+        icon-position="left"
+        onclick={handleView}
+      >
+      </lightning-button>
+      <template if:true={isErrorMessage}>
+        <span class="slds-text-color_error">{message}</span>
+      </template>
+      <template if:false={isErrorMessage}>
+        <span class="slds-text-color_success">{message}</span>
+      </template>
+    </div>
+  </c-modal-cmp>
 </template>

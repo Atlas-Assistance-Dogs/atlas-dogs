@@ -3,9 +3,8 @@
  */
 @isTest
 private class TestFormulaFields {
-
-    @isTest
-    static void TrainerCertificationValidUntil_ShowsDateAfterLastCert() {
-        // TO DO: implement unit test
-    }
+  @isTest
+  static void TrainerCertificationValidUntil_ShowsDateAfterLastCert() {
+    // TO DO: implement unit test
+  }
 }

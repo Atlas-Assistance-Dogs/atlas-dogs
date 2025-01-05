@@ -1,42 +1,42 @@
 {
-    "orgName": "atlas-dog - Build Test Org",
-    "edition": "Developer",
-    "settings": {
-        "lightningExperienceSettings": {
-            "enableS1DesktopEnabled": true
-        },
-        "chatterSettings": {
-            "enableChatter": true
-        },
-        "userManagementSettings": {
-            "enableNewProfileUI": true
-        },
-        "securitySettings": {
-            "enableAdminLoginAsAnyUser": true,
-            "sessionSettings": {
-                "forceRelogin": false
-            }
-        },
-        "enhancedNotesSettings": {
-            "enableEnhancedNotes": true
-        }
+  "orgName": "atlas-dog - Build Test Org",
+  "edition": "Developer",
+  "settings": {
+    "lightningExperienceSettings": {
+      "enableS1DesktopEnabled": true
     },
-    "objectSettings": {
-        "contact": {
-            "sharingModel": "private"
-        },
-        "lead": {
-            "sharingModel": "private"
-        },
-        "opportunity": {
-            "sharingModel": "private"
-        },
-        "account": {
-            "defaultRecordType": "default",
-            "sharingModel": "private"
-        },
-        "case": {
-            "sharingModel": "private"
-        }
+    "chatterSettings": {
+      "enableChatter": true
+    },
+    "userManagementSettings": {
+      "enableNewProfileUI": true
+    },
+    "securitySettings": {
+      "enableAdminLoginAsAnyUser": true,
+      "sessionSettings": {
+        "forceRelogin": false
+      }
+    },
+    "enhancedNotesSettings": {
+      "enableEnhancedNotes": true
     }
+  },
+  "objectSettings": {
+    "contact": {
+      "sharingModel": "private"
+    },
+    "lead": {
+      "sharingModel": "private"
+    },
+    "opportunity": {
+      "sharingModel": "private"
+    },
+    "account": {
+      "defaultRecordType": "default",
+      "sharingModel": "private"
+    },
+    "case": {
+      "sharingModel": "private"
+    }
+  }
 }

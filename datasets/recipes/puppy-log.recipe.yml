@@ -1,14 +1,14 @@
 - object: PuppyLog__c
   fields:
-      AdditionalInformation__c: 
-          fake: paragraph
-      Date__c:
-          date_between:
-              start_date: 2015-01-01
-              end_date: today
-      Dog__c:
-          random_reference: Dog__c
-      Raiser__c:
-          random_reference: Contact
-      RequestSupportFromAtlas__c:
-          fake: boolean
+    AdditionalInformation__c:
+      fake: paragraph
+    Date__c:
+      date_between:
+        start_date: 2015-01-01
+        end_date: today
+    Dog__c:
+      random_reference: Dog__c
+    Raiser__c:
+      random_reference: Contact
+    RequestSupportFromAtlas__c:
+      fake: boolean

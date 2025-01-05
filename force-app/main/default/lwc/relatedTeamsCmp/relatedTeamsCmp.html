@@ -1,42 +1,40 @@
 <template>
-    <c-related-object-cmp
-        title="Teams"
-        icon-name="custom:custom15"
-        total={total}
-        record-id={recordId}
-        object-api-name={objectApiName}
-        related-object={relatedObject}
-        aura-comp-name="AllRelatedTeamsCmp"
-        view-all={viewAll}
-    >
-        <div slot="actions">
-            <!-- lightning button for new team modal -->
-            <lightning-button
-                label="New"
-                title="New"
-                onclick={createTeam}
-                slot="actions"
-            >
-            </lightning-button>
-            <c-team-form-cmp
-                onchanged={handleChange}
-            ></c-team-form-cmp>
-        </div>
-        <div slot="list">
-            <template if:true={data}>
-                <lightning-datatable
-                    key-field="Id"
-                    columns={columns}
-                    data={data}
-                    hide-checkbox-column
-                    default-sort-direction={defaultSortDirection}
-                    sorted-direction={sortDirection}
-                    sorted-by={sortedBy}
-                    onsort={handleSort}
-                    onrowaction={handleRowAction}
-                >
-                </lightning-datatable>
-            </template>
-        </div>
-    </c-related-object-cmp>
+  <c-related-object-cmp
+    title="Teams"
+    icon-name="custom:custom15"
+    total={total}
+    record-id={recordId}
+    object-api-name={objectApiName}
+    related-object={relatedObject}
+    aura-comp-name="AllRelatedTeamsCmp"
+    view-all={viewAll}
+  >
+    <div slot="actions">
+      <!-- lightning button for new team modal -->
+      <lightning-button
+        label="New"
+        title="New"
+        onclick={createTeam}
+        slot="actions"
+      >
+      </lightning-button>
+      <c-team-form-cmp onchanged={handleChange}></c-team-form-cmp>
+    </div>
+    <div slot="list">
+      <template if:true={data}>
+        <lightning-datatable
+          key-field="Id"
+          columns={columns}
+          data={data}
+          hide-checkbox-column
+          default-sort-direction={defaultSortDirection}
+          sorted-direction={sortDirection}
+          sorted-by={sortedBy}
+          onsort={handleSort}
+          onrowaction={handleRowAction}
+        >
+        </lightning-datatable>
+      </template>
+    </div>
+  </c-related-object-cmp>
 </template>

@@ -1,64 +1,64 @@
 extract:
-    Lead:
-        fields:
-        - City
-        - Company
-        - Country
-        - Email
-        - FirstName
-        - IsConverted
-        - LeadSource
-        - MobilePhone
-        - Phone
-        - PostalCode
-        - State
-        - Status
-        - Street
-        - FIELDS(CUSTOM)
-    Account:
-        fields:
-            - RecordTypeId
-            - FIELDS(CUSTOM)
-    Contact:
-        fields:
-            - Email
-            - FirstName
-            - LastName
-            - Phone
-            - FIELDS(CUSTOM)
-    Campaign:
-        fields:
-            - FIELDS(CUSTOM)
-    npo02__Household__c:
-        fields: FIELDS(ALL)
-    npsp__Address__c:
-        fields: FIELDS(ALL)
-    npe4__Relationship__c:
-        fields: FIELDS(ALL)
-        where: npe4__Type__c != 'Client' and npe4__Type__c != 'Contact'
-    GW_Volunteers__Volunteer_Job__c:
-        fields: FIELDS(ALL)
-    BackgroundCheck__c:
-        fields: FIELDS(ALL)
-    CategoryRule__c:
-        fields: FIELDS(ALL)
-    ContinuingEducationUnit__c:
-        fields: FIELDS(ALL)
-    Dog__c:
-        fields: FIELDS(ALL)
-    DogRelationship__c:
-        fields: FIELDS(ALL)
-    Log__c:
-        fields:
-            - FIELDS(ALL)
-            - RecordTypeId
-    Program__c:
-        fields: FIELDS(ALL)
-    ProgramAssignment__c:
-        fields: FIELDS(ALL)
-    PublicAccessTest__c:
-        fields: FIELDS(ALL)
-    PuppyLog__c:
-        fields: FIELDS(ALL)
-    Team__c:
-        fields: FIELDS(ALL)
+  Lead:
+    fields:
+      - City
+      - Company
+      - Country
+      - Email
+      - FirstName
+      - IsConverted
+      - LeadSource
+      - MobilePhone
+      - Phone
+      - PostalCode
+      - State
+      - Status
+      - Street
+      - FIELDS(CUSTOM)
+  Account:
+    fields:
+      - RecordTypeId
+      - FIELDS(CUSTOM)
+  Contact:
+    fields:
+      - Email
+      - FirstName
+      - LastName
+      - Phone
+      - FIELDS(CUSTOM)
+  Campaign:
+    fields:
+      - FIELDS(CUSTOM)
+  npo02__Household__c:
+    fields: FIELDS(ALL)
+  npsp__Address__c:
+    fields: FIELDS(ALL)
+  npe4__Relationship__c:
+    fields: FIELDS(ALL)
+    where: npe4__Type__c != 'Client' and npe4__Type__c != 'Contact'
+  GW_Volunteers__Volunteer_Job__c:
+    fields: FIELDS(ALL)
+  BackgroundCheck__c:
+    fields: FIELDS(ALL)
+  CategoryRule__c:
+    fields: FIELDS(ALL)
+  ContinuingEducationUnit__c:
+    fields: FIELDS(ALL)
+  Dog__c:
+    fields: FIELDS(ALL)
+  DogRelationship__c:
+    fields: FIELDS(ALL)
+  Log__c:
+    fields:
+      - FIELDS(ALL)
+      - RecordTypeId
+  Program__c:
+    fields: FIELDS(ALL)
+  ProgramAssignment__c:
+    fields: FIELDS(ALL)
+  PublicAccessTest__c:
+    fields: FIELDS(ALL)
+  PuppyLog__c:
+    fields: FIELDS(ALL)
+  Team__c:
+    fields: FIELDS(ALL)
