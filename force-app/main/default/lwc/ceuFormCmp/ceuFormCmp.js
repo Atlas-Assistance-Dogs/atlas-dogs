@@ -106,10 +106,9 @@ export default class CeuFormCmp extends NavigationMixin(LightningElement) {
 
   // Create a new log
   handleSuccess(event) {
-    if (!this.recordId) {
-      // new CEU
+        if (!this.recordId) { // new CEU
       const docIds = this.relatedFiles?.map((file) => file.documentId);
-      relateFiles({ documentIds: docIds, recordId: event.detail.id })
+            relateFiles({documentIds: docIds, recordId: event.detail.id})
         .then((id) => {
           this.dispatchEvent(
             new CustomEvent("changed", { detail: event.detail })

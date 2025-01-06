@@ -79,10 +79,7 @@ public with sharing class TestCeuController {
   @isTest
   public static void getRelatedCeus_ReturnsRelated() {
     setup();
-    RelatedObjects ceus = ContinuingEducationUnitController.getRelatedCeus(
-      ace.Id,
-      10
-    );
+        RelatedObjects ceus = CEUController.getRelatedCeus(ace.Id, 10);
 
     System.assertEquals(1, ceus.items.size(), 'Wrong number of CEUs');
     System.assertEquals(1, ceus.total);
@@ -93,10 +90,7 @@ public with sharing class TestCeuController {
   @isTest
   public static void getRelatedCeus_ReturnsRelatedList() {
     setup();
-    RelatedObjects ceus = ContinuingEducationUnitController.getRelatedCeus(
-      cookie.Id,
-      5
-    );
+        RelatedObjects ceus = CEUController.getRelatedCeus(cookie.Id, 5);
 
     System.assertEquals(2, ceus.items.size(), 'Wrong number of CEUs');
     System.assertEquals(2, ceus.total);

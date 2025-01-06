@@ -2,22 +2,27 @@ public inherited sharing class ContactService {
   private ContactRepository contactRepo;
   private RelationshipRepository relationshipRepo;
   private EmailService emailServ;
+  private CertificationRepository certRepo;
   public ContactService() {
     contactRepo = new ContactRepository();
     relationshipRepo = new RelationshipRepository();
     emailServ = new EmailService();
+    certRepo = new CertificationRepository();
   }
 
   @TestVisible
   private ContactService(
     ContactRepository contactRepo,
     RelationshipRepository relationshipRepo,
-    EmailService emailServ
+    EmailService emailServ,
+    CertificationRepository certRepo
   ) {
     this.contactRepo = contactRepo;
     this.relationshipRepo = relationshipRepo;
     this.emailServ = emailServ;
+    this.certRepo = certRepo;
   }
+
   // This copies the contact email and phone to the ContactAt email & phone,
   // as long as the Email and Phone are not blank and ContactAt is Home or Alternate
   public static Contact updateContactAtEmail(Contact newContact) {
@@ -586,4 +591,33 @@ public inherited sharing class ContactService {
     }
     emailServ.sendEmail(emails);
   }
+
+    public void updateCertifications(List<Contact> contacts, Map<Id, Contact> old) {
+        List<Certification__c> currentCerts = certRepo.getForContacts(contacts);
+        Map<Id, List<Certification__c>> contactCerts = CeuService.sortCertifications(currentCerts);
+        List<Certification__c> newCerts = new List<Certification__c>();
+        List<Certification__c> updateCerts = new List<Certification__c>();
+        for (Contact person: contacts) {
+            Contact previous = old.get(person.Id);
+
+            if (person.TrainerCertValidUntil__c != previous.TrainerCertValidUntil__c) {
+                // create a certification
+                newCerts.add(new Certification__c(
+                    Contact__c = person.Id,
+                    End__c = person.TrainerCertValidUntil__c,
+                    Start__c = person.TrainerCertValidUntil__c.addYears(-1), 
+                    Type__c = 'Trainer'));
+            }
+
+            if (person.FacilitatorCertValidUntil__c != previous.FacilitatorCertValidUntil__c) {
+                // create a certification
+                newCerts.add(new Certification__c(
+                    Contact__c = person.Id,
+                    End__c = person.FacilitatorCertValidUntil__c,
+                    Start__c = person.FacilitatorCertValidUntil__c.addYears(-1), 
+                    Type__c = 'Facilitator'));
+            }
+        }
+        certRepo.create(newCerts);
+    }
 }
