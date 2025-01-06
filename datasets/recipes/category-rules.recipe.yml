@@ -25,7 +25,7 @@
     Category__c: "TeamDog"
     Object__c: "Dog"
     GroupName__c: "Team"
-    ReadOnly__c: True
+      ReadOnly__c: True
 
 - object: CategoryRule__c
   just_once: True
@@ -64,7 +64,7 @@
     Object__c: "Contact"
     Position__c: "Client"
     GroupName__c: "Team"
-    ReadOnly__c: True
+      ReadOnly__c: True
 
 - object: CategoryRule__c
   just_once: True

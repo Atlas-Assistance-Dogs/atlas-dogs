@@ -1,21 +1,21 @@
 extract:
   Lead:
     fields:
-      - City
-      - Company
-      - Country
-      - Email
-      - FirstName
-      - IsConverted
-      - LeadSource
-      - MobilePhone
-      - Phone
-      - PostalCode
-      - Pronoun__c
-      - State
-      - Status
-      - Street
-      - FIELDS(CUSTOM)
+        - City
+        - Company
+        - Country
+        - Email
+        - FirstName
+        - IsConverted
+        - LeadSource
+        - MobilePhone
+        - Phone
+        - PostalCode
+        - Pronoun__c
+        - State
+        - Status
+        - Street
+        - FIELDS(CUSTOM)
   Account:
     fields:
       - RecordTypeId

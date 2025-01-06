@@ -1,25 +1,25 @@
 {
-  "orgName": "ACME Dog Organization",
-  "edition": "Developer",
-  "features": ["ContactsToMultipleAccounts"],
-  "settings": {
-    "lightningExperienceSettings": {
-      "enableS1DesktopEnabled": true
-    },
-    "securitySettings": {
-      "passwordPolicies": {
-        "enableSetPasswordInApi": true
-      }
-    },
-    "mobileSettings": {
-      "enableS1EncryptedStoragePref2": false
-    },
-    "emailAdministrationSettings": {
-      "enableEnhancedEmailEnabled": true
-    },
-    "nameSettings": {
-      "enableMiddleName": true,
-      "enableNameSuffix": true
+    "orgName": "ACME Dog Organization",
+    "edition": "Developer",
+    "features": ["ContactsToMultipleAccounts"],
+    "settings": {
+        "lightningExperienceSettings": {
+            "enableS1DesktopEnabled": true
+        },
+        "securitySettings": {
+            "passwordPolicies": {
+                "enableSetPasswordInApi": true
+            }
+        },
+        "mobileSettings": {
+            "enableS1EncryptedStoragePref2": false
+        },
+        "emailAdministrationSettings": {
+            "enableEnhancedEmailEnabled": true
+        },
+        "nameSettings": {
+            "enableMiddleName": true,
+      "enableNameSuffix" : true
+        }
     }
-  }
 }
