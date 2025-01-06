@@ -95,14 +95,15 @@ export default class BackgroundCheckFormCmp extends NavigationMixin(
   }
 
   handleSuccess(event) {
-    if (!this.recordId && this.currentCv) {
-      // new background check
+        if (!this.recordId && this.currentCv) { // new background check
       relateFile({
         documentId: this.currentCv.ContentDocumentId,
         recordId: event.detail.id
       })
         .then((id) => {
-          this.dispatchEvent(new CustomEvent("changed", { detail: id }));
+                    this.dispatchEvent(
+                        new CustomEvent("changed", { detail: id })
+                    );
         })
         .catch((error) => {
           this.dispatchEvent(

@@ -6,15 +6,15 @@
 #
 #  https://cumulusci.readthedocs.io/en/stable/data.html#extracting-and-loading-sample-datasets
 Insert Campaign:
-  sf_object: Campaign
-  table: Campaign
-  fields:
+    sf_object: Campaign
+    table: Campaign
+    fields:
   - GW_Volunteers__Volunteer_Website_Time_Zone__c
   - Name
 Insert npo02__Household__c:
-  sf_object: npo02__Household__c
-  table: npo02__Household__c
-  fields:
+    sf_object: npo02__Household__c
+    table: npo02__Household__c
+    fields:
   - Name
   - npo02__Addressee__c
   - npo02__Always_Anonymous__c
@@ -57,9 +57,9 @@ Insert npo02__Household__c:
   - npo02__TotalOppAmount__c
   - npsp__Number_of_Household_Members__c
 Insert CategoryRule__c:
-  sf_object: CategoryRule__c
-  table: CategoryRule__c
-  fields:
+    sf_object: CategoryRule__c
+    table: CategoryRule__c
+    fields:
   - Category__c
   - GroupName__c
   - Object__c
@@ -67,9 +67,9 @@ Insert CategoryRule__c:
   - ReadOnly__c
   - Upload__c
 Insert Program__c:
-  sf_object: Program__c
-  table: Program__c
-  fields:
+    sf_object: Program__c
+    table: Program__c
+    fields:
   - CEU__c
   - Current__c
   - Months__c
@@ -77,14 +77,14 @@ Insert Program__c:
   - Reminder__c
   - Standalone__c
 Insert npsp__Batch__c:
-  sf_object: npsp__Batch__c
-  table: npsp__Batch__c
-  fields:
+    sf_object: npsp__Batch__c
+    table: npsp__Batch__c
+    fields:
   - npsp__Object_Name__c
 Insert Lead:
-  sf_object: Lead
-  table: Lead
-  fields:
+    sf_object: Lead
+    table: Lead
+    fields:
   - City
   - Company
   - Country
@@ -114,15 +114,15 @@ Insert Lead:
   - npsp__CompanyState__c
   - npsp__CompanyStreet__c
   - LastName
-  lookups:
-    npsp__Batch__c:
-      table:
+    lookups:
+        npsp__Batch__c:
+            table:
       - npsp__Batch__c
-      key_field: npsp__Batch__c
+            key_field: npsp__Batch__c
 Insert GW_Volunteers__Volunteer_Job__c:
-  sf_object: GW_Volunteers__Volunteer_Job__c
-  table: GW_Volunteers__Volunteer_Job__c
-  fields:
+    sf_object: GW_Volunteers__Volunteer_Job__c
+    table: GW_Volunteers__Volunteer_Job__c
+    fields:
   - GW_Volunteers__Description__c
   - GW_Volunteers__Display_on_Website__c
   - GW_Volunteers__External_Signup_Url__c
@@ -136,15 +136,15 @@ Insert GW_Volunteers__Volunteer_Job__c:
   - GW_Volunteers__Skills_Needed__c
   - GW_Volunteers__Volunteer_Website_Time_Zone__c
   - Name
-  lookups:
-    GW_Volunteers__Campaign__c:
-      table:
+    lookups:
+        GW_Volunteers__Campaign__c:
+            table:
       - Campaign
-      key_field: GW_Volunteers__Campaign__c
+            key_field: GW_Volunteers__Campaign__c
 Insert Account:
-  sf_object: Account
-  table: Account
-  fields:
+    sf_object: Account
+    table: Account
+    fields:
   - Email__c
   - npe01__SYSTEMIsIndividual__c
   - npe01__SYSTEM_AccountType__c
@@ -198,20 +198,20 @@ Insert Account:
   - npsp__Undeliverable_Address__c
   - Name
   - RecordTypeId
-  lookups:
-    npe01__One2OneContact__c:
-      table:
+    lookups:
+        npe01__One2OneContact__c:
+            table:
       - Contact
-      key_field: npe01__One2OneContact__c
-      after: Insert Contact
-    npsp__Batch__c:
-      table:
+            key_field: npe01__One2OneContact__c
+            after: Insert Contact
+        npsp__Batch__c:
+            table:
       - npsp__Batch__c
-      key_field: npsp__Batch__c
+            key_field: npsp__Batch__c
 Insert npsp__Address__c:
-  sf_object: npsp__Address__c
-  table: npsp__Address__c
-  fields:
+    sf_object: npsp__Address__c
+    table: npsp__Address__c
+    fields:
   - npsp__API_Response__c
   - npsp__Address_Type__c
   - npsp__Administrative_Area__c
@@ -243,15 +243,15 @@ Insert npsp__Address__c:
   - npsp__Verification_Status__c
   - npsp__Verified_Date__c
   - npsp__Verified__c
-  lookups:
-    npsp__Household_Account__c:
-      table:
+    lookups:
+        npsp__Household_Account__c:
+            table:
       - Account
-      key_field: npsp__Household_Account__c
+            key_field: npsp__Household_Account__c
 Insert Dog__c:
-  sf_object: Dog__c
-  table: Dog__c
-  fields:
+    sf_object: Dog__c
+    table: Dog__c
+    fields:
   - ActivationDate__c
   - Birthdate__c
   - Breed__c
@@ -274,15 +274,15 @@ Insert Dog__c:
   - VaccineDueParvovirus__c
   - VaccineDueRabies__c
   - Weight__c
-  lookups:
-    VetClinic__c:
-      table:
+    lookups:
+        VetClinic__c:
+            table:
       - Account
-      key_field: VetClinic__c
+            key_field: VetClinic__c
 Insert Contact:
-  sf_object: Contact
-  table: Contact
-  fields:
+    sf_object: Contact
+    table: Contact
+    fields:
   - Email
   - FirstName
   - LastName
@@ -464,63 +464,63 @@ Insert Contact:
   - npsp__Sustainer__c
   - npsp__Undeliverable_Address__c
   - npsp__is_Address_Override__c
-  lookups:
-    npo02__Household__c:
-      table:
+    lookups:
+        npo02__Household__c:
+            table:
       - npo02__Household__c
-      key_field: npo02__Household__c
-    npsp__Batch__c:
-      table:
+            key_field: npo02__Household__c
+        npsp__Batch__c:
+            table:
       - npsp__Batch__c
-      key_field: npsp__Batch__c
-    npsp__Current_Address__c:
-      table:
+            key_field: npsp__Batch__c
+        npsp__Current_Address__c:
+            table:
       - npsp__Address__c
-      key_field: npsp__Current_Address__c
-    npsp__Primary_Affiliation__c:
-      table:
+            key_field: npsp__Current_Address__c
+        npsp__Primary_Affiliation__c:
+            table:
       - Account
-      key_field: npsp__Primary_Affiliation__c
+            key_field: npsp__Primary_Affiliation__c
 Insert npe4__Relationship__c:
-  sf_object: npe4__Relationship__c
-  table: npe4__Relationship__c
-  fields:
+    sf_object: npe4__Relationship__c
+    table: npe4__Relationship__c
+    fields:
   - npe4__Description__c
   - npe4__SYSTEM_SystemCreated__c
   - npe4__Status__c
   - npe4__Type__c
   - npsp__Related_Opportunity_Contact_Role__c
-  lookups:
-    npe4__Contact__c:
-      table:
+    lookups:
+        npe4__Contact__c:
+            table:
       - Contact
-      key_field: npe4__Contact__c
-    npe4__ReciprocalRelationship__c:
-      table:
+            key_field: npe4__Contact__c
+        npe4__ReciprocalRelationship__c:
+            table:
       - npe4__Relationship__c
-      key_field: npe4__ReciprocalRelationship__c
-      after: Insert npe4__Relationship__c
-    npe4__RelatedContact__c:
-      table:
+            key_field: npe4__ReciprocalRelationship__c
+            after: Insert npe4__Relationship__c
+        npe4__RelatedContact__c:
+            table:
       - Contact
-      key_field: npe4__RelatedContact__c
+            key_field: npe4__RelatedContact__c
 Insert BackgroundCheck__c:
-  sf_object: BackgroundCheck__c
-  table: BackgroundCheck__c
-  fields:
+    sf_object: BackgroundCheck__c
+    table: BackgroundCheck__c
+    fields:
   - Date__c
   - Notes__c
   - Status__c
   - Type__c
-  lookups:
-    Contact__c:
-      table:
+    lookups:
+        Contact__c:
+            table:
       - Contact
-      key_field: Contact__c
+            key_field: Contact__c
 Insert CEU__c:
-  sf_object: CEU__c
-  table: CEU__c
-  fields:
+    sf_object: CEU__c
+    table: CEU__c
+    fields:
   - AuthorityOther__c
   - Authority__c
   - Comments__c
@@ -532,63 +532,63 @@ Insert CEU__c:
   - Quantity__c
   - Role__c
   - Status__c
-  lookups:
-    Contact__c:
-      table:
+    lookups:
+        Contact__c:
+            table:
       - Contact
-      key_field: Contact__c
+            key_field: Contact__c
 Insert DogRelationship__c:
-  sf_object: DogRelationship__c
-  table: DogRelationship__c
-  fields:
+    sf_object: DogRelationship__c
+    table: DogRelationship__c
+    fields:
   - Type__c
-  lookups:
-    Contact__c:
-      table:
+    lookups:
+        Contact__c:
+            table:
       - Contact
-      key_field: Contact__c
-    Dog__c:
-      table:
+            key_field: Contact__c
+        Dog__c:
+            table:
       - Dog__c
-      key_field: Dog__c
+            key_field: Dog__c
 Insert ProgramAssignment__c:
-  sf_object: ProgramAssignment__c
-  table: ProgramAssignment__c
-  fields:
+    sf_object: ProgramAssignment__c
+    table: ProgramAssignment__c
+    fields:
   - AssignedDate__c
   - CompletionDate__c
   - ExpectedCompletion__c
   - Status__c
   - TeacherAssistantRequested__c
-  lookups:
-    Contact__c:
-      table:
+    lookups:
+        Contact__c:
+            table:
       - Contact
-      key_field: Contact__c
-    Program__c:
-      table:
+            key_field: Contact__c
+        Program__c:
+            table:
       - Program__c
-      key_field: Program__c
+            key_field: Program__c
 Insert PuppyLog__c:
-  sf_object: PuppyLog__c
-  table: PuppyLog__c
-  fields:
+    sf_object: PuppyLog__c
+    table: PuppyLog__c
+    fields:
   - AdditionalInformation__c
   - Date__c
   - RequestSupportFromAtlas__c
-  lookups:
-    Dog__c:
-      table:
+    lookups:
+        Dog__c:
+            table:
       - Dog__c
-      key_field: Dog__c
-    Raiser__c:
-      table:
+            key_field: Dog__c
+        Raiser__c:
+            table:
       - Contact
-      key_field: Raiser__c
+            key_field: Raiser__c
 Insert Team__c:
-  sf_object: Team__c
-  table: Team__c
-  fields:
+    sf_object: Team__c
+    table: Team__c
+    fields:
   - ClientApplicationReceived__c
   - ClientApplicationVideoReceived__c
   - ClientCGCFormReceived__c
@@ -612,27 +612,27 @@ Insert Team__c:
   - Status__c
   - TrainingStartDate__c
   - XrayReceived__c
-  lookups:
-    Client__c:
-      table:
+    lookups:
+        Client__c:
+            table:
       - Contact
-      key_field: Client__c
-    Dog__c:
-      table:
+            key_field: Client__c
+        Dog__c:
+            table:
       - Dog__c
-      key_field: Dog__c
+            key_field: Dog__c
     Facilitator__c:
       table:
       - Contact
       key_field: Facilitator__c
-    Handler__c:
-      table:
+        Handler__c:
+            table:
       - Contact
-      key_field: Handler__c
+            key_field: Handler__c
 Insert Log__c:
-  sf_object: Log__c
-  table: Log__c
-  fields:
+    sf_object: Log__c
+    table: Log__c
+    fields:
   - ClientHours__c
   - ClientStress__c
   - Date__c
@@ -646,23 +646,23 @@ Insert Log__c:
   - Stress__c
   - SupportDetails__c
   - RecordTypeId
-  lookups:
-    Facilitator__c:
-      table:
+    lookups:
+        Facilitator__c:
+            table:
       - Contact
-      key_field: Facilitator__c
-    Submitter__c:
-      table:
+            key_field: Facilitator__c
+        Submitter__c:
+            table:
       - Contact
-      key_field: Submitter__c
-    Team__c:
-      table:
+            key_field: Submitter__c
+        Team__c:
+            table:
       - Team__c
-      key_field: Team__c
+            key_field: Team__c
 Insert PublicAccessTest__c:
-  sf_object: PublicAccessTest__c
-  table: PublicAccessTest__c
-  fields:
+    sf_object: PublicAccessTest__c
+    table: PublicAccessTest__c
+    fields:
   - AssessorComments__c
   - DateCompleted__c
   - Location__c
@@ -670,12 +670,12 @@ Insert PublicAccessTest__c:
   - Status__c
   - Type__c
   - ValidUntil__c
-  lookups:
-    Assessor__c:
-      table:
+    lookups:
+        Assessor__c:
+            table:
       - Contact
-      key_field: Assessor__c
-    Team__c:
-      table:
+            key_field: Assessor__c
+        Team__c:
+            table:
       - Team__c
-      key_field: Team__c
+            key_field: Team__c

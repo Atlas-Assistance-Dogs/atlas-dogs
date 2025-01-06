@@ -1,8 +1,8 @@
 public with sharing class CEUController {
-    private static ContinuingEducationUnitRepository repo = new ContinuingEducationUnitRepository();
+    private static CEURepository repo = new CEURepository();
 
     @TestVisible
-    private static void setRepo(ContinuingEducationUnitRepository crepo) {
+    private static void setRepo(CEURepository crepo) {
         repo = crepo;
     }
     // This method is used by the related list component
