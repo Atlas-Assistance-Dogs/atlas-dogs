@@ -5,6 +5,7 @@ public with sharing class TestFacilitatorCeuReminders {
   private static RelationshipRepository relationshipRepo;
   private static ContactRepository contactRepo;
   private static EmailService emailSrv;
+  private static CertificationRepository certRepo;
   // references to mocks
 
   private static void makeData() {
@@ -14,7 +15,8 @@ public with sharing class TestFacilitatorCeuReminders {
       RelationshipRepository.class
     );
     emailSrv = (EmailService) mocks.createMock(EmailService.class);
-    service = new ContactService(contactRepo, relationshipRepo, emailSrv);
+    certRepo = (CertificationRepository) mocks.createMock(CertificationRepository.class);
+    service = new ContactService(contactRepo, relationshipRepo, emailSrv, certRepo);
   }
 
   @isTest

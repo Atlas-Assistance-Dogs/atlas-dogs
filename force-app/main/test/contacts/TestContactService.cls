@@ -5,6 +5,7 @@ private class TestContactService {
   private static ContactRepository contactRepo;
   private static RelationshipRepository relationshipRepo;
   private static EmailService emailSrv;
+  private static CertificationRepository certRepo;
   // references to mocks
 
   private static void makeData() {
@@ -14,7 +15,8 @@ private class TestContactService {
       RelationshipRepository.class
     );
     emailSrv = (EmailService) mocks.createMock(EmailService.class);
-    service = new ContactService(contactRepo, relationshipRepo, emailSrv);
+    certRepo = (CertificationRepository) mocks.createMock(CertificationRepository.class);
+    service = new ContactService(contactRepo, relationshipRepo, emailSrv, certRepo);
   }
 
   @isTest
