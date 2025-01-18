@@ -17,13 +17,13 @@ public class TeamRepository {
     ];
   }
 
-    public List<Team__c> getByIds(Set<Id> teamIds) {
-        return [
-            SELECT Id, Client__c, PatValidUntil__c, PatCount__c
-            FROM Team__c
-            WHERE Id IN :teamIds
-        ];
-    }
+  public List<Team__c> getByIds(Set<Id> teamIds) {
+    return [
+      SELECT Id, Client__c, PatValidUntil__c, PatCount__c
+      FROM Team__c
+      WHERE Id IN :teamIds
+    ];
+  }
 
   public List<Team__c> modify(List<Team__c> teams) {
     upsert teams;

@@ -174,7 +174,7 @@ public with sharing class TestTeamTrigger {
       FacilitatorAvailability__c = expectedAvail,
       Status__c = status,
       PatValidUntil__c = cert,
-            InitialCertificationDate__c = expectedCert.addYears(-1)
+      InitialCertificationDate__c = expectedCert.addYears(-1)
     );
 
     // Act

@@ -345,9 +345,7 @@ public inherited sharing class ContactService {
     }
   }
 
-
-    
-    public static void updateCertValidUntil(Contact person) {
+  public static void updateCertValidUntil(Contact person) {
     // check to see if settings are missing
     Boolean updateSettings = false;
     AtlasSettings__c settings = AtlasSettings__c.getOrgDefaults();
@@ -372,35 +370,44 @@ public inherited sharing class ContactService {
     Integer years = (Integer) settings.CertRenewalYears__c;
     Integer early = (Integer) settings.EarlyRenewal__c;
     Integer leeway = (Integer) settings.RenewalLeeway__c;
-        // update trainer cert
-        if (
-            person.IsTrainer__c &&
-            person.TrainerCertAgreementReceived__c != null
-        ) {
-            if (person.TrainerInitialCertificationDate__c == null) {
-                person.TrainerInitialCertificationDate__c = person.TrainerCertAgreementReceived__c;
-                person.TrainerCertValidUntil__c = person.addYears(1);
+    // update trainer cert
+    if (person.IsTrainer__c && person.TrainerCertAgreementReceived__c != null) {
+      if (person.TrainerInitialCertificationDate__c == null) {
+        person.TrainerInitialCertificationDate__c = person.TrainerCertAgreementReceived__c;
+        person.TrainerCertValidUntil__c = person.TrainerCertAgreementReceived__c.addYears(
+          1
+        );
         return;
       }
-            Integer days = trainer.person.daysBetween(person.TrainerCertValidUntil__c);
-            if (days >= -early && days <= leeway) {
-                person.TrainerCertValidUntil__c = person.addYears(years);
+      Integer days = person.TrainerCertAgreementReceived__c.daysBetween(
+        person.TrainerCertValidUntil__c
+      );
+      if (days >= -early && days <= leeway) {
+        person.TrainerCertValidUntil__c = person.TrainerInitialCertificationDate__c.addYears(
+          years
+        );
       }
     }
-        // update facilitator cert
-        if (
-            person.IsFacilitator__c &&
-            person.FacilitatorCertAgreementReceived__c != null
+    // update facilitator cert
+    if (
+      person.IsTeamFacilitator__c &&
+      person.FacilitatorCertAgreementReceived__c != null
     ) {
-            if (person.FacilitatorInitialCertificationDate__c == null) {
-                person.FacilitatorInitialCertificationDate__c = person.FacilitatorInitialCertificationDate__c;
-                person.FacilitatorCertValidUntil__c = person.addYears(1);
-                return;
-        }
-            Integer days = trainer.person.daysBetween(person.TrainerCertValidUntil__c);
-            if (days >= -early && days <= leeway) {
-                person.FacilitatorCertValidUntil__c = person.addYears(years);
-            }
+      if (person.FacilitatorInitialCertificationDate__c == null) {
+        person.FacilitatorInitialCertificationDate__c = person.FacilitatorCertAgreementReceived__c;
+        person.FacilitatorCertValidUntil__c = person.FacilitatorCertAgreementReceived__c.addYears(
+          1
+        );
+        return;
+      }
+      Integer days = person.FacilitatorCertAgreementReceived__c.daysBetween(
+        person.FacilitatorCertValidUntil__c
+      );
+      if (days >= -early && days <= leeway) {
+        person.FacilitatorCertValidUntil__c = person.FacilitatorInitialCertificationDate__c.addYears(
+          years
+        );
+      }
     }
   }
 

@@ -11,8 +11,8 @@ public class TestBackgroundCheckController {
 
     Test.startTest();
     RelatedObjects checks = BackgroundCheckController.getRelatedChecks(
-            contact.Id,
-            6
+      contact.Id,
+      6
     );
     Test.stopTest();
 
@@ -60,8 +60,8 @@ public class TestBackgroundCheckController {
 
     Test.startTest();
     RelatedObjects checks = BackgroundCheckController.getRelatedChecks(
-            jack.Id,
-            6
+      jack.Id,
+      6
     );
     Test.stopTest();
 
@@ -82,14 +82,14 @@ public class TestBackgroundCheckController {
 
     Test.startTest();
     RelatedObjects checks = BackgroundCheckController.getRelatedChecks(
-            jill.Id,
-            6
+      jill.Id,
+      6
     );
     Test.stopTest();
 
     System.assertEquals(1, checks.items.size());
     System.assertEquals(1, checks.total);
-        BackgroundCheck__c check = ((BackgroundCheck)checks.items[0]).check;
+    BackgroundCheck__c check = ((BackgroundCheck) checks.items[0]).check;
     System.assertEquals(bgCheck.Date__c, check.Date__c);
     System.assertEquals('Criminal', check.Type__c);
     System.assertEquals('Pass', check.Status__c);
@@ -125,14 +125,14 @@ public class TestBackgroundCheckController {
 
     Test.startTest();
     RelatedObjects checks = BackgroundCheckController.getRelatedChecks(
-            jill.Id,
-            6
+      jill.Id,
+      6
     );
     Test.stopTest();
 
     System.assertEquals(1, checks.items.size());
     System.assertEquals(1, checks.total);
-        BackgroundCheck info = (BackgroundCheck)checks.items[0];
+    BackgroundCheck info = (BackgroundCheck) checks.items[0];
     BackgroundCheck__c check = info.check;
     System.assertEquals(contentDocumentId, info.documentId);
     System.assertEquals('Pass', check.Status__c);

@@ -1,5 +1,5 @@
 public inherited sharing class UserRepository {
-    public List<String> getGroupNames(ID userId) {
+  public List<String> getGroupNames(ID userId) {
     //Declaring a Set as we don't want Duplicate Group Ids
     Set<Id> results = new Set<Id>();
 
