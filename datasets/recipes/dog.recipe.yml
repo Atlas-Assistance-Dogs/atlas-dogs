@@ -5,13 +5,13 @@
 - var: weight_base
   value:
     random_number:
-        min: 400
-        max: 6000
+        min: 20
+        max: 1500
 - var: height_base
   value:
     random_number:
-        min: 200
-        max: 600
+        min: 80
+        max: 360
 
 - object: Dog__c
   nickname: dog
@@ -64,6 +64,8 @@
         - Female
       Weight__c: ${{weight_base / 100}}
       Height__c: ${{height_base / 10}}
+    Height__c: ${{height_base / 10}}
+    Weight__c: ${{weight_base / 10}}
     Notes__c:
       fake: paragraph
     LatestPhysicalExamOutcome__c:

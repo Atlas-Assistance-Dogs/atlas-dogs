@@ -512,12 +512,6 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
-                <componentName>dogSizeCmp</componentName>
-                <identifier>c_dogSizeCmp</identifier>
-            </componentInstance>
-        </itemInstances>
-        <itemInstances>
-            <componentInstance>
                 <componentInstanceProperties>
                     <name>tabs</name>
                     <value>sidebartabs</value>
