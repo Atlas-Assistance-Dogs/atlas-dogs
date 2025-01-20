@@ -151,4 +151,4 @@ AtlasSettings__c:
       PageSize__c: 50
       RabiesRenewalYears__c: 3
       VaccineRenewalYears__c: 1
-          BackgroundCheckRenewalYears__c: 1
+      BackgroundCheckRenewalYears__c: 1
