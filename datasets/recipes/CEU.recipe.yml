@@ -4,8 +4,6 @@
 - object: CEU__c
   count: 10
   fields:
-    Name:
-      fake: catch_phrase
     Authority__c:
       random_choice:
         - KPA
@@ -49,7 +47,7 @@
       random_choice:
         Attendee: 80%
         Presenter: 20%
-      Contact__c:
+    Contact__c:
       reference: Trainer
     Status__c:
       random_choice:
