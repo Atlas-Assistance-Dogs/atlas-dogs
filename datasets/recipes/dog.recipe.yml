@@ -5,13 +5,13 @@
 - var: weight_base
   value:
     random_number:
-        min: 20
-        max: 1500
+      min: 20
+      max: 1500
 - var: height_base
   value:
     random_number:
-        min: 80
-        max: 360
+      min: 80
+      max: 360
 
 - object: Dog__c
   nickname: dog
@@ -62,8 +62,6 @@
       random_choice:
         - Male
         - Female
-      Weight__c: ${{weight_base / 100}}
-      Height__c: ${{height_base / 10}}
     Height__c: ${{height_base / 10}}
     Weight__c: ${{weight_base / 10}}
     Notes__c:

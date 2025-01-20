@@ -47,7 +47,7 @@
     Category__c: "Standalone"
     Object__c: "Contact"
     Position__c: "Standalone"
-    Group__c: "Standalone Programs"
+    GroupName__c: "Standalone Programs"
 
 - object: CategoryRule__c
   just_once: True
