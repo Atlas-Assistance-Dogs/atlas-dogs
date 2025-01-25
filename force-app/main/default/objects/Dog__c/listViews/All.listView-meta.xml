@@ -6,6 +6,8 @@
     <columns>Breed__c</columns>
     <columns>Gender__c</columns>
     <columns>Status__c</columns>
+    <columns>Height__c</columns>
+    <columns>Weight__c</columns>
     <columns>HealthCareRecordsStatus__c</columns>
     <filterScope>Everything</filterScope>
     <label>All</label>
