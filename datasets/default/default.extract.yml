@@ -36,7 +36,7 @@ extract:
     fields: FIELDS(ALL)
   npe4__Relationship__c:
     fields: FIELDS(ALL)
-    where: npe4__Type__c != 'Client' and npe4__Type__c != 'Contact'
+    # where: npe4__Type__c != 'Client' and npe4__Type__c != 'Contact'
   GW_Volunteers__Volunteer_Job__c:
     fields: FIELDS(ALL)
   BackgroundCheck__c:

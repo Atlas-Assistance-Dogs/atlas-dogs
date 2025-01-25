@@ -3,7 +3,7 @@
     <fullName>Height__c</fullName>
     <description>Height at shoulders</description>
     <externalId>false</externalId>
-    <label>Height (cm)</label>
+    <label>Height (in)</label>
     <precision>7</precision>
     <required>false</required>
     <scale>2</scale>
