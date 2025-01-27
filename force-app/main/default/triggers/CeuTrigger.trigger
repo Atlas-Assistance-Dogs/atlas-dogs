@@ -1,5 +1,5 @@
 trigger CeuTrigger on CEU__c (after insert, after update, after delete) {
-    CeuService service = new CeuService();
+    CertificationService service = new CertificationService();
     if (Trigger.isInsert) {
         service.addCeus(Trigger.new);
     }

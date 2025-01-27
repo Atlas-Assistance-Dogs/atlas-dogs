@@ -37,4 +37,7 @@ public inherited sharing class CertificationRepository {
     public void remove(List<CeuCertification__c> ccs) {
         delete ccs;
     }
+    public Certification__c[] getActiveFacilitatorCerts() {
+        return [SELECT Id, Contact__c FROM Certification__c WHERE Active__c = true AND Contact__r.FacilitatorStatus__c = 'Active'];
+    }
 }

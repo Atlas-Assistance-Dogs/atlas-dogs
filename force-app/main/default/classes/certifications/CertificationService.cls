@@ -1,12 +1,15 @@
-public inherited sharing class CeuService {
+public inherited sharing class CertificationService {
     private CertificationRepository certRepo;
-    public CeuService() {
+    private EmailService emailServ;
+    public CertificationService() {
         certRepo = new CertificationRepository();
+        emailServ = new EmailService();
     }
 
     @TestVisible
-    private CeuService(CertificationRepository certRepo) {
+    private CertificationService(CertificationRepository certRepo, EmailService emailServ) {
         this.certRepo = certRepo;
+        this.emailServ = emailServ;
     }
 
     public static Map<Id, List<Ceu__c>> sortCeus(List<Ceu__c> ceus) {
@@ -61,8 +64,25 @@ public inherited sharing class CeuService {
     }
 
     public void updateCeus(List<Ceu__c> ceus, Map<Id, Ceu__c> old) {
-        deleteCeus(old.values());
-        addCeus(ceus);
+        Map<Id, List<Ceu__c>> contactCeuIds = sortCeus(ceus);
+        List<Certification__c> certs = certRepo.getForContacts(contactCeuIds.keySet());
+        List<CeuCertification__c> ccs = new List<CeuCertification__c>();
+        for (Certification__c cert: certs) {
+            List<Ceu__c> contactCeus = contactCeuIds.get(cert.Contact__c);
+            for (Ceu__c ceu1: contactCeus) {
+                if (ceu1.DateCompleted__c >= cert.Start__c && ceu1.DateCompleted__c <= cert.End__c) {
+                    CeuCertification__c cc = certRepo.get(ceu1.Id, cert.Id);
+                    if (cc != null) {
+                        ccs.add(cc);
+                        if (ceu1.Status__c == 'Approved' && cert.TotalCeus__c != null) {
+                            cert.TotalCeus__c = cert.TotalCeus__c - ceu1.Quantity__c;
+                        }
+                    }
+                }
+            }
+        }
+        certRepo.remove(ccs);
+        certRepo.modify(certs);
     }
 
     public void deleteCeus(List<Ceu__c> ceus) {
@@ -86,4 +106,37 @@ public inherited sharing class CeuService {
         certRepo.remove(ccs);
         certRepo.modify(certs);
     }
+
+
+    public void remindFacilitatorsToGetCeus() {
+        Certification__c[] certs = certRepo.getActiveFacilitatorCerts();
+    
+        if (certs.isEmpty()){
+            return;
+        }
+        // Remind the contact for these certs to get their CEUs
+        Id orgAddressId = emailServ.getOrgEmailAddressId();
+        EmailTemplate template = emailServ.getTemplate('FacilitatorCeuReminder');
+    
+        List<Messaging.SingleEmailMessage> emails = new List<Messaging.SingleEmailMessage>();
+        for (Certification__c cert : certs) {
+          Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
+          if (orgAddressId != null) {
+            mail.setOrgWideEmailAddressId(orgAddressId);
+          }
+          mail.setTargetObjectId(cert.Contact__c);
+          mail.setWhatId(cert.Id);
+          mail.setTemplateId(template.Id);
+    
+          //Record ID for which letter will be generated
+          mail.setBccSender(false);
+          mail.setUseSignature(false);
+          if (orgAddressId == null) {
+            mail.setSenderDisplayName('Atlas Assistance Dogs');
+          }
+          mail.setSaveAsActivity(false);
+          emails.add(mail);
+        }
+        emailServ.sendEmail(emails);
+      }
 }

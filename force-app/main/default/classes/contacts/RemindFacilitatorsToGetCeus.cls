@@ -1,13 +1,13 @@
 global class RemindFacilitatorsToGetCeus implements Schedulable {
-  private final ContactService service;
+  private final CertificationService service;
 
   // default constructor
   public RemindFacilitatorsToGetCeus() {
-    service = new ContactService();
+    service = new CertificationService();
   }
 
   @TestVisible
-  private RemindFacilitatorsToGetCeus(ContactService service) {
+  private RemindFacilitatorsToGetCeus(CertificationService service) {
     this.service = service;
   }
 
