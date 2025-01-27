@@ -561,40 +561,9 @@ public inherited sharing class ContactService {
     return status;
   }
 
-  public void remindFacilitatorsToGetCeus() {
-    Set<Id> facilitators = contactRepo.getActiveFacilitators();
-    // Remind the client in a Team to submit training logs
-
-    if (facilitators.isEmpty())
-      return;
-    // Remind these facilitators to get their CEUs
-    Id orgAddressId = emailServ.getOrgEmailAddressId();
-    EmailTemplate template = emailServ.getTemplate('FacilitatorCeuReminder');
-
-    List<Messaging.SingleEmailMessage> emails = new List<Messaging.SingleEmailMessage>();
-    for (Id facilitator : facilitators) {
-      Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
-      if (orgAddressId != null) {
-        mail.setOrgWideEmailAddressId(orgAddressId);
-      }
-      mail.setTargetObjectId(facilitator);
-      mail.setTemplateId(template.Id);
-
-      //Record ID for which letter will be generated
-      mail.setBccSender(false);
-      mail.setUseSignature(false);
-      if (orgAddressId == null) {
-        mail.setSenderDisplayName('Atlas Assistance Dogs');
-      }
-      mail.setSaveAsActivity(false);
-      emails.add(mail);
-    }
-    emailServ.sendEmail(emails);
-  }
-
     public void updateCertifications(List<Contact> contacts, Map<Id, Contact> old) {
         List<Certification__c> currentCerts = certRepo.getForContacts(contacts);
-        Map<Id, List<Certification__c>> contactCerts = CeuService.sortCertifications(currentCerts);
+        Map<Id, List<Certification__c>> contactCerts = CertificationService.sortCertifications(currentCerts);
         List<Certification__c> newCerts = new List<Certification__c>();
         List<Certification__c> updateCerts = new List<Certification__c>();
         for (Contact person: contacts) {
