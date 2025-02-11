@@ -9,7 +9,7 @@ trigger ContactTrigger on Contact(before insert, before update) {
     Date oldBoardDate = null;
     Date oldFirstAidDate = null;
     if (Trigger.isUpdate) {
-      //Get Old Value
+      // Get Old Value
       Contact oldContact = Trigger.oldMap.get(newContact.Id);
       oldEmail = oldContact.Email;
       oldPhone = oldContact.Phone;
@@ -44,13 +44,10 @@ trigger ContactTrigger on Contact(before insert, before update) {
     // we've got the update going, so make sure UpdateForRelated__c is false
     newContact.UpdateForRelated__c = false;
 
-    if (
-      newContact.Positions__c != oldPositions || newContact.UpdateSharing__c
-    ) {
-      newContact = ContactService.shareContactBasedOnPositions(
-        newContact,
-        positionGroups
-      );
+    if (newContact.Positions__c != oldPositions ||
+        newContact.UpdateSharing__c) {
+      newContact = ContactService.shareContactBasedOnPositions(newContact,
+                                                               positionGroups);
       newContact.UpdateSharing__c = false;
       if (!Trigger.isInsert) {
         modifiedContacts.put(newContact.Id, newContact);
@@ -59,62 +56,48 @@ trigger ContactTrigger on Contact(before insert, before update) {
 
     ContactService.updateFirstAidValidUntil(newContact, oldFirstAidDate);
 
-    if (
-      newContact.isTrainer__c &&
-      newContact.TrainerCertAgreementReceived__c != null
-    ) {
-      ContactService.updateCertValidUntil(newContact);
-    }
+    service.updateCertValidUntil(newContact);
   }
 
   if (!Trigger.isInsert) {
     // finish modifying these contacts
     // Find who the contacts are related to as emergency contacts or guardian
-    npe4__Relationship__c[] relationships = [
-      SELECT
-        npe4__Contact__r.Positions__c,
-        npe4__Contact__r.ShareBoard__c,
-        npe4__Contact__r.SharePuppyRaiser__c,
-        npe4__Contact__r.ShareStaff__c,
-        npe4__Contact__r.ShareStandalonePrograms__c,
-        npe4__Contact__r.ShareTeam__c,
-        npe4__Contact__r.ShareTrainer__c,
-        npe4__Contact__r.ShareVolunteer__c,
-        npe4__RelatedContact__c,
-        npe4__RelatedContact__r.Positions__c,
-        npe4__RelatedContact__r.ShareBoard__c,
-        npe4__RelatedContact__r.SharePuppyRaiser__c,
-        npe4__RelatedContact__r.ShareStaff__c,
-        npe4__RelatedContact__r.ShareStandalonePrograms__c,
-        npe4__RelatedContact__r.ShareTeam__c,
-        npe4__RelatedContact__r.ShareTrainer__c,
-        npe4__RelatedContact__r.ShareVolunteer__c
-      FROM npe4__Relationship__c
-      WHERE
-        (npe4__Type__c LIKE '%Emergency Contact'
-        OR npe4__Type__c = 'Guardian')
-        AND npe4__Status__c = 'Current'
-        AND npe4__RelatedContact__c IN :modifiedContacts.keySet()
-    ];
+    npe4__Relationship__c[] relationships =
+        [ SELECT npe4__Contact__r.Positions__c, npe4__Contact__r.ShareBoard__c,
+          npe4__Contact__r.SharePuppyRaiser__c, npe4__Contact__r.ShareStaff__c,
+          npe4__Contact__r.ShareStandalonePrograms__c,
+          npe4__Contact__r.ShareTeam__c, npe4__Contact__r.ShareTrainer__c,
+          npe4__Contact__r.ShareVolunteer__c, npe4__RelatedContact__c,
+          npe4__RelatedContact__r.Positions__c,
+          npe4__RelatedContact__r.ShareBoard__c,
+          npe4__RelatedContact__r.SharePuppyRaiser__c,
+          npe4__RelatedContact__r.ShareStaff__c,
+          npe4__RelatedContact__r.ShareStandalonePrograms__c,
+          npe4__RelatedContact__r.ShareTeam__c,
+          npe4__RelatedContact__r.ShareTrainer__c,
+          npe4__RelatedContact__r.ShareVolunteer__c FROM npe4__Relationship__c
+              WHERE(npe4__Type__c LIKE '%Emergency Contact' OR npe4__Type__c =
+                        'Guardian')
+                  AND npe4__Status__c = 'Current' AND npe4__RelatedContact__c
+          IN:modifiedContacts.keySet() ];
 
     for (npe4__Relationship__c relationship : relationships) {
       Contact source = relationship.npe4__Contact__r;
-      Contact relation = modifiedContacts.get(
-        relationship.npe4__RelatedContact__c
-      );
+      Contact relation =
+          modifiedContacts.get(relationship.npe4__RelatedContact__c);
       if (relation != null) {
         relation.ShareBoard__c = relation.ShareBoard__c || source.ShareBoard__c;
         relation.SharePuppyRaiser__c =
-          relation.SharePuppyRaiser__c || source.SharePuppyRaiser__c;
+            relation.SharePuppyRaiser__c || source.SharePuppyRaiser__c;
         relation.ShareStaff__c = relation.ShareStaff__c || source.ShareStaff__c;
         relation.ShareStandalonePrograms__c =
-          relation.ShareStandalonePrograms__c ||
-          source.ShareStandalonePrograms__c;
+            relation.ShareStandalonePrograms__c ||
+            source.ShareStandalonePrograms__c;
         relation.ShareTeam__c = relation.ShareTeam__c || source.ShareTeam__c;
         relation.ShareTrainer__c =
-          relation.ShareTrainer__c || source.ShareTrainer__c;
+            relation.ShareTrainer__c || source.ShareTrainer__c;
         relation.ShareVolunteer__c =
-          relation.ShareVolunteer__c || source.ShareVolunteer__c;
+            relation.ShareVolunteer__c || source.ShareVolunteer__c;
       }
     }
   }
