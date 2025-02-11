@@ -15,12 +15,22 @@ public inherited sharing class CertificationRepository {
     public List<Certification__c> getForContacts(Set<Id> contactIds) {
         return [SELECT Active__c, Contact__c, End__c, Start__c, TotalCeus__c, Type__c FROM Certification__c WHERE Contact__c IN :contactIds];
     }
+    public Certification__c create(Certification__c certs) {
+        if (certs == null) return null;
+        insert certs;
+        return certs;
+    }
     public List<Certification__c> create(List<Certification__c> certs) {
         if (certs == null) return null;
         insert certs;
         return certs;
     }
     public List<Certification__c> modify(List<Certification__c> certs) {
+        if (certs == null) return null;
+        update certs;
+        return certs;
+    }
+    public Certification__c modify(Certification__c certs) {
         if (certs == null) return null;
         update certs;
         return certs;
@@ -37,7 +47,10 @@ public inherited sharing class CertificationRepository {
     public void remove(List<CeuCertification__c> ccs) {
         delete ccs;
     }
+    public Certification__c getActiveCert(Id contactId, String type) {
+        return [SELECT Id, Contact__c FROM Certification__c WHERE Status__c = 'Active' AND Type__c = :type AND Contact__c = :contactId];
+    }
     public Certification__c[] getActiveFacilitatorCerts() {
-        return [SELECT Id, Contact__c FROM Certification__c WHERE Active__c = true AND Contact__r.FacilitatorStatus__c = 'Active'];
+        return [SELECT Id, Contact__c FROM Certification__c WHERE Status__c = 'Active' AND Type__c = 'Facilitator'];
     }
 }
