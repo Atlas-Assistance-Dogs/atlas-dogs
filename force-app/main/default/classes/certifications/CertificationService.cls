@@ -58,14 +58,12 @@ public
       for (Ceu__c ceu1 : contactCeus) {
         if (ceu1.DateCompleted__c >= cert.Start__c &&
             ceu1.DateCompleted__c <= cert.End__c) {
-          ccs.add(new CeuCertification__c(Ceu__c = ceu1.Id,
-                                          Certification__c = cert.Id));
+          CeuCertification__c cc = new CeuCertification__c(
+              Ceu__c = ceu1.Id, Certification__c = cert.Id);
           if (ceu1.Status__c == 'Approved') {
-            if (cert.TotalCeus__c == null) {
-              cert.TotalCeus__c = 0;
-            }
-            cert.TotalCeus__c = cert.TotalCeus__c + ceu1.Quantity__c;
+            cc.Approved__c = ceu1.Quantity__c;
           }
+          ccs.add(cc);
         }
       }
     }
@@ -73,56 +71,19 @@ public
     certRepo.modify(certs);
   }
 
-  // See what certifications these CEUs are tied to and recount their total CEUs
+  // Since there is a rollup summary an Approved, check that it is set properly
+  // We will not worry about changing the certification at this time, since
+  // that is not likely to happen
 public
   void updateCeus(List<Ceu__c> ceus, Map<Id, Ceu__c> old) {
-    Map<Id, List<Ceu__c>> contactCeuIds = sortCeus(ceus);
-    List<Certification__c> certs =
-        certRepo.getForContacts(contactCeuIds.keySet());
-    Map<Id, List<Ceu__c>> certCeuMap = certRepo.getCertCeus(certs);
+    List<CeuCertification__c> ceuCerts = certRepo.getCeuCerts(ceus);
 
-    for (Certification__c cert : certs) {
-      List<Ceu__c> certCeus = certCeuMap.get(cert.Id);
-      cert.TotalCeus__c = 0;
-      // Recount the number of CEUS
-      for (Ceu__c ceu1 : certCeus) {
-        if (ceu1.DateCompleted__c >= cert.Start__c &&
-            ceu1.DateCompleted__c <= cert.End__c) {
-          if (ceu1.Status__c == 'Approved') {
-            cert.TotalCeus__c = cert.TotalCeus__c + ceu1.Quantity__c;
-          }
-        }
-        else {
-            // We need to find where this CEU goes
-        }
+    for (CeuCertification__c cc : ceuCerts) {
+      if (cc.Ceu__r.Status__c == 'Approved') {
+        cc.Approved__c = cc.Ceu__r.Quantity__c;
       }
     }
-    certRepo.modify(certs);
-  }
-
-public
-  void deleteCeus(List<Ceu__c> ceus) {
-    Map<Id, List<Ceu__c>> contactCeuIds = sortCeus(ceus);
-    List<Certification__c> certs =
-        certRepo.getForContacts(contactCeuIds.keySet());
-    List<CeuCertification__c> ccs = new List<CeuCertification__c>();
-    for (Certification__c cert : certs) {
-      List<Ceu__c> contactCeus = contactCeuIds.get(cert.Contact__c);
-      for (Ceu__c ceu1 : contactCeus) {
-        if (ceu1.DateCompleted__c >= cert.Start__c &&
-            ceu1.DateCompleted__c <= cert.End__c) {
-          CeuCertification__c cc = certRepo.get(ceu1.Id, cert.Id);
-          if (cc != null) {
-            ccs.add(cc);
-            if (ceu1.Status__c == 'Approved' && cert.TotalCeus__c != null) {
-              cert.TotalCeus__c = cert.TotalCeus__c - ceu1.Quantity__c;
-            }
-          }
-        }
-      }
-    }
-    certRepo.remove(ccs);
-    certRepo.modify(certs);
+    certRepo.modify(ceuCerts);
   }
 
 public
