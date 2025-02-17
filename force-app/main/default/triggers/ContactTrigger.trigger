@@ -1,16 +1,17 @@
 trigger ContactTrigger on Contact(before insert, before update) {
   ContactService service = new ContactService();
   Map<Id, Contact> modifiedContacts = new Map<Id, Contact>();
-  Map<String, String> positionGroups = ContactService.getGroupsByPositions();
+  Map<String, String> positionGroups = service.getGroupsByPositions();
   for (Contact newContact : Trigger.new) {
     string oldEmail = newContact.Email;
     string oldPhone = newContact.Phone;
     string oldPositions = null;
     Date oldBoardDate = null;
     Date oldFirstAidDate = null;
+    Contact oldContact;
     if (Trigger.isUpdate) {
       // Get Old Value
-      Contact oldContact = Trigger.oldMap.get(newContact.Id);
+      oldContact = Trigger.oldMap.get(newContact.Id);
       oldEmail = oldContact.Email;
       oldPhone = oldContact.Phone;
       oldPositions = oldContact.Positions__c;
@@ -21,13 +22,13 @@ trigger ContactTrigger on Contact(before insert, before update) {
     // Check if Contact is set
     if (!String.isBlank(newContact.Contact__c)) {
       if (oldEmail != newContact.Email) {
-        newContact = ContactService.updateContactAtEmail(newContact);
+        newContact = service.updateContactAtEmail(newContact);
       } else {
         newContact = service.updateEmail(newContact);
       }
 
       if (oldPhone != newContact.Phone) {
-        newContact = ContactService.updateContactAtPhone(newContact);
+        newContact = service.updateContactAtPhone(newContact);
       } else {
         newContact = service.updatePhone(newContact);
       }
@@ -56,7 +57,7 @@ trigger ContactTrigger on Contact(before insert, before update) {
 
     ContactService.updateFirstAidValidUntil(newContact, oldFirstAidDate);
 
-    service.updateCertValidUntil(newContact);
+    service.updateCertValidUntil(newContact, oldContact);
   }
 
   if (!Trigger.isInsert) {

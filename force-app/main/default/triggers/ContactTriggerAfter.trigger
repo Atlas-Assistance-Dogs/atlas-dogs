@@ -43,5 +43,5 @@ trigger ContactTriggerAfter on Contact(after update) {
   }
   update related.values();
 
-  service.updateCertifications(Trigger.new, Trigger.oldMap);
+  // service.updateCertifications(Trigger.new, Trigger.oldMap);
 }

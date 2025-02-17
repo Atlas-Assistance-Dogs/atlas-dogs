@@ -30,7 +30,7 @@ public
   // as long as the Email and Phone are not blank and ContactAt is Home or
   // Alternate
 public
-  static Contact updateContactAtEmail(Contact newContact) {
+  Contact updateContactAtEmail(Contact newContact) {
     string contact = newContact.Contact__c;
     if (contact == 'Home' && !string.isBlank(newContact.Email)) {
       newContact.npe01__HomeEmail__c = newContact.Email;
@@ -41,7 +41,7 @@ public
   }
 
 public
-  static Contact updateContactAtPhone(Contact newContact) {
+  Contact updateContactAtPhone(Contact newContact) {
     string contact = newContact.Contact__c;
     if (contact == 'Home' && !string.isBlank(newContact.Phone)) {
       newContact.HomePhone = newContact.Phone;
@@ -176,7 +176,7 @@ private
 
   // Get the groups that the category rules assign for the positions
 public
-  static Map<String, String> getGroupsByPositions() {
+  Map<String, String> getGroupsByPositions() {
     // Get the groups that can see each position
     List<CategoryRule__c> rules = [
       SELECT GroupName__c, Position__c FROM CategoryRule__c WHERE Position__c !=
@@ -317,8 +317,8 @@ public
     }
   }
 
-  public void
-  updateCertValidUntil(Contact person) {
+public
+  void updateCertValidUntil(Contact person, Contact last) {
     // check to see if settings are missing
     Boolean updateSettings = false;
     AtlasSettings__c settings = AtlasSettings__c.getOrgDefaults();
@@ -345,7 +345,9 @@ public
     Integer leeway = (Integer)settings.RenewalLeeway__c;
     Certification__c cert;
 
-    if (person.IsTrainer__c && person.TrainerCertAgreementReceived__c != null) {
+    if (person.IsTrainer__c && person.TrainerCertAgreementReceived__c != null &&
+        person.TrainerCertAgreementReceived__c !=
+            last.TrainerCertAgreementReceived__c) {
       cert =
           updateCert(person, 'Trainer', person.TrainerCertAgreementReceived__c,
                      years, early, leeway);
@@ -358,7 +360,9 @@ public
     }
 
     if (person.IsTeamFacilitator__c &&
-        person.FacilitatorCertAgreementReceived__c != null) {
+        person.FacilitatorCertAgreementReceived__c != null &&
+        person.FacilitatorCertAgreementReceived__c !=
+            last.FacilitatorCertAgreementReceived__c) {
       cert = updateCert(person, 'Facilitator',
                         person.FacilitatorCertAgreementReceived__c, years,
                         early, leeway);
@@ -378,12 +382,8 @@ private
     if (cert == null) {
       // create cert
       cert = certRepo.create(new Certification__c(
-        Contact__c = person.Id,
-        Type__c = type,
-        Status__c = 'Active',
-        Start__c = certDate,
-        End__c = certDate.addYears(years)
-      ));
+          Contact__c = person.Id, Type__c = type, Status__c = 'Active',
+          Start__c = certDate, End__c = certDate.addYears(years)));
       return cert;
     }
     Integer days = certDate.daysBetween(cert.End__c);
@@ -393,13 +393,9 @@ private
       certRepo.modify(cert);
 
       cert = certRepo.create(new Certification__c(
-        Contact__c = person.Id,
-        Type__c = type,
-        Status__c = 'Active',
-        Start__c = cert.End__c,
-        End__c = cert.End__c.addYears(years)
-      ));
-     return cert;
+          Contact__c = person.Id, Type__c = type, Status__c = 'Active',
+          Start__c = cert.End__c, End__c = cert.End__c.addYears(years)));
+      return cert;
     }
     if (days > leeway) {
       // complete old cert and start new one
@@ -408,13 +404,9 @@ private
       certRepo.modify(cert);
 
       cert = certRepo.create(new Certification__c(
-        Contact__c = person.Id,
-        Type__c = type,
-        Status__c = 'Active',
-        Start__c = certDate,
-        End__c = certDate.addYears(years)
-      ));
-     return cert;
+          Contact__c = person.Id, Type__c = type, Status__c = 'Active',
+          Start__c = certDate, End__c = certDate.addYears(years)));
+      return cert;
     }
     return null;
   }
@@ -434,7 +426,7 @@ public
       'Client',    'Trainer',          'Standalone',   'Staff'};
 
 private
-  static List<PositionStatus> getStatusForPositions(Contact person) {
+  List<PositionStatus> getStatusForPositions(Contact person) {
     List<PositionStatus> statuses = new List<PositionStatus>();
     if (person.Positions__c == null) {
       return statuses;
@@ -545,36 +537,36 @@ private
     }
     return status;
   }
+  /*
+  public
+    void updateCertifications(List<Contact> contacts, Map<Id, Contact> old) {
+      List<Certification__c> currentCerts = certRepo.getForContacts(contacts);
+      Map<Id, List<Certification__c>> contactCerts =
+          CertificationService.sortCertifications(currentCerts);
+      List<Certification__c> newCerts = new List<Certification__c>();
+      List<Certification__c> updateCerts = new List<Certification__c>();
+      for (Contact person : contacts) {
+        Contact previous = old.get(person.Id);
 
-public
-  void updateCertifications(List<Contact> contacts, Map<Id, Contact> old) {
-    List<Certification__c> currentCerts = certRepo.getForContacts(contacts);
-    Map<Id, List<Certification__c>> contactCerts =
-        CertificationService.sortCertifications(currentCerts);
-    List<Certification__c> newCerts = new List<Certification__c>();
-    List<Certification__c> updateCerts = new List<Certification__c>();
-    for (Contact person : contacts) {
-      Contact previous = old.get(person.Id);
+        if (person.TrainerCertValidUntil__c !=
+            previous.TrainerCertValidUntil__c) {
+          // create a certification
+          newCerts.add(new Certification__c(
+              Contact__c = person.Id, End__c = person.TrainerCertValidUntil__c,
+              Start__c = person.TrainerCertValidUntil__c.addYears(-1),
+              Type__c = 'Trainer'));
+        }
 
-      if (person.TrainerCertValidUntil__c !=
-          previous.TrainerCertValidUntil__c) {
-        // create a certification
-        newCerts.add(new Certification__c(
-            Contact__c = person.Id, End__c = person.TrainerCertValidUntil__c,
-            Start__c = person.TrainerCertValidUntil__c.addYears(-1),
-            Type__c = 'Trainer'));
+        if (person.FacilitatorCertValidUntil__c !=
+            previous.FacilitatorCertValidUntil__c) {
+          // create a certification
+          newCerts.add(new Certification__c(
+              Contact__c = person.Id,
+              End__c = person.FacilitatorCertValidUntil__c,
+              Start__c = person.FacilitatorCertValidUntil__c.addYears(-1),
+              Type__c = 'Facilitator'));
+        }
       }
-
-      if (person.FacilitatorCertValidUntil__c !=
-          previous.FacilitatorCertValidUntil__c) {
-        // create a certification
-        newCerts.add(new Certification__c(
-            Contact__c = person.Id,
-            End__c = person.FacilitatorCertValidUntil__c,
-            Start__c = person.FacilitatorCertValidUntil__c.addYears(-1),
-            Type__c = 'Facilitator'));
-      }
-    }
-    certRepo.create(newCerts);
-  }
+      certRepo.create(newCerts);
+    }*/
 }
