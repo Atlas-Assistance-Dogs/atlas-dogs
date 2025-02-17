@@ -4,7 +4,7 @@ public
   CertificationRepository() {}
 public
   List<Certification__c> getForContact(Id contactId) {
-    return [ SELECT Status__c, Contact__c, End__c, Start__c, TotalCeus__c,
+    return [ SELECT Status__c, Contact__c, End__c, Start__c, Approved__c,
              Type__c FROM Certification__c WHERE Contact__c =:contactId ];
   }
 public
@@ -17,7 +17,7 @@ public
   }
 public
   List<Certification__c> getForContacts(Set<Id> contactIds) {
-    return [ SELECT Status__c, Contact__c, End__c, Start__c, TotalCeus__c,
+    return [ SELECT Status__c, Contact__c, End__c, Start__c, Approved__c,
              Type__c FROM Certification__c WHERE Contact__c IN:contactIds ];
   }
 public
@@ -69,9 +69,14 @@ public
     }
     return ccs[0];
   }
-public
+
+  public
   void remove(List<CeuCertification__c> ccs) { delete ccs; }
-public
+
+  public
+  void modify(List<CeuCertification__c> ccs) { update ccs; }
+
+  public
   Certification__c getActiveCert(Id contactId, String type) {
     Certification__c[] certs = [
       SELECT Id, Contact__c, Start__c,
@@ -84,7 +89,8 @@ public
     }
     return certs[0];
   }
-public
+
+  public
   Certification__c[] getActiveFacilitatorCerts() {
     return [
       SELECT Id, Contact__c FROM Certification__c WHERE Status__c =
@@ -96,22 +102,16 @@ public
   // this would mean more SOQL queries, but we can't do a SQL-like group-by,
   // SOQL only does functions with group-by
 public
-  Map<Id, List<Ceu__c>> getCertCeus(List<Certification__c> certs) {
+List<CeuCertification__c> getCeuCerts(List<Ceu__c> ceus) {
+    List<Id> ceuIds = new List<Id>();
+    for (Ceu__c ceu : ceus) {
+        ceuIds.add(ceu.Id);
+    }
     List<CeuCertification__c> ccs =
         [ SELECT Certification__c, Ceu__c, CEU__r.DateCompleted__c,
           CEU__r.Quantity__c,
           CEU__r.Status__c FROM CeuCertification__c WHERE Certification__c
-          IN:certs ];
-
-    Map<Id, List<Ceu__c>> certCeus = new Map<Id, List<Ceu__c>>();
-    for (CeuCertification__c cc : ccs) {
-      if (certCeus.containsKey(cc.Certification__c)) {
-        List<Ceu__c> ceus = certCeus.get(cc.Certification__c);
-        ceus.add(cc.Ceu__r);
-      } else {
-        certCeus.put(cc.Certification__c, new List<Ceu__c>{cc.Ceu__r});
-      }
-    }
-    return certCeus;
+          IN:ceuids ];
+    return ccs;
   }
 }
