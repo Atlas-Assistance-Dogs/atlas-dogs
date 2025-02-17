@@ -317,6 +317,15 @@
         </relatedContentItems>
     </relatedContent>
     <relatedLists>
+        <fields>NAME</fields>
+        <fields>Status__c</fields>
+        <fields>Start__c</fields>
+        <fields>End__c</fields>
+        <fields>TotalCeus__c</fields>
+        <fields>Type__c</fields>
+        <relatedList>Certification__c.Contact__c</relatedList>
+    </relatedLists>
+    <relatedLists>
         <fields>Program__c</fields>
         <fields>AssignedDate__c</fields>
         <fields>CompletionDate__c</fields>
@@ -352,15 +361,6 @@
     <relatedLists>
         <relatedList>RelatedContentNoteList</relatedList>
     </relatedLists>
-    <relatedLists>
-        <fields>NAME</fields>
-        <fields>Active__c</fields>
-        <fields>Start__c</fields>
-        <fields>End__c</fields>
-        <fields>TotalCeus__c</fields>
-        <fields>Type__c</fields>
-        <relatedList>Certification__c.Contact__c</relatedList>
-    </relatedLists>
     <relatedObjects>AccountId</relatedObjects>
     <showEmailCheckbox>false</showEmailCheckbox>
     <showHighlightsPanel>false</showHighlightsPanel>
@@ -368,7 +368,7 @@
     <showRunAssignmentRulesCheckbox>false</showRunAssignmentRulesCheckbox>
     <showSubmitAndAttachButton>false</showSubmitAndAttachButton>
     <summaryLayout>
-        <masterLabel>00hOx0000087uyj</masterLabel>
+        <masterLabel>00hQL000008Ne70</masterLabel>
         <sizeX>4</sizeX>
         <sizeY>0</sizeY>
         <summaryLayoutStyle>Default</summaryLayoutStyle>
