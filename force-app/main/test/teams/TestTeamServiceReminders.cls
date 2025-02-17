@@ -94,7 +94,7 @@ public with sharing class TestTeamServiceReminders {
     Team__c[] teams = new Team__c[5];
     for (Integer i = 0; i < 5; i++) {
       teams[i] = new Team__c(
-        Id = MockProvider.teamids[i],
+        Id = MockProvider.createId(Team__c.class),
         Client__c = MockProvider.contactids[i],
         Status__c = 'In Training',
         TrainingStartDate__c = Date.today().addDays(0 - i)
