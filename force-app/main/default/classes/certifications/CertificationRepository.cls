@@ -110,7 +110,7 @@ List<CeuCertification__c> getCeuCerts(List<Ceu__c> ceus) {
     List<CeuCertification__c> ccs =
         [ SELECT Certification__c, Ceu__c, CEU__r.DateCompleted__c,
           CEU__r.Quantity__c,
-          CEU__r.Status__c FROM CeuCertification__c WHERE Certification__c
+          CEU__r.Status__c FROM CeuCertification__c WHERE Ceu__c
           IN:ceuids ];
     return ccs;
   }

@@ -120,4 +120,40 @@ private class TestContactService {
     System.assertEquals('Staff', actual.position);
     System.assertEquals('None', actual.status);
   }
+/*
+  @isTest
+  static void updateCertValidUntil_changesTrainerCertValidUntil_when30daysBefore() {
+    AtlasSettings__c settings = AtlasSettings__c.getOrgDefaults();
+    upsert settings;
+    Date received = Date.newInstance(2022, 12, 25);
+
+    Contact joe = new Contact(
+      Id = MockCallData.contactids[0],
+      Email = 'joe-blow@pump.com',
+      FirstName = 'Joe',
+      LastName = 'Blow',
+      Positions__c = 'Trainer',
+      TrainerInitialCertificationDate__c = received,
+      TrainerCertAgreementReceived__c = received,
+      TrainerCertValidUntil__c = received.addYears(1)
+    );
+
+    joe.TrainerCertAgreementReceived__c = received.addYears(1).addDays(-30);
+
+    // Act
+    Test.startTest();
+    Database.SaveResult result = Database.update(joe, true);
+    Test.stopTest();
+
+    // Assert
+    System.assert(result.isSuccess());
+    Contact saved = [
+      SELECT id, TrainerInitialCertificationDate__c, TrainerCertValidUntil__c
+      FROM Contact
+      WHERE id = :result.getId()
+    ];
+    System.assert(result.getErrors().size() == 0);
+    System.assertEquals(received, saved.TrainerInitialCertificationDate__c);
+    System.assertEquals(received.addYears(2), saved.TrainerCertValidUntil__c);
+  }*/
 }

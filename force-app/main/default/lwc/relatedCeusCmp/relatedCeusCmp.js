@@ -2,7 +2,7 @@ import { LightningElement, api, wire } from "lwc";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
 import { NavigationMixin } from "lightning/navigation";
 import getRelatedCeus from "@salesforce/apex/CEUController.getRelatedCeus";
-import deleteRecord from "lightning/uiRecordApi";
+import { deleteRecord } from "lightning/uiRecordApi";
 import { refreshApex } from "@salesforce/apex";
 
 import AUTHORITY_FIELD from "@salesforce/schema/CEU__c.Authority__c";
@@ -197,5 +197,6 @@ export default class RelatedCeusCmp extends NavigationMixin(LightningElement) {
 
   handleChange() {
     refreshApex(this.wiredCeus);
+    this.dispatchEvent(new CustomEvent('force:refreshView'));
   }
 }

@@ -57,7 +57,7 @@ trigger ContactTrigger on Contact(before insert, before update) {
 
     ContactService.updateFirstAidValidUntil(newContact, oldFirstAidDate);
 
-    service.updateCertValidUntil(newContact, oldContact);
+    if (trigger.isUpdate) service.updateCertValidUntil(newContact, oldContact);
   }
 
   if (!Trigger.isInsert) {
