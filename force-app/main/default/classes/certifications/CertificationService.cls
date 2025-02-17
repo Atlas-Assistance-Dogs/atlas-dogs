@@ -76,14 +76,105 @@ public
   // that is not likely to happen
 public
   void updateCeus(List<Ceu__c> ceus, Map<Id, Ceu__c> old) {
-    List<CeuCertification__c> ceuCerts = certRepo.getCeuCerts(ceus);
+    List<CeuCertification__c> ccs = certRepo.getCeuCerts(ceus);
 
-    for (CeuCertification__c cc : ceuCerts) {
+    for (CeuCertification__c cc : ccs) {
       if (cc.Ceu__r.Status__c == 'Approved') {
         cc.Approved__c = cc.Ceu__r.Quantity__c;
+      } else {
+        cc.Approved__c = 0;
       }
     }
-    certRepo.modify(ceuCerts);
+    certRepo.modify(ccs);
+  }
+
+private
+  class Dates {
+  public
+    Integer years {
+      get;
+      set;
+    }
+  public
+    Integer early {
+      get;
+      set;
+    }
+  public
+    Integer leeway {
+      get;
+      set;
+    }
+  public
+    Dates() {
+      // check to see if settings are missing
+      Boolean updateSettings = false;
+      AtlasSettings__c settings = AtlasSettings__c.getOrgDefaults();
+      if (settings.CertRenewalYears__c == null) {
+        // TODO: get default value
+        settings.CertRenewalYears__c = 1;
+        updateSettings = true;
+      }
+      if (settings.EarlyRenewal__c == null) {
+        // TODO: get default value
+        settings.EarlyRenewal__c = 90;
+        updateSettings = true;
+      }
+      if (settings.RenewalLeeway__c == null) {
+        // TODO: get default value
+        settings.RenewalLeeway__c = 30;
+        updateSettings = true;
+      }
+      if (updateSettings) {
+        upsert settings;
+      }
+      this.years = (Integer)settings.CertRenewalYears__c;
+      this.early = (Integer)settings.EarlyRenewal__c;
+      this.leeway = (Integer)settings.RenewalLeeway__c;
+    }
+  }
+
+  public Certification__c
+  updateCert(Contact person, String type, Date validUntil, Date certDate) {
+    Certification__c cert = certRepo.getActiveCert(person.Id, type);
+    Dates dates = new Dates();
+    if (cert == null) {
+      if (validUntil == null) {
+        // create cert and exit
+        cert = certRepo.create(new Certification__c(
+            Contact__c = person.Id, Type__c = type, Status__c = 'Active',
+            Start__c = certDate, End__c = certDate.addYears(dates.years)));
+        return cert;
+      } else {
+        // create cert for current validUntil and continue
+        cert = certRepo.create(new Certification__c(
+            Contact__c = person.Id, Type__c = type, Status__c = 'Active',
+            Start__c = validUntil.addYears(-dates.years), End__c = validUntil));
+      }
+    }
+    Integer days = certDate.daysBetween(cert.End__c);
+    if (days >= -dates.early && days <= dates.leeway) {
+      // complete old cert
+      cert.Status__c = 'Complete';
+      certRepo.modify(cert);
+
+      cert = certRepo.create(new Certification__c(
+          Contact__c = person.Id, Type__c = type, Status__c = 'Active',
+          Start__c = cert.End__c, End__c = cert.End__c.addYears(dates.years)));
+      return cert;
+    }
+    if (days > dates.leeway) {
+      // complete old cert and start new one
+      // complete old cert
+      cert.Status__c = 'Complete';
+      certRepo.modify(cert);
+
+      cert = certRepo.create(new Certification__c(
+          Contact__c = person.Id, Type__c = type, Status__c = 'Active',
+          Start__c = certDate, End__c = certDate.addYears(dates.years)));
+      return cert;
+    }
+    return null;
   }
 
 public

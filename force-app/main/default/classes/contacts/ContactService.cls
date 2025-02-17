@@ -6,24 +6,23 @@ private
   RelationshipRepository relationshipRepo;
 private
   EmailService emailServ;
-private
-  CertificationRepository certRepo;
+  private CertificationService certService;
 public
   ContactService() {
     contactRepo = new ContactRepository();
     relationshipRepo = new RelationshipRepository();
     emailServ = new EmailService();
-    certRepo = new CertificationRepository();
+    certService = new CertificationService();
   }
 
   @TestVisible private ContactService(ContactRepository contactRepo,
                                       RelationshipRepository relationshipRepo,
                                       EmailService emailServ,
-                                      CertificationRepository certRepo) {
+                                      CertificationService certRService) {
     this.contactRepo = contactRepo;
     this.relationshipRepo = relationshipRepo;
     this.emailServ = emailServ;
-    this.certRepo = certRepo;
+    this.certService = certService;
   }
 
   // This copies the contact email and phone to the ContactAt email & phone,
@@ -319,38 +318,13 @@ public
 
 public
   void updateCertValidUntil(Contact person, Contact last) {
-    // check to see if settings are missing
-    Boolean updateSettings = false;
-    AtlasSettings__c settings = AtlasSettings__c.getOrgDefaults();
-    if (settings.CertRenewalYears__c == null) {
-      // TODO: get default value
-      settings.CertRenewalYears__c = 1;
-      updateSettings = true;
-    }
-    if (settings.EarlyRenewal__c == null) {
-      // TODO: get default value
-      settings.EarlyRenewal__c = 90;
-      updateSettings = true;
-    }
-    if (settings.RenewalLeeway__c == null) {
-      // TODO: get default value
-      settings.RenewalLeeway__c = 30;
-      updateSettings = true;
-    }
-    if (updateSettings) {
-      upsert settings;
-    }
-    Integer years = (Integer)settings.CertRenewalYears__c;
-    Integer early = (Integer)settings.EarlyRenewal__c;
-    Integer leeway = (Integer)settings.RenewalLeeway__c;
     Certification__c cert;
 
     if (person.IsTrainer__c && person.TrainerCertAgreementReceived__c != null &&
         person.TrainerCertAgreementReceived__c !=
             last.TrainerCertAgreementReceived__c) {
-      cert =
-          updateCert(person, 'Trainer', person.TrainerCertAgreementReceived__c,
-                     years, early, leeway);
+      cert = certService.updateCert(person, 'Trainer', person.TrainerCertValidUntil__c,
+                        person.TrainerCertAgreementReceived__c);
       if (cert != null) {
         if (person.TrainerInitialCertificationDate__c == null) {
           person.TrainerInitialCertificationDate__c = cert.Start__c;
@@ -363,9 +337,9 @@ public
         person.FacilitatorCertAgreementReceived__c != null &&
         person.FacilitatorCertAgreementReceived__c !=
             last.FacilitatorCertAgreementReceived__c) {
-      cert = updateCert(person, 'Facilitator',
-                        person.FacilitatorCertAgreementReceived__c, years,
-                        early, leeway);
+      cert = certService.updateCert(
+          person, 'Facilitator', person.FacilitatorCertValidUntil__c,
+          person.FacilitatorCertAgreementReceived__c);
       if (cert != null) {
         if (person.FacilitatorInitialCertificationDate__c == null) {
           person.FacilitatorInitialCertificationDate__c = cert.Start__c;
@@ -373,42 +347,6 @@ public
         person.FacilitatorCertValidUntil__c = cert.End__c;
       }
     }
-  }
-
-private
-  Certification__c updateCert(Contact person, String type, Date certDate,
-                              Integer years, Integer early, Integer leeway) {
-    Certification__c cert = certRepo.getActiveCert(person.Id, type);
-    if (cert == null) {
-      // create cert
-      cert = certRepo.create(new Certification__c(
-          Contact__c = person.Id, Type__c = type, Status__c = 'Active',
-          Start__c = certDate, End__c = certDate.addYears(years)));
-      return cert;
-    }
-    Integer days = certDate.daysBetween(cert.End__c);
-    if (days >= -early && days <= leeway) {
-      // complete old cert
-      cert.Status__c = 'Complete';
-      certRepo.modify(cert);
-
-      cert = certRepo.create(new Certification__c(
-          Contact__c = person.Id, Type__c = type, Status__c = 'Active',
-          Start__c = cert.End__c, End__c = cert.End__c.addYears(years)));
-      return cert;
-    }
-    if (days > leeway) {
-      // complete old cert and start new one
-      // complete old cert
-      cert.Status__c = 'Complete';
-      certRepo.modify(cert);
-
-      cert = certRepo.create(new Certification__c(
-          Contact__c = person.Id, Type__c = type, Status__c = 'Active',
-          Start__c = certDate, End__c = certDate.addYears(years)));
-      return cert;
-    }
-    return null;
   }
 
 public
