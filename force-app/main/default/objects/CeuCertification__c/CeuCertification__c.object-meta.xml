@@ -153,7 +153,7 @@
     <enableSearch>false</enableSearch>
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
-    <externalSharingModel>Private</externalSharingModel>
+    <externalSharingModel>ControlledByParent</externalSharingModel>
     <label>CEU Certification</label>
     <nameField>
         <displayFormat>CC-{00000}</displayFormat>
@@ -162,6 +162,6 @@
     </nameField>
     <pluralLabel>CEU Certifications</pluralLabel>
     <searchLayouts></searchLayouts>
-    <sharingModel>ReadWrite</sharingModel>
+    <sharingModel>ControlledByParent</sharingModel>
     <visibility>Public</visibility>
 </CustomObject>
