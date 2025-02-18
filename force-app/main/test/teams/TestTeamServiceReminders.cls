@@ -43,7 +43,8 @@ public with sharing class TestTeamServiceReminders {
     MockCallData getTeams = mocks.actualCalls[0];
     System.assertEquals('getByStatus', getTeams.methodName);
     System.assertEquals('In Training', getTeams.args[0]);
-    // see if there is a call to sendEmail, if there is, there should be no emails
+    // see if there is a call to sendEmail, if there is, there should be no
+    // emails
     for (MockCallData call : mocks.actualCalls) {
       if (call.obj == emailSrv && call.methodName == 'sendEmail') {
         System.assert(
@@ -55,17 +56,16 @@ public with sharing class TestTeamServiceReminders {
   @isTest
   static void remindClients_sendsEmailToClient_InTraining() {
     makeData();
+    EmailTemplate template = new EmailTemplate(
+      Id = MockProvider.createId(EmailTemplate.class)
+    );
     mocks.expectedCalls.add(
-      new MockCallData(
-        emailSrv,
-        'getTemplate',
-        new EmailTemplate(Id = MockProvider.templateIds[0])
-      )
+      new MockCallData(emailSrv, 'getTemplate', template)
     );
     mocks.expectedCalls.add(new MockCallData(emailSrv, 'sendEmail'));
     Team__c team = new Team__c(
-      Id = MockProvider.teamids[0],
-      Client__c = MockProvider.contactids[0],
+      Id = MockProvider.createId(Team__c.class),
+      Client__c = MockProvider.createId(Contact.class),
       Status__c = 'In Training',
       TrainingStartDate__c = Date.today().addDays(-6)
     );
@@ -86,7 +86,7 @@ public with sharing class TestTeamServiceReminders {
     Messaging.SingleEmailMessage message = emails[0];
     System.assertEquals(team.Client__c, message.targetobjectid);
     System.assertEquals(team.Id, message.whatid);
-    System.assertEquals(MockProvider.templateIds[0], message.templateid);
+    System.assertEquals(template.Id, message.templateid);
   }
   @isTest
   static void remindClients_sendsEmailsToClients_InTraining() {
@@ -95,18 +95,17 @@ public with sharing class TestTeamServiceReminders {
     for (Integer i = 0; i < 5; i++) {
       teams[i] = new Team__c(
         Id = MockProvider.createId(Team__c.class),
-        Client__c = MockProvider.contactids[i],
+        Client__c = MockProvider.createId(Contact.class),
         Status__c = 'In Training',
         TrainingStartDate__c = Date.today().addDays(0 - i)
       );
     }
     mocks.expectedCalls.add(new MockCallData(teamRepo, 'getByStatus', teams));
+    EmailTemplate template = new EmailTemplate(
+      Id = MockProvider.createId(EmailTemplate.class)
+    );
     mocks.expectedCalls.add(
-      new MockCallData(
-        emailSrv,
-        'getTemplate',
-        new EmailTemplate(Id = MockProvider.templateIds[0])
-      )
+      new MockCallData(emailSrv, 'getTemplate', template)
     );
     mocks.expectedCalls.add(new MockCallData(emailSrv, 'sendEmail'));
     service.remindClients();
@@ -119,7 +118,7 @@ public with sharing class TestTeamServiceReminders {
       Messaging.SingleEmailMessage message = emails[i];
       System.assertEquals(team.Client__c, message.targetobjectid);
       System.assertEquals(team.Id, message.whatid);
-      System.assertEquals(MockProvider.templateIds[0], message.templateid);
+      System.assertEquals(template.Id, message.templateid);
     }
   }
 
@@ -206,7 +205,7 @@ public with sharing class TestTeamServiceReminders {
         facilitatorToTeamIds.get(message.targetObjectId),
         message.whatid
       );
-      System.assertEquals(MockProvider.templateIds[0], message.templateid);
+      System.assertEquals(template.Id, message.templateid);
       facilitatorIds.remove(message.targetobjectid);
     }
   }
@@ -264,13 +263,13 @@ public with sharing class TestTeamServiceReminders {
       new MockCallData(
         emailSrv,
         'getTemplate',
-        new EmailTemplate(Id = MockProvider.templateIds[0])
+        new EmailTemplate(Id = MockProvider.createId(EmailTemplate.class))
       )
     );
     mocks.expectedCalls.add(new MockCallData(emailSrv, 'sendEmail'));
     Team__c team = new Team__c(
-      Id = MockProvider.teamids[0],
-      Client__c = MockProvider.contactids[0],
+      Id = MockProvider.createId(Team__c.class),
+      Client__c = MockProvider.createId(EmailTemplate.class),
       Status__c = 'In Training',
       TrainingStartDate__c = Date.today().addDays(-8)
     );

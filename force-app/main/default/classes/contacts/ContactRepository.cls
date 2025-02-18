@@ -57,17 +57,20 @@ public inherited sharing class ContactRepository {
   }
 
   public Contact modify(Contact cntct) {
-        upsert cntct;
+    upsert cntct;
     return cntct;
   }
 
-    public Contact[] getContactsNeedingBackgroundChecks() {
-        // Check for any contacts that need background checks
-        return [
-            SELECT Id, Name, VolunteerAccess__c
-            FROM Contact
-            WHERE
-                VolunteerAccess__c INCLUDES ('Credit Check Required', 'Background Check Required')
-        ];
-    }
+  public Contact[] getContactsNeedingBackgroundChecks() {
+    // Check for any contacts that need background checks
+    return [
+      SELECT Id, Name, VolunteerAccess__c
+      FROM Contact
+      WHERE
+        VolunteerAccess__c INCLUDES (
+          'Credit Check Required',
+          'Background Check Required'
+        )
+    ];
+  }
 }

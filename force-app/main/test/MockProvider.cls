@@ -23,19 +23,6 @@ public
         describes[0].getKeyPrefix() + (fakeIdCount++ +'').leftPad(15, '0');
     return code;
   }
-public
-  static final String[] teamids = new List<String>{
-      'a1D000000000000042', 'a1BE200000K4ZN4MAN', 'a1BE200000K4ZN5MAN',
-      'a1BE200000K4ZN6MAN', 'a1BE200000K4ZN7MAN', 'a1BE200000K4ZN8MAN',
-      'a1BE200000K4ZN9MAN', 'a1BE200000K4ZNAMA3', 'a1BE200000K4ZNBMA3',
-      'a1BE200000K4ZNCMA3'};
-
-public
-  static final String[] contactids = new List<String>{
-      '003E200000WBWDeIAP', '003E200000WBWDfIAP', '003E200000WBWDgIAP',
-      '003E200000WBWDhIAP', '003E200000WBWDiIAP', '003E200000WBWDjIAP',
-      '003E200000WBWDkIAP', '003E200000WBWDlIAP', '003E200000WBWDmIAP',
-      '003E200000WBWDnIAP'};
 
 public
   static final String[] relationshipids = new List<String>{

@@ -2,9 +2,9 @@
 public with sharing class TestCeuController {
   private static Contact ace;
   private static Contact cookie;
-    private static CEU__c aceCeu;
-    private static CEU__c cookieCeu1;
-    private static CEU__c cookieCeu2;
+  private static CEU__c aceCeu;
+  private static CEU__c cookieCeu1;
+  private static CEU__c cookieCeu2;
 
   static void setup() {
     List<Contact> contacts = new List<Contact>();
@@ -14,8 +14,8 @@ public with sharing class TestCeuController {
     contacts.add(cookie);
     insert contacts;
 
-        List<CEU__c> ceus = new List<CEU__c>();
-        aceCeu = new CEU__c(
+    List<CEU__c> ceus = new List<CEU__c>();
+    aceCeu = new CEU__c(
       Authority__c = 'Atlas',
       Comments__c = 'Comments1',
       DateCompleted__c = Date.today().addMonths(-1),
@@ -30,7 +30,7 @@ public with sharing class TestCeuController {
     );
     ceus.add(aceCeu);
 
-        cookieCeu1 = new CEU__c(
+    cookieCeu1 = new CEU__c(
       Authority__c = 'KPA',
       Comments__c = 'Comments2',
       DateCompleted__c = Date.today().addMonths(-2),
@@ -63,7 +63,7 @@ public with sharing class TestCeuController {
     insert ceus;
   }
 
-    private static void ceusMatch(CEU__c expected, CEU__c actual) {
+  private static void ceusMatch(CEU__c expected, CEU__c actual) {
     System.assertEquals(expected.Authority__c, actual.Authority__c);
     System.assertEquals(expected.Comments__c, actual.Comments__c);
     System.assertEquals(expected.DateCompleted__c, actual.DateCompleted__c);
@@ -79,22 +79,22 @@ public with sharing class TestCeuController {
   @isTest
   public static void getRelatedCeus_ReturnsRelated() {
     setup();
-        RelatedObjects ceus = CEUController.getRelatedCeus(ace.Id, 10);
+    RelatedObjects ceus = CEUController.getRelatedCeus(ace.Id, 10);
 
     System.assertEquals(1, ceus.items.size(), 'Wrong number of CEUs');
     System.assertEquals(1, ceus.total);
-    CEU__c ceu = (CEU__c)ceus.items[0];
+    CEU__c ceu = (CEU__c) ceus.items[0];
     ceusMatch(aceCeu, ceu);
   }
 
   @isTest
   public static void getRelatedCeus_ReturnsRelatedList() {
     setup();
-        RelatedObjects ceus = CEUController.getRelatedCeus(cookie.Id, 5);
+    RelatedObjects ceus = CEUController.getRelatedCeus(cookie.Id, 5);
 
     System.assertEquals(2, ceus.items.size(), 'Wrong number of CEUs');
     System.assertEquals(2, ceus.total);
-    ceusMatch(cookieCeu1, (CEU__c)ceus.items[0]);
-    ceusMatch(cookieCeu2, (CEU__c)ceus.items[1]);
+    ceusMatch(cookieCeu1, (CEU__c) ceus.items[0]);
+    ceusMatch(cookieCeu2, (CEU__c) ceus.items[1]);
   }
 }
