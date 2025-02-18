@@ -1,68 +1,65 @@
-public
-inherited sharing class CertificationRepository {
-public
-  CertificationRepository() {}
-public
-  List<Certification__c> getForContact(Id contactId) {
-    return [ SELECT Status__c, Contact__c, End__c, Start__c, Approved__c,
-             Type__c FROM Certification__c WHERE Contact__c =:contactId ];
+public inherited sharing class CertificationRepository {
+  public CertificationRepository() {
   }
-public
-  List<Certification__c> getForContacts(List<Contact> contacts) {
+  public List<Certification__c> getForContact(Id contactId) {
+    return [
+      SELECT Status__c, Contact__c, End__c, Start__c, Approved__c, Type__c
+      FROM Certification__c
+      WHERE Contact__c = :contactId
+    ];
+  }
+  public List<Certification__c> getForContacts(List<Contact> contacts) {
     Set<Id> contactIds = new Set<Id>();
     for (Contact person : contacts) {
       contactIds.add(person.Id);
     }
     return getForContacts(contactIds);
   }
-public
-  List<Certification__c> getForContacts(Set<Id> contactIds) {
-    return [ SELECT Status__c, Contact__c, End__c, Start__c, Approved__c,
-             Type__c FROM Certification__c WHERE Contact__c IN:contactIds ];
+  public List<Certification__c> getForContacts(Set<Id> contactIds) {
+    return [
+      SELECT Status__c, Contact__c, End__c, Start__c, Approved__c, Type__c
+      FROM Certification__c
+      WHERE Contact__c IN :contactIds
+    ];
   }
-public
-  Certification__c create(Certification__c certs) {
+  public Certification__c create(Certification__c certs) {
     if (certs == null)
       return null;
     insert certs;
     return certs;
   }
-public
-  List<Certification__c> create(List<Certification__c> certs) {
+  public List<Certification__c> create(List<Certification__c> certs) {
     if (certs == null)
       return null;
     insert certs;
     return certs;
   }
-public
-  List<Certification__c> modify(List<Certification__c> certs) {
+  public List<Certification__c> modify(List<Certification__c> certs) {
     if (certs == null)
       return null;
     update certs;
     return certs;
   }
-public
-  Certification__c modify(Certification__c certs) {
+  public Certification__c modify(Certification__c certs) {
     if (certs == null)
       return null;
     update certs;
     return certs;
   }
-public
-  List<CeuCertification__c> create(List<CeuCertification__c> ccs) {
+  public List<CeuCertification__c> create(List<CeuCertification__c> ccs) {
     if (ccs == null)
       return null;
     insert ccs;
     return ccs;
   }
-public
-  CeuCertification__c get(Id ceuId, Id certificationId) {
+  public CeuCertification__c get(Id ceuId, Id certificationId) {
     if (ceuId == null || certificationId == null)
       return null;
     CeuCertification__c[] ccs = [
-      SELECT Ceu__c, Certification__c FROM CeuCertification__c WHERE Ceu__c
-      =:ceuId AND Certification__c
-      =:certificationId LIMIT 1
+      SELECT Ceu__c, Certification__c
+      FROM CeuCertification__c
+      WHERE Ceu__c = :ceuId AND Certification__c = :certificationId
+      LIMIT 1
     ];
     if (ccs.isEmpty()) {
       return null;
@@ -70,19 +67,19 @@ public
     return ccs[0];
   }
 
-  public
-  void remove(List<CeuCertification__c> ccs) { delete ccs; }
+  public void remove(List<CeuCertification__c> ccs) {
+    delete ccs;
+  }
 
-  public
-  void modify(List<CeuCertification__c> ccs) { update ccs; }
+  public void modify(List<CeuCertification__c> ccs) {
+    update ccs;
+  }
 
-  public
-  Certification__c getActiveCert(Id contactId, String type) {
+  public Certification__c getActiveCert(Id contactId, String type) {
     Certification__c[] certs = [
-      SELECT Id, Contact__c, Start__c,
-      End__c FROM Certification__c WHERE Status__c = 'Active' AND Type__c
-      =:type AND Contact__c
-      =:contactId
+      SELECT Id, Contact__c, Start__c, End__c
+      FROM Certification__c
+      WHERE Status__c = 'Active' AND Type__c = :type AND Contact__c = :contactId
     ];
     if (certs.isEmpty()) {
       return null;
@@ -90,28 +87,32 @@ public
     return certs[0];
   }
 
-  public
-  Certification__c[] getActiveFacilitatorCerts() {
+  public Certification__c[] getActiveFacilitatorCerts() {
     return [
-      SELECT Id, Contact__c FROM Certification__c WHERE Status__c =
-                     'Active' AND Type__c = 'Facilitator'
+      SELECT Id, Contact__c
+      FROM Certification__c
+      WHERE Status__c = 'Active' AND Type__c = 'Facilitator'
     ];
   }
 
   // The easiest way to do this would be to use SOQL to filter the records,
   // this would mean more SOQL queries, but we can't do a SQL-like group-by,
   // SOQL only does functions with group-by
-public
-List<CeuCertification__c> getCeuCerts(List<Ceu__c> ceus) {
+  public List<CeuCertification__c> getCeuCerts(List<Ceu__c> ceus) {
     List<Id> ceuIds = new List<Id>();
     for (Ceu__c ceu : ceus) {
-        ceuIds.add(ceu.Id);
+      ceuIds.add(ceu.Id);
     }
-    List<CeuCertification__c> ccs =
-        [ SELECT Certification__c, Ceu__c, CEU__r.DateCompleted__c,
-          CEU__r.Quantity__c,
-          CEU__r.Status__c FROM CeuCertification__c WHERE Ceu__c
-          IN:ceuids ];
+    List<CeuCertification__c> ccs = [
+      SELECT
+        Certification__c,
+        Ceu__c,
+        CEU__r.DateCompleted__c,
+        CEU__r.Quantity__c,
+        CEU__r.Status__c
+      FROM CeuCertification__c
+      WHERE Ceu__c IN :ceuids
+    ];
     return ccs;
   }
 }
