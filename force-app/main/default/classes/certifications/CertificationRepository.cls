@@ -95,9 +95,10 @@ public inherited sharing class CertificationRepository {
     ];
   }
 
-  // The easiest way to do this would be to use SOQL to filter the records,
-  // this would mean more SOQL queries, but we can't do a SQL-like group-by,
-  // SOQL only does functions with group-by
+  // We are using a master detail rollup for the total CEUs in a certification.
+  // But to do this, we need to put the number of approved CEUs in the connecting
+  // table (CeuCertification__c)
+  // So here, we get the list of CeuCertification__c for the CEUs
   public List<CeuCertification__c> getCeuCerts(List<Ceu__c> ceus) {
     List<Id> ceuIds = new List<Id>();
     for (Ceu__c ceu : ceus) {
