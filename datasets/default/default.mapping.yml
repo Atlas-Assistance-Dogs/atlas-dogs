@@ -274,9 +274,9 @@ Insert Dog__c:
   - VaccineDueParvovirus__c
   - VaccineDueRabies__c
   - Weight__c
-    lookups:
-        VetClinic__c:
-            table:
+  lookups:
+    VetClinic__c:
+      table:
       - Account
       key_field: VetClinic__c
 Insert Contact:
