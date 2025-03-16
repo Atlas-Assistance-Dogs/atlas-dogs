@@ -38,7 +38,7 @@ private class TestLogRepository {
   @isTest
   static void getRecent_returnsEmpty_whenNoFacilitatorLogsButClientLogs() {
     setup();
-    Team__c team = TestTeamController.setup();
+    Team__c team = TestTeam.create();
     Log__c log = new Log__c(
       Team__c = team.Id,
       OtherHours__c = 3,
@@ -59,7 +59,7 @@ private class TestLogRepository {
   @isTest
   static void getRecent_returnsEmpty_whenNoClientLogsButFacilitatorLogs() {
     setup();
-    Team__c team = TestTeamController.setup();
+    Team__c team = TestTeam.create();
     Log__c log = new Log__c(
       Team__c = team.Id,
       OtherHours__c = 3,
@@ -80,7 +80,7 @@ private class TestLogRepository {
   @isTest
   static void getRecent_returnsEmpty_whenNoClientLogsAfterDate() {
     setup();
-    Team__c team = TestTeamController.setup();
+    Team__c team = TestTeam.create();
     Log__c log = new Log__c(
       Team__c = team.Id,
       OtherHours__c = 3,
@@ -102,7 +102,7 @@ private class TestLogRepository {
   @isTest
   static void getRecent_returnsEmpty_whenNoFacilitatorLogsAfterDate() {
     setup();
-    Team__c team = TestTeamController.setup();
+    Team__c team = TestTeam.create();
     Log__c log = new Log__c(
       Team__c = team.Id,
       OtherHours__c = 3,
@@ -124,7 +124,7 @@ private class TestLogRepository {
   @isTest
   static void getRecent_returnsLogs_whenFacilitatorLog() {
     setup();
-    Team__c team = TestTeamController.setup();
+    Team__c team = TestTeam.create();
     Log__c log = new Log__c(
       Team__c = team.Id,
       OtherHours__c = 3,
