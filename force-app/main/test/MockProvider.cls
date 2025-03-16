@@ -7,28 +7,24 @@ Calls that are not expected return null/void.
 The actual calls can be checked as part of the test assertions.
      */
 @isTest
-    /**
-     * @description add your description here
-     * @Date 30 October 2024
-     */
-    public class MockProvider implements System.StubProvider {
+/**
+ * @description add your description here
+ * @Date 30 October 2024
+ */
+public class MockProvider implements System.StubProvider {
   static Integer fakeIdCount = 42;
 
-public
-  static Id createId(System.Type type) {
+  public static Id createId(System.Type type) {
     String typeName = type.getName();
     List<Schema.DescribeSObjectResult> describes = Schema.describeSObjects(
-        new String[]{typeName}, SObjectDescribeOptions.DEFERRED);
+      new List<String>{ typeName },
+      SObjectDescribeOptions.DEFERRED
+    );
     String code =
-        describes[0].getKeyPrefix() + (fakeIdCount++ +'').leftPad(15, '0');
+      describes[0].getKeyPrefix() + (fakeIdCount++ + '').leftPad(15, '0');
     return code;
   }
 
-public
-  static final String[] relationshipids = new List<String>{
-      'a0FE2000003J7gsMAC', 'a0FE2000003J7gtMAC', 'a0FE2000003J9icMAC',
-      'a0FE2000003J9idMAC', 'a0FE2000003JC6zMAG', 'a0FE2000003JC70MAG',
-      'a0FE2000003JC8bMAG', 'a0FE2000003JC8cMAG'};
   static Integer fakeIdCount = 42;
 
   public static Id createId(System.Type type) {
@@ -47,8 +43,7 @@ public
     actualCalls = new List<MockCallData>();
   }
 
-public
-  Object createMock(Type typeToMock) {
+  public Object createMock(Type typeToMock) {
     // Invoke the stub API and pass it our mock provider to create a
     // mock class of typeToMock.
     return Test.createStub(typeToMock, this);
@@ -58,11 +53,14 @@ public
   public List<MockCallData> actualCalls { get; set; }
 
   // handle the mocked method call
-public
-  Object handleMethodCall(Object stubbedObject, String stubbedMethodName,
-                          Type returnType, List<Type> listOfParamTypes,
-                          List<String> listOfParamNames,
-                          List<Object> listOfArgs) {
+  public Object handleMethodCall(
+    Object stubbedObject,
+    String stubbedMethodName,
+    Type returnType,
+    List<Type> listOfParamTypes,
+    List<String> listOfParamNames,
+    List<Object> listOfArgs
+  ) {
     // create MockCallData to track the call
     MockCallData actual = new MockCallData();
 
@@ -77,8 +75,10 @@ public
     // See if this call was expected, for now we will just match object and
     // methodName
     for (MockCallData expected : expectedCalls) {
-      if (stubbedObject == expected.obj &&
-          stubbedMethodName == expected.methodName) {
+      if (
+        stubbedObject == expected.obj &&
+        stubbedMethodName == expected.methodName
+      ) {
         expected.matched = true;
         actual.matched = true;
         return expected.returnValue;
@@ -89,8 +89,7 @@ public
   }
 
   // validate that all actual calls were expected
-public
-  void validateCalls() {
+  public void validateCalls() {
     for (MockCallData actual : actualCalls) {
       System.assert(actual.matched);
     }
