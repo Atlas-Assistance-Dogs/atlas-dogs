@@ -4,6 +4,7 @@ public inherited sharing class CertificationRepository {
       SELECT Status__c, Contact__c, End__c, Start__c, Approved__c, Type__c
       FROM Certification__c
       WHERE Contact__c = :contactId
+      ORDER BY End__c DESC
     ];
   }
   public List<Certification__c> getForContacts(List<Contact> contacts) {
@@ -18,13 +19,14 @@ public inherited sharing class CertificationRepository {
       SELECT Status__c, Contact__c, End__c, Start__c, Approved__c, Type__c
       FROM Certification__c
       WHERE Contact__c IN :contactIds
+      ORDER BY End__c DESC
     ];
   }
-  public Certification__c create(Certification__c certs) {
-    if (certs == null)
+  public Certification__c create(Certification__c cert) {
+    if (cert == null)
       return null;
-    insert certs;
-    return certs;
+    insert cert;
+    return cert;
   }
   public List<Certification__c> create(List<Certification__c> certs) {
     if (certs == null)
@@ -38,11 +40,11 @@ public inherited sharing class CertificationRepository {
     update certs;
     return certs;
   }
-  public Certification__c modify(Certification__c certs) {
-    if (certs == null)
+  public Certification__c modify(Certification__c cert) {
+    if (cert == null)
       return null;
-    update certs;
-    return certs;
+    update cert;
+    return cert;
   }
   public List<CeuCertification__c> create(List<CeuCertification__c> ccs) {
     if (ccs == null)
