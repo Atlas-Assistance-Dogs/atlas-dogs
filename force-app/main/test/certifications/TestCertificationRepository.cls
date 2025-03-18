@@ -284,4 +284,63 @@ private class TestCertificationRepository {
     List<Certification__c> actual = repo.modify(certs);
     System.assertEquals(certs[0].Status__c, actual[0].Status__c, 'not updated');
   }
+
+  @IsTest
+  static void createCeuCerts_handlesNull() {
+    List<CeuCertification__c> data = null;
+    // Act
+    List<CeuCertification__c> actual = repo.create(data);
+    System.assertEquals(null, actual);
+  }
+
+  @IsTest
+  static void createCeuCerts_handlesEmpty() {
+    // Act
+    List<CeuCertification__c> actual = repo.create(
+      new List<CeuCertification__c>()
+    );
+    System.assert(actual.isEmpty(), 'not empty');
+  }
+
+  @IsTest
+  static void createCeuCerts_inserts() {
+    CertificationRepositoryData data = new CertificationRepositoryData();
+    // Act
+    List<CeuCertification__c> actual = repo.create(
+      new List<CeuCertification__c>{ data.cc }
+    );
+    System.assertNotEquals(null, actual[0].Id, 'no id created');
+  }
+
+  @IsTest
+  static void getCeuCerts_handlesNulls() {
+    CeuCertification__c actual = repo.get(null, null);
+    System.assertEquals(null, actual, 'returned non-null');
+  }
+
+  @IsTest
+  static void getCeuCerts_handlesWrongIds() {
+    CeuCertification__c actual = repo.get(
+      MockProvider.createId(Contact.class),
+      MockProvider.createId(Certification__c.class)
+    );
+    System.assertEquals(null, actual, 'returned non-null');
+  }
+
+  @IsTest
+  static void getCeuCerts_returnsNulL_whenNoMatch() {
+    CertificationRepositoryData data = new CertificationRepositoryData();
+    CeuCertification__c actual = repo.get(data.con1.Id, data.cert.Id);
+    System.assertEquals(null, actual, 'returned non-null');
+  }
+
+  @IsTest
+  static void getCeuCerts_returnsMatch_whenExists() {
+    CertificationRepositoryData data = new CertificationRepositoryData();
+    insert data.cc; // insert the CeuCert
+    CeuCertification__c actual = repo.get(data.ceu.Id, data.cert.Id);
+    System.assertEquals(data.ceu.Id, actual.Ceu__c);
+    System.assertEquals(data.cert.Id, actual.Certification__c);
+    System.assertEquals(data.cc.Id, actual.Id, 'returned wrong CC');
+  }
 }
