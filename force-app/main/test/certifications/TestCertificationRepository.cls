@@ -337,10 +337,12 @@ private class TestCertificationRepository {
   @IsTest
   static void getCeuCerts_returnsMatch_whenExists() {
     CertificationRepositoryData data = new CertificationRepositoryData();
-    insert data.cc; // insert the CeuCert
+    // the trigger adds a cc
     CeuCertification__c actual = repo.get(data.ceu.Id, data.cert.Id);
+    CeuCertification__c[] all = [SELECT Id FROM CeuCertification__c WHERE CEU__c = :data.ceu.Id AND Certification__c = :data.cert.Id];
+    System.assertEquals(1, all.size());
     System.assertEquals(data.ceu.Id, actual.Ceu__c);
     System.assertEquals(data.cert.Id, actual.Certification__c);
-    System.assertEquals(data.cc.Id, actual.Id, 'returned wrong CC');
+    System.assertEquals(all[0].Id, actual.Id, 'returned wrong CC');
   }
 }
