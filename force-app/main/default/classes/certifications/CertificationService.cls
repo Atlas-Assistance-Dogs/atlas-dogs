@@ -15,7 +15,10 @@ public inherited sharing class CertificationService {
     this.emailServ = emailServ;
   }
 
-  public static Map<Id, List<Ceu__c>> sortCeus(List<Ceu__c> ceus) {
+  // Create a map of CEUs by ContactId, with each contact id 
+  // having a list of the CEUs.
+  // This method is used when gathering CEUs for a list of contacts.
+  public Map<Id, List<Ceu__c>> sortCeus(List<Ceu__c> ceus) {
     Map<Id, List<Ceu__c>> contactCeuIds = new Map<Id, List<Ceu__c>>();
     for (Ceu__c ceu : ceus) {
       if (contactCeuIds.containsKey(ceu.Contact__c)) {
@@ -28,19 +31,22 @@ public inherited sharing class CertificationService {
     return contactCeuIds;
   }
 
-  public static Map<Id, List<Certification__c>> sortCertifications(
-    List<Certification__c> ceus
+  // Create a map of Certifications by ContactId, with each contact id 
+  // having a list of the Certifications.
+  // This method is used when gathering Certifications for a list of contacts.
+  public Map<Id, List<Certification__c>> sortCertifications(
+    List<Certification__c> certs
   ) {
-    Map<Id, List<Certification__c>> contactCeuIds = new Map<Id, List<Certification__c>>();
-    for (Certification__c ceu : ceus) {
-      if (contactCeuIds.containsKey(ceu.Contact__c)) {
-        List<Certification__c> contactCeus = contactCeuIds.get(ceu.Contact__c);
-        contactCeus.add(ceu);
+    Map<Id, List<Certification__c>> contactCertIds = new Map<Id, List<Certification__c>>();
+    for (Certification__c cert : certs) {
+      if (contactCertIds.containsKey(cert.Contact__c)) {
+        List<Certification__c> contactCerts = contactCertIds.get(cert.Contact__c);
+        contactCerts.add(cert);
       } else {
-        contactCeuIds.put(ceu.Contact__c, new List<Certification__c>{ ceu });
+        contactCertIds.put(cert.Contact__c, new List<Certification__c>{ cert });
       }
     }
-    return contactCeuIds;
+    return contactCertIds;
   }
 
   // add CEUs to the appropriate certifications
