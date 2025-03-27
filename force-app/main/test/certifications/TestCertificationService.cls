@@ -157,4 +157,153 @@ private class TestCertificationService {
       System.assertEquals(1, cs.size());
     }
   }
+
+  @isTest
+  static void addCeus_stops_whenNoCertifications() {
+    makeData();
+    mocks.expectedCalls.add(
+      new MockCallData(certRepo, 'getForContacts', new List<Certification__c>())
+    );
+    // act
+    service.addCeus(new List<Ceu__c>());
+    // assert
+    MockCallData createCall = mocks.actualCalls[1];
+    System.assertEquals('create', createCall.methodName, 'wrong method');
+    System.assertEquals(
+      new List<CeuCertification__c>(),
+      createCall.args[0],
+      'wrong data'
+    );
+    System.assertEquals(2, mocks.actualCalls.size(), 'wrong number of calls');
+  }
+
+  static void addCeusDoesNotAddWhenOutside(Integer outside) {
+    makeData();
+    Id contactId = MockProvider.createId(Contact.class);
+    Date startDate = Date.today().addMonths(-2);
+    Date endDate = startDate.addYears(1);
+    Date ceuDate = endDate.addDays(outside);
+    if (outside < 0) {
+        ceuDate = startDate.addDays(outside);
+    }
+    mocks.expectedCalls.add(
+      new MockCallData(
+        certRepo,
+        'getForContacts',
+        new List<Certification__c>{
+          new Certification__c(
+            Contact__c = contactId,
+            Start__c = startDate,
+            End__c = endDate,
+            Type__c = 'Trainer'
+          )
+        }
+      )
+    );
+    // act
+    service.addCeus(
+      new List<Ceu__c>{
+        new Ceu__c(
+          Contact__c = contactId,
+          DateCompleted__c = ceuDate
+        )
+      }
+    );
+    // assert
+    MockCallData createCall = mocks.actualCalls[1];
+    System.assertEquals('create', createCall.methodName, 'wrong method');
+    System.assertEquals(
+      new List<CeuCertification__c>(),
+      createCall.args[0],
+      'wrong data'
+    );
+    System.assertEquals(2, mocks.actualCalls.size(), 'wrong number of calls');
+  }
+
+  @isTest
+  static void addCeus_stops_whenCertificationsDayBefore() {
+    addCeusDoesNotAddWhenOutside(-1);
+  }
+
+  @isTest
+  static void addCeus_stops_whenCertificationsWeekBefore() {
+    addCeusDoesNotAddWhenOutside(-7);
+  }
+
+  @isTest
+  static void addCeus_stops_whenCertificationsDayAfter() {
+    addCeusDoesNotAddWhenOutside(1);
+  }
+
+  @isTest
+  static void addCeus_stops_whenCertificationsMonthsAfter() {
+    addCeusDoesNotAddWhenOutside(60);
+  }
+
+  static void addCeusAddConnector(Integer days) {
+  makeData();
+    Id contactId = MockProvider.createId(Contact.class);
+    Date startDate = Date.today().addMonths(-2);
+    Date endDate = startDate.addYears(1);
+    Id certId = MockProvider.createId(Certification__c.class);
+    Id ceuId = MockProvider.createId(Ceu__c.class);
+    mocks.expectedCalls.add(
+      new MockCallData(
+        certRepo,
+        'getForContacts',
+        new List<Certification__c>{
+          new Certification__c(
+            Contact__c = contactId,
+            Start__c = startDate,
+            End__c = endDate,
+            Type__c = 'Trainer',
+            Id = certId
+          )
+        }
+      )
+    );
+    // act
+    service.addCeus(
+      new List<Ceu__c>{
+        new Ceu__c(
+          Contact__c = contactId,
+          DateCompleted__c = startDate.addDays(1),
+          Id = ceuId,
+          Quantity__c = 5,
+          Status__c = 'Approved'
+        )
+      }
+    );
+    // assert
+    MockCallData createCall = mocks.actualCalls[1];
+    System.assertEquals('create', createCall.methodName, 'wrong method');
+    System.assertEquals(
+      new List<CeuCertification__c>{
+        new CeuCertification__c(Ceu__c = ceuId, Certification__c = certId, Approved__c = 5)
+      },
+      createCall.args[0],
+      'wrong data'
+    );
+    System.assertEquals(2, mocks.actualCalls.size(), 'wrong number of calls');
+  }
+
+  @isTest
+  static void addCeus_adds_whenCertificationInRangeBy1Day() {
+    addCeusAddConnector(1);
+  }
+
+  @isTest
+  static void addCeus_adds_whenCertificationInRangeBy0Days() {
+    addCeusAddConnector(0);
+  }
+
+  @isTest
+  static void addCeus_adds_whenCertificationInRangeBy364Days() {
+    addCeusAddConnector(364);
+  }
+
+  @isTest
+  static void addCeus_adds_whenCertificationInRangeBy365Days() {
+    addCeusAddConnector(365);
+  }
 }

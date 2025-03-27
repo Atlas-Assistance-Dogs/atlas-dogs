@@ -75,7 +75,6 @@ public inherited sharing class CertificationService {
       }
     }
     certRepo.create(ccs);
-    certRepo.modify(certs);
   }
 
   // Since there is a rollup summary an Approved, check that it is set properly
