@@ -21,10 +21,6 @@
               fake: company
     Comments__c:
       fake: sentence
-    ProgramDate__c:
-      date_between:
-        start_date: 2000-01-01
-        end_date: today
     ProgramHours__c:
       random_number:
         min: 8

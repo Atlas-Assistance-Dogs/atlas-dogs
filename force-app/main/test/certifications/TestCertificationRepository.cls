@@ -63,7 +63,6 @@ private class TestCertificationRepository {
           Comments__c = 'Comments1',
           DateCompleted__c = day,
           DateSubmitted__c = day,
-          ProgramDate__c = day,
           ProgramHours__c = 2,
           ProgramTitle__c = 'A Day in the Life of a Dog',
           Quantity__c = 2,

@@ -327,7 +327,6 @@ CREATE TABLE "CEU__c" (
 	"Comments__c" VARCHAR(255), 
 	"DateCompleted__c" VARCHAR(255), 
 	"DateSubmitted__c" VARCHAR(255), 
-	"ProgramDate__c" VARCHAR(255), 
 	"ProgramHours__c" VARCHAR(255), 
 	"ProgramTitle__c" VARCHAR(255), 
 	"Quantity__c" VARCHAR(255), 

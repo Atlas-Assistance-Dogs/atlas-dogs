@@ -26,7 +26,6 @@ public class CertificationRepositoryData {
       Comments__c = 'Comments1',
       DateCompleted__c = Date.today().addMonths(-1),
       DateSubmitted__c = Date.today().addMonths(-1),
-      ProgramDate__c = Date.today().addDays(-22),
       ProgramHours__c = 20,
       ProgramTitle__c = 'A Day in the Life of a Dog',
       Quantity__c = 20,
