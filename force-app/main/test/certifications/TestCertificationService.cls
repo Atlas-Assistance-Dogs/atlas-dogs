@@ -650,7 +650,7 @@ private class TestCertificationService {
   }
 
   @isTest
-  static void updateCertCompletesAndCreatesLaterOutsideLeeway() {
+  static void updateCertCompletesAndCreatesLaterAfterLeeway() {
     makeData();
     Contact person = new Contact(Id = MockProvider.createId(Contact.class));
     Date certDate = Date.today();
@@ -725,5 +725,34 @@ private class TestCertificationService {
       create.args[0],
       'wrong create arg data'
     );
+  }
+
+  @isTest
+  static void updateCert_leavesCurrent_whenBeforeLeeway() {
+    makeData();
+    Contact person = new Contact(Id = MockProvider.createId(Contact.class));
+    Date certDate = Date.today();
+    Date newCertDate = certDate.addDays(-91);
+    Certification__c cert = new Certification__c(
+      Contact__c = person.Id,
+      Type__c = 'Facilitator',
+      Status__c = 'Active',
+      Start__c = certDate.addYears(-1),
+      End__c = certDate
+    );
+    mocks.expectedCalls.add(new MockCallData(certRepo, 'getActiveCert', cert));
+    // act
+    Certification__c actual = service.updateCert(
+      person,
+      'Facilitator',
+      certDate,
+      newCertDate
+    );
+    // assert
+    System.assertEquals(cert,
+      actual,
+      'wrong return'
+    );
+    System.assertEquals(1, mocks.actualCalls.size(), 'wrong number of calls');
   }
 }

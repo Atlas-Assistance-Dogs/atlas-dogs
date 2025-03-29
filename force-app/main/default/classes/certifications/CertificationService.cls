@@ -207,7 +207,7 @@ public inherited sharing class CertificationService {
       );
       return cert;
     }
-    return null;
+    return cert;
   }
 
   public void remindFacilitatorsToGetCeus() {
