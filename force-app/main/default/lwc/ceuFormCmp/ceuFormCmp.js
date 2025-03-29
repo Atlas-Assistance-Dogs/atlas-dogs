@@ -10,7 +10,6 @@ import AUTHORITY_OTHER_FIELD from "@salesforce/schema/CEU__c.AuthorityOther__c";
 import COMMENTS_FIELD from "@salesforce/schema/CEU__c.Comments__c";
 import DATE_COMPLETED_FIELD from "@salesforce/schema/CEU__c.DateCompleted__c";
 import DATE_SUBMITTED_FIELD from "@salesforce/schema/CEU__c.DateSubmitted__c";
-import PROGRAM_DATE_FIELD from "@salesforce/schema/CEU__c.ProgramDate__c";
 import PROGRAM_HOURS_FIELD from "@salesforce/schema/CEU__c.ProgramHours__c";
 import PROGRAM_TITLE_FIELD from "@salesforce/schema/CEU__c.ProgramTitle__c";
 import QUANTITY_FIELD from "@salesforce/schema/CEU__c.Quantity__c";
@@ -46,7 +45,6 @@ export default class CeuFormCmp extends NavigationMixin(LightningElement) {
     comments: COMMENTS_FIELD,
     dateCompleted: DATE_COMPLETED_FIELD,
     dateSubmitted: DATE_SUBMITTED_FIELD,
-    programDate: PROGRAM_DATE_FIELD,
     programHours: PROGRAM_HOURS_FIELD,
     programTitle: PROGRAM_TITLE_FIELD,
     quantity: QUANTITY_FIELD,

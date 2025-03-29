@@ -527,7 +527,6 @@ Insert CEU__c:
   - Comments__c
   - DateCompleted__c
   - DateSubmitted__c
-  - ProgramDate__c
   - ProgramHours__c
   - ProgramTitle__c
   - Quantity__c

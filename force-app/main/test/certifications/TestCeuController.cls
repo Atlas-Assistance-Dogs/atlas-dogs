@@ -20,7 +20,6 @@ public with sharing class TestCeuController {
       Comments__c = 'Comments1',
       DateCompleted__c = Date.today().addMonths(-1),
       DateSubmitted__c = Date.today().addMonths(-1),
-      ProgramDate__c = Date.today().addDays(-22),
       ProgramHours__c = 20,
       ProgramTitle__c = 'A Day in the Life of a Dog',
       Quantity__c = 20,
@@ -35,7 +34,6 @@ public with sharing class TestCeuController {
       Comments__c = 'Comments2',
       DateCompleted__c = Date.today().addMonths(-2),
       DateSubmitted__c = Date.today().addMonths(-2),
-      ProgramDate__c = Date.today().addDays(-20),
       ProgramHours__c = 10,
       ProgramTitle__c = 'A Day in the Life of a Trainer',
       Quantity__c = 2,
@@ -50,7 +48,6 @@ public with sharing class TestCeuController {
       Comments__c = 'Comments3',
       DateCompleted__c = Date.today().addMonths(-3),
       DateSubmitted__c = Date.today().addMonths(-3),
-      ProgramDate__c = Date.today().addDays(-30),
       ProgramHours__c = 30,
       ProgramTitle__c = 'A Day in the Life of a Cookie',
       Quantity__c = 3,
@@ -68,7 +65,6 @@ public with sharing class TestCeuController {
     System.assertEquals(expected.Comments__c, actual.Comments__c);
     System.assertEquals(expected.DateCompleted__c, actual.DateCompleted__c);
     System.assertEquals(expected.DateSubmitted__c, actual.DateSubmitted__c);
-    System.assertEquals(expected.ProgramDate__c, actual.ProgramDate__c);
     System.assertEquals(expected.ProgramHours__c, actual.ProgramHours__c);
     System.assertEquals(expected.ProgramTitle__c, actual.ProgramTitle__c);
     System.assertEquals(expected.Quantity__c, actual.Quantity__c);
@@ -82,7 +78,7 @@ public with sharing class TestCeuController {
     RelatedObjects ceus = CEUController.getRelatedCeus(ace.Id, 10);
 
     System.assertEquals(1, ceus.items.size(), 'Wrong number of CEUs');
-    System.assertEquals(1, ceus.total);
+    System.assertEquals(1, ceus.total, 'wrong CEU total');
     CEU__c ceu = (CEU__c) ceus.items[0];
     ceusMatch(aceCeu, ceu);
   }

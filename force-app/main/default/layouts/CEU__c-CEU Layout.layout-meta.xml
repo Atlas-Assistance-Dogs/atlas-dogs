@@ -24,10 +24,6 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Required</behavior>
-                <field>ProgramDate__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Required</behavior>
                 <field>ProgramTitle__c</field>
             </layoutItems>
             <layoutItems>
@@ -79,7 +75,6 @@
         <fields>Role__c</fields>
         <fields>DateCompleted__c</fields>
         <fields>DateSubmitted__c</fields>
-        <fields>ProgramDate__c</fields>
         <fields>ProgramTitle__c</fields>
         <fields>Quantity__c</fields>
     </miniLayout>
