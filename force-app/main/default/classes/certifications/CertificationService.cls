@@ -15,7 +15,7 @@ public inherited sharing class CertificationService {
     this.emailServ = emailServ;
   }
 
-  // Create a map of CEUs by ContactId, with each contact id 
+  // Create a map of CEUs by ContactId, with each contact id
   // having a list of the CEUs.
   // This method is used when gathering CEUs for a list of contacts.
   public Map<Id, List<Ceu__c>> sortCeus(List<Ceu__c> ceus) {
@@ -31,7 +31,7 @@ public inherited sharing class CertificationService {
     return contactCeuIds;
   }
 
-  // Create a map of Certifications by ContactId, with each contact id 
+  // Create a map of Certifications by ContactId, with each contact id
   // having a list of the Certifications.
   // This method is used when gathering Certifications for a list of contacts.
   public Map<Id, List<Certification__c>> sortCertifications(
@@ -40,7 +40,9 @@ public inherited sharing class CertificationService {
     Map<Id, List<Certification__c>> contactCertIds = new Map<Id, List<Certification__c>>();
     for (Certification__c cert : certs) {
       if (contactCertIds.containsKey(cert.Contact__c)) {
-        List<Certification__c> contactCerts = contactCertIds.get(cert.Contact__c);
+        List<Certification__c> contactCerts = contactCertIds.get(
+          cert.Contact__c
+        );
         contactCerts.add(cert);
       } else {
         contactCertIds.put(cert.Contact__c, new List<Certification__c>{ cert });
@@ -77,10 +79,10 @@ public inherited sharing class CertificationService {
     certRepo.create(ccs);
   }
 
-  // Since there is a rollup summary an Approved, check that it is set properly
+  // Since there is a rollup summary on Approved, check that it is set properly
   // We will not worry about changing the certification at this time, since
   // that is not likely to happen
-  public void updateCeus(List<Ceu__c> ceus, Map<Id, Ceu__c> old) {
+  public void updateCeus(List<Ceu__c> ceus) {
     List<CeuCertification__c> ccs = certRepo.getCeuCerts(ceus);
 
     for (CeuCertification__c cc : ccs) {
@@ -93,7 +95,7 @@ public inherited sharing class CertificationService {
     certRepo.modify(ccs);
   }
 
-  private class Dates {
+  private inherited sharing class Dates {
     public Integer years { get; set; }
     public Integer early { get; set; }
     public Integer leeway { get; set; }
@@ -125,45 +127,57 @@ public inherited sharing class CertificationService {
     }
   }
 
+  /* This is called when a new certification agreement is received for a contact.
+   * If this is the first certification for the contact (identified by validUntil being null),
+   *   Creates a new certification and exits.
+   * It update the current certification (if there is an active one, otherwise it creates a cert for the just-completed period)
+   *   If the new certDate is within the leeway period, it completes the old cert and creates a new one starting when the old ends.
+   *   If the new certDate is after the leeway, it completes the old cert and creates a new one starting on the certDate
+   *   If the new certDate is somewhere else, it leaves the current cert in effect.
+   */
   public Certification__c updateCert(
     Contact person,
     String type,
-    Date validUntil,
+    Date validUntil, // date the most recent cert was valid until
     Date certDate
   ) {
-    Certification__c cert = certRepo.getActiveCert(person.Id, type);
+    // date the latest agreement was received
     Dates dates = new Dates();
-    if (cert == null) {
-      if (validUntil == null) {
-        // create cert and exit
-        cert = certRepo.create(
-          new Certification__c(
-            Contact__c = person.Id,
-            Type__c = type,
-            Status__c = 'Active',
-            Start__c = certDate,
-            End__c = certDate.addYears(dates.years)
-          )
-        );
-        return cert;
-      } else {
-        // create cert for current validUntil and continue
-        cert = certRepo.create(
-          new Certification__c(
-            Contact__c = person.Id,
-            Type__c = type,
-            Status__c = 'Active',
-            Start__c = validUntil.addYears(-dates.years),
-            End__c = validUntil
-          )
-        );
-      }
+    Certification__c cert;
+    if (validUntil == null) {
+      // create cert and exit
+      cert = certRepo.create(
+        new Certification__c(
+          Contact__c = person.Id,
+          Type__c = type,
+          Status__c = 'Active',
+          Start__c = certDate,
+          End__c = certDate.addYears(dates.years)
+        )
+      );
+      return cert;
     }
-    Integer days = certDate.daysBetween(cert.End__c);
+
+    cert = certRepo.getActiveCert(person.Id, type);
+    if (cert == null) {
+      // create cert for current validUntil and continue
+      cert = certRepo.create(
+        new Certification__c(
+          Contact__c = person.Id,
+          Type__c = type,
+          Status__c = 'Active',
+          Start__c = validUntil.addYears(-dates.years),
+          End__c = validUntil
+        )
+      );
+    }
+
+    Integer days = cert.End__c.daysBetween(certDate);
     if (days >= -dates.early && days <= dates.leeway) {
       // complete old cert
       cert.Status__c = 'Complete';
       certRepo.modify(cert);
+      System.debug('completing old cert');
 
       cert = certRepo.create(
         new Certification__c(

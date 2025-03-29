@@ -184,7 +184,7 @@ private class TestCertificationService {
     Date endDate = startDate.addYears(1);
     Date ceuDate = endDate.addDays(outside);
     if (outside < 0) {
-        ceuDate = startDate.addDays(outside);
+      ceuDate = startDate.addDays(outside);
     }
     mocks.expectedCalls.add(
       new MockCallData(
@@ -203,10 +203,7 @@ private class TestCertificationService {
     // act
     service.addCeus(
       new List<Ceu__c>{
-        new Ceu__c(
-          Contact__c = contactId,
-          DateCompleted__c = ceuDate
-        )
+        new Ceu__c(Contact__c = contactId, DateCompleted__c = ceuDate)
       }
     );
     // assert
@@ -241,7 +238,7 @@ private class TestCertificationService {
   }
 
   static void addCeusAddConnector(Integer days) {
-  makeData();
+    makeData();
     Id contactId = MockProvider.createId(Contact.class);
     Date startDate = Date.today().addMonths(-2);
     Date endDate = startDate.addYears(1);
@@ -267,7 +264,7 @@ private class TestCertificationService {
       new List<Ceu__c>{
         new Ceu__c(
           Contact__c = contactId,
-          DateCompleted__c = startDate.addDays(1),
+          DateCompleted__c = startDate.addDays(days),
           Id = ceuId,
           Quantity__c = 5,
           Status__c = 'Approved'
@@ -279,7 +276,11 @@ private class TestCertificationService {
     System.assertEquals('create', createCall.methodName, 'wrong method');
     System.assertEquals(
       new List<CeuCertification__c>{
-        new CeuCertification__c(Ceu__c = ceuId, Certification__c = certId, Approved__c = 5)
+        new CeuCertification__c(
+          Ceu__c = ceuId,
+          Certification__c = certId,
+          Approved__c = 5
+        )
       },
       createCall.args[0],
       'wrong data'
@@ -305,5 +306,424 @@ private class TestCertificationService {
   @isTest
   static void addCeus_adds_whenCertificationInRangeBy365Days() {
     addCeusAddConnector(365);
+  }
+
+  // verify the CEU is added to both certs in range.
+  // days is only valid from startDate + 10 to endDate
+  static void addCeusAddsConnectorToBothCerts(Integer days, Integer[] matches) {
+    makeData();
+    Id contactId = MockProvider.createId(Contact.class);
+    Date startDate = Date.today().addMonths(-2);
+    Date endDate = startDate.addYears(1);
+    Id ceuId = MockProvider.createId(Ceu__c.class);
+    List<Certification__c> certs = new List<Certification__c>{
+      new Certification__c(
+        Contact__c = contactId,
+        Start__c = startDate,
+        End__c = endDate,
+        Type__c = 'Trainer',
+        Id = MockProvider.createId(Certification__c.class)
+      ),
+      new Certification__c(
+        Contact__c = contactId,
+        Start__c = startDate.addDays(10),
+        End__c = endDate.addDays(10),
+        Type__c = 'Facilitator',
+        Id = MockProvider.createId(Certification__c.class)
+      )
+    };
+    mocks.expectedCalls.add(
+      new MockCallData(certRepo, 'getForContacts', certs)
+    );
+    // act
+    service.addCeus(
+      new List<Ceu__c>{
+        new Ceu__c(
+          Contact__c = contactId,
+          DateCompleted__c = startDate.addDays(days),
+          Id = ceuId,
+          Quantity__c = 5,
+          Status__c = 'Approved'
+        )
+      }
+    );
+    // assert
+    MockCallData createCall = mocks.actualCalls[1];
+    System.assertEquals('create', createCall.methodName, 'wrong method');
+    List<CeuCertification__c> ccs = (List<CeuCertification__c>) createCall.args[0];
+    System.assertEquals(2, mocks.actualCalls.size(), 'wrong number of calls');
+    if (matches == null) {
+      System.assertEquals(0, ccs.size(), 'ccs should not be created');
+      return;
+    }
+    System.assertEquals(matches.size(), ccs.size());
+    for (Integer i = 0; i < matches.size(); i++) {
+      System.assertEquals(
+        new CeuCertification__c(
+          Ceu__c = ceuId,
+          Certification__c = certs[matches[i]].Id,
+          Approved__c = 5
+        ),
+        ccs[i],
+        'wrong data'
+      );
+    }
+  }
+
+  @isTest
+  static void addCeus_addsToBoth_whenCertificationInRange() {
+    addCeusAddsConnectorToBothCerts(10, new List<Integer>{ 0, 1 });
+  }
+
+  @isTest
+  static void addCeus_addsToBoth_whenCertificationInMiddleOfRange() {
+    addCeusAddsConnectorToBothCerts(100, new List<Integer>{ 0, 1 });
+  }
+
+  @isTest
+  static void addCeus_addsToBoth_whenCertificationAtEndOfRange1() {
+    addCeusAddsConnectorToBothCerts(365, new List<Integer>{ 0, 1 });
+  }
+
+  @isTest
+  static void addCeus_addsToNeither_whenCertificationOutOfRange() {
+    addCeusAddsConnectorToBothCerts(-1, null);
+  }
+
+  @isTest
+  static void addCeus_addsToFirst() {
+    addCeusAddsConnectorToBothCerts(9, new List<Integer>{ 0 });
+  }
+
+  @isTest
+  static void addCeus_addsToSecond() {
+    addCeusAddsConnectorToBothCerts(366, new List<Integer>{ 1 });
+  }
+
+  @isTest
+  static void updateCeus_updatesQuantity_whenPassed() {
+    makeData();
+
+    List<CeuCertification__c> ccs = new List<CeuCertification__c>{
+      new CeuCertification__c(
+        Id = MockProvider.createId(CeuCertification__c.class),
+        Approved__c = 2,
+        CEU__r = new Ceu__c(
+          Id = MockProvider.createid(Ceu__c.class),
+          Status__c = 'Approved',
+          Quantity__c = 4
+        )
+      ),
+      new CeuCertification__c(
+        Id = MockProvider.createId(CeuCertification__c.class),
+        Approved__c = 2,
+        CEU__r = new Ceu__c(
+          Id = MockProvider.createid(Ceu__c.class),
+          Status__c = 'Pending',
+          Quantity__c = 4
+        )
+      )
+    };
+    mocks.expectedCalls.add(new MockCallData(certRepo, 'getCeuCerts', ccs));
+    // act
+    service.updateCeus(new List<Ceu__c>());
+    // assert
+    MockCallData updateCall = mocks.actualCalls[1];
+    System.assertEquals('modify', updateCall.methodName, 'wrong method');
+    List<CeuCertification__c> updatedCcs = (List<CeuCertification__c>) updateCall.args[0];
+    System.assertEquals(2, mocks.actualCalls.size(), 'wrong number of calls');
+    System.assertEquals(
+      ccs.size(),
+      updatedCcs.size(),
+      'wrong number of records'
+    );
+    System.assertEquals(
+      4,
+      updatedCcs[0].Approved__c,
+      'did not update approved'
+    );
+    System.assertEquals(0, updatedCcs[1].Approved__c, 'did not reset approved');
+  }
+
+  @isTest
+  static void updateCert_creates_whenNone() {
+    makeData();
+    Contact person = new Contact(Id = MockProvider.createId(Contact.class));
+    Date certDate = Date.today();
+    Certification__c cert = new Certification__c(
+      Contact__c = person.Id,
+      Type__c = 'Trainer',
+      Status__c = 'Active',
+      Start__c = certDate,
+      End__c = certDate.addYears(1)
+    );
+    mocks.expectedCalls.add(new MockCallData(certRepo, 'create', cert));
+    // act
+    Certification__c actual = service.updateCert(
+      person,
+      'Trainer',
+      null,
+      certDate
+    );
+    // assert
+    System.assertEquals(cert, actual, 'wrong return');
+    MockCallData createCall = mocks.actualCalls[0];
+    System.assertEquals(cert, createCall.args[0], 'wrong data');
+  }
+
+  @isTest
+  static void updateCert_createsOffValidUntil_whenNone() {
+    makeData();
+    Contact person = new Contact(Id = MockProvider.createId(Contact.class));
+    Date certDate = Date.today();
+    Certification__c cert = new Certification__c(
+      Contact__c = person.Id,
+      Type__c = 'Facilitator',
+      Status__c = 'Active',
+      Start__c = certDate.addYears(-1),
+      End__c = certDate
+    );
+    mocks.expectedCalls.add(new MockCallData(certRepo, 'getActiveCert', null));
+    mocks.expectedCalls.add(new MockCallData(certRepo, 'create', cert));
+    mocks.expectedCalls.add(
+      new MockCallData(
+        certRepo,
+        'modify',
+        new Certification__c(
+          Contact__c = person.Id,
+          Type__c = 'Facilitator',
+          Status__c = 'Complete',
+          Start__c = certDate.addYears(-1),
+          End__c = certDate
+        )
+      )
+    );
+    mocks.expectedCalls.add(
+      new MockCallData(
+        certRepo,
+        'create',
+        new Certification__c(
+          Contact__c = person.Id,
+          Type__c = 'Facilitator',
+          Status__c = 'Active',
+          Start__c = certDate,
+          End__c = certDate.addYears(1)
+        )
+      )
+    );
+    // act
+    Certification__c actual = service.updateCert(
+      person,
+      'Facilitator',
+      certDate,
+      certDate
+    );
+    // assert
+    System.assertEquals(cert, actual, 'wrong return');
+    MockCallData createCall = mocks.actualCalls[1];
+    System.assertEquals('create', createCall.methodName, 'wrong call');
+    // re-creating the certification object because the method is changing the object returned by the mock
+    System.assertEquals(
+      new Certification__c(
+        Contact__c = person.Id,
+        Type__c = 'Facilitator',
+        Status__c = 'Active',
+        Start__c = certDate.addYears(-1),
+        End__c = certDate
+      ),
+      createCall.args[0],
+      'wrong first create arg data'
+    );
+    MockCallData modifyCall = mocks.actualCalls[2];
+    System.assertEquals('modify', modifyCall.methodName, 'wrong call');
+    System.assertEquals(cert, modifyCall.args[0], 'wrong update data');
+    MockCallData secondCreate = mocks.actualCalls[3];
+    System.assertEquals('create', secondCreate.methodName, 'wrong call');
+    // re-creating the certification object because the method is changing the object returned by the mock
+    System.assertEquals(
+      new Certification__c(
+        Contact__c = person.Id,
+        Type__c = 'Facilitator',
+        Status__c = 'Active',
+        Start__c = certDate,
+        End__c = certDate.addYears(1)
+      ),
+      secondCreate.args[0],
+      'wrong second create arg data'
+    );
+  }
+
+  static void updateCertCompletesAndCreatesNextWithinLeeway(Integer offset) {
+    makeData();
+    Contact person = new Contact(Id = MockProvider.createId(Contact.class));
+    Date certDate = Date.today();
+    Certification__c cert = new Certification__c(
+      Contact__c = person.Id,
+      Type__c = 'Facilitator',
+      Status__c = 'Active',
+      Start__c = certDate.addYears(-1),
+      End__c = certDate
+    );
+    mocks.expectedCalls.add(new MockCallData(certRepo, 'getActiveCert', cert));
+    mocks.expectedCalls.add(
+      new MockCallData(
+        certRepo,
+        'modify',
+        new Certification__c(
+          Contact__c = person.Id,
+          Type__c = 'Facilitator',
+          Status__c = 'Complete',
+          Start__c = certDate.addYears(-1),
+          End__c = certDate
+        )
+      )
+    );
+    mocks.expectedCalls.add(
+      new MockCallData(
+        certRepo,
+        'create',
+        new Certification__c(
+          Contact__c = person.Id,
+          Type__c = 'Facilitator',
+          Status__c = 'Active',
+          Start__c = certDate,
+          End__c = certDate.addYears(1)
+        )
+      )
+    );
+    // act
+    Certification__c actual = service.updateCert(
+      person,
+      'Facilitator',
+      certDate,
+      certDate.addDays(offset)
+    );
+    // assert
+    System.assertEquals(
+      new Certification__c(
+        Contact__c = person.Id,
+        Type__c = 'Facilitator',
+        Status__c = 'Active',
+        Start__c = Date.today(),
+        End__c = Date.today().addYears(1)
+      ),
+      actual,
+      'wrong return'
+    );
+    MockCallData modifyCall = mocks.actualCalls[1];
+    System.assertEquals('modify', modifyCall.methodName, 'wrong call');
+    System.assertEquals(cert, modifyCall.args[0], 'wrong update data');
+    MockCallData create = mocks.actualCalls[2];
+    System.assertEquals('create', create.methodName, 'wrong call');
+    // re-creating the certification object because the method is changing the object returned by the mock
+    System.assertEquals(
+      new Certification__c(
+        Contact__c = person.Id,
+        Type__c = 'Facilitator',
+        Status__c = 'Active',
+        Start__c = certDate,
+        End__c = certDate.addYears(1)
+      ),
+      create.args[0],
+      'wrong create arg data'
+    );
+  }
+
+  @isTest
+  static void updateCert_creates_whenOnRenewDate() {
+    updateCertCompletesAndCreatesNextWithinLeeway(0);
+  }
+
+  @isTest
+  static void updateCert_creates_when30DaysEarly() {
+    updateCertCompletesAndCreatesNextWithinLeeway(-30);
+  }
+
+  @isTest
+  static void updateCert_creates_when89DaysEarly() {
+    updateCertCompletesAndCreatesNextWithinLeeway(-89);
+  }
+
+  @isTest
+  static void updateCert_creates_whenSuperLate() {
+    updateCertCompletesAndCreatesNextWithinLeeway(30);
+  }
+
+  @isTest
+  static void updateCertCompletesAndCreatesLaterOutsideLeeway() {
+    makeData();
+    Contact person = new Contact(Id = MockProvider.createId(Contact.class));
+    Date certDate = Date.today();
+    Date newCertDate = certDate.addDays(91);
+    Certification__c cert = new Certification__c(
+      Contact__c = person.Id,
+      Type__c = 'Facilitator',
+      Status__c = 'Active',
+      Start__c = certDate.addYears(-1),
+      End__c = certDate
+    );
+    mocks.expectedCalls.add(new MockCallData(certRepo, 'getActiveCert', cert));
+    mocks.expectedCalls.add(
+      new MockCallData(
+        certRepo,
+        'modify',
+        new Certification__c(
+          Contact__c = person.Id,
+          Type__c = 'Facilitator',
+          Status__c = 'Complete',
+          Start__c = certDate.addYears(-1),
+          End__c = certDate
+        )
+      )
+    );
+    mocks.expectedCalls.add(
+      new MockCallData(
+        certRepo,
+        'create',
+        new Certification__c(
+          Contact__c = person.Id,
+          Type__c = 'Facilitator',
+          Status__c = 'Active',
+          Start__c = newCertDate,
+          End__c = newCertDate.addYears(1)
+        )
+      )
+    );
+    // act
+    Certification__c actual = service.updateCert(
+      person,
+      'Facilitator',
+      certDate,
+      newCertDate
+    );
+    // assert
+    System.assertEquals(
+      new Certification__c(
+        Contact__c = person.Id,
+        Type__c = 'Facilitator',
+        Status__c = 'Active',
+        Start__c = newCertDate,
+        End__c = newCertDate.addYears(1)
+      ),
+      actual,
+      'wrong return'
+    );
+    MockCallData modifyCall = mocks.actualCalls[1];
+    System.assertEquals('modify', modifyCall.methodName, 'wrong call');
+    System.assertEquals(cert, modifyCall.args[0], 'wrong update data');
+    MockCallData create = mocks.actualCalls[2];
+    System.assertEquals('create', create.methodName, 'wrong call');
+    // re-creating the certification object because the method is changing the object returned by the mock
+    System.assertEquals(
+      new Certification__c(
+        Contact__c = person.Id,
+        Type__c = 'Facilitator',
+        Status__c = 'Active',
+        Start__c = newCertDate,
+        End__c = newCertDate.addYears(1)
+      ),
+      create.args[0],
+      'wrong create arg data'
+    );
   }
 }
