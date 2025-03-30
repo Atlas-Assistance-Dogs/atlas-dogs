@@ -409,7 +409,13 @@ private class TestCertificationService {
         CEU__r = new Ceu__c(
           Id = MockProvider.createid(Ceu__c.class),
           Status__c = 'Approved',
-          Quantity__c = 4
+          Quantity__c = 4,
+          DateCompleted__c = Date.today()
+        ),
+        Certification__r = new Certification__c(
+          Id = MockProvider.createId(Certification__c.class),
+          Start__c = Date.today().addMonths(-1),
+          End__c = Date.today().addMonths(11)
         )
       ),
       new CeuCertification__c(
@@ -418,7 +424,13 @@ private class TestCertificationService {
         CEU__r = new Ceu__c(
           Id = MockProvider.createid(Ceu__c.class),
           Status__c = 'Pending',
-          Quantity__c = 4
+          Quantity__c = 4,
+          DateCompleted__c = Date.today()
+        ),
+        Certification__r = new Certification__c(
+          Id = MockProvider.createId(Certification__c.class),
+          Start__c = Date.today().addMonths(-1),
+          End__c = Date.today().addMonths(11)
         )
       )
     };
@@ -441,6 +453,108 @@ private class TestCertificationService {
       'did not update approved'
     );
     System.assertEquals(0, updatedCcs[1].Approved__c, 'did not reset approved');
+  }
+
+  @isTest
+  static void updateCeus_updatesConnection_whenDateChanged() {
+    makeData();
+    Id contactId = MockProvider.createId(Contact.class);
+    Certification__c[] certs = new List<Certification__c>{
+      new Certification__c(
+        Id = MockProvider.createId(Certification__c.class),
+        Contact__c = contactId,
+        Start__c = Date.today().addMonths(-14),
+        End__c = Date.today().addMonths(-2)
+      ),
+      new Certification__c(
+        Id = MockProvider.createId(Certification__c.class),
+        Contact__c = contactId,
+        Start__c = Date.today().addMonths(-2),
+        End__c = Date.today().addMonths(10)
+      )
+    };
+
+    CeuCertification__c cc = new CeuCertification__c(
+      Id = MockProvider.createId(CeuCertification__c.class),
+      Approved__c = 2,
+      CEU__r = new Ceu__c(
+        Id = MockProvider.createid(Ceu__c.class),
+        Contact__c = contactId,
+        Status__c = 'Approved',
+        Quantity__c = 4,
+        DateCompleted__c = Date.today().addMonths(-3)
+      ),
+      Certification__c = certs[1].Id,
+      Certification__r = certs[1]
+    );
+    List<CeuCertification__c> ccs = new List<CeuCertification__c>{ cc };
+    List<Ceu__c> ceus = new List<Ceu__c>{ ccs[0].Ceu__r };
+    mocks.expectedCalls.add(new MockCallData(certRepo, 'getCeuCerts', ccs));
+    mocks.expectedCalls.add(
+      new MockCallData(certRepo, 'getForContacts', certs)
+    );
+    // act
+    service.updateCeus(ceus);
+    // assert
+    System.assertEquals(
+      ceus,
+      mocks.actualCalls[0].args[0],
+      'wrong data sent to getCeuCerts'
+    );
+    List<CeuCertification__c> updated = (List<CeuCertification__c>)mocks.actualCalls[2].args[0];
+    System.assertEquals(1, updated.size(), 'wrong number updated');
+    CeuCertification__c actual = updated[0];
+    System.assertEquals(cc.Id, actual.Id, 'wrong cc');
+    System.assertEquals(cc.Ceu__c, actual.Ceu__c, 'wrong CEU');
+    System.assertEquals(certs[0].Id, actual.Certification__c, 'wrong certification');
+    System.assertEquals(cc.Approved__c, actual.Approved__c, 'approved count changed');
+  }
+
+  @isTest
+  static void updateCeus_removesConnection_whenDateChangedOutOfCert() {
+    makeData();
+    Id contactId = MockProvider.createId(Contact.class);
+    Certification__c[] certs = new List<Certification__c>{
+      new Certification__c(
+        Id = MockProvider.createId(Certification__c.class),
+        Contact__c = contactId,
+        Start__c = Date.today().addMonths(-14),
+        End__c = Date.today().addMonths(-2)
+      )
+    };
+
+    CeuCertification__c cc = new CeuCertification__c(
+      Id = MockProvider.createId(CeuCertification__c.class),
+      Approved__c = 2,
+      CEU__r = new Ceu__c(
+        Id = MockProvider.createid(Ceu__c.class),
+        Contact__c = contactId,
+        Status__c = 'Approved',
+        Quantity__c = 4,
+        DateCompleted__c = Date.today().addMonths(1)
+      ),
+      Certification__c = certs[0].Id,
+      Certification__r = certs[0]
+    );
+    List<CeuCertification__c> ccs = new List<CeuCertification__c>{ cc };
+    List<Ceu__c> ceus = new List<Ceu__c>{ cc.Ceu__r };
+    mocks.expectedCalls.add(new MockCallData(certRepo, 'getCeuCerts', ccs));
+    mocks.expectedCalls.add(
+      new MockCallData(certRepo, 'getForContacts', certs)
+    );
+    // act
+    service.updateCeus(ceus);
+    // assert
+    System.assertEquals(
+      ceus,
+      mocks.actualCalls[0].args[0],
+      'wrong data sent to getCeuCerts'
+    );
+    System.assertEquals('remove', mocks.actualCalls[2].methodName, 'not removing bad');
+    List<CeuCertification__c> deleted = (List<CeuCertification__c>)mocks.actualCalls[2].args[0];
+    System.assertEquals(1, deleted.size(), 'wrong number deleted');
+    CeuCertification__c actual = deleted[0];
+    System.assertEquals(cc.Id, actual.Id, 'wrong cc');
   }
 
   @isTest

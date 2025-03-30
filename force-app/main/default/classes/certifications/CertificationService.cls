@@ -84,6 +84,9 @@ public inherited sharing class CertificationService {
   // that is not likely to happen
   public void updateCeus(List<Ceu__c> ceus) {
     List<CeuCertification__c> ccs = certRepo.getCeuCerts(ceus);
+    List<CeuCertification__c> goodConnections = new List<CeuCertification__c>();
+    List<CeuCertification__c> badConnections = new List<CeuCertification__c>();
+    Set<Id> contactIds = new Set<Id>();
 
     for (CeuCertification__c cc : ccs) {
       if (cc.Ceu__r.Status__c == 'Approved') {
@@ -91,8 +94,54 @@ public inherited sharing class CertificationService {
       } else {
         cc.Approved__c = 0;
       }
+      if (
+        cc.Ceu__r.DateCompleted__c >= cc.Certification__r.Start__c &&
+        cc.Ceu__r.DateCompleted__c <= cc.Certification__r.End__c
+      ) {
+        goodConnections.add(cc);
+      } else {
+        badConnections.add(cc);
+        contactIds.add(cc.Ceu__r.Contact__c);
+      }
     }
-    certRepo.modify(ccs);
+    // note that the CeuCertifications in badConnections are references,
+    // so correcting them here also corrects them in the ccs list.
+    if (!badConnections.isEmpty()) {
+      goodConnections.addAll(correctConnections(badConnections, contactIds));
+    }
+
+    // Now use the repo to flag CEUs that are tied to the wrong Certification
+    certRepo.modify(goodConnections);
+  }
+
+  // note that the CeuCertifications in badConnections are references,
+  // so correcting them here also corrects them in the ccs list.
+  private List<CeuCertification__c> correctConnections(
+    List<CeuCertification__c> badConnections,
+    Set<Id> contactIds
+  ) {
+    List<CeuCertification__c> loose = new List<CeuCertification__c>();
+    List<CeuCertification__c> corrected = new List<CeuCertification__c>();
+    List<Certification__c> certs = certRepo.getForContacts(contactIds);
+    for (CeuCertification__c cc : badConnections) {
+      Ceu__c ceu1 = cc.Ceu__r;
+      for (Certification__c cert : certs) {
+        if (
+          ceu1.Contact__c == cert.Contact__c &&
+          ceu1.DateCompleted__c >= cert.Start__c &&
+          ceu1.DateCompleted__c <= cert.End__c
+        ) {
+          cc.Certification__c = cert.Id;
+          corrected.add(cc);
+        } else {
+          loose.add(cc);
+        }
+      }
+    }
+    if (!loose.isEmpty()) {
+      certRepo.remove(loose);
+    }
+    return corrected;
   }
 
   private inherited sharing class Dates {
