@@ -747,10 +747,81 @@ private class TestCertificationService {
       newCertDate
     );
     // assert
-    System.assertEquals(cert,
-      actual,
-      'wrong return'
-    );
+    System.assertEquals(cert, actual, 'wrong return');
     System.assertEquals(1, mocks.actualCalls.size(), 'wrong number of calls');
+  }
+
+  @isTest
+  static void remindFacilitatorsToGetCeus_doesNothing_whenNoCerts() {
+    makeData();
+    mocks.expectedCalls.add(
+      new MockCallData(
+        certRepo,
+        'getActiveFacilitatorCerts',
+        new List<Certification__c>()
+      )
+    );
+    // act
+    service.remindFacilitatorsToGetCeus();
+    // assert
+    System.assertEquals(1, mocks.actualCalls.size(), 'too many calls');
+  }
+
+  @isTest
+  static void remindFacilitatorsToGetCeus_email_whenCerts() {
+    makeData();
+    Certification__c[] certs = new List<Certification__c>{
+      new Certification__c(
+        Contact__c = MockProvider.createId(Contact.class),
+        Type__c = 'Facilitator',
+        Status__c = 'Active',
+        Start__c = Date.today(),
+        End__c = Date.today().addYears(1)
+      ),
+      new Certification__c(
+        Contact__c = MockProvider.createId(Contact.class),
+        Type__c = 'Facilitator',
+        Status__c = 'Active',
+        Start__c = Date.today().addMonths(1),
+        End__c = Date.today().addYears(1).addMonths(1)
+      )
+    };
+    Id emailId = MockProvider.createId(OrgWideEmailAddress.class);
+    Id templateId = MockProvider.createId(EmailTemplate.class);
+    mocks.expectedCalls.add(
+      new MockCallData(certRepo, 'getActiveFacilitatorCerts', certs)
+    );
+    mocks.expectedCalls.add(
+      new MockCallData(emailSrv, 'getOrgEmailAddressId', emailId)
+    );
+    mocks.expectedCalls.add(
+      new MockCallData(
+        emailSrv,
+        'getTemplate',
+        new EmailTemplate(Id = templateId)
+      )
+    );
+    // act
+    service.remindFacilitatorsToGetCeus();
+    // assert
+    System.assertEquals(4, mocks.actualCalls.size(), 'wrong number of calls');
+    Messaging.SingleEmailMessage[] messages = (Messaging.SingleEmailMessage[]) mocks.actualCalls[3]
+      .args[0];
+    for (Integer i; i < certs.size(); i++) {
+      Messaging.SingleEmailMessage message = messages[i];
+      Certification__c cert = certs[i];
+      System.assertEquals(
+        emailId,
+        message.orgwideemailaddressid,
+        'wrong target object'
+      );
+      System.assertEquals(
+        cert.Contact__c,
+        message.TargetObjectId,
+        'wrong target object'
+      );
+      System.assertEquals(cert.Id, message.WhatId, 'wrong target object');
+      System.assertEquals(templateId, message.templateid, 'wrong template id');
+    }
   }
 }
