@@ -7,17 +7,24 @@ public with sharing class CEUController {
   }
   // This method is used by the related list component
   @AuraEnabled(Cacheable=true)
-  public static RelatedObjects getRelatedCeus(Id contactId, Integer max) {
+  public static RelatedObjects getRelatedCeus(Id recordId, Integer max) {
     if (max == null) {
       max = 6;
     }
     try {
       RelatedObjects related = new RelatedObjects();
-      List<CEU__c> ceus = repo.getForContact(contactId, max);
+      string objName = recordId.getSObjectType().getDescribe().getName();
+      List<CEU__c> ceus;
+      if (objName == Contact.class.getName()) {
+        ceus = repo.getForContact(recordId, max);
+        related.total = repo.getCountForContact(recordId);
+      } else if (objName == Certification__c.class.getName()) {
+        ceus = repo.getForCertification(recordId);
+        related.total = ceus.size();
+      }
       for (CEU__c ceu : ceus) {
         related.items.add(ceu);
       }
-      related.total = repo.getCountForContact(contactId);
       return related;
     } catch (Exception e) {
       throw new AuraHandledException(e.getMessage());
