@@ -22,6 +22,8 @@ const COLS = [
   {
     label: "Name",
     type: "button",
+    sortable: true,
+    fieldName: NAME_FIELD.fieldApiName,
     typeAttributes: {
       name: "goto",
       label: { fieldName: NAME_FIELD.fieldApiName },
@@ -30,12 +32,8 @@ const COLS = [
   },
   { label: "Authority", fieldName: "authority" },
   {
-    label: "Program Date",
-    fieldName: PROGRAM_DATE_FIELD.fieldApiName,
-    type: "date-local"
-  },
-  {
     label: "Date Completed",
+    sortable: true,
     fieldName: DATE_COMPLETED_FIELD.fieldApiName,
     type: "date-local"
   },
@@ -142,7 +140,7 @@ export default class RelatedCeusCmp extends NavigationMixin(LightningElement) {
     return this.viewAll ? 10000 : 6;
   }
 
-  @wire(getRelatedCeus, { contactId: "$recordId", max: "$max" })
+  @wire(getRelatedCeus, { recordId: "$recordId", max: "$max" })
   getCeus(result) {
     this.wiredCeus = result;
     this.data = null;
