@@ -86,11 +86,11 @@ public inherited sharing class CertificationRepository {
     }
     return certs[0];
   }
-  public Certification__c[] getActiveFacilitatorCerts() {
+  public Certification__c[] getActiveCerts() {
     return [
-      SELECT Id, Contact__c
+      SELECT Id, Contact__c, Approved__c
       FROM Certification__c
-      WHERE Status__c = 'Active' AND Type__c = 'Facilitator'
+      WHERE Status__c = 'Active'
     ];
   }
 
