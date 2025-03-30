@@ -260,15 +260,15 @@ public inherited sharing class CertificationService {
     return cert;
   }
 
-  public void remindFacilitatorsToGetCeus() {
-    Certification__c[] certs = certRepo.getActiveFacilitatorCerts();
+  public void remindToGetCeus() {
+    Certification__c[] certs = certRepo.getActiveCerts();
 
     if (certs.isEmpty()) {
       return;
     }
     // Remind the contact for these certs to get their CEUs
     Id orgAddressId = emailServ.getOrgEmailAddressId();
-    EmailTemplate template = emailServ.getTemplate('FacilitatorCeuReminder');
+    EmailTemplate template = emailServ.getTemplate('CeuReminder');
 
     List<Messaging.SingleEmailMessage> emails = new List<Messaging.SingleEmailMessage>();
     for (Certification__c cert : certs) {
