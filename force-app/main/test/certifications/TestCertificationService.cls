@@ -252,7 +252,8 @@ private class TestCertificationService {
             Start__c = startDate,
             End__c = endDate,
             Type__c = 'Trainer',
-            Id = certId
+            Id = certId,
+            Status__c = 'Active'
           )
         }
       )
@@ -320,14 +321,16 @@ private class TestCertificationService {
         Start__c = startDate,
         End__c = endDate,
         Type__c = 'Trainer',
-        Id = MockProvider.createId(Certification__c.class)
+        Id = MockProvider.createId(Certification__c.class),
+        Status__c = 'Active'
       ),
       new Certification__c(
         Contact__c = contactId,
         Start__c = startDate.addDays(10),
         End__c = endDate.addDays(10),
         Type__c = 'Facilitator',
-        Id = MockProvider.createId(Certification__c.class)
+        Id = MockProvider.createId(Certification__c.class),
+        Status__c = 'Active'
       )
     };
     mocks.expectedCalls.add(
@@ -354,7 +357,11 @@ private class TestCertificationService {
       System.assertEquals(0, ccs.size(), 'ccs should not be created');
       return;
     }
-    System.assertEquals(matches.size(), ccs.size());
+    System.assertEquals(
+      matches.size(),
+      ccs.size(),
+      'wrong number of connections'
+    );
     for (Integer i = 0; i < matches.size(); i++) {
       System.assertEquals(
         new CeuCertification__c(
@@ -396,6 +403,64 @@ private class TestCertificationService {
   @isTest
   static void addCeus_addsToSecond() {
     addCeusAddsConnectorToBothCerts(366, new List<Integer>{ 1 });
+  }
+
+  // verify the CEU is added only to active Certification
+  @isTest
+  static void addCeus_addsConnectorToActiveCert() {
+    makeData();
+    Id contactId = MockProvider.createId(Contact.class);
+    Date startDate = Date.today().addMonths(-2);
+    Date endDate = startDate.addYears(1);
+    Id ceuId = MockProvider.createId(Ceu__c.class);
+    List<Certification__c> certs = new List<Certification__c>{
+      new Certification__c(
+        Contact__c = contactId,
+        Start__c = startDate,
+        End__c = endDate,
+        Type__c = 'Trainer',
+        Id = MockProvider.createId(Certification__c.class),
+        Status__c = 'Complete'
+      ),
+      new Certification__c(
+        Contact__c = contactId,
+        Start__c = startDate.addDays(10),
+        End__c = endDate.addDays(10),
+        Type__c = 'Facilitator',
+        Id = MockProvider.createId(Certification__c.class),
+        Status__c = 'Active'
+      )
+    };
+    mocks.expectedCalls.add(
+      new MockCallData(certRepo, 'getForContacts', certs)
+    );
+    // act
+    service.addCeus(
+      new List<Ceu__c>{
+        new Ceu__c(
+          Contact__c = contactId,
+          DateCompleted__c = startDate.addDays(20),
+          Id = ceuId,
+          Quantity__c = 5,
+          Status__c = 'Approved'
+        )
+      }
+    );
+    // assert
+    MockCallData createCall = mocks.actualCalls[1];
+    System.assertEquals('create', createCall.methodName, 'wrong method');
+    List<CeuCertification__c> ccs = (List<CeuCertification__c>) createCall.args[0];
+    System.assertEquals(2, mocks.actualCalls.size(), 'wrong number of calls');
+    System.assertEquals(1, ccs.size(), 'wrong number of connections');
+    System.assertEquals(
+      new CeuCertification__c(
+        Ceu__c = ceuId,
+        Certification__c = certs[1].Id,
+        Approved__c = 5
+      ),
+      ccs[0],
+      'wrong data'
+    );
   }
 
   @isTest
@@ -501,13 +566,22 @@ private class TestCertificationService {
       mocks.actualCalls[0].args[0],
       'wrong data sent to getCeuCerts'
     );
-    List<CeuCertification__c> updated = (List<CeuCertification__c>)mocks.actualCalls[2].args[0];
+    List<CeuCertification__c> updated = (List<CeuCertification__c>) mocks.actualCalls[2]
+      .args[0];
     System.assertEquals(1, updated.size(), 'wrong number updated');
     CeuCertification__c actual = updated[0];
     System.assertEquals(cc.Id, actual.Id, 'wrong cc');
     System.assertEquals(cc.Ceu__c, actual.Ceu__c, 'wrong CEU');
-    System.assertEquals(certs[0].Id, actual.Certification__c, 'wrong certification');
-    System.assertEquals(cc.Approved__c, actual.Approved__c, 'approved count changed');
+    System.assertEquals(
+      certs[0].Id,
+      actual.Certification__c,
+      'wrong certification'
+    );
+    System.assertEquals(
+      cc.Approved__c,
+      actual.Approved__c,
+      'approved count changed'
+    );
   }
 
   @isTest
@@ -550,8 +624,13 @@ private class TestCertificationService {
       mocks.actualCalls[0].args[0],
       'wrong data sent to getCeuCerts'
     );
-    System.assertEquals('remove', mocks.actualCalls[2].methodName, 'not removing bad');
-    List<CeuCertification__c> deleted = (List<CeuCertification__c>)mocks.actualCalls[2].args[0];
+    System.assertEquals(
+      'remove',
+      mocks.actualCalls[2].methodName,
+      'not removing bad'
+    );
+    List<CeuCertification__c> deleted = (List<CeuCertification__c>) mocks.actualCalls[2]
+      .args[0];
     System.assertEquals(1, deleted.size(), 'wrong number deleted');
     CeuCertification__c actual = deleted[0];
     System.assertEquals(cc.Id, actual.Id, 'wrong cc');
