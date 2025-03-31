@@ -1,7 +1,4 @@
 public inherited sharing class CEURepository {
-  public CEURepository() {
-  }
-
   public List<CEU__c> getForContact(Id contactId, Integer max) {
     if (max == null) {
       max = 6;

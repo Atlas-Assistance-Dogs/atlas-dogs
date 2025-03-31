@@ -7,6 +7,7 @@ private class TestCertificationService {
   private static CertificationService service;
   private static EmailService emailSrv;
   private static CertificationRepository certRepo;
+  private static CeuRepository ceuRepo;
   // references to mocks
 
   static void makeData() {
@@ -15,7 +16,8 @@ private class TestCertificationService {
     certRepo = (CertificationRepository) mocks.createMock(
       CertificationRepository.class
     );
-    service = new CertificationService(certRepo, emailSrv);
+    ceuRepo = (CeuRepository) mocks.createMock(CeuRepository.class);
+    service = new CertificationService(certRepo, emailSrv, ceuRepo);
   }
 
   @isTest
@@ -945,23 +947,105 @@ private class TestCertificationService {
   }
 
   @isTest
-  static void remindFacilitatorsToGetCeus_doesNothing_whenNoCerts() {
+  static void addCeus_addsNothing_whenNoCeus() {
     makeData();
     mocks.expectedCalls.add(
-      new MockCallData(
-        certRepo,
-        'getActiveFacilitatorCerts',
-        new List<Certification__c>()
+      new MockCallData(ceuRepo, 'getForContact', new List<Ceu__c>())
+    );
+    Id contactId = MockProvider.createId(Contact.class);
+    // act
+    service.addCeus(new Certification__c(Contact__c = contactId));
+    // assert
+    System.assertEquals(2, mocks.actualCalls.size(), 'wrong number of calls');
+    System.assertEquals(
+      contactId,
+      mocks.actualCalls[0].args[0],
+      'wrong contact id'
+    );
+    List<CeuCertification__c> ccs = (List<CeuCertification__c>) mocks.actualCalls[1]
+      .args[0];
+    System.assert(ccs.isEmpty(), 'connections is not empty');
+  }
+
+  @isTest
+  static void addCeus_addsCeusInRange_whenCertActive() {
+    makeData();
+    Ceu__c[] ceus = new List<Ceu__c>{
+      new Ceu__c(
+        Id = MockProvider.createId(Ceu__c.class),
+        Status__c = 'Approved',
+        Quantity__c = 4,
+        DateCompleted__c = Date.today()
+      ),
+      new Ceu__c(
+        Id = MockProvider.createId(Ceu__c.class),
+        Status__c = 'Approved',
+        Quantity__c = 4,
+        DateCompleted__c = Date.today().addYears(-1)
+      ),
+      new Ceu__c(
+        Id = MockProvider.createId(Ceu__c.class),
+        Status__c = 'Pending',
+        Quantity__c = 4,
+        DateCompleted__c = Date.today()
       )
+    };
+    mocks.expectedCalls.add(new MockCallData(ceuRepo, 'getForContact', ceus));
+    Id contactId = MockProvider.createId(Contact.class);
+    Certification__c cert = new Certification__c(
+      Id = MockProvider.createId(Certification__c.class),
+      Contact__c = contactId,
+      Start__c = Date.today().addMonths(-1),
+      End__c = Date.today().addMonths(11)
     );
     // act
-    service.remindFacilitatorsToGetCeus();
+    service.addCeus(cert);
+    // assert
+    System.assertEquals(2, mocks.actualCalls.size(), 'wrong number of calls');
+    System.assertEquals(
+      contactId,
+      mocks.actualCalls[0].args[0],
+      'wrong contact id'
+    );
+    List<CeuCertification__c> ccs = (List<CeuCertification__c>) mocks.actualCalls[1]
+      .args[0];
+    System.assertEquals(2, ccs.size(), 'connections is wrong length');
+    CeuCertification__c cc1 = ccs[0];
+    System.assertEquals(
+      new CeuCertification__c(
+        Ceu__c = ceus[0].Id,
+        Certification__c = cert.Id,
+        Approved__c = 4
+      ),
+      cc1,
+      'wrong data in first cc'
+    );
+    CeuCertification__c cc2 = ccs[1];
+    System.assertEquals(
+      new CeuCertification__c(
+        Ceu__c = ceus[2].Id,
+        Certification__c = cert.Id,
+        Approved__c = 0
+      ),
+      cc2,
+      'wrong data in second cc'
+    );
+  }
+
+  @isTest
+  static void remindToGetCeus_doesNothing_whenNoCerts() {
+    makeData();
+    mocks.expectedCalls.add(
+      new MockCallData(certRepo, 'getActiveCerts', new List<Certification__c>())
+    );
+    // act
+    service.remindToGetCeus();
     // assert
     System.assertEquals(1, mocks.actualCalls.size(), 'too many calls');
   }
 
   @isTest
-  static void remindFacilitatorsToGetCeus_email_whenCerts() {
+  static void remindToGetCeus_email_whenCerts() {
     makeData();
     Certification__c[] certs = new List<Certification__c>{
       new Certification__c(
@@ -982,7 +1066,7 @@ private class TestCertificationService {
     Id emailId = MockProvider.createId(OrgWideEmailAddress.class);
     Id templateId = MockProvider.createId(EmailTemplate.class);
     mocks.expectedCalls.add(
-      new MockCallData(certRepo, 'getActiveFacilitatorCerts', certs)
+      new MockCallData(certRepo, 'getActiveCerts', certs)
     );
     mocks.expectedCalls.add(
       new MockCallData(emailSrv, 'getOrgEmailAddressId', emailId)
@@ -995,7 +1079,7 @@ private class TestCertificationService {
       )
     );
     // act
-    service.remindFacilitatorsToGetCeus();
+    service.remindToGetCeus();
     // assert
     System.assertEquals(4, mocks.actualCalls.size(), 'wrong number of calls');
     Messaging.SingleEmailMessage[] messages = (Messaging.SingleEmailMessage[]) mocks.actualCalls[3]
