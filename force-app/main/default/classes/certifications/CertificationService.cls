@@ -1,18 +1,22 @@
 public inherited sharing class CertificationService {
   private CertificationRepository certRepo;
+  private CeuRepository ceuRepo;
   private EmailService emailServ;
   public CertificationService() {
     certRepo = new CertificationRepository();
+    ceuRepo = new CeuRepository();
     emailServ = new EmailService();
   }
 
   @TestVisible
   private CertificationService(
     CertificationRepository certRepo,
-    EmailService emailServ
+    EmailService emailServ,
+    CeuRepository ceuRepo
   ) {
     this.certRepo = certRepo;
     this.emailServ = emailServ;
+    this.ceuRepo = ceuRepo;
   }
 
   // Create a map of CEUs by ContactId, with each contact id
@@ -258,6 +262,34 @@ public inherited sharing class CertificationService {
       return cert;
     }
     return cert;
+  }
+
+  // Add existing CEUs to a new certification. This should only be
+  // called for new certifications
+  public void addCeus(Certification__c cert) {
+    // SOQL doesn't allow date comparisons in a query, so get all
+    // the CEUs for the contact and filter tham out
+    List<Ceu__c> ceus = ceuRepo.getForContact(cert.Contact__c, 10000);
+    List<CeuCertification__c> ccs = new List<CeuCertification__c>();
+    for (Ceu__c ceu : ceus) {
+      if (
+        ceu.DateCompleted__c >= cert.Start__c &&
+        ceu.DateCompleted__c <= cert.End__c
+      ) {
+        Integer approved = 0;
+        if (ceu.Status__c == 'Approved') {
+          approved = (Integer) ceu.Quantity__c;
+        }
+        ccs.add(
+          new CeuCertification__c(
+            Ceu__c = ceu.Id,
+            Certification__c = cert.Id,
+            Approved__c = approved
+          )
+        );
+      }
+    }
+    certRepo.create(ccs);
   }
 
   public void remindToGetCeus() {
