@@ -21,6 +21,8 @@
               fake: company
     Comments__c:
       fake: sentence
+    Contact__c:
+      reference: Trainer
     ProgramHours__c:
       random_number:
         min: 8
@@ -43,8 +45,6 @@
       random_choice:
         Attendee: 80%
         Presenter: 20%
-    Contact__c:
-      reference: Trainer
     Status__c:
       random_choice:
         Approved: 50%
