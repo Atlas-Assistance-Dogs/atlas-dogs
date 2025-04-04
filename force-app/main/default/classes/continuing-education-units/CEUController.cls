@@ -21,6 +21,8 @@ public with sharing class CEUController {
       } else if (objName == Certification__c.class.getName()) {
         ceus = repo.getForCertification(recordId);
         related.total = ceus.size();
+      } else {
+        return related;
       }
       for (CEU__c ceu : ceus) {
         related.items.add(ceu);
