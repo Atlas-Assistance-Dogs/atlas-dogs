@@ -6,7 +6,7 @@ public with sharing class TestPatTrigger {
   private static Contact debbie;
   private static Dog__c ace;
 
-  private static void setup(Date expiration) {
+  public static Team__c setup(Date expiration) {
     List<Contact> contacts = new List<Contact>();
     debbie = new Contact(FirstName = 'Debbie', LastName = 'Queen');
     ken = new Contact(FirstName = 'Ken', LastName = 'King');
@@ -38,6 +38,7 @@ public with sharing class TestPatTrigger {
       Type__c = 'Initial',
       ValidUntil__c = expiration
     );
+    return team;
   }
 
   private static Contact getContact(Id contactId) {

@@ -147,37 +147,6 @@ private class TestTeamRepository {
     System.assertEquals(team.Status__c, result.Status__c);
     System.assertEquals(team.TrainingStartDate__c, result.TrainingStartDate__c);
   }
-  @isTest
-      static void getCertificationStatus_returnsUnsetCertificationStatus() {
-        // Arrange
-        setup();
-        // Act
-        TeamRepository repo = new TeamRepository();
-        Team__c actual = repo.getCertificationStatus(new Set<Id> { team.Id })[0];
-        // Assert
-        System.assertEquals(joe.Id, actual.Client__c);
-        System.assertEquals(null, actual.InitialCertificationDate__c);
-        System.assertEquals(null, actual.PatValidUntil__c);
-        System.assertEquals(null, actual.PatCount__c);
-    }
-
-    @isTest
-    static void getCertificationStatus_returnsCertificationStatus() {
-        // Arrange
-        setup();
-        team.InitialCertificationDate__c = Date.today().addDays(-22);
-        team.PatValidUntil__c = Date.today().addMonths(10);
-        team.PatCount__c = 5;
-        update team;
-        // Act
-        TeamRepository repo = new TeamRepository();
-        Team__c actual = repo.getCertificationStatus(new Set<Id> { team.Id })[0];
-        // Assert
-        System.assertEquals(joe.Id, actual.Client__c);
-        System.assertEquals(team.InitialCertificationDate__c, actual.InitialCertificationDate__c);
-        System.assertEquals(team.PatValidUntil__c, actual.PatValidUntil__c);
-        System.assertEquals(team.PatCount__c, actual.PatCount__c);
-    }
 
     @isTest
     static void modify_updates() {

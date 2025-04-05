@@ -126,15 +126,15 @@ public with sharing class TestTeamServiceReminders {
   private static Map<Id, Id> facilitatorToTeamIds = new Map<Id, Id>();
   private static Set<Id> facilitatorIds = new Set<Id>();
   private static Set<Id> clientIds = new Set<Id>();
+  private static EmailTemplate template;
 
   private static void setupCalls(Integer[] daysTraining) {
     makeData();
+    template = new EmailTemplate(
+      Id = MockProvider.createId(EmailTemplate.class)
+    );
     mocks.expectedCalls.add(
-      new MockCallData(
-        emailSrv,
-        'getTemplate',
-        new EmailTemplate(Id = MockProvider.templateIds[0])
-      )
+      new MockCallData(emailSrv, 'getTemplate', template)
     );
     mocks.expectedCalls.add(new MockCallData(emailSrv, 'sendEmail'));
     List<Team__c> teams = new List<Team__c>();
@@ -142,8 +142,8 @@ public with sharing class TestTeamServiceReminders {
       Integer days = daysTraining[i];
       teams.add(
         new Team__c(
-          Id = MockProvider.teamids[i],
-          Client__c = MockProvider.contactids[i],
+          Id = MockProvider.createId(Team__c.class),
+          Client__c = MockProvider.createId(Contact.class),
           Status__c = 'In Training',
           TrainingStartDate__c = Date.today().addDays(0 - days)
         )
@@ -155,21 +155,23 @@ public with sharing class TestTeamServiceReminders {
     clientIds = new Set<Id>();
     List<npe4__Relationship__c> relationships = new List<npe4__Relationship__c>();
     for (Integer i = 0; i < daysTraining.size(); i++) {
-      Id currentId = MockProvider.contactids[9 - i];
+      Id currentId = MockProvider.createId(Contact.class);
+      relationships.add(
         new npe4__Relationship__c(
-          Id = MockProvider.relationshipids[i],
-          npe4__Contact__c = MockProvider.contactids[i],
+          Id = MockProvider.createId(npe4__Relationship__c.class),
+          npe4__Contact__c = teams[i].Client__c,
           npe4__RelatedContact__c = currentId
         )
       );
       facilitatorIds.add(currentId);
-      clientIds.add(MockProvider.contactids[i]);
-      facilitatorToTeamIds.put(currentId, MockProvider.teamids[i]);
+      clientIds.add(teams[i].Client__c);
+      facilitatorToTeamIds.put(currentId, teams[i].Id);
     }
     mocks.expectedCalls.add(
       new MockCallData(relationshipRepo, 'getCurrentRelated', relationships)
     );
   }
+  
   @isTest
   static void remindFacilitators_sendsEmailsToFacilitators() {
     // Arrange

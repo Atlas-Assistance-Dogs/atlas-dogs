@@ -173,7 +173,7 @@ public with sharing class TestTeamTrigger {
       Dog__c = boomer.Id,
       FacilitatorAvailability__c = expectedAvail,
       Status__c = status,
-      PatValidUntil__c = cert,
+      PatValidUntil__c = cert
     );
 
     // Act
