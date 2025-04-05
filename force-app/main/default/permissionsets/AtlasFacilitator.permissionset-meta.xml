@@ -3,6 +3,26 @@
     <description>Ability to access Atlas app and Team Facilitator data</description>
     <fieldPermissions>
         <editable>true</editable>
+        <field>CEU__c.AuthorityOther__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>CEU__c.Comments__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>CEU__c.ProgramHours__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>CEU__c.Status__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Contact.AvailableAsTsimTA__c</field>
         <readable>true</readable>
     </fieldPermissions>
