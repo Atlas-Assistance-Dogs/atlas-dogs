@@ -208,6 +208,7 @@ public with sharing class TestTeamServiceReminders {
       System.assertEquals(template.Id, message.templateid);
       facilitatorIds.remove(message.targetobjectid);
     }
+    System.assertEquals(0, facilitatorIds.size(), 'should have messaged all facilitators');
   }
 
   @isTest
