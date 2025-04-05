@@ -41,6 +41,10 @@
                 <behavior>Edit</behavior>
                 <field>Height__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>XrayRequired__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>

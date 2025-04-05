@@ -90,6 +90,7 @@ public inherited sharing class TeamService {
 
     if (dog != null) {
       dog.Status__c = team.Status__c;
+      dog.XrayRequired__c = team.XrayRequired__c;
       dogRepo.modify(dog);
     }
   }
