@@ -581,7 +581,7 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Contact.TrainerCertificationValidUntil__c</field>
+        <field>Contact.TrainerCertValidUntil__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

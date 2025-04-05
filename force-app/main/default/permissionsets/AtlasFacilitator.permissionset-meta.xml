@@ -33,7 +33,7 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Contact.FacilitatorCertificationValidUntil__c</field>
+        <field>Contact.FacilitatorCertValidUntil__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
