@@ -89,8 +89,8 @@ private class TestTeamService {
         // the last call would be to update the teams
         MockCallData data = mocks.actualCalls[mocks.actualCalls.size() - 1];
         List<Team__c> actual = (List<Team__c>)data.args[0];
-        System.assertEquals(1, actual.size());
-        System.assertEquals(pat.DateCompleted__c, actual[0].InitialCertificationDate__c);
+        System.assertEquals(1, actual.size(), 'should have just one team');
+        System.assertEquals(pat.DateCompleted__c, actual[0].InitialCertificationDate__c, 'Initial Certification Date should be the same as the PAT Completed Date');
     }
 
     @isTest
@@ -110,14 +110,14 @@ private class TestTeamService {
         service.updatePatInformation(new Set<Id>{ teamId });
 
         // Assert
-        System.assert(!mocks.actualCalls.isEmpty());
+        System.assert(!mocks.actualCalls.isEmpty(), 'no mock calls were made');
         
         // the last call would be to update the teams
         MockCallData data = mocks.actualCalls[mocks.actualCalls.size() - 1];
         List<Team__c> actual = (List<Team__c>)data.args[0];
-        System.assertEquals(1, actual.size());
-        System.assertEquals(pat.ValidUntil__c, actual[0].PatValidUntil__c);
-    }
+        System.assertEquals(1, actual.size(), 'should have just one team');
+        System.assertEquals(pat.ValidUntil__c, actual[0].PatValidUntil__c, 'PAT valid until should match');
+     }
   
     @isTest
     static void updateDogStatus_updatesDogStatusAndXrayRequired() {
