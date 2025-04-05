@@ -166,8 +166,8 @@ public with sharing class TestTeamServiceReminders {
       relationships.add(
         new npe4__Relationship__c(
           Id = MockProvider.createId(npe4__Relationship__c.class),
-          npe4__Contact__c = currentId,
-          npe4__RelatedContact__c = teams[i].Client__c
+          npe4__Contact__c = teams[i].Client__c,
+          npe4__RelatedContact__c = currentId
         )
       );
       facilitatorIds.add(currentId);
@@ -219,6 +219,7 @@ public with sharing class TestTeamServiceReminders {
       System.assertEquals(template.Id, message.templateid);
       facilitatorIds.remove(message.targetobjectid);
     }
+    System.assertEquals(0, facilitatorIds.size(), 'should have messaged all facilitators');
   }
 
   @isTest
