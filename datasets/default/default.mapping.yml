@@ -315,6 +315,7 @@ Insert Contact:
   - EmailInclusion__c
   - FacilitatorApplicationReceived__c
   - FacilitatorCertAgreementReceived__c
+  - FacilitatorCertValidUntil__c
   - FacilitatorFirstAidReceived__c
   - FacilitatorInfrNoticeReceived__c
   - FacilitatorInitialCertificationDate__c
@@ -517,27 +518,25 @@ Insert BackgroundCheck__c:
       table:
       - Contact
       key_field: Contact__c
-Insert ContinuingEducationUnit__c:
-  sf_object: ContinuingEducationUnit__c
-  table: ContinuingEducationUnit__c
+Insert CEU__c:
+  sf_object: CEU__c
+  table: CEU__c
   fields:
   - AuthorityOther__c
   - Authority__c
   - Comments__c
   - DateCompleted__c
   - DateSubmitted__c
-  - Name
-  - ProgramDate__c
   - ProgramHours__c
   - ProgramTitle__c
   - Quantity__c
   - Role__c
   - Status__c
   lookups:
-    Trainer__c:
+    Contact__c:
       table:
       - Contact
-      key_field: Trainer__c
+      key_field: Contact__c
 Insert DogRelationship__c:
   sf_object: DogRelationship__c
   table: DogRelationship__c
@@ -638,6 +637,10 @@ Insert Log__c:
   - ClientStress__c
   - Date__c
   - Details__c
+  - DidMeetThisWeek__c
+  - FirstAidDetails__c
+  - FirstAidSuppliesUsed__c
+  - Handler__c
   - OtherHours__c
   - PublicAccessHours__c
   - RequestSupportFromAtlas__c
@@ -648,6 +651,14 @@ Insert Log__c:
   - SupportDetails__c
   - RecordTypeId
   lookups:
+    Client__c:
+      table:
+      - Contact
+      key_field: Client__c
+    Dog__c:
+      table:
+      - Dog__c
+      key_field: Dog__c
     Facilitator__c:
       table:
       - Contact

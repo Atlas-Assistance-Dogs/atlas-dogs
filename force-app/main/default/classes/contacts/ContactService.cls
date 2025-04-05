@@ -2,25 +2,31 @@ public inherited sharing class ContactService {
   private ContactRepository contactRepo;
   private RelationshipRepository relationshipRepo;
   private EmailService emailServ;
+  private CertificationService certService;
   public ContactService() {
     contactRepo = new ContactRepository();
     relationshipRepo = new RelationshipRepository();
     emailServ = new EmailService();
+    certService = new CertificationService();
   }
 
   @TestVisible
   private ContactService(
     ContactRepository contactRepo,
     RelationshipRepository relationshipRepo,
-    EmailService emailServ
+    EmailService emailServ,
+    CertificationService certRService
   ) {
     this.contactRepo = contactRepo;
     this.relationshipRepo = relationshipRepo;
     this.emailServ = emailServ;
+    this.certService = certService;
   }
+
   // This copies the contact email and phone to the ContactAt email & phone,
-  // as long as the Email and Phone are not blank and ContactAt is Home or Alternate
-  public static Contact updateContactAtEmail(Contact newContact) {
+  // as long as the Email and Phone are not blank and ContactAt is Home or
+  // Alternate
+  public Contact updateContactAtEmail(Contact newContact) {
     string contact = newContact.Contact__c;
     if (contact == 'Home' && !string.isBlank(newContact.Email)) {
       newContact.npe01__HomeEmail__c = newContact.Email;
@@ -30,7 +36,7 @@ public inherited sharing class ContactService {
     return newContact;
   }
 
-  public static Contact updateContactAtPhone(Contact newContact) {
+  public Contact updateContactAtPhone(Contact newContact) {
     string contact = newContact.Contact__c;
     if (contact == 'Home' && !string.isBlank(newContact.Phone)) {
       newContact.HomePhone = newContact.Phone;
@@ -125,8 +131,8 @@ public inherited sharing class ContactService {
     }
   }
 
-  // Share the contact with the appropriate groups based on which positions they have,
-  // and the positions they are emergency contacts for
+  // Share the contact with the appropriate groups based on which positions they
+  // have, and the positions they are emergency contacts for
   public static Contact shareContactBasedOnPositions(
     Contact person,
     Map<String, String> positionGroups
@@ -170,7 +176,7 @@ public inherited sharing class ContactService {
   }
 
   // Get the groups that the category rules assign for the positions
-  public static Map<String, String> getGroupsByPositions() {
+  public Map<String, String> getGroupsByPositions() {
     // Get the groups that can see each position
     List<CategoryRule__c> rules = [
       SELECT GroupName__c, Position__c
@@ -311,9 +317,9 @@ public inherited sharing class ContactService {
       } else if (month > endMonth && endMonth > 0) {
         months = 12 + endMonth - month;
       }
-      // We want to wind up at the last day of June in the year following 3 years of service.
-      // So, months + 1 takes us to July, toStartOfMonth() takes us to July 1, and subtracting
-      // a day takes us to June 30.
+      // We want to wind up at the last day of June in the year following 3
+      // years of service. So, months + 1 takes us to July, toStartOfMonth()
+      // takes us to July 1, and subtracting a day takes us to June 30.
       newContact.BoardTermValidUntil__c = minTerm.addMonths(months + 1)
         .toStartOfMonth()
         .addDays(-1);
@@ -345,73 +351,48 @@ public inherited sharing class ContactService {
     }
   }
 
-  class Dates {
-    public Date initial { get; set; }
-    public Date expiration { get; set; }
-  }
+  public void updateCertValidUntil(Contact person, Contact last) {
+    Certification__c cert;
 
-  public static void updateCertValidUntil(Contact trainer) {
-    // check to see if settings are missing
-    Boolean updateSettings = false;
-    AtlasSettings__c settings = AtlasSettings__c.getOrgDefaults();
-    if (settings.CertRenewalYears__c == null) {
-      // TODO: get default value
-      settings.CertRenewalYears__c = 1;
-      updateSettings = true;
-    }
-    if (settings.EarlyRenewal__c == null) {
-      // TODO: get default value
-      settings.EarlyRenewal__c = 90;
-      updateSettings = true;
-    }
-    if (settings.RenewalLeeway__c == null) {
-      // TODO: get default value
-      settings.RenewalLeeway__c = 30;
-      updateSettings = true;
-    }
-    if (updateSettings) {
-      upsert settings;
-    }
-    Integer years = (Integer) settings.CertRenewalYears__c;
-    Integer early = (Integer) settings.EarlyRenewal__c;
-    Integer leeway = (Integer) settings.RenewalLeeway__c;
     if (
-      trainer.IsTrainer__c && trainer.TrainerCertAgreementReceived__c != null
+      person.IsTrainer__c &&
+      person.TrainerCertAgreementReceived__c != null &&
+      person.TrainerCertAgreementReceived__c !=
+      last.TrainerCertAgreementReceived__c
     ) {
-      if (trainer.TrainerInitialCertificationDate__c == null) {
-        trainer.TrainerInitialCertificationDate__c = trainer.TrainerCertAgreementReceived__c;
-        trainer.TrainerCertValidUntil__c = trainer.TrainerCertAgreementReceived__c.addYears(1);
-        return;
-      }
-      Integer days = trainer.TrainerCertAgreementReceived__c.daysBetween(
-        trainer.TrainerCertValidUntil__c
+      cert = certService.updateCert(
+        person,
+        'Trainer',
+        person.TrainerCertValidUntil__c,
+        person.TrainerCertAgreementReceived__c
       );
-      if (days >= -early && days <= leeway) {
-        trainer.TrainerCertValidUntil__c = trainer.TrainerCertValidUntil__c.addYears(years);
+      if (cert != null) {
+        if (person.TrainerInitialCertificationDate__c == null) {
+          person.TrainerInitialCertificationDate__c = cert.Start__c;
+        }
+        person.TrainerCertValidUntil__c = cert.End__c;
       }
     }
-  }
 
-  private static Dates getCertExpiration(
-    Date initial,
-    Date agreement,
-    Integer early,
-    Integer years,
-    Integer leeway
-  ) {
-    Dates cdates = new Dates();
-    cdates.initial = initial;
-    if (agreement == null) {
-      return cdates;
+    if (
+      person.IsTeamFacilitator__c &&
+      person.FacilitatorCertAgreementReceived__c != null &&
+      person.FacilitatorCertAgreementReceived__c !=
+      last.FacilitatorCertAgreementReceived__c
+    ) {
+      cert = certService.updateCert(
+        person,
+        'Facilitator',
+        person.FacilitatorCertValidUntil__c,
+        person.FacilitatorCertAgreementReceived__c
+      );
+      if (cert != null) {
+        if (person.FacilitatorInitialCertificationDate__c == null) {
+          person.FacilitatorInitialCertificationDate__c = cert.Start__c;
+        }
+        person.FacilitatorCertValidUntil__c = cert.End__c;
+      }
     }
-    if (initial == null) {
-      cdates.initial = agreement;
-      cdates.expiration = agreement.addYears(years);
-    } else {
-      Integer moreYears = (agreement.daysBetween(initial) + 365 + leeway) / 365;
-      cdates.expiration = initial.addYears(moreYears);
-    }
-    return cdates;
   }
 
   public List<PositionStatus> getPositionStatusForContact(Id contactId) {
@@ -420,8 +401,8 @@ public inherited sharing class ContactService {
     return statuses;
   }
 
-  // We want the position status to be in this order, the Positions set for the contact
-  // may not be in this order
+  // We want the position status to be in this order, the Positions set for the
+  // contact may not be in this order
   public final static String[] POSITION_LIST = new List<string>{
     'Volunteer',
     'Team Facilitator',
@@ -433,7 +414,7 @@ public inherited sharing class ContactService {
     'Staff'
   };
 
-  private static List<PositionStatus> getStatusForPositions(Contact person) {
+  private List<PositionStatus> getStatusForPositions(Contact person) {
     List<PositionStatus> statuses = new List<PositionStatus>();
     if (person.Positions__c == null) {
       return statuses;
@@ -444,7 +425,8 @@ public inherited sharing class ContactService {
         when 'Volunteer' {
           if (
             positions.contains(position) &&
-            Schema.sObjectType.Contact.fields.GW_Volunteers__Volunteer_Status__c.isAccessible()
+            Schema.sObjectType.Contact.fields
+              .GW_Volunteers__Volunteer_Status__c.isAccessible()
           ) {
             statuses.add(
               new PositionStatus(
@@ -458,8 +440,10 @@ public inherited sharing class ContactService {
           if (
             (positions.contains(position) ||
             positions.contains('Team Facilitator Lead')) &&
-            Schema.sObjectType.Contact.fields.FacilitatorStatus__c.isAccessible() &&
-            Schema.sObjectType.Contact.fields.FacilitatorCertAgreementReceived__c.isAccessible()
+            Schema.sObjectType.Contact.fields.FacilitatorStatus__c
+              .isAccessible() &&
+            Schema.sObjectType.Contact.fields
+              .FacilitatorCertAgreementReceived__c.isAccessible()
           ) {
             string status = fineTuneStatus(
               person.FacilitatorStatus__c,
@@ -471,7 +455,8 @@ public inherited sharing class ContactService {
         when 'Puppy Raiser' {
           if (
             positions.contains(position) &&
-            Schema.sObjectType.Contact.fields.PuppyRaiserStatus__c.isAccessible()
+            Schema.sObjectType.Contact.fields.PuppyRaiserStatus__c
+              .isAccessible()
           ) {
             string status = fineTuneStatus(
               person.PuppyRaiserStatus__c,
@@ -483,7 +468,8 @@ public inherited sharing class ContactService {
         when 'Board' {
           if (
             positions.contains('Board Member') &&
-            Schema.sObjectType.Contact.fields.BoardMemberStatus__c.isAccessible()
+            Schema.sObjectType.Contact.fields.BoardMemberStatus__c
+              .isAccessible()
           ) {
             statuses.add(
               new PositionStatus(position, person.BoardMemberStatus__c)
@@ -494,7 +480,8 @@ public inherited sharing class ContactService {
           if (
             positions.contains(position) &&
             Schema.sObjectType.Contact.fields.ClientStatus__c.isAccessible() &&
-            Schema.sObjectType.Contact.fields.ClientCertificationValidUntil__c.isAccessible()
+            Schema.sObjectType.Contact.fields
+              .ClientCertificationValidUntil__c.isAccessible()
           ) {
             Date certDate = null;
             if (person.ClientCertificationValidUntil__c != null) {
@@ -508,7 +495,8 @@ public inherited sharing class ContactService {
           if (
             positions.contains(position) &&
             Schema.sObjectType.Contact.fields.TrainerStatus__c.isAccessible() &&
-            Schema.sObjectType.Contact.fields.TrainerCertAgreementReceived__c.isAccessible()
+            Schema.sObjectType.Contact.fields
+              .TrainerCertAgreementReceived__c.isAccessible()
           ) {
             string status = fineTuneStatus(
               person.TrainerStatus__c,
@@ -555,35 +543,36 @@ public inherited sharing class ContactService {
     }
     return status;
   }
+  /*
+  public
+    void updateCertifications(List<Contact> contacts, Map<Id, Contact> old) {
+      List<Certification__c> currentCerts = certRepo.getForContacts(contacts);
+      Map<Id, List<Certification__c>> contactCerts =
+          CertificationService.sortCertifications(currentCerts);
+      List<Certification__c> newCerts = new List<Certification__c>();
+      List<Certification__c> updateCerts = new List<Certification__c>();
+      for (Contact person : contacts) {
+        Contact previous = old.get(person.Id);
 
-  public void remindFacilitatorsToGetCeus() {
-    Set<Id> facilitators = contactRepo.getActiveFacilitators();
-    // Remind the client in a Team to submit training logs
+        if (person.TrainerCertValidUntil__c !=
+            previous.TrainerCertValidUntil__c) {
+          // create a certification
+          newCerts.add(new Certification__c(
+              Contact__c = person.Id, End__c = person.TrainerCertValidUntil__c,
+              Start__c = person.TrainerCertValidUntil__c.addYears(-1),
+              Type__c = 'Trainer'));
+        }
 
-    if (facilitators.isEmpty())
-      return;
-    // Remind these facilitators to get their CEUs
-    Id orgAddressId = emailServ.getOrgEmailAddressId();
-    EmailTemplate template = emailServ.getTemplate('FacilitatorCeuReminder');
-
-    List<Messaging.SingleEmailMessage> emails = new List<Messaging.SingleEmailMessage>();
-    for (Id facilitator : facilitators) {
-      Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
-      if (orgAddressId != null) {
-        mail.setOrgWideEmailAddressId(orgAddressId);
+        if (person.FacilitatorCertValidUntil__c !=
+            previous.FacilitatorCertValidUntil__c) {
+          // create a certification
+          newCerts.add(new Certification__c(
+              Contact__c = person.Id,
+              End__c = person.FacilitatorCertValidUntil__c,
+              Start__c = person.FacilitatorCertValidUntil__c.addYears(-1),
+              Type__c = 'Facilitator'));
+        }
       }
-      mail.setTargetObjectId(facilitator);
-      mail.setTemplateId(template.Id);
-
-      //Record ID for which letter will be generated
-      mail.setBccSender(false);
-      mail.setUseSignature(false);
-      if (orgAddressId == null) {
-        mail.setSenderDisplayName('Atlas Assistance Dogs');
-      }
-      mail.setSaveAsActivity(false);
-      emails.add(mail);
-    }
-    emailServ.sendEmail(emails);
-  }
+      certRepo.create(newCerts);
+    }*/
 }

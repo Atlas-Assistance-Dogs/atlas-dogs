@@ -1,6 +1,6 @@
 - object: PuppyLog__c
   fields:
-    AdditionalInformation__c:
+    AdditionalInformation__c: 
       fake: paragraph
     Date__c:
       date_between:

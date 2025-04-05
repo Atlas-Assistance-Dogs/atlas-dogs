@@ -18,7 +18,7 @@
             </quickActionLayoutItems>
             <quickActionLayoutItems>
                 <emptySpace>false</emptySpace>
-                <field>TrainerCertificationValidUntil__c</field>
+                <field>TrainerCertValidUntil__c</field>
                 <uiBehavior>Readonly</uiBehavior>
             </quickActionLayoutItems>
             <quickActionLayoutItems>

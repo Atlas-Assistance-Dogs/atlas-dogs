@@ -19,8 +19,8 @@
   nickname: Trainer
   include: positions
   fields:
-    #   AccountId:
-    #       reference: Household
+      #   AccountId:
+      #       reference: Household
     FirstName:
       fake: first_name
     LastName:

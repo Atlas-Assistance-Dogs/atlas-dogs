@@ -97,8 +97,8 @@
         - All Individual Contacts
         - All New or Edited Contacts
         - No Contacts
-    #   npsp__Current_Address__c:
-    #       reference: npsp__Address__c
+      #   npsp__Current_Address__c:
+      #       reference: npsp__Address__c
     npsp__First_Soft_Credit_Amount__c:
       random_number:
         min: 1
@@ -221,9 +221,9 @@
       fake: name
     Contact__c:
       random_choice:
-        Home: 80%
-        Alternate: 10%
-        Guardian: 10%
+             Home: 80%
+             Alternate: 10%
+             Guardian: 10%
     Language__c:
       random_choice:
         English: 83%

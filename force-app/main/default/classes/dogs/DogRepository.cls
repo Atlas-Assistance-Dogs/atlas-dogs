@@ -19,23 +19,23 @@ public with sharing class DogRepository {
     return dog;
   }
 
-  public List<DogRelationShip__c> getRelationships(Id contactId, Id dogId) {
+  public List<DogRelationship__c> getRelationships(Id contactId, Id dogId) {
     return [
-      SELECT Id, Type__c
-      FROM DogRelationShip__c
+      SELECT Id, Dog__c, Contact__c, Type__c
+      FROM DogRelationship__c
       WHERE Contact__c = :contactId AND Dog__c = :dogId
     ];
   }
 
-  public DogRelationShip__c createRelationship(
-    DogRelationShip__c relationship
+  public DogRelationship__c createRelationship(
+    DogRelationship__c relationship
   ) {
     insert relationship;
     return relationship;
   }
 
-  public DogRelationShip__c modifyRelationship(
-    DogRelationShip__c relationship
+  public DogRelationship__c modifyRelationship(
+    DogRelationship__c relationship
   ) {
     upsert relationship;
     return relationship;

@@ -3,7 +3,7 @@ project:
   name: atlas-dog
   package:
     name: AtlasDogs
-    namespace: atlas1
+    namespace: dogs
     api_version: "60.0"
     install_class: "PostInstall"
   dependencies:
@@ -53,12 +53,12 @@ flows:
           api_names: AtlasBackgroundCheck,AtlasBase,AtlasBoard,AtlasDemographics,AtlasFacilitator,AtlasPuppyRaiser,AtlasStaff,AtlasStandalonePrograms,AtlasTeam,AtlasTrainer,AtlasVolunteer
       4:
         task: load_custom_settings
-        options:
+        options: 
           settings_path: datasets/default/custom-settings.yml
 
   config_managed:
     steps:
-      # overload load_sample_data for now
+        # overload load_sample_data for now
       90:
         task: assign_permission_sets
         options:
