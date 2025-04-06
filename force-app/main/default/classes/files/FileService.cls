@@ -251,6 +251,7 @@ public with sharing class FileService {
         FacilitatorReferenceReceived__c,
         ContactFormReceived__c,
         FirstAidReceived__c,
+        MediaReceived__c, 
         PuppyApplicationReceived__c,
         PuppyCertAgreementReceived__c,
         PuppyContractReceived__c,
@@ -452,6 +453,10 @@ public with sharing class FileService {
       isLater(contact.FirstAidReceived__c, cv.Date__c)
     ) {
       contact.FirstAidReceived__c = cv.Date__c;
+    }
+
+    if ( cv.Type__c == 'Media' && isLater(contact.MediaReceived__c, cv.Date__c)) {
+      contact.MediaReceived__c = cv.Date__c;
     }
   }
 
