@@ -92,6 +92,12 @@
                 <identifier>RecordSpayedNeutered__cField</identifier>
             </fieldInstance>
         </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.XrayRequired__c</fieldItem>
+                <identifier>RecordXrayRequired__cField</identifier>
+            </fieldInstance>
+        </itemInstances>
         <name>Facet-398b8047-9fe2-47f4-b78d-0c041d9c99f2</name>
         <type>Facet</type>
     </flexiPageRegions>

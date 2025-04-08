@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>XrayRequired__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>A dog x-ray is required</description>
+    <externalId>false</externalId>
+    <label>X-ray required</label>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

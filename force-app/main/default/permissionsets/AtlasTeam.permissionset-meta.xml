@@ -208,6 +208,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Dog__c.XrayRequired__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Log__c.ClientHours__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -419,6 +424,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Team__c.XrayReceived__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Team__c.XrayRequired__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
