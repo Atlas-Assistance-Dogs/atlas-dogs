@@ -29,7 +29,7 @@
             <value>
                 <fullName>Agreement</fullName>
                 <default>false</default>
-                <label>Agreement</label>
+                <label>Participation Agreement</label>
             </value>
             <value>
                 <fullName>Contract</fullName>
@@ -49,7 +49,12 @@
             <value>
                 <fullName>LOMI</fullName>
                 <default>false</default>
-                <label>LOMI</label>
+                <label>Provider Form</label>
+            </value>
+            <value>
+                <fullName>Media</fullName>
+                <default>false</default>
+                <label>Media Release</label>
             </value>
             <value>
                 <fullName>VAPW</fullName>
@@ -221,6 +226,10 @@
         <valueSettings>
             <controllingFieldValue>Na</controllingFieldValue>
             <valueName>FirstAid</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Na</controllingFieldValue>
+            <valueName>Media</valueName>
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Client</controllingFieldValue>

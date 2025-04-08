@@ -23,9 +23,9 @@ for setting in setting_elements:
 
 
 
-base_file = 'force-app/main/test/TestFileService{category}Fields.cls'
-base_clear_file = 'force-app/main/test/TestClearDateService{category}Fields.cls'
-meta_path = 'force-app/main/test/TestFileServiceFields.cls-meta.xml'
+base_file = 'force-app/main/test/files/TestFileService{category}Fields.cls'
+base_clear_file = 'force-app/main/test/files/TestClearDateService{category}Fields.cls'
+meta_path = 'force-app/main/test/files/TestFileServiceFields.cls-meta.xml'
 
 
 for category, types in settings.items():
@@ -45,7 +45,7 @@ for category, types in settings.items():
 
 
 # Read the FileService.cls file
-service_path = 'force-app/main/default/classes/FileService.cls'
+service_path = 'force-app/main/default/classes/files/FileService.cls'
 with open(service_path) as file:
     service_lines = file.readlines()
 
@@ -70,7 +70,7 @@ with open(service_path, 'w') as service_copy:
 }''')
 
 # Read the ClearDateService.cls file
-service_path = 'force-app/main/default/classes/ClearDateService.cls'
+service_path = 'force-app/main/default/classes/files/ClearDateService.cls'
 with open(service_path) as file:
     service_lines = file.readlines()
 
