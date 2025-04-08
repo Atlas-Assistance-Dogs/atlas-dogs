@@ -5,13 +5,16 @@ public with sharing class TestTeamTrigger {
 
   private static void setup() {
     joe = new Contact(
-      FirstName = 'Joe',
-      LastName = 'Blow',
-      ClientStatus__c = 'Onboarding',
+      FirstName = 'Joe', 
+      LastName = 'Blow', 
+      ClientStatus__c = 'Onboarding', 
       ClientCertificationValidUntil__c = Date.today().addMonths(3)
     );
     insert joe;
-    boomer = new Dog__c(Name = 'Boomer', Status__c = 'Onboarding');
+    boomer = new Dog__c(
+      Name = 'Boomer', 
+      Status__c = 'Onboarding'
+    );
     insert boomer;
   }
 
@@ -19,23 +22,21 @@ public with sharing class TestTeamTrigger {
   public static void triggerCreatesRelationship_WhenNotDefined() {
     setup();
     Team__c team = new Team__c(
-      Name = 'Joe_Boomer',
-      Client__c = joe.Id,
+      Name = 'Joe_Boomer', 
+      Client__c = joe.Id, 
       Dog__c = boomer.Id
     );
 
     // Act
     Test.startTest();
-    Database.SaveResult result = Database.insert(team, false);
+    Database.SaveResult result = Database.insert (team, false);
     Test.stopTest();
 
     // Assert
     System.assert(result.isSuccess());
-    DogRelationShip__c relationship = [
-      SELECT Type__c
-      FROM DogRelationShip__c
-      WHERE Dog__c = :boomer.Id AND Contact__c = :joe.Id
-    ];
+    DogRelationShip__c relationship = [SELECT Type__c
+                                       FROM DogRelationShip__c
+                                       WHERE Dog__c = :boomer.Id AND Contact__c = :joe.Id];
     System.assertEquals('Client', relationship.Type__c);
   }
 
@@ -43,29 +44,27 @@ public with sharing class TestTeamTrigger {
   public static void triggerUpdatesRelationship_WhenNotClient() {
     setup();
     DogRelationShip__c dr = new DogRelationShip__c(
-      Contact__c = joe.Id,
-      Dog__c = boomer.Id,
+      Contact__c = joe.Id, 
+      Dog__c = boomer.Id, 
       Type__c = 'Owner'
     );
     insert dr;
     Team__c team = new Team__c(
-      Name = 'Joe_Boomer',
-      Client__c = joe.Id,
+      Name = 'Joe_Boomer', 
+      Client__c = joe.Id, 
       Dog__c = boomer.Id
     );
 
     // Act
     Test.startTest();
-    Database.SaveResult result = Database.insert(team, false);
+    Database.SaveResult result = Database.insert (team, false);
     Test.stopTest();
 
     // Assert
     System.assert(result.isSuccess());
-    DogRelationShip__c relationship = [
-      SELECT Type__c
-      FROM DogRelationShip__c
-      WHERE Dog__c = :boomer.Id AND Contact__c = :joe.Id
-    ];
+    DogRelationShip__c relationship = [SELECT Type__c
+                                       FROM DogRelationShip__c
+                                       WHERE Dog__c = :boomer.Id AND Contact__c = :joe.Id];
     System.assert(relationship.Type__c.contains('Client'));
     System.assert(relationship.Type__c.contains('Owner'));
     System.assert(relationship.Type__c.contains(';'));
@@ -75,36 +74,33 @@ public with sharing class TestTeamTrigger {
   public static void triggerDoesNothing_WhenRelationShipExists() {
     setup();
     DogRelationShip__c dr = new DogRelationShip__c(
-      Contact__c = joe.Id,
-      Dog__c = boomer.Id,
+      Contact__c = joe.Id, 
+      Dog__c = boomer.Id, 
       Type__c = 'Client;Owner'
     );
     insert dr;
-    dr = [
-      SELECT LastModifiedDate
-      FROM DogRelationShip__c
-      WHERE Id = :dr.Id
-    ];
+    dr = [SELECT LastModifiedDate
+          FROM DogRelationShip__c
+          WHERE Id = :dr.Id];
     Datetime modified = dr.LastModifiedDate;
 
     Team__c team = new Team__c(
-      Name = 'Joe_Boomer',
-      Client__c = joe.Id,
+      Name = 'Joe_Boomer', 
+      Client__c = joe.Id, 
       Dog__c = boomer.Id
     );
 
     // Act
     Test.startTest();
-    Database.SaveResult result = Database.insert(team, false);
+    Database.SaveResult result = Database.insert (team, false);
     Test.stopTest();
 
     // Assert
     System.assert(result.isSuccess());
-    DogRelationShip__c relationship = [
-      SELECT Type__c, LastModifiedDate
-      FROM DogRelationShip__c
-      WHERE Dog__c = :boomer.Id AND Contact__c = :joe.Id
-    ];
+    DogRelationShip__c relationship = [SELECT Type__c, 
+                                              LastModifiedDate
+                                       FROM DogRelationShip__c
+                                       WHERE Dog__c = :boomer.Id AND Contact__c = :joe.Id];
     System.assert(relationship.Type__c.contains('Client'));
     System.assert(relationship.Type__c.contains('Owner'));
     System.assert(relationship.Type__c.contains(';'));
@@ -115,100 +111,85 @@ public with sharing class TestTeamTrigger {
   public static void triggerCreatesRelationShip_WhenDogChanged() {
     setup();
     DogRelationShip__c dr = new DogRelationShip__c(
-      Contact__c = joe.Id,
-      Dog__c = boomer.Id,
+      Contact__c = joe.Id, 
+      Dog__c = boomer.Id, 
       Type__c = 'Client;Owner'
     );
     insert dr;
-    dr = [
-      SELECT LastModifiedDate
-      FROM DogRelationShip__c
-      WHERE Id = :dr.Id
-    ];
+    dr = [SELECT LastModifiedDate
+          FROM DogRelationShip__c
+          WHERE Id = :dr.Id];
     Datetime modified = dr.LastModifiedDate;
 
     Team__c team = new Team__c(
-      Name = 'Joe_Boomer',
-      Client__c = joe.Id,
+      Name = 'Joe_Boomer', 
+      Client__c = joe.Id, 
       Dog__c = boomer.Id
     );
     insert team;
 
-    Dog__c ace = new Dog__c(Name = 'Ace');
+    Dog__c ace = new Dog__c(
+      Name = 'Ace'
+    );
     insert ace;
 
     team.Dog__c = ace.Id;
 
     // Act
     Test.startTest();
-    Database.SaveResult result = Database.update(team, false);
+    Database.SaveResult result = Database.update (team, false);
     Test.stopTest();
 
     // Assert
     System.assert(result.isSuccess());
-    DogRelationShip__c relationship = [
-      SELECT Type__c, LastModifiedDate
-      FROM DogRelationShip__c
-      WHERE Dog__c = :boomer.Id AND Contact__c = :joe.Id
-    ];
+    DogRelationShip__c relationship = [SELECT Type__c, 
+                                              LastModifiedDate
+                                       FROM DogRelationShip__c
+                                       WHERE Dog__c = :boomer.Id AND Contact__c = :joe.Id];
     System.assertEquals(modified, relationship.LastModifiedDate);
-    relationship = [
-      SELECT Type__c, LastModifiedDate
-      FROM DogRelationShip__c
-      WHERE Dog__c = :ace.Id AND Contact__c = :joe.Id
-    ];
+    relationship = [SELECT Type__c, 
+                           LastModifiedDate
+                    FROM DogRelationShip__c
+                    WHERE Dog__c = :ace.Id AND Contact__c = :joe.Id];
     System.assertEquals('Client', relationship.Type__c);
   }
 
-  private static void testClientDogStatus(
-    string status,
-    Date cert,
-    string expectedStatus,
-    Date expectedCert,
-    string expectedAvail
-  ) {
+  private static void testClientDogStatus(string status, Date cert, string expectedStatus, Date expectedCert, string expectedAvail) {
     Team__c team = new Team__c(
-      Name = 'Joe_Boomer',
-      Client__c = joe.Id,
-      Dog__c = boomer.Id,
-      FacilitatorAvailability__c = expectedAvail,
-      Status__c = status,
+      Name = 'Joe_Boomer', 
+      Client__c = joe.Id, 
+      Dog__c = boomer.Id, 
+      FacilitatorAvailability__c = expectedAvail, 
+      Status__c = status, 
       PatValidUntil__c = cert
     );
 
     // Act
     Test.startTest();
-    Database.SaveResult result = Database.insert(team, false);
+    Database.SaveResult result = Database.insert (team, false);
     Test.stopTest();
 
     // Assert
     System.assert(result.isSuccess());
-    Contact client = [
-      SELECT
-        ClientStatus__c,
-        ClientDog__c,
-        ClientCertificationValidUntil__c,
-        ClientFacilitatorAvailability__c,
-        ClientInitialCertificationDate__c
-      FROM Contact
-      WHERE Id = :joe.Id
-    ];
+    Contact client = [SELECT ClientStatus__c, 
+                             ClientDog__c, 
+                             ClientCertificationValidUntil__c, 
+                             ClientFacilitatorAvailability__c, 
+                             ClientInitialCertificationDate__c
+                      FROM Contact
+                      WHERE Id = :joe.Id];
     System.assertEquals(expectedStatus, client.ClientStatus__c);
     System.assertEquals(expectedCert, client.ClientCertificationValidUntil__c);
     System.assertEquals(expectedAvail, client.ClientFacilitatorAvailability__c);
-    System.assertEquals(
-      team.InitialCertificationDate__c,
-      client.ClientInitialCertificationDate__c
-    );
+    System.assertEquals(team.InitialCertificationDate__c, client.ClientInitialCertificationDate__c);
     System.assertEquals(boomer.Name, client.ClientDog__c);
 
-    Dog__c dog = [
-      SELECT Status__c
-      FROM Dog__c
-      WHERE Id = :boomer.Id
-    ];
+    Dog__c dog = [SELECT Status__c
+                  FROM Dog__c
+                  WHERE Id = :boomer.Id];
     System.assertEquals(expectedStatus, dog.Status__c);
   }
+
   @isTest
   public static void trigger_UpdatesClientDogStatus_WhenDecertified() {
     setup();
@@ -216,6 +197,7 @@ public with sharing class TestTeamTrigger {
     Date expected = Date.today().addMonths(5);
     testClientDogStatus(status, expected, status, expected, 'None');
   }
+
   @isTest
   public static void trigger_UpdatesClientDogStatus_WhenDiscontinued() {
     setup();
@@ -223,6 +205,7 @@ public with sharing class TestTeamTrigger {
     Date expected = Date.today().addMonths(5);
     testClientDogStatus(status, expected, status, expected, 'None');
   }
+
   @isTest
   public static void trigger_UpdatesClientDogStatus_WhenNone() {
     setup();
@@ -230,6 +213,7 @@ public with sharing class TestTeamTrigger {
     Date expected = Date.today().addMonths(5);
     testClientDogStatus(status, expected, status, expected, null);
   }
+
   @isTest
   public static void trigger_UpdatesClientDogStatus_WhenInitialInquiry() {
     setup();
@@ -237,6 +221,7 @@ public with sharing class TestTeamTrigger {
     Date expected = Date.today().addMonths(5);
     testClientDogStatus(status, expected, status, expected, 'Forecast');
   }
+
   @isTest
   public static void trigger_UpdatesClientDogStatus_WhenInADSiM() {
     setup();
@@ -244,6 +229,7 @@ public with sharing class TestTeamTrigger {
     Date expected = Date.today().addMonths(5);
     testClientDogStatus(status, expected, status, expected, 'Waitlist');
   }
+
   @isTest
   public static void trigger_UpdatesClientDogStatus_WhenOnboarding() {
     setup();
@@ -251,6 +237,7 @@ public with sharing class TestTeamTrigger {
     Date expected = Date.today().addMonths(5);
     testClientDogStatus(status, expected, status, expected, 'Available');
   }
+
   @isTest
   public static void trigger_UpdatesClientDogStatus_WhenInTraining() {
     setup();
@@ -258,6 +245,7 @@ public with sharing class TestTeamTrigger {
     Date expected = Date.today().addMonths(5);
     testClientDogStatus(status, expected, status, expected, 'Available');
   }
+
   @isTest
   public static void trigger_UpdatesClientDogStatus_WhenCertified() {
     setup();
@@ -265,4 +253,54 @@ public with sharing class TestTeamTrigger {
     Date expected = Date.today().addMonths(5);
     testClientDogStatus(status, expected, status, expected, 'Available');
   }
+
+  @isTest
+  static void trigger_updatesFirstCertDate_whenFirstCertAgreement() {
+    setup();
+    Team__c team = new Team__c(
+      Name = 'Joe_Boomer', 
+      Client__c = joe.Id,
+      Dog__c = boomer.Id,
+      ClientCertAgreementReceived__c = Date.today().addDays(-1)
+    );
+ 
+    // Act
+    Test.startTest();
+    Database.SaveResult result = Database.insert (team, false);
+    Test.stopTest();
+
+    // Assert
+    System.assert(result.isSuccess());
+    Team__c actual = [SELECT ClientCertAgreementReceived__c, InitialCertificationDate__c
+      FROM Team__c
+      WHERE Id = :team.Id
+      LIMIT 1];
+    System.assertEquals(team.ClientCertAgreementReceived__c, actual.InitialCertificationDate__c, 'did not set initial cert date');
+  }
+
+  @isTest
+  static void setTeamHandlers_leavesFirstCertDate_whenNotFirstCertAgreement() {
+    setup();
+    Team__c team = new Team__c(
+      Name = 'Joe_Boomer', 
+      Client__c = joe.Id, 
+      Dog__c = boomer.Id,
+      ClientCertAgreementReceived__c = Date.today().addDays(-1), 
+      InitialCertificationDate__c = Date.today().addYears(-1)
+    );
+
+    // Act
+    Test.startTest();
+    Database.SaveResult result = Database.insert (team, false);
+    Test.stopTest();
+
+    // Assert
+    System.assert(result.isSuccess());
+    Team__c actual = [SELECT ClientCertAgreementReceived__c, InitialCertificationDate__c
+      FROM Team__c
+      WHERE Id = :team.Id
+      LIMIT 1];
+    System.assertNotEquals(actual.ClientCertAgreementReceived__c, actual.InitialCertificationDate__c, 'set initial cert date');
+  }
+
 }

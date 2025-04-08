@@ -12,7 +12,8 @@ private class TestTeamService {
     private static RelationshipRepository relationshipRepo;
     private static ContactRepository contactRepo;
     private static EmailService emailSrv;
-    private static void makeData(){
+    
+    private static void makeData() {
         mocks = new MockProvider();
         teamRepo = (TeamRepository)mocks.createMock(TeamRepository.class);
         dogRepo = (DogRepository)mocks.createMock(DogRepository.class);
@@ -29,14 +30,14 @@ private class TestTeamService {
         makeData();
         List<Team__c> teams = new List<Team__c>();
         mocks.expectedCalls.add(new MockCallData(teamRepo, 'getByIds', teams));
-        mocks.expectedCalls.add(new MockCallData(patRepo, 'getPassing', new PublicAccessTest__c[]{}));
+        mocks.expectedCalls.add(new MockCallData(patRepo, 'getPassing', new PublicAccessTest__c[]{  }));
 
         // Act
         service.updatePatInformation(new Set<Id>());
 
         // Assert
         System.assert(!mocks.actualCalls.isEmpty());
-        
+
         // the last call would be to update the teams
         MockCallData data = mocks.actualCalls[mocks.actualCalls.size() - 1];
         List<Team__c> actual = (List<Team__c>)data.args[0];
@@ -47,23 +48,25 @@ private class TestTeamService {
     static void updatePatInformation_clearsDates_whenNoPats() {
         // Arrange
         makeData();
-        List<Team__c> teams = new List<Team__c>{
-            new Team__c(Id = MockProvider.createId(Team__c.class), Client__c = MockProvider.createId(Contact.class), InitialCertificationDate__c = Date.today(), PatValidUntil__c = Date.today().addYears(1))
-        };
+        List<Team__c> teams = new List<Team__c>{ new Team__c(
+            Id = MockProvider.createId(Team__c.class), 
+            Client__c = MockProvider.createId(Contact.class), 
+            InitialCertificationDate__c = Date.today(), 
+            PatValidUntil__c = Date.today().addYears(1)
+        ) };
         mocks.expectedCalls.add(new MockCallData(teamRepo, 'getByIds', teams));
-        mocks.expectedCalls.add(new MockCallData(patRepo, 'getPassing', new PublicAccessTest__c[]{}));
+        mocks.expectedCalls.add(new MockCallData(patRepo, 'getPassing', new PublicAccessTest__c[]{  }));
 
         // Act
         service.updatePatInformation(new Set<Id>{ MockProvider.createId(Team__c.class) });
 
         // Assert
         System.assert(!mocks.actualCalls.isEmpty());
-        
+
         // the last call would be to update the teams
         MockCallData data = mocks.actualCalls[mocks.actualCalls.size() - 1];
         List<Team__c> actual = (List<Team__c>)data.args[0];
         System.assertEquals(1, actual.size());
-        System.assertEquals(null, actual[0].InitialCertificationDate__c);
         System.assertEquals(null, actual[0].PatValidUntil__c);
     }
 
@@ -73,24 +76,31 @@ private class TestTeamService {
         makeData();
         Id teamId = MockProvider.createId(Team__c.class);
         Id clientId = MockProvider.createId(Contact.class);
-        List<Team__c> teams = new List<Team__c>{
-            new Team__c(Id = teamId, Client__c = clientId, InitialCertificationDate__c = null, PatValidUntil__c = null)
-        };
+        List<Team__c> teams = new List<Team__c>{ new Team__c(
+            Id = teamId, 
+            Client__c = clientId, 
+            InitialCertificationDate__c = null, 
+            PatValidUntil__c = null
+        ) };
         mocks.expectedCalls.add(new MockCallData(teamRepo, 'getByIds', teams));
-        PublicAccessTest__c pat = new PublicAccessTest__c(Id = MockProvider.createId(PublicAccessTest__c.class), Type__c = 'Initial', DateCompleted__c = Date.today(), ValidUntil__c = Date.today().addYears(1));
-        mocks.expectedCalls.add(new MockCallData(patRepo, 'getPassing', new PublicAccessTest__c[] { pat }));
+        PublicAccessTest__c pat = new PublicAccessTest__c(
+            Id = MockProvider.createId(PublicAccessTest__c.class), 
+            Type__c = 'Initial', 
+            DateCompleted__c = Date.today(), 
+            ValidUntil__c = Date.today().addYears(1)
+        );
+        mocks.expectedCalls.add(new MockCallData(patRepo, 'getPassing', new PublicAccessTest__c[]{ pat }));
 
         // Act
         service.updatePatInformation(new Set<Id>{ teamId });
 
         // Assert
         System.assert(!mocks.actualCalls.isEmpty());
-        
+
         // the last call would be to update the teams
         MockCallData data = mocks.actualCalls[mocks.actualCalls.size() - 1];
         List<Team__c> actual = (List<Team__c>)data.args[0];
         System.assertEquals(1, actual.size(), 'should have just one team');
-        System.assertEquals(pat.DateCompleted__c, actual[0].InitialCertificationDate__c, 'Initial Certification Date should be the same as the PAT Completed Date');
     }
 
     @isTest
@@ -99,26 +109,33 @@ private class TestTeamService {
         makeData();
         Id teamId = MockProvider.createId(Team__c.class);
         Id clientId = MockProvider.createId(Contact.class);
-        List<Team__c> teams = new List<Team__c>{
-            new Team__c(Id = teamId, Client__c = clientId, InitialCertificationDate__c = null, PatValidUntil__c = null)
-        };
+        List<Team__c> teams = new List<Team__c>{ new Team__c(
+            Id = teamId, 
+            Client__c = clientId, 
+            InitialCertificationDate__c = null, 
+            PatValidUntil__c = null
+        ) };
         mocks.expectedCalls.add(new MockCallData(teamRepo, 'getByIds', teams));
-        PublicAccessTest__c pat = new PublicAccessTest__c(Id = MockProvider.createId(PublicAccessTest__c.class), Type__c = 'Initial', DateCompleted__c = Date.today(), ValidUntil__c = Date.today().addYears(1));
-        mocks.expectedCalls.add(new MockCallData(patRepo, 'getPassing', new PublicAccessTest__c[] { pat }));
+        PublicAccessTest__c pat = new PublicAccessTest__c(
+            Id = MockProvider.createId(PublicAccessTest__c.class), 
+            Type__c = 'Initial', 
+            DateCompleted__c = Date.today(), 
+            ValidUntil__c = Date.today().addYears(1)
+        );
+        mocks.expectedCalls.add(new MockCallData(patRepo, 'getPassing', new PublicAccessTest__c[]{ pat }));
 
         // Act
         service.updatePatInformation(new Set<Id>{ teamId });
 
         // Assert
         System.assert(!mocks.actualCalls.isEmpty(), 'no mock calls were made');
-        
+
         // the last call would be to update the teams
         MockCallData data = mocks.actualCalls[mocks.actualCalls.size() - 1];
         List<Team__c> actual = (List<Team__c>)data.args[0];
         System.assertEquals(1, actual.size(), 'should have just one team');
         System.assertEquals(pat.ValidUntil__c, actual[0].PatValidUntil__c, 'PAT valid until should match');
-     }
-  
+    }
     @isTest
     static void updateDogStatus_updatesDogStatusAndXrayRequired() {
         makeData();
@@ -156,5 +173,28 @@ private class TestTeamService {
         System.assertEquals(team.InitialCertificationDate__c, actual.ClientInitialCertificationDate__c, 'should match team initial cert data');
         System.assertEquals(team.FacilitatorAvailability__c, actual.ClientFacilitatorAvailability__c, 'should match team facilitator availability');
         System.assertEquals(dog.Name, actual.ClientDog__c, 'should match dog name');
+    }
+
+    @isTest
+    static void setTeamHandlers_updatesFirstCertDate_whenFirstCertAgreement() {
+        makeData();
+        Team__c team = new Team__c(
+            Id = MockProvider.createId(Team__c.class), 
+            ClientCertAgreementReceived__c = Date.today().addDays(-1)
+        );
+        service.setTeamHandler(new Team__c[]{ team });
+        System.assertEquals(team.ClientCertAgreementReceived__c, team.InitialCertificationDate__c, 'did not set initial cert date');
+    }
+
+    @isTest
+    static void setTeamHandlers_leavesFirstCertDate_whenNotFirstCertAgreement() {
+        makeData();
+        Team__c team = new Team__c(
+            Id = MockProvider.createId(Team__c.class), 
+            ClientCertAgreementReceived__c = Date.today().addDays(-1),
+            InitialCertificationDate__c = Date.today().addYears(-1)
+        );
+        service.setTeamHandler(new Team__c[]{ team });
+        System.assertNotEquals(team.ClientCertAgreementReceived__c, team.InitialCertificationDate__c, 'did not set initial cert date');
     }
 }

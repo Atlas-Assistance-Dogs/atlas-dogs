@@ -91,21 +91,23 @@ public inherited sharing class TeamService{
       List<PublicAccessTest__c> passingPats = patRepo.getPassing(team.Id);
       if (passingPats.isEmpty()){
         team.PatValidUntil__c = null;
-        team.InitialCertificationDate__c = null;
       } else if (team.PatValidUntil__c != passingPats[0].ValidUntil__c){
         team.PatValidUntil__c = passingPats[0].ValidUntil__c;
-      }
-      for (Integer i = passingPats.size() - 1; i >= 0; i--){
-        PublicAccessTest__c pat = passingPats[i];
-        if (pat.Type__c == 'Initial'){
-          team.InitialCertificationDate__c = pat.DateCompleted__c;
-          break;
-        }
       }
       team.PatCount__c = passingPats.size();
     }
 
     teamRepo.modify(teams);
+  }
+
+  // Set InitialCertificationDate when first ClientCertAgreementReceived.
+  // Called from TeamTriggerBefore
+  public void setTeamHandler(List<Team__c> teams) {
+    for (Team__c team : teams) {
+      if (team.ClientCertAgreementReceived__c != null && team.InitialCertificationDate__c == null) {
+        team.InitialCertificationDate__c = team.ClientCertAgreementReceived__c;
+      }
+    }
   }
 
   // Set the client/facilitator relationship.
