@@ -2,6 +2,7 @@ public inherited sharing class CertificationService {
   private CertificationRepository certRepo;
   private CeuRepository ceuRepo;
   private EmailService emailServ;
+
   public CertificationService() {
     certRepo = new CertificationRepository();
     ceuRepo = new CeuRepository();
@@ -9,11 +10,7 @@ public inherited sharing class CertificationService {
   }
 
   @TestVisible
-  private CertificationService(
-    CertificationRepository certRepo,
-    EmailService emailServ,
-    CeuRepository ceuRepo
-  ) {
+  private CertificationService(CertificationRepository certRepo, EmailService emailServ, CeuRepository ceuRepo) {
     this.certRepo = certRepo;
     this.emailServ = emailServ;
     this.ceuRepo = ceuRepo;
@@ -38,15 +35,11 @@ public inherited sharing class CertificationService {
   // Create a map of Certifications by ContactId, with each contact id
   // having a list of the Certifications.
   // This method is used when gathering Certifications for a list of contacts.
-  public Map<Id, List<Certification__c>> sortCertifications(
-    List<Certification__c> certs
-  ) {
+  public Map<Id, List<Certification__c>> sortCertifications(List<Certification__c> certs) {
     Map<Id, List<Certification__c>> contactCertIds = new Map<Id, List<Certification__c>>();
     for (Certification__c cert : certs) {
       if (contactCertIds.containsKey(cert.Contact__c)) {
-        List<Certification__c> contactCerts = contactCertIds.get(
-          cert.Contact__c
-        );
+        List<Certification__c> contactCerts = contactCertIds.get(cert.Contact__c);
         contactCerts.add(cert);
       } else {
         contactCertIds.put(cert.Contact__c, new List<Certification__c>{ cert });
@@ -58,20 +51,14 @@ public inherited sharing class CertificationService {
   // add CEUs to the appropriate certifications
   public void addCeus(List<Ceu__c> ceus) {
     Map<Id, List<Ceu__c>> contactCeuIds = sortCeus(ceus);
-    List<Certification__c> certs = certRepo.getForContacts(
-      contactCeuIds.keySet()
-    );
+    List<Certification__c> certs = certRepo.getForContacts(contactCeuIds.keySet());
     List<CeuCertification__c> ccs = new List<CeuCertification__c>();
     for (Certification__c cert : certs) {
       List<Ceu__c> contactCeus = contactCeuIds.get(cert.Contact__c);
       for (Ceu__c ceu1 : contactCeus) {
-        if (
-          cert.Status__c == 'Active' &&
-          ceu1.DateCompleted__c >= cert.Start__c &&
-          ceu1.DateCompleted__c <= cert.End__c
-        ) {
+        if (cert.Status__c == 'Active' && ceu1.DateCompleted__c >= cert.Start__c && ceu1.DateCompleted__c <= cert.End__c) {
           CeuCertification__c cc = new CeuCertification__c(
-            Ceu__c = ceu1.Id,
+            Ceu__c = ceu1.Id, 
             Certification__c = cert.Id
           );
           if (ceu1.Status__c == 'Approved') {
@@ -99,10 +86,7 @@ public inherited sharing class CertificationService {
       } else {
         cc.Approved__c = 0;
       }
-      if (
-        cc.Ceu__r.DateCompleted__c >= cc.Certification__r.Start__c &&
-        cc.Ceu__r.DateCompleted__c <= cc.Certification__r.End__c
-      ) {
+      if (cc.Ceu__r.DateCompleted__c >= cc.Certification__r.Start__c && cc.Ceu__r.DateCompleted__c <= cc.Certification__r.End__c) {
         goodConnections.add(cc);
       } else {
         badConnections.add(cc);
@@ -121,21 +105,14 @@ public inherited sharing class CertificationService {
 
   // note that the CeuCertifications in badConnections are references,
   // so correcting them here also corrects them in the ccs list.
-  private List<CeuCertification__c> correctConnections(
-    List<CeuCertification__c> badConnections,
-    Set<Id> contactIds
-  ) {
+  private List<CeuCertification__c> correctConnections(List<CeuCertification__c> badConnections, Set<Id> contactIds) {
     List<CeuCertification__c> loose = new List<CeuCertification__c>();
     List<CeuCertification__c> corrected = new List<CeuCertification__c>();
     List<Certification__c> certs = certRepo.getForContacts(contactIds);
     for (CeuCertification__c cc : badConnections) {
       Ceu__c ceu1 = cc.Ceu__r;
       for (Certification__c cert : certs) {
-        if (
-          ceu1.Contact__c == cert.Contact__c &&
-          ceu1.DateCompleted__c >= cert.Start__c &&
-          ceu1.DateCompleted__c <= cert.End__c
-        ) {
+        if (ceu1.Contact__c == cert.Contact__c && ceu1.DateCompleted__c >= cert.Start__c && ceu1.DateCompleted__c <= cert.End__c) {
           cc.Certification__c = cert.Id;
           corrected.add(cc);
         } else {
@@ -151,8 +128,11 @@ public inherited sharing class CertificationService {
 
   private inherited sharing class Dates {
     public Integer years { get; set; }
+
     public Integer early { get; set; }
+
     public Integer leeway { get; set; }
+
     public Dates() {
       // check to see if settings are missing
       Boolean updateSettings = false;
@@ -179,6 +159,7 @@ public inherited sharing class CertificationService {
       this.early = (Integer) settings.EarlyRenewal__c;
       this.leeway = (Integer) settings.RenewalLeeway__c;
     }
+
   }
 
   /* This is called when a new certification agreement is received for a contact.
@@ -189,41 +170,33 @@ public inherited sharing class CertificationService {
    *   If the new certDate is after the leeway, it completes the old cert and creates a new one starting on the certDate
    *   If the new certDate is somewhere else, it leaves the current cert in effect.
    */
-  public Certification__c updateCert(
-    Contact person,
-    String type,
-    Date validUntil, // date the most recent cert was valid until
-    Date certDate
-  ) {
+  public Certification__c updateCert(Contact person, String type, Date validUntil,   // date the most recent cert was valid until
+  Date certDate) {
     // date the latest agreement was received
     Dates dates = new Dates();
     Certification__c cert;
     if (validUntil == null) {
       // create cert and exit
-      cert = certRepo.create(
-        new Certification__c(
-          Contact__c = person.Id,
-          Type__c = type,
-          Status__c = 'Active',
-          Start__c = certDate,
-          End__c = certDate.addYears(dates.years)
-        )
-      );
+      cert = certRepo.create(new Certification__c(
+        Contact__c = person.Id, 
+        Type__c = type, 
+        Status__c = 'Active', 
+        Start__c = certDate, 
+        End__c = certDate.addYears(dates.years)
+      ));
       return cert;
     }
 
     cert = certRepo.getActiveCert(person.Id, type);
     if (cert == null) {
       // create cert for current validUntil and continue
-      cert = certRepo.create(
-        new Certification__c(
-          Contact__c = person.Id,
-          Type__c = type,
-          Status__c = 'Active',
-          Start__c = validUntil.addYears(-dates.years),
-          End__c = validUntil
-        )
-      );
+      cert = certRepo.create(new Certification__c(
+        Contact__c = person.Id, 
+        Type__c = type, 
+        Status__c = 'Active', 
+        Start__c = validUntil.addYears(-dates.years), 
+        End__c = validUntil
+      ));
     }
 
     Integer days = cert.End__c.daysBetween(certDate);
@@ -233,15 +206,13 @@ public inherited sharing class CertificationService {
       certRepo.modify(cert);
       System.debug('completing old cert');
 
-      cert = certRepo.create(
-        new Certification__c(
-          Contact__c = person.Id,
-          Type__c = type,
-          Status__c = 'Active',
-          Start__c = cert.End__c,
-          End__c = cert.End__c.addYears(dates.years)
-        )
-      );
+      cert = certRepo.create(new Certification__c(
+        Contact__c = person.Id, 
+        Type__c = type, 
+        Status__c = 'Active', 
+        Start__c = cert.End__c, 
+        End__c = cert.End__c.addYears(dates.years)
+      ));
       return cert;
     }
     if (days > dates.leeway) {
@@ -250,15 +221,13 @@ public inherited sharing class CertificationService {
       cert.Status__c = 'Complete';
       certRepo.modify(cert);
 
-      cert = certRepo.create(
-        new Certification__c(
-          Contact__c = person.Id,
-          Type__c = type,
-          Status__c = 'Active',
-          Start__c = certDate,
-          End__c = certDate.addYears(dates.years)
-        )
-      );
+      cert = certRepo.create(new Certification__c(
+        Contact__c = person.Id, 
+        Type__c = type, 
+        Status__c = 'Active', 
+        Start__c = certDate, 
+        End__c = certDate.addYears(dates.years)
+      ));
       return cert;
     }
     return cert;
@@ -272,21 +241,16 @@ public inherited sharing class CertificationService {
     List<Ceu__c> ceus = ceuRepo.getForContact(cert.Contact__c, 10000);
     List<CeuCertification__c> ccs = new List<CeuCertification__c>();
     for (Ceu__c ceu : ceus) {
-      if (
-        ceu.DateCompleted__c >= cert.Start__c &&
-        ceu.DateCompleted__c <= cert.End__c
-      ) {
+      if (ceu.DateCompleted__c >= cert.Start__c && ceu.DateCompleted__c <= cert.End__c) {
         Integer approved = 0;
         if (ceu.Status__c == 'Approved') {
           approved = (Integer) ceu.Quantity__c;
         }
-        ccs.add(
-          new CeuCertification__c(
-            Ceu__c = ceu.Id,
-            Certification__c = cert.Id,
-            Approved__c = approved
-          )
-        );
+        ccs.add(new CeuCertification__c(
+          Ceu__c = ceu.Id, 
+          Certification__c = cert.Id, 
+          Approved__c = approved
+        ));
       }
     }
     certRepo.create(ccs);
@@ -300,7 +264,8 @@ public inherited sharing class CertificationService {
     }
     // Remind the contact for these certs to get their CEUs
     Id orgAddressId = emailServ.getOrgEmailAddressId();
-    EmailTemplate template = emailServ.getTemplate('CeuReminder');
+    EmailTemplate facTemplate = emailServ.getTemplate('CeuFacilitatorReminder');
+    EmailTemplate trainTemplate = emailServ.getTemplate('CeuTrainerReminder');
 
     List<Messaging.SingleEmailMessage> emails = new List<Messaging.SingleEmailMessage>();
     for (Certification__c cert : certs) {
@@ -310,7 +275,11 @@ public inherited sharing class CertificationService {
       }
       mail.setTargetObjectId(cert.Contact__c);
       mail.setWhatId(cert.Id);
-      mail.setTemplateId(template.Id);
+      if (cert.Type__c == 'Facilitator') {
+        mail.setTemplateId(facTemplate.Id);
+      } else {
+        mail.setTemplateId(trainTemplate.Id);
+      }
 
       // Record ID for which letter will be generated
       mail.setBccSender(false);
@@ -323,4 +292,5 @@ public inherited sharing class CertificationService {
     }
     emailServ.sendEmail(emails);
   }
+
 }

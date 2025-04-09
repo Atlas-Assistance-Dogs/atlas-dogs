@@ -284,6 +284,10 @@
         <visibility>Visible</visibility>
     </tabSettings>
     <tabSettings>
+        <tab>Certification__c</tab>
+        <visibility>Visible</visibility>
+    </tabSettings>
+    <tabSettings>
         <tab>Dog__c</tab>
         <visibility>Visible</visibility>
     </tabSettings>
