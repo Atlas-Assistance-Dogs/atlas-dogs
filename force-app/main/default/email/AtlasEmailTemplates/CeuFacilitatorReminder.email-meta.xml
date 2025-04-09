@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Remind Team Facilitator to earn CEUs</description>
+    <encodingKey>UTF-8</encodingKey>
+    <letterhead>AtlasLetterhead_v2</letterhead>
+    <name>Facilitator Ceu Reminder</name>
+    <style>freeForm</style>
+    <subject>Please remember to submit your Atlas Team Facilitator CEUs</subject>
+    <textOnly>Dear {!Contact.PreferredName__c}
+
+This is a quarterly reminder to log your continuing education units. While you can submit them anytime before you renew your certification, it is often easier to do things like this         throughout the year so you can remember what you read, watched, participated in or listened to.
+
+Your Team Facilitator certification is valid from {!Certification__c.Start__c} to {!Certification__c.End__c} with {!Certification__c.Approved__c} CEUs presently applied.
+
+If you are looking for ideas of what to do for CEUs, look at the Facilitator Group in Canvas at the https://atlasdogacademy.instructure.com/groups/114/pages/atlas-ceu-options Remember it is as simple as 1 hr of your time spent learning something related to the training you do with our clients = 1 CEU.
+
+Atlas requires that all Team Facilitators and Trainers complete 10 CEU&apos;s during each year, so thank you for making sure to meet this important requirement. CEUs will be applied to both Trainer and Facilitator certification requirements, if applicable.
+
+To submit CEUs, simply go to:  https://atlasdog.tfaforms.net/4907434?tfa_2={!Contact.FirstName}&amp;tfa_4={!Contact.LastName}&amp;tfa_88={!Contact.Email}.  If you have more than one CEU to add, just click the &quot;Add CEU&quot; link at the bottom of the form and you can add as many as you want in one submission.
+
+        Thank you for being a part of Atlas.</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>
