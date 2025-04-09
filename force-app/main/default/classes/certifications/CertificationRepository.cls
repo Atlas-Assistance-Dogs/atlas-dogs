@@ -88,7 +88,7 @@ public inherited sharing class CertificationRepository {
   }
   public Certification__c[] getActiveCerts() {
     return [
-      SELECT Id, Contact__c, Approved__c
+      SELECT Id, Contact__c, Approved__c, Type__c, Start__c, End__c
       FROM Certification__c
       WHERE Status__c = 'Active'
     ];
