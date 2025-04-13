@@ -20,14 +20,6 @@ public class MockProvider implements System.StubProvider {
     return code;
   }
 
-  static Integer fakeIdCount = 42;
-  public static Id createId(System.Type type) {
-    String typeName = type.getName();
-    List<Schema.DescribeSObjectResult> describes = Schema.describeSObjects(new List<String>{ typeName }, SObjectDescribeOptions.DEFERRED);
-    String code = describes[0].getKeyPrefix() + (fakeIdCount++ + '').leftPad(15, '0');
-    return code;
-  }
-
   public MockProvider() {
     expectedCalls = new List<MockCallData>();
     actualCalls = new List<MockCallData>();
