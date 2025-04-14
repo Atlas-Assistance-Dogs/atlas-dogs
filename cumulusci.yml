@@ -3,8 +3,8 @@ project:
   name: atlas-dog
   package:
     name: AtlasDogs
-    namespace: dogs
-    api_version: "60.0"
+    namespace: atlas1
+    api_version: "63.0"
     install_class: "PostInstall"
   dependencies:
     - github: "https://github.com/SalesforceFoundation/NPSP"

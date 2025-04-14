@@ -214,6 +214,7 @@ public with sharing class TestTeamServiceReminders {
   @isTest
   static void remindFacilitators_doesNotSendEmailsOnEvenWeeks() {
     // Arrange
+    setupCalls(new List<Integer>{ 1, 14 + 2, 28 + 3, 14 * 3 + 4 });
     // Act
     service.remindFacilitators();
     // Assert
