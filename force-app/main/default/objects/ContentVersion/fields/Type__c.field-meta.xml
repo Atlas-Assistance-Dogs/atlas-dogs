@@ -29,7 +29,7 @@
             <value>
                 <fullName>Agreement</fullName>
                 <default>false</default>
-                <label>Participation Agreement</label>
+                <label>Agreement</label>
             </value>
             <value>
                 <fullName>Contract</fullName>
@@ -49,7 +49,7 @@
             <value>
                 <fullName>LOMI</fullName>
                 <default>false</default>
-                <label>Provider Form</label>
+                <label>Medical Provider Form</label>
             </value>
             <value>
                 <fullName>Media</fullName>
@@ -166,6 +166,11 @@
                 <default>false</default>
                 <label>Provider Release Form</label>
             </value>
+            <value>
+                <fullName>ParticipationAgreement</fullName>
+                <default>false</default>
+                <label>Participation Agreement</label>
+            </value>
         </valueSetDefinition>
         <valueSettings>
             <controllingFieldValue>Staff</controllingFieldValue>
@@ -225,11 +230,15 @@
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Na</controllingFieldValue>
+            <valueName>Media</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Na</controllingFieldValue>
             <valueName>FirstAid</valueName>
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Na</controllingFieldValue>
-            <valueName>Media</valueName>
+            <valueName>ParticipationAgreement</valueName>
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Client</controllingFieldValue>
