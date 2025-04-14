@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Remind Trainers to earn CEUs</description>
+    <encodingKey>UTF-8</encodingKey>
+    <letterhead>AtlasLetterhead_v2</letterhead>
+    <name>Trainer Ceu Reminder</name>
+    <style>freeForm</style>
+    <subject>Please remember to submit your Trainer CEUs to Atlas</subject>
+    <textOnly>Dear {!Contact.PreferredName__c}
+
+This is a quarterly reminder to log your continuing education units. While you can submit them anytime before you renew your certification, it is often easier to do things like this throughout the year so you can remember what you read, watched, participated in or listened to.
+
+Your Trainer certification is valid from {!Certification__c.Start__c} to {!Certification__c.End__c} with {!Certification__c.Approved__c} CEU&apos;s presently applied.
+
+If you are looking for ideas of what to do for CEU&apos;s, look at the Trainer Group in Canvas at https://atlasdogacademy.instructure.com/groups/110/pages/atlas-ceu-options. Remember it is as simple as 1 hr of your time spent learning something related to advancing your dog training, disability, advocacy or related knowledge = 1 CEU.
+
+Atlas requires that all Trainers complete 10 CEU&apos;s each year, so thank you for making sure to meet this important requirement. Please note, CEU&apos;s will be applied to both Trainer and Facilitator certification requirements, if applicable.
+
+To submit CEU&apos;s, simply go to: https://atlasdog.tfaforms.net/4907434.
+
+If you have more than one CEU to add, just click the &quot;Add CEU&quot; link at the bottom of the form and you can add as many as you want in one submission.
+
+Thank you for being a part of Atlas.</textOnly>
+    <type>html</type>
+    <uiType>Aloha</uiType>
+</EmailTemplate>

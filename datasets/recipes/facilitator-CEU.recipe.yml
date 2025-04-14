@@ -1,0 +1,52 @@
+# cci task run update_data --recipe datasets/recipes/facilitator-CEU.recipe.yml --object Contact --where "IsTeamFacilitator__c = true" --org dev
+- object: Contact
+  friends:
+    - object: CEU__c
+      count: 10
+      fields:
+        Authority__c:
+          random_choice:
+            - KPA
+            - CCPDT
+            - IAABC
+            - CBCC
+            - Atlas
+            - Other
+            - None
+        AuthorityOther__c:
+          if:
+            - choice:
+                when: ${{Authority__c=='Other'}}
+                pick:
+                  fake: company
+        Comments__c:
+          fake: sentence
+        ProgramHours__c:
+          random_number:
+            min: 8
+            max: 2000
+        ProgramTitle__c:
+          fake: catch_phrase
+        Quantity__c:
+          random_number:
+            min: 1
+            max: 20
+        DateSubmitted__c:
+          date_between:
+            start_date: 2000-01-01
+            end_date: today
+        DateCompleted__c:
+          date_between:
+            start_date: ${{date(DateSubmitted__c)}}
+            end_date: today
+        Role__c:
+          random_choice:
+            Attendee: 80%
+            Presenter: 20%
+        Contact__c:
+          reference: Contact
+        Status__c:
+          random_choice:
+            Approved: 50%
+            Pending: 40%
+            Denied: 10%

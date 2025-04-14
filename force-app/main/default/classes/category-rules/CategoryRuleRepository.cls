@@ -1,9 +1,6 @@
 public with sharing class CategoryRuleRepository {
-    public CategoryRuleRepository() {
-
-    }
     public CategoryRule__c[] getAll() {
-        return [SELECT Category__c, GroupName__c FROM CategoryRule__c];
+        return [SELECT Category__c, GroupName__c, ReadOnly__c FROM CategoryRule__c];
     }
     public CategoryRule__c[] getForGroupNames(String objLabel, Set<String> allCategories, List<String> groupNames) {
         return [

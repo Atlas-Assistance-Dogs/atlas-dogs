@@ -13,7 +13,7 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>ContinuingEducationUnitController</apexClass>
+        <apexClass>CEUController</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -581,7 +581,7 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Contact.TrainerCertificationValidUntil__c</field>
+        <field>Contact.TrainerCertValidUntil__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -661,22 +661,22 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>ContinuingEducationUnit__c.AuthorityOther__c</field>
+        <field>CEU__c.AuthorityOther__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>ContinuingEducationUnit__c.Comments__c</field>
+        <field>CEU__c.Comments__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>ContinuingEducationUnit__c.ProgramHours__c</field>
+        <field>CEU__c.ProgramHours__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>ContinuingEducationUnit__c.Status__c</field>
+        <field>CEU__c.Status__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -1085,15 +1085,6 @@
         <allowEdit>true</allowEdit>
         <allowRead>true</allowRead>
         <modifyAllRecords>true</modifyAllRecords>
-        <object>ContinuingEducationUnit__c</object>
-        <viewAllRecords>true</viewAllRecords>
-    </objectPermissions>
-    <objectPermissions>
-        <allowCreate>true</allowCreate>
-        <allowDelete>true</allowDelete>
-        <allowEdit>true</allowEdit>
-        <allowRead>true</allowRead>
-        <modifyAllRecords>true</modifyAllRecords>
         <object>DogRelationship__c</object>
         <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
@@ -1182,10 +1173,6 @@
     </tabSettings>
     <tabSettings>
         <tab>CategoryRule__c</tab>
-        <visibility>Visible</visibility>
-    </tabSettings>
-    <tabSettings>
-        <tab>ContinuingEducationUnit__c</tab>
         <visibility>Visible</visibility>
     </tabSettings>
     <tabSettings>

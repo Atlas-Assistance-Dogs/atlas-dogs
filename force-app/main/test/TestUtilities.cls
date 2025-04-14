@@ -214,16 +214,27 @@ public with sharing class TestUtilities {
   }
   public static Map<String, List<String>> getCategoryTypeDependencies() {
     Map<String, List<String>> controllingInfo = new Map<String, List<String>>();
+    String nameSpace = '';
 
+    // Get the name of a custom object so we know if the namespace is applied
+    String dogName = Dog__c.class.getName();
+    Integer startIndex = dogName.indexOf('Dog');
+    if (startIndex > -1) {
+      nameSpace = dogName.substring(0, startIndex);
+    }
     Schema.SObjectType objType = Schema.getGlobalDescribe()
       .get('ContentVersion');
 
     Schema.DescribeSObjectResult describeResult = objType.getDescribe();
-    Schema.DescribeFieldResult controllingFieldInfo = describeResult.fields.getMap()
-      .get('Category__c')
+    Map<String, Schema.SObjectField> fieldMap = describeResult.fields.getMap();
+
+    Schema.DescribeFieldResult controllingFieldInfo = fieldMap.get(
+        nameSpace + 'Category__c'
+      )
       .getDescribe();
-    Schema.DescribeFieldResult dependentFieldInfo = describeResult.fields.getMap()
-      .get('Type__c')
+    Schema.DescribeFieldResult dependentFieldInfo = fieldMap.get(
+        nameSpace + 'Type__c'
+      )
       .getDescribe();
 
     List<Schema.PicklistEntry> controllingValues = controllingFieldInfo.getPicklistValues();

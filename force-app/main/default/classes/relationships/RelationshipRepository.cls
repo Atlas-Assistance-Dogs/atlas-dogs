@@ -45,6 +45,7 @@ public class RelationshipRepository {
         npe4__Contact__c,
         npe4__Contact__r.Contact__c,
         npe4__Contact__r.Email,
+        npe4__Contact__r.Phone,
         npe4__RelatedContact__c,
         npe4__RelatedContact__r.Email,
         npe4__RelatedContact__r.Phone,

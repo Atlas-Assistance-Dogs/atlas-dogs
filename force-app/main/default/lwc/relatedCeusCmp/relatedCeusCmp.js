@@ -1,18 +1,17 @@
 import { LightningElement, api, wire } from "lwc";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
 import { NavigationMixin } from "lightning/navigation";
-import getRelatedCeus from "@salesforce/apex/ContinuingEducationUnitController.getRelatedCeus";
-import deleteRecord from "lightning/uiRecordApi";
+import getRelatedCeus from "@salesforce/apex/CEUController.getRelatedCeus";
+import { deleteRecord } from "lightning/uiRecordApi";
 import { refreshApex } from "@salesforce/apex";
 
-import AUTHORITY_FIELD from "@salesforce/schema/ContinuingEducationUnit__c.Authority__c";
-import AUTHORITY_OTHER_FIELD from "@salesforce/schema/ContinuingEducationUnit__c.AuthorityOther__c";
-import DATE_COMPLETED_FIELD from "@salesforce/schema/ContinuingEducationUnit__c.DateCompleted__c";
-import NAME_FIELD from "@salesforce/schema/ContinuingEducationUnit__c.Name";
-import PROGRAM_DATE_FIELD from "@salesforce/schema/ContinuingEducationUnit__c.ProgramDate__c";
-import REQUESTED_CEUS_FIELD from "@salesforce/schema/ContinuingEducationUnit__c.Quantity__c";
-import ROLE_FIELD from "@salesforce/schema/ContinuingEducationUnit__c.Role__c";
-import STATUS_FIELD from "@salesforce/schema/ContinuingEducationUnit__c.Status__c";
+import AUTHORITY_FIELD from "@salesforce/schema/CEU__c.Authority__c";
+import AUTHORITY_OTHER_FIELD from "@salesforce/schema/CEU__c.AuthorityOther__c";
+import DATE_COMPLETED_FIELD from "@salesforce/schema/CEU__c.DateCompleted__c";
+import NAME_FIELD from "@salesforce/schema/CEU__c.Name";
+import REQUESTED_CEUS_FIELD from "@salesforce/schema/CEU__c.Quantity__c";
+import ROLE_FIELD from "@salesforce/schema/CEU__c.Role__c";
+import STATUS_FIELD from "@salesforce/schema/CEU__c.Status__c";
 
 const actions = [
   { label: "Edit", name: "edit" },
@@ -23,6 +22,8 @@ const COLS = [
   {
     label: "Name",
     type: "button",
+    sortable: true,
+    fieldName: NAME_FIELD.fieldApiName,
     typeAttributes: {
       name: "goto",
       label: { fieldName: NAME_FIELD.fieldApiName },
@@ -31,12 +32,8 @@ const COLS = [
   },
   { label: "Authority", fieldName: "authority" },
   {
-    label: "Program Date",
-    fieldName: PROGRAM_DATE_FIELD.fieldApiName,
-    type: "date-local"
-  },
-  {
     label: "Date Completed",
+    sortable: true,
     fieldName: DATE_COMPLETED_FIELD.fieldApiName,
     type: "date-local"
   },
@@ -143,7 +140,7 @@ export default class RelatedCeusCmp extends NavigationMixin(LightningElement) {
     return this.viewAll ? 10000 : 6;
   }
 
-  @wire(getRelatedCeus, { contactId: "$recordId", max: "$max" })
+  @wire(getRelatedCeus, { recordId: "$recordId", max: "$max" })
   getCeus(result) {
     this.wiredCeus = result;
     this.data = null;
@@ -197,5 +194,6 @@ export default class RelatedCeusCmp extends NavigationMixin(LightningElement) {
 
   handleChange() {
     refreshApex(this.wiredCeus);
+    this.dispatchEvent(new CustomEvent('force:refreshView'));
   }
 }

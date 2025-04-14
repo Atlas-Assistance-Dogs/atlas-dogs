@@ -1,6 +1,6 @@
 import { LightningElement, api } from "lwc";
 import { NavigationMixin } from "lightning/navigation";
-import CEU_OBJECT from "@salesforce/schema/ContinuingEducationUnit__c";
+import CEU_OBJECT from "@salesforce/schema/CEU__c";
 
 // This component is used as a stand-alone modal on a page when creating a
 // new CEU from the overall CEU list

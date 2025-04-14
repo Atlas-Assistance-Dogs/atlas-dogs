@@ -327,30 +327,30 @@
         - Decertified
         - Discontinued
         - None
-    #   VetClinic__c:
-    #       - object: Account
-    #         nickname: vet_clinic
-    #         fields:
-    #             RecordType: Organization
-    #             name:
-    #                 fake: company
-    #             Description:
-    #                 fake: catch_phrase
-    #             Industry: Healthcare
-    #             ShippingStreet:
-    #                 fake: street_address
-    #             ShippingCity:
-    #                 fake: city
-    #             ShippingState:
-    #                 fake: state
-    #             ShippingPostalCode:
-    #                 fake: postalcode
-    #             ShippingCountry:
-    #                 fake: country
-    #             Phone:
-    #                 fake: phone_number
-    #             Fax:
-    #                 fake: phone_number
+      #   VetClinic__c:
+      #       - object: Account
+      #         nickname: vet_clinic
+      #         fields:
+      #             RecordType: Organization
+      #             name:
+      #                 fake: company
+      #             Description:
+      #                 fake: catch_phrase
+      #             Industry: Healthcare
+      #             ShippingStreet:
+      #                 fake: street_address
+      #             ShippingCity:
+      #                 fake: city
+      #             ShippingState:
+      #                 fake: state
+      #             ShippingPostalCode:
+      #                 fake: postalcode
+      #             ShippingCountry:
+      #                 fake: country
+      #             Phone:
+      #                 fake: phone_number
+      #             Fax:
+      #                 fake: phone_number
 
 # Veterinarian
 # - object: Contact

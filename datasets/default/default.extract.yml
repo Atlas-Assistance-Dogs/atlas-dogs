@@ -1,21 +1,21 @@
 extract:
   Lead:
     fields:
-      - City
-      - Company
-      - Country
-      - Email
-      - FirstName
-      - IsConverted
-      - LeadSource
-      - MobilePhone
-      - Phone
-      - PostalCode
-      - Pronoun__c
-      - State
-      - Status
-      - Street
-      - FIELDS(CUSTOM)
+        - City
+        - Company
+        - Country
+        - Email
+        - FirstName
+        - IsConverted
+        - LeadSource
+        - MobilePhone
+        - Phone
+        - PostalCode
+        - Pronoun__c
+        - State
+        - Status
+        - Street
+        - FIELDS(CUSTOM)
   Account:
     fields:
       - RecordTypeId
@@ -43,7 +43,7 @@ extract:
     fields: FIELDS(ALL)
   CategoryRule__c:
     fields: FIELDS(ALL)
-  ContinuingEducationUnit__c:
+  CEU__c:
     fields: FIELDS(ALL)
   Dog__c:
     fields: FIELDS(ALL)
@@ -51,23 +51,7 @@ extract:
     fields: FIELDS(ALL)
   Log__c:
     fields:
-      - ClientHours__c
-      - ClientStress__c
-      - Date__c
-      - Details__c
-      - Facilitator__c
-      - OtherHours__c
-      - PublicAccessHours__c
-      - OtherHours__c
-      - PublicAccessHours__c
-      - RequestSupportFromAtlas__c
-      - RequestSupportFromTeam__c
-      - Satisfaction__c
-      - SessionType__c
-      - Stress__c
-      - SupportDetails__c
-      - Submitter__c
-      - Team__c
+      - FIELDS(ALL)
       - RecordTypeId
   Program__c:
     fields: FIELDS(ALL)
