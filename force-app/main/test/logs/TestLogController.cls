@@ -11,8 +11,8 @@ public with sharing class TestLogController {
   private static Contact facilitator;
   private static Contact other;
   private static Dog__c dog;
-  private static ID CLIENT_ID;
-  private static ID FACILITATOR_ID;
+  public static ID CLIENT_ID;
+  public static ID FACILITATOR_ID;
 
   @testSetup
   static void setup() {

@@ -4,7 +4,7 @@ project:
   package:
     name: AtlasDogs
     namespace: atlas1
-    api_version: "60.0"
+    api_version: "63.0"
     install_class: "PostInstall"
   dependencies:
     - github: "https://github.com/SalesforceFoundation/NPSP"
@@ -53,12 +53,12 @@ flows:
           api_names: AtlasBackgroundCheck,AtlasBase,AtlasBoard,AtlasDemographics,AtlasFacilitator,AtlasPuppyRaiser,AtlasStaff,AtlasStandalonePrograms,AtlasTeam,AtlasTrainer,AtlasVolunteer
       4:
         task: load_custom_settings
-        options:
+        options: 
           settings_path: datasets/default/custom-settings.yml
 
   config_managed:
     steps:
-      # overload load_sample_data for now
+        # overload load_sample_data for now
       90:
         task: assign_permission_sets
         options:

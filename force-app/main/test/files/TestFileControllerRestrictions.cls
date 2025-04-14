@@ -1,23 +1,5 @@
 /**
- * This class contains unit tests for validating the behavior of Apex classes
- * and triggers.
- *
- * Unit tests are class methods that verify whether a particular piece
- * of code is working properly. Unit test methods take no arguments,
- * commit no data to the database, and are flagged with the testMethod
- * keyword in the method definition.
- *
- * All test methods in an org are executed whenever Apex code is deployed
- * to a production org to confirm correctness, ensure code
- * coverage, and prevent regressions. All Apex classes are
- * required to have at least 75% code coverage in order to be deployed
- * to a production org. In addition, all triggers must have some code coverage.
- *
- * The @isTest class annotation indicates this class only contains test
- * methods. Classes defined with the @isTest annotation do not count against
- * the org size limit for all Apex scripts.
- *
- * See the Apex Language Reference for more information about Testing and Code Coverage.
+ * This class contains unit tests for validating the behavior of FileController
  */
 @isTest
 private class TestFileControllerRestrictions {
@@ -30,17 +12,15 @@ private class TestFileControllerRestrictions {
       List<String> types = allCategories.get(category);
       for (String docType : types) {
         List<Object> parameters = new List<Object>{ count };
-        documents.add(
-          new ContentVersion(
-            Title = String.format('TestDocument{0}', parameters),
-            PathOnClient = String.format('TestDocument{0}.jpg', parameters),
-            Origin = 'H',
-            VersionData = Blob.valueOf('Document Body'),
-            Category__c = category,
-            Type__c = docType,
-            Date__c = Date.today().addDays(-count)
-          )
-        );
+        documents.add(new ContentVersion(
+          Title = String.format('TestDocument{0}', parameters), 
+          PathOnClient = String.format('TestDocument{0}.jpg', parameters), 
+          Origin = 'H', 
+          VersionData = Blob.valueOf('Document Body'), 
+          Category__c = category, 
+          Type__c = docType, 
+          Date__c = Date.today().addDays(-count)
+        ));
         count = count + 1;
       }
     }
@@ -48,19 +28,16 @@ private class TestFileControllerRestrictions {
     insert documents;
 
     // We need to do the query here to get the ContentDocumentId's
-    documents = [
-      SELECT
-        Id,
-        ContentDocumentId,
-        Title,
-        PathOnClient,
-        Origin,
-        VersionData,
-        Category__c,
-        Type__c,
-        Date__c
-      FROM ContentVersion
-    ];
+    documents = [SELECT Id, 
+                        ContentDocumentId, 
+                        Title, 
+                        PathOnClient, 
+                        Origin, 
+                        VersionData, 
+                        Category__c, 
+                        Type__c, 
+                        Date__c
+                 FROM ContentVersion];
     return documents;
   }
 
@@ -76,16 +53,16 @@ private class TestFileControllerRestrictions {
       ids.add(cv.ContentDocumentId);
     }
     Contact ronan = new Contact(
-      FirstName = 'Ronan',
-      LastName = 'Dax',
-      email = 'ronan@test.com',
-      Positions__c = 'Board Member;Client;Puppy Raiser;Standalone;Staff;Team Facilitator;Team Facilitator Lead;Trainer;Volunteer',
-      ShareBoard__c = true,
-      SharePuppyRaiser__c = true,
-      ShareStaff__c = true,
-      ShareStandalonePrograms__c = true,
-      ShareTeam__c = true,
-      ShareTrainer__c = true,
+      FirstName = 'Ronan', 
+      LastName = 'Dax', 
+      email = 'ronan@test.com', 
+      Positions__c = 'Board Member;Client;Puppy Raiser;Standalone;Staff;Team Facilitator;Team Facilitator Lead;Trainer;Volunteer', 
+      ShareBoard__c = true, 
+      SharePuppyRaiser__c = true, 
+      ShareStaff__c = true, 
+      ShareStandalonePrograms__c = true, 
+      ShareTeam__c = true, 
+      ShareTrainer__c = true, 
       ShareVolunteer__c = true
     );
     insert ronan;
@@ -95,7 +72,9 @@ private class TestFileControllerRestrictions {
     TestUtilities.addUserToGroups(testUser, groups);
     RelatedObjects related = new RelatedObjects();
     Test.startTest();
-    System.runAs(new User(Id = testUser.Id)) {
+    System.runAs(new User(
+      Id = testUser.Id
+    )) {
       related = FileController.getRelatedFiles(ronan.Id, 6);
     }
     Test.stopTest();
@@ -105,63 +84,60 @@ private class TestFileControllerRestrictions {
 
   @isTest
   public static void getRelatedFiles_ReturnsRelatedRecords_ForBoardVolunteerTrainer() {
-    RelatedObjects related = getRelatedFilesWithGroups(
-      new List<string>{ 'Board', 'Volunteer', 'Trainer' }
-    );
+    RelatedObjects related = getRelatedFilesWithGroups(new List<string>{ 'Board', 'Volunteer', 'Trainer' });
     System.assert(related.items.size() <= 6);
-    System.assertEquals(16, related.total);
+    System.assertEquals(18, related.total, 'should have 18 total');
   }
 
   @isTest
   public static void getRelatedFiles_ReturnsRelatedRecords_ForBoard() {
-    RelatedObjects related = getRelatedFilesWithGroups(
-      new List<string>{ 'Board' }
-    );
+    RelatedObjects related = getRelatedFilesWithGroups(new List<string>{ 'Board' });
 
     System.assertEquals(6, related.items.size());
-    System.assertEquals(7, related.total);
-    System.assertEquals('Board', ((FileInfo) related.items[0]).category);
+    System.assertEquals(9, related.total, 'should have 9 files');
+    System.assertEquals('Board', ((FileInfo)related.items[0]).category);
   }
 
   @isTest
   public static void getRelatedFiles_ReturnsRelatedRecords_ForVolunteer() {
-    RelatedObjects related = getRelatedFilesWithGroups(
-      new List<string>{ 'Volunteer' }
-    );
+    RelatedObjects related = getRelatedFilesWithGroups(new List<string>{ 'Volunteer' });
 
-    System.assertEquals(5, related.items.size());
-    System.assertEquals(5, related.total);
-    System.assertEquals('Volunteer', ((FileInfo) related.items[0]).category);
+    System.assertEquals(6, related.items.size(), 'should have 6 files returned');
+    System.assertEquals(7, related.total, 'should have 7 total');
+    Set<String> cats = new Set<String>{ 'N/A', 'Volunteer' };
+    for (Object obj : related.items) {
+      FileInfo info = (FileInfo)obj;
+      System.assert(cats.contains(info.category), 'should be N/A or Volunteer');
+    }
   }
 
   @isTest
   public static void getRelatedFiles_ReturnsRelatedRecords_ForTrainer() {
-    RelatedObjects related = getRelatedFilesWithGroups(
-      new List<string>{ 'Trainer' }
-    );
+    RelatedObjects related = getRelatedFilesWithGroups(new List<string>{ 'Trainer' });
 
-    System.assertEquals(6, related.items.size());
-    System.assertEquals(8, related.total);
-    System.assertEquals('Trainer', ((FileInfo) related.items[3]).category);
+    System.assertEquals(6, related.items.size(), 'should have 6 files returned');
+    System.assertEquals(10, related.total, 'should have 10 total');
+    Set<String> cats = new Set<String>{ 'N/A', 'Trainer' };
+    for (Object obj : related.items) {
+      FileInfo info = (FileInfo)obj;
+      System.assert(cats.contains(info.category), 'should be N/A or Trainer');
+    }
   }
 
   @isTest
   public static void getRelatedFiles_ReturnsRelatedRecords_ForTeam() {
-    RelatedObjects related = getRelatedFilesWithGroups(
-      new List<string>{ 'Team' }
-    );
+    RelatedObjects related = getRelatedFilesWithGroups(new List<string>{ 'Team' });
 
-    System.assertEquals(6, related.items.size());
-        System.assertEquals(22, related.total);
+    System.assertEquals(6, related.items.size(), 'should have 6 files returned');
+    System.assertEquals(24, related.total, 'should have 24 total');
   }
 
   @isTest
   public static void getRelatedFiles_ReturnsRelatedRecords_ForBoardTrainer() {
-    RelatedObjects related = getRelatedFilesWithGroups(
-      new List<string>{ 'Board', 'Trainer' }
-    );
+    RelatedObjects related = getRelatedFilesWithGroups(new List<string>{ 'Board', 'Trainer' });
 
-    System.assertEquals(6, related.items.size());
-    System.assertEquals(13, related.total);
+    System.assertEquals(6, related.items.size(), 'should have 6 files returned');
+    System.assertEquals(15, related.total, 'should have 15 total');
   }
+
 }

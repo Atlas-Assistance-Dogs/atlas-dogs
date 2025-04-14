@@ -1,11 +1,9 @@
 - include_file: common.recipe.yml
 - include_file: trainer.recipe.yml
 
-- object: ContinuingEducationUnit__c
+- object: CEU__c
   count: 10
   fields:
-    Name:
-      fake: catch_phrase
     Authority__c:
       random_choice:
         - KPA
@@ -23,10 +21,8 @@
               fake: company
     Comments__c:
       fake: sentence
-    ProgramDate__c:
-      date_between:
-        start_date: 2000-01-01
-        end_date: today
+    Contact__c:
+      reference: Trainer
     ProgramHours__c:
       random_number:
         min: 8
@@ -49,8 +45,6 @@
       random_choice:
         Attendee: 80%
         Presenter: 20%
-    Trainer__c:
-      reference: Trainer
     Status__c:
       random_choice:
         Approved: 50%
