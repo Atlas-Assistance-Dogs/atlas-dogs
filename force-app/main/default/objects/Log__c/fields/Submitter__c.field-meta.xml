@@ -8,7 +8,7 @@
     <referenceTo>Contact</referenceTo>
     <relationshipLabel>Logs (Submitter)</relationshipLabel>
     <relationshipName>Logs</relationshipName>
-    <required>true</required>
+    <required>false</required>
     <trackTrending>false</trackTrending>
     <type>Lookup</type>
 </CustomField>
