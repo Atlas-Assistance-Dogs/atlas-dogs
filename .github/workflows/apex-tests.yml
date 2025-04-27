@@ -16,7 +16,7 @@ jobs:
 
       - name: "Authenticate using SFDX_AUTH_URL"
         run: |
-          echo ${{ secrets.DEV_HUB_AUTH_URL }} | sf org login sfdx-url -d -u
+          echo ${{ secrets.DEV_HUB_AUTH_URL }} | sf org login sfdx-url -d -a devhub -u
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -30,6 +30,10 @@ jobs:
           pip install cumulusci
           pip install --upgrade cumulusci
           cci version
+
+      - name: connect to dev hub
+        shell: bash
+        run: cci org import devhub dev_hub
 
       - name: Upload to a scratch org
         shell: bash
