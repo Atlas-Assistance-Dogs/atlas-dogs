@@ -6,6 +6,8 @@ on:
 jobs:
   deploy-and-test:
     runs-on: ubuntu-latest
+    container:
+      image: salesforce/cli:latest-slim
     steps:
       - name: "Checkout source code"
         uses: actions/checkout@v4
@@ -19,7 +21,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: 3.11
+          python-version: 3.8
 
       - name: Install CumulusCI
         shell: bash
