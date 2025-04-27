@@ -4,33 +4,32 @@ on:
   push:
 
 jobs:
-  validate-deployment:
+  deploy-and-test:
     runs-on: ubuntu-latest
     container:
       image: salesforce/cli:latest-slim
-    steps:      
-        - name: 'Checkout source code'
-          uses: actions/checkout@v4
-          with:
-                fetch-depth: 0
-      
-        - name: 'Authenticate using SFDX_AUTH_URL'
-          run: | 
-            echo ${{ secrets.DEV_HUB_AUTH_URL }} | sf org login sfdx-url -d -u
+    steps:
+      - name: "Checkout source code"
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-        - name: Set up Python
-          uses: actions/setup-python@v5
-          with:
-            python-version: 3.13
+      - name: "Authenticate using SFDX_AUTH_URL"
+        run: |
+          echo ${{ secrets.DEV_HUB_AUTH_URL }} | sf org login sfdx-url -d -u
 
-        - name: Install CumulusCI
-          shell: bash
-          run: |
-            python -m pip install -U pip
-            pip install cumulusci
-            cci version
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.12
 
-        - name: Upload to a scratch org
-          shell: bash
-          run: cci flow run ci_feature --org dev
-          
+      - name: Install CumulusCI
+        shell: bash
+        run: |
+          python -m pip install -U pip
+          pip install cumulusci
+          cci version
+
+      - name: Upload to a scratch org
+        shell: bash
+        run: cci flow run ci_feature --org dev
