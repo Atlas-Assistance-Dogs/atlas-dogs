@@ -16,7 +16,7 @@ jobs:
       
         - name: 'Authenticate using SFDX_AUTH_URL'
           run: | 
-            echo ${{ secrets.DEV_HUB_AUTH_URL }} | sf org login sfdx-url -d
+            echo ${{ secrets.DEV_HUB_AUTH_URL }} | sf org login sfdx-url -d -u
 
         - name: Set up Python
           uses: actions/setup-python@v5
