@@ -1,4 +1,4 @@
-name: Validate pull request
+name: Deploy to scratch org and test
 
 on:
   push:
@@ -6,8 +6,6 @@ on:
 jobs:
   deploy-and-test:
     runs-on: ubuntu-latest
-    container:
-      image: salesforce/cli:latest-slim
     steps:
       - name: "Checkout source code"
         uses: actions/checkout@v4
