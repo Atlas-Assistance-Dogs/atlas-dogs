@@ -1,18 +1,36 @@
-name: Feature Test
+name: Validate pull request
+
 on:
   push:
-    branches:
-      - dev
-      - main
-  workflow_dispatch:
+
 jobs:
-  feature-test:
-    name: "Feature Test"
-    # Replace this URL with your forked repo.
-    # Use the feature test workflow that matches your project needs.
-    uses: Atlas-Assistance-Dogs/standard-cci-workflows/.github/workflows/feature.yml@main
-    with:
-      cumulusci-version: "3.83.0"
-      sfdx-version: "@salesforce/cli/2.21.8"
-    secrets:
-      dev-hub-auth-url: "${{ secrets.DEV_HUB_AUTH_URL }}"
+  validate-deployment:
+    runs-on: ubuntu-latest
+    container:
+      image: salesforce/cli:latest-slim
+    steps:      
+        - name: 'Checkout source code'
+          uses: actions/checkout@v4
+          with:
+                fetch-depth: 0
+      
+        - name: 'Authenticate using SFDX_AUTH_URL'
+          run: | 
+            echo ${{ secrets.DEV_HUB_AUTH_URL }} | sf org login sfdx-url -d
+
+        - name: Set up Python
+          uses: actions/setup-python@v5
+          with:
+            python-version: 3.13
+
+        - name: Install CumulusCI
+          shell: bash
+          run: |
+            python -m pip install -U pip
+            pip install cumulusci
+            cci version
+
+        - name: Upload to a scratch org
+          shell: bash
+          run: cci flow run ci_feature --org dev
+          
