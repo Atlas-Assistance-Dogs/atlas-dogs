@@ -34,7 +34,7 @@ jobs:
         run: sf org create scratch -a feature -f orgs/feature.json
       - name: import scratch org
         shell: bash
-        run: cci org import feature
+        run: cci org import feature feature
       - name: Set feature org as default org
         run: cci org default feature
       - name: Run Feature Test
