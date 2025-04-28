@@ -32,7 +32,7 @@ jobs:
       - name: Connect GitHub service
         shell: bash
         run: |
-          cci service connect github mygithub --username deb761 --token ${{ secrets.ACCESS_TOKEN }}
+          cci service connect github --username deb761 --token ${{ secrets.ACCESS_TOKEN }} --email ${{ secrets.EMAIL }}
       - name: Create scratch org
         shell: bash
         run: sf org create scratch -a feature -f orgs/feature.json
