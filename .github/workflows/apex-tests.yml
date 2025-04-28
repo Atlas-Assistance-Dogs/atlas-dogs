@@ -7,7 +7,7 @@ jobs:
   deploy-and-test:
     runs-on: ubuntu-latest
     container:
-      image: salesforce/cli:latest-full
+      image: salesforce/cli:latest-lite
     steps:
       - name: "Checkout source code"
         uses: actions/checkout@v4
