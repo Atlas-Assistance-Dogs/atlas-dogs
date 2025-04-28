@@ -33,12 +33,12 @@ jobs:
         shell: bash
         run: |
           cci service connect github --username deb761 --token ${{ secrets.ACCESS_TOKEN }} --email ${{ secrets.EMAIL }}
-      - name: Create scratch org
-        shell: bash
-        run: sf org create scratch -a feature -f orgs/feature.json
-      - name: import scratch org
-        shell: bash
-        run: cci org import feature feature
+      # - name: Create scratch org
+      #   shell: bash
+      #   run: sf org create scratch -a feature -f orgs/feature.json
+      # - name: import scratch org
+      #   shell: bash
+      #   run: cci org import feature feature
       - name: Set feature org as default org
         run: cci org default feature
       - name: Run Feature Test
