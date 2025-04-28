@@ -36,10 +36,10 @@ jobs:
           pip install cumulusci
           cci version
       
-      - name: Debug CumulusCI Errors
-        run: |
-          cci error --help
-          cci error log
+      # - name: Debug CumulusCI Errors
+      #   run: |
+      #     cci error --help
+      #     cci error log
 
       - name: Connect GitHub service
         shell: bash
