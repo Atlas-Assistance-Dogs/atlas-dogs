@@ -29,7 +29,12 @@ jobs:
           python -m pip install -U pip
           pip install cumulusci
           cci version
-
+      - name: Create scratch org
+        shell: bash
+        run: sf org create scratch -a feature -f orgs/feature.json
+      - name: import scratch org
+        shell: bash
+        run: cci org import feature
       - name: Set feature org as default org
         run: cci org default feature
       - name: Run Feature Test
