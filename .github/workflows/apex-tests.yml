@@ -38,11 +38,11 @@ jobs:
       #   run: sf org create scratch -a feature -f orgs/feature.json
       # - name: import scratch org
       #   shell: bash
-      #   run: cci org import feature feature
-      - name: Set feature org as default org
-        run: cci org default feature
+      #   run: cci org scratch feature feature
+      # - name: Set feature org as default org
+      #   run: cci org default feature
       - name: Run Feature Test
-        run: cci flow run ci_feature
+        run: cci flow run ci_feature --org feature
       - name: Delete Scratch Org
         if: ${{ always() }}
         run: |
