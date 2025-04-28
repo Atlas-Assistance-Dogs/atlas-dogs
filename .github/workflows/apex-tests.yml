@@ -29,6 +29,10 @@ jobs:
           python -m pip install -U pip
           pip install cumulusci
           cci version
+      - name: Connect GitHub service
+        shell: bash
+        run: |
+          cci service connect github mygithub --username deb761 --token ${{ secrets.ACCESS_TOKEN }}
       - name: Create scratch org
         shell: bash
         run: sf org create scratch -a feature -f orgs/feature.json
