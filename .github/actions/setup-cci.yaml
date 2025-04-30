@@ -1,66 +1,23 @@
 name: "Setup CumulusCI Environment"
 description: "Setup a CumulusCI environment for running cci commands."
-author: "ANT-Informatik AG"
-inputs:
-  CUMULUSCI_KEY:
-    description: "An alphanumeric string used to encrypt org credentials at rest when an OS keychain is not available."
-    required: true
-  SALESFORCE_DEVHUB_CLIENTID:
-    description: "ClientId of the connected app used to connect to the DevHub."
-    required: false
-  SALESFORCE_DEVHUB_USERNAME:
-    description: "Username for authenthication against the DevHub."
-    required: true
-  SALESFORCE_DEVHUB_KEY:
-    description: "Jwt key to authenticate against the DevHub connected app."
-    required: false
-  GITHUB_USERNAME:
-    description: "Username used to connect to Github service."
-    required: true
-  GITHUB_EMAIL:
-    description: "E-mail used to connect to Github service."
-    required: true
-  GITHUB_PAT:
-    description: "PAT used to connect to Github service."
-    required: true
-  PYTHON_VERSION:
-    description: "Python version to be installed."
-    required: true
-    default: "3.12"
-  SALESFORCE_CLI_VERSION:
-    description: "Version of the Salesforce CLI to be installed."
-    required: true
-    default: "latest"
-  SALESFORCE_BROWSERFORCE_PLUGIN_VERSION:
-    description: "Version of the Salesforce Browserforce plugin to be installed."
-    required: true
-    default: "latest"
+author: "Atlas Assistance Dogs"
 
 runs:
   using: "composite"
   steps:
-    - name: Setup CumulusCI key
-      shell: bash
-      run: |
-        echo "CUMULUSCI_KEY=${{ inputs.CUMULUSCI_KEY }}" >> $GITHUB_ENV
     - name: Install sf cli
       shell: bash
       run: |
-        npm install @salesforce/cli@${{ inputs.SALESFORCE_CLI_VERSION }} --global
+        npm install @salesforce/cli --global
         sf version
-    - name: Install sfdx-browserforce
-      shell: bash
+
+    - name: "Authenticate dev hub using SFDX_AUTH_URL"
       run: |
-        npm install sfdx-browserforce-plugin@${{ inputs.SALESFORCE_BROWSERFORCE_PLUGIN_VERSION }} --global
-    - name: Authenticate DevHub
-      shell: bash
-      run: |
-        echo "${{ inputs.SALESFORCE_DEVHUB_KEY }}" > server.key
-        sf org login jwt --client-id ${{ inputs.SALESFORCE_DEVHUB_CLIENTID }} --jwt-key-file server.key --username ${{ inputs.SALESFORCE_DEVHUB_USERNAME}} --set-default-dev-hub --alias devhub
+          echo ${{ secrets.DEV_HUB_AUTH_URL }} | sf org login sfdx-url -d -a devhub -u
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
-        python-version: ${{ inputs.PYTHON_VERSION }}
+        python-version: 3.12
     - name: Install CumulusCI
       shell: bash
       run: |

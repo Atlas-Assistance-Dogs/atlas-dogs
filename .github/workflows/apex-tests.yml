@@ -6,49 +6,52 @@ on:
 jobs:
   deploy-and-test:
     runs-on: ubuntu-latest
-    container:
-      image: salesforce/cli:latest-slim
+    # container:
+    #   image: salesforce/cli:latest-slim
     steps:
       - name: "Checkout source code"
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: "Authenticate using SFDX_AUTH_URL"
-        run: |
-          echo ${{ secrets.DEV_HUB_AUTH_URL }} | sf org login sfdx-url -d -a devhub -u
+      - name: Setup CumulusCI Environment
+        uses: setup-cumulusci@main
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: 3.8
-      - name: Set UTF-8 locale
-        run: |
-          export LC_ALL=C.UTF-8
-          export LANG=C.UTF-8
-        
-      - name: Install CumulusCI
-        shell: bash
-        run: |
-          python -m pip install -U pip
-          pip install cumulusci
-          cci version
-      
+      # - name: "Authenticate using SFDX_AUTH_URL"
+      #   run: |
+      #     echo ${{ secrets.DEV_HUB_AUTH_URL }} | sf org login sfdx-url -d -a devhub -u
+
+      # - name: Set up Python
+      #   uses: actions/setup-python@v5
+      #   with:
+      #     python-version: 3.8
+      # - name: Set UTF-8 locale
+      #   run: |
+      #     export LC_ALL=C.UTF-8
+      #     export LANG=C.UTF-8
+
+      # - name: Install CumulusCI
+      #   shell: bash
+      #   run: |
+      #     python -m pip install -U pip
+      #     pip install cumulusci
+      #     cci version
+
       # - name: Debug CumulusCI Errors
       #   run: |
       #     cci error --help
       #     cci error log
 
-      - name: Connect GitHub service
-        shell: bash
-        run: |
-          cci service connect github --username deb761 --token ${{ secrets.ACCESS_TOKEN }} --email ${{ secrets.EMAIL }}
-      - name: Create scratch org
-        shell: bash
-        run: sf org create scratch -a feature -f orgs/feature.json
-      - name: import scratch org
-        shell: bash
-        run: cci org scratch feature feature
+      # - name: Connect GitHub service
+      #   shell: bash
+      #   run: |
+      #     cci service connect github --username deb761 --token ${{ secrets.ACCESS_TOKEN }} --email ${{ secrets.EMAIL }}
+      # - name: Create scratch org
+      #   shell: bash
+      #   run: sf org create scratch -a feature -f orgs/feature.json
+      # - name: import scratch org
+      #   shell: bash
+      #   run: cci org scratch feature feature
       - name: Set feature org as default org
         run: cci org default feature
       - name: Run Feature Test
