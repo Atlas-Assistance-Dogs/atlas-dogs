@@ -1,15 +1,33 @@
 name: Upload Production Release
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
+
 jobs:
-  upload-production-release:
-    name: "Upload Production Release"
-    # Replace this URL with your forked repo.
-    # Use the `beta-2gp` workflow if this is a 2GP project.
-    uses: Atlas-Assistance-Dogs/standard-cci-workflows/.github/workflows/production-1gp.yml@main
-    secrets:
-      # If this is a 2GP project, omit the packaging org auth URL.
-      packaging-org-auth-url: "${{ secrets.PACKAGING_ORG_AUTH_URL }}"
-      dev-hub-auth-url: "${{ secrets.DEV_HUB_AUTH_URL }}"
+  release-beta:
+    runs-on: macos-latest
+    steps:
+      - name: "Checkout source code"
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup CumulusCI Environment
+        uses: ./.github/actions/setup-cci
+        with:
+          dev-hub-auth-url: "${{ secrets.DEV_HUB_AUTH_URL }}"
+          github-username: "deb761"
+          github-pat: "${{ secrets.ACCESS_TOKEN }}"
+          github-email: "${{ secrets.EMAIL }}"
+
+      - name: "Authenticate using SFDX_AUTH_URL"
+        run: |
+          echo ${{ secrets.PACKAGING_AUTH_URL }} | sf org login sfdx-url -a packaging -u
+          cci org import packaging
+
+      - name: Upload to packaging org
+        shell: bash
+        run: cci flow run ci_master --org packaging
+
+      - name: Release a production package
+        shell: bash
+        run: cci flow run release_production --org packaging

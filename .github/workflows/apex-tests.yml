@@ -20,16 +20,6 @@ jobs:
           github-pat: "${{ secrets.ACCESS_TOKEN }}"
           github-email: "${{ secrets.EMAIL }}"
 
-      # - name: Set UTF-8 locale
-      #   run: |
-      #     export LC_ALL=C.UTF-8
-      #     export LANG=C.UTF-8
-      # - name: Create scratch org
-      #   shell: bash
-      #   run: sf org create scratch -a feature -f orgs/feature.json
-      # - name: import scratch org
-      #   shell: bash
-      #   run: cci org scratch feature feature
       - name: Run Feature Test
         run: cci flow run ci_feature --org feature
       - name: Delete Scratch Org
