@@ -5,7 +5,7 @@ on:
 
 jobs:
   feature-test:
-    runs-on: github
+    runs-on: macos-latest
     steps:
       - name: "Checkout source code"
         uses: actions/checkout@v4
@@ -20,10 +20,10 @@ jobs:
           github-pat: "${{ secrets.ACCESS_TOKEN }}"
           github-email: "${{ secrets.EMAIL }}"
 
-      - name: Set UTF-8 locale
-        run: |
-          export LC_ALL=C.UTF-8
-          export LANG=C.UTF-8
+      # - name: Set UTF-8 locale
+      #   run: |
+      #     export LC_ALL=C.UTF-8
+      #     export LANG=C.UTF-8
       # - name: Create scratch org
       #   shell: bash
       #   run: sf org create scratch -a feature -f orgs/feature.json
