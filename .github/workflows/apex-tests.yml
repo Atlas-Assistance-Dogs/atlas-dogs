@@ -20,7 +20,7 @@ jobs:
           dev-hub-auth-url: '${{ secrets.DEV_HUB_AUTH_URL }}'
           github-username: '${{ secrets.GITHUB_USERNAME }}'
           github-pat: '${{ secrets.GITHUB_PAT }}'
-          github-email: '${{ secrets.GITHUB_EMAIL }}''
+          github-email: '${{ secrets.GITHUB_EMAIL }}'
 
 
       # - name: "Authenticate using SFDX_AUTH_URL"
