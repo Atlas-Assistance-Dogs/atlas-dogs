@@ -22,35 +22,10 @@ jobs:
           github-pat: "${{ secrets.ACCESS_TOKEN }}"
           github-email: "${{ secrets.EMAIL }}"
 
-      # - name: "Authenticate using SFDX_AUTH_URL"
-      #   run: |
-      #     echo ${{ secrets.DEV_HUB_AUTH_URL }} | sf org login sfdx-url -d -a devhub -u
-
-      # - name: Set up Python
-      #   uses: actions/setup-python@v5
-      #   with:
-      #     python-version: 3.8
-      # - name: Set UTF-8 locale
-      #   run: |
-      #     export LC_ALL=C.UTF-8
-      #     export LANG=C.UTF-8
-
-      # - name: Install CumulusCI
-      #   shell: bash
-      #   run: |
-      #     python -m pip install -U pip
-      #     pip install cumulusci
-      #     cci version
-
-      # - name: Debug CumulusCI Errors
-      #   run: |
-      #     cci error --help
-      #     cci error log
-
-      # - name: Connect GitHub service
-      #   shell: bash
-      #   run: |
-      #     cci service connect github --username deb761 --token ${{ secrets.ACCESS_TOKEN }} --email ${{ secrets.EMAIL }}
+      - name: Set UTF-8 locale
+        run: |
+          export LC_ALL=C.UTF-8
+          export LANG=C.UTF-8
       # - name: Create scratch org
       #   shell: bash
       #   run: sf org create scratch -a feature -f orgs/feature.json
