@@ -1,4 +1,4 @@
-name: Deploy to scratch org and test
+name: Feature Test
 
 on:
   push:

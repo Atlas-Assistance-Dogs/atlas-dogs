@@ -34,3 +34,7 @@ jobs:
       - name: Release a beta package
         shell: bash
         run: cci flow run release_beta --org packaging
+
+      - name: Test a beta package
+        shell: bash
+        run: cci flow run ci_beta --org beta
