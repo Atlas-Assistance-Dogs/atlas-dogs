@@ -1,6 +1,19 @@
 name: "Setup CumulusCI Environment"
 description: "Setup a CumulusCI environment for running cci commands."
 author: "Atlas Assistance Dogs"
+inputs:
+  dev-hub-auth-url: 
+    description: "Auth url secret for dev hub."
+    required: true
+  github-username:
+    description: "Github username to connect cumulusci with"
+    required: true
+  github-pat:
+    description: "Github personal access token to connect cumulusci with"
+    required: true
+  github-email:
+    description: "Github user email to connect cumulusci with"
+    required: true
 
 runs:
   using: "composite"
@@ -11,12 +24,10 @@ runs:
         npm install @salesforce/cli --global
         sf version
 
-    - name: "Authenticate dev hub using SFDX_AUTH_URL"
+    - name: "Authenticate dev hub using dev-hub-auth-url"
       shell: bash
-      env:
-        DEV_HUB_AUTH_URL: ${{ secrets.DEV_HUB_AUTH_URL }}
       run:
-          echo $DEV_HUB_AUTH_URL | sf org login sfdx-url -d -a devhub -u
+          echo ${{ inputs.dev-hub-auth-url }} | sf org login sfdx-url -d -a devhub -u
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
@@ -30,4 +41,4 @@ runs:
     - name: Connect GitHub service
       shell: bash
       run: |
-        cci service connect github --username ${{ inputs.GITHUB_USERNAME }} --token ${{ inputs.GITHUB_PAT }} --email ${{ inputs.GITHUB_EMAIL }}
+        cci service connect github --username ${{ inputs.github-username }} --token ${{ inputs.github-pat }} --email ${{ inputs.github-email }}
