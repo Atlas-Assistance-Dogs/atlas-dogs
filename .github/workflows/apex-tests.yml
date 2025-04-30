@@ -15,7 +15,7 @@ jobs:
           fetch-depth: 0
 
       - name: Setup CumulusCI Environment
-        uses: ./.github/actions/setup-cci
+        uses: ./.github/actions/setup-cci.yaml
 
       # - name: "Authenticate using SFDX_AUTH_URL"
       #   run: |
