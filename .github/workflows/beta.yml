@@ -1,7 +1,14 @@
-name: Upload Production Release
+name: Upload Beta Release
 on:
+  push:
+    branches:
+      - main
   workflow_dispatch:
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+    
 jobs:
   release-beta:
     runs-on: macos-latest
@@ -25,13 +32,10 @@ jobs:
           cci org import packaging
 
       - name: Upload to packaging org
-        shell: bash
         run: cci flow run ci_master --org packaging
 
-      - name: Release a production package
-        shell: bash
-        run: cci flow run release_production --org packaging
+      - name: Release a beta package
+        run: cci flow run release_beta --org packaging
 
-      - name: Test the production release
-        shell: bash
-        run: cci flow run ci_release --org release
+      - name: Test a beta package
+        run: cci flow run ci_beta --org beta
