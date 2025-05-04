@@ -1,0 +1,34 @@
+name: Package Test
+
+on:
+  workflow_run:
+      workflows: ["Upload Beta Release"]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  package-test:
+    runs-on: macos-latest
+    steps:
+      - name: "Checkout source code"
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup CumulusCI Environment
+        uses: ./.github/actions/setup-cci
+        with:
+          dev-hub-auth-url: "${{ secrets.DEV_HUB_AUTH_URL }}"
+          github-username: "deb761"
+          github-pat: "${{ secrets.ACCESS_TOKEN }}"
+          github-email: "${{ secrets.EMAIL }}"
+
+      - name: Run Beta Test
+        run: cci flow run ci_beta --org beta
+      - name: Delete Scratch Org
+        if: ${{ always() }}
+        run: |
+          cci org scratch_delete beta
