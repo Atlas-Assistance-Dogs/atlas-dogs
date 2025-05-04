@@ -72,8 +72,6 @@ public inherited sharing class CertificationService {
   }
 
   // Since there is a rollup summary on Approved, check that it is set properly
-  // We will not worry about changing the certification at this time, since
-  // that is not likely to happen
   public void updateCeus(List<Ceu__c> ceus) {
     List<CeuCertification__c> ccs = certRepo.getCeuCerts(ceus);
     List<CeuCertification__c> goodConnections = new List<CeuCertification__c>();

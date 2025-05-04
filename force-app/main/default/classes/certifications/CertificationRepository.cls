@@ -106,9 +106,11 @@ public inherited sharing class CertificationRepository {
     List<CeuCertification__c> ccs = [
       SELECT
         Certification__c,
+        Certification__r.Contact__c,
         Certification__r.Start__c,
         Certification__r.End__c,
         Ceu__c,
+        CEU__r.Contact__c,
         CEU__r.DateCompleted__c,
         CEU__r.Quantity__c,
         CEU__r.Status__c
