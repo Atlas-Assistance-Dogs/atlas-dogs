@@ -100,16 +100,6 @@ public inherited sharing class TeamService{
     teamRepo.modify(teams);
   }
 
-  // Set InitialCertificationDate when first ClientCertAgreementReceived.
-  // Called from TeamTriggerBefore
-  public void setTeamHandler(List<Team__c> teams) {
-    for (Team__c team : teams) {
-      if (team.ClientCertAgreementReceived__c != null && team.InitialCertificationDate__c == null) {
-        team.InitialCertificationDate__c = team.ClientCertAgreementReceived__c;
-      }
-    }
-  }
-
   // Set the client/facilitator relationship.
   // This is meant to be called from the team update trigger.
   public void setClientFacilitatorRelationShip(Team__c newTeam){
