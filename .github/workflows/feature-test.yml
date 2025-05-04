@@ -2,6 +2,7 @@ name: Feature Test
 
 on:
   push:
+  workflow_dispatch:
 
 jobs:
   feature-test:
