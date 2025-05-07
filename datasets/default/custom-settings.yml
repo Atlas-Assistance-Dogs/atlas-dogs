@@ -143,12 +143,12 @@ npe4__Relationship_Lookup__c:
     npe4__Male__c: Husband
     npe4__Female__c: Wife
     npe4__Neutral__c: Spouse
-atlas1__AtlasSettings__c:
+AtlasSettings__c:
   - location: org
     data:
-      atlas1__DogExamRenewalYears__c: 1
-      atlas1__LinkFilesToTeamMembers__c: True
-      atlas1__PageSize__c: 50
-      atlas1__RabiesRenewalYears__c: 3
-      atlas1__VaccineRenewalYears__c: 1
-      atlas1__BackgroundCheckRenewalYears__c: 1
+      DogExamRenewalYears__c: 1
+      LinkFilesToTeamMembers__c: True
+      PageSize__c: 50
+      RabiesRenewalYears__c: 3
+      VaccineRenewalYears__c: 1
+      BackgroundCheckRenewalYears__c: 1
