@@ -2,6 +2,7 @@ name: Feature Test
 
 on:
   push:
+    branches-ignore: [main]
   workflow_dispatch:
 
 concurrency:
