@@ -65,15 +65,23 @@ flows:
           api_names: AtlasBackgroundCheck,AtlasBase,AtlasBoard,AtlasDemographics,AtlasFacilitator,AtlasPuppyRaiser,AtlasStaff,AtlasStandalonePrograms,AtlasTeam,AtlasTrainer,AtlasVolunteer
 
   # Flow to deploy current source to a sandbox for dev or verification
-  sandbox:
+  setup_data:
     steps:
       1:
-        flow: dependencies
-      2:
-        task: dx
+        task: assign_permission_sets
         options:
-          command: force:source:deploy
-          extra: -p force-app/main/default
+          api_names: AtlasBackgroundCheck,AtlasBase,AtlasBoard,AtlasDemographics,AtlasFacilitator,AtlasPuppyRaiser,AtlasStaff,AtlasStandalonePrograms,AtlasTeam,AtlasTrainer,AtlasVolunteer
+      2:
+        task: load_custom_settings
+        options: 
+          settings_path: datasets/default/custom-settings.yml
+      3:
+        task: generate_and_load_from_yaml
+        options:
+          generator_yaml: datasets/recipes/snowfakery.recipe.yml
+          num_records: 10
+          num_records_tablename: Dog__c
+          ignore_row_errors: true
 
   release_2gp_beta:
     steps:
