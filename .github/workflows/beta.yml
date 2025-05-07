@@ -29,7 +29,7 @@ jobs:
       - name: "Authenticate using SFDX_AUTH_URL"
         run: |
           echo ${{ secrets.PACKAGING_AUTH_URL }} | sf org login sfdx-url -a packaging -u
-          cci org import packaging
+          cci org import packaging --org packaging
 
       - name: Upload to packaging org
         run: cci flow run ci_master --org packaging
