@@ -8,7 +8,7 @@
             <group>Board</group>
         </sharedTo>
         <criteriaItems>
-            <field>ShareBoard__c</field>
+            <field>%%%NAMESPACE%%%ShareBoard__c</field>
             <operation>equals</operation>
             <value>True</value>
         </criteriaItems>
@@ -22,7 +22,7 @@
             <group>PuppyRaiser</group>
         </sharedTo>
         <criteriaItems>
-            <field>SharePuppyRaiser__c</field>
+            <field>%%%NAMESPACE%%%SharePuppyRaiser__c</field>
             <operation>equals</operation>
             <value>True</value>
         </criteriaItems>
@@ -36,7 +36,7 @@
             <group>Staff</group>
         </sharedTo>
         <criteriaItems>
-            <field>ShareStaff__c</field>
+            <field>%%%NAMESPACE%%%ShareStaff__c</field>
             <operation>equals</operation>
             <value>True</value>
         </criteriaItems>
@@ -50,7 +50,7 @@
             <group>StandalonePrograms</group>
         </sharedTo>
         <criteriaItems>
-            <field>ShareStandalonePrograms__c</field>
+            <field>%%%NAMESPACE%%%ShareStandalonePrograms__c</field>
             <operation>equals</operation>
             <value>True</value>
         </criteriaItems>
@@ -64,7 +64,7 @@
             <group>Team</group>
         </sharedTo>
         <criteriaItems>
-            <field>ShareTeam__c</field>
+            <field>%%%NAMESPACE%%%ShareTeam__c</field>
             <operation>equals</operation>
             <value>True</value>
         </criteriaItems>
@@ -78,7 +78,7 @@
             <group>Trainer</group>
         </sharedTo>
         <criteriaItems>
-            <field>ShareTrainer__c</field>
+            <field>%%%NAMESPACE%%%ShareTrainer__c</field>
             <operation>equals</operation>
             <value>True</value>
         </criteriaItems>
@@ -92,7 +92,7 @@
             <group>Volunteer</group>
         </sharedTo>
         <criteriaItems>
-            <field>ShareVolunteer__c</field>
+            <field>%%%NAMESPACE%%%ShareVolunteer__c</field>
             <operation>equals</operation>
             <value>True</value>
         </criteriaItems>
