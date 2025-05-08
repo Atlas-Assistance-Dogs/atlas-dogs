@@ -74,7 +74,7 @@ flows:
       2:
         task: load_custom_settings
         options: 
-          settings_path: datasets/default/custom-settings.yml
+          settings_path: datasets/default/atlas1-settings.yml
       3:
         task: generate_and_load_from_yaml
         options:
