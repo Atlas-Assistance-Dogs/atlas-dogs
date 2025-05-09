@@ -256,41 +256,4 @@ public inherited sharing class CertificationService {
     certRepo.create(ccs);
   }
 
-  public void remindToGetCeus() {
-    Certification__c[] certs = certRepo.getActiveCerts();
-
-    if (certs.isEmpty()) {
-      return;
-    }
-    // Remind the contact for these certs to get their CEUs
-    Id orgAddressId = emailServ.getOrgEmailAddressId();
-    EmailTemplate facTemplate = emailServ.getTemplate('CeuFacilitatorReminder');
-    EmailTemplate trainTemplate = emailServ.getTemplate('CeuTrainerReminder');
-
-    List<Messaging.SingleEmailMessage> emails = new List<Messaging.SingleEmailMessage>();
-    for (Certification__c cert : certs) {
-      Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
-      if (orgAddressId != null) {
-        mail.setOrgWideEmailAddressId(orgAddressId);
-      }
-      mail.setTargetObjectId(cert.Contact__c);
-      mail.setWhatId(cert.Id);
-      if (cert.Type__c == 'Facilitator') {
-        mail.setTemplateId(facTemplate.Id);
-      } else {
-        mail.setTemplateId(trainTemplate.Id);
-      }
-
-      // Record ID for which letter will be generated
-      mail.setBccSender(false);
-      mail.setUseSignature(false);
-      if (orgAddressId == null) {
-        mail.setSenderDisplayName('Atlas Assistance Dogs');
-      }
-      mail.setSaveAsActivity(false);
-      emails.add(mail);
-    }
-    emailServ.sendEmail(emails);
-  }
-
 }

@@ -20,15 +20,6 @@ public inherited sharing class EmailService {
     }
     return addressId;
   }
-  public EmailTemplate getTemplate(String name) {
-    EmailTemplate__mdt et = EmailTemplate__mdt.getInstance(name);
-    EmailTemplate template = [
-      SELECT Id
-      FROM EmailTemplate
-      WHERE DeveloperName = :et.Template__c
-    ];
-    return template;
-  }
   public void sendEmail(List<Messaging.SingleEmailMessage> emails) {
     Messaging.sendEmail(emails);
   }
