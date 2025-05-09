@@ -1,8 +1,0 @@
-Dear {!Account.FirstName__c} {!Account.LastName__c},
-
-We are glad to inform you that you are provisionally selected for the Facilitator role at Atlas Dog.
-
-You will be receiving separate email with next steps.
-
-Thanks, 
-{!Account.OwnerFullName}

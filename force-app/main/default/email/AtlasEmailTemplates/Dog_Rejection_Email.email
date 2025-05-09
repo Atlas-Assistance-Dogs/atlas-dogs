@@ -1,8 +1,0 @@
-Dear {!Dog__c.OwnerFullName},
-
-We want to thank you for your interest in enrolling your dog, {!Dog__c.Name} in Atlas Dog program. Unfortunately, we are unable to register {!Dog__c.Name} as it failed the health check.
-
-Please let us know if you want to enroll other dog.
-
-Thanks, 
-Atlas Dog.
