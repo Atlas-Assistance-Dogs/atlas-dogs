@@ -9,6 +9,7 @@ import AUTHORITY_FIELD from "@salesforce/schema/CEU__c.Authority__c";
 import AUTHORITY_OTHER_FIELD from "@salesforce/schema/CEU__c.AuthorityOther__c";
 import DATE_COMPLETED_FIELD from "@salesforce/schema/CEU__c.DateCompleted__c";
 import NAME_FIELD from "@salesforce/schema/CEU__c.Name";
+import PROGRAM_FIELD from "@salesforce/schema/CEU__c.ProgramTitle__c";
 import REQUESTED_CEUS_FIELD from "@salesforce/schema/CEU__c.Quantity__c";
 import ROLE_FIELD from "@salesforce/schema/CEU__c.Role__c";
 import STATUS_FIELD from "@salesforce/schema/CEU__c.Status__c";
@@ -31,6 +32,7 @@ const COLS = [
     }
   },
   { label: "Authority", fieldName: "authority" },
+  { label: "Program Title", fieldName: PROGRAM_FIELD.fieldApiName },
   {
     label: "Date Completed",
     sortable: true,
