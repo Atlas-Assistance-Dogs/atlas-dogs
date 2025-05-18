@@ -163,13 +163,12 @@ public inherited sharing class CertificationService {
   /* This is called when a new certification agreement is received for a contact.
    * If this is the first certification for the contact (identified by validUntil being null),
    *   Creates a new certification and exits.
-   * It update the current certification (if there is an active one, otherwise it creates a cert for the just-completed period)
+   * It update the current certification (if there is an active one, otherwise it creates a cert for the just-completed period).
    *   If the new certDate is within the leeway period, it completes the old cert and creates a new one starting when the old ends.
    *   If the new certDate is after the leeway, it completes the old cert and creates a new one starting on the certDate
    *   If the new certDate is somewhere else, it leaves the current cert in effect.
    */
-  public Certification__c updateCert(Contact person, String type, Date validUntil,   // date the most recent cert was valid until
-  Date certDate) {
+  public Certification__c updateCert(Contact person, String type, Date validUntil, Date certDate) {
     // date the latest agreement was received
     Dates dates = new Dates();
     Certification__c cert;
