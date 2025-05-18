@@ -174,27 +174,4 @@ private class TestTeamService {
         System.assertEquals(team.FacilitatorAvailability__c, actual.ClientFacilitatorAvailability__c, 'should match team facilitator availability');
         System.assertEquals(dog.Name, actual.ClientDog__c, 'should match dog name');
     }
-
-    @isTest
-    static void setTeamHandlers_updatesFirstCertDate_whenFirstCertAgreement() {
-        makeData();
-        Team__c team = new Team__c(
-            Id = MockProvider.createId(Team__c.class), 
-            ClientCertAgreementReceived__c = Date.today().addDays(-1)
-        );
-        service.setTeamHandler(new Team__c[]{ team });
-        System.assertEquals(team.ClientCertAgreementReceived__c, team.InitialCertificationDate__c, 'did not set initial cert date');
-    }
-
-    @isTest
-    static void setTeamHandlers_leavesFirstCertDate_whenNotFirstCertAgreement() {
-        makeData();
-        Team__c team = new Team__c(
-            Id = MockProvider.createId(Team__c.class), 
-            ClientCertAgreementReceived__c = Date.today().addDays(-1),
-            InitialCertificationDate__c = Date.today().addYears(-1)
-        );
-        service.setTeamHandler(new Team__c[]{ team });
-        System.assertNotEquals(team.ClientCertAgreementReceived__c, team.InitialCertificationDate__c, 'did not set initial cert date');
-    }
 }

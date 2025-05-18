@@ -275,7 +275,7 @@ public with sharing class TestTeamTrigger {
       FROM Team__c
       WHERE Id = :team.Id
       LIMIT 1];
-    System.assertEquals(team.ClientCertAgreementReceived__c, actual.InitialCertificationDate__c, 'did not set initial cert date');
+    System.assertEquals(null, actual.InitialCertificationDate__c, 'set initial cert date');
   }
 
   @isTest
