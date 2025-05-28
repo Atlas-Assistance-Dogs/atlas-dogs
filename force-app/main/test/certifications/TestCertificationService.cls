@@ -766,9 +766,11 @@ private class TestCertificationService {
       DateCompleted__c = Date.today()
     ) };
     mocks.expectedCalls.add(new MockCallData(ceuRepo, 'getForContact', ceus));
+    mocks.expectedCalls.add(new MockCallData(ceuRepo, 'ceuAssignedToCert', false));
     Id contactId = MockProvider.createId(Contact.class);
     Certification__c cert = new Certification__c(
-      Id = MockProvider.createId(Certification__c.class), 
+      Id = MockProvider.createId(Certification__c.class),
+      Type__c = 'Trainer',
       Contact__c = contactId, 
       Start__c = Date.today().addMonths(-1), 
       End__c = Date.today().addMonths(11)
@@ -776,7 +778,7 @@ private class TestCertificationService {
     // act
     service.addCeus(cert);
     // assert
-    System.assertEquals(2, mocks.actualCalls.size(), 'wrong number of calls');
+    System.assertEquals(4, mocks.actualCalls.size(), 'wrong number of calls');
     System.assertEquals(contactId, mocks.actualCalls[0].args[0], 'wrong contact id');
     List<CeuCertification__c> ccs = (List<CeuCertification__c>)mocks.actualCalls[1].args[0];
     System.assertEquals(2, ccs.size(), 'connections is wrong length');
@@ -792,6 +794,34 @@ private class TestCertificationService {
       Certification__c = cert.Id, 
       Approved__c = 0
     ), cc2, 'wrong data in second cc');
+  }
+
+  @isTest
+  static void addCeus_doesNotAddCeu_whenCeuInAnotherCertActive() {
+    makeData();
+    Ceu__c[] ceus = new List<Ceu__c>{ new Ceu__c(
+      Id = MockProvider.createId(Ceu__c.class), 
+      Status__c = 'Approved', 
+      Quantity__c = 4, 
+      DateCompleted__c = Date.today()
+    )};
+    mocks.expectedCalls.add(new MockCallData(ceuRepo, 'getForContact', ceus));
+    mocks.expectedCalls.add(new MockCallData(ceuRepo, 'ceuAssignedToCert', true));
+    Id contactId = MockProvider.createId(Contact.class);
+    Certification__c cert = new Certification__c(
+      Id = MockProvider.createId(Certification__c.class), 
+      Type__c = 'Facilitator',
+      Contact__c = contactId, 
+      Start__c = Date.today().addMonths(-1), 
+      End__c = Date.today().addMonths(11)
+    );
+    // act
+    service.addCeus(cert);
+    // assert
+    System.assertEquals(2, mocks.actualCalls.size(), 'wrong number of calls');
+    System.assertEquals(contactId, mocks.actualCalls[0].args[0], 'wrong contact id');
+    System.assertEquals(ceus[0].id, mocks.actualCalls[1].args[0], 'wrong ceu id');
+    System.assertEquals(cert.Type__c, mocks.actualCalls[0].args[1], 'wrong cert type');
   }
 
   @isTest

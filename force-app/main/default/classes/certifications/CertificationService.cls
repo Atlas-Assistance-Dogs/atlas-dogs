@@ -56,7 +56,7 @@ public inherited sharing class CertificationService {
     for (Certification__c cert : certs) {
       List<Ceu__c> contactCeus = contactCeuIds.get(cert.Contact__c);
       for (Ceu__c ceu1 : contactCeus) {
-        if (cert.Status__c == 'Active' && ceu1.DateCompleted__c >= cert.Start__c && ceu1.DateCompleted__c <= cert.End__c) {
+        if (cert.Status__c == 'Active' && ceu1.DateCompleted__c >= cert.Start__c && ceu1.DateCompleted__c <= cert.End__c && !certRepo.ceuAssignedToCert(ceu1.Id, cert.Type__c)) {
           CeuCertification__c cc = new CeuCertification__c(
             Ceu__c = ceu1.Id, 
             Certification__c = cert.Id

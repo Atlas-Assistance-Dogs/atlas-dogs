@@ -382,4 +382,33 @@ private class TestCertificationRepository {
     System.assertEquals(data.cert.Contact__c, cert.Contact__c, 'wrong contact');
   }
 
+  @IsTest
+  static void ceuAssignedToCert_returnsTrueWhenAssigned() {
+    CertificationRepositoryData data = new CertificationRepositoryData();
+
+    Boolean result = repo.ceuAssignedToCert(data.ceu.Id, data.cert.Type__c);
+    System.assertEquals(true, result, 'should be true');
+  }
+
+  @IsTest
+  static void ceuAssignedToCert_returnsFalseWhenNotAssigned() {
+    CertificationRepositoryData data = new CertificationRepositoryData();
+    Ceu__c ceu = new Ceu__c(
+      Authority__c = 'Atlas', 
+      Comments__c = 'Comments1', 
+      DateCompleted__c = Date.today().addMonths(11), 
+      DateSubmitted__c = Date.today().addMonths(11), 
+      ProgramHours__c = 20, 
+      ProgramTitle__c = 'A Day in the Life of a Dog', 
+      Quantity__c = 20, 
+      Role__c = 'Presenter', 
+      Status__c = 'Approved', 
+      Contact__c = data.ceu.Contact__c
+    );
+    insert ceu;
+
+    Boolean result = repo.ceuAssignedToCert(ceu.Id, data.cert.Type__c);
+    System.assertEquals(false, result, 'should be false');
+  }
+
 }
