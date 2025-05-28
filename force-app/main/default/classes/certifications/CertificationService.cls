@@ -160,22 +160,41 @@ public inherited sharing class CertificationService {
 
   }
 
-  /* This is called when a new certification agreement is received for a contact.
-   * If this is the first certification for the contact (identified by validUntil being null),
-   *   Creates a new certification and exits.
+  /* This is called when a Trainer or Facilitator contact is updated.
+   * If the contact has an initial certification date but not a valid until date:
+   *   Creates a new certification off the initial certification and exit.
+   * If the contact has a certification agreement but no initial certification and no valid until:
+   *   Create a new certification off the agreement and exit.
    * It update the current certification (if there is an active one, otherwise it creates a cert for the just-completed period).
    *   If the new certDate is within the leeway period, it completes the old cert and creates a new one starting when the old ends.
    *   If the new certDate is after the leeway, it completes the old cert and creates a new one starting on the certDate
    *   If the new certDate is somewhere else, it leaves the current cert in effect.
    */
-  public Certification__c updateCert(Contact person, String type, Date validUntil, Date certDate) {
+  public Certification__c updateCert(Id contactId, String type, Date initial, Date validUntil, Date certDate) {
     // date the latest agreement was received
     Dates dates = new Dates();
     Certification__c cert;
-    if (validUntil == null) {
+    if (initial != null && validUntil == null) {
       // create cert and exit
       cert = certRepo.create(new Certification__c(
-        Contact__c = person.Id, 
+        Contact__c = contactId, 
+        Type__c = type, 
+        Status__c = 'Active', 
+        Start__c = initial, 
+        End__c = initial.addYears(dates.years)
+      ));
+      return cert;
+    }
+
+    if (certDate == null) {
+      return cert; // nothing to do
+    }
+
+    // We don't have an initial cert, so create one off certDate
+    if (validUntil == null) {
+      // create cert for current agreement and continue
+      cert = certRepo.create(new Certification__c(
+        Contact__c = contactId, 
         Type__c = type, 
         Status__c = 'Active', 
         Start__c = certDate, 
@@ -184,49 +203,45 @@ public inherited sharing class CertificationService {
       return cert;
     }
 
-    cert = certRepo.getActiveCert(person.Id, type);
-    if (cert == null) {
-      // create cert for current validUntil and continue
-      cert = certRepo.create(new Certification__c(
-        Contact__c = person.Id, 
-        Type__c = type, 
-        Status__c = 'Active', 
-        Start__c = validUntil.addYears(-dates.years), 
-        End__c = validUntil
-      ));
+    // See if we should complete the current cert and start a new one
+    Integer days = validUntil.daysBetween(certDate);
+
+    // Stop checking if the certDate is before the leeway,
+    // which it will be until a new certDate is entered
+    if (days < -dates.early) {
+      return cert;
     }
 
-    Integer days = cert.End__c.daysBetween(certDate);
-    if (days >= -dates.early && days <= dates.leeway) {
-      // complete old cert
+    // We need the active cert now so we can complete it
+    cert = certRepo.getActiveCert(contactId, type);
+    // complete old cert
+    if (cert != null) {
       cert.Status__c = 'Complete';
       certRepo.modify(cert);
       System.debug('completing old cert');
+      validUntil = cert.End__c;
+    }
 
+    // We can continue off the old cert date if within the leeway
+    if (days <= dates.leeway) {
       cert = certRepo.create(new Certification__c(
-        Contact__c = person.Id, 
+        Contact__c = contactId, 
         Type__c = type, 
         Status__c = 'Active', 
-        Start__c = cert.End__c, 
-        End__c = cert.End__c.addYears(dates.years)
+        Start__c = validUntil, 
+        End__c = validUntil.addYears(dates.years)
       ));
       return cert;
     }
-    if (days > dates.leeway) {
-      // complete old cert and start new one
-      // complete old cert
-      cert.Status__c = 'Complete';
-      certRepo.modify(cert);
 
-      cert = certRepo.create(new Certification__c(
-        Contact__c = person.Id, 
-        Type__c = type, 
-        Status__c = 'Active', 
-        Start__c = certDate, 
-        End__c = certDate.addYears(dates.years)
-      ));
-      return cert;
-    }
+    // We'll start a new cert off the certDate since we've passed the leeway
+    cert = certRepo.create(new Certification__c(
+      Contact__c = contactId, 
+      Type__c = type, 
+      Status__c = 'Active', 
+      Start__c = certDate, 
+      End__c = certDate.addYears(dates.years)
+    ));
     return cert;
   }
 
@@ -234,7 +249,7 @@ public inherited sharing class CertificationService {
   // called for new certifications
   public void addCeus(Certification__c cert) {
     // SOQL doesn't allow date comparisons in a query, so get all
-    // the CEUs for the contact and filter tham out
+    // the CEUs for the contact and filter them out
     List<Ceu__c> ceus = ceuRepo.getForContact(cert.Contact__c, 10000);
     List<CeuCertification__c> ccs = new List<CeuCertification__c>();
     for (Ceu__c ceu : ceus) {
