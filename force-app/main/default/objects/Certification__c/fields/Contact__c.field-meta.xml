@@ -3,7 +3,6 @@
     <fullName>Contact__c</fullName>
     <deleteConstraint>Restrict</deleteConstraint>
     <description>Trainer or Facilitator</description>
-    <externalId>false</externalId>
     <label>Contact</label>
     <referenceTo>Contact</referenceTo>
     <relationshipLabel>Certifications</relationshipLabel>
