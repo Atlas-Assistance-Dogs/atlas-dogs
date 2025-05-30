@@ -136,11 +136,11 @@ public inherited sharing class CertificationRepository {
   }
 
   // Check to see if the CEU is already assigned to a Certification
-  public Boolean ceuAssignedToCert(Id ceuId, String type) {
+  public Boolean ceuNotAssignedToCert(Id ceuId, String type) {
     CeuCertification__c[] ccs = [SELECT Id
                                  FROM CeuCertification__c
                                  WHERE CEU__c = :ceuId AND Certification__r.Type__c = :type];
-    return !ccs.isEmpty();
+    return ccs.isEmpty();
   }
 
 }
