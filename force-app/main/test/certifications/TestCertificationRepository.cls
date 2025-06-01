@@ -383,15 +383,15 @@ private class TestCertificationRepository {
   }
 
   @IsTest
-  static void ceuAssignedToCert_returnsTrueWhenAssigned() {
+  static void ceuNotAssignedToCert_returnsFalseWhenAssigned() {
     CertificationRepositoryData data = new CertificationRepositoryData();
 
-    Boolean result = repo.ceuAssignedToCert(data.ceu.Id, data.cert.Type__c);
-    System.assertEquals(true, result, 'should be true');
+    Boolean result = repo.ceuNotAssignedToCert(data.ceu.Id, data.cert.Type__c);
+    System.assertEquals(false, result, 'should be false');
   }
 
   @IsTest
-  static void ceuAssignedToCert_returnsFalseWhenNotAssigned() {
+  static void ceuNotAssignedToCert_returnsTrueWhenNotAssigned() {
     CertificationRepositoryData data = new CertificationRepositoryData();
     Ceu__c ceu = new Ceu__c(
       Authority__c = 'Atlas', 
@@ -407,8 +407,8 @@ private class TestCertificationRepository {
     );
     insert ceu;
 
-    Boolean result = repo.ceuAssignedToCert(ceu.Id, data.cert.Type__c);
-    System.assertEquals(false, result, 'should be false');
+    Boolean result = repo.ceuNotAssignedToCert(ceu.Id, data.cert.Type__c);
+    System.assertEquals(true, result, 'should be true');
   }
 
 }
