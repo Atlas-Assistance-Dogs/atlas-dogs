@@ -56,7 +56,7 @@ public inherited sharing class CertificationService {
     for (Certification__c cert : certs) {
       List<Ceu__c> contactCeus = contactCeuIds.get(cert.Contact__c);
       for (Ceu__c ceu1 : contactCeus) {
-        if (cert.Status__c == 'Active' && ceu1.DateCompleted__c >= cert.Start__c && ceu1.DateCompleted__c <= cert.End__c) {
+        if (cert.Status__c == 'Active' && ceu1.DateCompleted__c >= cert.Start__c && ceu1.DateCompleted__c <= cert.End__c && certRepo.ceuNotAssignedToCert(ceu1.Id, cert.Type__c)) {
           CeuCertification__c cc = new CeuCertification__c(
             Ceu__c = ceu1.Id, 
             Certification__c = cert.Id
@@ -253,7 +253,7 @@ public inherited sharing class CertificationService {
     List<Ceu__c> ceus = ceuRepo.getForContact(cert.Contact__c, 10000);
     List<CeuCertification__c> ccs = new List<CeuCertification__c>();
     for (Ceu__c ceu : ceus) {
-      if (ceu.DateCompleted__c >= cert.Start__c && ceu.DateCompleted__c <= cert.End__c) {
+      if (ceu.DateCompleted__c >= cert.Start__c && ceu.DateCompleted__c <= cert.End__c && certRepo.ceuNotAssignedToCert(ceu.Id, cert.Type__c)) {
         Integer approved = 0;
         if (ceu.Status__c == 'Approved') {
           approved = (Integer) ceu.Quantity__c;
