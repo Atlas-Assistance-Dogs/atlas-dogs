@@ -87,9 +87,7 @@ const COLS = {
   },
   handlers: {
     label: "Handler(s)",
-    fieldName: HANDLERS_FIELD.fieldApiName,
-    type: "string",
-    editable: "true"
+    fieldName: HANDLERS_FIELD.fieldApiName
   },
   session: {
     label: "Session Type",
