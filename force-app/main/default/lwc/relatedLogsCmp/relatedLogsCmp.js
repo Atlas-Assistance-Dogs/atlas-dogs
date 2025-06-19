@@ -8,17 +8,20 @@ import { refreshApex } from "@salesforce/apex";
 import LOG_OBJECT from "@salesforce/schema/Log__c";
 import ATLAS_SUPPORT_FIELD from "@salesforce/schema/Log__c.RequestSupportFromAtlas__c";
 import TEAM_OBJECT from "@salesforce/schema/Team__c";
+import CLIENT_HOURS_FIELD from "@salesforce/schema/Log__c.ClientHours__c";
 import CLIENT_STRESS_FIELD from "@salesforce/schema/Log__c.ClientStress__c";
 import DATE_FIELD from "@salesforce/schema/Log__c.Date__c";
 import DETAILS_FIELD from "@salesforce/schema/Log__c.Details__c";
 import DID_MEET_FIELD from "@salesforce/schema/Log__c.DidMeetThisWeek__c";
 import FACILITATOR_FIELD from "@salesforce/schema/Log__c.Facilitator__c";
 import FIRST_AID_SUPPLIES_FIELD from "@salesforce/schema/Log__c.FirstAidSuppliesUsed__c";
+import HANDLERS_FIELD from "@salesforce/schema/Log__c.Handler__c";
 import SUBMITTER_FIELD from "@salesforce/schema/Log__c.Submitter__c";
 import NAME_FIELD from "@salesforce/schema/Log__c.Name";
 import OTHER_HOURS_FIELD from "@salesforce/schema/Log__c.OtherHours__c";
 import PAH_FIELD from "@salesforce/schema/Log__c.PublicAccessHours__c";
 import SATISFACTION_FIELD from "@salesforce/schema/Log__c.Satisfaction__c";
+import SESSION_FIELD from "@salesforce/schema/Log__c.SessionType__c";
 import STRESS_FIELD from "@salesforce/schema/Log__c.Stress__c";
 import TEAM_FIELD from "@salesforce/schema/Log__c.Team__c";
 import TEAM_SUPPORT_FIELD from "@salesforce/schema/Log__c.RequestSupportFromTeam__c";
@@ -82,6 +85,22 @@ const COLS = {
     sortable: true,
     actions: [{ label: "Hide", name: "hide" }]
   },
+  handlers: {
+    label: "Handler(s)",
+    fieldName: HANDLERS_FIELD.fieldApiName
+  },
+  session: {
+    label: "Session Type",
+    fieldName: SESSION_FIELD.fieldApiName,
+    type: "string",
+    editable: "true"
+  },
+  clientHours: {
+    label: "Hours with Client",
+    fieldName: CLIENT_HOURS_FIELD.fieldApiName,
+    type: "number",
+    editable: "true"
+  },
   hours: {
     label: "PA Hours",
     fieldName: PAH_FIELD.fieldApiName,
@@ -134,34 +153,20 @@ const CLIENT_COLS = [
   COLS.name,
   COLS.date,
   COLS.team,
-  COLS.facilitator,
-  COLS.submitter,
-  COLS.hours,
-  COLS.otherHours,
+  COLS.handlers,
+  COLS.session,
   COLS.didMeet,
-  COLS.teamSupport,
-  COLS.stress,
-  COLS.satisfaction,
-  COLS.atlas,
-  COLS.details,
-  COLS.action
+  COLS.details
 ];
 
 const FAC_COLS = [
   COLS.name,
   COLS.date,
   COLS.team,
+  COLS.handlers,
   COLS.facilitator,
-  COLS.submitter,
-  COLS.hours,
-  COLS.otherHours,
-  COLS.teamSupport,
-  COLS.clientStress,
-  COLS.stress,
-  COLS.atlas,
-  COLS.aid,
-  COLS.details,
-  COLS.action
+  COLS.session,
+  COLS.details
 ];
 
 export default class RelatedLogsCmp extends NavigationMixin(LightningElement) {

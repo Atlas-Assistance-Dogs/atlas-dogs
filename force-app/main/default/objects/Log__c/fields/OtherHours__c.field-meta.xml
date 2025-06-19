@@ -5,7 +5,7 @@
     <label>Other Hours</label>
     <precision>4</precision>
     <required>true</required>
-    <scale>0</scale>
+    <scale>1</scale>
     <trackTrending>false</trackTrending>
     <type>Number</type>
     <unique>false</unique>

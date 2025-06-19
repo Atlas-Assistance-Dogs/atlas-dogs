@@ -25,6 +25,7 @@ public with sharing class LogController {
           Facilitator__r.Name,
           FirstAidSuppliesUsed__c,
           FirstAidDetails__c,
+          Handler__c,
           Name,
           OtherHours__c,
           PublicAccessHours__c,
@@ -56,6 +57,7 @@ public with sharing class LogController {
         LIMIT :max
       ];
       for (Log__c log : logs) {
+        System.debug(log.Handler__c);
         LogInfo item = new LogInfo();
         item.log = log;
         item.clientName = log.Team__r.Client__r.Name;
@@ -102,6 +104,7 @@ public with sharing class LogController {
           Facilitator__r.Name,
           FirstAidSuppliesUsed__c,
           FirstAidDetails__c,
+          Handler__c,
           Name,
           OtherHours__c,
           PublicAccessHours__c,
