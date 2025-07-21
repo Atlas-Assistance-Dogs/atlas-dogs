@@ -5,6 +5,7 @@ import LOG_OBJECT from "@salesforce/schema/Log__c";
 
 import ATLAS_SUPPORT_FIELD from "@salesforce/schema/Log__c.RequestSupportFromAtlas__c";
 import TEAM_FIELD from "@salesforce/schema/Log__c.Team__c";
+import CLIENT_FIELD from "@salesforce/schema/Log__c.Client__c";
 import CLIENT_HOURS_FIELD from "@salesforce/schema/Log__c.ClientHours__c";
 import CLIENT_STRESS_FIELD from "@salesforce/schema/Log__c.ClientStress__c";
 import DATE_FIELD from "@salesforce/schema/Log__c.Date__c";
@@ -34,6 +35,7 @@ export default class LogFormCmp extends LightningElement {
   fields = {
     team: TEAM_FIELD,
     submitter: SUBMITTER_FIELD,
+    client: CLIENT_FIELD,
     facilitator: TEAM_FACILITATOR_FIELD,
     recordType: RECORD_TYPE_FIELD,
     date: DATE_FIELD,
