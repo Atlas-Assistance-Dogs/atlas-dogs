@@ -1,7 +1,6 @@
 import { createElement } from "lwc";
 import NewPatCmp from "c/newPatCmp";
 import PAT_OBJECT from "@salesforce/schema/PublicAccessTest__c";
-import flushPromises from "../../__tests__/flushPromises";
 
 describe("c-new-pat-cmp", () => {
   afterEach(() => {
@@ -10,6 +9,11 @@ describe("c-new-pat-cmp", () => {
       document.body.removeChild(document.body.firstChild);
     }
   });
+  // Helper function to wait until the microtask queue is empty. This is needed for promise
+  // timing when calling imperative Apex.
+  async function flushPromises() {
+    return Promise.resolve();
+  }
 
   it("should show pat-form", async () => {
     // Arrange

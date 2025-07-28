@@ -14,7 +14,6 @@ import STRESS_FIELD from "@salesforce/schema/Log__c.Stress__c";
 import SUBMITTER_FIELD from "@salesforce/schema/Log__c.Submitter__c";
 import TEAM_FACILITATOR_FIELD from "@salesforce/schema/Log__c.Facilitator__c";
 import TEAM_SUPPORT_FIELD from "@salesforce/schema/Log__c.RequestSupportFromTeam__c";
-import flushPromises from "../../__tests__/flushPromises";
 
 const RECORD_ID_INPUT = "0031700000pJRRSAA4";
 
@@ -25,6 +24,11 @@ describe("c-log-form-cmp", () => {
       document.body.removeChild(document.body.firstChild);
     }
   });
+  // Helper function to wait until the microtask queue is empty. This is needed for promise
+  // timing when calling imperative Apex.
+  async function flushPromises() {
+    return Promise.resolve();
+  }
 
   it("renders lightning-record-edit-form with given input values", async () => {
     // Create component
