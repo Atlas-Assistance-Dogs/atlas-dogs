@@ -34,9 +34,9 @@
                 <label>Volunteer</label>
             </value>
             <value>
-                <fullName>Team Faciliator</fullName>
+                <fullName>Team Facilitator</fullName>
                 <default>false</default>
-                <label>Team Faciliator</label>
+                <label>Team Facilitator</label>
             </value>
             <value>
                 <fullName>Team Facilitator Lead</fullName>
