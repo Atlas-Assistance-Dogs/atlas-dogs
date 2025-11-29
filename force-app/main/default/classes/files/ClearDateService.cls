@@ -26,6 +26,7 @@ public inherited sharing class ClearDateService {
 				PuppyApplicationReceived__c, PuppyCertAgreementReceived__c, PuppyContractReceived__c, PuppyInfrNoticeReceived__c, PuppyProgAgreementReceived__c, PuppyReferenceReceived__c,
 				StaffAgreementReceived__c, StaffApplicationReceived__c, StaffI9Received__c, StaffOfferReceived__c, StaffResumeReceived__c, StaffW4Received__c, StaffW9Received__c,
 				StandaloneApplicationReceived__c, StandaloneProgAgreementReceived__c,
+				TSiMApplicationReceived__c, TSiMProgAgreementReceived__c,
 				TrainerApplicationReceived__c, TrainerCertAgreementReceived__c, TrainerClientReferenceReceived__c, TrainerInfrNoticeReceived__c, TrainerProfReferenceReceived__c, TrainerProgAgreementReceived__c,
 				VolunteerAgreementReceived__c, VolunteerApplicationReceived__c, VolunteerResumeReceived__c
             FROM Contact
@@ -61,6 +62,10 @@ public inherited sharing class ClearDateService {
         
         if (cv.Category__c == 'Standalone') {
             clearStandaloneDate(cv, contact);
+        }
+        
+        if (cv.Category__c == 'TSiM') {
+            clearTSiMDate(cv, contact);
         }
         
         if (cv.Category__c == 'Trainer') {
@@ -224,6 +229,17 @@ public inherited sharing class ClearDateService {
 
         if (cv.Type__c == 'ProgAgreement'){
             contact.StandaloneProgAgreementReceived__c = null;
+        }
+    }
+
+    // Clear the last date when the category is TSiM
+    private static void clearTSiMDate(ContentVersion cv, Contact contact) {
+        if (cv.Type__c == 'Application'){
+            contact.TSiMApplicationReceived__c = null;
+        }
+
+        if (cv.Type__c == 'ProgAgreement'){
+            contact.TSiMProgAgreementReceived__c = null;
         }
     }
 

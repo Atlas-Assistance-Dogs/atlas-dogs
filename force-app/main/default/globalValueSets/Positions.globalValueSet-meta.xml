@@ -50,6 +50,11 @@
         <default>false</default>
         <label>Standalone</label>
     </customValue>
+    <customValue>
+        <fullName>TSiM</fullName>
+        <default>false</default>
+        <label>TSiM</label>
+    </customValue>
     <description>Positions a contact can have</description>
     <masterLabel>Positions</masterLabel>
     <sorted>false</sorted>

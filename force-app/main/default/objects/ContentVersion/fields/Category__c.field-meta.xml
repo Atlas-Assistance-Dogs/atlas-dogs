@@ -41,6 +41,11 @@
                 <label>Standalone Programs</label>
             </value>
             <value>
+                <fullName>TSiM</fullName>
+                <default>false</default>
+                <label>TSiM Programs</label>
+            </value>
+            <value>
                 <fullName>ADSiM</fullName>
                 <default>false</default>
                 <label>Assistance Dogs Set in Motion</label>
