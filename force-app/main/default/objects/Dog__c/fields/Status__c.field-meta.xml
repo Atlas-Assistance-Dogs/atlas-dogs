@@ -48,6 +48,11 @@
                 <label>Discontinued</label>
             </value>
             <value>
+                <fullName>On Hold</fullName>
+                <default>false</default>
+                <label>On Hold</label>
+            </value>
+            <value>
                 <fullName>None</fullName>
                 <default>false</default>
                 <label>None</label>
