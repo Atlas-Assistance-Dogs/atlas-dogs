@@ -32,6 +32,11 @@
                 <label>In Training</label>
             </value>
             <value>
+                <fullName>On Hold</fullName>
+                <default>false</default>
+                <label>On Hold</label>
+            </value>
+            <value>
                 <fullName>Certified</fullName>
                 <default>false</default>
                 <label>Certified</label>
