@@ -11,6 +11,7 @@ Insert Campaign:
   fields:
   - GW_Volunteers__Volunteer_Website_Time_Zone__c
   - Name
+  select_options: {}
 Insert npo02__Household__c:
   sf_object: npo02__Household__c
   table: npo02__Household__c
@@ -56,6 +57,7 @@ Insert npo02__Household__c:
   - npo02__TotalMembershipOppAmount__c
   - npo02__TotalOppAmount__c
   - npsp__Number_of_Household_Members__c
+  select_options: {}
 Insert CategoryRule__c:
   sf_object: CategoryRule__c
   table: CategoryRule__c
@@ -66,6 +68,7 @@ Insert CategoryRule__c:
   - Position__c
   - ReadOnly__c
   - Upload__c
+  select_options: {}
 Insert Program__c:
   sf_object: Program__c
   table: Program__c
@@ -76,11 +79,13 @@ Insert Program__c:
   - Name
   - Reminder__c
   - Standalone__c
+  select_options: {}
 Insert npsp__Batch__c:
   sf_object: npsp__Batch__c
   table: npsp__Batch__c
   fields:
   - npsp__Object_Name__c
+  select_options: {}
 Insert Lead:
   sf_object: Lead
   table: Lead
@@ -119,6 +124,7 @@ Insert Lead:
       table:
       - npsp__Batch__c
       key_field: npsp__Batch__c
+  select_options: {}
 Insert GW_Volunteers__Volunteer_Job__c:
   sf_object: GW_Volunteers__Volunteer_Job__c
   table: GW_Volunteers__Volunteer_Job__c
@@ -141,6 +147,7 @@ Insert GW_Volunteers__Volunteer_Job__c:
       table:
       - Campaign
       key_field: GW_Volunteers__Campaign__c
+  select_options: {}
 Insert Account:
   sf_object: Account
   table: Account
@@ -208,6 +215,7 @@ Insert Account:
       table:
       - npsp__Batch__c
       key_field: npsp__Batch__c
+  select_options: {}
 Insert npsp__Address__c:
   sf_object: npsp__Address__c
   table: npsp__Address__c
@@ -248,6 +256,7 @@ Insert npsp__Address__c:
       table:
       - Account
       key_field: npsp__Household_Account__c
+  select_options: {}
 Insert Dog__c:
   sf_object: Dog__c
   table: Dog__c
@@ -274,11 +283,13 @@ Insert Dog__c:
   - VaccineDueParvovirus__c
   - VaccineDueRabies__c
   - Weight__c
+  - XrayRequired__c
   lookups:
     VetClinic__c:
       table:
       - Account
       key_field: VetClinic__c
+  select_options: {}
 Insert Contact:
   sf_object: Contact
   table: Contact
@@ -340,7 +351,9 @@ Insert Contact:
   - LeadFacilitatorStatus__c
   - LeadInterest__c
   - LeadSourceOther__c
+  - MediaReceived__c
   - OtherLanguages__c
+  - ParticipationAgreementReceived__c
   - Photo__c
   - Positions__c
   - PreferredName__c
@@ -359,6 +372,7 @@ Insert Contact:
   - SharePuppyRaiser__c
   - ShareStaff__c
   - ShareStandalonePrograms__c
+  - ShareTSiM__c
   - ShareTeam__c
   - ShareTrainer__c
   - ShareVolunteer__c
@@ -381,6 +395,9 @@ Insert Contact:
   - StandaloneApplicationReceived__c
   - StandaloneProgAgreementReceived__c
   - StandaloneStatus__c
+  - TSiMApplicationReceived__c
+  - TSiMProgAgreementReceived__c
+  - TSiMStatus__c
   - TextMessagesApproved__c
   - TrainerApplicationReceived__c
   - TrainerBoardTrain__c
@@ -482,6 +499,7 @@ Insert Contact:
       table:
       - Account
       key_field: npsp__Primary_Affiliation__c
+  select_options: {}
 Insert npe4__Relationship__c:
   sf_object: npe4__Relationship__c
   table: npe4__Relationship__c
@@ -505,6 +523,7 @@ Insert npe4__Relationship__c:
       table:
       - Contact
       key_field: npe4__RelatedContact__c
+  select_options: {}
 Insert BackgroundCheck__c:
   sf_object: BackgroundCheck__c
   table: BackgroundCheck__c
@@ -518,6 +537,7 @@ Insert BackgroundCheck__c:
       table:
       - Contact
       key_field: Contact__c
+  select_options: {}
 Insert CEU__c:
   sf_object: CEU__c
   table: CEU__c
@@ -537,6 +557,7 @@ Insert CEU__c:
       table:
       - Contact
       key_field: Contact__c
+  select_options: {}
 Insert DogRelationship__c:
   sf_object: DogRelationship__c
   table: DogRelationship__c
@@ -551,6 +572,7 @@ Insert DogRelationship__c:
       table:
       - Dog__c
       key_field: Dog__c
+  select_options: {}
 Insert ProgramAssignment__c:
   sf_object: ProgramAssignment__c
   table: ProgramAssignment__c
@@ -569,6 +591,7 @@ Insert ProgramAssignment__c:
       table:
       - Program__c
       key_field: Program__c
+  select_options: {}
 Insert PuppyLog__c:
   sf_object: PuppyLog__c
   table: PuppyLog__c
@@ -585,6 +608,7 @@ Insert PuppyLog__c:
       table:
       - Contact
       key_field: Raiser__c
+  select_options: {}
 Insert Team__c:
   sf_object: Team__c
   table: Team__c
@@ -612,6 +636,7 @@ Insert Team__c:
   - Status__c
   - TrainingStartDate__c
   - XrayReceived__c
+  - XrayRequired__c
   lookups:
     Client__c:
       table:
@@ -629,6 +654,7 @@ Insert Team__c:
       table:
       - Contact
       key_field: Handler__c
+  select_options: {}
 Insert Log__c:
   sf_object: Log__c
   table: Log__c
@@ -648,6 +674,7 @@ Insert Log__c:
   - Satisfaction__c
   - SessionType__c
   - Stress__c
+  - SubmitterName__c
   - SupportDetails__c
   - RecordTypeId
   lookups:
@@ -671,6 +698,7 @@ Insert Log__c:
       table:
       - Team__c
       key_field: Team__c
+  select_options: {}
 Insert PublicAccessTest__c:
   sf_object: PublicAccessTest__c
   table: PublicAccessTest__c
@@ -691,3 +719,4 @@ Insert PublicAccessTest__c:
       table:
       - Team__c
       key_field: Team__c
+  select_options: {}
