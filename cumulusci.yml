@@ -50,11 +50,13 @@ flows:
       3:
         task: assign_permission_sets
         options:
-          api_names: AtlasBackgroundCheck,AtlasBase,AtlasBoard,AtlasDemographics,AtlasFacilitator,AtlasPuppyRaiser,AtlasStaff,AtlasStandalonePrograms,AtlasTeam,AtlasTrainer,AtlasVolunteer
+          api_names: AtlasBackgroundCheck,AtlasBase,AtlasBoard,AtlasDemographics,AtlasFacilitator,AtlasPuppyRaiser,AtlasStaff,AtlasStandalonePrograms,AtlasTeam,AtlasTrainer,AtlasTSiM,AtlasVolunteer
       4:
         task: load_custom_settings
         options: 
           settings_path: datasets/default/custom-settings.yml
+      # 90:
+      #   task: None
 
   config_managed:
     steps:

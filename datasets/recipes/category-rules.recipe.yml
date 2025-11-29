@@ -54,8 +54,8 @@
   fields:
     Category__c: "TSiM"
     Object__c: "Contact"
-    Position__c: "TSim"
-    GroupName__c: "Standalone Programs"
+    Position__c: "TSiM"
+    GroupName__c: "TSiM"
 
 - object: CategoryRule__c
   just_once: True
