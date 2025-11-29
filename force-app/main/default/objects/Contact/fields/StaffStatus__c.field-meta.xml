@@ -2,7 +2,7 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>StaffStatus__c</fullName>
     <externalId>false</externalId>
-    <label>Status</label>
+    <label>Staff Status</label>
     <required>false</required>
     <trackFeedHistory>false</trackFeedHistory>
     <type>Picklist</type>
@@ -29,6 +29,11 @@
                 <fullName>Inactive</fullName>
                 <default>false</default>
                 <label>Inactive</label>
+            </value>
+            <value>
+                <fullName>Not Accepted</fullName>
+                <default>false</default>
+                <label>Not Accepted</label>
             </value>
         </valueSetDefinition>
     </valueSet>
