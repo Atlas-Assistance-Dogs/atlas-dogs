@@ -52,6 +52,16 @@
                 <default>false</default>
                 <label>None</label>
             </value>
+            <value>
+                <fullName>On Hold</fullName>
+                <default>false</default>
+                <label>On Hold</label>
+            </value>
+            <value>
+                <fullName>Not Accepted</fullName>
+                <default>false</default>
+                <label>Not Accepted</label>
+            </value>
         </valueSetDefinition>
     </valueSet>
 </CustomField>
