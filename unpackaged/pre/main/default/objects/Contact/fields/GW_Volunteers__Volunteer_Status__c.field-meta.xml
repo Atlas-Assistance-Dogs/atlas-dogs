@@ -31,6 +31,11 @@
                 <label>Initial Inquiry</label>
             </value>
             <value>
+                <fullName>Not Accepted</fullName>
+                <default>false</default>
+                <label>Not Accepted</label>
+            </value>
+            <value>
                 <fullName>None</fullName>
                 <default>false</default>
                 <label>None</label>

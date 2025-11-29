@@ -51,6 +51,11 @@
                 <default>false</default>
                 <label>Discontinued</label>
             </value>
+            <value>
+                <fullName>Not Accepted</fullName>
+                <default>false</default>
+                <label>Not Accepted</label>
+            </value>
         </valueSetDefinition>
     </valueSet>
 </CustomField>
