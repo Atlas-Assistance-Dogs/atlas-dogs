@@ -10,6 +10,8 @@
         - Trainer
         - Client
         - Donor
+        - Standalone
+        - TSiM
         - Volunteer;Client
         - Volunteer;Trainer
         - Team Facilitator;Volunteer
@@ -31,4 +33,6 @@
         - Trainer
         - Client
         - Donor
+        - Standalone
+        - TSiM
         - Staff
