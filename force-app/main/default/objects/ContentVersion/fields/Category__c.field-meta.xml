@@ -41,7 +41,7 @@
                 <label>Standalone Programs</label>
             </value>
             <value>
-                <fullName>TSiM</fullName>
+                <fullName>TSM</fullName>
                 <default>false</default>
                 <label>TSiM Programs</label>
             </value>

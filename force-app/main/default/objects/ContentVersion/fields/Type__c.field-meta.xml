@@ -178,7 +178,7 @@
             <controllingFieldValue>Board</controllingFieldValue>
             <controllingFieldValue>Client</controllingFieldValue>
             <controllingFieldValue>Standalone</controllingFieldValue>
-            <controllingFieldValue>TSiM</controllingFieldValue>
+            <controllingFieldValue>TSM</controllingFieldValue>
             <controllingFieldValue>ADSiM</controllingFieldValue>
             <controllingFieldValue>Facilitator</controllingFieldValue>
             <controllingFieldValue>Puppy</controllingFieldValue>
@@ -261,7 +261,7 @@
         <valueSettings>
             <controllingFieldValue>Client</controllingFieldValue>
             <controllingFieldValue>Standalone</controllingFieldValue>
-            <controllingFieldValue>TSiM</controllingFieldValue>
+            <controllingFieldValue>TSM</controllingFieldValue>
             <controllingFieldValue>ADSiM</controllingFieldValue>
             <controllingFieldValue>Facilitator</controllingFieldValue>
             <controllingFieldValue>Puppy</controllingFieldValue>
