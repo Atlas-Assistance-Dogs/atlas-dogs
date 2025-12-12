@@ -466,7 +466,7 @@ INSERT INTO "CategoryRule__c" VALUES('CategoryRule__c-4','TeamDog','Team','Dog',
 INSERT INTO "CategoryRule__c" VALUES('CategoryRule__c-5','ADSiM','Team','Contact','Client','False','False');
 INSERT INTO "CategoryRule__c" VALUES('CategoryRule__c-6','Na','','Contact','','False','False');
 INSERT INTO "CategoryRule__c" VALUES('CategoryRule__c-7','Standalone','Standalone Programs','Contact','Standalone','False','False');
-INSERT INTO "CategoryRule__c" VALUES('CategoryRule__c-8','TSiM','TSiM','Contact','TSiM','False','False');
+INSERT INTO "CategoryRule__c" VALUES('CategoryRule__c-8','TSM','TSiM','Contact','TSiM','False','False');
 INSERT INTO "CategoryRule__c" VALUES('CategoryRule__c-9','Board','Board','Contact','Board Member','False','False');
 INSERT INTO "CategoryRule__c" VALUES('CategoryRule__c-10','Client','Team','Contact','Client','True','False');
 INSERT INTO "CategoryRule__c" VALUES('CategoryRule__c-11','Facilitator','Team','Contact','Team Facilitator','False','False');
