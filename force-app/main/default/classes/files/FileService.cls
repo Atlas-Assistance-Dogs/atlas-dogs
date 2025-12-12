@@ -232,15 +232,15 @@ public with sharing class FileService {
         List<Contact> contacts = [
             SELECT Id,
                 ADSiMApplicationReceived__c, ADSiMPreApplicationReceived__c, ADSiMProgAgreementReceived__c,
-				BoardAgreementReceived__c, BoardApplicationReceived__c, BoardCoIReceived__c, BoardResumeReceived__c, BoardToNReceived__c,
-				FacilitatorApplicationReceived__c, FacilitatorCertAgreementReceived__c, FacilitatorInfrNoticeReceived__c, FacilitatorPracticumReceived__c, FacilitatorProgAgreementReceived__c, FacilitatorReferenceReceived__c,
-				ContactFormReceived__c, FirstAidReceived__c, MediaReceived__c, ParticipationAgreementReceived__c,
-				PuppyApplicationReceived__c, PuppyCertAgreementReceived__c, PuppyContractReceived__c, PuppyInfrNoticeReceived__c, PuppyProgAgreementReceived__c, PuppyReferenceReceived__c,
-				StaffAgreementReceived__c, StaffApplicationReceived__c, StaffI9Received__c, StaffOfferReceived__c, StaffResumeReceived__c, StaffW4Received__c, StaffW9Received__c,
-				StandaloneApplicationReceived__c, StandaloneProgAgreementReceived__c,
-				TSMApplicationReceived__c, TSMProgAgreementReceived__c,
-				TrainerApplicationReceived__c, TrainerCertAgreementReceived__c, TrainerClientReferenceReceived__c, TrainerInfrNoticeReceived__c, TrainerProfReferenceReceived__c, TrainerProgAgreementReceived__c,
-				VolunteerAgreementReceived__c, VolunteerApplicationReceived__c, VolunteerResumeReceived__c
+                BoardAgreementReceived__c, BoardApplicationReceived__c, BoardCoIReceived__c, BoardResumeReceived__c, BoardToNReceived__c,
+                FacilitatorApplicationReceived__c, FacilitatorCertAgreementReceived__c, FacilitatorInfrNoticeReceived__c, FacilitatorPracticumReceived__c, FacilitatorProgAgreementReceived__c, FacilitatorReferenceReceived__c,
+                ContactFormReceived__c, FirstAidReceived__c, MediaReceived__c, ParticipationAgreementReceived__c,
+                PuppyApplicationReceived__c, PuppyCertAgreementReceived__c, PuppyContractReceived__c, PuppyInfrNoticeReceived__c, PuppyProgAgreementReceived__c, PuppyReferenceReceived__c,
+                StaffAgreementReceived__c, StaffApplicationReceived__c, StaffI9Received__c, StaffOfferReceived__c, StaffResumeReceived__c, StaffW4Received__c, StaffW9Received__c,
+                StandaloneApplicationReceived__c, StandaloneProgAgreementReceived__c,
+                TSMApplicationReceived__c, TSMProgAgreementReceived__c,
+                TrainerApplicationReceived__c, TrainerCertAgreementReceived__c, TrainerClientReferenceReceived__c, TrainerInfrNoticeReceived__c, TrainerProfReferenceReceived__c, TrainerProgAgreementReceived__c,
+                VolunteerAgreementReceived__c, VolunteerApplicationReceived__c, VolunteerResumeReceived__c
             FROM Contact
             WHERE Id = :recordId
         ];

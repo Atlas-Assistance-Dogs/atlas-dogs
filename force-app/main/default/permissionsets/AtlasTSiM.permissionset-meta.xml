@@ -8,12 +8,12 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Contact.TSiMApplicationReceived__c</field>
+        <field>Contact.TSMApplicationReceived__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Contact.TSiMProgAgreementReceived__c</field>
+        <field>Contact.TSMProgAgreementReceived__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

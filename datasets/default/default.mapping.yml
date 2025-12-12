@@ -395,8 +395,8 @@ Insert Contact:
   - StandaloneApplicationReceived__c
   - StandaloneProgAgreementReceived__c
   - StandaloneStatus__c
-  - TSiMApplicationReceived__c
-  - TSiMProgAgreementReceived__c
+  - TSMApplicationReceived__c
+  - TSMProgAgreementReceived__c
   - TSiMStatus__c
   - TextMessagesApproved__c
   - TrainerApplicationReceived__c
