@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Teams_Set_in_Motion</fullName>
+    <columns>FULL_NAME</columns>
+    <columns>ACCOUNT.NAME</columns>
+    <columns>CONTACT.PHONE1</columns>
+    <columns>CONTACT.EMAIL</columns>
+    <columns>Pronoun__c</columns>
+    <columns>Language__c</columns>
+    <columns>CONTACT.ADDRESS2_STATE</columns>
+    <columns>BoardTermValidUntil__c</columns>
+    <columns>BoardMemberStatus__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Positions__c</field>
+        <operation>includes</operation>
+        <value>TSiM</value>
+    </filters>
+    <label>Teams Set in Motion</label>
+    <sharedTo>
+        <group>TSiM</group>
+    </sharedTo>
+</ListView>

@@ -232,14 +232,15 @@ public with sharing class FileService {
         List<Contact> contacts = [
             SELECT Id,
                 ADSiMApplicationReceived__c, ADSiMPreApplicationReceived__c, ADSiMProgAgreementReceived__c,
-				BoardAgreementReceived__c, BoardApplicationReceived__c, BoardCoIReceived__c, BoardResumeReceived__c, BoardToNReceived__c,
-				FacilitatorApplicationReceived__c, FacilitatorCertAgreementReceived__c, FacilitatorInfrNoticeReceived__c, FacilitatorPracticumReceived__c, FacilitatorProgAgreementReceived__c, FacilitatorReferenceReceived__c,
-				ContactFormReceived__c, FirstAidReceived__c, MediaReceived__c, ParticipationAgreementReceived__c,
-				PuppyApplicationReceived__c, PuppyCertAgreementReceived__c, PuppyContractReceived__c, PuppyInfrNoticeReceived__c, PuppyProgAgreementReceived__c, PuppyReferenceReceived__c,
-				StaffAgreementReceived__c, StaffApplicationReceived__c, StaffI9Received__c, StaffOfferReceived__c, StaffResumeReceived__c, StaffW4Received__c, StaffW9Received__c,
-				StandaloneApplicationReceived__c, StandaloneProgAgreementReceived__c,
-				TrainerApplicationReceived__c, TrainerCertAgreementReceived__c, TrainerClientReferenceReceived__c, TrainerInfrNoticeReceived__c, TrainerProfReferenceReceived__c, TrainerProgAgreementReceived__c,
-				VolunteerAgreementReceived__c, VolunteerApplicationReceived__c, VolunteerResumeReceived__c
+                BoardAgreementReceived__c, BoardApplicationReceived__c, BoardCoIReceived__c, BoardResumeReceived__c, BoardToNReceived__c,
+                FacilitatorApplicationReceived__c, FacilitatorCertAgreementReceived__c, FacilitatorInfrNoticeReceived__c, FacilitatorPracticumReceived__c, FacilitatorProgAgreementReceived__c, FacilitatorReferenceReceived__c,
+                ContactFormReceived__c, FirstAidReceived__c, MediaReceived__c, ParticipationAgreementReceived__c,
+                PuppyApplicationReceived__c, PuppyCertAgreementReceived__c, PuppyContractReceived__c, PuppyInfrNoticeReceived__c, PuppyProgAgreementReceived__c, PuppyReferenceReceived__c,
+                StaffAgreementReceived__c, StaffApplicationReceived__c, StaffI9Received__c, StaffOfferReceived__c, StaffResumeReceived__c, StaffW4Received__c, StaffW9Received__c,
+                StandaloneApplicationReceived__c, StandaloneProgAgreementReceived__c,
+                TSMApplicationReceived__c, TSMProgAgreementReceived__c,
+                TrainerApplicationReceived__c, TrainerCertAgreementReceived__c, TrainerClientReferenceReceived__c, TrainerInfrNoticeReceived__c, TrainerProfReferenceReceived__c, TrainerProgAgreementReceived__c,
+                VolunteerAgreementReceived__c, VolunteerApplicationReceived__c, VolunteerResumeReceived__c
             FROM Contact
             WHERE Id = :recordId
         ];
@@ -282,6 +283,10 @@ public with sharing class FileService {
         
             if (cv.Category__c == 'Standalone') {
                 updateStandaloneDate(cv, contact);
+            }
+        
+            if (cv.Category__c == 'TSM') {
+                updateTSMDate(cv, contact);
             }
         
             if (cv.Category__c == 'Trainer') {
@@ -452,6 +457,18 @@ public with sharing class FileService {
 
         if (cv.Type__c == 'ProgAgreement' && isLater(contact.StandaloneProgAgreementReceived__c, cv.Date__c)) {
             contact.StandaloneProgAgreementReceived__c = cv.Date__c;
+        }
+    }
+
+    // Update the last date when the category is TSM
+    private static void updateTSMDate(ContentVersion cv, Contact contact) {
+
+        if (cv.Type__c == 'Application' && isLater(contact.TSMApplicationReceived__c, cv.Date__c)) {
+            contact.TSMApplicationReceived__c = cv.Date__c;
+        }
+
+        if (cv.Type__c == 'ProgAgreement' && isLater(contact.TSMProgAgreementReceived__c, cv.Date__c)) {
+            contact.TSMProgAgreementReceived__c = cv.Date__c;
         }
     }
 

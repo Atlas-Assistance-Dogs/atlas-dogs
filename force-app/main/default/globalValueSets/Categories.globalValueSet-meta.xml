@@ -31,6 +31,11 @@
         <label>Standalone Programs</label>
     </customValue>
     <customValue>
+        <fullName>TSM</fullName>
+        <default>false</default>
+        <label>TSiM</label>
+    </customValue>
+    <customValue>
         <fullName>ADSiM</fullName>
         <default>false</default>
         <label>Assistance Dogs Set in Motion</label>
