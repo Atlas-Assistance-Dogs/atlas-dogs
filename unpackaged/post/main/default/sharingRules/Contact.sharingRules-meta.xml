@@ -71,6 +71,21 @@
         <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
     </sharingCriteriaRules>
     <sharingCriteriaRules>
+        <fullName>Share_with_TSiM</fullName>
+        <accessLevel>Edit</accessLevel>
+        <description>Share contacts in TSiM</description>
+        <label>Share with TSiM</label>
+        <sharedTo>
+            <group>TSiM</group>
+        </sharedTo>
+        <criteriaItems>
+            <field>%%%NAMESPACE%%%ShareTSiM__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <includeRecordsOwnedByAll>true</includeRecordsOwnedByAll>
+    </sharingCriteriaRules>
+    <sharingCriteriaRules>
         <fullName>Trainer</fullName>
         <accessLevel>Edit</accessLevel>
         <label>Trainer</label>

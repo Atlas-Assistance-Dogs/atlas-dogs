@@ -171,6 +171,7 @@ public inherited sharing class ContactService {
     contact.SharePuppyRaiser__c = groupNames.contains('Puppy Raiser');
     contact.ShareStaff__c = groupNames.contains('Staff');
     contact.ShareStandalonePrograms__c = groupNames.contains('Standalone Programs');
+    contact.ShareTSiM__c = groupNames.contains('TSiM');
     contact.ShareTeam__c = groupNames.contains('Team');
     contact.ShareTrainer__c = groupNames.contains('Trainer');
     contact.ShareVolunteer__c = groupNames.contains('Volunteer');
@@ -192,9 +193,10 @@ public inherited sharing class ContactService {
                                      ShareStandalonePrograms__c, 
                                      ShareTeam__c, 
                                      ShareTrainer__c, 
+                                     ShareTSiM__c,
                                      ShareVolunteer__c
                               FROM Contact
-                              WHERE IsBoardMember__c = TRUE OR IsClient__c = TRUE OR IsPuppyRaiser__c = TRUE OR IsStaff__c = TRUE OR IsStandalone__c = TRUE OR IsTeamFacilitator__c = TRUE OR IsTrainer__c = TRUE OR IsVolunteer__c = TRUE];
+                              WHERE IsBoardMember__c = TRUE OR IsClient__c = TRUE OR IsPuppyRaiser__c = TRUE OR IsStaff__c = TRUE OR IsStandalone__c = TRUE OR IsTeamFacilitator__c = TRUE OR IsTrainer__c = TRUE OR IsTSiM__c = TRUE OR IsVolunteer__c = TRUE];
 
     Map<Id, Contact> contactMap = new Map<Id, Contact>();
 
@@ -203,6 +205,7 @@ public inherited sharing class ContactService {
       person.SharePuppyRaiser__c = person.IsPuppyRaiser__c;
       person.ShareStaff__c = person.IsStaff__c;
       person.ShareStandalonePrograms__c = person.IsStandalone__c;
+      person.ShareTSiM__c = person.IsTSiM__c;
       person.ShareTeam__c = person.IsClient__c || person.IsTeamFacilitator__c;
       person.ShareTrainer__c = person.IsTrainer__c;
       person.ShareVolunteer__c = person.IsVolunteer__c;
@@ -318,7 +321,7 @@ public inherited sharing class ContactService {
 
   // We want the position status to be in this order, the Positions set for the
   // contact may not be in this order
-  public final static String[] POSITION_LIST = new List<string>{ 'Volunteer', 'Team Facilitator', 'Puppy Raiser', 'Board', 'Client', 'Trainer', 'Standalone', 'Staff' };
+  public final static String[] POSITION_LIST = new List<string>{ 'Volunteer', 'Team Facilitator', 'Puppy Raiser', 'Board', 'Client', 'Trainer', 'Standalone', 'TSiM', 'Staff' };
   private List<PositionStatus> getStatusForPositions(Contact person) {
     List<PositionStatus> statuses = new List<PositionStatus>();
     if (person.Positions__c == null) {
@@ -368,6 +371,11 @@ public inherited sharing class ContactService {
         when 'Standalone' {
           if (positions.contains(position) && Schema.sObjectType.Contact.fields.StandaloneStatus__c.isAccessible()) {
             statuses.add(new PositionStatus(position, person.StandaloneStatus__c));
+          }
+        }
+       when 'TSiM' {
+          if (positions.contains(position) && Schema.sObjectType.Contact.fields.TSiMStatus__c.isAccessible()) {
+            statuses.add(new PositionStatus(position, person.TSiMStatus__c));
           }
         }
         when 'Staff' {

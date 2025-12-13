@@ -15,6 +15,7 @@ public inherited sharing class ContactRepository {
         PuppyCertAgreementReceived__c,
         StaffStatus__c,
         StandaloneStatus__c,
+        TSiMStatus__c,
         TrainerCertAgreementReceived__c,
         TrainerStatus__c,
         GW_Volunteers__Volunteer_Status__c
