@@ -525,7 +525,7 @@ public with sharing class FileService {
         }
         List<Team__c> teams = [
             SELECT Id, Client__c, Dog__c,
-                    ClientApplicationReceived__c, ClientApplicationVideoReceived__c, ClientCGCFormReceived__c, ClientCertAgreementReceived__c, ClientLOMIReceived__c, ClientMentalHealthFormReceived__c, ClientPreApplicationReceived__c, ClientProgAgreementReceived__c, ClientProvRelFormReceived__c, ClientSurveyReceived__c, ClientVAPWReceived__c,
+                    ClientApplicationReceived__c, ClientApplicationVideoReceived__c, ClientCGCFormReceived__c, ClientCertAgreementReceived__c, ClientDecertReceived__c, ClientDiscontinueReceived__c, ClientLOMIReceived__c, ClientMentalHealthFormReceived__c, ClientPreApplicationReceived__c, ClientProgAgreementReceived__c, ClientProvRelFormReceived__c, ClientSurveyReceived__c, ClientVAPWReceived__c,
 					HealthFormReceived__c, XrayReceived__c
             FROM Team__c
             WHERE Id = :recordId
@@ -559,6 +559,14 @@ public with sharing class FileService {
 
         if (cv.Type__c == 'CertAgreement' && isLater(team.ClientCertAgreementReceived__c, cv.Date__c)) {
             team.ClientCertAgreementReceived__c = cv.Date__c;
+        }
+
+        if (cv.Type__c == 'Decert' && isLater(team.ClientDecertReceived__c, cv.Date__c)) {
+            team.ClientDecertReceived__c = cv.Date__c;
+        }
+
+        if (cv.Type__c == 'Discontinue' && isLater(team.ClientDiscontinueReceived__c, cv.Date__c)) {
+            team.ClientDiscontinueReceived__c = cv.Date__c;
         }
 
         if (cv.Type__c == 'LOMI' && isLater(team.ClientLOMIReceived__c, cv.Date__c)) {
