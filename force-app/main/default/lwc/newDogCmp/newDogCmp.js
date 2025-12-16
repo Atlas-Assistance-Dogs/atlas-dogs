@@ -5,6 +5,7 @@ import { NavigationMixin } from "lightning/navigation";
 import NAME_FIELD from "@salesforce/schema/Dog__c.Name";
 import BREED_FIELD from "@salesforce/schema/Dog__c.Breed__c";
 import GENDER_FIELD from "@salesforce/schema/Dog__c.Gender__c";
+import HEIGHT_FIELD from "@salesforce/schema/Dog__c.Height__c";
 import SPAYED_NEUTERED_FIELD from "@salesforce/schema/Dog__c.SpayedNeutered__c";
 import BIRTHDATE_FIELD from "@salesforce/schema/Dog__c.Birthdate__c";
 import STATUS_FIELD from "@salesforce/schema/Dog__c.Status__c";
@@ -12,7 +13,10 @@ import MICROCHIP_FIELD from "@salesforce/schema/Dog__c.MicrochipNumber__c";
 import HEALTH_FIELD from "@salesforce/schema/Dog__c.LatestPhysicalExamOutcome__c";
 import EXAM_DUE_FIELD from "@salesforce/schema/Dog__c.PhysicalExamDue__c";
 import DA2PP_DUE_FIELD from "@salesforce/schema/Dog__c.VaccineDueDA2PP__c";
+import PICTURE_FIELD from "@salesforce/schema/Dog__c.Picture__c";
 import RABIES_DUE_FIELD from "@salesforce/schema/Dog__c.VaccineDueRabies__c";
+import WEIGHT_FIELD from "@salesforce/schema/Dog__c.Weight__c";
+import XRAY_FIELD from "@salesforce/schema/Dog__c.XrayRequired__c";
 
 export default class NewDogCmp extends NavigationMixin(LightningElement) {
   showSourceOther = false;
@@ -23,6 +27,8 @@ export default class NewDogCmp extends NavigationMixin(LightningElement) {
     name: NAME_FIELD,
     breed: BREED_FIELD,
     gender: GENDER_FIELD,
+    height: HEIGHT_FIELD,
+    weight: WEIGHT_FIELD,
     spayed: SPAYED_NEUTERED_FIELD,
     birthdate: BIRTHDATE_FIELD,
     status: STATUS_FIELD,
@@ -30,7 +36,9 @@ export default class NewDogCmp extends NavigationMixin(LightningElement) {
     health: HEALTH_FIELD,
     examDue: EXAM_DUE_FIELD,
     da2ppDue: DA2PP_DUE_FIELD,
-    rabiesDue: RABIES_DUE_FIELD
+    picture: PICTURE_FIELD,
+    rabiesDue: RABIES_DUE_FIELD,
+    xray: XRAY_FIELD
   };
 
   // Standard lifecycle hooks used run when loaded

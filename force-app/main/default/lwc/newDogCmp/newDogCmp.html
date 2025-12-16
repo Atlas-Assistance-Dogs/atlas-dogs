@@ -1,75 +1,40 @@
 <template>
   <c-modal-cmp title="New Dog" oncancel={handleCancel} onsubmit={handleSubmit}>
-    <lightning-record-edit-form
-      object-api-name={object}
-      onsuccess={handleSuccess}
-      onsubmit={handleSubmit}
-      onerror={handleError}
-      slot="body"
-    >
+    <lightning-record-edit-form object-api-name={object} onsuccess={handleSuccess} onsubmit={handleSubmit}
+      onerror={handleError} slot="body">
       <div class="slds-grid slds-wrap">
         <lightning-messages></lightning-messages>
-        <div
-          class="slds-col slds-size_1-of-1 slds-grid slds-wrap slds-m-vertical_small slds-theme_shade"
-        >
+        <div class="slds-col slds-size_1-of-1 slds-grid slds-wrap slds-m-vertical_small slds-theme_shade">
           <h3 class="slds-p-around_small">Dog Information</h3>
         </div>
         <div
-          class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2 slds-p-horizontal_small"
-        >
-          <lightning-input-field
-            field-name={fields.name}
-            required
-          ></lightning-input-field>
-          <lightning-input-field
-            field-name={fields.breed}
-            required
-          ></lightning-input-field>
-          <lightning-input-field
-            field-name={fields.gender}
-            required
-          ></lightning-input-field>
-          <lightning-input-field
-            field-name={fields.spayed}
-          ></lightning-input-field>
+          class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2 slds-p-horizontal_small">
+          <lightning-input-field field-name={fields.name} required></lightning-input-field>
+          <lightning-input-field field-name={fields.breed} required></lightning-input-field>
+          <lightning-input-field field-name={fields.gender} required></lightning-input-field>
+          <lightning-input-field field-name={fields.spayed}></lightning-input-field>
+          <lightning-input-field field-name={fields.height}></lightning-input-field>
         </div>
         <div
-          class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2 slds-p-horizontal_small"
-        >
-          <lightning-input-field
-            field-name={fields.birthdate}
-          ></lightning-input-field>
-          <lightning-input-field
-            field-name={fields.status}
-            required
-            default="None"
-          ></lightning-input-field>
-          <lightning-input-field
-            field-name={fields.microchip}
-          ></lightning-input-field>
+          class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2 slds-p-horizontal_small">
+          <lightning-input-field field-name={fields.birthdate}></lightning-input-field>
+          <lightning-input-field field-name={fields.status} required default="None"></lightning-input-field>
+          <lightning-input-field field-name={fields.microchip}></lightning-input-field>
+          <lightning-input-field field-name={fields.xray}></lightning-input-field>
+          <lightning-input-field field-name={fields.weight}></lightning-input-field>
         </div>
         <div
-          class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2 slds-p-horizontal_small"
-        >
-          <lightning-input-field
-            field-name={fields.health}
-            required
-          ></lightning-input-field>
-          <lightning-input-field
-            field-name={fields.examDue}
-          ></lightning-input-field>
+          class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2 slds-p-horizontal_small">
+          <lightning-input-field field-name={fields.health} required></lightning-input-field>
+          <lightning-input-field field-name={fields.examDue}></lightning-input-field>
         </div>
         <div
-          class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2 slds-p-horizontal_small"
-        >
-          <lightning-input-field
-            field-name={fields.da2ppDue}
-          ></lightning-input-field>
-          <lightning-input-field
-            field-name={fields.rabiesDue}
-          ></lightning-input-field>
+          class="slds-col slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-2 slds-p-horizontal_small">
+          <lightning-input-field field-name={fields.da2ppDue}></lightning-input-field>
+          <lightning-input-field field-name={fields.rabiesDue}></lightning-input-field>
         </div>
       </div>
+      <lightning-input-field field-name={fields.picture}></lightning-input-field>
     </lightning-record-edit-form>
   </c-modal-cmp>
 </template>
