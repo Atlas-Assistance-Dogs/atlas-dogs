@@ -156,7 +156,8 @@ const CLIENT_COLS = [
   COLS.handlers,
   COLS.session,
   COLS.didMeet,
-  COLS.details
+  COLS.details,
+  COLS.action
 ];
 
 const FAC_COLS = [
@@ -166,7 +167,8 @@ const FAC_COLS = [
   COLS.handlers,
   COLS.facilitator,
   COLS.session,
-  COLS.details
+  COLS.details,
+  COLS.action
 ];
 
 export default class RelatedLogsCmp extends NavigationMixin(LightningElement) {
