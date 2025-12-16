@@ -288,7 +288,7 @@ public inherited sharing class ClearDateService {
     private static void clearTeamDate(ContentVersion cv, Id recordId) {
         List<Team__c> teams = [
             SELECT Id, Client__c, Dog__c,
-                   ClientApplicationReceived__c, ClientApplicationVideoReceived__c, ClientCGCFormReceived__c, ClientCertAgreementReceived__c, ClientLOMIReceived__c, ClientMentalHealthFormReceived__c, ClientPreApplicationReceived__c, ClientProgAgreementReceived__c, ClientProvRelFormReceived__c, ClientSurveyReceived__c, ClientVAPWReceived__c,
+                   ClientApplicationReceived__c, ClientApplicationVideoReceived__c, ClientCGCFormReceived__c, ClientCertAgreementReceived__c, ClientDecertReceived__c, ClientDiscontinueReceived__c, ClientLOMIReceived__c, ClientMentalHealthFormReceived__c, ClientPreApplicationReceived__c, ClientProgAgreementReceived__c, ClientProvRelFormReceived__c, ClientSurveyReceived__c, ClientVAPWReceived__c,
 					HealthFormReceived__c, XrayReceived__c
             FROM Team__c
             WHERE Id = :recordId];
@@ -311,6 +311,14 @@ public inherited sharing class ClearDateService {
 
         if (cv.Type__c == 'CertAgreement'){
             team.ClientCertAgreementReceived__c = null;
+        }
+
+        if (cv.Type__c == 'Decert'){
+            team.ClientDecertReceived__c = null;
+        }
+
+        if (cv.Type__c == 'Discontinue'){
+            team.ClientDiscontinueReceived__c = null;
         }
 
         if (cv.Type__c == 'LOMI'){
