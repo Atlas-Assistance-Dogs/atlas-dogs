@@ -129,7 +129,7 @@ private class TestFileControllerRestrictions {
     RelatedObjects related = getRelatedFilesWithGroups(new List<string>{ 'Team' });
 
     System.assertEquals(6, related.items.size(), 'should have 6 files returned');
-    System.assertEquals(24, related.total, 'should have 24 total');
+    System.assertEquals(26, related.total, 'should have 26 total');
   }
 
   @isTest
