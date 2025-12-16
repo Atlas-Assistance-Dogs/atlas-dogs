@@ -106,6 +106,9 @@ export default class LogFormCmp extends LightningElement {
       this.wantSupport = message.record.RequestSupportFromTeam__c;
       this.didFirstAid = message.record.FirstAidSuppliesUsed__c;
     }
+    if (message[this.fields.firstAid.fieldApiName]) {
+      this.didFirstAid = true;
+    }
     this.template.querySelector("c-modal-cmp").openModal();
   }
 

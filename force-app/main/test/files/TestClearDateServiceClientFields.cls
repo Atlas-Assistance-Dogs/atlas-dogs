@@ -96,6 +96,48 @@ public with sharing class TestClearDateServiceClientFields {
     }
 
     @isTest
+    public static void clearDate_ClientDecert_SetsDateToNull() {
+        ContentVersion cv = new ContentVersion(Category__c = 'Client', Type__c = 'Decert');
+        createTeamMembers();
+        Team__c record = new Team__c(Name = 'Test', Client__c = client.Id, Dog__c = dog.Id);
+        insert record;
+        ClearDateService.clear(cv, record.Id);
+
+        record = [
+            SELECT ClientDecertReceived__c
+            FROM Team__c
+            WHERE Id = :record.Id
+            LIMIT 1
+        ];
+        system.assertEquals(
+            null,
+            record.ClientDecertReceived__c,
+            'ClientDecertReceived__c not cleared'
+        );
+    }
+
+    @isTest
+    public static void clearDate_ClientDiscontinue_SetsDateToNull() {
+        ContentVersion cv = new ContentVersion(Category__c = 'Client', Type__c = 'Discontinue');
+        createTeamMembers();
+        Team__c record = new Team__c(Name = 'Test', Client__c = client.Id, Dog__c = dog.Id);
+        insert record;
+        ClearDateService.clear(cv, record.Id);
+
+        record = [
+            SELECT ClientDiscontinueReceived__c
+            FROM Team__c
+            WHERE Id = :record.Id
+            LIMIT 1
+        ];
+        system.assertEquals(
+            null,
+            record.ClientDiscontinueReceived__c,
+            'ClientDiscontinueReceived__c not cleared'
+        );
+    }
+
+    @isTest
     public static void clearDate_ClientLOMI_SetsDateToNull() {
         ContentVersion cv = new ContentVersion(Category__c = 'Client', Type__c = 'LOMI');
         createTeamMembers();
