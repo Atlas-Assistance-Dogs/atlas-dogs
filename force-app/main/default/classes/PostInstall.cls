@@ -254,7 +254,7 @@ global class PostInstall implements InstallHandler {
 
   // Find Contacts with current Standalone position that is assigned Teams Set in Motion Client program only and
   // give them the TSiM position
-  public void setTSiMPosition() {
+  void setTSiMPosition() {
     ProgramAssignment__c[] tsimAssignments = [SELECT Id, 
                                                      Contact__r.Positions__c, 
                                                      Contact__r.StandaloneApplicationReceived__c, 
