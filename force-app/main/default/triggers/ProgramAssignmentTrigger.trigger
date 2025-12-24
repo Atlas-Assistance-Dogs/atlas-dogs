@@ -17,7 +17,7 @@ trigger ProgramAssignmentTrigger on ProgramAssignment__c(
       progAssign.AssignedDate__c = Date.today();
     }
 
-    if (progAssign.ExpectedCompletion__c == null) {
+    if (progAssign.ExpectedCompletion__c == null && progAssign.AssignedDate__c != null && program.Months__c != null) {
       progAssign.ExpectedCompletion__c = progAssign.AssignedDate__c.addDays(
         (Integer) (program.Months__c * 30)
       );
