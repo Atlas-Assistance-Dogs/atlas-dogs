@@ -12,15 +12,14 @@ global class PostInstall implements InstallHandler {
         linkTeamLogs();
         linkTeamDocuments();
       } catch (Exception e) {
-        send(
-          context.installerId(),
-          'Installation Failure' + context.organizationId(),
-          ' e: ' + e.getMessage() + ' stack trace ' + e.getStackTraceString()
-        );
+        send(context.installerId(), 'Installation Failure' + context.organizationId(), ' e: ' + e.getMessage() + ' stack trace ' + e.getStackTraceString());
       }
     }
     if (context.previousVersion().compareTo(new Version(1, 5)) <= 0) {
       setBackgroundCheckTypes();
+    }
+    if (context.previousVersion().compareTo(new Version(1, 14)) <= 0) {
+      setTSiMPosition();
     }
   }
 
@@ -36,21 +35,15 @@ global class PostInstall implements InstallHandler {
 
   public void combineDogVaccineFields() {
     // combine dog vaccine fields
-    List<Dog__c> dogs = [
-      SELECT
-        Name,
-        VaccineDueDA2PP__c,
-        VaccineDueDistemper__c,
-        VaccineDueHepatitis__c,
-        VaccineDueParainfluenza__c,
-        VaccineDueParvovirus__c
-      FROM Dog__c
-    ];
+    List<Dog__c> dogs = [SELECT Name, 
+                                VaccineDueDA2PP__c, 
+                                VaccineDueDistemper__c, 
+                                VaccineDueHepatitis__c, 
+                                VaccineDueParainfluenza__c, 
+                                VaccineDueParvovirus__c
+                         FROM Dog__c];
     for (Dog__c dog : dogs) {
-      Date latest = later(
-        dog.VaccineDueDistemper__c,
-        dog.VaccineDueHepatitis__c
-      );
+      Date latest = later(dog.VaccineDueDistemper__c, dog.VaccineDueHepatitis__c);
       latest = later(latest, dog.VaccineDueParainfluenza__c);
       latest = later(latest, dog.VaccineDueParvovirus__c);
       dog.VaccineDueDA2PP__c = latest;
@@ -64,7 +57,10 @@ global class PostInstall implements InstallHandler {
     settings.LinkFilesToTeamMembers__c = false;
     upsert settings;
 
-    List<Team__c> teams = [SELECT Id, Client__c, Dog__c FROM Team__c];
+    List<Team__c> teams = [SELECT Id, 
+                                  Client__c, 
+                                  Dog__c
+                           FROM Team__c];
     List<ContentDocumentLink> links = new List<ContentDocumentLink>();
     List<Id> clientIds = new List<Id>();
     List<Id> dogIds = new List<Id>();
@@ -73,12 +69,10 @@ global class PostInstall implements InstallHandler {
       teamIds.add(team.Id);
       List<ContentVersion> clientDocs = getEntityDocs(team.Client__c, 'Client');
       for (ContentVersion cv : clientDocs) {
-        links.add(
-          new ContentDocumentLink(
-            ContentDocumentId = cv.ContentDocumentId,
-            LinkedEntityId = team.Id
-          )
-        );
+        links.add(new ContentDocumentLink(
+          ContentDocumentId = cv.ContentDocumentId, 
+          LinkedEntityId = team.Id
+        ));
       }
 
       List<ContentVersion> dogDocs = getEntityDocs(team.Dog__c, 'Dog');
@@ -86,12 +80,10 @@ global class PostInstall implements InstallHandler {
         if (cv.Type__c == 'VacExams') {
           continue;
         }
-        links.add(
-          new ContentDocumentLink(
-            ContentDocumentId = cv.ContentDocumentId,
-            LinkedEntityId = team.Id
-          )
-        );
+        links.add(new ContentDocumentLink(
+          ContentDocumentId = cv.ContentDocumentId, 
+          LinkedEntityId = team.Id
+        ));
       }
     }
 
@@ -102,38 +94,39 @@ global class PostInstall implements InstallHandler {
 
   public static List<ContentVersion> getEntityDocs(Id id, String category) {
     // find the documents linked to the clients
-    List<ContentDocumentLink> cdls = [
-      SELECT ID, ContentDocumentId, LinkedEntityId
-      FROM ContentDocumentLink
-      WHERE LinkedEntityId = :id
-    ];
+    List<ContentDocumentLink> cdls = [SELECT ID, 
+                                             ContentDocumentId, 
+                                             LinkedEntityId
+                                      FROM ContentDocumentLink
+                                      WHERE LinkedEntityId = :id];
     List<Id> docIds = new List<Id>();
     for (ContentDocumentLink cdl : cdls) {
       docIds.add(cdl.ContentDocumentId);
     }
-    List<ContentVersion> cvs = [
-      SELECT Id, ContentDocumentId, Category__c, Type__c
-      FROM ContentVersion
-      WHERE ContentDocumentId IN :docIds AND Category__c = :category
-    ];
+    List<ContentVersion> cvs = [SELECT Id, 
+                                       ContentDocumentId, 
+                                       Category__c, 
+                                       Type__c
+                                FROM ContentVersion
+                                WHERE ContentDocumentId IN:docIds AND Category__c = :category];
 
     return cvs;
   }
 
   public void linkTeamLogs() {
     // Get the list of teams
-    List<Team__c> teams = [
-      SELECT Id, Client__c, Dog__c, Handler__c
-      FROM Team__c
-    ];
+    List<Team__c> teams = [SELECT Id, 
+                                  Client__c, 
+                                  Dog__c, 
+                                  Handler__c
+                           FROM Team__c];
 
     for (Team__c team : teams) {
       // get the logs that match
-      List<Log__c> logs = [
-        SELECT Id, Team__c
-        FROM Log__c
-        WHERE Client__c = :team.Client__c AND Dog__c = :team.Dog__c
-      ];
+      List<Log__c> logs = [SELECT Id, 
+                                  Team__c
+                           FROM Log__c
+                           WHERE Client__c = :team.Client__c AND Dog__c = :team.Dog__c];
       for (Log__c log : logs) {
         // set the team
         log.Team__c = team.Id;
@@ -143,26 +136,21 @@ global class PostInstall implements InstallHandler {
   }
 
   public static void send(Id userId, String subject, String htmlBody) {
-    List<User> users = [
-      SELECT Name, FirstName, LastName, UserName, Email
-      FROM User
-      WHERE Id = :userId
-    ];
-    User u = users.size() > 0 ? users[0] : new User(Id = userId);
-    sendEmail(
-      new List<String>{ u.Email, 'deborahe@atlasdog.org' }, // <= replace with your default email
-      subject,
-      htmlBody,
-      new Map<String, Blob>()
+    List<User> users = [SELECT Name, 
+                               FirstName, 
+                               LastName, 
+                               UserName, 
+                               Email
+                        FROM User
+                        WHERE Id = :userId];
+    User u = users.size() > 0 ? users[0] : new User(
+      Id = userId
     );
+    sendEmail(new List<String>{ u.Email, 'deborahe@atlasdog.org' },   // <= replace with your default email
+    subject, htmlBody, new Map<String, Blob>());
   }
 
-  public static Boolean sendEmail(
-    List<String> recipients,
-    String subject,
-    String htmlBody,
-    Map<String, Blob> attachments
-  ) {
+  public static Boolean sendEmail(List<String> recipients, String subject, String htmlBody, Map<String, Blob> attachments) {
     Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
     mail.setToAddresses(recipients);
     mail.setSubject(subject);
@@ -189,10 +177,9 @@ global class PostInstall implements InstallHandler {
   }
 
   private void setBackgroundCheckTypes() {
-    List<BackgroundCheck__c> checks = [
-      SELECT Id, Type__c
-      FROM BackgroundCheck__c
-    ];
+    List<BackgroundCheck__c> checks = [SELECT Id, 
+                                              Type__c
+                                       FROM BackgroundCheck__c];
     for (BackgroundCheck__c check : checks) {
       check.Type__c = 'Criminal';
     }
@@ -200,34 +187,23 @@ global class PostInstall implements InstallHandler {
   }
 
   global static void setSharingFields() {
-    List<Contact> contacts = [
-      SELECT
-        IsBoardMember__c,
-        IsClient__c,
-        IsPuppyRaiser__c,
-        IsStaff__c,
-        IsStandalone__c,
-        IsTeamFacilitator__c,
-        IsTrainer__c,
-        IsVolunteer__c,
-        ShareBoard__c,
-        SharePuppyRaiser__c,
-        ShareStaff__c,
-        ShareStandalonePrograms__c,
-        ShareTeam__c,
-        ShareTrainer__c,
-        ShareVolunteer__c
-      FROM Contact
-      WHERE
-        IsBoardMember__c = TRUE
-        OR IsClient__c = TRUE
-        OR IsPuppyRaiser__c = TRUE
-        OR IsStaff__c = TRUE
-        OR IsStandalone__c = TRUE
-        OR IsTeamFacilitator__c = TRUE
-        OR IsTrainer__c = TRUE
-        OR IsVolunteer__c = TRUE
-    ];
+    List<Contact> contacts = [SELECT IsBoardMember__c, 
+                                     IsClient__c, 
+                                     IsPuppyRaiser__c, 
+                                     IsStaff__c, 
+                                     IsStandalone__c, 
+                                     IsTeamFacilitator__c, 
+                                     IsTrainer__c, 
+                                     IsVolunteer__c, 
+                                     ShareBoard__c, 
+                                     SharePuppyRaiser__c, 
+                                     ShareStaff__c, 
+                                     ShareStandalonePrograms__c, 
+                                     ShareTeam__c, 
+                                     ShareTrainer__c, 
+                                     ShareVolunteer__c
+                              FROM Contact
+                              WHERE IsBoardMember__c = TRUE OR IsClient__c = TRUE OR IsPuppyRaiser__c = TRUE OR IsStaff__c = TRUE OR IsStandalone__c = TRUE OR IsTeamFacilitator__c = TRUE OR IsTrainer__c = TRUE OR IsVolunteer__c = TRUE];
 
     Map<Id, Contact> contactMap = new Map<Id, Contact>();
 
@@ -243,26 +219,19 @@ global class PostInstall implements InstallHandler {
     }
 
     // Get related contacts
-    npe4__Relationship__c[] related = [
-      SELECT
-        Id,
-        npe4__RelatedContact__c,
-        npe4__RelatedContact__r.Positions__c,
-        npe4__RelatedContact__r.ShareBoard__c,
-        npe4__RelatedContact__r.SharePuppyRaiser__c,
-        npe4__RelatedContact__r.ShareStaff__c,
-        npe4__RelatedContact__r.ShareStandalonePrograms__c,
-        npe4__RelatedContact__r.ShareTeam__c,
-        npe4__RelatedContact__r.ShareTrainer__c,
-        npe4__RelatedContact__r.ShareVolunteer__c,
-        npe4__Contact__c
-      FROM npe4__Relationship__c
-      WHERE
-        (npe4__Type__c LIKE '%Emergency Contact'
-        OR npe4__Type__c = 'Guardian')
-        AND npe4__Status__c = 'Current'
-        AND npe4__Contact__c IN :contactMap.keySet()
-    ];
+    npe4__Relationship__c[] related = [SELECT Id, 
+                                              npe4__RelatedContact__c, 
+                                              npe4__RelatedContact__r.Positions__c, 
+                                              npe4__RelatedContact__r.ShareBoard__c, 
+                                              npe4__RelatedContact__r.SharePuppyRaiser__c, 
+                                              npe4__RelatedContact__r.ShareStaff__c, 
+                                              npe4__RelatedContact__r.ShareStandalonePrograms__c, 
+                                              npe4__RelatedContact__r.ShareTeam__c, 
+                                              npe4__RelatedContact__r.ShareTrainer__c, 
+                                              npe4__RelatedContact__r.ShareVolunteer__c, 
+                                              npe4__Contact__c
+                                       FROM npe4__Relationship__c
+                                       WHERE (npe4__Type__c LIKE '%Emergency Contact' OR npe4__Type__c = 'Guardian') AND npe4__Status__c = 'Current' AND npe4__Contact__c IN:contactMap.keySet()];
     for (npe4__Relationship__c relation : related) {
       Contact shared = contactMap.get(relation.npe4__Contact__c);
       Contact share = contactMap.get(relation.npe4__RelatedContact__c);
@@ -270,19 +239,88 @@ global class PostInstall implements InstallHandler {
         share = relation.npe4__RelatedContact__r;
       }
       share.ShareBoard__c = share.ShareBoard__c || shared.ShareBoard__c;
-      share.SharePuppyRaiser__c =
-        share.SharePuppyRaiser__c || shared.SharePuppyRaiser__c;
+      share.SharePuppyRaiser__c = share.SharePuppyRaiser__c || shared.SharePuppyRaiser__c;
       share.ShareStaff__c = share.ShareStaff__c || share.ShareStaff__c;
-      share.ShareStandalonePrograms__c =
-        share.ShareStandalonePrograms__c || shared.ShareStandalonePrograms__c;
+      share.ShareStandalonePrograms__c = share.ShareStandalonePrograms__c || shared.ShareStandalonePrograms__c;
       share.ShareTeam__c = share.ShareTeam__c || shared.ShareTeam__c;
       share.ShareTrainer__c = share.ShareTrainer__c || shared.ShareTrainer__c;
-      share.ShareVolunteer__c =
-        share.ShareVolunteer__c || shared.ShareVolunteer__c;
+      share.ShareVolunteer__c = share.ShareVolunteer__c || shared.ShareVolunteer__c;
       if (!contactMap.containsKey(relation.npe4__RelatedContact__c)) {
         contactMap.put(relation.npe4__RelatedContact__c, share);
       }
     }
     update contactMap.values();
   }
+
+  // Find Contacts with current Standalone position that is assigned Teams Set in Motion Client program only and
+  // give them the TSiM position
+  void setTSiMPosition() {
+    ProgramAssignment__c[] tsimAssignments = [SELECT Id, 
+                                                     Contact__r.Positions__c, 
+                                                     Contact__r.StandaloneApplicationReceived__c, 
+                                                     Contact__r.StandaloneProgAgreementReceived__c, 
+                                                     Contact__r.StandaloneStatus__c, 
+                                                     Contact__r.TSiMStatus__c, 
+                                                     Contact__r.TSMApplicationReceived__c, 
+                                                     Contact__r.TSMProgAgreementReceived__c
+                                              FROM ProgramAssignment__c
+                                              WHERE Program__r.Name = 'Teams Set in Motion Client' AND Contact__r.Positions__c INCLUDES('Standalone')];
+
+    ProgramAssignment__c[] standalones = [SELECT Contact__c
+                                          FROM ProgramAssignment__c
+                                          WHERE Program__r.Standalone__c = true AND Program__r.Name != 'Teams Set in Motion Client'];
+    Set<Id> standaloneContacts = new Set<Id>();
+    for (ProgramAssignment__c pa : standalones) {
+      standaloneContacts.add(pa.Contact__c);
+    }
+
+    List<Contact> tsimContacts = new List<Contact>();
+    for (ProgramAssignment__c pa : tsimAssignments) {
+      if (standaloneContacts.contains(pa.Contact__r.Id)) {
+        continue;
+      }
+      Contact c = pa.Contact__r;
+      Set<String> positions = new Set<String>(c.Positions__c.split(';'));
+      positions.remove('Standalone');
+      positions.add('TSiM');
+      String[] pos = new List<String>(positions);
+      c.Positions__c = String.join(pos, ';');
+      c.TSimStatus__c = c.StandaloneStatus__c;
+      c.TSMApplicationReceived__c = c.StandaloneApplicationReceived__c;
+      c.TSMProgAgreementReceived__c = c.StandaloneProgAgreementReceived__c;
+      c.StandaloneStatus__c = null;
+      c.StandaloneApplicationReceived__c = null;
+      c.StandaloneProgAgreementReceived__c = null;
+      tsimContacts.add(c);
+    }
+    update tsimContacts;
+    transferDocumentsToTSiM(tsimContacts);
+  }
+
+  // Find related
+  void transferDocumentsToTSiM(Contact[] contacts) {
+    if (contacts.isEmpty()) {
+      return;
+    }
+    Set<Id> contactIds = new Set<Id>();
+    for (Contact c : contacts) {
+      contactIds.add(c.Id);
+    }
+    List<Id> lstConDocs = new List<Id>();
+
+    for (ContentDocumentLink cntLink : [SELECT Id, 
+                                               ContentDocumentId
+                                        FROM ContentDocumentLink
+                                        WHERE LinkedEntityId IN :contactIds]) {
+      lstConDocs.add(cntLink.ContentDocumentId);
+    }
+    List<ContentVersion> files = [SELECT Category__c
+                                  FROM ContentVersion
+                                  WHERE Category__C = 'Standalone' AND ContentDocumentId IN :lstConDocs AND FileType != 'SNOTE'];
+    for (ContentVersion cv : files) {
+      cv.Category__c = 'TSM';
+    }
+    update files;
+  }
+
 }
