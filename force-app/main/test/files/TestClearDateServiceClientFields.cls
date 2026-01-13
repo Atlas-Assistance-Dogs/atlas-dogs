@@ -54,6 +54,27 @@ public with sharing class TestClearDateServiceClientFields {
     }
 
     @isTest
+    public static void clearDate_ClientAssessment_SetsDateToNull() {
+        ContentVersion cv = new ContentVersion(Category__c = 'Client', Type__c = 'Assessment');
+        createTeamMembers();
+        Team__c record = new Team__c(Name = 'Test', Client__c = client.Id, Dog__c = dog.Id);
+        insert record;
+        ClearDateService.clear(cv, record.Id);
+
+        record = [
+            SELECT ClientAssessmentReceived__c
+            FROM Team__c
+            WHERE Id = :record.Id
+            LIMIT 1
+        ];
+        system.assertEquals(
+            null,
+            record.ClientAssessmentReceived__c,
+            'ClientAssessmentReceived__c not cleared'
+        );
+    }
+
+    @isTest
     public static void clearDate_ClientCGCForm_SetsDateToNull() {
         ContentVersion cv = new ContentVersion(Category__c = 'Client', Type__c = 'CGCForm');
         createTeamMembers();
@@ -176,6 +197,27 @@ public with sharing class TestClearDateServiceClientFields {
             null,
             record.ClientMentalHealthFormReceived__c,
             'ClientMentalHealthFormReceived__c not cleared'
+        );
+    }
+
+    @isTest
+    public static void clearDate_ClientNotes_SetsDateToNull() {
+        ContentVersion cv = new ContentVersion(Category__c = 'Client', Type__c = 'Notes');
+        createTeamMembers();
+        Team__c record = new Team__c(Name = 'Test', Client__c = client.Id, Dog__c = dog.Id);
+        insert record;
+        ClearDateService.clear(cv, record.Id);
+
+        record = [
+            SELECT ClientNotesReceived__c
+            FROM Team__c
+            WHERE Id = :record.Id
+            LIMIT 1
+        ];
+        system.assertEquals(
+            null,
+            record.ClientNotesReceived__c,
+            'ClientNotesReceived__c not cleared'
         );
     }
 

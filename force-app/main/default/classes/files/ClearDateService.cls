@@ -288,7 +288,7 @@ public inherited sharing class ClearDateService {
     private static void clearTeamDate(ContentVersion cv, Id recordId) {
         List<Team__c> teams = [
             SELECT Id, Client__c, Dog__c,
-                   ClientApplicationReceived__c, ClientApplicationVideoReceived__c, ClientCGCFormReceived__c, ClientCertAgreementReceived__c, ClientDecertReceived__c, ClientDiscontinueReceived__c, ClientLOMIReceived__c, ClientMentalHealthFormReceived__c, ClientPreApplicationReceived__c, ClientProgAgreementReceived__c, ClientProvRelFormReceived__c, ClientSurveyReceived__c, ClientVAPWReceived__c,
+                   ClientApplicationReceived__c, ClientApplicationVideoReceived__c, ClientAssessmentReceived__c, ClientCGCFormReceived__c, ClientCertAgreementReceived__c, ClientDecertReceived__c, ClientDiscontinueReceived__c, ClientLOMIReceived__c, ClientMentalHealthFormReceived__c, ClientNotesReceived__c, ClientPreApplicationReceived__c, ClientProgAgreementReceived__c, ClientProvRelFormReceived__c, ClientSurveyReceived__c, ClientVAPWReceived__c,
 					HealthFormReceived__c, XrayReceived__c
             FROM Team__c
             WHERE Id = :recordId];
@@ -303,6 +303,10 @@ public inherited sharing class ClearDateService {
 
         if (cv.Type__c == 'ApplicationVideo'){
             team.ClientApplicationVideoReceived__c = null;
+        }
+
+        if (cv.Type__c == 'Assessment'){
+            team.ClientAssessmentReceived__c = null;
         }
 
         if (cv.Type__c == 'CGCForm'){
@@ -327,6 +331,10 @@ public inherited sharing class ClearDateService {
 
         if (cv.Type__c == 'MentalHealthForm'){
             team.ClientMentalHealthFormReceived__c = null;
+        }
+
+        if (cv.Type__c == 'Notes'){
+            team.ClientNotesReceived__c = null;
         }
 
         if (cv.Type__c == 'PreApplication'){
