@@ -139,6 +139,69 @@ public with sharing class TestFileServiceClientFields {
     }
 
     @isTest
+    public static void updateDate_ClientAssessment_SetsDateWhenNull() {
+        createTeamMembers();
+        Team__c record = new Team__c(Name = 'Test', Client__c = client.Id, Dog__c = dog.Id);
+        insert record;
+        ContentVersion cv = TestFileServiceFields.createLink('Client', 'Assessment', Date.today(), record.Id);
+        FileService.updateDate(cv, record.Id);
+
+        record = [
+            SELECT ClientAssessmentReceived__c
+            FROM Team__c
+            WHERE Id = :record.Id
+            LIMIT 1
+        ];
+        system.assertEquals(
+            Date.today(),
+            record.ClientAssessmentReceived__c,
+            'ClientAssessmentReceived__c not set'
+        );
+    }
+
+    @isTest
+    public static void updateDate_ClientAssessment_SetsDateWhenNewer() {
+        createTeamMembers();
+        Team__c record = new Team__c(Name = 'Test', Client__c = client.Id, Dog__c = dog.Id, ClientAssessmentReceived__c = Date.today().addDays(-1));
+        insert record;
+        ContentVersion cv = TestFileServiceFields.createLink('Client', 'Assessment', Date.today(), record.Id);
+        FileService.updateDate(cv, record.Id);
+
+        record = [
+            SELECT ClientAssessmentReceived__c
+            FROM Team__c
+            WHERE Id = :record.Id
+            LIMIT 1
+        ];
+        system.assertEquals(
+            Date.today(),
+            record.ClientAssessmentReceived__c,
+            'ClientAssessmentReceived__c not set'
+        );
+    }
+
+    @isTest
+    public static void updateDate_ClientAssessment_LeavesDateWhenOlder() {
+        createTeamMembers();
+        Team__c record = new Team__c(Name = 'Test', Client__c = client.Id, Dog__c = dog.Id, ClientAssessmentReceived__c = Date.today());
+        insert record;
+        ContentVersion cv = TestFileServiceFields.createLink('Client', 'Assessment', Date.today().addDays(-1), record.Id);
+        FileService.updateDate(cv, record.Id);
+
+        record = [
+            SELECT ClientAssessmentReceived__c
+            FROM Team__c
+            WHERE Id = :record.Id
+            LIMIT 1
+        ];
+        system.assertEquals(
+            Date.today(),
+            record.ClientAssessmentReceived__c,
+            'ClientAssessmentReceived__c set to an older date'
+        );
+    }
+
+    @isTest
     public static void updateDate_ClientCGCForm_SetsDateWhenNull() {
         createTeamMembers();
         Team__c record = new Team__c(Name = 'Test', Client__c = client.Id, Dog__c = dog.Id);
@@ -513,6 +576,69 @@ public with sharing class TestFileServiceClientFields {
             Date.today(),
             record.ClientMentalHealthFormReceived__c,
             'ClientMentalHealthFormReceived__c set to an older date'
+        );
+    }
+
+    @isTest
+    public static void updateDate_ClientNotes_SetsDateWhenNull() {
+        createTeamMembers();
+        Team__c record = new Team__c(Name = 'Test', Client__c = client.Id, Dog__c = dog.Id);
+        insert record;
+        ContentVersion cv = TestFileServiceFields.createLink('Client', 'Notes', Date.today(), record.Id);
+        FileService.updateDate(cv, record.Id);
+
+        record = [
+            SELECT ClientNotesReceived__c
+            FROM Team__c
+            WHERE Id = :record.Id
+            LIMIT 1
+        ];
+        system.assertEquals(
+            Date.today(),
+            record.ClientNotesReceived__c,
+            'ClientNotesReceived__c not set'
+        );
+    }
+
+    @isTest
+    public static void updateDate_ClientNotes_SetsDateWhenNewer() {
+        createTeamMembers();
+        Team__c record = new Team__c(Name = 'Test', Client__c = client.Id, Dog__c = dog.Id, ClientNotesReceived__c = Date.today().addDays(-1));
+        insert record;
+        ContentVersion cv = TestFileServiceFields.createLink('Client', 'Notes', Date.today(), record.Id);
+        FileService.updateDate(cv, record.Id);
+
+        record = [
+            SELECT ClientNotesReceived__c
+            FROM Team__c
+            WHERE Id = :record.Id
+            LIMIT 1
+        ];
+        system.assertEquals(
+            Date.today(),
+            record.ClientNotesReceived__c,
+            'ClientNotesReceived__c not set'
+        );
+    }
+
+    @isTest
+    public static void updateDate_ClientNotes_LeavesDateWhenOlder() {
+        createTeamMembers();
+        Team__c record = new Team__c(Name = 'Test', Client__c = client.Id, Dog__c = dog.Id, ClientNotesReceived__c = Date.today());
+        insert record;
+        ContentVersion cv = TestFileServiceFields.createLink('Client', 'Notes', Date.today().addDays(-1), record.Id);
+        FileService.updateDate(cv, record.Id);
+
+        record = [
+            SELECT ClientNotesReceived__c
+            FROM Team__c
+            WHERE Id = :record.Id
+            LIMIT 1
+        ];
+        system.assertEquals(
+            Date.today(),
+            record.ClientNotesReceived__c,
+            'ClientNotesReceived__c set to an older date'
         );
     }
 
