@@ -21,6 +21,11 @@
                 <label>Application</label>
             </value>
             <value>
+                <fullName>Assessment</fullName>
+                <default>false</default>
+                <label>Assessment</label>
+            </value>
+            <value>
                 <fullName>ContactForm</fullName>
                 <default>false</default>
                 <label>Contact Form</label>
@@ -104,6 +109,11 @@
                 <fullName>HealthForm</fullName>
                 <default>false</default>
                 <label>Vet Health Form</label>
+            </value>
+            <value>
+                <fullName>Notes</fullName>
+                <default>false</default>
+                <label>Interview Notes</label>
             </value>
             <value>
                 <fullName>Xray</fullName>
@@ -288,6 +298,10 @@
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Client</controllingFieldValue>
+            <valueName>Assessment</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Client</controllingFieldValue>
             <valueName>LOMI</valueName>
         </valueSettings>
         <valueSettings>
@@ -297,6 +311,10 @@
         <valueSettings>
             <controllingFieldValue>Client</controllingFieldValue>
             <valueName>Survey</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Client</controllingFieldValue>
+            <valueName>Notes</valueName>
         </valueSettings>
         <valueSettings>
             <controllingFieldValue>Client</controllingFieldValue>

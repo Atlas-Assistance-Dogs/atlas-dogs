@@ -343,6 +343,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Team__c.ClientAssessmentReceived__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Team__c.ClientCGCFormReceived__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -369,6 +374,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Team__c.ClientMentalHealthFormReceived__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Team__c.ClientNotesReceived__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
