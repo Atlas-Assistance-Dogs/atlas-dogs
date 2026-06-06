@@ -24,7 +24,7 @@ export default class ContactStatusIndicatorCmp extends LightningElement {
         return "custom:custom82";
       case "Action Needed":
         return "standard:actions_and_buttons";
-      case "Certified-Hold":
+      case "Certified-OnHold":
       case "Inactive":
       case "On Hold":
       case "Suspended":

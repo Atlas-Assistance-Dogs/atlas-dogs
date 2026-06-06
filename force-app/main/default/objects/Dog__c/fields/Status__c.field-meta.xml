@@ -33,14 +33,14 @@
                 <label>In Training</label>
             </value>
             <value>
-                <fullName>Certified</fullName>
+                <fullName>Certified-Active</fullName>
                 <default>false</default>
-                <label>Certified</label>
+                <label>Certified-Active</label>
             </value>
             <value>
-                <fullName>Certified-Hold</fullName>
+                <fullName>Certified-OnHold</fullName>
                 <default>false</default>
-                <label>Certified-Hold</label>
+                <label>Certified-OnHold</label>
             </value>
             <value>
                 <fullName>Decertified</fullName>
