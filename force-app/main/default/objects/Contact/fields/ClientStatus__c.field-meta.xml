@@ -38,6 +38,11 @@
                 <label>Certified</label>
             </value>
             <value>
+                <fullName>Certified-Hold</fullName>
+                <default>false</default>
+                <label>Certified-Hold</label>
+            </value>
+            <value>
                 <fullName>Decertified</fullName>
                 <default>false</default>
                 <label>Decertified</label>
