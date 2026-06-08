@@ -394,7 +394,7 @@ public inherited sharing class ContactService {
 
   private static string fineTuneStatus(string status, Date certDate) {
     Date today = Date.today();
-    if (status == 'Active' || (status == 'Certified' && certDate != null)) {
+    if (status == 'Active' || (status != null && status.contains('Certified') && certDate != null)) {
       if (certDate.addDays(365) < today) {
         status = 'Action Needed';
       } else if (certDate.addDays(270) < today) {

@@ -249,7 +249,7 @@ public with sharing class TestTeamTrigger {
   @isTest
   public static void trigger_UpdatesClientDogStatus_WhenCertified() {
     setup();
-    string status = 'Certified';
+    string status = 'Certified-Active';
     Date expected = Date.today().addMonths(5);
     testClientDogStatus(status, expected, status, expected, 'Available');
   }
@@ -270,7 +270,7 @@ public with sharing class TestTeamTrigger {
     Test.stopTest();
 
     // Assert
-    System.assert(result.isSuccess());
+    System.assert(result.isSuccess(), 'Expected insert to succeed');
     Team__c actual = [SELECT ClientCertAgreementReceived__c, InitialCertificationDate__c
       FROM Team__c
       WHERE Id = :team.Id
@@ -295,7 +295,7 @@ public with sharing class TestTeamTrigger {
     Test.stopTest();
 
     // Assert
-    System.assert(result.isSuccess());
+    System.assert(result.isSuccess(), 'Expected insert to succeed');
     Team__c actual = [SELECT ClientCertAgreementReceived__c, InitialCertificationDate__c
       FROM Team__c
       WHERE Id = :team.Id
