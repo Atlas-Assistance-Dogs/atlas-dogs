@@ -320,7 +320,8 @@
                 - Initial Inquiry
                 - Onboarding
                 - In Training
-                - Certified
+                - Certified-Active
+                - Certified-OnHold
                 - Decertified
                 - Discontinued
                 - In ADSim
@@ -439,7 +440,6 @@
                 - Diabetes Alert
                 - Autism
                 - Seizure Response
-                - Medical Incident Assist
                 - Hearing Alert
                 - Narcolepsy Alert
                 - Mobility;Autism
