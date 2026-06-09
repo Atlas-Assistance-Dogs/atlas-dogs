@@ -3,7 +3,7 @@ public with sharing class TestReminders {
   // Dummy CRON expression: midnight on March 15.
   // Because this is a test, job executes
   // immediately after Test.stopTest().
-  public static String CRON_EXP = '0 0 0 15 3 ? 2026';
+  public static String cronExp = '0 0 0 15 3 ? 2036';
   private static Group adminGroup;
   private static Contact joe;
   private static final String GROUP_NAME = 'Program_Administrator';
@@ -39,7 +39,7 @@ public with sharing class TestReminders {
     // Schedule the test job
     String jobId = System.schedule(
       'ScheduledApexTest',
-      CRON_EXP,
+      cronExp,
       new Reminders(GROUP_NAME)
     );
     // Verify the scheduled job has not run yet.
@@ -121,7 +121,7 @@ public with sharing class TestReminders {
     // Schedule the test job
     String jobId = System.schedule(
       'ScheduledApexTest',
-      CRON_EXP,
+      cronExp,
       new Reminders(GROUP_NAME)
     );
     // Verify the scheduled job has not run yet.
@@ -148,7 +148,7 @@ public with sharing class TestReminders {
     // Schedule the test job
     String jobId = System.schedule(
       'ScheduledApexTest',
-      CRON_EXP,
+      cronExp,
       new Reminders(GROUP_NAME)
     );
     // Verify the scheduled job has not run yet.
@@ -259,7 +259,7 @@ public with sharing class TestReminders {
     // Schedule the test job
     String jobId = System.schedule(
       'ScheduledApexTest',
-      CRON_EXP,
+      cronExp,
       new Reminders(GROUP_NAME)
     );
     // Verify the scheduled job has not run yet.
@@ -315,7 +315,7 @@ public with sharing class TestReminders {
     // Schedule the test job
     String jobId = System.schedule(
       'ScheduledApexTest',
-      CRON_EXP,
+      cronExp,
       new Reminders(GROUP_NAME)
     );
     // Verify the scheduled job has not run yet.
@@ -350,7 +350,7 @@ public with sharing class TestReminders {
     // Schedule the test job
     String jobId = System.schedule(
       'ScheduledApexTest',
-      CRON_EXP,
+      cronExp,
       new Reminders(GROUP_NAME)
     );
     // Verify the scheduled job has not run yet.
