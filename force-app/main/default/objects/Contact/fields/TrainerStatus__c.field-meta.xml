@@ -32,6 +32,11 @@
                 <label>Certified-Active</label>
             </value>
             <value>
+                <fullName>Certified-OnHold</fullName>
+                <default>false</default>
+                <label>Certified-OnHold</label>
+            </value>
+            <value>
                 <fullName>Inactive</fullName>
                 <default>false</default>
                 <label>Inactive</label>
