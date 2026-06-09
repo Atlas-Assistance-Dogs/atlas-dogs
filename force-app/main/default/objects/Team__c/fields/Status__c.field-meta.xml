@@ -37,9 +37,14 @@
                 <label>On Hold</label>
             </value>
             <value>
-                <fullName>Certified</fullName>
+                <fullName>Certified-Active</fullName>
                 <default>false</default>
-                <label>Certified</label>
+                <label>Certified-Active</label>
+            </value>
+            <value>
+                <fullName>Certified-OnHold</fullName>
+                <default>false</default>
+                <label>Certified-OnHold</label>
             </value>
             <value>
                 <fullName>Decertified</fullName>
