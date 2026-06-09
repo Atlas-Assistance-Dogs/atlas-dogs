@@ -615,10 +615,14 @@ Insert Team__c:
   fields:
   - ClientApplicationReceived__c
   - ClientApplicationVideoReceived__c
+  - ClientAssessmentReceived__c
   - ClientCGCFormReceived__c
   - ClientCertAgreementReceived__c
+  - ClientDecertReceived__c
+  - ClientDiscontinueReceived__c
   - ClientLOMIReceived__c
   - ClientMentalHealthFormReceived__c
+  - ClientNotesReceived__c
   - ClientPreApplicationReceived__c
   - ClientProgAgreementReceived__c
   - ClientProvRelFormReceived__c
