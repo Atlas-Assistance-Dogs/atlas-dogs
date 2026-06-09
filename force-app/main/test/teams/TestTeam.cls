@@ -23,7 +23,7 @@ public class TestTeam {
       PatCount__c = 21,
       PrimaryCertification__c = 'Allergen Alert',
       SecondaryCertification__c = 'Autism',
-      Status__c = 'Certified',
+      Status__c = 'Certified-Active',
       TrainingStartDate__c = Date.today()
     );
     insert team;
